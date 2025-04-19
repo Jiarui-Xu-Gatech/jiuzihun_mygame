@@ -2309,6 +2309,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.addTempSkill('lang_skill_damage_bonus', 'phaseAfter'); // 添加临时技能
                     player.addTempSkill('shixue_sha', 'phaseAfter'); // 添加临时技能
                     player.insertPhase('shixue',true);
+                    game.log(player,'获得一个额外的回合');
                 },
                 ai:{
                     threaten:2.3,
@@ -10843,7 +10844,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 group:['bihai_self_shui','bihai_fire_shui','bihai_thunder_shui'],
                 ai:{
                     nofire:true,
-                    filterDamage:true,
+                    // filterDamage:true,
+                    effect:{
+                        target:function(card,player,target){
+                            if (get.tag(card,'damage')&&get.tag(card,'fireDamage')&&get.nature(card)=='fire'){
+                                return 'zerotarget';
+                            }
+                        },
+                    },
                 },
 
             },
@@ -14111,21 +14119,50 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:2,
                 forced:true,
                 locked:true,
-                group:['lingyu_phaseUse_lala','lingyu_discard_lala','lingyu_damage_lala'],
+                group:['lingyu_phaseUse_lala','lingyu_discard_lala','lingyu_damage_lala','lingyu_effect'],
                 ai:{
                     threaten:0.7,
                     forbidNoCardButNatureDamage:true,
-					effect:{
-						target:function(card,player,target){
-							if(get.tag(card,'damage') && !get.tag(card,'natureDamage')){
-                                return 0;
+					// effect:{
+					// 	target:function(card,player,target){
+					// 		if(get.tag(card,'damage') && !get.tag(card,'natureDamage')){
+                    //             return 'zerotarget';
+					// 		}
+                    //         if (get.tag(card,'skip')=='phaseUse'){
+                    //             return 'zerotarget';
+                    //         }
+					// 	}
+					// },
+				},
+            },
+
+            lingyu_effect:{
+                audio:false,
+                silent:true,
+                popup:false,
+                direct:true,
+                trigger:{
+                    target:"shaBefore",
+                },
+                forced:true,
+                filter:function(event,player){
+                    return false;
+                },
+                content:function(event){
+                    event.finish();
+                },
+                ai:{
+                    effect:{
+                        target:function(card,player,target){
+                            if(get.tag(card,'damage') && !get.tag(card,'natureDamage')&&get.type(card)!='trick'){
+                                return 'zerotarget';
 							}
                             if (get.tag(card,'skip')=='phaseUse'){
-                                return 0;
+                                return 'zerotarget';
                             }
-						}
-					}
-				},
+                        },
+                    },
+                },
             },
 
             lingyu_phaseUse_lala:{
@@ -15485,7 +15522,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					// expose:0.3,
 				},
 
-                group:"yewang_init_gu",
+                group:["yewang_init_gu"],
             },
 
             yewang_init_gu:{
@@ -15498,6 +15535,36 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     player.storage.yewang_gu = [1,1,1];
                     player.syncStorage('yewang_gu');
+                },
+            },
+
+            yewang_effect:{
+                audio:false,
+                silent:true,
+                popup:false,
+                direct:true,
+                trigger:{
+                    target:"shaBefore",
+                },
+                forced:true,
+                filter:function(event,player){
+                    return false;
+                },
+                content:function(event){
+                    event.finish();
+                },
+                ai:{
+                    effect:{
+                        target:function(card,player,target){
+                            if (card&&get.suit(card)&&get.tag(card,'damage')&&target.hasSkill('yewang_protect_gu')&&target.storage.yewang_protect_gu){
+                                for (var i = 0; i < target.storage.yewang_protect_gu.length; i++){
+                                    if (target.storage.yewang_protect_gu[i] == get.suit(card)){
+                                        return 'zerotarget';
+                                    }
+                                }
+                            }
+                        },
+                    },
                 },
             },
 
@@ -15526,6 +15593,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill('yewang_gu');
                     game.log(trigger.card,'的花色与','#g【野望】','记录的花色相同，此次伤害对',player,'无效');
                 },
+                group:['yewang_effect'],
             },
             
             gushi_gu:{
