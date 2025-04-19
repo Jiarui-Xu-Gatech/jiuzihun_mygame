@@ -3708,6 +3708,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else if (get.tag(trigger.card,'recover')||get.tag(trigger.card,'save')||get.tag(trigger.card,'draw')){
                             return false;
                         }
+                        else if (get.name(trigger.card) == 'tiesuo'&&player.isLinked()){
+                            return false;
+                        }
                         else{
                             return player.hp*0.1 + (trigger.player.hp-player.storage.jingtong_lan)*0.1 - Math.random() < 0;
                         }
@@ -3819,12 +3822,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (!target.hasSkill('qinyin_end')){
                             target.addSkill('qinyin_end');
                         }
+                        game.log(player,'令',target,'直到下一个结束阶段之前造成伤害+1');
                     }
                     else{
                         target.addSkill('qinyin_jian_duo');
                         if (!target.hasSkill('qinyin_end')){
                             target.addSkill('qinyin_end');
                         }
+                        game.log(player,'令',target,'直到下一个结束阶段之前造成伤害-1');
                     }
 
                 },
@@ -3861,7 +3866,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content: function () {
                     // game.playAudio('skill','qinyin_jia_duo'+(Math.ceil(2*Math.random())+2));
-					trigger.num++; // 增加伤害值
+					game.log(player,'造成伤害+1');
+                    trigger.num++; // 增加伤害值
 				},
                 ai:{
                     damageBonus:true,
@@ -3882,7 +3888,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content: function () {
                     // game.playAudio('skill','qinyin_jian_duo'+(Math.ceil(2*Math.random())+2));
-					trigger.num--; // 减少伤害值
+					game.log(player,'造成伤害-1');
+                    trigger.num--; // 减少伤害值
 				},
                 ai:{
                     notricksource:true,
