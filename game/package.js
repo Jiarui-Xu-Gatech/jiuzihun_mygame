@@ -163,6 +163,7 @@ window.noname_package={
 		music_onepiece:'航海时代',
 		music_conan:'柯南主题',
 		music_fight:'战斗兄弟',
+		music_void:'如履薄冰',
 		music_pirate:'海盗天下',
 		music_xianjian:'奇缘剑仙',
 		music_weare:'海盗宝藏',

@@ -15690,9 +15690,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.storage.gushi_gu2.push(result.links[0][2]);
                         player.syncStorage('gushi_gu2');
 						player.logSkill('gushi_gu');
-						player.chooseCard('he','选择一张手牌作为“古石”',true).set('ai',function(card){
+						player.chooseCard('he','选择一张牌作为“古石”',true).set('ai',function(card){
                             var eff = 0;
-                            if (get.type(card)=='equip'&&get.name(card)!='muniu'){
+                            if (get.type(card)=='equip'&&get.subtype(card)!='equip3'&&get.name(card)!='muniu'){
                                 eff = 5;
                             }
                             if (get.name(card)=='tao'){
@@ -15723,6 +15723,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.storage.gushi_gu.push(card);
 						player.syncStorage('gushi_gu');
 						player.markSkill('gushi_gu');
+                        game.log(player,'将一张牌置于其武将牌上，作为','#g【古石】');
 					}
 				},
 				group:['gushi_gu2'],
@@ -17185,6 +17186,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     player.draw();
                     'step 1'
+                    if (!player.isUnderControl(true)&&player.hasSkill('liaoyuan_moke')){
+                        game.delay(1);
+                    }
                     if (player.isAlive()&&player.countCards('he')>0){
                         player.chooseToDiscard('he', 1, true).set('ai',function(card){
                             var player=get.owner(card);
