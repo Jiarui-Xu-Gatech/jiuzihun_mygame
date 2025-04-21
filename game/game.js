@@ -51793,6 +51793,10 @@
 			}
 			if(zeroplayer) result1=0;
 			if(zerotarget) result2=0;
+			//add pretrick effect
+			if (player2==player&&player.hasSkillTag('pretrick')&&card&&get.type(card)&&get.type(card)=='trick'){
+				result1 += 0.5;
+			}
 			var final=0;
 			if(player2){
 				final=(result1*get.attitude(player2,player)+(target?result2*get.attitude(player2,target):0));

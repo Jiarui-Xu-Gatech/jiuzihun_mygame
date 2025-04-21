@@ -7141,8 +7141,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							game.players[i].node.identity.dataset.color='unknown';
 							game.players[i].node.identity.classList.add('guessing');
 						}
-						console.log(game.players[i]);
-						console.log(lib.character[game.players[i].name]);
+						// console.log(game.players[i]);
+						// console.log(lib.character[game.players[i].name]);
 						game.players[i].hiddenSkills=lib.character[game.players[i].name][3].slice(0);
 						var hiddenSkills2=lib.character[game.players[i].name2][3];
 						for(var j=0;j<hiddenSkills2.length;j++){

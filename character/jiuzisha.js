@@ -44,6 +44,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:["male","wei",4,['zhenjiu_gui','qixing_gui','yunv_gui'],[]],
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
+            tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
+            monian:["male","qun",4,["lanyong_mo","daiduo_mo","shuixing_mo"],[]],
             // yuner:["female","qun",'1/9',['yuner_shiyan','yuner_selfDamage','yuner_loseHp'],[]],
 		},
 		characterIntro:{
@@ -60,7 +62,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             tushanzuiyue: "涂山醉月，涂山之主，拥有无尽酒壶能够不断续酒，喝酒后会妖力大涨，喝得酩酊大醉时能觉醒最强奥义：九尾！蓝川之战中，以一句“涂山，我罩了！”名留青史，但这美人儿喝得太多了也会神志不清，敌我不分。曾与饕餮夫人交好，一次，涂山醉月过蓝河到饕餮族（饕餮峻）做客，似是要与饕餮一族交好，适逢饕餮夫人金守珍外出奔丧。多名洞接待了她，多名洞这美男子，美艳动人，深深吸引了涂山醉月，涂山族有爱与美丽之神——维纳斯，所遗留的爱情迷迭香，涂山醉月在蓝河豪华游轮船上，和多名洞喝酒（浪漫晚风，多情波浪，夕阳微微染红朦胧的天空，岸边景色宜人，让人神清气爽，心潮澎湃，空气中弥漫着桂花香以及荷尔蒙的味道，将迷迭香用在了多名洞身上，将他强行掰直，爱上自己，然后将他带走。金守珍闻讯赶回，一听此事极度愤怒，但已追赶不上。她向猫族女王单文倩，蜘蛛族女王郭依宁，以及蜂女蒯嘉慧求援，同时号令北域盟友，组成一支拥有1186只战舰和10万大军的号称“珍倩宁”的三族联军，沿着蓝河逆流而上向北直逼涂山城下。蓝河在北域支流形成的爱琴海。饕餮统治的区域与涂山正好隔着爱琴海。涂山依靠蓝河在北域支流形成的爱琴海沿岸地势形成的蓝川天险，稳若泰山，固若金汤，易守难攻。由此，著名的“蓝川之战”因一个美貌的男子拉开了序幕。",
             zhangning_jiuzi: "张宁，原名涂山宁，涂山狐族人，只是她贪图一时之欢，被驱逐出境，才逃到了西域，后被张貂蝉所纳为妾后才改名叫张宁。韩鑫的初恋。在狼女雅雯的战役中与韩鑫摩擦出火花，但后来驱利附势勾搭上了有钱的公子哥韩寿，隧抛弃了韩鑫，但内心深处，她还是过意不去，为了让自己良心安定，她当着韩鑫的面惩罚自己，来表明恩断义绝。",
             caoxin:"曹信，九子魂中的睚眦之魂，战神阿瑞斯的继承者，曹炎的弟弟，皮肤幽蓝色，拥有巨力和以力打力的神通，金刚不坏之身，是领军打仗的奇才，人送外号“兵仙”。早年为雅典娜贴身保镖和男妓，因不满现状和有志不能伸而与哥哥逃出雅典之城。和舜之间有着微秒的感情，一辉是他的劲敌。",
-            dingya:"丁亚，南域五大将之一，九昕儿于鬼斗子家中收服的名将，“白煞”，与陈英超并称为“黑白双煞”，喝酒速度极度惊人，最快甚至超过九昕儿，好喝快酒，但酒量跟不上，经常是第一个醉倒的，十分适合于陈英超，性格也极豪放，最喜欢豪放之人，与人喜欢畅饮，说话语速飞快，喝酒速度也做前锋。",
+            dingya:"丁亚，南域五大将之一，九昕儿于鬼斗子家中收服的名将，“白煞”，与陈英超并称为“黑白双煞”，喝酒速度极度惊人，最快甚至超过九昕儿，好喝快酒，但酒量跟不上，经常是第一个醉倒的，与陈英超非常合得来，性格也极豪放，最喜欢豪放之人，与人喜欢畅饮，说话语速飞快，喝酒速度也做前锋。后师从董笑蓉学习灌醉百兽的千觞不醉之道，与人决斗拼酒绝不落下风！",
             caoyan:"曹炎，九子魂中的赑屃之魂，火神赫菲斯托斯的继承者，曹信的哥哥，拥有高温的身体和融化万物的“熔炎龙拳”，对锻造之术极为讲究，韩鑫的羽扇，九昕儿的紫砂内衣都由他打造。早年与曹战为侍奉雅典娜的贴身男妓，但后来对雅典娜滥杀生灵感到不满，自己又有志不能伸，于是和弟弟一同逃出雅典之城。雅典娜对其还留着些许微妙的感情。",
             quanjinfa:"全金发，是原西方赌场的老管家，后在西赌大会上结识韩鑫。对法贤和韩鑫都忠心耿耿，特殊能力是一根金头发可以变成任何东西，但他头发长得很慢。",
             meixian:"玫贤，原西域之主，千门原门主，江湖四圣之一，“东烟，西赌，南饮，北食”中的“西赌”，曾化名法贤先生，被人称为神算子，赌神，赌博计算之术无人能及，也是“撒旦之劫”的策划者，曾经拥有自己的势力造孽套多，被人追杀，看到这一切的罪过，她后悔了，在被人追杀的途中，算出自己命不久矣，在荒野之庙的浩劫中救下韩鑫，将自己今生所学托付给他，最后后含笑而终。",
@@ -1713,6 +1715,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:7.4,
                     noautowuxie:true,
+                    pretrick:true,
                 },
                 mod:{
                     maxHandcard:function(player,num){
@@ -11767,7 +11770,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill('chengting_taojiu_jin');
                     game.log(player,'的肚皮撑挺得太大，身上的装备都会被滚挺的肚皮崩弹出去，砸伤别人');
                     game.playAudio('skill','chengting_sha_jin'+1);
-                    game.log(player,"将装备牌视为【杀】");
+                    game.log(player,"将装备牌视为","#y杀");
                 },
                 mod:{
 					cardname:function(card,player,name){
@@ -11795,7 +11798,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill('chengting_taojiu_jin');
                     game.log(player,'的肚皮撑挺得太大，任何的拖延都不再有空间，将被她当做酒一般喝进那肚里');
                     game.playAudio('skill','jiuyin'+1);
-                    game.log(player,"将延迟锦囊牌视为【酒】");
+                    game.log(player,"将延迟锦囊牌视为","#y酒");
                 },
                 mod:{
 					cardname:function(card,player,name){
@@ -14894,11 +14897,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							// 	if(!target.hasFriend()) return;
 							// 	if(target.hp>=4) return [0,0.001];
 							// }
-							if(get.tag(card,'recover')&&player==target&&target.hp <= 3&&target.hp > 1) {
-                                if (target==_status.currentPhase&&target.countCards('h','tao')<target.hp + 1){
-                                    return [0,0];
-                                }
-                            }
+
+
+							// if(get.tag(card,'recover')&&player==target&&target.hp <= 3&&target.hp > 1) {
+                            //     if (target==_status.currentPhase&&target.countCards('h','tao')<target.hp + 1){
+                            //         return [0,0];
+                            //     }
+                            // }
 						}
 					}
 				},
@@ -17813,7 +17818,27 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
 
+            fengru_tong:{
 
+            },
+            
+            tunfei_tong:{
+
+            },
+
+
+
+            lanyong_mo:{
+
+            },
+
+            daiduo_mo:{
+
+            },
+            
+            shuixing_mo:{
+
+            },
 
 
 
@@ -19018,6 +19043,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'huozhong_moke_info':'一名其他角色的出牌阶段，该角色在本阶段使用的第一张牌结算后，你可以弃置一张牌，令其获得技能【烟瘾】直到回合结束。',
             
             
+            tongxin:"彤欣",
+            "fengru_tong":"丰乳",
+            "fengru_tong_info":"丰乳",
+            "tunfei_tong":"臀肥",
+            "tunfei_tong_info":"臀肥",
+
+
+            monian:"墨念",
+            "lanyong_mo":"懒慵",
+            "lanyong_mo_info":"懒慵",
+            "daiduo_mo":"怠惰",
+            "daiduo_mo_info":"怠惰",
+            "shuixing_mo":"随性",
+            "shuixing_mo_info":"随性",
 
             
             yuner:"允儿",
