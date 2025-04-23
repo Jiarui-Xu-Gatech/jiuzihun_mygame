@@ -3416,6 +3416,18 @@ window.noname_asset_list=[
 	'audio/die/moke.mp3',
 	'audio/die/moke2.mp3',
 
+
+	'audio/skill/lanyong_mo1.mp3', 
+	'audio/skill/lanyong_mo2.mp3', 
+	'audio/skill/sanman_mo1.mp3', 
+	'audio/skill/sanman_mo2.mp3', 
+	'audio/skill/shuaixing_mo1.mp3', 
+	'audio/skill/shuaixing_mo2.mp3', 
+	'audio/skill/shuaixing_mo3.mp3',
+	'audio/skill/shuaixing_mo4.mp3', 
+	'audio/die/monian.mp3',
+
+
 	
 	
 	'font/huangcao.ttf',

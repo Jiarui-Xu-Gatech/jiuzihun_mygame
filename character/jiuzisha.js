@@ -45,8 +45,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
-            monian:["male","qun",4,["lanyong_mo","daiduo_mo","shuixing_mo"],[]],
-            // yuner:["female","qun",'1/9',['yuner_shiyan','yuner_selfDamage','yuner_loseHp'],[]],
+            monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_qiangpai','yuner_die'],[]],
 		},
 		characterIntro:{
 			ouruoling:"欧若灵，西域第一美人儿，善于飞行，相貌极其精致，如凌波仙子般水灵秀气，丰姿冶丽，仿佛上天有意细细雕琢出来一般；她秀雅绝俗，自有一股轻灵之气，肌肤娇嫩、神态悠闲、美目流盼、含辞未吐、气若幽兰，说不尽的温柔可人；身材无限接近九昕儿一般的完美，娇躯时常散发着茉莉的清香，除了九昕儿以外无人的颜值能在她之上；她是九幽精灵鸟仅存的后裔；全金发的手下，韩鑫的好友；原西域千门赌场掌管财务的户部尚书，后兼任韩鑫的治粟总长，总管账目和运送粮草，是全金发的得力助手。早年为一绿翅小鸟，被全金发所救，并为他的无私和爱所感动，爱上了全金发；为了全金发加入了千门，由于长得实在太美了，成为无数男人心中的女神，升官极其顺利，很快就成了全金发的副手，单相思着全金发，可是由于害羞和含蓄不敢表露自己的情愫。性格单纯，聪颖，贤惠，含蓄又专情；数学非常好，算账从来没有出过错；大叔控，有时会自作多情，沉浸在自己与全金发的美好幻想之中无法自拔。对爱人非常周到和体贴，也非常容易满足，全金发一个微笑和一句夸赞就能让她开心好几天。",
@@ -3312,6 +3312,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.log(player,'猜对了'+get.cnNumber(event.num)+'项');
                     if(event.num>0){
                         target.addTempSkill('minghou_lan_adddamage','phaseJieshu');
+                        game.log(trigger.card,'对',event.target,'造成的伤害+1');
                         target.storage.minghou_lan={
                             card:trigger.card,
                             //player:event.targett,
@@ -3967,6 +3968,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             return (target != player && target.sex == 'female');
                         }).ai=function(target){
                             var player = _status.currentPhase;
+                            if (get.attitude(player, target)<0&&target.hasSkill('zuimei')&&target.hp==1){
+                                return -1;
+                            }
                             if (get.attitude(player, target)<0&&target.hasSkillTag('maihp')&&target.hp>1){
                                 return -1;
                             }
@@ -5348,6 +5352,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							return -1;
 						},
 						target:function(player,target){
+                            if (target.hasSkill('xuqin_ning_lose')){
+                                return 0;
+                            }
                             if (get.attitude(player,target) < 0){
                                 if (target.hasSkillTag('maihp')) return 0;
                                 if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')) return -100;
@@ -13566,8 +13573,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						target:function(player,target){
 							var card=ui.selected.cards[0];
                             var type=get.subtype(card);
+                            var add = 1;
+                            if (target.countCards('e',{subtype:type})>0){
+                                add = 4;
+                            }
                             if (!player.isDisabled(type)&&!player.hasSkill('yujiu_hp_heng')) return 0;
-							if(card) return get.effect(target,card,target,target);
+							if(card) return get.effect(target,card,target,target)/add;
 							return 0;
 						},
                         // player:function(player,target){
@@ -17158,7 +17169,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.storage.yunv_givePhase_gui3.logSkill('yunv_givePhase_gui');
                     game.log(player,'于其','#g【驭女】','回合内造成伤害，令',player.storage.yunv_givePhase_gui3,'摸牌')
                     player.storage.yunv_givePhase_gui3.draw();
-				}
+				},
+                ai:{
+                    predamage:true,
+                }
 			},
 
 
@@ -17829,15 +17843,612 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
             lanyong_mo:{
+                audio:2,
+				trigger:{target:'useCardToTargeted'},
+				direct:true,
+				init:function(player){
+					if(!player.storage.lanyong_mo) player.storage.lanyong_mo=[];
+                    player.syncStorage('lanyong_mo');
+				},
+				filter:function(event,player){
+					return event.card&&get.tag(event.card,'damage')&&event.player.isAlive();
+				},
+				content:function(){
+					'step 0'
+					// var list=['sha','shan','tao','jiu','taoyuan','wugu','juedou','huogong','jiedao','tiesuo','guohe','shunshou','wuzhong','wanjian','nanman','lebu','bingliang','shandian'];
+					// for(var i=0;i<player.storage.lanyong_mo.length;i++){
+					// 	list.remove(player.storage.lanyong_mo[i]);
+					// }
+					// for(var i=0;i<list.length;i++){
+					// 	list[i]=[get.type(list[i]),'',list[i]];
+					// }
+                    var list1=[],list2=[],list3=[];
+					for(var i=0;i<lib.inpile.length;i++){
+                        if (!player.storage.lanyong_mo.contains(lib.inpile[i])){
+                            var type=get.type(lib.inpile[i]);
+                            if(type=='basic'){
+                                list1.push(['基本','',lib.inpile[i]]);
+                            }
+                            else if(type=='trick'){
+                                list2.push(['锦囊','',lib.inpile[i]]);
+                            }
+                            else if(type=='delay'){
+                                list3.push(['延时锦囊','',lib.inpile[i]]);
+                            }
+                        }
+					}
+                    var list = list1.concat(list2).concat(list3);
+					player.chooseButton([get.prompt('lanyong_mo',trigger.player),[list,'vcard']]).set('ai',function(button){
+                        var player = _status.event.player;
+                        var att = get.attitude(trigger.player,player);
+                        var type=get.type(button.link[2]);
+                        if (att >= 0){
+                            if (type == 'basic'){
+                                if (button.link[2]!='tao'&&button.link[2]!='jiu'){
+                                    return 5+Math.random();
+                                }
+                                else{
+                                    return 3+Math.random();
+                                }
+                            }
+                            else if (type=='trick'){
+                                return 2+Math.random();
+                            }
+                            else{
+                                return 1+Math.random();
+                            }
+                        }
+                        else{
+                            if (type == 'basic'){
+                                if (button.link[2]!='tao'&&button.link[2]!='jiu'){
+                                    return 1+Math.random();
+                                }
+                                else{
+                                    return 2+Math.random();
+                                }
+                            }
+                            else if (type=='trick'){
+                                return 3+Math.random();
+                            }
+                            else{
+                                return 5+Math.random();
+                            }
+                        }
+					});
+					'step 1'
+					if(result.bool){
+						player.logSkill('lanyong_mo');
+                        player.line(trigger.player);
+						var name=result.links[0][2];
+						event.vcard=result.links;
+						event.cardname=name;
+						player.storage.lanyong_mo.add(name);
+                        player.syncStorage('lanyong_mo');
+                        game.log(player,'要求',trigger.player,'弃置一张','#y'+get.translation(event.cardname),'，否则',trigger.card,'对其无效');
+					}
+					else{
+						event.finish();
+					}
+					'step 2'
+					var name=event.cardname;
+					trigger.player.chooseToDiscard(function(card){
+						return card.name==_status.event.cardname;
+					}).set('ai',function(card){
+						if(_status.event.att<0){
+							return 10-get.value(card);
+						}
+						return 0;
+					}).set('att',get.attitude(trigger.player,player)).set('cardname',name).set('dialog',['懒慵：请弃置一张【'+get.translation(name)+'】，否则此'+get.translation(trigger.card)+'对'+get.translation(player)+'无效',[event.vcard,'vcard']]);
+					'step 3'
+					if(result.bool==false){
+						trigger.excluded.push(player);
+                        game.log(trigger.player,'未弃置','#y'+get.translation(event.cardname),'，',trigger.card,'对',player,'无效');
+					}
+					else{
+                        trigger.player.draw(get.translation(event.cardname).length);
+						// trigger.player.gainPlayerCard(player);
+					}
+				},
+                group:'lanyong_refresh_mo',
+				ai:{
+                    threaten:0.3,
+					effect:{
+						target:function(card,player,target,current){
+							if(get.tag(card,'damage')&&get.attitude(player,target)<0){
+								return 0.3;
+							}
+						}
+					}
+				},
 
             },
 
-            daiduo_mo:{
+            lanyong_refresh_mo:{
+                audio:false,
+                direct:true,
+                frequent:true,
+                trigger:{player:'useCard'},
+                filter:function(event,player){
+                    var evt=event.getParent('phaseUse');
+					if(!evt) return false;
+                    if (!player.storage.lanyong_mo || player.storage.lanyong_mo.length == 0){
+                        return false;
+                    }
+                    return player == _status.currentPhase && event.player.getHistory('useCard',function(evtt){
+						return evtt.getParent('phaseUse')==evt;
+					}).indexOf(event)==0;
+                },
+                content:function(){
+                    if (trigger.card&&player.storage.lanyong_mo.contains(get.name(trigger.card))){
+                        player.logSkill('lanyong_mo');
+                        player.storage.lanyong_mo.remove(get.name(trigger.card));
+                        player.syncStorage('lanyong_mo');
+                        game.log(player,'令','#y'+get.translation(get.name(trigger.card)),'视为未通过','#g【懒慵】','声明过');
+                    }
+                },
 
+            },
+
+            sanman_mo:{
+                audio:2,
+                priority:-100,
+                trigger:{
+                    global:"roundStart",
+                },
+                frequent:true,
+                direct:true,
+                content:function(){
+                    'step 0'
+                    player.chooseBool(get.prompt2('sanman_mo')).set('ai',function(){
+                        return true;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.chooseTarget('###请选择【散漫】的目标###'+get.translation('sanman_mo_info'), function(event, player, target) {
+                            return true;
+                        }).set('ai',function(target){
+                            var player = _status.event.player;
+                            if (target == player){
+                                if (player.countCards('h')>player.hp+2&&player.countCards('j','lebu')==0&&!player.isTurnedOver()){
+                                    return 0.1*player.countCards('h')+1+Math.random();
+                                }
+                                else{
+                                    return 0.5+Math.random();
+                                }
+                            }
+                            var players=get.players(lib.sort.position);
+                            var player_position=parseInt(player.dataset.position);
+                            var round_position = parseInt(_status.roundStart.dataset.position);
+                            var target_position = parseInt(target.dataset.position);
+                            var player_actual = player_position - round_position;
+                            var target_actual = target_position - round_position;
+                            if (player_actual < 0){
+                                player_actual += players.length;
+                            }
+                            if (target_actual < 0){
+                                target_actual += players.length;
+                            }
+                            var addi = get.threaten(target,player,false)/10;
+                            if (get.attitude(player,target)>0 || get.attitude(target,player)>0){
+                                if (target_actual<player_actual&&!player.hasSkill('shuaixing_limit_mo')){
+                                    return addi + 1 + Math.random();
+                                }
+                                else{
+                                    if (player.isTurnedOver()){
+                                        return addi + 1 + Math.random();
+                                    }
+                                    else{
+                                        return (addi + Math.random())*0.5+0.1*target.countCards('h');
+                                    }
+                                }
+                            }
+                            else if ((get.attitude(player,target)<0 || get.attitude(target,player)<0)&&target_actual>player_actual&&!player.isTurnedOver()&&!player.hasSkill('shuaixing_limit_mo')){
+                                return addi + 1 + Math.random();
+                            }
+                            else{
+                                return -1;
+                            }
+                        });
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (result.bool){
+                        var target = result.targets[0];
+                        player.logSkill('sanman_mo');
+                        player.line(target);
+                        target.addTempSkill('man_mo','roundStart');
+                        target.storage.man_mo = player;
+                        target.syncStorage('man_mo');
+                        game.log(player,'令',target,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2');
+                        player.addTempSkill('san_mo','roundStart');
+                        player.storage.san_mo = player;
+                        player.syncStorage('san_mo');
+                        game.log(player,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    if (player == _status.roundStart){
+                        game.delay(2);
+                    }
+                    else{
+                        game.delay(1);
+                    }
+                },
+
+                ai:{
+                    expose:0.45,
+                    threaten:4,
+                },
+                
+            },
+
+            man_mo:{
+                mark:true,
+                marktext:"漫",
+				intro:{
+					name:'漫',
+					content:'本轮的回合：摸牌数+2、出杀次数+2、手牌上限+2',
+				},
+				mod:{
+					cardUsable:function (card,player,num){
+						if(card.name=='sha') return num + 2;
+					},
+					maxHandcard:function (player,num){
+						return num + 2;
+					},
+				},
+				audio:false,
+				trigger:{
+					player:['phaseDrawBegin2','phaseDiscard','useCard1'],
+				},
+				forced:true,
+				filter:function(event,player){
+                    if (event.name == 'phaseDraw'){
+                        return !event.numFixed;
+                    }
+                    else if (event.name == 'phaseDiscard'){
+                        return player.countCards('h')>player.hp;
+                    }
+                    else if (event.name == 'useCard'){
+                        return get.name(event.card)=='sha'&&player.countUsed('sha',true)>1&&event.getParent().type=='phase';
+                    }
+                    return false;
+				},
+				content:function(){
+                    if (trigger.name == 'phaseDraw'){
+                        if (player.storage.man_mo.isAlive()){
+                            player.storage.man_mo.logSkill('sanman_mo');
+                            player.storage.man_mo.line(player);
+                        }
+                        else{
+                            player.logSkill('sanman_mo');
+                        }
+                        game.log(player,'摸牌阶段摸牌数+2');
+                        trigger.num+=2;
+                    }
+                    else if (trigger.name == 'phaseDiscard'){
+                        if (player.storage.man_mo.isAlive()){
+                            player.storage.man_mo.logSkill('sanman_mo');
+                            player.storage.man_mo.line(player);
+                        }
+                        else{
+                            player.logSkill('sanman_mo');
+                        }
+                        game.log(player,'手牌上限+2');
+                    }
+                    else if (trigger.name == 'useCard'){
+                        if (player.storage.man_mo.isAlive()){
+                            player.storage.man_mo.logSkill('sanman_mo');
+                            player.storage.man_mo.line(player);
+                        }
+                        else{
+                            player.logSkill('sanman_mo');
+                        }
+                        game.log(player,'出牌阶段使用【杀】次数上限+2');
+                    }
+                    
+				},
+                ai:{
+                    threaten:3,
+                },
+            },
+
+            san_mo:{
+                mark:true,
+                marktext:"散",
+				intro:{
+					name:'散',
+					content:'本轮的回合：摸牌数-1、出杀次数-1、手牌上限-1',
+				},
+				mod:{
+					cardUsable:function (card,player,num){
+						if(card.name=='sha') return num - 1;
+					},
+					maxHandcard:function (player,num){
+						return num - 1;
+					},
+				},
+				audio:false,
+				trigger:{
+					player:['phaseDrawBegin2','phaseDiscard'],
+				},
+				forced:true,
+				filter:function(event,player){
+                    if (event.name == 'phaseDraw'){
+                        return !event.numFixed&&event.num>0;
+                    }
+                    else if (event.name == 'phaseDiscard'){
+                        return player.countCards('h')>player.getHandcardLimit();
+                    }
+                    return false;
+				},
+				content:function(){
+                    if (trigger.name == 'phaseDraw'){
+                        if (!player.hasSkill('man_mo')){
+                            if (player.storage.san_mo.isAlive()){
+                                player.storage.san_mo.logSkill('sanman_mo');
+                                player.storage.san_mo.line(player);
+                            }
+                            else{
+                                player.logSkill('sanman_mo');
+                            }
+                        }
+                        game.log(player,'摸牌阶段摸牌数-1');
+                        if (trigger.num > 0){
+                            trigger.num-=1;
+                        }
+                        
+                    }
+                    else if (trigger.name == 'phaseDiscard'){
+                        if (!player.hasSkill('man_mo')){
+                            if (player.storage.san_mo.isAlive()){
+                                player.storage.san_mo.logSkill('sanman_mo');
+                                player.storage.san_mo.line(player);
+                            }
+                            else{
+                                player.logSkill('sanman_mo');
+                            }
+                        }
+                        game.log(player,'手牌上限-1');
+                    }
+                    
+				},
             },
             
-            shuixing_mo:{
+            shuaixing_mo:{
+                skillAnimation:true,
+                animationColor:"thunder",
+                audio:2,
+                direct:true,
+                trigger:{
+                    player:"phaseZhunbei",
+                },
+                filter:function(event,player){
+                    if (player.hasSkill('shuaixing_limit_mo')){
+                        return false;
+                    }
+                    if (!(player.hasSkill('san_mo')||player.hasSkill('man_mo'))){
+                        return false;
+                    }
+                    var has=game.hasPlayer(function(current){
+                        return current!=player&&(current.hasSkill('san_mo')||current.hasSkill('man_mo'));
+                    });
+                    return has;
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt2('shuaixing_mo')).set('ai',function(event,player){
+                        if (player.hasSkill('san_mo')){
+                            var has_past = game.hasPlayer(function(current){
+                                if (current == player){
+                                    return false;
+                                }
+                                if (current.hasSkill('man_mo')){
+                                    var players=get.players(lib.sort.position);
+                                    var player_position=parseInt(player.dataset.position);
+                                    var round_position = parseInt(_status.roundStart.dataset.position);
+                                    var current_position = parseInt(current.dataset.position);
+                                    var player_actual = player_position - round_position;
+                                    var current_actual = current_position - round_position;
+                                    if (player_actual < 0){
+                                        player_actual += players.length;
+                                    }
+                                    if (current_actual < 0){
+                                        current_actual += players.length;
+                                    }
+                                    if (current_actual < player_actual){
+                                        return true;
+                                    }
+                                    else{
+                                        return false;
+                                    }
+                                }
+                                else{
+                                    return false;
+                                }
+                            });
 
+                            if (has_past){
+                                return true;
+                            }
+
+                            event.friend_is = player;
+                            var has_enemy=game.hasPlayer(function(current){
+                                return current!=player&&(current.hasSkill('man_mo'))&&(get.attitude(player,current)<0||get.attitude(current,player)<0);
+                            });
+                            var has_friend=game.hasPlayer(function(current){
+                                if (current!=player&&(current.hasSkill('man_mo'))&&(get.attitude(player,current)>0||get.attitude(current,player)>0)){
+                                    event.friend_is = current;
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                            });
+                            if (has_enemy){
+                                return true;
+                            }
+                            if (has_friend){
+                                if (player.countCards('j','lebu')>0){
+                                    return false;
+                                }
+                                else if (event.friend_is.countCards('j','lebu')>0){
+                                    return true;
+                                }
+                                else{
+                                    return Math.random()<0.5;
+                                }
+
+                            }
+                        }
+                        else if (player.hasSkill('man_mo')){
+                            var has_past = game.hasPlayer(function(current){
+                                if (current == player){
+                                    return false;
+                                }
+                                if (current.hasSkill('san_mo')){
+                                    var players=get.players(lib.sort.position);
+                                    var player_position=parseInt(player.dataset.position);
+                                    var round_position = parseInt(_status.roundStart.dataset.position);
+                                    var current_position = parseInt(current.dataset.position);
+                                    var player_actual = player_position - round_position;
+                                    var current_actual = current_position - round_position;
+                                    if (player_actual < 0){
+                                        player_actual += players.length;
+                                    }
+                                    if (current_actual < 0){
+                                        current_actual += players.length;
+                                    }
+                                    if (current_actual < player_actual){
+                                        return true;
+                                    }
+                                    else{
+                                        return false;
+                                    }
+                                }
+                                else{
+                                    return false;
+                                }
+                            });
+
+                            if (has_past){
+                                return false;
+                            }
+
+                            event.friend_is = player;
+                            var has_enemy=game.hasPlayer(function(current){
+                                return current!=player&&(current.hasSkill('san_mo'))&&(get.attitude(player,current)<0||get.attitude(current,player)<0);
+                            });
+                            var has_friend=game.hasPlayer(function(current){
+                                if (current!=player&&(current.hasSkill('san_mo'))&&(get.attitude(player,current)>0||get.attitude(current,player)>0)){
+                                    event.friend_is = current;
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                            });
+                            if (has_enemy){
+                                return false;
+                            }
+                            if (has_friend){
+                                if (player.countCards('j','lebu')>0){
+                                    return true;
+                                }
+                                else if (event.friend_is.countCards('j','lebu')>0){
+                                    return false;
+                                }
+                                else{
+                                    return Math.random()>0.5;
+                                }
+
+                            }
+                        }
+                        return false;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        game.delay(2);
+                        player.logSkill('shuaixing_mo');
+                        if (player.hasSkill('san_mo')){
+                            var has=game.hasPlayer(function(current){
+                                if (current!=player&current.hasSkill('man_mo')){
+                                    current.removeSkill('man_mo');
+                                    if (player.hasSkill('san_mo')){
+                                        player.removeSkill('san_mo');
+                                    }
+
+                                    player.line(current,'green');
+                                    current.line(player,'green');
+
+                                    current.addTempSkill('san_mo','roundStart');
+                                    current.storage.san_mo = player;
+                                    current.syncStorage('san_mo');
+                                    game.log(player,'令',current,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1');
+                                    player.addTempSkill('man_mo','roundStart');
+                                    player.storage.man_mo = player;
+                                    player.syncStorage('man_mo');
+                                    game.log(player,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2');
+                                }
+                            });
+                        }
+                        else if (player.hasSkill('man_mo')){
+                            var has=game.hasPlayer(function(current){
+                                if (current!=player&current.hasSkill('san_mo')){
+                                    
+                                    current.removeSkill('san_mo');
+                                    if (player.hasSkill('man_mo')){
+                                        player.removeSkill('man_mo');
+                                    }
+
+                                    player.line(current,'green');
+                                    current.line(player,'green');
+
+                                    current.addTempSkill('man_mo','roundStart');
+                                    current.storage.man_mo = player;
+                                    current.syncStorage('man_mo');
+                                    game.log(player,'令',current,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2');
+                                    player.addTempSkill('san_mo','roundStart');
+                                    player.storage.san_mo = player;
+                                    player.syncStorage('san_mo');
+                                    game.log(player,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1');
+                                }
+                            });
+                        }
+
+                        player.addSkill('shuaixing_limit_mo');
+                        game.log('#g【率性】','失效直到一名角色死亡');
+                    }
+                    else{
+                        event.finish();
+                    }
+
+                },
+
+                ai:{
+                    expose:0.2,
+                    threaten:2.5,
+                },
+            },
+
+
+            shuaixing_limit_mo:{
+                silent:true,
+                audio:false,
+                forced:true,
+                trigger:{
+                    global:"die",
+                },
+                content:function(){
+                    player.popup('shuaixing_mo','thunder');
+                    game.playAudio('skill','shuaixing_mo'+Math.ceil(2+2*Math.random()));
+                    game.log(player,'恢复技能','#g【率性】');
+                    player.removeSkill('shuaixing_limit_mo');
+                },
             },
 
 
@@ -18136,6 +18747,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player.chooseTarget("你抢ta牌");
                     "step 1"
 					if(result.bool){
+                        // console.log(result.targets[0].dataset.position);
+                        // var players=get.players(lib.sort.position);
+                        // for(var i=0;i<players.length;i++){
+                        //     console.log('第'+i);
+                        //     console.log(players[i]);
+                        // }
                         var targetHand = result.targets[0].getCards('h');
                         player.gain(targetHand, result.targets[0], 'draw');
 					}
@@ -19053,10 +19670,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             monian:"墨念",
             "lanyong_mo":"懒慵",
             "lanyong_mo_info":"懒慵",
-            "daiduo_mo":"怠惰",
-            "daiduo_mo_info":"怠惰",
-            "shuixing_mo":"随性",
-            "shuixing_mo_info":"随性",
+            "lanyong_refresh_mo":'懒慵',
+            "sanman_mo":"散漫",
+            "sanman_mo_info":"散漫",
+            "shuaixing_mo":"率性",
+            "shuaixing_mo_info":"率性",
 
             
             yuner:"允儿",
