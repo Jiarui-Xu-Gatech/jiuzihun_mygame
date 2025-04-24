@@ -18378,6 +18378,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (player.hasSkill('san_mo')){
                             var has=game.hasPlayer(function(current){
                                 if (current!=player&current.hasSkill('man_mo')){
+                                    game.log(player,'与',current,'交换','#g【散漫】','效果');
                                     current.removeSkill('man_mo');
                                     if (player.hasSkill('san_mo')){
                                         player.removeSkill('san_mo');
@@ -18400,6 +18401,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else if (player.hasSkill('man_mo')){
                             var has=game.hasPlayer(function(current){
                                 if (current!=player&current.hasSkill('san_mo')){
+                                    game.log(player,'与',current,'交换','#g【散漫】','效果');
                                     
                                     current.removeSkill('san_mo');
                                     if (player.hasSkill('man_mo')){
