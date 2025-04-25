@@ -44,7 +44,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:["male","wei",4,['zhenjiu_gui','qixing_gui','yunv_gui'],[]],
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
-            tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
+            // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
             // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_qiangpai','yuner_die'],[]],
 		},
@@ -138,7 +138,6 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function (event) {        
                     "step 0"
-                    game.delay(1);
                     player.chooseBool(get.prompt2("jingling")).set('ai',function(event,player){
 
                         if (trigger.name == 'useCard'){
@@ -206,7 +205,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                     "step 1"
                     if (result.bool) {
-                        game.delay(1);
+                        game.delay(2);
                         player.chooseToDiscard(2,'he').set('ai',function(card){
                             if (get.subtype(card) == 'equip2') {
                                 return 1000;
@@ -220,8 +219,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     else{
                         event.finish();
                     }
-
                     "step 2"
+                    game.delay(1);
                     if (result.bool) {
                         // game.playAudio('skill','jingling'+Math.ceil(2*Math.random()));
                         // player.popup(get.translation('jingling'));
@@ -1321,6 +1320,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             jiuyu_jiu:{
+                audio:false,
                 silent:true,
                 forced:true,
                 mark:true,
@@ -2316,6 +2316,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.log(player,'获得一个额外的回合');
                 },
                 ai:{
+                    prophase:true,
                     threaten:2.3,
                 },
             },
@@ -3328,6 +3329,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                 },
                 ai:{
+                    damageBonus:true,
                     expose: 0.45,
                     threaten:4.4,
                 },
@@ -3850,7 +3852,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     result:{
                         target:function (player,target){
                             var threatening = get.threaten(target,player,false);
-                            if (get.attitude(player, target) < 0) return -threatening-100+get.attitude(player, target);
+                            if (get.attitude(player, target) < 0) return threatening-100+get.attitude(player, target);
                             if (get.attitude(player, target) > 0) return 1+get.attitude(player, target);
                             return 0;
                         },
@@ -13907,6 +13909,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
 
                 ai:{
+                    prophase:true,
                     threaten:4.5,
                 },
 
@@ -15425,8 +15428,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 trigger:{
                     target:'useCardToTargeted',
                 },
+                init:function(player){
+                    player.storage.yewang_gu = [1,1,1];
+                    player.syncStorage('yewang_gu');
+                },
                 filter:function(event,player){
-                    if (event.player&&event.player!=player){
+                    if (!player.storage.yewang_gu||!player.storage.yewang_gu.length==3){
+                        player.storage.yewang_gu = [1,1,1];
+                        player.syncStorage('yewang_gu');
+                    }
+                    if (player.storage.yewang_gu&&player.storage.yewang_gu.length==3&&event.player&&event.player!=player){
                         if (event.player.hp > player.hp){
                             return player.storage.yewang_gu[0] != 0;
                         }
@@ -17946,6 +17957,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.log(trigger.player,'未弃置','#y'+get.translation(event.cardname),'，',trigger.card,'对',player,'无效');
 					}
 					else{
+                        player.$throw(result.cards,1000);
+                        game.delay(1);
                         trigger.player.draw(get.translation(event.cardname).length);
 						// trigger.player.gainPlayerCard(player);
 					}
@@ -18009,6 +18022,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             return true;
                         }).set('ai',function(target){
                             var player = _status.event.player;
+                            var addi = get.threaten(target,player,false)/10;
+                            var prophase = 1;
+                            var final = 0;
+                            if (target.hasSkillTag('prephase')){
+                                prophase = 1.35;
+                            }
                             if (target == player){
                                 if (player.countCards('h')>player.hp+2&&player.countCards('j','lebu')==0&&!player.isTurnedOver()){
                                     return 0.1*player.countCards('h')+1+Math.random();
@@ -18016,6 +18035,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 else{
                                     return 0.5+Math.random();
                                 }
+                            }
+                            if(lib.config.mode=='identity'&&game.zhu.isZhu&&player.identity=='zhong'&&target == game.zhu){
+                                return (addi + 2.7 + Math.random())*prophase;
                             }
                             var players=get.players(lib.sort.position);
                             var player_position=parseInt(player.dataset.position);
@@ -18029,26 +18051,27 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (target_actual < 0){
                                 target_actual += players.length;
                             }
-                            var addi = get.threaten(target,player,false)/10;
-                            if (get.attitude(player,target)>0 || get.attitude(target,player)>0){
+                            if (get.attitude(player,target)>0 && get.attitude(target,player)>0){
                                 if (target_actual<player_actual&&!player.hasSkill('shuaixing_limit_mo')){
-                                    return addi + 1 + Math.random();
+                                    final = (addi + 1.7 + Math.random())*prophase;
                                 }
                                 else{
                                     if (player.isTurnedOver()){
-                                        return addi + 1 + Math.random();
+                                        final = (addi + 1 + Math.random())*prophase;
                                     }
                                     else{
-                                        return (addi + Math.random())*0.5+0.1*target.countCards('h');
+                                        final = ((addi + Math.random())*0.5+0.1*target.countCards('h'))*prophase;
                                     }
                                 }
                             }
                             else if ((get.attitude(player,target)<0 || get.attitude(target,player)<0)&&target_actual>player_actual&&!player.isTurnedOver()&&!player.hasSkill('shuaixing_limit_mo')){
-                                return addi + 1 + Math.random();
+                                final = (addi + 1 + Math.random())*prophase;
                             }
                             else{
-                                return -1;
+                                final = -1;
                             }
+
+                            return final;
                         });
                     }
                     else{
@@ -18115,7 +18138,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         return player.countCards('h')>player.hp;
                     }
                     else if (event.name == 'useCard'){
-                        return get.name(event.card)=='sha'&&player.countUsed('sha',true)>1&&event.getParent().type=='phase';
+                        return get.name(event.card)=='sha'&&player.countUsed('sha',true)>1&&player.countUsed('sha',true)<=3&&event.getParent().type=='phase';
                     }
                     return false;
 				},
