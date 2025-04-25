@@ -1509,6 +1509,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				effect:function(){
 					if(result.card&&result.suit=='spade'&&result.bool==false){
+						game.playAudio('skill','anmou_enda'+3);
 						player.damage(3,'thunder','nosource');
 					}
 					else{
