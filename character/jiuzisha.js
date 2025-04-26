@@ -1770,6 +1770,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.storage.honglian_equip=[1,1,1,1];
                 },
                 filter:function(event,player){
+                    if (!player.storage.honglian_equip){
+                        player.storage.honglian_equip=[1,1,1,1];
+                    }
 					return player.countCards('e')>0&&player.storage.honglian_equip&&(
                         (player.storage.honglian_equip[0] == 1&&!player.isEmpty('equip1')) ||
                         (player.storage.honglian_equip[1] == 1&&!player.isEmpty('equip2')) ||
@@ -10692,7 +10695,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'damageBegin4',
                 },
                 filter:function(event,player){                    
-                    return player.storage.cangxin_enda.length > 0;
+                    return player.storage.cangxin_enda&&player.storage.cangxin_enda.length > 0;
                 },
                 content:function(event){
                     'step 0'
@@ -10754,7 +10757,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'damageEnd',
                 },
                 filter:function(event,player){
-                    if (player.isAlive()&&player.storage.cangxin_start_enda&&player.storage.cangxin_start_enda==2){
+                    if (player.storage.cangxin_enda&&player.isAlive()&&player.storage.cangxin_start_enda&&player.storage.cangxin_start_enda==2){
                         return true;
                     }
                     else{
@@ -15433,7 +15436,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.syncStorage('yewang_gu');
                 },
                 filter:function(event,player){
-                    if (!player.storage.yewang_gu||!player.storage.yewang_gu.length==3){
+                    if (!player.storage.yewang_gu){
                         player.storage.yewang_gu = [1,1,1];
                         player.syncStorage('yewang_gu');
                     }
@@ -16452,7 +16455,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'dying',
                 },
                 filter:function(event,player){
-                    return player.hasSkill('qixing_gui')&&player.storage.qixing_gui > 0;
+                    return player.hasSkill('qixing_gui')&&player.storage.qixing_gui&&player.storage.qixing_gui > 0;
                 },
                 content:function(event){
                     'step 0'
@@ -16513,7 +16516,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"phaseDiscardEnd",
                 },
                 filter:function(event,player){
-                    return player.countCards('h')>player.hp;
+                    return player.storage.qixing_gui&&player.countCards('h')>player.hp;
                 },
                 content:function(event){
                     player.logSkill('qixing_gui');
@@ -16530,7 +16533,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"dyingAfter",
                 },
                 filter:function(event,player){
-                    return player.isAlive()&&player.hasSkill('qixing_gui')&&player.storage.qixing_gui == 0;
+                    return player.isAlive()&&player.hasSkill('qixing_gui')&&(!player.storage.qixing_gui || player.storage.qixing_gui == 0);
                 },
                 content:function(event){
                     'step 0'
