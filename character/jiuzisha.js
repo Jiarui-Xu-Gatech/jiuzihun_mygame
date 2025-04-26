@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','guicai','yuner_shandian'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','muniu_kaer','yuner_die'],[]],
 		},
 		characterIntro:{
 			ouruoling:"欧若灵，西域第一美人儿，善于飞行，相貌极其精致，如凌波仙子般水灵秀气，丰姿冶丽，仿佛上天有意细细雕琢出来一般；她秀雅绝俗，自有一股轻灵之气，肌肤娇嫩、神态悠闲、美目流盼、含辞未吐、气若幽兰，说不尽的温柔可人；身材无限接近九昕儿一般的完美，娇躯时常散发着茉莉的清香，除了九昕儿以外无人的颜值能在她之上；她是九幽精灵鸟仅存的后裔；全金发的手下，韩鑫的好友；原西域千门赌场掌管财务的户部尚书，后兼任韩鑫的治粟总长，总管账目和运送粮草，是全金发的得力助手。早年为一绿翅小鸟，被全金发所救，并为他的无私和爱所感动，爱上了全金发；为了全金发加入了千门，由于长得实在太美了，成为无数男人心中的女神，升官极其顺利，很快就成了全金发的副手，单相思着全金发，可是由于害羞和含蓄不敢表露自己的情愫。性格单纯，聪颖，贤惠，含蓄又专情；数学非常好，算账从来没有出过错；大叔控，有时会自作多情，沉浸在自己与全金发的美好幻想之中无法自拔。对爱人非常周到和体贴，也非常容易满足，全金发一个微笑和一句夸赞就能让她开心好几天。",
@@ -795,6 +795,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'mingwang_bg'){
                         game.createClearBackground(player.storage.mingwang_background,player);
+                        player.storage.mingwang_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -2004,6 +2005,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'honglian_bg'){
                         game.createClearBackground(player.storage.honglian_background,player);
+                        player.storage.honglian_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -2332,6 +2334,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'xueyue_bg'){
                         game.createClearBackground(player.storage.shixue,player);
+                        player.storage.shixue = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -2951,6 +2954,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'yanjiang_bg'){
                         game.createClearBackground(player.storage.yuhuo_background_nv,player);
+                        player.storage.yuhuo_background_nv = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -3346,6 +3350,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'minghou_bg'){
                         game.createClearBackground(player.storage.minghou_background_lan,player);
+                        player.storage.minghou_background_lan = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -6648,7 +6653,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     player.chooseBool(get.prompt("fenfen_damaged_ding"),'你受到伤害，是否翻面，然后摸两张牌？').set('ai',function(){
-                        return player.storage.kuaijiu_ding > player.maxHp;
+                        return player.storage.kuaijiu_ding >= player.maxHp;
                     });
                     "step 1"
                     if (result.bool) {
@@ -9429,6 +9434,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'ring_bg'){
                         game.createClearBackground(player.storage.xinruan_mei,player);
+                        player.storage.xinruan_mei = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -12218,7 +12224,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.logSkill('muniu_start_kaer');
                         player.$give(result.cards.length,player,false);
                         player.storage.niu_kaer=player.storage.niu_kaer.concat(result.cards);
-                        player.storage.kaer_jiuzi = player;
+                        if (player.hasSkill('tongzhen_kaer')){
+                            player.storage.kaer_jiuzi = player;
+                        }
                         player.addSkill('niu_kaer');
                         player.syncStorage('niu_kaer');
                         game.addVideo('storage',player,['muniu_start_kaer',get.cardsInfo(player.storage.niu_kaer),'cards']);
@@ -12258,7 +12266,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // if (player.hasSkill('niu_kaer')){
                     //     game.log(player,'失去了【牛】');
                     // }
-                    if (player.hp < player.maxHp || player.storage.kaer_jiuzi.hp < player.storage.kaer_jiuzi.maxHp||(player.storage.kaer_jiuzi.countCards('h')<player.storage.kaer_jiuzi.hp&&(!player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')))){
+                    if (!player.storage.kaer_jiuzi){
+                        return;
+                    }
+                    else if (player.hp < player.maxHp || player.storage.kaer_jiuzi.hp < player.storage.kaer_jiuzi.maxHp||(player.storage.kaer_jiuzi.countCards('h')<player.storage.kaer_jiuzi.hp&&(!player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')))){
                         player.storage.kaer_jiuzi.logSkill('tongzhen_recover_kaer');
                         if (player.storage.kaer_jiuzi.countCards('h')<player.storage.kaer_jiuzi.hp&&(!player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw'))){
                             if (_status.event.name == 'yanhua_kaer'){
@@ -12271,6 +12282,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.recover(1);
                     player.storage.kaer_jiuzi.recover(1);
                     'step 2'
+                    delete player.storage.kaer_jiuzi;
                     game.delay(2);
 
                 },
@@ -12293,7 +12305,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             // console.log("yuzhong去了呀");
                             current.removeSkill('niu_kaer');
                         }
-                        
+                        else if (current.storage.kaer_jiuzi){
+                            delete current.storage.kaer_jiuzi;
+                        }
                         
                     });
                 }
@@ -12349,7 +12363,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.NumCards = player.storage.niu_kaer.length;
                         game.log(player,'将'+get.cnNumber(event.NumCards)+'张','#g【牛】','牌置于',result.targets[0],'武将牌上，',result.targets[0],'获得','#g【牛】');
                         player.$give(player.storage.niu_kaer.length,result.targets[0],false);
-                        result.targets[0].storage.kaer_jiuzi = player;
+                        if (player.hasSkill('tongzhen_kaer')){
+                            result.targets[0].storage.kaer_jiuzi = player;
+                        }
                         result.targets[0].storage.niu_kaer = [];
                         result.targets[0].storage.niu_kaer = result.targets[0].storage.niu_kaer.concat(player.storage.niu_kaer);
                         result.targets[0].syncStorage('niu_kaer');
@@ -12390,7 +12406,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"useCardAfter",
                 },
                 filter:function(event,player){
-                    return player.hasSkill('niu_kaer')&&player.storage.niu_kaer.length != 0;
+                    return player.hasSkill('niu_kaer')&&player.storage.niu_kaer&&player.storage.niu_kaer.length != 0;
                 },
                 content:function(event){
                     'step 0'
@@ -12435,7 +12451,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'damageAfter',
                 },
                 filter:function(event,player){
-                    return player.storage.niu_kaer&&player.storage.niu_kaer.length > 0 && event.player.isAlive();
+                    return player.storage.kaer_jiuzi&&player.storage.niu_kaer&&player.storage.niu_kaer.length > 0 && event.player.isAlive();
                 },
                 content:function(event){
                     'step 0'
@@ -12454,7 +12470,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.markSkill('niu_kaer');
                     }
                     'step 1'
-                    if (player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')){
+                    if (player.storage.kaer_jiuzi&&player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')){
                         player.storage.kaer_jiuzi.removeSkill('forbidExtraDraw');
                     }
 
@@ -12471,7 +12487,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     source:'damageAfter',
                 },
                 filter:function(event,player){
-                    return player.storage.niu_kaer&&player.storage.niu_kaer.length > 0 && event.player.isAlive();
+                    return player.storage.kaer_jiuzi&&player.storage.niu_kaer&&player.storage.niu_kaer.length > 0 && event.player.isAlive();
                 },
                 content:function(event){
                     'step 0'
@@ -12490,7 +12506,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.markSkill('niu_kaer');
                     }
                     'step 1'
-                    if ( player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')){
+                    if (player.storage.kaer_jiuzi&&player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')){
                         player.storage.kaer_jiuzi.removeSkill('forbidExtraDraw');
                     }
 
@@ -13446,6 +13462,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     mingzhi:true,
                     maihp:true,
+                    predamage:true,
+                    preshadamage:true,
+                    skillTagFilter:function(player,tag){
+                        if (tag == 'predamage'&&player.countCards('h')<=17){
+                            return false;
+                        }
+					},
                     effect:{
                         target:function(card,player,target){
                             var has = false;
@@ -13967,6 +13990,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'zhaoze_bg'){
                         game.createClearBackground(player.storage.zuizhao_background,player);
+                        player.storage.zuizhao_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -14512,6 +14536,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'bingshan_bg'){
                         game.createClearBackground(player.storage.hanbian_background,player);
+                        player.storage.hanbian_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -14815,6 +14840,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'huoshan_bg'){
                         game.createClearBackground(player.storage.qianshang_background,player);
+                        player.storage.qianshang_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -15073,7 +15099,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 onremove:function (player){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'rainforest_bg'){
-                        game.createClearBackground(player.storage.qianshang_background,player);
+                        game.createClearBackground(player.storage.liejiu_dong_background,player);
+                        player.storage.liejiu_dong_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -16184,6 +16211,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'firelion_bg'){
                         game.createClearBackground(player.storage.kuanglie_background,player);
+                        player.storage.kuanglie_background = '';
                     }
                     else{
                         game.createClearBackground('',player);
@@ -16229,6 +16257,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:2.5,
 					maihp:true,
+                    predamage:true,
+                    preshadamage:true,
+                    skillTagFilter:function(player,tag){
+                        if (tag == 'predamage'&&player.countCards('h')<=12){
+                            return false;
+                        }
+					},
 				},
             },
 
@@ -17486,6 +17521,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.cardNumber = 0;
                     }
                     if (get.tag(trigger.card,'recover')||get.tag(trigger.card,'save')||get.tag(trigger.card,'draw')){
+                        event.isGood = true;
+                    }
+                    else if (get.name(trigger.card)=='tiesuo'&&player.isLinked()){
                         event.isGood = true;
                     }
                     else{

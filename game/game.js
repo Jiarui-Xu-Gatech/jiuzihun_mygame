@@ -51801,6 +51801,10 @@
 			if (player2==player&&player.hasSkillTag('predamage')&&card&&get.tag(card,'damage')){
 				result1 += 0.2;
 			}
+			//add preshadamage effect
+			if (player2==player&&player.hasSkillTag('preshadamage')&&card&&get.name(card)=='sha'){
+				result1 += 0.2;
+			}
 
 			var final=0;
 			if(player2){
