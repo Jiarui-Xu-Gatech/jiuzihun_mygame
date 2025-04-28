@@ -14653,16 +14653,25 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     "step 0"
                     player.chooseBool(get.prompt2("qianshang_dong")).set('ai',function(event,player){
+                        var addi = 0;
+                        if (player.hp == 1){
+                            addi += 0.3;
+                        }
+                        var friends_num = 0;
                         var targets = game.filterPlayer();
                         targets.remove(player);
                         var effect=0;
                         for(var i=0;i<targets.length;i++){
                             effect+=get.effect(targets[i],{name:'juedou'},player);
+                            if (get.attitude(targets[i],player)>0 || get.attitude(player,targets[i])>1){
+                                friends_num++;
+                            }
                         }
+                        addi += (friends_num - (Math.min(3,player.hp-1)))*0.2;
                         if(get.mode()=='identity'){
                             if(player.hasUnknown(2)) return true;
                         }
-                        return effect > 0 || Math.random() < 0.35;
+                        return effect > 0 || Math.random() < 0.35+addi;
                     });
 
                     "step 1"

@@ -5071,7 +5071,7 @@
 							'2v2':'2v2',
 							'3v3':'3v3',
 							'4v4':'4v4',
-							'guandu':'官渡',
+							// 'guandu':'官渡',
 						},
 						frequent:true
 					},
@@ -5207,7 +5207,7 @@
 							four:'对抗',
 							three:'统率',
 							two:'欢乐',
-							guandu:'官渡',
+							// guandu:'官渡',
 							jiange:'剑阁',
 							siguo:'四国',
 							standard:'自由'
@@ -5237,19 +5237,19 @@
 					},
 					enable_all_cards_four:{
 						name:'启用全部卡牌',
-						init:false,
+						init:true,
 						frequent:true,
 						restart:true,
 					},
 					enable_all_three:{
 						name:'启用全部武将',
-						init:false,
+						init:true,
 						frequent:true,
 						restart:true,
 					},
 					enable_all_cards:{
 						name:'启用全部卡牌',
-						init:false,
+						init:true,
 						frequent:true,
 						restart:true,
 					},
@@ -48814,7 +48814,7 @@
 					case '2v2':return '欢乐成双';
 					case '3v3':return '血战到底';
 					case '4v4':return '四人对决';
-					case 'guandu':return '官渡之战';
+					// case 'guandu':return '官渡之战';
 				}
 			}
 			else if(config.mode=='single'){
