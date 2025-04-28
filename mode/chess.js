@@ -5974,52 +5974,52 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				// image:'mode/chess/difficulty/leader_hard'
 			}
 		},
-		characterPack:{
-			mode_chess:{
-				leader_caocao:['male','wei',4,['leader_xiaoxiong']],
-				leader_liubei:['male','shu',4,['leader_renyi']],
-				leader_sunquan:['male','wu',4,['leader_mouduan']],
-				// chess_caocao:['male','wei',3,['']],
-				// chess_xunyu:['male','wei',3,['']],
-				// chess_simayi:['male','wei',3,['']],
-				// chess_xiahoudun:['male','wei',3,['']],
-				// chess_dianwei:['male','wei',3,['']],
-				// chess_xuzhu:['male','wei',3,['']],
-				chess_zhangliao:['male','wei',4,['gongji','zhiming']],
-				// chess_jiaxu:['male','wei',3,['']],
-				//
-				// chess_liubei:['male','shu',3,['']],
-				// chess_guanyu:['male','shu',3,['']],
-				// chess_zhangfei:['male','shu',3,['']],
-				// chess_zhaoyun:['male','shu',3,['']],
-				// chess_machao:['male','shu',3,['']],
-				chess_huangzhong:['male','shu',4,['sanjiansheji','liegong']],
-				// chess_maliang:['male','shu',3,['']],
-				// chess_zhugeliang:['male','shu',3,['']],
-				//
-				// chess_sunquan:['male','wu',3,['']],
-				// chess_zhouyu:['male','wu',3,['qinyin']],
-				// chess_lvmeng:['male','wu',3,['']],
-				// chess_huanggai:['male','wu',3,['']],
-				// chess_lusu:['male','wu',3,['']],
-				// chess_luxun:['male','wu',3,['']],
-				// chess_ganning:['male','wu',3,['']],
-				chess_taishici:['male','wu',4,['gongji','guanchuan','pojun']],
-				//
-				// chess_lvbu:['male','qun',3,['']],
-				chess_sunshangxiang:['female','wu',3,['lingdong','lianshe','gongji']],
-				chess_diaochan:['female','qun',3,['xingzhui','pianyi','biyue']],
-				// chess_huatuo:['male','qun',3,['zhenjiu','mazui']],
-				// chess_zhangjiao:['male','qun',3,['']],
-				// chess_menghuo:['male','qun',3,['']],
-				//
-				chess_jinchidiao:['male','qun',15,['boss_bfengxing','boss_chiyu'],['boss','chessboss']],
-				chess_beimingjukun:['male','qun',25,['boss_wuying','cangming'],['boss','chessboss']],
-				chess_wuzhaojinlong:['male','qun',30,['boss_tenglong','boss_wushang'],['boss','chessboss']],
-				chess_dongzhuo:['male','qun',20,['jiuchi','boss_stoneqiangzheng','boss_stonebaolin'],['boss','chessboss']],
-				chess_xingtian:['male','qun',99,['boss_moyan','wushuang'],['boss','chessboss']],
-			}
-		},
+		// characterPack:{
+		// 	mode_chess:{
+		// 		// leader_caocao:['male','wei',4,['leader_xiaoxiong']],
+		// 		// leader_liubei:['male','shu',4,['leader_renyi']],
+		// 		// leader_sunquan:['male','wu',4,['leader_mouduan']],
+		// 		// // chess_caocao:['male','wei',3,['']],
+		// 		// // chess_xunyu:['male','wei',3,['']],
+		// 		// // chess_simayi:['male','wei',3,['']],
+		// 		// // chess_xiahoudun:['male','wei',3,['']],
+		// 		// // chess_dianwei:['male','wei',3,['']],
+		// 		// // chess_xuzhu:['male','wei',3,['']],
+		// 		// chess_zhangliao:['male','wei',4,['gongji','zhiming']],
+		// 		// // chess_jiaxu:['male','wei',3,['']],
+		// 		// //
+		// 		// // chess_liubei:['male','shu',3,['']],
+		// 		// // chess_guanyu:['male','shu',3,['']],
+		// 		// // chess_zhangfei:['male','shu',3,['']],
+		// 		// // chess_zhaoyun:['male','shu',3,['']],
+		// 		// // chess_machao:['male','shu',3,['']],
+		// 		// chess_huangzhong:['male','shu',4,['sanjiansheji','liegong']],
+		// 		// // chess_maliang:['male','shu',3,['']],
+		// 		// // chess_zhugeliang:['male','shu',3,['']],
+		// 		// //
+		// 		// // chess_sunquan:['male','wu',3,['']],
+		// 		// // chess_zhouyu:['male','wu',3,['qinyin']],
+		// 		// // chess_lvmeng:['male','wu',3,['']],
+		// 		// // chess_huanggai:['male','wu',3,['']],
+		// 		// // chess_lusu:['male','wu',3,['']],
+		// 		// // chess_luxun:['male','wu',3,['']],
+		// 		// // chess_ganning:['male','wu',3,['']],
+		// 		// chess_taishici:['male','wu',4,['gongji','guanchuan','pojun']],
+		// 		// //
+		// 		// // chess_lvbu:['male','qun',3,['']],
+		// 		// chess_sunshangxiang:['female','wu',3,['lingdong','lianshe','gongji']],
+		// 		// chess_diaochan:['female','qun',3,['xingzhui','pianyi','biyue']],
+		// 		// // chess_huatuo:['male','qun',3,['zhenjiu','mazui']],
+		// 		// // chess_zhangjiao:['male','qun',3,['']],
+		// 		// // chess_menghuo:['male','qun',3,['']],
+		// 		// //
+		// 		// chess_jinchidiao:['male','qun',15,['boss_bfengxing','boss_chiyu'],['boss','chessboss']],
+		// 		// chess_beimingjukun:['male','qun',25,['boss_wuying','cangming'],['boss','chessboss']],
+		// 		// chess_wuzhaojinlong:['male','qun',30,['boss_tenglong','boss_wushang'],['boss','chessboss']],
+		// 		// chess_dongzhuo:['male','qun',20,['jiuchi','boss_stoneqiangzheng','boss_stonebaolin'],['boss','chessboss']],
+		// 		// chess_xingtian:['male','qun',99,['boss_moyan','wushuang'],['boss','chessboss']],
+		// 	}
+		// },
 		cardPack:{
 			mode_chess:['chess_shezhang','chess_chuzhang']
 		},

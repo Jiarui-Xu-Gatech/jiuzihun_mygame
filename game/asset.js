@@ -46,6 +46,7 @@ window.noname_asset_list=[
 	'audio/background/music_pirate.mp3',
 	'audio/background/music_weare.mp3',
 	'audio/background/music_void.mp3',
+	'audio/background/music_ninelie.mp3',
 
 	'audio/card/default.mp3',
 	

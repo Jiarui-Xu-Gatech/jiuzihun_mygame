@@ -4185,7 +4185,7 @@
 						item:{
 							normal:'标准',
 							zhong:'明忠',
-							purple:'3v3v2',
+							// purple:'3v3v2',
 						},
 						restart:true,
 						frequent:true,
@@ -5782,7 +5782,7 @@
 						item:{
 							combat:'自由',
 							three:'统率',
-							leader:'君主',
+							// leader:'君主',
 						},
 						restart:true,
 						frequent:true,
@@ -6015,61 +6015,61 @@
 			brawl:{
 				name:'乱斗',
 				config:{
-					huanhuazhizhan:{
-						name:'幻化之战',
-						init:true,
-						frequent:true
-					},
+					// huanhuazhizhan:{
+					// 	name:'幻化之战',
+					// 	init:true,
+					// 	frequent:true
+					// },
 					duzhansanguo:{
 						name:'毒战三国',
 						init:true,
 						frequent:true
 					},
-					daozhiyueying:{
-						name:'导师月英',
-						init:true,
-						frequent:true
-					},
+					// daozhiyueying:{
+					// 	name:'导师月英',
+					// 	init:true,
+					// 	frequent:true
+					// },
 					weiwoduzun:{
 						name:'唯我独尊',
 						init:true,
 						frequent:true
 					},
-					tongxingzhizheng:{
-						name:'同姓之争',
-						init:true,
-						frequent:true
-					},
-					tongqueduopao:{
-						name:'铜雀夺袍',
-						init:true,
-						frequent:true
-					},
-					tongjiangmoshi:{
-						name:'同将模式',
-						init:true,
-						frequent:true
-					},
-					baiyidujiang:{
-						name:'白衣渡江',
-						init:true,
-						frequent:true
-					},
+					// tongxingzhizheng:{
+					// 	name:'同姓之争',
+					// 	init:true,
+					// 	frequent:true
+					// },
+					// tongqueduopao:{
+					// 	name:'铜雀夺袍',
+					// 	init:true,
+					// 	frequent:true
+					// },
+					// tongjiangmoshi:{
+					// 	name:'同将模式',
+					// 	init:true,
+					// 	frequent:true
+					// },
+					// baiyidujiang:{
+					// 	name:'白衣渡江',
+					// 	init:true,
+					// 	frequent:true
+					// },
 					qianlidanji:{
 						name:'千里单骑',
 						init:true,
 						frequent:true
 					},
-					liangjunduilei:{
-						name:'两军对垒',
-						init:true,
-						frequent:true
-					},
-					scene:{
-						name:'创建场景',
-						init:true,
-						frequent:true
-					}
+					// liangjunduilei:{
+					// 	name:'两军对垒',
+					// 	init:true,
+					// 	frequent:true
+					// },
+					// scene:{
+					// 	name:'创建场景',
+					// 	init:true,
+					// 	frequent:true
+					// }
 				}
 			},
 			stone:{
@@ -24421,8 +24421,8 @@
 				return true;
 			},
 			characterDisabled:function(i,libCharacter){
-				if(lib.character[i][4]&&lib.character[i][4].contains('forbidai')) return true;
-				if(lib.character[i][4]&&lib.character[i][4].contains('unseen')) return true;
+				if(lib.character[i]&&lib.character[i][4]&&lib.character[i][4].contains('forbidai')) return true;
+				if(lib.character[i]&&lib.character[i][4]&&lib.character[i][4].contains('unseen')) return true;
 				if(lib.config.forbidai.contains(i)) return true;
 				if(lib.characterFilter[i]&&!lib.characterFilter[i](get.mode())) return true;
 				if(_status.connectMode){
@@ -29364,32 +29364,60 @@
 					console.log(player);
 				}
 			},
-			over:function(str){
+			over:function(strAndTime){
 				_status.over = true;
 				game.playBackgroundMusic();
 				for (var i = 0; i < game.players.length; i++){
 					game.players[i].node.identity.classList.remove('guessing');
 					game.players[i].forceShown = true;
 				}
+				var str = strAndTime[0];
+				var timeoutTime = strAndTime[1];
 
-				var dialog=ui.create.dialog('hidden');
-				dialog.noforcebutton=true;
-				dialog.content.innerHTML=str;
-				dialog.forcebutton=true;
-				dialog.open();
-				if(game.chess){
-					dialog.classList.add('center');
-				}
-				if((game.layout=='long2'||game.layout=='nova')&&!game.chess){
-					ui.arena.classList.add('choose-character');
-					if(ui.me) ui.me.hide();
-					if(ui.mebg) ui.mebg.hide()
-					if(ui.autonode) ui.autonode.hide();
-					if(lib.config.radius_size!='off'){
-						if(ui.historybar) ui.historybar.style.borderRadius='0 0 0 4px';
+				// var dialog=ui.create.dialog('hidden');
+				// dialog.noforcebutton=true;
+				// dialog.content.innerHTML=str;
+				// dialog.forcebutton=true;
+				// dialog.open();
+				// if(game.chess){
+				// 	dialog.classList.add('center');
+				// }
+				// if((game.layout=='long2'||game.layout=='nova')&&!game.chess){
+				// 	ui.arena.classList.add('choose-character');
+				// 	if(ui.me) ui.me.hide();
+				// 	if(ui.mebg) ui.mebg.hide()
+				// 	if(ui.autonode) ui.autonode.hide();
+				// 	if(lib.config.radius_size!='off'){
+				// 		if(ui.historybar) ui.historybar.style.borderRadius='0 0 0 4px';
+				// 	}
+				// }
+
+				setTimeout(function(){
+					var dialog=ui.create.dialog('hidden');
+					dialog.noforcebutton=true;
+					dialog.content.innerHTML=str;
+					dialog.forcebutton=true;
+					dialog.open();
+					if(game.chess){
+						dialog.classList.add('center');
 					}
-				}
-			}
+					if((game.layout=='long2'||game.layout=='nova')&&!game.chess){
+						ui.arena.classList.add('choose-character');
+						if(ui.me) ui.me.hide();
+						if(ui.mebg) ui.mebg.hide()
+						if(ui.autonode) ui.autonode.hide();
+						if(lib.config.radius_size!='off'){
+							if(ui.historybar) ui.historybar.style.borderRadius='0 0 0 4px';
+						}
+					}
+				},timeoutTime);
+			},
+			bestPlayerShow:function(str){
+				game.bestPlayerShow(str[0],str[1]);
+			},
+			neiVSzhu:function(time){
+				game.neiVSzhu(time);
+			},
 		},
 		reload:function(){
 			if(_status){
@@ -30501,6 +30529,7 @@
 					ui.historybar.style.borderRadius='0 0 0 4px';
 				}
 			}
+
 			if(game.online){
 				var dialog=ui.create.dialog();
 				dialog.noforcebutton=true;
@@ -30597,6 +30626,10 @@
 			if(result===false) result='战斗失败';
 			if(result==undefined) result='战斗结束';
 			dialog=ui.create.dialog(result);
+			
+			//先隐藏
+			dialog.classList.add('hidden');
+
 			dialog.noforcebutton=true;
 			dialog.forcebutton=true;
 			if(game.addOverDialog){
@@ -30726,6 +30759,11 @@
 					ui.ladder.innerHTML=game.getLadderName(lib.storage.ladder.current);
 				}
 			}
+			//杀敌50%, 造成伤害15%，受伤10%，出牌15%，摸牌10%
+			var bestPlayerName = '';
+			var bestPlayer;
+			var totalScore = -1;
+			
 			// if(true){
 				if(game.players.length){
 					table=document.createElement('table');
@@ -30748,6 +30786,7 @@
 					tr.appendChild(td);
 					table.appendChild(tr);
 					for(i=0;i<game.players.length;i++){
+						var currentScore = 0;
 						tr=document.createElement('tr');
 						td=document.createElement('td');
 						td.innerHTML=get.translation(game.players[i]);
@@ -30758,6 +30797,7 @@
 							if(game.players[i].stat[j].damage!=undefined) num+=game.players[i].stat[j].damage;
 						}
 						td.innerHTML=num;
+						currentScore += 0.15*num/(3.5*(game.players.length+game.dead.length));
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30765,6 +30805,7 @@
 							if(game.players[i].stat[j].damaged!=undefined) num+=game.players[i].stat[j].damaged;
 						}
 						td.innerHTML=num;
+						currentScore += 0.1*num/(3.5*(game.players.length+game.dead.length));
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30772,6 +30813,7 @@
 							if(game.players[i].stat[j].gain!=undefined) num+=game.players[i].stat[j].gain;
 						}
 						td.innerHTML=num;
+						currentScore += 0.1*num/(161);
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30781,6 +30823,7 @@
 							}
 						}
 						td.innerHTML=num;
+						currentScore += 0.15*num/(161);
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30788,11 +30831,18 @@
 							if(game.players[i].stat[j].kill!=undefined) num+=game.players[i].stat[j].kill;
 						}
 						td.innerHTML=num;
+						currentScore += 0.5*num/(game.players.length+game.dead.length);
 						tr.appendChild(td);
 						table.appendChild(tr);
+						if (currentScore > totalScore){
+							totalScore = currentScore;
+							bestPlayerName = game.players[i].name;
+							bestPlayer = game.players[i];
+						}
 					}
 					dialog.add(ui.create.div('.placeholder'));
 					dialog.content.appendChild(table);
+
 				}
 				if(game.dead.length){
 					table=document.createElement('table');
@@ -30818,6 +30868,7 @@
 						table.appendChild(tr);
 					}
 					for(i=0;i<game.dead.length;i++){
+						var currentScore = 0;
 						tr=document.createElement('tr');
 						td=document.createElement('td');
 						td.innerHTML=get.translation(game.dead[i]);
@@ -30828,6 +30879,7 @@
 							if(game.dead[i].stat[j].damage!=undefined) num+=game.dead[i].stat[j].damage;
 						}
 						td.innerHTML=num;
+						currentScore += 0.15*num/(3.5*(game.players.length+game.dead.length));
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30835,6 +30887,7 @@
 							if(game.dead[i].stat[j].damaged!=undefined) num+=game.dead[i].stat[j].damaged;
 						}
 						td.innerHTML=num;
+						currentScore += 0.1*num/(3.5*(game.players.length+game.dead.length));
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30842,6 +30895,7 @@
 							if(game.dead[i].stat[j].gain!=undefined) num+=game.dead[i].stat[j].gain;
 						}
 						td.innerHTML=num;
+						currentScore += 0.1*num/(161);
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30851,6 +30905,7 @@
 							}
 						}
 						td.innerHTML=num;
+						currentScore += 0.15*num/(161);
 						tr.appendChild(td);
 						td=document.createElement('td');
 						num=0;
@@ -30858,8 +30913,14 @@
 							if(game.dead[i].stat[j].kill!=undefined) num+=game.dead[i].stat[j].kill;
 						}
 						td.innerHTML=num;
+						currentScore += 0.5*num/(game.players.length+game.dead.length);
 						tr.appendChild(td);
 						table.appendChild(tr);
+						if (currentScore > totalScore){
+							totalScore = currentScore;
+							bestPlayerName = game.dead[i].name;
+							bestPlayer = game.dead[i];
+						}
 					}
 					dialog.add(ui.create.div('.placeholder'));
 					dialog.content.appendChild(table);
@@ -30943,7 +31004,30 @@
 				}
 			}
 			dialog.add(ui.create.div('.placeholder.slim'));
-			game.addVideo('over',null,dialog.content.innerHTML);
+
+			// ★★★ 这里开始插入全场最佳的弹出逻辑 ★★★
+			// var bestPlayerName = 'chenyingchao';
+			var ThetimeoutTime = 4000;
+			game.bestPlayerShow(bestPlayerName,ThetimeoutTime);
+			if (bestPlayer&&bestPlayer.countSkillWithInfo()>0){
+				var thePlayer = lib.character[bestPlayerName];
+				var skills = thePlayer[3];
+				var skillsInfo = thePlayer[3];
+				// for (var i = 0; i < skills.length; i++){
+				// 	if(lib.translate[skills[i]+'_info']){
+				// 		skillsInfo.push(skills[i]);
+				// 	}
+				// }
+				var numberRan = Math.ceil(skillsInfo.length*Math.random())-1;
+				game.playAudio('skill',skillsInfo[numberRan]+1);
+			}
+
+			setTimeout(function(){
+				dialog.classList.remove('hidden'); // 4秒后显示出来
+			},ThetimeoutTime);
+
+			game.addVideo('over',null,[dialog.content.innerHTML,ThetimeoutTime]);
+
 			var vinum=parseInt(lib.config.video);
 			if(!_status.video&&vinum&&game.getVideoName&&window.indexedDB&&_status.videoInited){
 				var store=lib.db.transaction(['video'],'readwrite').objectStore('video');
@@ -31119,6 +31203,201 @@
 				game.saveConfig('pagecfg'+window.isNonameServer,[lib.configOL,game.roomId,_status.onlinenickname,_status.onlineavatar]);
 				game.reload();
 			}
+		},
+		bestPlayerShow:function(bestPlayer_name,timeoutTime){
+			game.addVideo('bestPlayerShow',null,[bestPlayer_name,timeoutTime]);
+			game.broadcastAll(function(bestPlayer_name){
+				//画出玩家
+				var bestPlayer = ui.create.player(null,true);
+				bestPlayer.node.avatar.style.backgroundSize = 'cover';
+				bestPlayer.node.avatar.setBackgroundImage('image/character/'+bestPlayer_name+'.jpg');
+				bestPlayer.node.avatar.show();
+				var rand1=Math.round(0.2*100);
+				var rand2=Math.round(0.38*100);
+				var rand3=Math.round(0.25*40)-20;
+				bestPlayer.style.left = 'calc('+38+'% - '+180+'px)';
+				bestPlayer.style.top = 'calc('+rand2+'% - '+64+'px)';
+				bestPlayer.style.transform='scale(1.2) rotate('+rand3+'deg)';
+				bestPlayer.node.count.remove();
+				bestPlayer.node.hp.remove();
+				bestPlayer.style.transition = 'all 0.5s';
+				ui.arena.appendChild(bestPlayer);
+
+				// 创建艺术字
+				var bestText = document.createElement('div');
+				bestText.innerHTML = '全场最佳';
+				bestText.style.position = 'absolute';
+				bestText.style.left = 'calc(' + 38 + '% )'; // 在头像右边偏移160px
+				bestText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				bestText.style.fontSize = '80px'; // 字体大小
+				bestText.style.textShadow = `
+					rgba(255, 203, 0, 1) 0 0 2px,
+					rgba(255, 203, 0, 1) 0 0 5px,
+					rgba(255, 203, 0, 1) 0 0 10px,
+					rgba(255, 203, 0, 1) 0 0 10px
+				`;
+				bestText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				bestText.style.transition = 'all 0.5s';
+				ui.arena.appendChild(bestText);
+				
+				bestPlayer.classList.add('zoomin3');
+				bestPlayer.hide();
+				bestPlayer.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					bestPlayer.style.transitionProperty='none';
+					bestPlayer.classList.remove('zoomin3');
+					bestPlayer.classList.add('zoomout2');
+					setTimeout(function(){
+						bestPlayer.style.transitionProperty='';
+						bestPlayer.classList.remove('zoomout2');
+						bestPlayer.show();
+					},200);
+				},400);
+
+
+				bestText.classList.add('zoomin3');
+				bestText.hide();
+				bestText.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					bestText.style.transitionProperty='none';
+					bestText.classList.remove('zoomin3');
+					bestText.classList.add('zoomout2');
+					setTimeout(function(){
+						bestText.style.transitionProperty='';
+						bestText.classList.remove('zoomout2');
+						bestText.show();
+					},200);
+				},400);
+
+				var interval = setInterval(function(){
+					bestPlayer.classList.add('zoomin3');
+					bestText.classList.add('zoomin3');
+				}, timeoutTime); 
+
+				setTimeout(function(){
+					clearInterval(interval);
+					bestPlayer.delete();
+					bestText.delete();
+				}, timeoutTime);
+
+			},bestPlayer_name);
+		},
+		neiVSzhu:function(timeoutTime){
+			game.addVideo('neiVSzhu',null,timeoutTime);
+			game.broadcastAll(function(){
+				var rand1=Math.round(0.2*100);
+				var rand2=Math.round(0.38*100);
+				var rand3=Math.round(0.25*40)-20;
+
+				// 创建艺术字
+				var NeiText = document.createElement('div');
+				NeiText.innerHTML = '内奸';
+				NeiText.style.position = 'absolute';
+				NeiText.style.left = 'calc(' + 38 + '% - 100px)'; // 在头像右边偏移160px
+				NeiText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				NeiText.style.fontSize = '80px'; // 字体大小
+				NeiText.style.textShadow = `
+					rgba(100, 74, 139,1) 0 0 2px,
+					rgba(100, 74, 139,1) 0 0 5px,
+					rgba(100, 74, 139,1) 0 0 10px,
+					rgba(100, 74, 139,1) 0 0 10px
+				`;
+				NeiText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				NeiText.style.transition = 'all 0.5s';
+				ui.arena.appendChild(NeiText);
+
+				NeiText.classList.add('zoomin3');
+				NeiText.hide();
+				NeiText.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					NeiText.style.transitionProperty='none';
+					NeiText.classList.remove('zoomin3');
+					NeiText.classList.add('zoomout2');
+					setTimeout(function(){
+						NeiText.style.transitionProperty='';
+						NeiText.classList.remove('zoomout2');
+						NeiText.show();
+					},10);
+				},20);
+
+				// 创建艺术字
+				var VSText = document.createElement('div');
+				VSText.innerHTML = 'VS';
+				VSText.style.position = 'absolute';
+				VSText.style.left = 'calc(' + 38 + '% + 84px)'; // 在头像右边偏移160px
+				VSText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				VSText.style.fontSize = '80px'; // 字体大小
+				// VSText.style.color = '#FFCB00';
+				VSText.style.textShadow = `
+					rgba(255, 203, 0, 1) 0 0 2px,
+					rgba(255, 203, 0, 1) 0 0 5px,
+					rgba(255, 203, 0, 1) 0 0 10px,
+					rgba(255, 203, 0, 1) 0 0 10px
+				`;
+				VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				VSText.style.transition = 'all 0.5s';
+				ui.arena.appendChild(VSText);
+
+				VSText.classList.add('zoomin3');
+				VSText.hide();
+				VSText.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					VSText.style.transitionProperty='none';
+					VSText.classList.remove('zoomin3');
+					VSText.classList.add('zoomout2');
+					setTimeout(function(){
+						VSText.style.transitionProperty='';
+						VSText.classList.remove('zoomout2');
+						VSText.show();
+					},10);
+				},20);
+
+				// 创建艺术字
+				var ZhuText = document.createElement('div');
+				ZhuText.innerHTML = '主公';
+				ZhuText.style.position = 'absolute';
+				ZhuText.style.left = 'calc(' + 38 + '% + 180px)'; // 在头像右边偏移160px
+				ZhuText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				ZhuText.style.fontSize = '80px'; // 字体大小
+				ZhuText.style.textShadow = `
+					rgba(232, 53, 53,1) 0 0 2px,
+					rgba(232, 53, 53,1) 0 0 5px,
+					rgba(232, 53, 53,1) 0 0 10px,
+					rgba(232, 53, 53,1) 0 0 10px
+				`;
+				ZhuText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				ZhuText.style.transition = 'all 0.5s';
+				ui.arena.appendChild(ZhuText);
+
+				ZhuText.classList.add('zoomin3');
+				ZhuText.hide();
+				ZhuText.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					ZhuText.style.transitionProperty='none';
+					ZhuText.classList.remove('zoomin3');
+					ZhuText.classList.add('zoomout2');
+					setTimeout(function(){
+						ZhuText.style.transitionProperty='';
+						ZhuText.classList.remove('zoomout2');
+						ZhuText.show();
+					},10);
+				},20);
+
+				var interval = setInterval(function(){
+					NeiText.classList.add('zoomin3');
+					VSText.classList.add('zoomin3');
+					ZhuText.classList.add('zoomin3');
+				}, timeoutTime); 
+
+				setTimeout(function(){
+					clearInterval(interval);
+					NeiText.delete();
+					VSText.delete();
+					ZhuText.delete();
+				}, timeoutTime);
+
+			});
+
 		},
 		loop:function(){
 			var event=_status.event;
@@ -48722,26 +49001,26 @@
 			if(typeof num!='number') num=false;
 			if(name==_status.lord) return num?Math.round(7*(num-1)/8+1):'ap';
 			var rank=lib.rank;
-			if(lib.characterPack.standard[name]||lib.characterPack.shenhua[name]){
-				var skills;
-				if(lib.character[name]){
-					skills=lib.character[name][3];
-				}
-				else{
-					var tmpinfo=get.character(name);
-					if(tmpinfo){
-						skills=tmpinfo[3];
-					}
-					else{
-						skills=[];
-					}
-				}
-				for(var i=0;i<skills.length;i++){
-					if(skills[i].alter&&!lib.config.vintageSkills.contains(skills[i])){
-						name=lib.rank.a[0];break;
-					}
-				}
-			}
+			// if(lib.characterPack.standard[name]||lib.characterPack.shenhua[name]){
+			// 	var skills;
+			// 	if(lib.character[name]){
+			// 		skills=lib.character[name][3];
+			// 	}
+			// 	else{
+			// 		var tmpinfo=get.character(name);
+			// 		if(tmpinfo){
+			// 			skills=tmpinfo[3];
+			// 		}
+			// 		else{
+			// 			skills=[];
+			// 		}
+			// 	}
+			// 	for(var i=0;i<skills.length;i++){
+			// 		if(skills[i].alter&&!lib.config.vintageSkills.contains(skills[i])){
+			// 			name=lib.rank.a[0];break;
+			// 		}
+			// 	}
+			// }
 			if(rank.s.contains(name)) return num?Math.round(8*(num-1)/8+1):'s';
 			if(rank.ap.contains(name)) return num?Math.round(7*(num-1)/8+1):'ap';
 			if(rank.a.contains(name)) return num?Math.round(6*(num-1)/8+1):'a';

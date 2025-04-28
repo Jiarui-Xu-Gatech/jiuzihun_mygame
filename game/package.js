@@ -25,7 +25,7 @@ window.noname_package={
 	card:{
 		standard:'标准',
 		extra:'军争',
-		// sp:'SP',
+		sp:'SP',
 		guozhan:'国战',
 		// zhulu:'逐鹿天下',
 		// zhenfa:'阵法',
@@ -168,6 +168,7 @@ window.noname_package={
 		music_xianjian:'奇缘剑仙',
 		music_weare:'海盗宝藏',
 		music_buwu:'天下布武',
+		music_ninelie:'王冠之战',
 		music_taoyuanjieyi:'桃园结义',
 		music_siji:'四季',
 		music_dongzhuojinjing:'董卓进京',

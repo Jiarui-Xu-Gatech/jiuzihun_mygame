@@ -2235,6 +2235,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						},game.zhu,this.special_identity);
 					}
 					game.checkResult();
+					if (game.zhu.isAlive()&&get.population('nei')>0&&game.players.length==2){
+						setTimeout(function(){
+							game.neiVSzhu(3000);	
+						},1000);
+					}
 					if(_status.mode=='purple'){
 						var red=[];
 						var blue=[];
