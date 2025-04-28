@@ -119,14 +119,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				if(lib.character.lvbu) lib.character.lvbu[3]=['wushuang','zhanshen'];
 				if(lib.character.xiahoudun) lib.character.xiahoudun[3]=['ganglie_three'];
 				if(!get.config('enable_all_cards')){
-					lib.translate.wuzhong_info+='若对方存活角色多于己方，则额外摸一张牌';
-					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3';
+					lib.translate.wuzhong_info+='若对方存活角色多于己方，则额外摸一张牌。';
+					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3。';
 					lib.card.list=lib.cardsThree;
 					game.fixedPile=true;
 				}
 				else if (get.config('enable_all_cards')){
-					lib.translate.wuzhong_info+='若对方存活角色多于己方，则额外摸一张牌';
-					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3';
+					lib.translate.wuzhong_info+='若对方存活角色多于己方，则额外摸一张牌。';
+					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3。';
 				}
 				else if(Array.isArray(lib.config.forbidthreecard)){
 					for(var i=0;i<lib.card.list.length;i++){
