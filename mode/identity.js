@@ -443,6 +443,21 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				if(player.identityShown) return;
 				if(player==game.me) return;
 				if(_status.mode=='purple'){
+					if (_status.video){
+						var colours = player.node.identity.dataset.color;
+						if (colours[0]=='r'||colours[colours.length - 1]=='2')return {
+							cai2:'☯',
+							rZhong:'忠',
+							rNei:'内',
+							rYe:'野',
+						}
+						return {
+							cai:'☯',
+							bZhong:'忠',
+							bNei:'内',
+							bYe:'野',
+						}
+					}
 					if(_status.yeconfirm&&['rNei','bNei'].contains(game.me.identity)&&['rNei','bNei'].contains(player.identity)) return;
 					if(player.identity.slice(0,1)=='r') return {
 						cai2:'☯',
@@ -918,8 +933,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 					}
 					game.zhu=game.rZhu;
- 				game.rZhu.isZhu=true;
- 				game.bZhu.isZhu=true;
+					game.rZhu.isZhu=true;
+					game.bZhu.isZhu=true;
 					game.me.setIdentity();
 					game.me.node.identity.classList.remove('guessing');
 					players.sortBySeat(game.zhu);
@@ -947,12 +962,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							map_zhu[group].push(i);
 						}
 					}
-					for(var i in map){
-						if(map[i].length<12){
-							delete map[i];
-							list.remove(i);
-						}
-					}
+					// for(var i in map){
+					// 	if(map[i].length<12){
+					// 		delete map[i];
+					// 		list.remove(i);
+					// 	}
+					// }
 					list.sort(function(a,b){
 						return lib.group.indexOf(a)-lib.group.indexOf(b);
 					});
@@ -972,7 +987,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					event.rZhu=result.control;
 					if(game.me==game.rZhu||game.me==game.bZhu){
 						event.isZhu=true;
-						var list=event.map[event[game.me.identity]].randomGets(4);
+						// var list=event.map[event[game.me.identity]].randomGets(4);
+						var list=event.map[event[game.me.identity]].randomGets(2);
 						if(event.map_zhu[event[game.me.identity]]) list.addArray(event.map_zhu[event[game.me.identity]].randomGets(2));
 						game.me.chooseButton(true,['请选择您的武将牌',[list,'character']]);
 					}
@@ -982,14 +998,16 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						game.me.init(result.links[0]);
 					}
 					if(!game.rZhu.name){
-						var list=event.map[event.rZhu].randomGets(3);
+						// var list=event.map[event.rZhu].randomGets(3);
+						var list=event.map[event.rZhu].randomGets(1);
 						if(event.map_zhu[event.rZhu]) list.addArray(event.map_zhu[event.rZhu]);
 						var character=list.randomGet();
 						event.map[event.rZhu].remove(character);
 						game.rZhu.init(character);
 					}
 					if(!game.bZhu.name){
-						var list=event.map[event.bZhu].randomGets(4);
+						// var list=event.map[event.bZhu].randomGets(4);
+						var list=event.map[event.bZhu].randomGets(2);
 						if(event.map_zhu[event.bZhu]) list.addArray(event.map_zhu[event.bZhu].randomGets(2));
 						var character=list.randomGet();
 						event.map[event.bZhu].remove(character);
@@ -1003,7 +1021,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					game.bZhu.update();
 					if(!event.isZhu){
 						var group=game.me.identity.indexOf('r')==0?event.rZhu:event.bZhu;
-						game.me.chooseButton(true,['请选择您的武将牌',[event.map[group].randomRemove(5),'character']]);
+						// game.me.chooseButton(true,['请选择您的武将牌',[event.map[group].randomRemove(5),'character']]);
+						game.me.chooseButton(true,['请选择您的武将牌',[event.map[group].randomRemove(3),'character']]);
 					}
 					"step 6"
 					if(!event.isZhu){
@@ -2149,7 +2168,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 						var node=ui.create.div('.damage.dieidentity',str,this);
 						if(str=='野心家'){
-							node.style.fontSize='40px';
+							node.style.fontSize='55px';
 						}
 						ui.refresh(node);
 						node.style.opacity=1;
@@ -3121,13 +3140,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 		},
 		help:{
 			'身份模式':'<div style="margin:10px">选项</div><ul style="margin-top:0"><li>加强主公<br>反贼人数多于2时主公会额外增加一个技能（每个主公的额外技能固定，非常备主公增加天命）<li>特殊身份<br><ul style="padding-left:20px;padding-top:5px"><li>军师：忠臣身份。只要军师存活，主公在准备阶段开始时，可以观看牌堆顶的三张牌，然后将这些牌以任意顺序置于牌堆顶或牌堆底<li>大将：忠臣身份。只要大将存活，主公手牌上限+1<li>贼首：反贼身份，只要贼首存活，主公手牌上限-1</ul></ul>',
-			// '明忠模式':'<div style="margin:10px">明忠模式（忠胆英杰）</div><ul style="margin-top:0"><li>本模式需要8名玩家进行游戏，使用的身份牌为：1主公、2忠臣、4反贼和1内奸。游戏开始时，每名玩家随机获得一个身份，由系统随机选择一名忠臣身份的玩家亮出身份（将忠臣牌正面朝上放在面前），其他身份（包括主公）的玩家不亮出身份。<li>'+
-			// '首先由亮出身份的忠臣玩家随机获得六张武将牌，挑选一名角色，并将选好的武将牌展示给其他玩家。之后其余每名玩家随机获得三张武将牌，各自从其中挑选一张同时亮出<li>'+
-			// '亮出身份牌的忠臣增加1点体力上限。角色濒死和死亡的结算及胜利条件与普通身份局相同。',
-			// '3v3v2':'<div style="margin:10px">3v3v2模式</div><ul style="margin-top:0"><li>游戏准备<br>本模式需要8名玩家进行游戏。游戏开始前，所有玩家随机分成两组，每组四人，分别称为「冷色阵营」和「暖色阵营」，然后分发身份牌，抽取到「主帅」身份的玩家亮出身份牌。'+
-			// '<li>身份牌<br>每组的身份分为四种。<br>主帅（主）和前锋（忠）：联合对方阵营的细作，击杀己方细作，对方阵营的主帅和前锋以及所有的野心家。<br>细作（内）：帮助对方阵营的主帅和前锋，击杀对方细作，己方阵营的主帅和前锋以及所有的野心家。<br>野心家（野）：联合对方阵营中的野心家，击杀所有其他角色，成为最后的生还者。<br>'+
-			// '<li>胜负判定<br>冷色主帅，先锋和暖色细作在所有其他角色全部阵亡后视为胜利，在冷色主帅阵亡后视为游戏失败。<br>暖色主帅，先锋和冷色细作在所有其他角色阵亡后视为胜利，在暖色主帅阵亡后视为失败。<br>野心家在所有不为野心家的角色阵亡后视为胜利，在双方主帅全部阵亡而有非野心家角色存活时失败。<br>当有角色阵亡后，若有角色满足胜利条件，游戏结束。若所有角色均满足失败条件，则游戏平局。若一名角色满足失败条件，即使其满足胜利条件，也视为游戏失败。<br>'+
-			// '<li>游戏流程<br>在「游戏准备」中的工作完成后，冷色主帅选择一个势力，然后暖色主帅选择一个其他势力，作为双方各自的势力将池。<br>双方主帅从各自的势力将池中获得两张常备主公武将牌和四张非常备主公武将牌，然后选择一张作为武将牌，将其他的武将牌放回势力将池并洗混。然后双方的其他玩家从各自的势力将池中随机获得五张武将牌，选择一张作为自己的武将牌。<br>暖色主帅成为游戏的一号位，双方主帅各加1点体力和体力上限。七号位和八号位的起始手牌+1。<br>当场上第一次有玩家死亡时，野心家确认彼此的身份牌，然后获得技能〖野心毕露〗：出牌阶段，你可以明置身份牌，加1点体力上限和体力值。若如此做，所有的野心家失去技能〖野心毕露〗<br>'+'<li>击杀奖惩<br>杀死颜色不同的主帅的角色回复1点体力，杀死颜色不同的先锋的角色摸两张牌，杀死颜色相同的细作的角色摸三张牌，杀死颜色相同的先锋的主帅弃置所有手牌。<br>'+
+			'明忠模式':'<div style="margin:10px">明忠模式（忠胆英杰）</div><ul style="margin-top:0"><li>本模式需要8名玩家进行游戏，使用的身份牌为：1主公、2忠臣、4反贼和1内奸。游戏开始时，每名玩家随机获得一个身份，由系统随机选择一名忠臣身份的玩家亮出身份（将忠臣牌正面朝上放在面前），其他身份（包括主公）的玩家不亮出身份。<li>'+
+			'首先由亮出身份的忠臣玩家随机获得六张武将牌，挑选一名角色，并将选好的武将牌展示给其他玩家。之后其余每名玩家随机获得三张武将牌，各自从其中挑选一张同时亮出<li>'+
+			'亮出身份牌的忠臣增加1点体力上限。角色濒死和死亡的结算及胜利条件与普通身份局相同。',
+			'3v3v2':'<div style="margin:10px">3v3v2模式</div><ul style="margin-top:0"><li>游戏准备<br>本模式需要8名玩家进行游戏。游戏开始前，所有玩家随机分成两组，每组四人，分别称为「冷色阵营」和「暖色阵营」，然后分发身份牌，抽取到「主帅」身份的玩家亮出身份牌。'+
+			'<li>身份牌<br>每组的身份分为四种。<br>主帅（主）和前锋（忠）：联合对方阵营的细作，击杀己方细作，对方阵营的主帅和前锋以及所有的野心家。<br>细作（内）：帮助对方阵营的主帅和前锋，击杀对方细作，己方阵营的主帅和前锋以及所有的野心家。<br>野心家（野）：联合对方阵营中的野心家，击杀所有其他角色，成为最后的生还者。<br>'+
+			'<li>胜负判定<br>冷色主帅，先锋和暖色细作在所有其他角色全部阵亡后视为胜利，在冷色主帅阵亡后视为游戏失败。<br>暖色主帅，先锋和冷色细作在所有其他角色阵亡后视为胜利，在暖色主帅阵亡后视为失败。<br>野心家在所有不为野心家的角色阵亡后视为胜利，在双方主帅全部阵亡而有非野心家角色存活时失败。<br>当有角色阵亡后，若有角色满足胜利条件，游戏结束。若所有角色均满足失败条件，则游戏平局。若一名角色满足失败条件，即使其满足胜利条件，也视为游戏失败。<br>'+
+			'<li>游戏流程<br>在「游戏准备」中的工作完成后，冷色主帅选择一个势力，然后暖色主帅选择一个其他势力，作为双方各自的势力将池。<br>双方主帅从各自的势力将池中获得两张常备主公武将牌和四张非常备主公武将牌，然后选择一张作为武将牌，将其他的武将牌放回势力将池并洗混。然后双方的其他玩家从各自的势力将池中随机获得五张武将牌，选择一张作为自己的武将牌。<br>暖色主帅成为游戏的一号位，双方主帅各加1点体力和体力上限。七号位和八号位的起始手牌+1。<br>当场上第一次有玩家死亡时，野心家确认彼此的身份牌，然后获得技能〖野心毕露〗：出牌阶段，你可以明置身份牌，加1点体力上限和体力值。若如此做，所有的野心家失去技能〖野心毕露〗<br>'+'<li>击杀奖惩<br>杀死颜色不同的主帅的角色回复1点体力，杀死颜色不同的先锋的角色摸两张牌，杀死颜色相同的细作的角色摸三张牌，杀死颜色相同的先锋的主帅弃置所有手牌。<br>',
 			// '<li>制作团队<br>游戏出品：紫星居<br>游戏设计：食茸貳拾肆<br>游戏开发：食茸貳拾肆、紫髯的小乔、聆星Mine、空城琴音依旧弥漫、丽景原同志、雪之彩翼、拉普拉斯、明月照沟渠<br>程序化：无名杀<br>鸣谢：荆哲、魔风、萨巴鲁酱、这就是秋夜</ul></ul>',
 		}
 	};

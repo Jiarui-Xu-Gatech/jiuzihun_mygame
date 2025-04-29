@@ -14671,6 +14671,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if(get.mode()=='identity'){
                             if(player.hasUnknown(2)) return true;
                         }
+                        if (addi < -0.2){
+                            return false;
+                        }
                         return effect > 0 || Math.random() < 0.35+addi;
                     });
 
@@ -15321,6 +15324,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:0.2,
                     preRespondSha:true,
+                    preshadamage:true,
 					effect:{
 						target:function(card,player,target,effect){
 							if(get.tag(card,'respondSha')) return 0.7;
@@ -19236,7 +19240,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 enable:"phaseUse",
                 content:function(){
                     "step 0"
-                    game.neiVSzhu(3000);
+                    game.tieAnimation(3000);
+                    // game.bestPlayerShow('chenyingchao',3000);
+                    // game.neiVSzhu(3000);
 					
 				},
             },

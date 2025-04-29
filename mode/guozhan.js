@@ -6741,6 +6741,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				for(var i in list){
 					switch(i){
 						case 'unknown':list[i]='未知';break;
+						case 'cai':list[i]='未知';break;
 						case 'ye':list[i]='野心家';break;
 						case 'qun':list[i]+='域';break;
 						default:list[i]+='域';
@@ -7130,7 +7131,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							event.ai(game.players[i],event.list.splice(0,parseInt(get.config('choice_num'))),event.list);
 						}
 					}
-					console.log(game.players);
 					for(var i=0;i<game.players.length;i++){
 						game.players[i].classList.add('unseen');
 						game.players[i].classList.add('unseen2');
@@ -7138,8 +7138,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						_status.characterlist.remove(game.players[i].name2);
 						if(game.players[i]!=game.me){
 							game.players[i].node.identity.firstChild.innerHTML='☯';
-							game.players[i].node.identity.dataset.color='unknown';
+							game.players[i].node.identity.dataset.color='cai';
 							game.players[i].node.identity.classList.add('guessing');
+						}
+						else{
+							game.players[i].node.identity.firstChild.innerHTML='☯';
+							game.players[i].node.identity.dataset.color='cai';
 						}
 						// console.log(game.players[i]);
 						// console.log(lib.character[game.players[i].name]);
@@ -7314,7 +7318,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							game.players[i].classList.add('unseen2');
 							if(game.players[i]!=game.me){
 								game.players[i].node.identity.firstChild.innerHTML='☯';
-								game.players[i].node.identity.dataset.color='unknown';
+								game.players[i].node.identity.dataset.color='cai';
 								game.players[i].node.identity.classList.add('guessing');
 							}
 							game.players[i].group='unknown';
@@ -7344,7 +7348,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				// 			case '蜀':this.firstChild.innerHTML='吴';this.dataset.color='wu';break;
 				// 			case '吴':this.firstChild.innerHTML='群';this.dataset.color='qun';break;
 				// 			case '群':this.firstChild.innerHTML='野';this.dataset.color='ye';break;
-				// 			case '野':this.firstChild.innerHTML='☯';this.dataset.color='unknown';break;
+				// 			case '野':this.firstChild.innerHTML='☯';this.dataset.color='cai';break;
 				// 			default:this.firstChild.innerHTML='魏';this.dataset.color='wei';break;
 				// 		}
 				// 	}
@@ -8141,7 +8145,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 					else if(this!=game.me){
 						this.node.identity.firstChild.innerHTML='☯';
-						this.node.identity.dataset.color='unknown';
+						this.node.identity.dataset.color='cai';
 						this.node.identity.classList.add('guessing');
 					}
 				},

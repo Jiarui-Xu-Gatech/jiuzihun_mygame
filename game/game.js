@@ -4185,7 +4185,7 @@
 						item:{
 							normal:'标准',
 							zhong:'明忠',
-							// purple:'3v3v2',
+							purple:'3v3v2',
 						},
 						restart:true,
 						frequent:true,
@@ -28029,18 +28029,45 @@
 					ui.arena.setNumber(8);
 				}
 				ui.updatehl();
+				console.log(_status);
 				for(var i=0;i<players.length;i++){
 					if(lib.config.mode=='identity'){
 						game.players[i].init(players[i].name,players[i].name2);
-						if(game.players[i]!=game.me&&players[i].identity != 'zhu'){
-							game.players[i].node.identity.firstChild.innerHTML='☯';
-							game.players[i].node.identity.dataset.color='cai';
-							game.players[i].node.identity.classList.add('guessing');
+						if (_status.mode=='normal'){
+							if(game.players[i]!=game.me&&players[i].identity != 'zhu'){
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color='cai';
+								game.players[i].node.identity.classList.add('guessing');
+							}
+							else{
+								game.players[i].setIdentity(players[i].identity);
+							}
+						}
+						else if (_status.mode=='zhong'){
+							if(game.players[i]!=game.me&&players[i].identity != 'mingzhong'){
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color='cai';
+								game.players[i].node.identity.classList.add('guessing');
+							}
+							else{
+								game.players[i].setIdentity(players[i].identity);
+							}
+
+						}
+						else if (_status.mode=='purple'){
+							if(game.players[i]!=game.me&&players[i].identity != 'rZhu'&&players[i].identity != 'bZhu'){
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color=(players[i].identity[0]=='r'?'cai2':'cai');
+								game.players[i].node.identity.classList.add('guessing');
+							}
+							else{
+								game.players[i].setIdentity(players[i].identity);
+							}
 						}
 						else{
 							game.players[i].setIdentity(players[i].identity);
 						}
-						// game.players[i].setIdentity(players[i].identity);
+						
 					}
 					else if(lib.config.mode=='doudizhu'||lib.config.mode=='single'){
 						game.players[i].init(players[i].name,players[i].name2);
@@ -28076,14 +28103,18 @@
 
 						game.players[i].classList.add('unseen_v');
 						game.players[i].classList.add('unseen2_v');
+						// game.players[i].classList.add('unseen');
+						// game.players[i].classList.add('unseen2');
 						if(game.players[i]!=game.me){
 							game.players[i].node.identity.firstChild.innerHTML='☯';
-							// game.players[i].node.identity.dataset.color='cai';
-							game.players[i].node.identity.dataset.color='unknown';
+							game.players[i].node.identity.dataset.color='cai';
+							// game.players[i].node.identity.dataset.color='unknown';
 							game.players[i].node.identity.classList.add('guessing');
 						}
 						else{
-							game.players[i].setIdentity(game.players[i].group);
+							game.players[i].node.identity.firstChild.innerHTML='☯';
+							game.players[i].node.identity.dataset.color='cai';
+							// game.players[i].setIdentity(game.players[i].group);
 						}
 					}
 				}
@@ -28139,7 +28170,7 @@
 				var str = strtrans[0];
 				var node=ui.create.div('.damage.dieidentity',str,player);
 				if(str=='野心家'){
-					node.style.fontSize='40px';
+					node.style.fontSize='55px';
 				}
 				ui.refresh(node);
 				node.style.opacity=1;
@@ -28254,6 +28285,11 @@
 			},
 			playAudio:function(str){
 				game.playAudio(str,'video');
+			},
+			playerTimeoutAudio:function(str){
+				setTimeout(function(){
+					game.playAudio(str[0],'video');
+				}, str[1]);
 			},
 			playSkillAudio:function(name){
 				game.playSkillAudio(name,'video');
@@ -29412,11 +29448,23 @@
 					}
 				},timeoutTime);
 			},
+			timeoutBestPlayer:function(str){
+				game.timeoutBestPlayer(str[0],str[1],str[2]);
+			},
 			bestPlayerShow:function(str){
 				game.bestPlayerShow(str[0],str[1]);
 			},
 			neiVSzhu:function(time){
 				game.neiVSzhu(time);
+			},
+			winAnimation:function(time){
+				game.winAnimation(time);
+			},
+			tieAnimation:function(time){
+				game.tieAnimation(time);
+			},
+			loseAnimation:function(time){
+				game.loseAnimation(time);
 			},
 		},
 		reload:function(){
@@ -31007,26 +31055,25 @@
 
 			// ★★★ 这里开始插入全场最佳的弹出逻辑 ★★★
 			// var bestPlayerName = 'chenyingchao';
+			var texttimeout = 3000;
 			var ThetimeoutTime = 4000;
-			game.bestPlayerShow(bestPlayerName,ThetimeoutTime);
-			if (bestPlayer&&bestPlayer.countSkillWithInfo()>0){
-				var thePlayer = lib.character[bestPlayerName];
-				var skills = thePlayer[3];
-				var skillsInfo = thePlayer[3];
-				// for (var i = 0; i < skills.length; i++){
-				// 	if(lib.translate[skills[i]+'_info']){
-				// 		skillsInfo.push(skills[i]);
-				// 	}
-				// }
-				var numberRan = Math.ceil(skillsInfo.length*Math.random())-1;
-				game.playAudio('skill',skillsInfo[numberRan]+1);
+			if(result=='战斗胜利'){
+				game.winAnimation(texttimeout);
 			}
+			else if (result=='战斗失败'){
+				game.loseAnimation(texttimeout);
+			}
+			else{
+				game.tieAnimation(texttimeout);
+			}
+
+			game.timeoutBestPlayer(bestPlayerName,ThetimeoutTime,texttimeout - 500);
 
 			setTimeout(function(){
 				dialog.classList.remove('hidden'); // 4秒后显示出来
-			},ThetimeoutTime);
+			},ThetimeoutTime+texttimeout-500);
 
-			game.addVideo('over',null,[dialog.content.innerHTML,ThetimeoutTime]);
+			game.addVideo('over',null,[dialog.content.innerHTML,ThetimeoutTime+texttimeout-500]);
 
 			var vinum=parseInt(lib.config.video);
 			if(!_status.video&&vinum&&game.getVideoName&&window.indexedDB&&_status.videoInited){
@@ -31204,6 +31251,35 @@
 				game.reload();
 			}
 		},
+		timeoutBestPlayer:function(bestPlayerName,ThetimeoutTime,texttimeout){
+			game.addVideo('timeoutBestPlayer',null,[bestPlayerName,ThetimeoutTime,texttimeout]);
+			if (bestPlayerName&&bestPlayerName.length>0){
+				var thePlayer = lib.character[bestPlayerName];
+				var skills = thePlayer[3];
+				var audio_skills = []
+				var audio_numbers = [];
+				for (var i = 0; i < skills.length; i++){
+					var info=get.info(skills[i]);
+					var audioinfo=info.audio;
+					if (audioinfo){
+						audio_skills.push(skills[i]);
+						audio_numbers.push(audioinfo);
+					}
+				}
+				if (audio_skills.length > 0){
+					var numberRan = Math.ceil(audio_skills.length*Math.random())-1;
+					var textAudio = audio_skills[numberRan]+Math.ceil(audio_numbers[numberRan]*Math.random());
+					game.addVideo('playerTimeoutAudio',null,['/'+'skill'+'/'+textAudio,texttimeout]);
+					setTimeout(function(){
+						game.playAudio('skill',textAudio);
+					},texttimeout);
+					
+				}
+			}
+			setTimeout(function(){
+				game.bestPlayerShow(bestPlayerName,ThetimeoutTime);
+			},texttimeout);
+		},
 		bestPlayerShow:function(bestPlayer_name,timeoutTime){
 			game.addVideo('bestPlayerShow',null,[bestPlayer_name,timeoutTime]);
 			game.broadcastAll(function(bestPlayer_name){
@@ -31215,8 +31291,8 @@
 				var rand1=Math.round(0.2*100);
 				var rand2=Math.round(0.38*100);
 				var rand3=Math.round(0.25*40)-20;
-				bestPlayer.style.left = 'calc('+38+'% - '+180+'px)';
-				bestPlayer.style.top = 'calc('+rand2+'% - '+64+'px)';
+				bestPlayer.style.left = 'calc('+50+'% - '+285+'px)';
+				bestPlayer.style.top = 'calc('+50+'% - '+124+'px)';
 				bestPlayer.style.transform='scale(1.2) rotate('+rand3+'deg)';
 				bestPlayer.node.count.remove();
 				bestPlayer.node.hp.remove();
@@ -31227,8 +31303,8 @@
 				var bestText = document.createElement('div');
 				bestText.innerHTML = '全场最佳';
 				bestText.style.position = 'absolute';
-				bestText.style.left = 'calc(' + 38 + '% )'; // 在头像右边偏移160px
-				bestText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				bestText.style.left = 'calc(' + 50 + '% - 105px)'; // 在头像右边偏移160px
+				bestText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
 				bestText.style.fontSize = '80px'; // 字体大小
 				bestText.style.textShadow = `
 					rgba(255, 203, 0, 1) 0 0 2px,
@@ -31293,8 +31369,8 @@
 				var NeiText = document.createElement('div');
 				NeiText.innerHTML = '内奸';
 				NeiText.style.position = 'absolute';
-				NeiText.style.left = 'calc(' + 38 + '% - 100px)'; // 在头像右边偏移160px
-				NeiText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				NeiText.style.left = 'calc(' + 50 + '% - 240px)'; // 在头像右边偏移160px
+				NeiText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
 				NeiText.style.fontSize = '80px'; // 字体大小
 				NeiText.style.textShadow = `
 					rgba(100, 74, 139,1) 0 0 2px,
@@ -31324,8 +31400,8 @@
 				var VSText = document.createElement('div');
 				VSText.innerHTML = 'VS';
 				VSText.style.position = 'absolute';
-				VSText.style.left = 'calc(' + 38 + '% + 84px)'; // 在头像右边偏移160px
-				VSText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				VSText.style.left = 'calc(' + 50 + '% - 40px)'; // 在头像右边偏移160px
+				VSText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
 				VSText.style.fontSize = '80px'; // 字体大小
 				// VSText.style.color = '#FFCB00';
 				VSText.style.textShadow = `
@@ -31356,8 +31432,8 @@
 				var ZhuText = document.createElement('div');
 				ZhuText.innerHTML = '主公';
 				ZhuText.style.position = 'absolute';
-				ZhuText.style.left = 'calc(' + 38 + '% + 180px)'; // 在头像右边偏移160px
-				ZhuText.style.top = 'calc(' + rand2 + '% + 20px)';   // 稍微调整一下上下对齐
+				ZhuText.style.left = 'calc(' + 50 + '% + 80px)'; // 在头像右边偏移160px
+				ZhuText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
 				ZhuText.style.fontSize = '80px'; // 字体大小
 				ZhuText.style.textShadow = `
 					rgba(232, 53, 53,1) 0 0 2px,
@@ -31397,6 +31473,147 @@
 				}, timeoutTime);
 
 			});
+
+		},
+		winAnimation:function(timeoutTime){
+			game.addVideo('winAnimation',null,timeoutTime);
+			var rand1=Math.round(0.2*100);
+			var rand2=Math.round(0.38*100);
+			var rand3=Math.round(0.25*40)-20;
+
+			// 创建艺术字
+			var VSText = document.createElement('div');
+			VSText.innerHTML = '战斗胜利';
+			VSText.style.position = 'fixed';
+			VSText.style.left = 'calc(' + 50 + '% - 160px)'; // 在头像右边偏移160px
+			VSText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
+			VSText.style.fontSize = '80px'; // 字体大小
+			VSText.style.textShadow = `
+				rgba(255, 203, 0, 1) 0 0 2px,
+				rgba(255, 203, 0, 1) 0 0 5px,
+				rgba(255, 203, 0, 1) 0 0 10px,
+				rgba(255, 203, 0, 1) 0 0 10px
+			`;
+			VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+			VSText.style.transition = 'all 0.5s';
+			ui.arena.appendChild(VSText);
+
+			VSText.classList.add('zoomin3');
+			VSText.hide();
+			VSText.style.transitionDuration='0.7s'
+			setTimeout(function(){
+				VSText.style.transitionProperty='none';
+				VSText.classList.remove('zoomin3');
+				VSText.classList.add('zoomout2');
+				setTimeout(function(){
+					VSText.style.transitionProperty='';
+					VSText.classList.remove('zoomout2');
+					VSText.show();
+				},10);
+			},20);
+
+			var interval = setInterval(function(){
+				VSText.classList.add('zoomin3');
+			}, timeoutTime); 
+
+			setTimeout(function(){
+				clearInterval(interval);
+				VSText.delete();
+			}, timeoutTime);
+
+		},
+		tieAnimation:function(timeoutTime){
+			game.addVideo('tieAnimation',null,timeoutTime);
+			var rand1=Math.round(0.2*100);
+			var rand2=Math.round(0.38*100);
+			var rand3=Math.round(0.25*40)-20;
+
+			// 创建艺术字
+			var VSText = document.createElement('div');
+			VSText.innerHTML = '平局';
+			VSText.style.position = 'fixed';
+			VSText.style.left = 'calc(' + 50 + '% - 80px)'; // 在头像右边偏移160px
+			VSText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
+			VSText.style.fontSize = '80px'; // 字体大小
+			VSText.style.textShadow = `
+				rgba(78, 117, 140,1) 0 0 2px,
+				rgba(78, 117, 140,1) 0 0 5px,
+				rgba(78, 117, 140,1) 0 0 10px,
+				rgba(78, 117, 140,1) 0 0 10px
+			`;
+			VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+			VSText.style.transition = 'all 0.5s';
+			ui.arena.appendChild(VSText);
+
+			VSText.classList.add('zoomin3');
+			VSText.hide();
+			VSText.style.transitionDuration='0.7s'
+			setTimeout(function(){
+				VSText.style.transitionProperty='none';
+				VSText.classList.remove('zoomin3');
+				VSText.classList.add('zoomout2');
+				setTimeout(function(){
+					VSText.style.transitionProperty='';
+					VSText.classList.remove('zoomout2');
+					VSText.show();
+				},10);
+			},20);
+
+			var interval = setInterval(function(){
+				VSText.classList.add('zoomin3');
+			}, timeoutTime); 
+
+			setTimeout(function(){
+				clearInterval(interval);
+				VSText.delete();
+			}, timeoutTime);
+
+		},
+		loseAnimation:function(timeoutTime){
+			game.addVideo('loseAnimation',null,timeoutTime);
+			var rand1=Math.round(0.2*100);
+			var rand2=Math.round(0.38*100);
+			var rand3=Math.round(0.25*40)-20;
+
+			// 创建艺术字
+			var VSText = document.createElement('div');
+			VSText.innerHTML = '战斗失败';
+			VSText.style.position = 'fixed';
+			VSText.style.left = 'calc(' + 50 + '% - 160px)'; // 在头像右边偏移160px
+			VSText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
+			VSText.style.fontSize = '80px'; // 字体大小
+			VSText.style.textShadow = `
+				rgba(100, 74, 139,1) 0 0 2px,
+				rgba(100, 74, 139,1) 0 0 5px,
+				rgba(100, 74, 139,1) 0 0 10px,
+				rgba(100, 74, 139,1) 0 0 10px
+			`;
+			VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+			VSText.style.transition = 'all 0.5s';
+			ui.arena.appendChild(VSText);
+
+			VSText.classList.add('zoomin3');
+			VSText.hide();
+			VSText.style.transitionDuration='0.7s'
+			setTimeout(function(){
+				VSText.style.transitionProperty='none';
+				VSText.classList.remove('zoomin3');
+				VSText.classList.add('zoomout2');
+				setTimeout(function(){
+					VSText.style.transitionProperty='';
+					VSText.classList.remove('zoomout2');
+					VSText.show();
+				},10);
+			},20);
+
+			var interval = setInterval(function(){
+				VSText.classList.add('zoomin3');
+			}, timeoutTime); 
+
+			setTimeout(function(){
+				clearInterval(interval);
+				VSText.delete();
+			}, timeoutTime);
 
 		},
 		loop:function(){
@@ -43931,20 +44148,49 @@
 		},
 		click:{
 			identitycircle:function(){
+				var info=this.link;
+				if(info[2]=='cai'){ // <<<<<< 新增判断
+					// this._source._guozhanguess=[];
+					// 让所有子节点透明
+					for(var i=0;i<this.parentNode.childNodes.length;i++){
+						this.parentNode.childNodes[i].classList.add('transparent');
+					}
+					// 头像上清空身份信息
+					info[0].firstChild.innerHTML='☯';
+					info[0].dataset.color='cai';
+					// 关闭弹窗
+					game.closeDialog && game.closeDialog();
+					return;
+				}
+
 				var list=[];
 				this.classList.toggle('transparent');
 				for(var i=0;i<this.parentNode.childNodes.length;i++){
 					if(!this.parentNode.childNodes[i].classList.contains('transparent')){
-						list.add(this.parentNode.childNodes[i].link[2]);
+						if (this.parentNode.childNodes[i].link[2]!='cai'){
+							list.add(this.parentNode.childNodes[i].link[2]);
+						}
 					}
 				}
-				var info=this.link;
-				if(list.length==1){
+				if(list.length==0){
+					info[0].firstChild.innerHTML='☯';
+					info[0].dataset.color='cai';
+					// for(var i=0;i<this.parentNode.childNodes.length;i++){
+					// 	if(!this.parentNode.childNodes[i].classList.contains('transparent')){
+					// 		var info2=this.parentNode.childNodes[i].link;
+					// 		info[0].firstChild.innerHTML='☯';
+					// 		info[0].dataset.color='cai';
+					// 	}
+					// }
+				}
+				else if(list.length==1){
 					for(var i=0;i<this.parentNode.childNodes.length;i++){
 						if(!this.parentNode.childNodes[i].classList.contains('transparent')){
 							var info2=this.parentNode.childNodes[i].link;
-							info[0].firstChild.innerHTML=info2[1];
-							info[0].dataset.color=info2[2];
+							// info[0].firstChild.innerHTML=info2[1];
+							// info[0].dataset.color=info2[2];
+							info[0].firstChild.innerHTML=get.translation(list[0]);
+							info[0].dataset.color=list[0];
 						}
 					}
 				}
@@ -44620,7 +44866,7 @@
 					e.stopPropagation();
 				}
 			},
-			identity:function(e){
+			identity:function(e){//guessing identity
 				if(_status.dragged) return;
 				_status.clicked=true;
 				if(!game.getIdentityList) return;
@@ -44658,7 +44904,7 @@
 				}
 				else{
 					if(get.mode()=='guozhan'){
-						list={wei:'东',shu:'南',wu:'西',qun:'北'};
+						list={wei:'东',shu:'南',wu:'西',qun:'北',cai:'☯'};
 					}
 					var list2=get.copy(list);
 					if(game.getIdentityList2){
@@ -44693,7 +44939,7 @@
 							}
 							if(get.mode()=='guozhan'){
 								if(source._guozhanguess){
-									if(!source._guozhanguess.contains(i)){
+									if(!source._guozhanguess.contains(i)&&i!='cai'){
 										node.classList.add('transparent');
 									}
 								}

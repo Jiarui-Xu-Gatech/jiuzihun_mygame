@@ -2736,7 +2736,7 @@ div:not(.handcards)>.card>.info>span,
 .unseen2_v>.avatar2,
 .unseen_v>.name:not(.name2):not(.name_seat),
 .unseen2_v>.name2 {
-	opacity: 0.2 !important
+	opacity: 0 !important
 }
 
 .player>.name_seat {
