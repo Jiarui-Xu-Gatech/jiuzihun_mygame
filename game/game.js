@@ -31269,10 +31269,10 @@
 				if (audio_skills.length > 0){
 					var numberRan = Math.ceil(audio_skills.length*Math.random())-1;
 					var textAudio = audio_skills[numberRan]+Math.ceil(audio_numbers[numberRan]*Math.random());
-					game.addVideo('playerTimeoutAudio',null,['/'+'skill'+'/'+textAudio,texttimeout]);
+					game.addVideo('playerTimeoutAudio',null,['/'+'skill'+'/'+textAudio,texttimeout+400]);
 					setTimeout(function(){
 						game.playAudio('skill',textAudio);
-					},texttimeout);
+					},texttimeout+400);
 					
 				}
 			}
