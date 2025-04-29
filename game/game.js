@@ -27336,6 +27336,52 @@
 			ui.window.appendChild(audio);
 			return audio;
 		},
+		playAudioNoAddVideo:function(){
+			if(_status.video&&arguments[1]!='video') return;
+			var str='';
+			var onerror=null;
+			for(var i=0;i<arguments.length;i++){
+				if(typeof arguments[i]==='string'||typeof arguments[i]=='number'){
+					str+='/'+arguments[i];
+				}
+				else if(typeof arguments[i]=='function'){
+					onerror=arguments[i]
+				}
+				if(_status.video) break;
+			}
+			if(!lib.config.repeat_audio&&_status.skillaudio.contains(str)) return;
+			_status.skillaudio.add(str);
+			// game.addVideo('playAudio',null,str);
+			setTimeout(function(){
+				_status.skillaudio.remove(str);
+			},1000);
+			var audio=document.createElement('audio');
+			audio.autoplay=true;
+			audio.volume=lib.config.volumn_audio/8;
+			if(str.indexOf('.mp3')!=-1||str.indexOf('.ogg')!=-1){
+				audio.src=lib.assetURL+'audio'+str;
+			}
+			else{
+				audio.src=lib.assetURL+'audio'+str+'.mp3';
+			}
+			audio.addEventListener('ended',function(){
+				this.remove();
+			});
+			audio.onerror=function(){
+				if(this._changed){
+					this.remove();
+					if(onerror){
+						onerror();
+					}
+				}
+				else{
+					this.src=lib.assetURL+'audio'+str+'.ogg';
+					this._changed=true;
+				}
+			};
+			ui.window.appendChild(audio);
+			return audio;
+		},
 		trySkillAudio:function(skill,player,directaudio){
 			game.broadcast(game.trySkillAudio,skill,player,directaudio);
 			var info=get.info(skill);
@@ -47415,12 +47461,12 @@
 								audioinfo=audioinfo.split(':');
 								if(audioinfo.length==3){
 									if(audioinfo[2]=='true'){
-										game.playAudio('..','extension',audioinfo[1],audioname);
+										game.playAudioNoAddVideo('..','extension',audioinfo[1],audioname);
 									}
 									else{
 										audioinfo[2]=parseInt(audioinfo[2]);
 										if(audioinfo[2]){
-											game.playAudio('..','extension',audioinfo[1],audioname+getIndex(audioinfo[2]));
+											game.playAudioNoAddVideo('..','extension',audioinfo[1],audioname+getIndex(audioinfo[2]));
 										}
 									}
 								}
@@ -47439,11 +47485,11 @@
 						}
 						if(typeof audioinfo=='number'){
 							if(Array.isArray(info.audioname)&&info.audioname.contains(playername)) audioname=audioname+'_'+playername;
-							game.playAudio('skill',audioname+getIndex(audioinfo));
+							game.playAudioNoAddVideo('skill',audioname+getIndex(audioinfo));
 						}
 						else if(audioinfo){
 							if(Array.isArray(info.audioname)&&info.audioname.contains(playername)) audioname=audioname+'_'+playername;
-							game.playAudio('skill',audioname);
+							game.playAudioNoAddVideo('skill',audioname);
 						}
 						else if(true&&info.audio!==false){
 							if(Array.isArray(info.audioname)&&info.audioname.contains(playername)) audioname=audioname+'_'+playername;
