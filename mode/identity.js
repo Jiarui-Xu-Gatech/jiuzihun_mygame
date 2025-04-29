@@ -78,6 +78,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"step 1"
 			var playback=localStorage.getItem(lib.configprefix+'playback');
 			if(playback){
+				//修改_status.mode
+				var subMode = localStorage.getItem(lib.configprefix+'playback_identity_mode');
+				if (subMode){
+					_status.mode = subMode;
+				} 
+
 				ui.create.me();
 				ui.arena.style.display='none';
 				ui.system.style.display='none';

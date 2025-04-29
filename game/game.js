@@ -4208,7 +4208,7 @@
 					},
 					connect_zhong_card:{
 						name:'明忠卡牌替换',
-						init:true,
+						init:false,
 						frequent:true,
 						restart:true
 					},
@@ -4410,7 +4410,7 @@
 					},
 					zhong_card:{
 						name:'明忠卡牌替换',
-						init:true,
+						init:false,
 						frequent:true,
 						restart:true
 					},
@@ -28029,7 +28029,6 @@
 					ui.arena.setNumber(8);
 				}
 				ui.updatehl();
-				console.log(_status);
 				for(var i=0;i<players.length;i++){
 					if(lib.config.mode=='identity'){
 						game.players[i].init(players[i].name,players[i].name2);
@@ -28091,31 +28090,74 @@
 						game.players[i].node.action.innerHTML='行动';
 					}
 					else if(lib.config.mode=='guozhan'){
-						game.players[i].name=players[i].name;
-						game.players[i].name1=players[i].name1;
-						game.players[i].name2=players[i].name2;
+						if (_status.mode=='normal'){
+							game.players[i].name=players[i].name;
+							game.players[i].name1=players[i].name1;
+							game.players[i].name2=players[i].name2;
 
-						game.players[i].sex='unknown';
-						game.players[i].identity='unknown';
+							game.players[i].sex='unknown';
+							game.players[i].identity='unknown';
 
-						lib.translate[game.players[i].name]=players[i].translate;
-						game.players[i].init(players[i].name1,players[i].name2);
+							lib.translate[game.players[i].name]=players[i].translate;
+							game.players[i].init(players[i].name1,players[i].name2);
 
-						game.players[i].classList.add('unseen_v');
-						game.players[i].classList.add('unseen2_v');
-						// game.players[i].classList.add('unseen');
-						// game.players[i].classList.add('unseen2');
-						if(game.players[i]!=game.me){
-							game.players[i].node.identity.firstChild.innerHTML='☯';
-							game.players[i].node.identity.dataset.color='cai';
-							// game.players[i].node.identity.dataset.color='unknown';
-							game.players[i].node.identity.classList.add('guessing');
+							game.players[i].classList.add('unseen_v');
+							game.players[i].classList.add('unseen2_v');
+							// game.players[i].classList.add('unseen');
+							// game.players[i].classList.add('unseen2');
+							if(game.players[i]!=game.me){
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color='cai';
+								// game.players[i].node.identity.dataset.color='unknown';
+								game.players[i].node.identity.classList.add('guessing');
+							}
+							else{
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color='cai';
+								// game.players[i].setIdentity(game.players[i].group);
+							}
 						}
+						// else if (_status.mode=='mingjiang'){
+						// 	game.players[i].name=players[i].name;
+						// 	game.players[i].name1=players[i].name1;
+						// 	game.players[i].name2=players[i].name2;
+
+						// 	game.players[i].sex='unknown';
+						// 	game.players[i].identity='unknown';
+
+						// 	lib.translate[game.players[i].name]=players[i].translate;
+						// 	game.players[i].init(players[i].name1,players[i].name2);
+
+						// 	game.players[i].setIdentity(game.players[i].group);
+						// }
 						else{
-							game.players[i].node.identity.firstChild.innerHTML='☯';
-							game.players[i].node.identity.dataset.color='cai';
-							// game.players[i].setIdentity(game.players[i].group);
+							game.players[i].name=players[i].name;
+							game.players[i].name1=players[i].name1;
+							game.players[i].name2=players[i].name2;
+
+							game.players[i].sex='unknown';
+							game.players[i].identity='unknown';
+
+							lib.translate[game.players[i].name]=players[i].translate;
+							game.players[i].init(players[i].name1,players[i].name2);
+
+							game.players[i].classList.add('unseen_v');
+							game.players[i].classList.add('unseen2_v');
+							// game.players[i].classList.add('unseen');
+							// game.players[i].classList.add('unseen2');
+							if(game.players[i]!=game.me){
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color='cai';
+								// game.players[i].node.identity.dataset.color='unknown';
+								game.players[i].node.identity.classList.add('guessing');
+							}
+							else{
+								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.dataset.color='cai';
+								// game.players[i].setIdentity(game.players[i].group);
+							}
 						}
+						
 					}
 				}
 				for(var i=0;i<game.players.length;i++){
@@ -28165,6 +28207,11 @@
 			},
 			dieShowIdentity:function(player,identity){
 				player.node.identity.firstChild.innerHTML=get.translation(identity+'_bg');	
+			},
+			guozhanShowIdentity:function(started){
+				for(var i=0;i<game.players.length;i++){
+					game.players[i].showCharacter(2,false);
+				}
 			},
 			dieAfterWordsOn:function(player,strtrans){
 				var str = strtrans[0];
@@ -41646,6 +41693,31 @@
 								playButton.listen(function(){
 									var current=this.parentNode.querySelector('.videonode.active');
 									if(current){
+										if (current.link.mode == 'identity'){
+											var long_name = current.link.name[1];
+											var parts = long_name.split(' - ');
+											if (parts[0]=='忠胆英杰'){
+												localStorage.setItem(lib.configprefix+'playback_identity_mode','zhong');
+												// game.saveConfig('identity_mode','zhong');
+												// game.saveConfig('connect_identity_mode','zhong');
+												// current.link.video = ['zhong',current.link.video];
+												// _status.mode = 'zhong';
+											}
+											else if (parts[0]=='3v3v2'){
+												localStorage.setItem(lib.configprefix+'playback_identity_mode','purple');
+												// game.saveConfig('identity_mode','purple');
+												// game.saveConfig('connect_identity_mode','purple');
+												// current.link.video = ['purple',current.link.video];
+												// _status.mode = 'purple';
+											}
+											else{
+												localStorage.setItem(lib.configprefix+'playback_identity_mode','normal');
+												// game.saveConfig('identity_mode','normal');
+												// game.saveConfig('connect_identity_mode','normal');
+												// current.link.video = ['normal',current.link.video];
+												// _status.mode = 'normal';
+											}
+										}
 										game.playVideo(current.link.time,current.link.mode);
 									}
 								});

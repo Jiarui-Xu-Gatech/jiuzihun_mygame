@@ -171,6 +171,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			game.addVideo('init',null,info);
 			if(_status.mode=='mingjiang'){
 				game.showIdentity(true);
+				
 			}
 			else{
 				for(var i=0;i<game.players.length;i++){
@@ -6760,6 +6761,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			showIdentity:function(started){
 				if(game.phaseNumber==0&&!started) return;
+				game.addVideo('guozhanShowIdentity',null,started);
 				for(var i=0;i<game.players.length;i++){
 					game.players[i].showCharacter(2,false);
 				}
