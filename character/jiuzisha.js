@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_neiVSzhu','yuner_die'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_neiVSzhu','yuner_die'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -2532,8 +2532,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     return true;
                                 }
                             });
+                            var num=game.countPlayer(function(current){
+                                if(current.countCards('he')&&current!=player&&get.attitude(player,current)<=0){
+                                    return true;
+                                }
+                                if(current.countCards('j')&&current!=player&&get.attitude(player,current)>0){
+                                    return true;
+                                }
+                            });
                             //牌多了就别打了 因为也不会翻了
-                            if ((target.countCards('h')<=(7+10*(live-2)/6)+(2+16*(live-2)/6)*(0.1))&&get.attitude(player,target)+get.attitude(target,player)>0){
+                            if ((target.countCards('h')<=(7+10*(live-2)/6)+(2+16*(live-2)/6)*(0.1))&&get.attitude(player,target)+get.attitude(target,player)>0&&num>=1){
                                 if(get.tag(card,'damage')){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
