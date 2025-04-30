@@ -1918,7 +1918,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     return current.isZhu;
                                 }); 
                                 if((player.identity=='zhong'||player.identity=='nei'||player.identity=='mingzhong')&&
-                                (zhugongs[0].hp >= 2 || zhugongs[0].hasSkillTag('preRespondSha') || zhugongs[0].countCards('h')>=3||player.countCards('h','tao')>0)){
+                                (zhugongs[0].countCards('e','tengjia')>0||zhugongs[0].hp >= 2 || zhugongs[0].hasSkillTag('preRespondSha') || zhugongs[0].countCards('h')>=3||player.countCards('h','tao')>0)){
                                     return 90;
                                 }
                             }
@@ -2855,7 +2855,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     "step 0"
                     event.hp = player.hp;
-                    player.chooseTarget(get.prompt2("yuhuo_nv"),[1,1],function(event,player,target){
+                    player.chooseTarget(get.prompt2("yuhuo_nv"),[1,1],true,function(event,player,target){
                         return target != player||target == player;
                     }).set('ai',function(target){
                         // return -get.attitude(player,target);
@@ -2915,6 +2915,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     
                 },
+                group:"yuhuo_nv_effect",
                 ai:{
                     order:9,
                     expose:0.5,
@@ -2924,9 +2925,125 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     },
                     result:{
                         player:function(player,target){
+                            var score = 0;
+                            if (player.countCards('e','tengjia')>0){
+                                score -= 2;
+                            }
+
+                            var linkEffect = 0;
+                            if (player.isLinked()){
+                                var has = game.hasPlayer(function(current){
+                                    if(current.isLinked()&&!current.hasSkillTag('nofire')&&!current.hasSkillTag('maixie')){
+                                        if (get.attitude(player,current)+get.attitude(current,player)>0){
+                                            //看藤甲，血量，技能影响
+                                            if (current.countCards('e','tengjia')>0){
+                                                if (current.hp <= 2){
+                                                    linkEffect -= 10;
+                                                }
+                                                else{
+                                                    linkEffect -= 2;
+                                                }
+                                            }
+                                            else{
+                                                if (current.hp <= 1){
+                                                    linkEffect -= 10;
+                                                }
+                                                else{
+                                                    linkEffect -= 1;
+                                                }
+                                            }
+                                        }
+                                        if (get.attitude(player,current)+get.attitude(current,player)<0){
+                                            //看藤甲，血量，技能影响
+                                            if (current.countCards('e','tengjia')>0){
+                                                if (current.hp <= 2){
+                                                    linkEffect += 10;
+                                                }
+                                                else{
+                                                    linkEffect += 2;
+                                                }
+                                            }
+                                            else{
+                                                if (current.hp <= 1){
+                                                    linkEffect += 10;
+                                                }
+                                                else{
+                                                    linkEffect += 1;
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+
+                            score += linkEffect;
+
+                            var xinruan_char = false;
+
+                            var has_xinruan = game.hasPlayer(function(current){
+                                if (current.hasSkill('xinruan_mei')){
+                                    xinruan_char = current;
+                                    return true;
+                                }
+                            });
+
+                            if (xinruan_char){
+                                if (xinruan_char.hasSkill('mantian_mei')){
+                                    if (get.attitude(player,xinruan_char)+get.attitude(xinruan_char,player)>=0){
+                                        if (xinruan_char.hp <= 1){
+                                            score += -1;
+                                        }
+                                        else{
+                                            score += 10;
+                                        }
+                                    }
+                                    else{
+                                        if (xinruan_char.hp <= 1){
+                                            score += 5;
+                                        }
+                                        else{
+                                            score += -5;
+                                        }
+                                    }
+                                }
+                                else{
+                                    if (get.attitude(player,xinruan_char)+get.attitude(xinruan_char,player)>=0){
+                                        if (xinruan_char.hp <= 1){
+                                            score += -5;
+                                        }
+                                        else{
+                                            score += -1;
+                                        }
+                                    }
+                                    else{
+                                        if (xinruan_char.hp <= 1){
+                                            score += 10;
+                                        }
+                                        else{
+                                            score += 7.5;
+                                        }
+                                    }
+                                }
+                            }
+
+                            score = score -0.5 + Math.random();
+
+                            var addi = 0;
+                            if (score > 0){
+                                addi += Math.random();
+                            }
+                            else{
+                                if (score < -8) {
+                                    //一票否决权
+                                    return -1;
+                                }
+                                addi -= Math.random();
+                            }
+                            
+
                             if (player.storage.chongsheng_nv&&player.storage.chongsheng_nv.length >= 3 + Math.ceil(4*Math.random()) - 1) return -1;
                             if(player.countCards('h')>=20) return -1;
-                            if(player.countCards('h')<=8) return Math.random()*0.125*(9-player.countCards('h')) - 0.15;
+                            if(player.countCards('h')<=8) return Math.random()*0.125*(9-player.countCards('h')) - 0.15 + addi*0.6;
                             // if(player.hp<=2) return -1;
                             return 0;
                         },
@@ -2934,6 +3051,32 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                     },
                     
+                },
+            },
+
+            yuhuo_nv_effect:{
+                audio:false,
+                silent:true,
+                popup:false,
+                direct:true,
+                trigger:{
+                    target:"shaBefore",
+                },
+                forced:true,
+                filter:function(event,player){
+                    return false;
+                },
+                content:function(event){
+                    event.finish();
+                },
+                ai:{
+                    effect:{
+                        target:function(card,player,target){
+                            if(get.name(card)=='tengjia'&&target.hasSkill('yuhuo_nv')&&Math.random()<0.7){
+                                if (player == target) return 0;
+                            }
+                        },
+                    },
                 },
             },
 
@@ -14551,7 +14694,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 onremove:function(player){
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'bingshan_bg'){
-                        game.createClearBackground(player.storage.hanbian_background,player);
+                        // game.createClearBackground(player.storage.hanbian_background,player);
+                        game.createClearBackground('',player);
                         player.storage.hanbian_background = '';
                     }
                     else{
