@@ -313,7 +313,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					game.zhong=game.zhu;
 					game.zhu=game.zhu2;
 					delete game.zhu2;
-					if(game.zhong.sex=='male'&&game.zhong.maxHp<=4){
+					if(game.zhong.sex=='male'){
 						game.zhong.addSkill('dongcha');
 					}
 					else{
@@ -454,13 +454,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if (colours[0]=='r'||colours[colours.length - 1]=='2')return {
 							cai2:'☯',
 							rZhong:'忠',
-							rNei:'内',
+							rNei:'细',//'内',
 							rYe:'野',
 						}
 						return {
 							cai:'☯',
 							bZhong:'忠',
-							bNei:'内',
+							bNei:'细',//'内',
 							bYe:'野',
 						}
 					}
@@ -468,13 +468,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					if(player.identity.slice(0,1)=='r') return {
 						cai2:'☯',
 						rZhong:'忠',
-						rNei:'内',
+						rNei:'细',//'内',
 						rYe:'野',
 					}
 					return {
 						cai:'☯',
 						bZhong:'忠',
-						bNei:'内',
+						bNei:'细',//'内',
 						bYe:'野',
 					}
 				}
@@ -515,7 +515,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						case 'nei':list[i]='内奸';break;
 						case 'zhu':list[i]='主公';break;
 						case 'cai':case 'cai2':list[i]='未知';break;
-						case 'rZhong':case 'bZhong':list[i]='前锋';break;
+						case 'rZhong':case 'bZhong':list[i]='忠良';break;
 						case 'rNei':case 'bNei':list[i]='细作';break;
 						case 'rYe':case 'bYe':list[i]='野心家';break;
 					}
@@ -2117,7 +2117,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			rNei:"内",
 			rYe:"野",
 			rZhu2:"主帅",
-			rZhong2:"前锋",
+			rZhong2:"忠良",
 			rNei2:"细作",
 			rYe2:"野心家",
 			bZhu:"主",
@@ -2125,7 +2125,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			bNei:"内",
 			bYe:"野",
 			bZhu2:"主帅",
-			bZhong2:"前锋",
+			bZhong2:"忠良",
 			bNei2:"细作",
 			bYe2:"野心家",
 			zhu2:"主公",
@@ -2147,9 +2147,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			ai_strategy_5:'天使',
 			ai_strategy_6:'仇主',
 			dongcha:'洞察',
-			dongcha_info:'游戏开始时，随机一名反贼的身份对你可见；准备阶段，你可以弃置场上的一张牌',
+			dongcha_info:'游戏开始时，随机一名反贼的身份对你可见；准备阶段，你可以弃置场上的一张牌。',
 			sheshen:'舍身',
-			sheshen_info:'锁定技，主公处于濒死状态即将死亡时，令主公+1体力上限，回复体力至X点（X为你的体力值数），获得你的所有牌，然后你死亡',
+			sheshen_info:'锁定技，主公处于濒死状态即将死亡时，令主公+1体力上限，回复体力至X点（X为你的体力值数），获得你的所有牌，然后你死亡。',
 			yexinbilu:'野心毕露',
 		},
 		element:{
@@ -3078,6 +3078,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					begin:{
 						trigger:{global:'gameStart'},
 						forced:true,
+						direct:true,
 						popup:false,
 						content:function(){
 							var list=[];
@@ -3087,6 +3088,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								}
 							}
 							var target=list.randomGet();
+							player.logSkill('dongcha');
 							player.storage.dongcha=target;
 							if(!_status.connectMode){
 								if(player==game.me){
@@ -3147,12 +3149,17 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 		help:{
 			'身份模式':'<div style="margin:10px">选项</div><ul style="margin-top:0"><li>加强主公<br>反贼人数多于2时主公会额外增加一个技能（每个主公的额外技能固定，非常备主公增加天命）<li>特殊身份<br><ul style="padding-left:20px;padding-top:5px"><li>军师：忠臣身份。只要军师存活，主公在准备阶段开始时，可以观看牌堆顶的三张牌，然后将这些牌以任意顺序置于牌堆顶或牌堆底<li>大将：忠臣身份。只要大将存活，主公手牌上限+1<li>贼首：反贼身份，只要贼首存活，主公手牌上限-1</ul></ul>',
 			'明忠模式':'<div style="margin:10px">明忠模式（忠胆英杰）</div><ul style="margin-top:0"><li>本模式需要8名玩家进行游戏，使用的身份牌为：1主公、2忠臣、4反贼和1内奸。游戏开始时，每名玩家随机获得一个身份，由系统随机选择一名忠臣身份的玩家亮出身份（将忠臣牌正面朝上放在面前），其他身份（包括主公）的玩家不亮出身份。<li>'+
-			'首先由亮出身份的忠臣玩家随机获得六张武将牌，挑选一名角色，并将选好的武将牌展示给其他玩家。之后其余每名玩家随机获得三张武将牌，各自从其中挑选一张同时亮出<li>'+
-			'亮出身份牌的忠臣增加1点体力上限。角色濒死和死亡的结算及胜利条件与普通身份局相同。',
+			'首先由亮出身份的忠臣玩家随机获得六张武将牌，挑选一名角色，并将选好的武将牌展示给其他玩家，然后女性明忠获得技能【舍身】，男性明忠获得技能【洞察】。之后其余每名玩家随机获得三张武将牌，各自从其中挑选一张同时亮出<li>'+
+			'亮出身份牌的忠臣增加1点体力上限。角色濒死和死亡的结算及胜利条件与普通身份局相同。<li>'+
+			'【舍身】：锁定技，主公处于濒死状态即将死亡时，令主公+1体力上限，回复体力至X点（X为你的体力值数），获得你的所有牌，然后你死亡。<li>'+
+			'【洞察】：游戏开始时，随机一名反贼的身份对你可见；准备阶段，你可以弃置场上的一张牌。',
 			'3v3v2':'<div style="margin:10px">3v3v2模式</div><ul style="margin-top:0"><li>游戏准备<br>本模式需要8名玩家进行游戏。游戏开始前，所有玩家随机分成两组，每组四人，分别称为「冷色阵营」和「暖色阵营」，然后分发身份牌，抽取到「主帅」身份的玩家亮出身份牌。'+
-			'<li>身份牌<br>每组的身份分为四种。<br>主帅（主）和前锋（忠）：联合对方阵营的细作，击杀己方细作，对方阵营的主帅和前锋以及所有的野心家。<br>细作（内）：帮助对方阵营的主帅和前锋，击杀对方细作，己方阵营的主帅和前锋以及所有的野心家。<br>野心家（野）：联合对方阵营中的野心家，击杀所有其他角色，成为最后的生还者。<br>'+
-			'<li>胜负判定<br>冷色主帅，先锋和暖色细作在所有其他角色全部阵亡后视为胜利，在冷色主帅阵亡后视为游戏失败。<br>暖色主帅，先锋和冷色细作在所有其他角色阵亡后视为胜利，在暖色主帅阵亡后视为失败。<br>野心家在所有不为野心家的角色阵亡后视为胜利，在双方主帅全部阵亡而有非野心家角色存活时失败。<br>当有角色阵亡后，若有角色满足胜利条件，游戏结束。若所有角色均满足失败条件，则游戏平局。若一名角色满足失败条件，即使其满足胜利条件，也视为游戏失败。<br>'+
-			'<li>游戏流程<br>在「游戏准备」中的工作完成后，冷色主帅选择一个势力，然后暖色主帅选择一个其他势力，作为双方各自的势力将池。<br>双方主帅从各自的势力将池中获得两张常备主公武将牌和四张非常备主公武将牌，然后选择一张作为武将牌，将其他的武将牌放回势力将池并洗混。然后双方的其他玩家从各自的势力将池中随机获得五张武将牌，选择一张作为自己的武将牌。<br>暖色主帅成为游戏的一号位，双方主帅各加1点体力和体力上限。七号位和八号位的起始手牌+1。<br>当场上第一次有玩家死亡时，野心家确认彼此的身份牌，然后获得技能〖野心毕露〗：出牌阶段，你可以明置身份牌，加1点体力上限和体力值。若如此做，所有的野心家失去技能〖野心毕露〗<br>'+'<li>击杀奖惩<br>杀死颜色不同的主帅的角色回复1点体力，杀死颜色不同的先锋的角色摸两张牌，杀死颜色相同的细作的角色摸三张牌，杀死颜色相同的先锋的主帅弃置所有手牌。<br>',
+			'<li>身份牌<br>每组的身份分为四种。<br>主帅（主）和忠良（忠）：联合对方阵营的细作，击杀己方细作，对方阵营的主帅和忠良以及所有的野心家。<br>细作（内）：帮助对方阵营的主帅和忠良，击杀对方细作，己方阵营的主帅和忠良以及所有的野心家。<br>野心家（野）：联合对方阵营中的野心家，击杀所有其他角色，成为最后的生还者。<br>'+
+			'<li>胜负判定<br>冷色主帅，忠良和暖色细作在所有其他角色全部阵亡后视为胜利，在冷色主帅阵亡后视为游戏失败。<br>暖色主帅，忠良和冷色细作在所有其他角色阵亡后视为胜利，在暖色主帅阵亡后视为失败。<br>野心家在所有不为野心家的角色阵亡后视为胜利，在双方主帅全部阵亡而有非野心家角色存活时失败。<br>当有角色阵亡后，若有角色满足胜利条件，游戏结束。若所有角色均满足失败条件，则游戏平局。若一名角色满足失败条件，即使其满足胜利条件，也视为游戏失败。<br>'+
+			'<li>游戏流程<br>在「游戏准备」中的工作完成后，冷色主帅选择一个势力，然后暖色主帅选择一个其他势力，作为双方各自的势力将池。<br>双方主帅从各自的势力将池中获得两张常备主公武将牌和四张非常备主公武将牌，然后选择一张作为武将牌，将其他的武将牌放回势力将池并洗混。然后双方的其他玩家从各自的势力将池中随机获得五张武将牌，选择一张作为自己的武将牌。<br>暖色主帅成为游戏的一号位，双方主帅各加1点体力和体力上限。七号位和八号位的起始手牌+1。<br>当场上第一次有玩家死亡时，野心家确认彼此的身份牌，然后获得技能〖野心毕露〗：出牌阶段，你可以明置身份牌，加1点体力上限和体力值。若如此做，所有的野心家失去技能〖野心毕露〗<br>'+'<li>击杀奖惩<br>杀死颜色不同的主帅的角色回复1点体力，杀死颜色不同的忠良的角色摸两张牌，杀死颜色相同的细作的角色摸三张牌，杀死颜色相同的忠良的主帅弃置所有手牌。<br>',
+			'游戏开发':'<div style="margin:10px">游戏开发(developer)</div><ul style="margin-top:0"><li>许家瑞(Jiarui Xu)独立开发和部署。<li>'+
+			'This game, Son of Soul, was developed solely by Jiarui Xu.<li>'+
+			'特别鸣谢：无名杀制作团队提供的帮助。',
 			// '<li>制作团队<br>游戏出品：紫星居<br>游戏设计：食茸貳拾肆<br>游戏开发：食茸貳拾肆、紫髯的小乔、聆星Mine、空城琴音依旧弥漫、丽景原同志、雪之彩翼、拉普拉斯、明月照沟渠<br>程序化：无名杀<br>鸣谢：荆哲、魔风、萨巴鲁酱、这就是秋夜</ul></ul>',
 		}
 	};
