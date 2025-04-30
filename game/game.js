@@ -27337,7 +27337,7 @@
 			return audio;
 		},
 		playAudioNoAddVideo:function(){
-			if(_status.video&&arguments[1]!='video') return;
+			// if(_status.video&&arguments[1]!='video') return;
 			var str='';
 			var onerror=null;
 			for(var i=0;i<arguments.length;i++){
@@ -27347,7 +27347,7 @@
 				else if(typeof arguments[i]=='function'){
 					onerror=arguments[i]
 				}
-				if(_status.video) break;
+				// if(_status.video) break;
 			}
 			if(!lib.config.repeat_audio&&_status.skillaudio.contains(str)) return;
 			_status.skillaudio.add(str);

@@ -434,6 +434,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				cardnature:'fire',
 				ai:{
 					equipValue:function(card,player){
+						if(player.hasSkillTag('nofire')) return 10;
 						if(player.hasSkill('yuhuo_nv')) return 0;
 						if(player.hasSkillTag('maixie')&&player.hp>1) return 0;
 						if(player.hasSkillTag('noDirectDamage')) return 10;
