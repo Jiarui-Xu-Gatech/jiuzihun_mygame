@@ -2421,9 +2421,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 check:function (event,player){
                     if(player.isTurnedOver()||event.num>1) return true;
-                    if (event.source&&get.attitude(event.source,player)+get.attitude(event.source,player)>0){
-                        return true;
-                    }
+                    if(player.isPhaseUsing()) return true;
+                    // if (event.source&&get.attitude(event.source,player)+get.attitude(event.source,player)>0){
+                    //     return true;
+                    // }
                     var live=game.countPlayer(function(current){
                         if (current.isAlive()){
                             return true;
