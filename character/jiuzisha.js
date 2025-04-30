@@ -3030,6 +3030,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                             var addi = 0;
                             if (score > 0){
+                                if (score > 10){
+                                    //一票否决权
+                                    return 1;
+                                }
                                 addi += Math.random();
                             }
                             else{
@@ -3838,7 +3842,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     threaten:1.5,
                     result:{
                         target:function(player,target){
-                            return target.countCards('h');
+                            return -target.countCards('h');
                         },
                         player:function(player,target){
                             if (player.countCards('h')> 0) return 1;
