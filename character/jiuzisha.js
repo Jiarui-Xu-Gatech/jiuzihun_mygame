@@ -1915,9 +1915,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if(get.mode()=='identity'){
                                 if(player.isZhu&&player.hasUnknown(4)) return 100;
                                 var zhugongs = game.filterPlayer(function(current) {
-                                    return current.isZhu;
+                                    return current.identity == 'zhu';
                                 }); 
-                                if((player.identity=='zhong'||player.identity=='nei'||player.identity=='mingzhong')&&
+                                if(zhugongs&&zhugongs.length>0&&(player.identity=='zhong'||player.identity=='nei'||player.identity=='mingzhong')&&
                                 (zhugongs[0].countCards('e','tengjia')>0||zhugongs[0].hp >= 2 || zhugongs[0].hasSkillTag('preRespondSha') || zhugongs[0].countCards('h')>=3||player.countCards('h','tao')>0)){
                                     return 90;
                                 }
@@ -4704,6 +4704,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     !player.storage.haoyin_tushan || player.storage.haoyin_tushan <= 9;
                 },
                 content:function(){
+                    game.log(player,'防止了本回合第一次受到的伤害');
                     trigger.num = 0;
                 },
 
@@ -15389,6 +15390,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             xiangzhuo_sha:{
+                audio:false,
                 silent:true,
                 popup:false,
                 direct:true,
@@ -15400,7 +15402,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     var idp=trigger.player.playerid;
 					var idt=trigger.target.playerid;
-                    trigger.baseDamage = trigger.turnNum;
+                    // trigger.baseDamage = trigger.turnNum;
+                    trigger.extraDamage = trigger.turnNum - 1;
                     trigger.shaReq[idp] = trigger.turnNum;
                     trigger.shaReq[idt] = trigger.turnNum;
                 },
@@ -15446,7 +15449,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.chooseBool(get.prompt('aozun_dong'),"当你使用【杀】指定目标后，你可以将此牌视为【决斗】。").set('ai',function(event,player){
+                    player.chooseBool(get.prompt('aozun_dong'),"当你使用【杀】指定目标后，你可以将此牌视为【决斗】并继承此【杀】的伤害值。").set('ai',function(event,player){
                         if (trigger.stocktargets&&trigger.stocktargets.length>0&&trigger.stocktargets.length<=1&&trigger.stocktargets[0].hasSkillTag('notrick')){
                             return false;
                         }
@@ -15455,7 +15458,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         if (!player.hasSkill('qianshang_background')&&player==_status.currentPhase){
                             if (trigger.jiu){
-                                if (Math.random()<(1/(1+trigger.jiu_add))){
+                                if (get.mode() == 'identity'&&player.identity == 'zhu'&&player.hasUnknown(2)){
+                                    return true;
+                                }
+                                if (Math.random()<((player.countCards('h','sha')/2+1)/(1+trigger.jiu_add))){
                                     return true;
                                 }
                                 else{
@@ -15467,7 +15473,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
                         }
                         else {
-                            if ((!trigger.jiu)&&Math.random()<0.3){
+                            // if ((!trigger.jiu)&&Math.random()<0.3){
+                            //     return true;
+                            // }
+                            if (Math.random()<0.3){
                                 return true;
                             }
                             else{
@@ -20067,14 +20076,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'yexing_dong':"野性",
             'yexing_dong_info':"锁定技，若你的体力值：≤3，你拥有技能【并腿】；≤2，你拥有技能【猎酒】；≤1，你拥有技能【象酌】。",
             'aozun_dong':"傲樽",
-            'aozun_dong_info':"当你使用【杀】指定目标后，你可以将此牌视为【决斗】。当你需要打出【杀】时，你可以观看牌堆底四张牌，若其中有【杀】，你可以选择其中一张【杀】打出，若其中没有【杀】，你可以获得这四张牌中的一张并将剩余三张牌置于牌堆顶。",
+            'aozun_dong_info':"当你使用【杀】指定目标后，你可以将此牌视为【决斗】并继承此【杀】的伤害值。当你需要打出【杀】时，你可以观看牌堆底四张牌，若其中有【杀】，你可以选择其中一张【杀】打出，若其中没有【杀】，你可以获得这四张牌中的一张并将剩余三张牌置于牌堆顶。",
             'aozun_respond_dong':"傲樽",
             bingtui_dong:"并腿",
             bingtui_dong_info:"锁定技，当你每回合非首次受到伤害时，若你有手牌，你弃置所有手牌并防止此伤害，然后若你弃置的手牌数大于伤害值，你摸取两者之差数量的牌，若在你的回合内，你再摸伤害值两倍数量的牌。",
             liejiu_dong:"猎酒",
             liejiu_dong_info:"你的回合外，当你受到其他角色的伤害后，若存在伤害来源，你可以观看其手牌，若其中有【杀】或【酒】，你可以获得其中一张【杀】或【酒】并视为对伤害来源使用了一张【决斗】。",
             xiangzhuo_dong:"象酌",
-            xiangzhuo_dong_info:"锁定技，你【决斗】时，【决斗】双方第1次响应此【决斗】需打出1张【杀】，第2次响应需依次打出2张【杀】，第3次响应需依次打出3张【杀】，以此类推，直到【决斗】中的一方在需要打出X张【杀】响应此【决斗】时未成功打出足够的【杀】为止，然后其受到【决斗】另一方造成的X点伤害。",
+            xiangzhuo_dong_info:"锁定技，你【决斗】时，【决斗】双方第1次响应此【决斗】需打出1张【杀】，第2次响应需额外打出1张【杀】，第3次响应需额外打出2张【杀】，以此类推，直到【决斗】中的一方在需要额外打出X张【杀】响应此【决斗】时未成功打出足够的【杀】为止，然后其受到【决斗】另一方造成的伤害额外+X。",
             xiangzhuo_sha:"象酌",
 
 

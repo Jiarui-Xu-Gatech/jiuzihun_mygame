@@ -3019,7 +3019,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			dongcha:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbei'},
 				direct:true,
 				unique:true,
 				filter:function(event,player){

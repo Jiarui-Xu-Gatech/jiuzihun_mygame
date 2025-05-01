@@ -311,7 +311,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 									}
 								}
 							}
-							if(target.hp<0&&target!=player&&target.identity!='zhu'&&!target.hasSkill('chongsheng_nv')) return 0;
+							if(target.hp<0&&target!=player&&target.identity!='zhu'&&!target.hasSkill('chongsheng_nv')&&!target.hasSkill('mingwang')) return 0;
 							var att=get.attitude(player,target);
 							if(att<3&&att>=0&&player!=target) return 0;
 							var tri=_status.event.getTrigger();
@@ -792,6 +792,11 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 							if(nh==1) return -1.7
 							return -1.5;
 						},
+						player:function(player,target){
+							if (get.mode() == 'identity'&&(player.identity == 'zhu'||player.identity == 'mingzhong')&&player.hasUnknown(3)){
+								return 1;
+							}
+						},
 					},
 					tag:{
 						respond:1,
@@ -856,6 +861,11 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 							if(nh==0) return -2;
 							if(nh==1) return -1.7
 							return -1.5;
+						},
+						player:function(player,target){
+							if (get.mode() == 'identity'&&(player.identity == 'zhu'||player.identity == 'mingzhong')&&player.hasUnknown(3)){
+								return 1;
+							}
 						},
 					},
 					tag:{
