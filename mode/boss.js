@@ -2240,7 +2240,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			lingsheji2:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				equipSkill:true,
 				forced:true,
 				popup:false,
@@ -3725,7 +3725,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			boss_shedu:{
-				trigger:{player:"phaseBegin"},
+				trigger:{player:"phaseZhunbeiBefore"},
 				mark:true,
 				intro:{content:'mark'},
 				forced:true,
@@ -3975,7 +3975,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_yanyu:{
 				forced:true,
-				trigger:{global:'phaseBegin'},
+				trigger:{global:'phaseZhunbeiBefore'},
 				filter:function(event,player){
 					return player!=event.player;
 				},
@@ -3997,7 +3997,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			boss_fengdong:{
-				trigger:{player:"phaseBegin"},
+				trigger:{player:"phaseZhunbeiBefore"},
 				forced:true,
 				content:function(){
 					game.countPlayer(function(current){
@@ -4006,7 +4006,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			boss_xunyou:{
-				trigger:{global:'phaseBegin'},
+				trigger:{global:'phaseZhunbeiBefore'},
 				forced:true,
 				filter:function(event,player){
 					return player!=event.player
@@ -9550,7 +9550,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			shenfu:{
 				audio:2,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				content:function(){
 					'step 0'
@@ -9705,7 +9705,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						})) return num+1;
 					},
 				},
-				trigger:{player:['phaseDrawBegin2','phaseEnd']},
+				trigger:{player:['phaseDrawBegin2','phaseJieshuAfter']},
 				forced:true,
 				filter:function(event,player){
 					var num=event.name=='phase'?5:3;
@@ -12510,7 +12510,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					'3':{
 						audio:'drlt_jieying',
 						trigger:{
-							global:'phaseEnd',
+							global:'phaseJieshuAfter',
 						},
 						forced:true,
 						filter:function(event,player){

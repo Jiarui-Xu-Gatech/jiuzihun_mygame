@@ -4302,7 +4302,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				selectTarget:-1,
 				content:function(){
-					player.addTempSkill('spell_yemanpaoxiao',{player:'phaseBegin'});
+					player.addTempSkill('spell_yemanpaoxiao',{player:'phaseZhunbeiBefore'});
 				},
 				ai:{
 					order:1,
@@ -5556,7 +5556,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			stone_chenshui:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				content:function(){
 					var list=['hsmengjing_feicuiyoulong','hsmengjing_huanxiaojiemei',
@@ -5927,7 +5927,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 
 			warrior_heiyao:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				direct:true,
 				filter:function(event,player){
@@ -6112,7 +6112,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			priest_shengshui:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				unique:true,
 				forced:true,
 				filter:function(event,player){
@@ -6355,7 +6355,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			rogue_shoudao:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				direct:true,
 				filter:function(event,player){
@@ -6864,7 +6864,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 
 			paladin_zhengqianghaosheng:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				mark:true,
 				intro:{
@@ -6882,7 +6882,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			paladin_zhihuizhufu:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				mark:true,
 				intro:{
@@ -7068,7 +7068,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			shaman_shihuawuqi:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				content:function(){
 					player.draw(3);
@@ -7080,7 +7080,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				group:'shaman_shihuawuqi2'
 			},
 			shaman_shihuawuqi2:{
-				trigger:{global:'phaseBegin'},
+				trigger:{global:'phaseZhunbeiBefore'},
 				forced:true,
 				popup:false,
 				filter:function(event,player){
@@ -7118,7 +7118,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				group:'mage_hanbingpingzhang2'
 			},
 			mage_hanbingpingzhang2:{
-				trigger:{global:'phaseBegin'},
+				trigger:{global:'phaseZhunbeiBefore'},
 				forced:true,
 				popup:false,
 				filter:function(event,player){
@@ -8110,7 +8110,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			shaman_fachao:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				filter:function(event,player){
 					return event.player.career&&player.side==event.player.side&&event.player.isAlive();
@@ -8121,7 +8121,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			shaman_jili:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				filter:function(event,player){
 					if(event.player.career&&player.side==event.player.side){
@@ -8476,7 +8476,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			shaman_zhiliao:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				direct:true,
 				content:function(){
@@ -8503,7 +8503,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			shaman_fali_old:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				direct:true,
 				filter:function(event,player){
@@ -8530,7 +8530,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			shaman_zhuore:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				direct:true,
 				filter:function(event,player){
@@ -8708,7 +8708,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			stone_fennuxiaoji1:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				filter:function(event,player){
 					return player.countCards('h')==0;
 				},
@@ -8717,7 +8717,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			stone_fatiaozhuru1:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				filter:function(event,player){
 					return player.countCards('h')==0;
 				},
@@ -8742,7 +8742,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			stone_kutongsiseng2:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				content:function(){
 					player.draw();
@@ -9017,7 +9017,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			stone_zhufu:{
-				trigger:{global:'phaseEnd'},
+				trigger:{global:'phaseJieshuAfter'},
 				forced:true,
 				unique:true,
 				filter:function(event,player){
@@ -9060,7 +9060,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if(player.getActCount()+stoneact>player.actcount) return false;
 					}
 				},
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				popup:false,
 				priority:15,
@@ -9177,7 +9177,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			_stonerage_add:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				direct:true,
 				priority:10,
 				filter:function(event,player){

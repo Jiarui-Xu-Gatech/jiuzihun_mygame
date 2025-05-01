@@ -4651,10 +4651,10 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			tongshuai2:{
 				audio:2,
-				trigger:{player:['phaseBegin','phaseEnd'],global:'gameStart'},
+				trigger:{player:['phaseZhunbeiBefore','phaseJieshuAfter'],global:'gameStart'},
 				filter:function(event,player,name){
 					if(!player.hasSkill('tongshuai')) return false;
-					if(name=='phaseBegin'&&game.phaseNumber==1) return false;
+					if(event.name=='phaseZhunbei'&&game.phaseNumber==1) return false;
 					return true;
 				},
 				priority:-9,
@@ -4768,7 +4768,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			tongshuai3:{
 				unique:true,
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				filter:function(event,player){
 					return player.storage.tongshuai&&player.storage.tongshuai.unowned&&player.storage.tongshuai.unowned.length>0;
@@ -4852,7 +4852,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			cangming2:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				popup:false,
 				content:function(){
@@ -4863,7 +4863,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_moyan:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				unique:true,
 				content:function(){
@@ -4880,7 +4880,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				inherit:'juece',
 			},
 			boss_stoneqiangzheng:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				unique:true,
 				filter:function(event,player){
@@ -5047,7 +5047,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			pianyi:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				filter:function(event,player){
 					return !player.getStat('damage');
@@ -5062,7 +5062,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			lingdong:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				filter:function(event,player){
 					return player.countUsed('sha')>0;
@@ -5223,7 +5223,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			_phasequeue:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				popup:false,
 				content:function(){
@@ -5322,7 +5322,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			_chesscenter:{
-				trigger:{player:['phaseBegin','useCardBegin','useSkillBegin','respondBegin','damageBegin','loseHpBegin'],
+				trigger:{player:['phaseZhunbeiBefore','useCardBegin','useSkillBegin','respondBegin','damageBegin','loseHpBegin'],
 				target:'useCardToBegin'},
 				forced:true,
 				priority:100,
@@ -5416,7 +5416,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_wushang:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				filter:function(event,player){
 					for(var i=0;i<game.players.length;i++){

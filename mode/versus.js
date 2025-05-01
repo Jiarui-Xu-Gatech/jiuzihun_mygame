@@ -4264,7 +4264,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			zhanyanliangzhuwenchou:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				silent:true,
 				content:function(){
 					'step 0'
@@ -4337,7 +4337,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					if(result.bool&&result.cards.length){
 						player.gain(result.cards,trigger.player,'give');
 						if(get.type(result.cards[0])=='trick'){
-							player.addTempSkill('wenji2',{player:'phaseBegin'});
+							player.addTempSkill('wenji2',{player:'phaseZhunbeiBefore'});
 						}
 					}
 				}
@@ -4356,7 +4356,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			tunjiang:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				filter:function(event,player){
 					return !player.getStat('damage')&&player.countUsed()>=2;
@@ -4580,7 +4580,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_didongjg:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				content:function(){
 					"step 0"
@@ -4610,7 +4610,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_lianyujg:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				unique:true,
 				content:function(){
 					"step 0"
@@ -4687,7 +4687,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_tianyujg:{
 				audio:true,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				filter:function(event,player){
 					return game.hasPlayer(function(current){
@@ -4730,7 +4730,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_huodi:{
 				audio:2,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				filter:function(event,player){
 					return game.hasPlayer(function(current){
@@ -4757,7 +4757,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_chuanyun:{
 				audio:true,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				content:function(){
 					"step 0"
@@ -4801,7 +4801,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_fengxing:{
 				audio:true,
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				direct:true,
 				content:function(){
 					"step 0"
@@ -4824,7 +4824,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_xuanlei:{
 				audio:true,
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				filter:function(event,player){
 					return game.hasPlayer(function(current){
@@ -4847,7 +4847,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_fanshi:{
 				audio:true,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				check:function(){
 					return false;
@@ -4926,7 +4926,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_lingyu:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				check:function(event,player){
 					if(player.isTurnedOver()) return true;
 					var num=0,players=game.filterPlayer();
@@ -4988,7 +4988,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_benlei:{
 				mode:['versus'],
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				filter:function(event,player){
 					if(_status.mode!='jiange') return false;
@@ -5022,7 +5022,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_nailuo:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				check:function(event,player){
 					if(player.isTurnedOver()) return true;
 					var num=0,players=game.filterPlayer();
@@ -5085,7 +5085,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 			},
 			boss_tanshi:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				check:function(){
 					return false;
@@ -5098,7 +5098,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_tunshi:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				filter:function(event,player){
 					var nh=player.countCards('h');
@@ -5134,7 +5134,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_gongshenjg:{
 				audio:2,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				mode:['versus'],
 				filter:function(event,player){
 					if(_status.mode!='jiange') return false;
@@ -5188,7 +5188,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_zhinang:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				frequent:true,
 				content:function(){
 					"step 0"
@@ -5264,7 +5264,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_biantian:{
-				trigger:{player:'phaseBegin'},
+				trigger:{player:'phaseZhunbeiBefore'},
 				forced:true,
 				unique:true,
 				audio:false,
@@ -5366,7 +5366,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			boss_jizhen:{
 				audio:2,
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				forced:true,
 				filter:function(event,player){
 					return game.hasPlayer(function(current){
@@ -5436,7 +5436,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			boss_tianyun:{
-				trigger:{player:'phaseEnd'},
+				trigger:{player:'phaseJieshuAfter'},
 				direct:true,
 				content:function(){
 					"step 0"

@@ -548,7 +548,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			// 					 	content:'当前灵力点数：# / 5',
 			// 					 },
 			// 					 trigger:{
-			// 					 	player:'phaseBeginStart',
+			// 					 	player:'phaseZhunbeiBeforeStart',
 			// 					 },
 			// 					 prompt:'是否消耗2点灵力获得一个技能？',
 			// 					 filter:function(event,player){
@@ -1960,7 +1960,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
  			// 		_status.brawl.map3=map3;
  			// 		var skill={
  			// 			_jiazu_wei:{
- 			// 				trigger:{player:'phaseBegin'},
+ 			// 				trigger:{player:'phaseZhunbeiBefore'},
  			// 				direct:true,
  			// 				popup:'魏业',
  			// 				prompt2:'回合开始时，你可以弃置一张牌并指定一名敌方角色，该角色须弃置一张牌，否则你摸一张牌。',
@@ -2012,7 +2012,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
  			// 				content:function(){player.draw()},
  			// 			},
  			// 			_jiazu_wu:{
- 			// 				trigger:{player:'phaseEnd'},
+ 			// 				trigger:{player:'phaseJieshuAfter'},
  			// 				forced:true,
  			// 				popup:'吴耀',
  			// 				prompt2:'回合结束时，若你的手牌数不等于你的体力值，则你摸一张牌。',
@@ -2669,33 +2669,33 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								game.saveConfig('qianlidanji_level',lib.config.qianlidanji_level);
 							}
 							if(game.fellow&&game.fellow.isAlive()){
-   					if(ui.land&&ui.land.player==game.fellow){
-   						game.addVideo('destroyLand');
-   						ui.land.destroy();
-   					}
-   					game.zhu.next=game.fan;
-   					game.fan.next=game.zhu;
-   					game.zhu.nextSeat=game.fan;
-   					game.fan.nextSeat=game.zhu;
-  						game.players.remove(game.fellow);
-  						_status.dying.remove(game.fellow);
-  						game.fellow.out();
-  						for(var mark in game.fellow.marks){
-  							game.fellow.unmarkSkill(mark);
-  						}
-  						while(game.fellow.node.marks.childNodes.length>1){
-  							game.fellow.node.marks.lastChild.remove();
-  						}
-   					for(var i in game.fellow.tempSkills){
-   						game.fellow.removeSkill(i);
-   					}
-   					var skills=game.fellow.getSkills();
-   					for(var i=0;i<skills.length;i++){
-   						if(lib.skill[skills[i]].temp){
-   							game.fellow.removeSkill(skills[i]);
-   						}
-   					}
-  						var cards=game.fellow.getCards('hej');		
+								if(ui.land&&ui.land.player==game.fellow){
+									game.addVideo('destroyLand');
+									ui.land.destroy();
+								}
+								game.zhu.next=game.fan;
+								game.fan.next=game.zhu;
+								game.zhu.nextSeat=game.fan;
+								game.fan.nextSeat=game.zhu;
+								game.players.remove(game.fellow);
+								_status.dying.remove(game.fellow);
+								game.fellow.out();
+								for(var mark in game.fellow.marks){
+									game.fellow.unmarkSkill(mark);
+								}
+								while(game.fellow.node.marks.childNodes.length>1){
+									game.fellow.node.marks.lastChild.remove();
+								}
+								for(var i in game.fellow.tempSkills){
+									game.fellow.removeSkill(i);
+								}
+								var skills=game.fellow.getSkills();
+								for(var i=0;i<skills.length;i++){
+									if(lib.skill[skills[i]].temp){
+										game.fellow.removeSkill(skills[i]);
+									}
+								}
+  								var cards=game.fellow.getCards('hej');		
 								while(cards.length){
 									ui.discardPile.appendChild(cards.shift());
 								}
@@ -2706,10 +2706,10 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								game.fellow.remove();
 								game.fan.dataset.position=1;
 								ui.arena.setNumber(2);
-   					game.zhu.next=game.fan;
-   					game.fan.next=game.zhu;
-   					game.zhu.nextSeat=game.fan;
-   					game.fan.nextSeat=game.zhu;
+								game.zhu.next=game.fan;
+								game.fan.next=game.zhu;
+								game.zhu.nextSeat=game.fan;
+								game.fan.nextSeat=game.zhu;
 							}
 							if(_status.qianlidanji.completeNumber!=5){
  							var list=_status.qianlidanji.completeReward.randomGets(3);

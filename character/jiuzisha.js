@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_neiVSzhu','yuner_die'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -1171,7 +1171,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.log(player,"令技能","#g【醉美】","摸牌数-1");
                     var has=game.hasPlayer(function(current){
                         if (!current.hasSkill('jiuyu_jiu')){
-                            current.addSkill('jiuyu_jiu');
+                            current.addTempSkill('jiuyu_jiu','phaseBefore');
                         }
                     });
                     event.current=player.next;
@@ -7184,25 +7184,40 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 			},
             
             yuzhong_fix_yan:{
-				// audio:'yuzhong_yan',
+				audio:false,
                 forced:true,
                 locked:true,
+                direct:true,
                 trigger:{
                     player:["judgeBegin","judgeEnd"],
+                },
+                init:function(player){
+                    player.storage.yuzhong_fix_yan = 1;
+                    player.syncStorage('yuzhong_fix_yan');
                 },
 				filter:function(event,player){
                     return true;
                 },
                 content(event){
-                    game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
-                    game.log(player,"发动技能","#g【愚忠】","，判定牌不能被修改或无效。");
+                    
                     var has=game.hasPlayer(function(current){
                         if (current.hasSkill('yuzhong_panding_yan')){
                             // console.log("yuzhong去了呀");
                             current.removeSkill('yuzhong_panding_yan');
+                            if (player.storage.yuzhong_fix_yan == 2){
+                                player.storage.yuzhong_fix_yan = 1;
+                                player.syncStorage('yuzhong_fix_yan');
+                            }
                         }else{
                             // console.log("yuzhong加了呀");
-                            current.addSkill('yuzhong_panding_yan');
+                            current.addTempSkill('yuzhong_panding_yan','phaseBefore');
+                            if (player.storage.yuzhong_fix_yan == 1){
+                                player.storage.yuzhong_fix_yan = 2;
+                                player.syncStorage('yuzhong_fix_yan');
+                                player.popup('yuzhong_yan');
+                                game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                                game.log(player,"发动了","#g【愚忠】","，判定牌不能被修改或无效。");
+                            }
                         }
                         
                     });
@@ -7596,7 +7611,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         var has=game.hasPlayer(function(current){
                             if (!current.hasSkill('mingcha_disable_quan')){
                                 // console.log("加了呀");
-                                current.addSkill('mingcha_disable_quan');
+                                current.addTempSkill('mingcha_disable_quan');
                                 if (trigger.card.cardid){
                                     player.storage.mingcha_remove_quan = trigger.card.cardid;
                                     player.syncStorage('mingcha_remove_quan');
@@ -9626,7 +9641,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     var has=game.hasPlayer(function(current){
                         if (!current.hasSkill('xinruan_jiu_begin_mei')&&current!=player){
                             player.line(current,"green");
-                            current.addSkill('xinruan_jiu_begin_mei');
+                            current.addTempSkill('xinruan_jiu_begin_mei');
                         }
                         // if (!current.hasSkill('xinruan_jiu_end_mei')&&current!=player){
                         //     current.addSkill('xinruan_jiu_end_mei');
