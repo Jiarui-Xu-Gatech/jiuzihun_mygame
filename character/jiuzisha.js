@@ -7597,6 +7597,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (!current.hasSkill('mingcha_disable_quan')){
                                 // console.log("加了呀");
                                 current.addSkill('mingcha_disable_quan');
+                                if (trigger.card.cardid){
+                                    player.storage.mingcha_remove_quan = trigger.card.cardid;
+                                    player.syncStorage('mingcha_remove_quan');
+                                }
+                                else {
+                                    trigger.card.cardid = 'mingcha_remove_quan_id';
+                                    player.storage.mingcha_remove_quan = trigger.card.cardid;
+                                    player.syncStorage('mingcha_remove_quan');
+                                }
                             }
                             else{
     
@@ -7619,12 +7628,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 forced:true,
 				trigger:{
-					player:["useCardAfter","respondAfter"],
+					player:["useCardAfter","respondAfter",'dieBegin'],
 				},
 				filter:function(event,player){
-					return event.card&&(get.type(event.card)=='trick')&&(event.card!='wuxie')&&game.hasPlayer(function(current){
-						return current!=player;
-					});
+                    if (event.name!='die'){
+                        return event.card&&(player.storage.mingcha_remove_quan&&event.card.cardid == player.storage.mingcha_remove_quan)&&game.hasPlayer(function(current){
+                            return current!=player;
+                        });
+                    }
+                    else{
+                        return true;
+                    }
+					
 				},
 				content:function(){
                     var has=game.hasPlayer(function(current){
@@ -7645,6 +7660,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             mingcha_disable_quan:{
                 // mark:true,
                 // marktext:"无",
+                // intro:{
+                //     name:'无懈',
+                // },
                 silent:true,
                 forced:true,
                 // filter:function(event,player){
@@ -20083,7 +20101,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             liejiu_dong:"猎酒",
             liejiu_dong_info:"你的回合外，当你受到其他角色的伤害后，若存在伤害来源，你可以观看其手牌，若其中有【杀】或【酒】，你可以获得其中一张【杀】或【酒】并视为对伤害来源使用了一张【决斗】。",
             xiangzhuo_dong:"象酌",
-            xiangzhuo_dong_info:"锁定技，你【决斗】时，【决斗】双方第1次响应此【决斗】需打出1张【杀】，第2次响应需额外打出1张【杀】，第3次响应需额外打出2张【杀】，以此类推，直到【决斗】中的一方在需要额外打出X张【杀】响应此【决斗】时未成功打出足够的【杀】为止，然后其受到【决斗】另一方造成的伤害额外+X。",
+            xiangzhuo_dong_info:"锁定技，你【决斗】时，【决斗】双方第1次响应此【决斗】需打出1张【杀】，第2次响应需额外打出1张【杀】，第3次响应需额外打出2张【杀】，第4次响应需额外打出3张【杀】，以此类推，直到【决斗】中的一方在需要额外打出X张【杀】响应此【决斗】时未成功打出足够的【杀】为止，然后其受到【决斗】另一方造成的伤害额外+X。",
             xiangzhuo_sha:"象酌",
 
 
