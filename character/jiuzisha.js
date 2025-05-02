@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuzhong_yan','hualuo_duo'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -13121,6 +13121,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					'step 1'
 					if(result.bool){
 						player.logSkill('huitong_shou',trigger.source);
+                        game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
                             player.storage.hanshou_skill.popup('weiyi_shou');
                         }
@@ -13152,6 +13153,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					if(result.bool){
 						var card=result.links;
 						trigger.source.gain(card,player,'giveAuto','bySelf');
+                        game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
 						trigger.cancel();
                         game.log(player,'令此次伤害无效');
                         player.addTempSkill('huitong_shou_limit','phaseAfter');
@@ -13165,6 +13167,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 3'
                     if (result.bool&&result.cards.length > 0){
                         player.gain(result.cards,trigger.source,'giveAuto','bySelf');
+                        game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                     }
 				},
                 ai:{
@@ -13194,6 +13197,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(result.bool){
 						player.logSkill('fuyao_shou');
+                        game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
                             player.storage.hanshou_skill.popup('weiyi_shou');
                             player.storage.hanshou_skill.line(player,'green');
@@ -19482,12 +19486,34 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 enable:"phaseUse",
                 content:function(){
                     "step 0"
+                    game.playAudio('effect','tie');
+					game.playAudio('effect','tie_music');
                     game.tieAnimation(3000);
                     // game.bestPlayerShow('chenyingchao',3000);
                     // game.neiVSzhu(3000);
 					
 				},
             },
+
+            yuner_compareAni:{
+                enable:'phaseUse',
+                filter:function(event,player){
+					return true;
+				},
+				content:function(event){
+                    "step 0"
+					player.chooseCard("选两张牌比较",2);
+                    "step 1"
+                    if (result.cards){
+                        player.$compare(result.cards[0],player,result.cards[1]);
+                    }
+					    
+				},
+            },
+
+            
+
+
 
 
             //蔡阳

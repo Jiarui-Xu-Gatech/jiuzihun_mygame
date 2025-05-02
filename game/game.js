@@ -30757,6 +30757,7 @@
 				else{
 					game.playBackgroundMusic();
 					game.playAudio('effect','tie');
+					game.playAudio('effect','tie_music');
 				}
 			}
 			var resultbool=result;
