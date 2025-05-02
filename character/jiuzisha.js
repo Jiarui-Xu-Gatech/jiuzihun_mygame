@@ -1165,7 +1165,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.background = game.getUpperBackgroundName('',player);
                     game.createClearBackground('jiuyu_bg',player);
                     //效果
-                    player.awakenSkill('jiuyu');
+                    // player.awakenSkill('jiuyu');
                     player.removeSkill('zuimei');
                     player.addSkill('zuimei2');
                     game.log(player,"令技能","#g【醉美】","摸牌数-1");
@@ -1196,6 +1196,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.current.chooseCard('【酒域】：使用一张【酒】或流失一点体力',1,'h',function(card){return get.name(card)=='jiu';}).set('ai',function(card){  
                         if (event.current.hasSkillTag('maihp')){
                             return -10;
+                        }
+                        if (event.current.hasSkill('yujiu_heng')&&!event.current.hasSkill('yujiu_hp_heng')&&event.current.countCards('e')==0){
+                            return 25 - get.value(card);
                         }
                         return Math.ceil(15*Math.random()) - get.value(card);
                     });
@@ -1343,7 +1346,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(event){
 					player.logSkill('jiuyu_jiu');
-                    game.log(player,'将'+get.translation(trigger.cards[0])+"视为【酒】使用");
+                    game.log(player,'将',trigger.cards[0],"视为","#y酒","使用");
 				},
             },
 
@@ -1356,22 +1359,24 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"phaseJieshu",
                 },
                 priority:15,
+                direct:true,
                 onremove:true,
                 filter:function (event,player){
                     return game.players.length>1;
                 },
                 content:function (){
                     "step 0"
-                    player.chooseTarget('选择【豪情】的目标',lib.translate.haoqin_info,true,function(card,player,target){
+                    player.chooseTarget('选择【豪情】的目标',lib.translate.haoqin_info,function(card,player,target){
                             return target!=player;
                     }).set('ai',function(target){     
-                            return get.attitude(player,target);            
+                            return get.attitude(player,target)+get.attitude(target,player);            
                     });        
                     "step 1"
-                    if(result.bool){           
+                    if(result.bool){        
                         var target=result.targets[0];
+                        player.logSkill('haoqin',target); 
                         player.line(target,'green');
-                        game.log(target,'成为了','【豪情】','的目标');
+                        game.log(target,'成为了','#g【豪情】','的目标，其受到的伤害均由',player,'承担');
                         target.storage.haoqin_target=player;
                         target.addSkill('haoqin_target');
                         target.syncStorage('haoqin_target');
@@ -5925,6 +5930,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             
             yinyang_origin_caoxin:{
                 audio:2,
+                direct:true,
                 trigger:{player:'turnOverAfter',},
                 filterTarget: function(card, player, target) {
                     return target != player; // 示例：目标不能是自己
@@ -5964,6 +5970,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if (result.bool && result.targets.length) {
                         var target = result.targets[0];
+                        player.logSkill('yinyang_origin_caoxin',target);
                         player.line(target,'green');
                         target.turnOver(); // 令目标翻面
                         game.delay(1);
@@ -7179,6 +7186,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.update();
                         // game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         player.logSkill('yuzhong_yan');
+                        game.log(player,'做主公，不增加体力上限');
 					}
 				}
 			},
