@@ -30752,7 +30752,7 @@
 				}
 				else if(result===false){
 					game.playBackgroundMusic();
-					game.playAudio('effect','lose');
+					game.playAudio('effect','lose'+Math.ceil(3*Math.random()));
 				}
 				else{
 					game.playBackgroundMusic();
