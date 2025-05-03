@@ -11107,6 +11107,14 @@
 						_status.replayvideo=true;
 						game.playVideo(_status.playback,lib.config.mode);
 					});
+
+					ui.volumn=ui.create.system('♫');
+					lib.setPopped(ui.volumn,ui.click.volumn,200);
+					// if(lib.config.show_pause) ui.auto.style.marginLeft='10px';
+					if(!lib.config.show_volumn){
+						ui.volumn.style.display='none';
+					}
+
 					ui.create.system('暂停',ui.click.pause,true).id='pausebutton';
 					var slow=ui.create.system('减速',function(){
 						_status.videoDuration*=1.5;

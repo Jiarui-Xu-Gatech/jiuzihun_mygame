@@ -2546,8 +2546,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     return true;
                                 }
                             });
-                            //牌多了就别打了 因为也不会翻了
-                            if ((target.countCards('h')<=(7+10*(live-2)/6)+(2+16*(live-2)/6)*(0.1))&&get.attitude(player,target)+get.attitude(target,player)>0&&num>=1){
+
+                            if (target.isTurnedOver()){
                                 if(get.tag(card,'damage')){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
@@ -2565,8 +2565,26 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     if(num==2) return [0.5,1];
                                 }
                             }
-
-                            else if ((target.countCards('h')<=(7+10*(live-2)/6)+(2+16*(live-2)/6)*(1))&&get.attitude(player,target)+get.attitude(target,player)<=0){
+                            //牌多了就别打了 因为也不会翻了
+                            else if ((target.countCards('h')<=(7+10*(live-2)/6)+(2+16*(live-2)/6)*(0.1))&&get.attitude(player,target)+get.attitude(target,player)>0&&num>=1){
+                                if(get.tag(card,'damage')){
+                                    if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
+                                    if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
+                                    if(target.hp==1) return [0.85,0.8];
+                                    if(target.isTurnedOver()) return [0,3];
+                                    var num=game.countPlayer(function(current){
+                                        if(current.countCards('he')&&current!=player&&get.attitude(player,current)<=0){
+                                            return true;
+                                        }
+                                        if(current.countCards('j')&&current!=player&&get.attitude(player,current)>0){
+                                            return true;
+                                        }
+                                    });
+                                    if(num>2) return [0,1];
+                                    if(num==2) return [0.5,1];
+                                }
+                            }
+                            else if ((target.countCards('h')<=(7+10*(live-2)/6)+(2+16*(live-2)/6)*(1))&&(get.attitude(player,target)+get.attitude(target,player)<=0 || target.isTurnedOver())){
                                 if(get.tag(card,'damage')){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
