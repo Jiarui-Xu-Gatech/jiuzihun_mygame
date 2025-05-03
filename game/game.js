@@ -21815,6 +21815,155 @@
 						node2.listenTransition(onEnd02);
 					},200);
 				},
+				$compare2:function(card1,target,card2){
+					game.broadcast(function(player,target,card1,card2){
+						player.$compare2(card1,target,card2);
+					},this,target,card1,card2);
+					var timeForDelay = 1;
+					if (target == ''){
+						// timeForDelay = 200;
+						game.addVideo('compare2',this,[get.cardInfo(card1),target,get.cardInfo(card2)]);
+					}
+					else{
+						game.addVideo('compare2',this,[get.cardInfo(card1),target.dataset.position,get.cardInfo(card2)]);
+					}
+					var player=this;
+					var node1;
+					var node2;
+					if (target == ''){
+						node1=player.$throwxyNoThrow(card1,
+							'calc(50% - 114px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+						);
+					}
+					else{
+						node1=player.$throwxy2(card1,
+							'calc(50% - 114px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+						);
+					}
+					if(lib.config.cardback_style!='default'){
+						node1.style.transitionProperty='none';
+						ui.refresh(node1);
+						node1.classList.add('infohidden');
+						ui.refresh(node1);
+						node1.style.transitionProperty='';
+					}
+					else{
+						node1.classList.add('infohidden');
+					}
+
+					node1.style.transform='perspective(600px) rotateY(180deg) translateX(0)';
+					var onEnd01=function(){
+						node1.removeEventListener('webkitTransitionEnd',onEnd01);
+						setTimeout(function(){
+							node1.style.transition='all ease-in 0.3s';
+							node1.style.transform='perspective(600px) rotateY(270deg) translateX(52px)';
+							var onEnd=function(){
+								node1.classList.remove('infohidden');
+								node1.style.transition='all 0s';
+								ui.refresh(node1);
+								node1.style.transform='perspective(600px) rotateY(-90deg) translateX(52px)';
+								ui.refresh(node1);
+								node1.style.transition='';
+								ui.refresh(node1);
+								node1.style.transform='';
+								node1.removeEventListener('webkitTransitionEnd',onEnd);
+							}
+							node1.listenTransition(onEnd);
+						},timeForDelay);
+					};
+					node1.listenTransition(onEnd01);
+					setTimeout(function(){
+						// var node2=target.$throwxy2(card2,
+						// 	'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+						// );
+						if (target == ''){
+							node2=player.$throwxyNoThrow(card2,
+								'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+							);
+						}
+						else{
+							node2=target.$throwxy2(card2,
+								'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+							);
+						}
+						if(lib.config.cardback_style!='default'){
+							node2.style.transitionProperty='none';
+							ui.refresh(node2);
+							node2.classList.add('infohidden');
+							ui.refresh(node2);
+							node2.style.transitionProperty='';
+						}
+						else{
+							node2.classList.add('infohidden');
+						}
+						node2.style.transform='perspective(600px) rotateY(180deg) translateX(0)';
+						var onEnd02=function(){
+							node2.removeEventListener('webkitTransitionEnd',onEnd02);
+							setTimeout(function(){
+								node2.style.transition='all ease-in 0.3s';
+								node2.style.transform='perspective(600px) rotateY(270deg) translateX(52px)';
+								var onEnd=function(){
+									node2.classList.remove('infohidden');
+									node2.style.transition='all 0s';
+									ui.refresh(node2);
+									node2.style.transform='perspective(600px) rotateY(-90deg) translateX(52px)';
+									ui.refresh(node2);
+									node2.style.transition='';
+									ui.refresh(node2);
+									node2.style.transform='';
+									node2.removeEventListener('webkitTransitionEnd',onEnd);
+								}
+								node2.listenTransition(onEnd);
+							},timeForDelay);
+						};
+						node2.listenTransition(onEnd02);
+					},0);
+
+					setTimeout(function(){
+						game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+					},50);
+					if (target != ''){
+						setTimeout(function(){
+							game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
+						},850);
+					}
+
+				},
+				$dutianShowCards:function(cards,target){
+					'step 0'
+					var str = '';
+					if (target == ''){
+						game.log('公牌：',cards,'被展示');
+						str += '公牌展示';
+					}
+					else{
+						game.log(this,'展示了','#g【赌天】','牌',cards);
+						str += get.translation(this)+'展示【赌天】牌';
+					}
+					game.broadcastAll(function(str){
+						var dialog=ui.create.dialog(str);
+						dialog.classList.add('center');
+						setTimeout(function(){
+							dialog.close();
+						},1500);
+					},str);
+					'step 1'
+					this.$compare2(cards[0],target,cards[1]);
+					if (target == ''){
+						game.delay(2.2,1500);
+					}
+					else{
+						game.delay(1.5,1500);
+					}
+					setTimeout(function(){
+						game.broadcastAll(function(){
+						ui.arena.classList.remove('thrownhighlight');
+						});
+						game.addVideo('thrownhighlight2');
+						// game.broadcastAll(ui.clear);
+						// game.addVideo('uiClear');
+					},1500);
+				},
 				$throw:function(card,time,init,nosource){
 					if(typeof card=='number'){
 						var tmp=card;
@@ -22146,6 +22295,28 @@
 					}
 					else{
 						node.style.transform='translate('+dx+'px,'+dy+'px)';
+					}
+
+					ui.arena.appendChild(node);
+					ui.refresh(node);
+					node.show();
+					// node.style.transform=trans||'';
+					lib.listenEnd(node);
+					return node;
+				},
+				$throwxyNoThrow:function(card,left,top,trans,flipx,flipy){
+					if(game.chess){
+						return this.$throwxy.apply(this,arguments);
+					}
+					var node=card.copy('thrown','thrownhighlight');
+					node.style.left=left;
+					node.style.top=top;
+					node.hide();
+					// node.style.transitionProperty='left,top,opacity,transform';
+
+					// 设置 transform（只保留 trans 参数的原始 transform，不加 translate）
+					if(trans){
+						node.style.transform = trans;
 					}
 
 					ui.arena.appendChild(node);
@@ -28809,6 +28980,19 @@
 			compare:function(player,info){
 				if(player&&info){
 					player.$compare(get.infoCard(info[0]),game.playerMap[info[1]],get.infoCard(info[2]));
+				}
+				else{
+					console.log(player);
+				}
+			},
+			compare2:function(player,info){
+				if(player&&info){
+					if (info[1] == ''){
+						player.$compare2(get.infoCard(info[0]),info[1],get.infoCard(info[2]));
+					}
+					else{
+						player.$compare2(get.infoCard(info[0]),game.playerMap[info[1]],get.infoCard(info[2]));
+					}
 				}
 				else{
 					console.log(player);

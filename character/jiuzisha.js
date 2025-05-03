@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -73,7 +73,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             jinshouzhen:"金守珍，九子魂中的饕餮之魂，史称“饕餮夫人”，北域之主，“江湖四圣”之一的“北食”，七大罪中的暴食之罪，地狱灵魂体为一条巨蟒，赫拉（婚姻和生育之神）的继承者，身姿丰腴性感，拥有300个老公，生了2000个子孙，拥有世人所无法想象的吞噬之术，与九昕儿直接用强悍的肉身将酒喝进腹中不同，饕餮夫人在腹中形成了一个异次元空间的入口，所以虽然她的食量惊人，但并没有进入自己的肚子。用此法，她可以吞下一整个世界，只要是她嘴巴能装下的东西就能从世界上消失，但缺点是不能长期使用吞噬之术，否则腹中一直空空如也会饥饿而亡。有自己的老公孩子食神军团，军团的人都是靠强悍肉身硬吃的。嫉妒九昕儿的容貌，经常找机会和九昕儿较量并设计要铲除她。有一次，被她逮到机会，喝得九昕儿差点撑不住，还好韩鑫在场看穿了饕餮夫人的弱点：由于大战时间太长，她自己一直不进食饿得撑不住只好认输。救了九昕儿。总喜欢做各种化学实验让自己变得更美。后来和多名洞在一起，被多名洞虐腹感到快感。",
             shuimiaoer:"水淼儿，九子魂中的蚣蝮之魂，碧海公主，七大罪中的嫉妒之罪，地狱灵魂体为一条鲨鱼，百合美人儿，深爱着九昕儿，奈何九昕儿爱的是韩鑫，曾经为了得到九昕儿与九昕儿拼酒，用她的原话说：“那本小姐今天就把你灌醉，然后开房把你办了，看你以后从不从我！”结果逞能喝了7大瓶儿威士忌，喝得醉醺醺的，却还是没能将九昕儿灌醉……",
             wangyueheng:"王月蘅，南域三女王之一，沼泽女王，领地为南域西南的沼泽地带。肚量酒量都一级棒，虽然肚量不如腰刀女王，但酒量是绝对没话说，喜欢在酒精沼泽中泡澡，除了酒，什么也不喝，声称酒是她的命。距离她方圆10米内就能闻到浓郁的酒精味。有一次要发大水，她怕酒精沼泽里的酒精被稀释，直接将六个沼泽地的酒精全部喝进腹中，撑得医生都没办法，但说什么也不上厕所，直到大水退了，才又将酒精全部吐回酒精沼泽中，此举令她名扬天下。能在任何地方脱下衣服洗澡，甚至在油锅里也能洗澡。因为她身上纹了一条龙，可以调节温度和湿度，所以沼泽女王的洗澡功力很强。陈英超刚进入南域时不服沼泽女王，与她拼酒。两人超负荷喝下了无数烈酒，陈英超撑得两眼发直，直俞呕吐，突然失去了战意，这股强烈的吐意挡都挡不住。但是在酒族，呕吐是一件很羞耻的事情，有呕吐物在地上的女人一辈子都会有心理阴影甚至种下心魔导致之后的喝酒之路无法再有长进。王月蘅见状，突然温柔地揽过陈英超的纤腰，嘴唇轻轻含住陈英超的嘴“想吐就吐出来吧~”，陈英超：“沼泽女王……”陈英超感受着这股温柔的力量再也把持不住，大口吐起来，只是并没有到地上，而是进了王月蘅本就撑得发硬的肚腹之中。王月蘅娇喉一滚一滚，强忍着腹内剧烈的饱胀之感喝下陈英超的呕吐之物。陈英超喝得虽然已经迷糊了，但依旧能感受到王月蘅那温柔旖旎的力量，心中感动，这是多伟大的姐妹之情！史称：一吻噬恩仇！友情提示：沐浴沼泽女王王月蘅沼泽的酒，然后再被她喝下去，就能加快肌肤生长，促进伤口复原，但过于微小的伤口可能起到反作用。",
-            dongxiaorong:"董笑蓉，南域三女王之一，百兽女王，领地为南域东南的丛林地带。酒量肚量一级棒，喜欢在丛林中用狗寻找猎物，一旦发现大型猛兽，就将其抓住，与其拼酒，且拼酒从来都是动物喝一杯，她喝一缸，而且必须喝倒才算完，否则她就会继续喝下去。喝酒喜欢并着双腿，没有并着腿喝下去的酒不算数，不仅如此还要罚喝十缸以赎自己没有并腿的罪，所以被另外两位女王戏称为“并腿女王”。有一次连续抓住了一大群，接近两千多头猛兽，包括巨型猛犸，梁龙兽，宰相兽（拥有海量的巨大肚量），巨腹河马兽等等，她一口气通通都喝倒，竟然还能接着回去在九昕儿的生日派对上豪饮，来者不拒。九昕儿生日时，蛋糕制作在她两条大腿和滚挺的肚皮之上，画着奶油甜蜜蜜，大家你一舌头，我一舌头，一起舔！好酒！好蛋糕！",
+            dongxiaorong:"董笑蓉，南域三女王之一，百兽女王，领地为南域东南的丛林地带。酒量肚量一级棒，喜欢在丛林中用狗寻找猎物，一旦发现大型猛兽，就将其抓住，与其拼酒，且拼酒从来都是动物喝一杯，她喝一缸，而且必须喝倒才算完，否则她就会继续喝下去。喝酒喜欢并着双腿，没有并着腿喝下去的酒不算数，不仅如此还要罚喝十缸以赎自己没有并腿的罪，所以被另外两位女王戏称为“并腿女王”。有一次连续抓住了一大群，接近两千多头猛兽，包括巨型猛犸，梁龙兽，宰相兽（拥有海量的巨大肚量），巨腹河马兽等等，她一口气通通都喝倒，竟然还能接着回去在九昕儿的生日派对上豪饮，来者不拒。九昕儿生日时，蛋糕制作在她两条大腿和滚挺的肚皮之上，画着奶油甜蜜蜜，大家你一口，我一口，一起吃！酒味大蛋糕！",
             kaer:"卡尔，九子魂中的狻猊之魂，一个天真无邪的北域矮人国小牧童，拥有童真之力，无人可伤他，农业与丰收之神德墨忒尔的继承者,喜欢玩烟花爆竹。",
             kalala:"卡拉拉，矮人国的小公主，娇小可人，卡尔的爱人，被雅典娜困于黑域，后陈英超受九昕儿之命去营救卡拉拉。经过黑虎域时，陈英超与黑虎王定下赌约连喝三天三夜的酒，卡拉拉看热闹不嫌事大，待陈英超喝倒一众黑虎域高手后，还是又劝又灌陈英超喝酒，原本就喝了非常多的陈英超差点没挺住，所幸英超美人酒量实在过硬。",
             hanshou:"韩门公子，家财万贯，是千门的对头，冷月（韩月）的忠实追求者。由于察觉了韩月对韩鑫的感情，将韩鑫视为劲敌。通过金钱的诱惑，从韩鑫手里抢走了初恋张宁的心。",
@@ -6233,7 +6233,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt('taiji1_caoxin'),"你即将受到伤害，是否弃一个信印记，然后翻面，令此伤害-1，并令伤害来源受到其自己造成的1点相同属性的伤害？").set('ai',function(event,player){
-                        if (player.storage.xinnian_caoxin<6 &&trigger.num < player.hp){
+                        if (get.attitude(player,trigger.source)<-4.8){
+                            return true;
+                        }
+                        else if (player.storage.xinnian_caoxin<6 &&trigger.num < player.hp){
                             return false;
                         }
                         else if (trigger.source!=undefined && get.attitude(player,trigger.source)>0&& trigger.source.hp <= 1){
@@ -8227,15 +8230,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					for(var i=0;i<2;i++){
 						if(ui.cardPile.childNodes.length>i) event.publicCards.push(ui.cardPile.childNodes[i]);
 					}
-                    game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
-                    player.showCards(event.publicCards,'公牌展示');
-                    game.delay();
+                    // game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+                    // player.showCards(event.publicCards,'公牌展示');
                     player.popup('公牌展示','metal');
                     game.log(player,"展示公牌");
+                    player.$dutianShowCards(event.publicCards,'');
                     game.delay();
                     'step 4'
-                    game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
-                    player.showCards(event.playerCards,get.translation(player)+'的【赌天】牌展示');
+                    // game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+                    // player.showCards(event.playerCards,get.translation(player)+'的【赌天】牌展示');
+                    game.broadcastAll(ui.clear);
+					game.addVideo('uiClear');
+                    player.$dutianShowCards(event.playerCards,player);
+                    game.delay(2);
                     game.delay();
                     game.delay();
                     game.delay();
@@ -8243,11 +8250,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (player.hasSkill("mantian_mei")){
-                        player.logSkill("mantian_mei");
+                        player.popup("mantian_mei",'thunder');
+                        game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (player.hasSkill("mantian_mei_nan")){
-                        player.logSkill("mantian_mei_nan");
+                        player.popup("mantian_mei_nan",'thunder');
+                        game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     event.playerPoint = 0;
@@ -8398,7 +8407,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     game.delay(10);
                     player.popup('赌天点数','metal');
-                    game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
+                    // game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                     game.delay();
                     player.popup(event.playerPoint+'点','metal');
                     game.log(player,"的赌天点数为","#y"+event.playerPoint,"点");
@@ -8406,8 +8415,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.loopNum2 = 0;
                     event.otherPoints = [];
                     'step 5'
-                    game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
-                    event.targets[event.loopNum2].showCards(event.cards2[event.loopNum2],get.translation(event.targets[event.loopNum2])+'的【赌天】牌展示');
+                    // game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+                    // event.targets[event.loopNum2].showCards(event.cards2[event.loopNum2],get.translation(event.targets[event.loopNum2])+'的【赌天】牌展示');
+                    game.broadcastAll(ui.clear);
+					game.addVideo('uiClear');
+                    event.targets[event.loopNum2].$dutianShowCards(event.cards2[event.loopNum2],event.targets[event.loopNum2]);
+                    game.delay(2);
                     game.delay();
                     game.delay();
                     game.delay();
@@ -8415,11 +8428,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei")){
-                        event.targets[event.loopNum2].logSkill("mantian_mei");
+                        event.targets[event.loopNum2].popup("mantian_mei",'thunder');
+                        game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei_nan")){
-                        event.targets[event.loopNum2].logSkill("mantian_mei_nan");
+                        event.targets[event.loopNum2].popup("mantian_mei_nan",'thunder');
+                        game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     var playerPoint = 0;
@@ -8562,7 +8577,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     game.delay();
                     event.targets[event.loopNum2].popup('赌天点数','metal');
-                    game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
+                    // game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                     game.delay();
                     event.targets[event.loopNum2].popup(playerPoint+'点','metal');
                     event.otherPoints.push(playerPoint);
@@ -8573,6 +8588,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (event.loopNum2 == event.targets.length) event.goto(7);
                     else event.goto(5);
                     'step 7'
+                    game.broadcastAll(ui.clear);
+					game.addVideo('uiClear');
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'casino_bg'){
                         game.createClearBackground(event.background,player);
@@ -8808,15 +8825,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					for(var i=0;i<2;i++){
 						if(ui.cardPile.childNodes.length>i) event.publicCards.push(ui.cardPile.childNodes[i]);
 					}
-                    game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
-                    player.showCards(event.publicCards,'公牌展示');
+                    // game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+                    // player.showCards(event.publicCards,'公牌展示');
+                    player.$dutianShowCards(event.publicCards,'');
                     game.delay();
                     player.popup('公牌展示','metal');
                     game.log(player,"展示公牌");
                     game.delay();
                     'step 4'
-                    game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
-                    player.showCards(event.playerCards,get.translation(player)+'的【赌天】牌展示');
+                    // game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+                    // player.showCards(event.playerCards,get.translation(player)+'的【赌天】牌展示');
+                    game.broadcastAll(ui.clear);
+					game.addVideo('uiClear');
+                    player.$dutianShowCards(event.playerCards,player);
+                    game.delay(2);
                     game.delay();
                     game.delay();
                     game.delay();
@@ -8824,11 +8846,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (player.hasSkill("mantian_mei")){
-                        player.logSkill("mantian_mei");
+                        player.popup("mantian_mei",'thunder');
+                        game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (player.hasSkill("mantian_mei_nan")){
-                        player.logSkill("mantian_mei_nan");
+                        player.popup("mantian_mei_nan",'thunder');
+                        game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     event.playerPoint = 0;
@@ -8979,7 +9003,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     game.delay(10);
                     player.popup('赌天点数','metal');
-                    game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
+                    // game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                     game.delay();
                     player.popup(event.playerPoint+'点','metal');
                     game.log(player,"的赌天点数为","#y"+event.playerPoint,"点");
@@ -8987,8 +9011,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.loopNum2 = 0;
                     event.otherPoints = [];
                     'step 5'
-                    game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
-                    event.targets[event.loopNum2].showCards(event.cards2[event.loopNum2],get.translation(event.targets[event.loopNum2])+'的【赌天】牌展示');
+                    // game.playAudio('skill','dutian_kapai_mei'+Math.ceil(2*Math.random()));
+                    // event.targets[event.loopNum2].showCards(event.cards2[event.loopNum2],get.translation(event.targets[event.loopNum2])+'的【赌天】牌展示');
+                    game.broadcastAll(ui.clear);
+					game.addVideo('uiClear');
+                    event.targets[event.loopNum2].$dutianShowCards(event.cards2[event.loopNum2],event.targets[event.loopNum2]);
+                    game.delay(2);
                     game.delay();
                     game.delay();
                     game.delay();
@@ -8996,11 +9024,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei")){
-                        event.targets[event.loopNum2].logSkill("mantian_mei");
+                        // event.targets[event.loopNum2].logSkill("mantian_mei");
+                        event.targets[event.loopNum2].popup("mantian_mei",'thunder');
+                        game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei_nan")){
-                        event.targets[event.loopNum2].logSkill("mantian_mei_nan");
+                        // event.targets[event.loopNum2].logSkill("mantian_mei_nan");
+                        event.targets[event.loopNum2].popup("mantian_mei_nan",'thunder');
+                        game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     var playerPoint = 0;
@@ -9143,7 +9175,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     game.delay();
                     event.targets[event.loopNum2].popup('赌天点数','metal');
-                    game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
+                    // game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                     game.delay();
                     event.targets[event.loopNum2].popup(playerPoint+'点','metal');
                     event.otherPoints.push(playerPoint);
@@ -9154,6 +9186,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (event.loopNum2 == event.targets.length) event.goto(7);
                     else event.goto(5);
                     'step 7'
+                    game.broadcastAll(ui.clear);
+					game.addVideo('uiClear');
                     //改回背景
                     if (game.getUpperBackgroundName('',player) == 'casino_bg'){
                         game.createClearBackground(event.background,player);
@@ -19505,7 +19539,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player.chooseCard("选两张牌比较",2);
                     "step 1"
                     if (result.cards){
-                        player.$compare(result.cards[0],player,result.cards[1]);
+                        player.$dutianShowCards(result.cards,player);
                     }
 					    
 				},
