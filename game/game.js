@@ -21940,6 +21940,7 @@
 						game.log(this,'展示了','#g【赌天】','牌',cards);
 						str += get.translation(this)+'展示【赌天】牌';
 					}
+					game.addVideo('titledutian',this,str);
 					game.broadcastAll(function(str){
 						var dialog=ui.create.dialog(str);
 						dialog.classList.add('center');
@@ -28997,6 +28998,15 @@
 				else{
 					console.log(player);
 				}
+			},
+			titledutian:function(player,str){
+				game.broadcastAll(function(str){
+					var dialog=ui.create.dialog(str);
+					dialog.classList.add('center');
+					setTimeout(function(){
+						dialog.close();
+					},1500);
+				},str);
 			},
 			compareMultiple:function(player,info){
 				if(player&&info){
