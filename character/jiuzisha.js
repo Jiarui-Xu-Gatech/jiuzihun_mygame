@@ -12151,20 +12151,37 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.discard(selfEquip);
                     game.delay(1);
                     'step 1'
-                    var has=game.hasPlayer(function(current){
-                        if (current!=player&&get.distance(current,player)<=1){
+                    var targets=game.filterPlayer();
+                    targets.remove(player);
+                    targets.sort(lib.sort.seat);
+                    for (var i = 0; i < targets.length; i++){
+                        if (targets[i]!=player&&get.distance(targets[i],player)<=1){
                             var differ = 0;
-                            if (current.countCards('h') > current.hp){
-                                differ = current.countCards('h') - current.hp;
-                                current.chooseToDiscard(get.translation('chengting_jin'),'请弃置'+get.cnNumber(differ)+'张牌','h',differ,true).set(ai,function(card){
+                            if (targets[i].countCards('h') > targets[i].hp){
+                                differ = targets[i].countCards('h') - targets[i].hp;
+                                targets[i].chooseToDiscard(get.translation('chengting_jin'),'请弃置'+get.cnNumber(differ)+'张牌','h',differ,true).set(ai,function(card){
                                     return -get.value(card)+Math.random();
                                 });
-                                current.line(player,'green');
+                                targets[i].line(player,'green');
                                 
                             }
                             
                         }
-                    });
+                    }
+                    // var has=game.hasPlayer(function(current){
+                    //     if (current!=player&&get.distance(current,player)<=1){
+                    //         var differ = 0;
+                    //         if (current.countCards('h') > current.hp){
+                    //             differ = current.countCards('h') - current.hp;
+                    //             current.chooseToDiscard(get.translation('chengting_jin'),'请弃置'+get.cnNumber(differ)+'张牌','h',differ,true).set(ai,function(card){
+                    //                 return -get.value(card)+Math.random();
+                    //             });
+                    //             current.line(player,'green');
+                                
+                    //         }
+                            
+                    //     }
+                    // });
                 },
 
             },

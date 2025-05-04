@@ -6467,7 +6467,7 @@
 					if(htmlbg){
 						// document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+htmlbg+'.jpg")';
 						// document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+'white_bg'+'.jpg")';
-						if (_status.mode || _status.video){
+						if (sessionStorage.getItem('hasLoadedOnce')){
 							document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+htmlbg+'.jpg")';
 						}
 						else{
@@ -7934,57 +7934,58 @@
 				ui.background.style.backgroundSize="cover";
 				ui.background.style.backgroundPosition='50% 50%';
 				if(lib.config.image_background&&lib.config.image_background!='default'&&lib.config.image_background.indexOf('custom_')!=0){
-					if (_status.mode || _status.video){
+					if (sessionStorage.getItem('hasLoadedOnce')){
 						ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
 					}
 					else{
+						// 第一次加载
+						sessionStorage.setItem('hasLoadedOnce', 'true');
 						ui.background.setBackgroundImage('image/background/'+'white_bg'+'.jpg');
+						setTimeout(function(){
+							var background = lib.config.image_background;
+	
+							var animate=lib.config.image_background=='default';
+							game.saveConfig('image_background',background);
+							lib.init.background();
+							ui.background.delete();
+							ui.background=ui.create.div('.background');
+	
+							if(lib.config.image_background_blur){
+								ui.background.style.filter='blur(8px)';
+								ui.background.style.webkitFilter='blur(8px)';
+								ui.background.style.transform='scale(1.05)';
+							}
+							else{
+								ui.background.style.filter='';
+								ui.background.style.webkitFilter='';
+								ui.background.style.transform='';
+							}
+	
+							document.body.insertBefore(ui.background,document.body.firstChild);
+							if(animate) ui.background.animate('start');
+							if(lib.config.image_background=='default'){
+								ui.background.style.backgroundImage="none";
+							}
+							else if(lib.config.image_background.indexOf('custom_')==0){
+								ui.background.style.backgroundImage="none";
+								game.getDB('image',lib.config.image_background,function(fileToLoad){
+									if(!fileToLoad) return;
+									var fileReader = new FileReader();
+									fileReader.onload = function(fileLoadedEvent)
+									{
+										var data = fileLoadedEvent.target.result;
+										ui.background.style.backgroundImage='url('+data+')';
+									};
+									fileReader.readAsDataURL(fileToLoad, "UTF-8");
+								});
+							}
+							else{
+								ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
+							}
+							ui.background.style.backgroundSize='cover';
+							ui.background.style.backgroundPosition='50% 50%';
+						},1);
 					}
-					setTimeout(function(){
-						var background = lib.config.image_background;
-
-						var animate=lib.config.image_background=='default';
-						game.saveConfig('image_background',background);
-						lib.init.background();
-						ui.background.delete();
-						ui.background=ui.create.div('.background');
-
-						if(lib.config.image_background_blur){
-							ui.background.style.filter='blur(8px)';
-							ui.background.style.webkitFilter='blur(8px)';
-							ui.background.style.transform='scale(1.05)';
-						}
-						else{
-							ui.background.style.filter='';
-							ui.background.style.webkitFilter='';
-							ui.background.style.transform='';
-						}
-
-						document.body.insertBefore(ui.background,document.body.firstChild);
-						if(animate) ui.background.animate('start');
-						if(lib.config.image_background=='default'){
-							ui.background.style.backgroundImage="none";
-						}
-						else if(lib.config.image_background.indexOf('custom_')==0){
-							ui.background.style.backgroundImage="none";
-							game.getDB('image',lib.config.image_background,function(fileToLoad){
-								if(!fileToLoad) return;
-								var fileReader = new FileReader();
-								fileReader.onload = function(fileLoadedEvent)
-								{
-									var data = fileLoadedEvent.target.result;
-									ui.background.style.backgroundImage='url('+data+')';
-								};
-								fileReader.readAsDataURL(fileToLoad, "UTF-8");
-							});
-						}
-						else{
-							ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
-						}
-						ui.background.style.backgroundSize='cover';
-						ui.background.style.backgroundPosition='50% 50%';
-					},1);
-					// ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
 					if(lib.config.image_background_blur){
 						ui.background.style.filter='blur(8px)';
 						ui.background.style.webkitFilter='blur(8px)';
@@ -28398,8 +28399,15 @@
 							lib.translate[game.players[i].name]=players[i].translate;
 							game.players[i].init(players[i].name1,players[i].name2);
 
-							game.players[i].classList.add('unseen_v');
-							game.players[i].classList.add('unseen2_v');
+							if(game.players[i]!=game.me){
+								game.players[i].classList.add('unseen');
+								game.players[i].classList.add('unseen2');
+							}
+							else{
+								game.players[i].classList.add('unseen_v');
+								game.players[i].classList.add('unseen2_v');
+							}
+							
 							// game.players[i].classList.add('unseen');
 							// game.players[i].classList.add('unseen2');
 							if(game.players[i]!=game.me){
@@ -28438,8 +28446,14 @@
 							lib.translate[game.players[i].name]=players[i].translate;
 							game.players[i].init(players[i].name1,players[i].name2);
 
-							game.players[i].classList.add('unseen_v');
-							game.players[i].classList.add('unseen2_v');
+							if(game.players[i]!=game.me){
+								game.players[i].classList.add('unseen');
+								game.players[i].classList.add('unseen2');
+							}
+							else{
+								game.players[i].classList.add('unseen_v');
+								game.players[i].classList.add('unseen2_v');
+							}
 							// game.players[i].classList.add('unseen');
 							// game.players[i].classList.add('unseen2');
 							if(game.players[i]!=game.me){
@@ -28978,13 +28992,17 @@
 					switch(num){
 						case 0:
 						player.classList.remove('unseen_v');
+						player.classList.remove('unseen');
 						break;
 						case 1:
 						player.classList.remove('unseen2_v');
+						player.classList.remove('unseen2');
 						break;
 						case 2:
 						player.classList.remove('unseen_v');
 						player.classList.remove('unseen2_v');
+						player.classList.remove('unseen');
+						player.classList.remove('unseen2');
 						break;
 					}
 				}
