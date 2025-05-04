@@ -6466,7 +6466,13 @@
 					}
 					if(htmlbg){
 						// document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+htmlbg+'.jpg")';
-						document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+'white_bg'+'.jpg")';
+						// document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+'white_bg'+'.jpg")';
+						if (_status.mode || _status.video){
+							document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+htmlbg+'.jpg")';
+						}
+						else{
+							document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+'white_bg'+'.jpg")';
+						}
 						document.documentElement.style.backgroundSize='cover';
 						document.documentElement.style.backgroundPosition='50% 50%';
 					}
@@ -7928,7 +7934,12 @@
 				ui.background.style.backgroundSize="cover";
 				ui.background.style.backgroundPosition='50% 50%';
 				if(lib.config.image_background&&lib.config.image_background!='default'&&lib.config.image_background.indexOf('custom_')!=0){
-					ui.background.setBackgroundImage('image/background/'+'white_bg'+'.jpg');
+					if (_status.mode || _status.video){
+						ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
+					}
+					else{
+						ui.background.setBackgroundImage('image/background/'+'white_bg'+'.jpg');
+					}
 					setTimeout(function(){
 						var background = lib.config.image_background;
 
