@@ -5210,7 +5210,7 @@
 							// guandu:'官渡',
 							jiange:'剑阁',
 							siguo:'四国',
-							standard:'自由'
+							// standard:'自由'
 							// endless:'无尽',
 							// triple:'血战',
 							// one:'<span style="display:inline-block;width:100%;text-align:center">1v1</span>',
@@ -5780,7 +5780,7 @@
 						name:'游戏模式',
 						init:'combat',
 						item:{
-							combat:'自由',
+							// combat:'自由',
 							three:'统率',
 							// leader:'君主',
 						},

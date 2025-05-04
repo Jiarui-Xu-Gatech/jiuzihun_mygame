@@ -360,16 +360,28 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 
 			if(!event.video&&((_status.mode=='combat'&&get.config('zhu')&&!_status.vsboss&&game.players.length>2)||_status.mode=='three')){
 				game.friendZhu=event.friendZhu;
-				game.friendZhu.hp++;
-				game.friendZhu.maxHp++;
+				if (!game.friendZhu.hasSkill('yuzhong_yan')){
+					game.friendZhu.hp++;
+					game.friendZhu.maxHp++;
+				}
+				else{
+					game.friendZhu.logSkill('yuzhong_yan');
+                    game.log(game.friendZhu,'做主公、主将、主帅，不增加体力上限');
+				}
 				game.friendZhu.update();
 				game.friendZhu.node.identity.firstChild.innerHTML='将';
 
 				for(var i=0;i<game.players.length;i++){
 					if(game.players[i].side!=game.me.side){
 						game.enemyZhu=game.players[i];
-						game.players[i].hp++;
-						game.players[i].maxHp++;
+						if (!game.players[i].hasSkill('yuzhong_yan')){
+							game.players[i].hp++;
+							game.players[i].maxHp++;
+						}
+						else{
+							game.players[i].logSkill('yuzhong_yan');
+                    		game.log(game.players[i],'做主公、主将、主帅，不增加体力上限');
+						}
 						game.players[i].update();
 						game.players[i].node.identity.firstChild.innerHTML='帅';
 						break;

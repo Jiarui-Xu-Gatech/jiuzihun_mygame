@@ -7208,13 +7208,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 forced:true,
 				init:function(player){
-					if(player.isZhu){
+					if((player.isZhu&&game.players.length>4)||(_status.mode=='three'&&player.identity == 'zhu')){
 						player.hp--;
                         player.maxHp--;
 						player.update();
                         // game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         player.logSkill('yuzhong_yan');
-                        game.log(player,'做主公，不增加体力上限');
+                        game.log(player,'做主公、主将、主帅，不增加体力上限');
 					}
 				}
 			},
@@ -20094,7 +20094,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'longquan_yan':"龙拳",
             'longquan_yan_info':"你的回合内限一次，你使用【杀】指定目标后，你可以弃置手牌区和装备区所有牌，然后摸等量的牌，并令所有其他角色均成为此【杀】的目标，此【杀】结算完后，你翻面。",
             'yuzhong_yan':"愚忠",
-            'yuzhong_yan_info':"锁定技，你的判定牌不能被无效或修改；你做主公时，不增加体力上限；你即将对一名角色造成伤害时，若你正面朝上，则你摸一张牌，若你背面朝上，该角色摸一张牌，若该角色背面朝上，则此伤害无效，改为令其从背面翻回正面；当你受到伤害时：1.若来自锦囊牌，此伤害+1；2.若伤害非卡牌伤害，此伤害-1；3.若为火焰伤害，且你为铁索传导的起点，则此伤害+1。",
+            'yuzhong_yan_info':"锁定技，你的判定牌不能被无效或修改；你做主公、主将、主帅时，不增加体力上限；你即将对一名角色造成伤害时，若你正面朝上，则你摸一张牌，若你背面朝上，该角色摸一张牌，若该角色背面朝上，则此伤害无效，改为令其从背面翻回正面；当你受到伤害时：1.若来自锦囊牌，此伤害+1；2.若伤害非卡牌伤害，此伤害-1；3.若为火焰伤害，且你为铁索传导的起点，则此伤害+1。",
             'yuzhong_zhu_yan':"愚忠",
             'yuzhong_fix_yan':"愚忠",
             'yuzhong_panding_yan':"愚忠",
