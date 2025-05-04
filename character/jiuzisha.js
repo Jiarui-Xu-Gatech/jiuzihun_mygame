@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','dutian_mei_nan','mantian_mei_nan'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','hualuo_duo','jingling'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -231,6 +231,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             game.log(player,'令',trigger.card,'无效');
                             trigger.targets.length=0;
 						    trigger.all_excluded=true;
+                            event.goto(3);
                         }
                         else if (trigger.name == 'judge'){
                             if (!(trigger.card)){
@@ -240,11 +241,17 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 game.log(player,'令',trigger.card,'的判定无效');
                             }
                             trigger.cancel();
+                            event.goto(3);
                         }
                     } 
                     else{
                         event.finish();
                     }
+                    "step 3"
+                    setTimeout(function(){
+                        game.broadcastAll(ui.clear);
+					    game.addVideo('uiClear');
+                    },1200);
                 },
                 ai:{
                     order: 5,

@@ -15523,6 +15523,9 @@
 						event.dialog=ui.create.dialog(str);
 						event.dialog.classList.add('center');
 						event.dialog.videoId=id;
+						setTimeout(function(){
+							event.dialog.close();
+						},900);
 					},player,player.judging[0],judgestr,event.videoId,get.id());
 
 					game.log(player,'进行'+event.judgestr+'判定，亮出的判定牌为',player.judging[0]);
@@ -29143,9 +29146,12 @@
 					else{
 						player.$throwordered(judging.copy('thrownhighlight'),true);
 					}
-
-					ui.create.dialog(content[1]).videoId=content[2];
+					var dialogUI = ui.create.dialog(content[1]);
+					dialogUI.videoId=content[2];
 					ui.arena.classList.add('thrownhighlight');
+					setTimeout(function(){
+						dialogUI.close();
+					},900);
 				}
 				else{
 					console.log(player);
