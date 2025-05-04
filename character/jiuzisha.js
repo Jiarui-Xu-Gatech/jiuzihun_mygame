@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','hualuo_duo','jingling'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','guaidao','yini_heng','yuner_baiyin'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -3806,7 +3806,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:0.5,
                     maixie_defend:true,
-                    filterDamage:true,
+                    // filterDamage:true,
 					// nofire:true,
 					// nothunder:true,
 					// nodamage:true,
@@ -10453,6 +10453,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.getParent().name == 'judge'||event.getParent().name == 'phaseJudge'||
                     event.getParent().name == 'cangxin_enda'|| event.getParent().name == 'swapHandcards'||
                     event.getParent().name == 'swapEquip' || event.getParent().name == 'chooseToCompare'
+                    // ||event.getParent().name == 'gain'
                 )) {return false;}
                     if ((event.name == 'useCard') && get.type(event.card)=='equip') return false;
                     return true;
@@ -19398,6 +19399,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     var card=get.cardPile2(function(card){
                         return get.name(card)=='muniu';
+                    });
+                    if (card){
+                        player.gain(card);
+                    }
+					
+				},
+                
+            },
+
+            yuner_baiyin:{
+                enable:"phaseUse",
+                content:function(){
+                    "step 0"
+                    var card=get.cardPile2(function(card){
+                        return get.name(card)=='baiyin';
                     });
                     if (card){
                         player.gain(card);
