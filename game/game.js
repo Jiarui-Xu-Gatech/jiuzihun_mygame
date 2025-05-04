@@ -5778,7 +5778,7 @@
 				config:{
 					chess_mode:{
 						name:'游戏模式',
-						init:'combat',
+						init:'three',
 						item:{
 							// combat:'自由',
 							three:'统率',
