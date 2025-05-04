@@ -6465,7 +6465,8 @@
 						}
 					}
 					if(htmlbg){
-						document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+htmlbg+'.jpg")';
+						// document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+htmlbg+'.jpg")';
+						document.documentElement.style.backgroundImage='url("'+lib.assetURL+'image/background/'+'white_bg'+'.jpg")';
 						document.documentElement.style.backgroundSize='cover';
 						document.documentElement.style.backgroundPosition='50% 50%';
 					}
@@ -7927,7 +7928,52 @@
 				ui.background.style.backgroundSize="cover";
 				ui.background.style.backgroundPosition='50% 50%';
 				if(lib.config.image_background&&lib.config.image_background!='default'&&lib.config.image_background.indexOf('custom_')!=0){
-					ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
+					ui.background.setBackgroundImage('image/background/'+'white_bg'+'.jpg');
+					setTimeout(function(){
+						var background = lib.config.image_background;
+
+						var animate=lib.config.image_background=='default';
+						game.saveConfig('image_background',background);
+						lib.init.background();
+						ui.background.delete();
+						ui.background=ui.create.div('.background');
+
+						if(lib.config.image_background_blur){
+							ui.background.style.filter='blur(8px)';
+							ui.background.style.webkitFilter='blur(8px)';
+							ui.background.style.transform='scale(1.05)';
+						}
+						else{
+							ui.background.style.filter='';
+							ui.background.style.webkitFilter='';
+							ui.background.style.transform='';
+						}
+
+						document.body.insertBefore(ui.background,document.body.firstChild);
+						if(animate) ui.background.animate('start');
+						if(lib.config.image_background=='default'){
+							ui.background.style.backgroundImage="none";
+						}
+						else if(lib.config.image_background.indexOf('custom_')==0){
+							ui.background.style.backgroundImage="none";
+							game.getDB('image',lib.config.image_background,function(fileToLoad){
+								if(!fileToLoad) return;
+								var fileReader = new FileReader();
+								fileReader.onload = function(fileLoadedEvent)
+								{
+									var data = fileLoadedEvent.target.result;
+									ui.background.style.backgroundImage='url('+data+')';
+								};
+								fileReader.readAsDataURL(fileToLoad, "UTF-8");
+							});
+						}
+						else{
+							ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
+						}
+						ui.background.style.backgroundSize='cover';
+						ui.background.style.backgroundPosition='50% 50%';
+					},1);
+					// ui.background.setBackgroundImage('image/background/'+lib.config.image_background+'.jpg');
 					if(lib.config.image_background_blur){
 						ui.background.style.filter='blur(8px)';
 						ui.background.style.webkitFilter='blur(8px)';
@@ -8621,42 +8667,44 @@
 						splash.classList.add('slim');
 					}
 					splash.dataset.radius_size=lib.config.radius_size;
-					for(var i=0;i<lib.config.all.mode.length;i++){
-						var node=ui.create.div('.hidden',splash,clickNode);
-						if (!lib.config.new_tutorial){
-							node.link=lib.config.all.mode[0];
-						}
-						else{
-							node.link=lib.config.all.mode[i];
-						}
-						ui.create.div(node,'.splashtext',get.verticalStr(get.translation(lib.config.all.mode[i])));
-						if(lib.config.all.stockmode.indexOf(lib.config.all.mode[i])!=-1){
-							ui.create.div(node,'.avatar').setBackgroundImage('image/splash/'+lib.config.all.mode[i]+'.jpg');
-						}
-						else{
-							var avatarnode=ui.create.div(node,'.avatar');
-							var avatarbg=lib.mode[lib.config.all.mode[i]].splash;
-							if(avatarbg.indexOf('ext:')==0){
-								avatarnode.setBackgroundImage(avatarbg.replace(/ext:/,'extension/'));
+					setTimeout(function(){
+						for(var i=0;i<lib.config.all.mode.length;i++){
+							var node=ui.create.div('.hidden',splash,clickNode);
+							if (!lib.config.new_tutorial){
+								node.link=lib.config.all.mode[0];
 							}
 							else{
-								avatarnode.setBackgroundDB(avatarbg);
+								node.link=lib.config.all.mode[i];
 							}
-						}
-						if(!lib.config.touchscreen){
-							node.addEventListener('mousedown',downNode);
-							node.addEventListener('mouseup',upNode);
-							node.addEventListener('mouseleave',upNode);
-						}
-						setTimeout((function(node){
-							return function(){
-								node.show();
+							ui.create.div(node,'.splashtext',get.verticalStr(get.translation(lib.config.all.mode[i])));
+							if(lib.config.all.stockmode.indexOf(lib.config.all.mode[i])!=-1){
+								ui.create.div(node,'.avatar').setBackgroundImage('image/splash/'+lib.config.all.mode[i]+'.jpg');
 							}
-						}(node)),i*100);
-					}
-					if(lib.config.mousewheel){
-						splash.onmousewheel=ui.click.mousewheel;
-					}
+							else{
+								var avatarnode=ui.create.div(node,'.avatar');
+								var avatarbg=lib.mode[lib.config.all.mode[i]].splash;
+								if(avatarbg.indexOf('ext:')==0){
+									avatarnode.setBackgroundImage(avatarbg.replace(/ext:/,'extension/'));
+								}
+								else{
+									avatarnode.setBackgroundDB(avatarbg);
+								}
+							}
+							if(!lib.config.touchscreen){
+								node.addEventListener('mousedown',downNode);
+								node.addEventListener('mouseup',upNode);
+								node.addEventListener('mouseleave',upNode);
+							}
+							setTimeout((function(node){
+								return function(){
+									node.show();
+								}
+							}(node)),i*100);
+						}
+						if(lib.config.mousewheel){
+							splash.onmousewheel=ui.click.mousewheel;
+						}
+					},1001);
 				}
 				else{
 					proceed();
@@ -8976,44 +9024,6 @@
 				},500);
 			},
 			background:function(){
-				// // 延迟时间（毫秒）
-				// var delay = 1000;
-
-				// // 淡入背景函数
-				// var applyBackground = function () {
-				// 	var bg;
-			
-				// 	if (lib.config.image_background_random) {
-				// 		var list = [];
-				// 		for (var i in lib.configMenu.appearence.config.image_background.item) {
-				// 			if (i == 'default') continue;
-				// 			list.push(i);
-				// 		}
-				// 		list.remove(lib.config.image_background);
-				// 		bg = list.randomGet();
-				// 	} else if (lib.config.image_background && lib.config.image_background != 'default' && lib.config.image_background.indexOf('custom_') != 0) {
-				// 		bg = lib.config.image_background;
-				// 	} else if (lib.config.image_background == 'default' && lib.config.theme == 'simple') {
-				// 		bg = 'jiuzi_bg';
-				// 	}
-			
-				// 	if (bg) {
-				// 		localStorage.setItem(lib.configprefix + 'background', bg);
-			
-				// 		// 应用淡入效果
-				// 		var body = document.body;
-				// 		body.style.transition = "background 1s ease-in-out";
-				// 		body.style.backgroundImage = "url('image/background/" + bg + ".jpg')";
-				// 	} else {
-				// 		localStorage.removeItem(lib.configprefix + 'background');
-				// 		document.body.style.backgroundImage = '';
-				// 	}
-				// };
-			
-				// // 延迟执行背景设置
-				// setTimeout(applyBackground, delay);
-
-
 				if(lib.config.image_background_random){
 					var list=[];
 					for(var i in lib.configMenu.appearence.config.image_background.item){
