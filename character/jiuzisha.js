@@ -8175,7 +8175,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     if (get.suit(card) == 'diamond'){
                         if (player.hasSkill("mantian_mei")||player.hasSkill("mantian_mei_nan")){
-                            addExtra = -13;
+                            addExtra = 2;//-13;
                         }else{
                             addExtra = 2;
                         }
@@ -8227,7 +8227,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         if (get.suit(card) == 'diamond'){
                             if (event.targets[event.loopNum].hasSkill("mantian_mei")||event.targets[event.loopNum].hasSkill("mantian_mei_nan")){
-                                addExtra = -13;
+                                addExtra = 2;
                             }else{
                                 addExtra = 2;
                             }
@@ -8770,7 +8770,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     if (get.suit(card) == 'diamond'){
                         if (player.hasSkill("mantian_mei")||player.hasSkill("mantian_mei_nan")){
-                            addExtra = -13;
+                            addExtra = 2;//-13;
                         }else{
                             addExtra = 2;
                         }
@@ -8822,7 +8822,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         if (get.suit(card) == 'diamond'){
                             if (event.targets[event.loopNum].hasSkill("mantian_mei")||event.targets[event.loopNum].hasSkill("mantian_mei_nan")){
-                                addExtra = -13;
+                                addExtra = 2;//-13;
                             }else{
                                 addExtra = 2;
                             }
