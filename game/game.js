@@ -17518,7 +17518,21 @@
 						this.node.identity.firstChild.innerHTML='君';
 					}
 					else{
-						this.node.identity.firstChild.innerHTML=get.translation(identity);
+						if (lib.config.mode != 'doudizhu'){
+							this.node.identity.firstChild.innerHTML=get.translation(identity);
+						}
+						else{
+							if (identity == 'zhu'){
+								this.node.identity.firstChild.innerHTML='地';
+							}
+							else if (identity == 'fan'){
+								this.node.identity.firstChild.innerHTML='农';
+							}
+							else{
+								this.node.identity.firstChild.innerHTML=get.translation(identity);
+							}
+						}
+						
 					}
 					this.node.identity.dataset.color=identity;
 					return this;
