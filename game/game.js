@@ -8976,6 +8976,44 @@
 				},500);
 			},
 			background:function(){
+				// // 延迟时间（毫秒）
+				// var delay = 1000;
+
+				// // 淡入背景函数
+				// var applyBackground = function () {
+				// 	var bg;
+			
+				// 	if (lib.config.image_background_random) {
+				// 		var list = [];
+				// 		for (var i in lib.configMenu.appearence.config.image_background.item) {
+				// 			if (i == 'default') continue;
+				// 			list.push(i);
+				// 		}
+				// 		list.remove(lib.config.image_background);
+				// 		bg = list.randomGet();
+				// 	} else if (lib.config.image_background && lib.config.image_background != 'default' && lib.config.image_background.indexOf('custom_') != 0) {
+				// 		bg = lib.config.image_background;
+				// 	} else if (lib.config.image_background == 'default' && lib.config.theme == 'simple') {
+				// 		bg = 'jiuzi_bg';
+				// 	}
+			
+				// 	if (bg) {
+				// 		localStorage.setItem(lib.configprefix + 'background', bg);
+			
+				// 		// 应用淡入效果
+				// 		var body = document.body;
+				// 		body.style.transition = "background 1s ease-in-out";
+				// 		body.style.backgroundImage = "url('image/background/" + bg + ".jpg')";
+				// 	} else {
+				// 		localStorage.removeItem(lib.configprefix + 'background');
+				// 		document.body.style.backgroundImage = '';
+				// 	}
+				// };
+			
+				// // 延迟执行背景设置
+				// setTimeout(applyBackground, delay);
+
+
 				if(lib.config.image_background_random){
 					var list=[];
 					for(var i in lib.configMenu.appearence.config.image_background.item){
@@ -21841,14 +21879,27 @@
 					var player=this;
 					var node1;
 					var node2;
+					
 					if (target == ''){
 						node1=player.$throwxyNoThrow(card1,
 							'calc(50% - 114px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
 						);
+						node1.classList.add('hidden'); // 先隐藏，避免瞬间切换的突兀感
+						node2=player.$throwxyNoThrow(card2,
+							'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+						);
+						node2.classList.add('hidden'); // 先隐藏，避免瞬间切换的突兀感
+						setTimeout(() => {
+							node1.classList.remove('hidden'); // 渐显新背景
+							node2.classList.remove('hidden'); // 渐显新背景
+						}, 300);
 					}
 					else{
 						node1=player.$throwxy2(card1,
 							'calc(50% - 114px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
+						);
+						node2=target.$throwxy2(card2,
+							'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
 						);
 					}
 					if(lib.config.cardback_style!='default'){
@@ -21866,6 +21917,9 @@
 					var onEnd01=function(){
 						node1.removeEventListener('webkitTransitionEnd',onEnd01);
 						setTimeout(function(){
+							// setTimeout(() => {
+							// 	node1.classList.remove('hidden'); // 渐显新背景
+							// }, 1);
 							node1.style.transition='all ease-in 0.3s';
 							node1.style.transform='perspective(600px) rotateY(270deg) translateX(52px)';
 							var onEnd=function(){
@@ -21887,16 +21941,6 @@
 						// var node2=target.$throwxy2(card2,
 						// 	'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
 						// );
-						if (target == ''){
-							node2=player.$throwxyNoThrow(card2,
-								'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
-							);
-						}
-						else{
-							node2=target.$throwxy2(card2,
-								'calc(50% + 10px)','calc(50% - 52px)','perspective(600px) rotateY(180deg)',true
-							);
-						}
 						if(lib.config.cardback_style!='default'){
 							node2.style.transitionProperty='none';
 							ui.refresh(node2);
@@ -21911,6 +21955,9 @@
 						var onEnd02=function(){
 							node2.removeEventListener('webkitTransitionEnd',onEnd02);
 							setTimeout(function(){
+								// setTimeout(() => {
+								// 	node2.classList.remove('hidden'); // 渐显新背景
+								// }, 1);
 								node2.style.transition='all ease-in 0.3s';
 								node2.style.transform='perspective(600px) rotateY(270deg) translateX(52px)';
 								var onEnd=function(){
