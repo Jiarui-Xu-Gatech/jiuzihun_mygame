@@ -1628,7 +1628,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						return name;
 					}
 					else{
-						var arr=['shen_caocao','shen_simayi','shen_guanyu','shen_zhugeliang','shen_zhaoyun','shen_zhouyu','shen_lvmeng','shen_lvbu','shen_liubei','shen_luxun','shen_ganning','ol_zhangliao','shen_zhenji','shen_caopi','key_kagari','key_shiki'];
+						var arr=['shen_caocao','shen_simayi','shen_guanyu','shen_zhugeliang','shen_zhaoyun','shen_zhouyu','shen_lvmeng','shen_lvbu','shen_liubei','shen_luxun','shen_ganning','ol_zhangliao','shen_zhenji','shen_caopi'];
 						// var arr=['key_kagari','key_shiki'];
 						arr.removeArray(list);
 						return arr.randomGet();
@@ -1678,7 +1678,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							game.check();
 						});
 						control.backup1=ui.create.div('.buttons');
-						control.backup2=ui.create.buttons(['shen_caocao','shen_simayi','shen_guanyu','shen_zhugeliang','shen_zhaoyun','shen_zhouyu','shen_lvmeng','shen_lvbu','shen_liubei','shen_luxun','shen_ganning','ol_zhangliao','shen_zhenji','shen_caopi','key_kagari','key_shiki'],'character',control.backup1);
+						control.backup2=ui.create.buttons(['shen_caocao','shen_simayi','shen_guanyu','shen_zhugeliang','shen_zhaoyun','shen_zhouyu','shen_lvmeng','shen_lvbu','shen_liubei','shen_luxun','shen_ganning','ol_zhangliao','shen_zhenji','shen_caopi'],'character',control.backup1);
 						return control;
 					}
 				},
