@@ -10701,6 +10701,7 @@
 					"step 3"
 					_status.imchoosing=false;
 					if(event.bool){
+						game.playAudioNoAddVideo('effect','discard');
 						if(game.changeCoin){
 							game.changeCoin(-3);
 						}
@@ -24084,7 +24085,10 @@
 				trigger:function(name){
 					if(_status.video) return;
 					if((this.name==='gain'||this.name==='lose')&&!_status.gameDrawed) return;
-					if(name==='gameDrawEnd') _status.gameDrawed=true;
+					if(name==='gameDrawEnd') {
+						_status.gameDrawed=true;
+						game.startFight(2000);
+					}
 					if(name==='gameStart'){
 						if(_status.brawl&&_status.brawl.gameStart){
 							_status.brawl.gameStart();
@@ -29858,6 +29862,9 @@
 			neiVSzhu:function(time){
 				game.neiVSzhu(time);
 			},
+			startFight:function(time){
+				game.startFight(time);
+			},
 			winAnimation:function(time){
 				game.winAnimation(time);
 			},
@@ -31761,7 +31768,16 @@
 			},bestPlayer_name);
 		},
 		neiVSzhu:function(timeoutTime){
+			'step 0'
+			if (!_status.video){
+				game.playAudio('effect','neiVSzhu');
+			}
 			game.addVideo('neiVSzhu',null,timeoutTime);
+			'step 1'
+			game.delay(1);
+			game.broadcastAll(ui.clear);
+			game.addVideo('uiClear');
+			'step 2'
 			game.broadcastAll(function(){
 				var rand1=Math.round(0.2*100);
 				var rand2=Math.round(0.38*100);
@@ -31875,6 +31891,134 @@
 				}, timeoutTime);
 
 			});
+			'step 3'
+			game.pause();
+			_status.timeout=setTimeout(game.resume,timeoutTime);
+
+		},
+		startFight:function(timeoutTime){
+			'step 0'
+			if (!_status.video){
+				game.playAudio('effect','startFight');
+			}
+			game.addVideo('startFight',null,timeoutTime);
+			'step 1'
+			game.broadcastAll(function(){
+				var rand1=Math.round(0.2*100);
+				var rand2=Math.round(0.38*100);
+				var rand3=Math.round(0.25*40)-20;
+
+				// 创建艺术字
+				// var NeiText = document.createElement('div');
+				// NeiText.innerHTML = '内奸';
+				// NeiText.style.position = 'absolute';
+				// NeiText.style.left = 'calc(' + 50 + '% - 240px)'; // 在头像右边偏移160px
+				// NeiText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
+				// NeiText.style.fontSize = '80px'; // 字体大小
+				// NeiText.style.textShadow = `
+				// 	rgba(100, 74, 139,1) 0 0 2px,
+				// 	rgba(100, 74, 139,1) 0 0 5px,
+				// 	rgba(100, 74, 139,1) 0 0 10px,
+				// 	rgba(100, 74, 139,1) 0 0 10px
+				// `;
+				// NeiText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				// NeiText.style.transition = 'all 0.5s';
+				// ui.arena.appendChild(NeiText);
+
+				// NeiText.classList.add('zoomin3');
+				// NeiText.hide();
+				// NeiText.style.transitionDuration='0.7s'
+				// setTimeout(function(){
+				// 	NeiText.style.transitionProperty='none';
+				// 	NeiText.classList.remove('zoomin3');
+				// 	NeiText.classList.add('zoomout2');
+				// 	setTimeout(function(){
+				// 		NeiText.style.transitionProperty='';
+				// 		NeiText.classList.remove('zoomout2');
+				// 		NeiText.show();
+				// 	},10);
+				// },20);
+
+				// 创建艺术字
+				// var VSText = document.createElement('div');
+				// VSText.innerHTML = 'VS';
+				// VSText.style.position = 'absolute';
+				// VSText.style.left = 'calc(' + 50 + '% - 40px)'; // 在头像右边偏移160px
+				// VSText.style.top = 'calc(' + 50 + '% - 40px)';   // 稍微调整一下上下对齐
+				// VSText.style.fontSize = '80px'; // 字体大小
+				// // VSText.style.color = '#FFCB00';
+				// VSText.style.textShadow = `
+				// 	rgba(255, 203, 0, 1) 0 0 2px,
+				// 	rgba(255, 203, 0, 1) 0 0 5px,
+				// 	rgba(255, 203, 0, 1) 0 0 10px,
+				// 	rgba(255, 203, 0, 1) 0 0 10px
+				// `;
+				// VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				// VSText.style.transition = 'all 0.5s';
+				// ui.arena.appendChild(VSText);
+
+				// VSText.classList.add('zoomin3');
+				// VSText.hide();
+				// VSText.style.transitionDuration='0.7s'
+				// setTimeout(function(){
+				// 	VSText.style.transitionProperty='none';
+				// 	VSText.classList.remove('zoomin3');
+				// 	VSText.classList.add('zoomout2');
+				// 	setTimeout(function(){
+				// 		VSText.style.transitionProperty='';
+				// 		VSText.classList.remove('zoomout2');
+				// 		VSText.show();
+				// 	},10);
+				// },20);
+
+				// 创建艺术字
+				var ZhuText = document.createElement('div');
+				ZhuText.innerHTML = '开战';
+				ZhuText.style.position = 'absolute';
+				ZhuText.style.left = 'calc(' + 50 + '% - 120px)'; // 在头像右边偏移160px
+				ZhuText.style.top = 'calc(' + 50 + '% - 60px)';   // 稍微调整一下上下对齐
+				ZhuText.style.fontSize = '120px'; // 字体大小
+				ZhuText.style.textShadow = `
+					rgba(178, 59, 2,1) 0 0 2px,
+					rgba(178, 59, 2,1) 0 0 5px,
+					rgba(178, 59, 2,1) 0 0 10px,
+					rgba(178, 59, 2,1) 0 0 10px
+				`;
+				ZhuText.style.fontFamily = '"STLiti", "KaiTi", cursive'; // 选一个艺术字体
+				ZhuText.style.transition = 'all 0.5s';
+				ui.arena.appendChild(ZhuText);
+
+				ZhuText.classList.add('zoomin3');
+				ZhuText.hide();
+				ZhuText.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					ZhuText.style.transitionProperty='none';
+					ZhuText.classList.remove('zoomin3');
+					ZhuText.classList.add('zoomout2');
+					setTimeout(function(){
+						ZhuText.style.transitionProperty='';
+						ZhuText.classList.remove('zoomout2');
+						ZhuText.show();
+					},10);
+				},20);
+
+				var interval = setInterval(function(){
+					// NeiText.classList.add('zoomin3');
+					// VSText.classList.add('zoomin3');
+					ZhuText.classList.add('zoomin3');
+				}, timeoutTime); 
+
+				setTimeout(function(){
+					clearInterval(interval);
+					// NeiText.delete();
+					// VSText.delete();
+					ZhuText.delete();
+				}, timeoutTime);
+
+			});
+			'step 2'
+			game.pause();
+			_status.timeout=setTimeout(game.resume,timeoutTime);
 
 		},
 		winAnimation:function(timeoutTime){

@@ -44,9 +44,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:["male","wei",4,['zhenjiu_gui','qixing_gui','yunv_gui'],[]],
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
-            // tongxin:["female","shu",5,["fengru_tong","tunfei_tong"],[]],
+            // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','guaidao','yini_heng','yuner_baiyin'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -2723,7 +2723,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 logTarget:"target",
                 content:function(event){
                     "step 0"
-                    if(!trigger.target.hasSkill('fengyin')){
+                    if(!trigger.target.hasSkill('wushi_fengyin')){
                         // trigger.target.storage.wushi_fengyin = player;
                         trigger.target.addTempSkill('wushi_fengyin');
                         // trigger.target.addTempSkill('wushi_fengyin2');
@@ -5972,11 +5972,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         return target != player; // 目标不能是自己
                     }).set('ai', function(target) {
                         // AI逻辑：优先选择敌对角色
+                        if(target.hasSkillTag('noturn')) return 0;
+						var player=_status.event.player;
                         if (!target.isTurnedOver()){
                             if (get.attitude(player,target)+get.attitude(target,player)<0){
                                 // return Math.random()+100;
                                 //后置位立马要动的优先翻。
-                                var diff_posi = target.dataset.position - player.dataset.position;
+                                var diff_posi = target.dataset.position - _status.currentPhase.dataset.position;
                                 if (diff_posi<0){
                                     diff_posi = diff_posi+8;
                                 }
@@ -6402,7 +6404,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						evt.targets.push(target);
                         player.logSkill('taiji2_caoxin');
                         game.log(player,'失去1个信印记');
-                        game.log(player,'将【杀】的目标转移给',target);
+                        game.log(player,'将',trigger.card,'的目标转移为',target);
                         // game.playAudio('skill','taiji2_caoxin'+Math.ceil(2*Math.random()));
                         game.delay(1);
                         
@@ -18244,25 +18246,131 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
 
-            fengru_tong:{
+            jiuhan_tong:{
                 audio:2,
-
-
+                trigger:{player:'damageEnd'},
+				direct:true,
+                content:function(){
+					"step 0"
+					player.chooseTarget(get.prompt('jiuhan_tong'),'你受到伤害后，可以令一名其他角色翻面，然后你摸'+get.cnNumber(player.getDamagedHp())+'张牌，并将'+get.cnNumber(player.getDamagedHp())+'张牌交给该角色。',function(card,player,target){
+						return player!=target
+					}).ai=function(target){
+						if(target.hasSkillTag('noturn')) return 0;
+						var player=_status.event.player;
+                        if (!target.isTurnedOver()){//正面时
+                            if (get.attitude(player,target)+get.attitude(target,player)<0){
+                                // return Math.random()+100;
+                                //后置位立马要动的优先翻。
+                                var diff_posi = target.dataset.position - _status.currentPhase.dataset.position;
+                                if (diff_posi<0){
+                                    diff_posi = diff_posi+8;
+                                }
+                                return get.threaten(target,player,true)*(8 - diff_posi)/8+target.countCards('h')-player.getDamagedHp();
+                            }
+                            else{
+                                if (get.attitude(player, target)>0){
+                                    var addi = 0;
+                                    if (_status.currentPhase == target&&(get.attitude(player, target)+get.attitude(target,player)>4)){
+                                        addi = 5;
+                                    }
+                                    return addi+get.attitude(player, target)+target.countCards('h')+player.getDamagedHp();
+                                }
+                                else{
+                                    return -1;
+                                }
+                            }
+                        }
+                        else{//背面时
+                            if (get.attitude(player, target)>0){
+                                var addi = 0;
+                                if (_status.currentPhase == target&&(get.attitude(player, target)+get.attitude(target,player)>4)){
+                                    addi = 10;
+                                }
+                                return addi+get.attitude(player, target)+target.countCards('h')+player.getDamagedHp();
+                            }
+                            else{
+                                return -1;
+                            }
+                            
+                        }
+					}
+					"step 1"
+					if(result.bool){
+						player.logSkill('jiuhan_tong',result.targets);
+                        event.target = result.targets[0];
+                        event.target.turnOver();
+						player.draw(player.getDamagedHp());
+                        player.chooseCard('【丰乳】：请选择'+get.cnNumber(player.getDamagedHp())+'张牌交给'+get.translation(event.target),true,player.getDamagedHp(),'he').set('ai',function(card){
+                            if (get.attitude(player,event.target)>0){
+                                return get.value(card);
+                            }
+                            else{
+                                return -get.value(card);
+                            }
+                        });
+					}
+                    else{
+                        event.finish();
+                    }
+                    "step 2"
+                    if (result.bool){
+                        event.target.gain(result.cards, player,'giveAuto','bySelf');
+                    }
+                    else{
+                        event.finish();
+                    }
+				},
+				ai:{
+					maixie:true,
+					maixie_hp:true,
+					effect:{
+						target:function(card,player,target){
+							if(get.tag(card,'damage')){
+								if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
+								if(target.hp<=1) return;
+								if(!target.hasFriend()) return;
+								var hastarget=false;
+								var turnfriend=false;
+								var players=game.filterPlayer();
+								for(var i=0;i<players.length;i++){
+									if(get.attitude(target,players[i])<0&&!players[i].isTurnedOver()){
+										hastarget=true;
+									}
+									if(get.attitude(target,players[i])>0&&players[i].isTurnedOver()){
+										hastarget=true;
+										turnfriend=true;
+									}
+								}
+								if(get.attitude(player,target)>0&&!hastarget) return;
+								if(turnfriend||target.hp==target.maxHp) return [0.5,1];
+								if(target.hp>1) return [1,0.5];
+							}
+						}
+					}
+				},
             },
             
-            tunfei_tong:{
+            zuitun_tong:{
                 trigger:{player:'damageBegin3'},
 				audio:2,
+                direct:true,
 				forced:true,
 				filter:function(event){
-					return event.card&&(get.color(event.card)!='black'||event.source&&event.source.isAlive()&&event.source.sex == 'male');
+					return event.card;//&&(get.color(event.card)!='black'||event.source&&event.source.isAlive()&&event.source.sex == 'male');
 				},
 				content:function(){
                     if (get.color(trigger.card)=='black'&&trigger.source&&trigger.source.isAlive()&&trigger.source.sex == 'male'){
-                        trigger.source.draw();
+                        player.popup('zuitun_tong','soil');
+                        game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
+                        game.log(player,'发动了','#g【臀肥】');
+                        player.line(trigger.source,'green');
+                        trigger.source.draw('nodelay');
                     }
                     else{
-                        trigger.player.draw();
+                        player.popup('zuitun_tong','soil');
+                        game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
+                        game.log(player,'发动了','#g【臀肥】');
+                        trigger.player.draw('nodelay');
                     }
 				},
             },
@@ -19577,11 +19685,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 enable:"phaseUse",
                 content:function(){
                     "step 0"
-                    game.playAudio('effect','tie');
-					game.playAudio('effect','tie_music');
-                    game.tieAnimation(3000);
+                    // game.playAudio('effect','tie');
+					// game.playAudio('effect','tie_music');
+                    // game.tieAnimation(3000);
                     // game.bestPlayerShow('chenyingchao',3000);
-                    // game.neiVSzhu(3000);
+                    game.neiVSzhu(3000);
 					
 				},
             },
@@ -20350,10 +20458,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             
             
             tongxin:"彤欣",
-            "fengru_tong":"丰乳",
-            "fengru_tong_info":"丰乳",
-            "tunfei_tong":"臀肥",
-            "tunfei_tong_info":"锁定技，当你受到牌造成的伤害时，若伤害来源为男性角色且此牌为黑色，则伤害来源摸一张牌；否则你摸一张牌。",
+            "jiuhan_tong":"酒酣",
+            "jiuhan_tong_info":"酒酣",
+            "zuitun_tong":"醉臀",
+            "zuitun_tong_info":"锁定技，当你受到牌造成的伤害时，若伤害来源为男性角色且此牌为黑色，则伤害来源摸一张牌；否则你摸一张牌。",
 
 
             monian:"墨念",
