@@ -118,7 +118,7 @@ window.config={
 
 
 	border_style:'gold',
-	identity_font:'MySymbolFont',//'huangcao',
+	identity_font:'huangcao',//'MySymbolFont',
 	global_font:'default',
 	name_font:'xingkai',
 	cardshape:'oblong',
