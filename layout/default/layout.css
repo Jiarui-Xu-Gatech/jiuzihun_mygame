@@ -3704,7 +3704,7 @@ div:hover>.intro {
 .player .identity>div {
 	margin: auto;
 	position: relative;
-	font-family: 'huangcao','xinwei','MySymbolFont';
+	font-family: 'MySymbolFont','huangcao','xinwei';
 	font-size: 24px;
 	top: 0;
 }
