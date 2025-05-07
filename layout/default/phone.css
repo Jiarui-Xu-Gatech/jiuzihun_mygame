@@ -116,3 +116,12 @@ div.finish_game{
 @media screen and (orientation:portrait) {
 
 }
+
+@font-face {
+font-family: 'MySymbolFont';
+src: url('/font/Symbola.ttf') format('truetype');
+}
+
+.unified-symbol {
+font-family: 'MySymbolFont';
+}

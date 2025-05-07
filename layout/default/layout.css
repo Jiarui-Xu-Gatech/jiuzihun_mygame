@@ -1,4 +1,12 @@
 /*--------标签--------*/
+@font-face {
+font-family: 'MySymbolFont';
+src: url('/font/Symbola.ttf') format('truetype');
+}
+
+.unified-symbol {
+font-family: 'MySymbolFont';
+}
 html {
 	width: 100%;
 	height: 100%;
