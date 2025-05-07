@@ -31721,7 +31721,7 @@
 					rgba(255, 203, 0, 1) 0 0 10px,
 					rgba(255, 203, 0, 1) 0 0 10px
 				`;
-				bestText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				bestText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 				bestText.style.transition = 'all 0.5s';
 				ui.arena.appendChild(bestText);
 				
@@ -31796,7 +31796,7 @@
 					rgba(100, 74, 139,1) 0 0 10px,
 					rgba(100, 74, 139,1) 0 0 10px
 				`;
-				NeiText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				NeiText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 				NeiText.style.transition = 'all 0.5s';
 				ui.arena.appendChild(NeiText);
 
@@ -31828,7 +31828,7 @@
 					rgba(255, 203, 0, 1) 0 0 10px,
 					rgba(255, 203, 0, 1) 0 0 10px
 				`;
-				VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				VSText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 				VSText.style.transition = 'all 0.5s';
 				ui.arena.appendChild(VSText);
 
@@ -31859,7 +31859,7 @@
 					rgba(232, 53, 53,1) 0 0 10px,
 					rgba(232, 53, 53,1) 0 0 10px
 				`;
-				ZhuText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				ZhuText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 				ZhuText.style.transition = 'all 0.5s';
 				ui.arena.appendChild(ZhuText);
 
@@ -31921,7 +31921,7 @@
 				// 	rgba(100, 74, 139,1) 0 0 10px,
 				// 	rgba(100, 74, 139,1) 0 0 10px
 				// `;
-				// NeiText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				// NeiText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 				// NeiText.style.transition = 'all 0.5s';
 				// ui.arena.appendChild(NeiText);
 
@@ -31953,7 +31953,7 @@
 				// 	rgba(255, 203, 0, 1) 0 0 10px,
 				// 	rgba(255, 203, 0, 1) 0 0 10px
 				// `;
-				// VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+				// VSText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 				// VSText.style.transition = 'all 0.5s';
 				// ui.arena.appendChild(VSText);
 
@@ -32040,7 +32040,7 @@
 				rgba(255, 203, 0, 1) 0 0 10px,
 				rgba(255, 203, 0, 1) 0 0 10px
 			`;
-			VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+			VSText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 			VSText.style.transition = 'all 0.5s';
 			ui.arena.appendChild(VSText);
 
@@ -32087,7 +32087,7 @@
 				rgba(78, 117, 140,1) 0 0 10px,
 				rgba(78, 117, 140,1) 0 0 10px
 			`;
-			VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+			VSText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 			VSText.style.transition = 'all 0.5s';
 			ui.arena.appendChild(VSText);
 
@@ -32134,7 +32134,7 @@
 				rgba(100, 74, 139,1) 0 0 10px,
 				rgba(100, 74, 139,1) 0 0 10px
 			`;
-			VSText.style.fontFamily = '"STXingkai", "KaiTi", cursive'; // 选一个艺术字体
+			VSText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
 			VSText.style.transition = 'all 0.5s';
 			ui.arena.appendChild(VSText);
 
