@@ -6,6 +6,16 @@ src: url('/font/Symbola.ttf') format('truetype');
 .unified-symbol {
 font-family: 'MySymbolFont';
 }
+
+@font-face {
+font-family: 'LishuCustom';
+src: url('/font/STLITI.TTF') format('truetype');
+}
+
+.lishu-text {
+font-family: 'LishuCustom', 'KaiTi', cursive;
+}
+
 .player{
 	width:150px;
 	height:180px;

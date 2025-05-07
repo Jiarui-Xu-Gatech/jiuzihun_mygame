@@ -1612,7 +1612,7 @@ div:not(.handcards)>.card>.info>span,
 	letter-spacing: -0.2em
 }
 .marks>.card>.background.skillmark {
-	font-family: 'huangcao','xinwei';
+	font-family: 'huangcao','xinwei','LishuCustom','MySymbolFont';
 	padding-top: 4px;
 }
 .marks>.card.overflowmark {
@@ -3676,7 +3676,7 @@ div:hover>.intro {
 .player .identity>div {
 	margin: auto;
 	position: relative;
-	font-family: 'huangcao','xinwei';
+	font-family: 'huangcao','xinwei','MySymbolFont';
 	font-size: 24px;
 	top: 0;
 }

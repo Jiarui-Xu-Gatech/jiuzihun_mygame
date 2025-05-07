@@ -1,3 +1,21 @@
+@font-face {
+font-family: 'MySymbolFont';
+src: url('/font/Symbola.ttf') format('truetype');
+}
+
+.unified-symbol {
+font-family: 'MySymbolFont';
+}
+
+@font-face {
+font-family: 'LishuCustom';
+src: url('/font/STLITI.TTF') format('truetype');
+}
+
+.lishu-text {
+font-family: 'LishuCustom', 'KaiTi', cursive;
+}
+
 #arena{
     height: calc(97% + 30px);
     top:3%
@@ -10,7 +28,7 @@
 }
 #control>div,#system>div>div{
     height: 40px;
-    font-family: 'xinwei';
+    font-family: 'xinwei','LishuCustom','MySymbolFont';
     font-size: 30px;
     line-height: 34px;
 }

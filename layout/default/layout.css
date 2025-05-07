@@ -11,8 +11,6 @@ font-family: 'MySymbolFont';
 @font-face {
 font-family: 'LishuCustom';
 src: url('/font/STLITI.TTF') format('truetype');
-font-weight: normal;
-font-style: normal;
 }
 
 .lishu-text {
