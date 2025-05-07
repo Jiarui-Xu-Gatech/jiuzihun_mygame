@@ -2675,7 +2675,8 @@
 					},
 					identity_font:{
 						name:'身份字体',
-						init:'huangcao',
+						init:'MySymbolFont',
+						// init:'huangcao',
 						unfrequent:true,
 						item:{},
 						textMenu:function(node,link){

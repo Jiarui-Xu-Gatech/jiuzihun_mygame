@@ -2677,6 +2677,7 @@ div:not(.handcards)>.card>.info>span,
 	height: 22px;
 }
 .identity>div {
+	font-family: 'huangcao','xinwei','MySymbolFont';
 	position: relative;
 	top: 2px;
 }
