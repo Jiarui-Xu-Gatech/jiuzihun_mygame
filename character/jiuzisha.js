@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
+            yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','jieran_gui'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -20083,7 +20083,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "wushi_liyun":"武士",
             "wushi_liyun_info":"当你使用【杀】指定一名角色为目标后，你可以令该角色的非锁定技失效直到回合结束，然后其弃置一张牌，并令你进行一次判定，除非判定结果与该角色弃置的牌花色相同，否则其不能使用【闪】抵消此【杀】。",
             'wushi_fengyin':'武士',
-            'wushi_fengyin_bg':'✙',//'✞',//'✙',
+            'wushi_fengyin_bg':'✟',//'✙',//'✞',//'✙',
             "luoshen_liyun":'裸身',
             "luoshen_liyun_info":'你濒死时，若你的区域内（判定区、装备区、手牌区）有至少一张牌，你可以弃置你区域内所有牌，将体力回复至1点。',
             "jisu_liyun":"疾袭",
