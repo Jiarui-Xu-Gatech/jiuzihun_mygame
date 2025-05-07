@@ -1,6 +1,6 @@
 @font-face {
 font-family: 'MySymbolFont';
-src: url('/font/Symbola.ttf') format('truetype');
+src: url('../font/Symbola.ttf') format('truetype');
 }
 
 .unified-symbol {
@@ -9,7 +9,7 @@ font-family: 'MySymbolFont';
 
 @font-face {
 font-family: 'LishuCustom';
-src: url('/font/STLITI.TTF') format('truetype');
+src: url('../font/STLITI.TTF') format('truetype');
 }
 
 .lishu-text {
