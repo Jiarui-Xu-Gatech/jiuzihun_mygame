@@ -26761,7 +26761,7 @@
 								}
 								if(player.isAlive()){
 									if(!game.me.identityShown&&lib.configOL.mode=='guozhan'){
-										game.me.node.identity.firstChild.innerHTML='☯';
+										game.me.node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';//'☯';
 										game.me.node.identity.dataset.color='cai';
 										// game.me.node.identity.dataset.color='unknown';
 										// game.players[i].node.identity.classList.add('guessing');
@@ -28350,7 +28350,7 @@
 						game.players[i].init(players[i].name,players[i].name2);
 						if (_status.mode=='normal'){
 							if(game.players[i]!=game.me&&players[i].identity != 'zhu'){
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color='cai';
 								game.players[i].node.identity.classList.add('guessing');
 							}
@@ -28360,7 +28360,7 @@
 						}
 						else if (_status.mode=='zhong'){
 							if(game.players[i]!=game.me&&players[i].identity != 'mingzhong'){
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color='cai';
 								game.players[i].node.identity.classList.add('guessing');
 							}
@@ -28371,7 +28371,7 @@
 						}
 						else if (_status.mode=='purple'){
 							if(game.players[i]!=game.me&&players[i].identity != 'rZhu'&&players[i].identity != 'bZhu'){
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color=(players[i].identity[0]=='r'?'cai2':'cai');
 								game.players[i].node.identity.classList.add('guessing');
 							}
@@ -28429,13 +28429,13 @@
 							// game.players[i].classList.add('unseen');
 							// game.players[i].classList.add('unseen2');
 							if(game.players[i]!=game.me){
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color='cai';
 								// game.players[i].node.identity.dataset.color='unknown';
 								game.players[i].node.identity.classList.add('guessing');
 							}
 							else{
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color='cai';
 								// game.players[i].setIdentity(game.players[i].group);
 							}
@@ -28475,13 +28475,13 @@
 							// game.players[i].classList.add('unseen');
 							// game.players[i].classList.add('unseen2');
 							if(game.players[i]!=game.me){
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color='cai';
 								// game.players[i].node.identity.dataset.color='unknown';
 								game.players[i].node.identity.classList.add('guessing');
 							}
 							else{
-								game.players[i].node.identity.firstChild.innerHTML='☯';
+								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
 								game.players[i].node.identity.dataset.color='cai';
 								// game.players[i].setIdentity(game.players[i].group);
 							}
@@ -44727,7 +44727,7 @@
 						this.parentNode.childNodes[i].classList.add('transparent');
 					}
 					// 头像上清空身份信息
-					info[0].firstChild.innerHTML='☯';
+					info[0].firstChild.innerHTML='&#x262F;&#xFE0E;';
 					info[0].dataset.color='cai';
 					// 关闭弹窗
 					game.closeDialog && game.closeDialog();
@@ -44744,12 +44744,12 @@
 					}
 				}
 				if(list.length==0){
-					info[0].firstChild.innerHTML='☯';
+					info[0].firstChild.innerHTML='&#x262F;&#xFE0E;';
 					info[0].dataset.color='cai';
 					// for(var i=0;i<this.parentNode.childNodes.length;i++){
 					// 	if(!this.parentNode.childNodes[i].classList.contains('transparent')){
 					// 		var info2=this.parentNode.childNodes[i].link;
-					// 		info[0].firstChild.innerHTML='☯';
+					// 		info[0].firstChild.innerHTML='&#x262F;&#xFE0E;';
 					// 		info[0].dataset.color='cai';
 					// 	}
 					// }
@@ -45475,7 +45475,7 @@
 				}
 				else{
 					if(get.mode()=='guozhan'){
-						list={wei:'东',shu:'南',wu:'西',qun:'北',cai:'☯'};
+						list={wei:'东',shu:'南',wu:'西',qun:'北',cai:'&#x262F;&#xFE0E;'};
 					}
 					var list2=get.copy(list);
 					if(game.getIdentityList2){

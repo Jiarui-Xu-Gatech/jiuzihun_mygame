@@ -20433,7 +20433,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'yunv_kong_gui':'驭女',
             'jieran_gui':'孑然',
             'jieran_gui_info':'限定技，准备阶段，你可以令一名其他角色的非锁定技失效。此角色每回合结束阶段开始时，其视为对你使用X张无视距离的【杀】(X为其技能已失效的回合数)。你死亡时，此角色重新获得失效的技能。',
-            'jieran_gui_bg':'☯',
+            'jieran_gui_bg':'&#x262F;&#xFE0E;',//'☯',
             'jieran_sha':'孑然',
             'jieran_fengyin_bg':'孑',
 
