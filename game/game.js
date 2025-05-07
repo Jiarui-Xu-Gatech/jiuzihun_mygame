@@ -31984,7 +31984,7 @@
 					rgba(178, 59, 2,1) 0 0 10px,
 					rgba(178, 59, 2,1) 0 0 10px
 				`;
-				ZhuText.style.fontFamily = '"STLITI", "KaiTi", cursive'; // 选一个艺术字体
+				ZhuText.style.fontFamily = '"LishuCustom", "KaiTi", cursive'; // 选一个艺术字体
 				ZhuText.style.transition = 'all 0.5s';
 				ui.arena.appendChild(ZhuText);
 

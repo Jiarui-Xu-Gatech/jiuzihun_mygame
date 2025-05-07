@@ -7,6 +7,18 @@ src: url('/font/Symbola.ttf') format('truetype');
 .unified-symbol {
 font-family: 'MySymbolFont';
 }
+
+@font-face {
+font-family: 'LishuCustom';
+src: url('/font/STLITI.TTF') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+.lishu-text {
+font-family: 'LishuCustom', 'KaiTi', cursive;
+}
+
 html {
 	width: 100%;
 	height: 100%;
@@ -1620,7 +1632,7 @@ div:not(.handcards)>.card>.info>span,
 	letter-spacing: -0.2em
 }
 .marks>.card>.background.skillmark {
-	font-family: 'huangcao','xinwei','Symbola';
+	font-family: 'huangcao','xinwei','MySymbolFont';
 	padding-top: 4px;
 }
 .marks>.card.overflowmark {
@@ -3694,7 +3706,7 @@ div:hover>.intro {
 .player .identity>div {
 	margin: auto;
 	position: relative;
-	font-family: 'huangcao','xinwei','Symbola';
+	font-family: 'huangcao','xinwei','MySymbolFont';
 	font-size: 24px;
 	top: 0;
 }
