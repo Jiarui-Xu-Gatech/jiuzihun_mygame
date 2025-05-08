@@ -451,6 +451,7 @@ window.noname_asset_list=[
 	'audio/effect/lose1.mp3',
 	'audio/effect/lose2.mp3',
 	'audio/effect/lose3.mp3',
+	'audio/effect/lose4.mp3',
 	'audio/effect/neiVSzhu.mp3',
 	'audio/effect/startFight.mp3',
 	
