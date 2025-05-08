@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','jieran_gui'],[]],
+            // yuner:["female","qun",1,['yuner_shiyan','yuner_selfDamage','yuner_die','mingwang','jibian_shou'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -765,13 +765,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             player.popup('终结');
                             game.log(player,'#g【冥王】','判定成功');
                             //改变背景
-                            if (game.getUpperBackgroundName('',player) != 'mingwang_bg'){
+                            if (game.getUpperBackgroundName('',player) != 'mingwang2_bg'){
                                 if (!player.hasSkill('mingwang_background')){
                                     player.addTempSkill('mingwang_background','phaseJieshu');
                                 }
                                 player.storage.mingwang_background = game.getUpperBackgroundName('',player);
                                 player.syncStorage('mingwang_background');
-                                game.createClearBackground('mingwang_bg',player);
+                                game.createClearBackground('mingwang2_bg',player);
                             }
 
                             event.target.die();
@@ -802,7 +802,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 onremove:function(player){
                     //改回背景
-                    if (game.getUpperBackgroundName('',player) == 'mingwang_bg'){
+                    if (game.getUpperBackgroundName('',player) == 'mingwang_bg' || game.getUpperBackgroundName('',player) == 'mingwang2_bg'){
                         game.createClearBackground(player.storage.mingwang_background,player);
                         player.storage.mingwang_background = '';
                     }
@@ -1347,7 +1347,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						if(card.name !='sha') return 'jiu';
 					},
 				},
-				trigger:{player:'useCard'},
+				trigger:{player:'useCardBefore'},
 				filter:function(event,player){
 					return event.card.name!='sha'&&event.cards.length > 0;
 				},
@@ -10209,6 +10209,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             zhuxing_sha_len:{
                 audio:2,
                 frequent:true,
+                direct:true,
                 popup:false,
                 shaRelated:true,
                 trigger:{global:'useCard'},
@@ -10217,52 +10218,102 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(){
 					'step 0'
-					var go=false;
-					if(get.attitude(player,trigger.player)>0){
-						if(get.nature(trigger.card)=='thunder'){
-							go=true;
-						}
-						else if(trigger.addCount===false) go=false;
-						else if(!trigger.player.hasSkill('paoxiao')&&
-							!trigger.player.hasSkill('tanlin3')&&
-							!trigger.player.hasSkill('baonu_gu2')&&
-                            !trigger.player.hasSkill('yujiu_hp_heng')&&
-							!trigger.player.hasSkill('fengnu')&&
-							!trigger.player.getEquip('zhuge')){
-							var nh=trigger.player.countCards('h');
-							if(player==trigger.player){
-								go=(player.countCards('h','sha')>0);
-							}
-							else if(nh>=4){
-								go=true;
-							}
-							else if(player.countCards('h','sha')){
-								if(nh==3){
-									go=Math.random()<0.8;
-								}
-								else if(nh==2){
-									go=Math.random()<0.5;
-								}
-							}
-							else if(nh>=3){
-								if(nh==3){
-									go=Math.random()<0.5;
-								}
-								else if(nh==2){
-									go=Math.random()<0.2;
-								}
-							}
-						}
-					}
-					var next=player.chooseToDiscard(get.prompt('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【杀】不计入使用次数','he');
-					next.set('ai',function(card){
-						if(_status.event.go){
-							return 20-get.value(card);
-						}
-						return 0;
-					});
-					next.set('go',go);
-					'step 1'
+                    event.go = false;
+                    player.chooseBool(get.prompt('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【杀】不计入使用次数').set('ai',function(){
+                        var go=false;
+                        if(get.attitude(player,trigger.player)>0){
+                            if(get.nature(trigger.card)=='thunder'){
+                                go=true;
+                            }
+                            else if(trigger.addCount===false) go=false;
+                            else if(!trigger.player.hasSkill('paoxiao')&&
+                                !trigger.player.hasSkill('tanlin3')&&
+                                !trigger.player.hasSkill('baonu_gu2')&&
+                                !trigger.player.hasSkill('yujiu_hp_heng')&&
+                                !trigger.player.hasSkill('fengnu')&&
+                                !trigger.player.getEquip('zhuge')){
+                                var nh=trigger.player.countCards('h');
+                                if(player==trigger.player){
+                                    go=(player.countCards('h','sha')>0);
+                                }
+                                else if(nh>=4){
+                                    go=true;
+                                }
+                                else if(player.countCards('h','sha')){
+                                    if(nh==3){
+                                        go=Math.random()<0.8;
+                                    }
+                                    else if(nh==2){
+                                        go=Math.random()<0.5;
+                                    }
+                                }
+                                else if(nh>=3){
+                                    if(nh==3){
+                                        go=Math.random()<0.5;
+                                    }
+                                    else if(nh==2){
+                                        go=Math.random()<0.2;
+                                    }
+                                }
+                            }
+                        }
+                        event.go = go;
+                        return go;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        game.delay(1);
+                        // var go=false;
+                        // if(get.attitude(player,trigger.player)>0){
+                        //     if(get.nature(trigger.card)=='thunder'){
+                        //         go=true;
+                        //     }
+                        //     else if(trigger.addCount===false) go=false;
+                        //     else if(!trigger.player.hasSkill('paoxiao')&&
+                        //         !trigger.player.hasSkill('tanlin3')&&
+                        //         !trigger.player.hasSkill('baonu_gu2')&&
+                        //         !trigger.player.hasSkill('yujiu_hp_heng')&&
+                        //         !trigger.player.hasSkill('fengnu')&&
+                        //         !trigger.player.getEquip('zhuge')){
+                        //         var nh=trigger.player.countCards('h');
+                        //         if(player==trigger.player){
+                        //             go=(player.countCards('h','sha')>0);
+                        //         }
+                        //         else if(nh>=4){
+                        //             go=true;
+                        //         }
+                        //         else if(player.countCards('h','sha')){
+                        //             if(nh==3){
+                        //                 go=Math.random()<0.8;
+                        //             }
+                        //             else if(nh==2){
+                        //                 go=Math.random()<0.5;
+                        //             }
+                        //         }
+                        //         else if(nh>=3){
+                        //             if(nh==3){
+                        //                 go=Math.random()<0.5;
+                        //             }
+                        //             else if(nh==2){
+                        //                 go=Math.random()<0.2;
+                        //             }
+                        //         }
+                        //     }
+                        // }
+                        var next=player.chooseToDiscard(get.translation('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【杀】不计入使用次数','he');
+                        next.set('ai',function(card){
+                            if(_status.event.go){
+                                return 20-get.value(card);
+                            }
+                            return 0;
+                        });
+                        next.set('go',event.go);
+                    }
+                    else{
+                        event.finish();
+                    }
+					
+					'step 2'
 					if(result.bool){
 						if(trigger.addCount!==false){
 							trigger.addCount=false;
@@ -10273,6 +10324,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						}
 						player.logSkill('zhuxing_len',trigger.player);
 					}
+                    else{
+                        event.finish();
+                    }
 				},
 				ai:{
                     threaten:0.9,
@@ -20433,7 +20487,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'yunv_kong_gui':'驭女',
             'jieran_gui':'孑然',
             'jieran_gui_info':'限定技，准备阶段，你可以令一名其他角色的非锁定技失效。此角色每回合结束阶段开始时，其视为对你使用X张无视距离的【杀】(X为其技能已失效的回合数)。你死亡时，此角色重新获得失效的技能。',
-            'jieran_gui_bg':'&#x262F;&#xFE0E;',//'☯',
+            'jieran_gui_bg':'&#x262F;&#xFE0E;',//'☯',//阴阳八卦图
             'jieran_sha':'孑然',
             'jieran_fengyin_bg':'孑',
 

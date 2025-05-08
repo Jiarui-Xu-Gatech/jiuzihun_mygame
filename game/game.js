@@ -26762,7 +26762,7 @@
 								}
 								if(player.isAlive()){
 									if(!game.me.identityShown&&lib.configOL.mode=='guozhan'){
-										game.me.node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';//'☯';
+										game.me.node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';//'☯';//阴阳八卦图
 										game.me.node.identity.dataset.color='cai';
 										// game.me.node.identity.dataset.color='unknown';
 										// game.players[i].node.identity.classList.add('guessing');

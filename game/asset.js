@@ -3504,6 +3504,7 @@ window.noname_asset_list=[
 	'image/background/yanjiang_bg.jpg',
 	'image/background/huoshan_bg.jpg',
 	'image/background/mingwang_bg.jpg',
+	'image/background/mingwang2_bg.jpg',
 	'image/background/minghou_bg.jpg',
 	'image/background/bingshan_bg.jpg',
 	'image/background/bihai_bg.jpg',
@@ -3519,6 +3520,7 @@ window.noname_asset_list=[
 	'image/background/firelion_bg.jpg',
 	'image/background/chengbao_bg.jpg',
 	'image/background/skyCastle_bg.jpg',
+	'image/background/lodge_bg.jpg',
 
 	
 	
