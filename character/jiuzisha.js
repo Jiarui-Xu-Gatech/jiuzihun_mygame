@@ -4587,10 +4587,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     player.judge(function (card) {
                         event.point = get.number(card);
-                        return get.number(card) <= 9 ? -2 : 2;
+                        if (get.number(card) < 9){
+                            return -2;
+                        }
+                        else if (get.number(card) == 9){
+                            return 4;
+                        }
+                        else if (get.number(card) > 9){
+                            return 2;
+                        }
+                        else{
+                            return 0;
+                        }
                     });
                     "step 1"
-                    if (result.card&&result.bool) {
+                    if (result.card&&get.number(result.card) > 9) {
                         if (!player.storage.haoyin_tushan){
                             player.storage.haoyin_tushan = event.point;
                             player.syncStorage('haoyin_tushan');
