@@ -517,6 +517,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			game.me.chooseBool('是否置换手牌？');
 			"step 4"
 			if(result.bool){
+				game.playAudioNoAddVideo('effect','discard');
 				var hs=game.me.getCards('h');
 				for(var i=0;i<hs.length;i++){
 					hs[i].discard(false);

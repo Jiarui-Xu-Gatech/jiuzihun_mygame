@@ -536,6 +536,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			}
 			"step 4"
 			if(event.replaceCard&&result.bool){
+				game.playAudioNoAddVideo('effect','discard');
 				var hs=game.me.getCards('h');
 				for(var i=0;i<hs.length;i++){
 					hs[i].discard(false);
@@ -883,7 +884,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 					}
 					var dialog=ui.create.dialog('选择角色',[myChoice.concat([event.friendChoice]),'character']);
-					dialog.buttons[7].node.name.innerHTML=get.verticalStr('队友选择');
+					dialog.buttons[dialog.buttons.length - 1].node.name.innerHTML=get.verticalStr('队友选择');
 
 					var addSetting=function(dialog){
 						dialog.add('选择座位').classList.add('add-setting');
@@ -961,7 +962,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							list[game.me.identity].add(event.friendChoice);
 							event.friendChoice=list[game.me.identity].randomRemove();
 							_status.event.dialog.buttons=ui.create.buttons(list[game.me.identity].randomGets(7).concat([event.friendChoice]),'character',buttons);
-							_status.event.dialog.buttons[7].node.name.innerHTML=get.verticalStr('队友选择');
+							_status.event.dialog.buttons[_status.event.dialog.buttons.length - 1].node.name.innerHTML=get.verticalStr('队友选择');
 							_status.event.dialog.content.insertBefore(buttons,node);
 							buttons.animate('start');
 							node.remove();

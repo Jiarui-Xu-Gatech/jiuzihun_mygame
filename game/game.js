@@ -5366,7 +5366,7 @@
 					},
 					siguo_character:{
 						name:'专属武将出场率',
-						init:'increase',
+						init:'off',
 						item:{
 							increase:'大概率',
 							normal:'默认概率',
