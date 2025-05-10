@@ -2340,7 +2340,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							// node.node.avatar.style.display='none';
 							// node.node.avatar.style.backgroundSize = 'contain';
 							node.node.avatar.style.backgroundSize = '100% auto';
-							node.node.avatar.setBackgroundImage('image/card/jiuzi2_char_redcop.jpg');
+							node.node.avatar.setBackgroundImage('image/card/jiuzi2_vertical_large.jpg');
 							node.node.avatar.show();
 
 							node.style.transform='perspective(1200px) rotateY(180deg) translateX(0)';

@@ -47,6 +47,8 @@ window.noname_asset_list=[
 	'audio/background/music_weare.mp3',
 	'audio/background/music_void.mp3',
 	'audio/background/music_ninelie.mp3',
+	'audio/background/music_steinsOverture.mp3',
+	'audio/background/music_steinsDoor.mp3',
 
 	'audio/card/default.mp3',
 	

@@ -17522,7 +17522,7 @@
 						return this;
 					}
 					if (identity == 'leaderLord_enemy'){
-						this.node.identity.firstChild.innerHTML='兽';
+						this.node.identity.firstChild.innerHTML='怪';//'兽';
 						this.node.identity.dataset.color=get.translation('falseColor');
 						return this;
 					}

@@ -44,7 +44,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:["male","wei",4,['zhenjiu_gui','qixing_gui','yunv_gui'],[]],
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
-            // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
+            tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
             // yuner:["female","qun",1,['yuner_shiyan','yuner_selfDamage','yuner_die','mingwang','jibian_shou'],[]],
             
@@ -2559,7 +2559,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
                                     if(target.hp==1) return [0.85,0.8];
-                                    if(target.isTurnedOver()) return [0,3];
+                                    if(target.isTurnedOver()){
+                                        if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=3){
+                                            return [0,3];
+                                        }
+                                        else if (Math.random()<0.1){
+                                            return [0,0.5];
+                                        }
+                                    }
                                     var num=game.countPlayer(function(current){
                                         if(current.countCards('he')&&current!=player&&get.attitude(player,current)<=0){
                                             return true;
@@ -2578,7 +2585,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
                                     if(target.hp==1) return [0.85,0.8];
-                                    if(target.isTurnedOver()) return [0,3];
+                                    if(target.isTurnedOver()){
+                                        if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=3){
+                                            return [0,3];
+                                        }
+                                        else if (Math.random()<0.1){
+                                            return [0,0.5];
+                                        }
+                                    }
                                     var num=game.countPlayer(function(current){
                                         if(current.countCards('he')&&current!=player&&get.attitude(player,current)<=0){
                                             return true;
@@ -2596,7 +2610,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
                                     if(target.hp==1) return [0.85,0.8];
-                                    if(target.isTurnedOver()) return [0,3];
+                                    if(target.isTurnedOver()){
+                                        if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=3){
+                                            return [0,3];
+                                        }
+                                        else if (Math.random()<0.1){
+                                            return [0,0.5];
+                                        }
+                                    }
                                     var num=game.countPlayer(function(current){
                                         if(current.countCards('he')&&current!=player&&get.attitude(player,current)<=0){
                                             return true;
@@ -5992,17 +6013,26 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 // return Math.random()+100;
                                 //后置位立马要动的优先翻。
                                 var diff_posi = target.dataset.position - _status.currentPhase.dataset.position;
-                                if (diff_posi<0){
+                                if (diff_posi<=0){
                                     diff_posi = diff_posi+8;
                                 }
-                                return get.threaten(target,player,true)*(8 - diff_posi)/8;
+                                return (get.threaten(target,player,true)+target.countCards('h'))*(9 - diff_posi)/8;
                             }
                             else{
                                 return -1;
                             }
                         }
                         else{
-                            return get.attitude(player, target);
+                            if (get.attitude(player, target)>0){
+                                var addi = 0;
+                                if ((get.attitude(player, target)+get.attitude(target,player)>4)){
+                                    addi = 10;
+                                }
+                                return addi+get.attitude(player, target)+target.countCards('h');
+                            }
+                            else{
+                                return -1;
+                            }
                         }
                         
                     });
@@ -18323,17 +18353,26 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				direct:true,
                 content:function(){
 					"step 0"
-					player.chooseTarget(get.prompt('jiuhan_tong'),'你受到伤害后，可以令一名其他角色翻面，然后你摸'+get.cnNumber(player.getDamagedHp())+'张牌，并将'+get.cnNumber(player.getDamagedHp())+'张牌交给该角色。',function(card,player,target){
-						return player!=target
+					player.chooseTarget(get.prompt('jiuhan_tong'),'你受到伤害后，可以令一名角色翻面，然后你翻面并摸'+get.cnNumber(2*player.getDamagedHp())+'张牌，并将'+get.cnNumber(player.getDamagedHp())+'张牌交给该角色。',function(card,player,target){
+						return player!=target||player==target;
 					}).ai=function(target){
 						if(target.hasSkillTag('noturn')) return 0;
 						var player=_status.event.player;
+                        if (player == target){
+                            if (player.isTurnedOver()){
+                                return player.getDamagedHp()/(player.countCards('h')+1);
+                            }
+                            else{
+                                return (2.5 + 2/(player.countCards('h')+1))*player.getDamagedHp();
+                            }
+                            
+                        }
                         if (!target.isTurnedOver()){//正面时
-                            if (get.attitude(player,target)+get.attitude(target,player)<0){
+                            if (get.attitude(player,target)+get.attitude(target,player)<=0){
                                 // return Math.random()+100;
                                 //后置位立马要动的优先翻。
                                 var diff_posi = target.dataset.position - _status.currentPhase.dataset.position;
-                                if (diff_posi<0){
+                                if (diff_posi<=0){
                                     diff_posi = diff_posi+8;
                                 }
                                 return get.threaten(target,player,true)*(8 - diff_posi)/8+target.countCards('h')-player.getDamagedHp();
@@ -18344,7 +18383,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     if (_status.currentPhase == target&&(get.attitude(player, target)+get.attitude(target,player)>4)){
                                         addi = 5;
                                     }
-                                    return addi+get.attitude(player, target)+target.countCards('h')+player.getDamagedHp();
+                                    return addi+get.attitude(player, target)-target.countCards('h')+player.getDamagedHp();
                                 }
                                 else{
                                     return -1;
@@ -18367,23 +18406,104 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}
 					"step 1"
 					if(result.bool){
-						player.logSkill('jiuhan_tong',result.targets);
+						// player.logSkill('jiuhan_tong',result.targets);
+                        game.delay(1);
+                        player.popup('jiuhan_tong','soil');
+                        game.playAudio('skill','jiuhan_tong'+Math.ceil(2*Math.random()));
+                        var str=(result.targets[0]==player?'#b自己':result.targets);
+                        game.log(player,'对',str,'发动了','#g【酒酣】');
+                        player.line(result.targets,'green');
                         event.target = result.targets[0];
                         event.target.turnOver();
-						player.draw(player.getDamagedHp());
-                        player.chooseCard('【丰乳】：请选择'+get.cnNumber(player.getDamagedHp())+'张牌交给'+get.translation(event.target),true,player.getDamagedHp(),'he').set('ai',function(card){
-                            if (get.attitude(player,event.target)>0){
-                                return get.value(card);
-                            }
-                            else{
-                                return -get.value(card);
-                            }
-                        });
 					}
                     else{
                         event.finish();
                     }
                     "step 2"
+                    game.delay(1);
+                    player.turnOver();
+                    "step 3"
+                    player.draw(2*player.getDamagedHp());
+                    "step 4"
+                    if (player!=event.target){
+                        player.chooseCard('【酒酣】：请选择'+get.cnNumber(player.getDamagedHp())+'张牌交给'+get.translation(event.target),true,player.getDamagedHp(),'he').set('ai',function(card){
+                            // if (get.attitude(player,event.target)>0){
+                            //     return get.value(card);
+                            // }
+                            // else{
+                            //     return -get.value(card);
+                            // }
+                            var player=get.owner(card);
+                            if (_status.currentPhase!=player){
+                                if((get.type(card)=='basic')||get.name(card)=='wuxie'){
+                                    return -100 - get.value(card);
+                                }
+                                else if (get.type(card,'trick')=='trick' || get.type(card)=='equip'){
+                                    return 100 - get.value(card);
+                                }
+                                else{
+                                    return 0;
+                                }
+                            }
+                            else{
+                                if(get.type(card)=='basic'||get.name(card)=='wuxie'){
+                                    if (player.getEquip('zhuge')&&get.name(card)=='sha'){
+                                        return -100-get.value(card);
+                                    }
+                                    else if (get.name(card)=='sha'){
+                                        return 50 - get.value(card);
+                                    }
+                                    else if (get.tag(card,'recover')){
+                                        if (player.hp<player.maxHp){
+                                            return - get.value(card);
+                                        }
+                                        else if (get.attitude(player,event.target)>0){
+                                            return 10 - get.value(card);
+                                        }
+                                        else{
+                                            - get.value(card);
+                                        }
+                                    }
+                                    else{
+                                        return 100 - get.value(card);
+                                    }
+                                }
+                                else if (get.type(card,'trick')=='trick' || get.type(card)=='equip'){
+                                    if (get.name(card) == 'zhuge'&&player.countCards('h','sha')>2){
+                                        return -1000;
+                                    }
+                                    // else if (player.getEquip('zhuge')&&get.type(card)=='equip'&&get.subtype(card)=='equip1'){
+                                    //     return 100 - get.value(card);
+                                    // }
+                                    if (get.type(card)=='equip'){
+                                        if (player.countCards('e',{subtype:get.subtype(card)})>0&&player.countCards('h',{subtype:get.subtype(card)})>0&&player.countCards('e',get.name(card))>0){
+                                            return 130 - get.value(card);
+                                        }
+                                        else{
+                                            return 90 - get.value(card);
+                                        }
+                                    }
+                                    else if (get.name(card)=='jiedao'){
+                                        return 1;
+                                    }
+                                    else if (get.name(card)=='shandian'&&player.getJudge('shandian')){
+                                        return 100 - get.value(card);
+                                    }
+                                    else{
+                                        return 100 - get.value(card);
+                                    }
+                                }
+                                else{
+                                    return 0;
+                                }
+                                
+                            }
+                        });
+                    }
+                    else{
+                        event.finish();
+                    }
+                    "step 5"
                     if (result.bool){
                         event.target.gain(result.cards, player,'giveAuto','bySelf');
                     }
@@ -18396,7 +18516,23 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					maixie_hp:true,
 					effect:{
 						target:function(card,player,target){
-							if(get.tag(card,'damage')){
+                            if (target.isTurnedOver()){
+                                if(get.tag(card,'damage')){
+                                    if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
+                                    if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
+                                    if(target.hp==1) return [0.85,0.8];
+                                    if(target.isTurnedOver()){
+                                        if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=3){
+                                            return [0,3];
+                                        }
+                                        else if (Math.random()<0.1){
+                                            return [0,0.5];
+                                        }
+                                    }
+                                }
+                            }
+
+							else if(get.tag(card,'damage')){
 								if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
 								if(target.hp<=1) return;
 								if(!target.hasFriend()) return;
@@ -18426,10 +18562,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				audio:2,
                 direct:true,
 				forced:true,
-				filter:function(event){
+				filter:function(event,player){
+                    if (event.card&&(player.getHistory('damage',function(evt){
+						    return evt!=event
+                    }).length==0)&&player.hp == player.maxHp){
+                        return get.color(event.card)=='black'&&event.source&&event.source.isAlive()&&event.source.sex == 'male';
+                    }
 					return event.card;//&&(get.color(event.card)!='black'||event.source&&event.source.isAlive()&&event.source.sex == 'male');
 				},
 				content:function(){
+                    game.delay(1.3);
                     if (get.color(trigger.card)=='black'&&trigger.source&&trigger.source.isAlive()&&trigger.source.sex == 'male'){
                         player.popup('zuitun_tong','soil');
                         game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
@@ -18441,7 +18583,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.popup('zuitun_tong','soil');
                         game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
                         game.log(player,'发动了','#g【臀肥】');
-                        trigger.player.draw('nodelay');
+                        if ((player.getHistory('damage',function(evt){
+						    return evt!=event
+                        }).length==0)){
+                            trigger.player.recover(1);
+                        }
+                        else{
+                            trigger.player.draw('nodelay');
+                        }
                     }
 				},
             },
@@ -20534,9 +20683,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             
             tongxin:"彤欣",
             "jiuhan_tong":"酒酣",
-            "jiuhan_tong_info":"酒酣",
+            "jiuhan_tong_info":"当你受到伤害后，可以令一名角色翻面，然后你翻面并摸2*X张牌，并将X张牌交给该角色（X为你已损失的体力值）。",
             "zuitun_tong":"醉臀",
-            "zuitun_tong_info":"锁定技，当你受到牌造成的伤害时，若伤害来源为男性角色且此牌为黑色，则伤害来源摸一张牌；否则你摸一张牌。",
+            "zuitun_tong_info":"锁定技，当你受到牌造成的伤害时，若伤害来源为男性角色且此牌为黑色，则伤害来源摸一张牌；否则，若此伤害是你本回合首次受到的伤害，你回复一点体力，若非首次伤害，你摸一张牌。",
 
 
             monian:"墨念",
