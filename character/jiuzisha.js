@@ -44,7 +44,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:["male","wei",4,['zhenjiu_gui','qixing_gui','yunv_gui'],[]],
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
-            tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
+            // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
             // yuner:["female","qun",1,['yuner_shiyan','yuner_selfDamage','yuner_die','mingwang','jibian_shou'],[]],
             
