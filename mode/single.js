@@ -197,8 +197,6 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						_status.characterlist.push(i);
 					}
 				}
-				console.log(_status.characterlist);
-				console.log(lib);
 				game.broadcastAll(function(){
 					_status.mode='changban';
 					lib.translate.bingliang_info='目标角色判定阶段进行判定：若判定结果不为梅花，则跳过该角色的摸牌阶段。';

@@ -2184,6 +2184,40 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 					}
 
+					//加入九子魂角色
+					var leads_jiuzi = ['lenenda','jiuxiner','hanxin','jinshouzhen'];
+					var leads_rank_rarity = ['legend','epic','rare','common'];
+					var leads_rank = ['s','ap','a','am','bp','b','bm','c','d'];
+					var leads_boss = ['chess_beimingjukun','chess_xingtian','chess_jinchidiao','chess_wuzhaojinlong','chess_dongzhuo'];
+					var count_i = 0;
+					var count_j = 0;
+					for(var i in lib.character){
+						if(!lib.character[i][4]){
+							lib.character[i][4]=[];
+						}
+						if (!lib.character[i][4].contains('unseen')&&!leads_jiuzi.contains(i)){
+							if (!leads_boss.contains(i)){
+								lib.rank.rarity[leads_rank_rarity[count_j%leads_rank_rarity.length]].push(i);
+								count_j++;
+							}
+							lib.rank[leads_rank[count_i%leads_rank.length]].push(i);
+							count_i++;
+						}
+						
+					}
+					lib.rank.all=lib.rank.s.
+						concat(lib.rank.ap).
+						concat(lib.rank.a).
+						concat(lib.rank.am).
+						concat(lib.rank.bp).
+						concat(lib.rank.b).
+						concat(lib.rank.bm).
+						concat(lib.rank.c).
+						concat(lib.rank.d);
+
+
+
+
 					ui.control.style.transition='all 0s';
 					if(get.is.phoneLayout()){
 						ui.control.style.top='calc(100% - 80px)';
@@ -2286,7 +2320,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							}
 						}
 						if(kaibao){
-							node.node.avatar.style.display='none';
+							// node.node.avatar.style.display='none';
+							// node.node.avatar.style.backgroundSize = 'contain';
+							node.node.avatar.style.backgroundSize = '100% auto';
+							node.node.avatar.setBackgroundImage('image/card/jiuzi2_char_redcop.jpg');
+							node.node.avatar.show();
+
 							node.style.transform='perspective(1200px) rotateY(180deg) translateX(0)';
 							if(typeof i=='string'){
 								node.listen(event.turnCard2);
@@ -2370,7 +2409,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							intro.innerHTML=get.translation(rarity);
 						}
 					}
-					game.leaderLord=['leader_caocao','leader_liubei','leader_sunquan'];
+					game.leaderLord=['lenenda','jiuxiner','hanxin','jinshouzhen'];
 					var dialog1=ui.create.dialog('选择君主','hidden');
 					event.dialog1=dialog1;
 					dialog1.classList.add('fullheight');
@@ -2514,6 +2553,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						// dialog2.buttons[i].classList.remove('card');
 					}
 					dialog2.add('挑战武将');
+					game.data.challenge=game.getLeaderList();
+					game.saveData();
 					dialog2.add([game.data.challenge,'character']);
 					for(;i<dialog2.buttons.length;i++){
 						dialog2.buttons[i].area='challenge';
@@ -2754,6 +2795,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								case 'c':list=lib.rank.bm.concat(lib.rank.d);break;
 								case 'd':list=lib.rank.c;break;
 							}
+							var rarity_all =lib.rank.rarity.legend.
+							concat(lib.rank.rarity.epic).
+							concat(lib.rank.rarity.rare).
+							concat(lib.rank.rarity.common);
+							var list_boss = ['chess_beimingjukun','chess_xingtian','chess_jinchidiao','chess_wuzhaojinlong','chess_dongzhuo'];
 							for(var i=0;i<total;i++){
 								if(Math.random()<0.7){
 									_status.enemylist.push(Array.prototype.randomGet.apply(
@@ -2762,6 +2808,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								else{
 									_status.enemylist.push(Array.prototype.randomGet.apply(
 										list,_status.enemylist.concat(_status.mylist)));
+								}
+							}
+							for (var j=1; j<_status.enemylist.length;j++){
+								if (_status.enemylist[j]==undefined||list_boss.contains(_status.enemylist[j])){
+									_status.enemylist[j] = Array.prototype.randomGet.apply(
+										rarity_all,_status.enemylist.concat(_status.mylist));
 								}
 							}
 						}
@@ -3569,21 +3621,29 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 			getLeaderList:function(){
 				var list=lib.rank.all.slice(0);
+				var list_boss = ['chess_beimingjukun','chess_xingtian','chess_jinchidiao','chess_wuzhaojinlong','chess_dongzhuo'];
 				for(var i=0;i<game.data.character.length;i++){
 					list.remove(game.data.character[i]);
+					list_boss.remove(game.data.character[i]);
 				}
-				if(!list.length){
-					return ['chess_xingtian'];
+				list_boss.remove('chess_dongzhuo');
+				// if(!list.length){
+				// 	return ['chess_xingtian'];
+				// }
+				// return list.randomGets(6);
+
+				if(list_boss.length){
+					return list_boss;
 				}
 				return list.randomGets(6);
 			},
 			getLeaderCharacter:function(){
 				var pleg;
 				if(game.data.legend<=20){
-					pleg=0.01;
+					pleg=0.15;
 				}
 				else{
-					pleg=0.01+(game.data.legend-20)*(game.data.legend-20)*0.99/10000;
+					pleg=0.15+(game.data.legend-20)*(game.data.legend-20)*0.99/10000;
 				}
 				if(Math.random()<pleg){
 					game.data.legend=0;
@@ -3592,8 +3652,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 				game.data.legend++;
 				game.saveData();
-				if(Math.random()<0.05) return lib.rank.rarity.epic.randomGet();
-				if(Math.random()<0.3) return lib.rank.rarity.rare.randomGet();
+				if(Math.random()<0.25) return lib.rank.rarity.epic.randomGet();
+				if(Math.random()<0.4) return lib.rank.rarity.rare.randomGet();
 				return lib.rank.rarity.common.randomGet();
 			},
 			changeMoney:function(num){
@@ -5465,9 +5525,118 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						event.goto(1);
 					}
 				}
-			}
+			},
+
+			wushuang:{
+				shaRelated:true,
+				audio:2,
+				audioname:['re_lvbu','shen_lvbu'],
+				forced:true,
+				locked:true,
+				group:['wushuang1','wushuang2']
+			},
+			wushuang1:{
+				audio:'wushuang',
+				audioname:['re_lvbu','shen_lvbu'],
+				trigger:{player:'useCardToPlayered'},
+				forced:true,
+				filter:function(event,player){
+					return event.card.name=='sha'&&!event.getParent().directHit.contains(event.target);
+				},
+				//priority:-1,
+				logTarget:'target',
+				content:function(){
+					var id=trigger.target.playerid;
+					var map=trigger.getParent().customArgs;
+					if(!map[id]) map[id]={};
+					if(typeof map[id].shanRequired=='number'){
+						map[id].shanRequired++;
+					}
+					else{
+						map[id].shanRequired=2;
+					}
+				}
+			},
+			wushuang2:{
+				audio:'wushuang',
+				audioname:['re_lvbu','shen_lvbu'],
+				trigger:{player:'useCardToPlayered',target:'useCardToTargeted'},
+				forced:true,
+				logTarget:function(trigger,player){
+					return player==trigger.player?trigger.target:trigger.player
+				},
+				filter:function(event,player){
+					return event.card.name=='juedou';
+				},
+				//priority:-1,
+				content:function(){
+					var id=(player==trigger.player?trigger.target:trigger.player)['playerid'];
+					var idt=trigger.target.playerid;
+					var map=trigger.getParent().customArgs;
+					if(!map[idt]) map[idt]={};
+					if(!map[idt].shaReq) map[idt].shaReq={};
+					if(!map[idt].shaReq[id]) map[idt].shaReq[id]=1;
+					map[idt].shaReq[id]++;
+				},
+				ai:{
+					result:{
+						target:function(card,player,target){
+							if(card.name=='juedou'&&target.countCards('h')>0) return [1,0,0,-1];
+						}
+					}
+				},
+			},
+
+			jiuchi:{
+				audio:2,
+				audioname:['re_dongzhuo'],
+				enable:'chooseToUse',
+				filterCard:function(card){
+					return get.suit(card)=='spade';
+				},
+				viewAs:{name:'jiu'},
+				viewAsFilter:function(player){
+					if(!player.countCards('h',{suit:'spade'})) return false;
+				},
+				prompt:'将一张黑桃手牌当酒使用',
+				check:function(card){
+					if(_status.event.type=='dying') return 1;
+					return 4-get.value(card);
+				},
+				ai:{
+					skillTagFilter:function(player){
+						return player.countCards('h',{suit:'spade'})>0&&player.hp<=0;
+					},
+					threaten:1.5,
+					save:true,
+				}
+			},
+
+			jueqing:{
+				trigger:{source:'damageBefore'},
+				forced:true,
+				audio:2,
+				//priority:16,
+				check:function(){return false;},
+				content:function(){
+					trigger.cancel();
+					trigger.player.loseHp(trigger.num);
+				},
+				ai:{
+					jueqing:true
+				}
+			},
 		},
 		translate:{
+			wushuang:'无双',
+			wushuang1:'无双',
+			wushuang2:'无双',
+			jiuchi:'酒池',
+			jueqing:'绝情',
+			wushuang_info:'锁定技，当你使用【杀】或【决斗】指定目标后，你令此牌需要依次使用或打出两张【闪】或【杀】响应。',
+			jiuchi_info:'你可以将一张♠手牌当作【酒】使用。',
+			jueqing_info:'锁定技，你即将造成的伤害均视为失去体力。',
+
 			zhu_config:'启用主将',
 			main_zhu_config:'启用副将',
 			noreplace_end_config:'无替补时结束',
@@ -5986,8 +6155,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				// image:'mode/chess/difficulty/leader_hard'
 			}
 		},
-		// characterPack:{
-		// 	mode_chess:{
+		characterPack:{
+			mode_chess:{
 		// 		// leader_caocao:['male','wei',4,['leader_xiaoxiong']],
 		// 		// leader_liubei:['male','shu',4,['leader_renyi']],
 		// 		// leader_sunquan:['male','wu',4,['leader_mouduan']],
@@ -6025,13 +6194,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 		// 		// // chess_zhangjiao:['male','qun',3,['']],
 		// 		// // chess_menghuo:['male','qun',3,['']],
 		// 		// //
-		// 		// chess_jinchidiao:['male','qun',15,['boss_bfengxing','boss_chiyu'],['boss','chessboss']],
-		// 		// chess_beimingjukun:['male','qun',25,['boss_wuying','cangming'],['boss','chessboss']],
-		// 		// chess_wuzhaojinlong:['male','qun',30,['boss_tenglong','boss_wushang'],['boss','chessboss']],
-		// 		// chess_dongzhuo:['male','qun',20,['jiuchi','boss_stoneqiangzheng','boss_stonebaolin'],['boss','chessboss']],
-		// 		// chess_xingtian:['male','qun',99,['boss_moyan','wushuang'],['boss','chessboss']],
-		// 	}
-		// },
+				chess_jinchidiao:['male','wu',15,['boss_bfengxing','boss_chiyu'],['boss','chessboss']],
+				chess_beimingjukun:['male','wei',25,['boss_wuying','cangming'],['boss','chessboss']],
+				chess_wuzhaojinlong:['male','qun',30,['boss_tenglong','boss_wushang'],['boss','chessboss']],
+				chess_dongzhuo:['male','qun',20,['jiuchi','boss_stoneqiangzheng','boss_stonebaolin'],['boss','chessboss']],
+				chess_xingtian:['male','shu',99,['boss_moyan','wushuang'],['boss','chessboss']],
+			}
+		},
 		cardPack:{
 			mode_chess:['chess_shezhang','chess_chuzhang']
 		},
@@ -6330,12 +6499,15 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			'开启战场机关后，每个回合结束时有一定机率出现一个机关，该机关不参与战斗，并有一个影响周围或全体角色的效果。机关在出现后的5~10个回合内消失<li>'+
 			'开启击退效果后，当一名角色对距离两格以内的目标造成伤害后，受伤害角色将沿反方向移动一格<li>'+
 			'战场上可设置出现随机路障，角色无法移动到路障处。当一名角色的周围四格有至少三格为路障或在战场外时，其可以在回合内清除一个相邻路障</ul>'
-			// +'<div style="margin:10px">君主模式</div><ul style="margin-top:0"><li>收集武将进行战斗，根据战斗难度及我方出场武将的强度，战斗胜利后将获得数量不等的金钱。没有君主出场时，获得的金钱较多<li>'+
-			// '金钱可以用来招募随机武将，招到已有武将，或遣返不需要的武将时可得到招募令<li>'+
-			// '战斗中有君主出场时可招降敌将，成功率取决于敌将的稀有度、剩余体力值以及手牌数。成功后战斗立即结束且没有金钱奖励。每发动一次招降，无论成功还是失败，都会扣除10招募令<li>'+
-			// '挑战武将会与该武将以及与其强度相近的武将进行战斗，敌方人数与我方出场人数相同，但不少于3。胜利后可通过招募令招募该武将，普通/稀有/史诗/传说武将分别需要40/100/400/1600招募令<li>'+
-			// '竞技场：<br>随机选择9名武将，每次派出1~3名武将参战。战斗中阵亡的武将不能再次上场。<br><br>战斗后武将进入疲劳状态，若立即再次出场则初始体力值-1。<br><br>战斗中本方武将行动时可召唤后援，令一名未出场的已方武将加入战斗。后援武将在战斗结束后无论存活与否均不能再次出场<br><br>当取得12场胜利或所有武将全部阵亡后结束，并根据胜场数获得随机奖励<li>'+
-			// '修改金钱：<br>game.changeMoney<br>修改招募令：<br>game.changeDust</ul>'
+			
+			+'<div style="margin:10px">君主模式</div><ul style="margin-top:0"><li>收集武将进行战斗，根据战斗难度及我方出场武将的强度，战斗胜利后将获得数量不等的金钱。没有君主出场时，获得的金钱较多<li>'+
+			'金钱可以用来招募随机武将，招到已有武将，或遣返不需要的武将时可得到招募令<li>'+
+			'战斗中有君主出场时可招降敌将，成功率取决于敌将的稀有度、剩余体力值以及手牌数。成功后战斗立即结束且没有金钱奖励。每发动一次招降，无论成功还是失败，都会扣除10招募令<li>'+
+			'挑战武将会与该武将以及与其强度相近的武将进行战斗，敌方人数与我方出场人数相同，但不少于3。胜利后可通过招募令招募该武将，普通/稀有/史诗/传说武将分别需要40/100/400/1600招募令<li>'+
+			'竞技场：<br>随机选择9名武将，每次派出1~3名武将参战。战斗中阵亡的武将不能再次上场。<br><br>战斗后武将进入疲劳状态，若立即再次出场则初始体力值-1。<br><br>战斗中本方武将行动时可召唤后援，令一名未出场的已方武将加入战斗。后援武将在战斗结束后无论存活与否均不能再次出场<br><br>当取得12场胜利或所有武将全部阵亡后结束，并根据胜场数获得随机奖励</ul>'
+
+			
+			// +'修改金钱：<br>game.changeMoney<br>修改招募令：<br>game.changeDust</ul>'
 		},
 	};
 });

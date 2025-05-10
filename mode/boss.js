@@ -12528,9 +12528,119 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 
 
+			wushuang:{
+				shaRelated:true,
+				audio:2,
+				audioname:['re_lvbu','shen_lvbu'],
+				forced:true,
+				locked:true,
+				group:['wushuang1','wushuang2']
+			},
+			wushuang1:{
+				audio:'wushuang',
+				audioname:['re_lvbu','shen_lvbu'],
+				trigger:{player:'useCardToPlayered'},
+				forced:true,
+				filter:function(event,player){
+					return event.card.name=='sha'&&!event.getParent().directHit.contains(event.target);
+				},
+				//priority:-1,
+				logTarget:'target',
+				content:function(){
+					var id=trigger.target.playerid;
+					var map=trigger.getParent().customArgs;
+					if(!map[id]) map[id]={};
+					if(typeof map[id].shanRequired=='number'){
+						map[id].shanRequired++;
+					}
+					else{
+						map[id].shanRequired=2;
+					}
+				}
+			},
+			wushuang2:{
+				audio:'wushuang',
+				audioname:['re_lvbu','shen_lvbu'],
+				trigger:{player:'useCardToPlayered',target:'useCardToTargeted'},
+				forced:true,
+				logTarget:function(trigger,player){
+					return player==trigger.player?trigger.target:trigger.player
+				},
+				filter:function(event,player){
+					return event.card.name=='juedou';
+				},
+				//priority:-1,
+				content:function(){
+					var id=(player==trigger.player?trigger.target:trigger.player)['playerid'];
+					var idt=trigger.target.playerid;
+					var map=trigger.getParent().customArgs;
+					if(!map[idt]) map[idt]={};
+					if(!map[idt].shaReq) map[idt].shaReq={};
+					if(!map[idt].shaReq[id]) map[idt].shaReq[id]=1;
+					map[idt].shaReq[id]++;
+				},
+				ai:{
+					result:{
+						target:function(card,player,target){
+							if(card.name=='juedou'&&target.countCards('h')>0) return [1,0,0,-1];
+						}
+					}
+				},
+			},
+
+			jiuchi:{
+				audio:2,
+				audioname:['re_dongzhuo'],
+				enable:'chooseToUse',
+				filterCard:function(card){
+					return get.suit(card)=='spade';
+				},
+				viewAs:{name:'jiu'},
+				viewAsFilter:function(player){
+					if(!player.countCards('h',{suit:'spade'})) return false;
+				},
+				prompt:'将一张黑桃手牌当酒使用',
+				check:function(card){
+					if(_status.event.type=='dying') return 1;
+					return 4-get.value(card);
+				},
+				ai:{
+					skillTagFilter:function(player){
+						return player.countCards('h',{suit:'spade'})>0&&player.hp<=0;
+					},
+					threaten:1.5,
+					save:true,
+				}
+			},
+
+			jueqing:{
+				trigger:{source:'damageBefore'},
+				forced:true,
+				audio:2,
+				//priority:16,
+				check:function(){return false;},
+				content:function(){
+					trigger.cancel();
+					trigger.player.loseHp(trigger.num);
+				},
+				ai:{
+					jueqing:true
+				}
+			},
+
 
 		},
 		translate:{
+			wushuang:'无双',
+			wushuang1:'无双',
+			wushuang2:'无双',
+			jiuchi:'酒池',
+			jueqing:'绝情',
+			wushuang_info:'锁定技，当你使用【杀】或【决斗】指定目标后，你令此牌需要依次使用或打出两张【闪】或【杀】响应。',
+			jiuchi_info:'你可以将一张♠手牌当作【酒】使用。',
+			jueqing_info:'锁定技，你即将造成的伤害均视为失去体力。',
+
+
 			zhu:'神',
 			cai:'盟',
 			zhong:'从',

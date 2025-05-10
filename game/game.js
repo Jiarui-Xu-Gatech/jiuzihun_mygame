@@ -5203,7 +5203,7 @@
 					},
 					versus_mode:{
 						name:'游戏模式',
-						init:'four',
+						init:'three',
 						item:{
 							four:'对抗',
 							three:'统率',
@@ -5779,11 +5779,11 @@
 				config:{
 					chess_mode:{
 						name:'游戏模式',
-						init:'three',
+						init:'leader',
 						item:{
 							// combat:'自由',
 							three:'统率',
-							// leader:'君主',
+							leader:'君主',
 						},
 						restart:true,
 						frequent:true,

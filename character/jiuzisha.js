@@ -2500,7 +2500,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     "step 4"
                     for (var i = 0; i < event.allTheCard.length; i++){
-                        if (player.isUnderControl(true)){
+                        if (player == game.me){
                             event.allThePlayer[i].$give(event.allTheCard[i],player,true);
                         }
                         else{
@@ -3760,7 +3760,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 ai:{
 					threaten:3.5,
+                    
 				},
+                changeSeat:true,
 			},
 
             shiling_change:{
@@ -10971,7 +10973,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(result.bool){
                         // player.storage.cangxin_enda.push(result.cards[0]);
                         // player.syncStorage('cangxin_start_enda');
-                        if(player.isUnderControl(true)){
+                        if(player == game.me){
 							player.$give(1,player,false);
                             // player.$gain(1,false);
                             // player.$gain2(1,false);
@@ -15839,7 +15841,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.updateRoundNumber();
                         player.$draw(1);
 						player.gain(result.links[0],'giveAuto','bySelf');
-                        if (player.isUnderControl(true)){
+                        if (player == game.me){
                             game.log(player,'从牌堆底获得',result.links[0]);
                         }
                         else{
@@ -15850,7 +15852,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             ui.cardPile.removeChild(event.allCards[i]);
                             ui.cardPile.insertBefore(event.allCards[i],ui.cardPile.firstChild);
                         }
-                        if (player.isUnderControl(true)){
+                        if (player == game.me){
                             game.log(player,'将',event.allCards,'置于牌堆顶');
                         }
                         else{
@@ -15976,7 +15978,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.updateRoundNumber();
                         player.$draw(result.links.length);
 						player.gain(result.links,'giveAuto','bySelf');
-                        if (player.isUnderControl(true)){
+                        if (player == game.me){
                             game.log(player,'从牌堆顶获得',result.links);
                         }
                         else{
@@ -16109,7 +16111,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					mark:function(dialog,content,player){
 						if(content&&content.length){
 							dialog.addAuto([content,'blank']);
-							if(player.isUnderControl(true)){
+							if(player == game.me){
 								var str='';
 								for(var i=0;i<player.storage.gushi_gu2.length;i++){
 									str+=get.translation(player.storage.gushi_gu2[i]);
@@ -17684,7 +17686,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     player.draw();
                     'step 1'
-                    if (!player.isUnderControl(true)&&player.hasSkill('liaoyuan_moke')){
+                    if (!player == game.me&&player.hasSkill('liaoyuan_moke')){
                         game.delay(1);
                     }
                     if (player.isAlive()&&player.countCards('he')>0){
@@ -18117,6 +18119,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         },
                     },
                 },
+                changeSeat:true,
 
             },
             
@@ -19814,6 +19817,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
 
+            
+
+
+
 
             shiki_omusubi:{
 				audio:2,
@@ -20559,6 +20566,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             caiyang:'蔡阳',
             yinka:'印卡',
+
+
+            
 
 
 
