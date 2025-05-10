@@ -17516,6 +17516,16 @@
 				setIdentity:function(identity){
 					if(!identity) identity=this.identity;
 					game.addVideo('setIdentity',this,identity);
+					if (identity == 'leaderLord_friend'){
+						this.node.identity.firstChild.innerHTML='君';
+						this.node.identity.dataset.color=get.translation('trueColor');
+						return this;
+					}
+					if (identity == 'leaderLord_enemy'){
+						this.node.identity.firstChild.innerHTML='兽';
+						this.node.identity.dataset.color=get.translation('falseColor');
+						return this;
+					}
 					if(get.is.jun(this)){
 						this.node.identity.firstChild.innerHTML='君';
 					}

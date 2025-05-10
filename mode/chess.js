@@ -223,7 +223,15 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 				friend.init(_status.mylist.shift());
 				friend.side=side;
-				friend.setIdentity('friend');
+				if (event.video){
+					game.leaderLord=['lenenda','jiuxiner','hanxin','jinshouzhen'];
+				}
+				if (game.leaderLord&&game.leaderLord.contains(friend.name)){
+				friend.setIdentity('leaderLord_friend');
+				}
+				else{
+					friend.setIdentity('friend');
+				}
 				friend.identity='friend';
 				friend.node.identity.dataset.color=get.translation(side+'Color');
 				game.players.push(friend);
@@ -248,7 +256,15 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				enemy.getId();
 				enemy.init(_status.enemylist.shift());
 				enemy.side=!side;
-				enemy.setIdentity('enemy');
+				if (event.video){
+					game.leaderBoss = ['chess_beimingjukun','chess_xingtian','chess_jinchidiao','chess_wuzhaojinlong','chess_dongzhuo'];
+				}
+				if (game.leaderBoss&&game.leaderBoss.contains(enemy.name)){
+					enemy.setIdentity('leaderLord_enemy');
+				}
+				else{
+					enemy.setIdentity('enemy');
+				}
 				enemy.identity='enemy';
 				enemy.node.identity.dataset.color=get.translation(!side+'Color');
 				game.players.push(enemy);
@@ -2189,6 +2205,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var leads_rank_rarity = ['legend','epic','rare','common'];
 					var leads_rank = ['s','ap','a','am','bp','b','bm','c','d'];
 					var leads_boss = ['chess_beimingjukun','chess_xingtian','chess_jinchidiao','chess_wuzhaojinlong','chess_dongzhuo'];
+					game.leaderBoss = ['chess_beimingjukun','chess_xingtian','chess_jinchidiao','chess_wuzhaojinlong','chess_dongzhuo'];
 					var count_i = 0;
 					var count_j = 0;
 					for(var i in lib.character){
@@ -2746,12 +2763,24 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if(_status.kaibao||_status.qianfan) return;
 						if(selected.challenge.length){
 							var cname=selected.challenge[0].link;
-							var rarity=game.getRarity(cname);
-							switch(rarity){
-								case 'common':rarity=40;break;
-								case 'rare':rarity=100;break;
-								case 'epic':rarity=400;break;
-								case 'legend':rarity=1600;break;
+							// var rarity=game.getRarity(cname);
+							// switch(rarity){
+							// 	case 'common':rarity=40;break;
+							// 	case 'rare':rarity=100;break;
+							// 	case 'epic':rarity=400;break;
+							// 	case 'legend':rarity=1600;break;
+							// }
+							var rarity = 40;
+							switch(get.rank(cname)){
+								case 's':rarity=1600;break;
+								case 'ap':rarity=400;break;
+								case 'a':rarity=100;break;
+								case 'am':rarity = 40;break;
+								case 'bp':rarity = 40;break;
+								case 'b':rarity = 40;break;
+								case 'bm':rarity = 40;break;
+								case 'c':rarity = 40;break;
+								case 'd':rarity = 40;break;
 							}
 							if(!confirm('即将挑战'+get.translation(cname)+'，战斗胜利后可消耗'+rarity+'招募令招募该武将，无论是否招募，挑战列表将被刷新。是否继续？')){
 								return;
@@ -2846,6 +2875,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							}
 							for(var i=0;i<_status.mylist.length;i++){
 								list.remove(_status.mylist[i]);
+							}
+							if (game.leaderBoss){
+								for (var i=0; i<list.length; i++){
+									if (game.leaderBoss.contains(list[i])){
+										list.remove(list[i]);
+									}
+								}
 							}
 							_status.enemylist=list.randomGets(number);
 						}
