@@ -1208,6 +1208,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (event.current.hasSkill('yujiu_heng')&&!event.current.hasSkill('yujiu_hp_heng')&&event.current.countCards('e')==0){
                             return 25 - get.value(card);
                         }
+                        if (event.current.hasSkill('leyin_lala')){
+                            return 25 - get.value(card);
+                        }
                         return Math.ceil(15*Math.random()) - get.value(card);
                     });
                     // .chooseToDiscard('【酒域】：使用一张酒或流失一点体力','h',function(card){
@@ -18373,18 +18376,24 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 // return Math.random()+100;
                                 //后置位立马要动的优先翻。
                                 var diff_posi = target.dataset.position - _status.currentPhase.dataset.position;
+                                var multi = 1;
+                                if (diff_posi == 0){
+                                    multi = -1;
+                                }
                                 if (diff_posi<=0){
                                     diff_posi = diff_posi+8;
                                 }
-                                return get.threaten(target,player,true)*(8 - diff_posi)/8+target.countCards('h')-player.getDamagedHp();
+                                return get.threaten(target,player,true)*(8 - diff_posi)/8+(multi*target.countCards('h'))-player.getDamagedHp();
                             }
                             else{
                                 if (get.attitude(player, target)>0){
                                     var addi = 0;
+                                    var multi = 1;
                                     if (_status.currentPhase == target&&(get.attitude(player, target)+get.attitude(target,player)>4)){
-                                        addi = 5;
+                                        addi = 1.8;
+                                        multi = -1;
                                     }
-                                    return addi+get.attitude(player, target)-target.countCards('h')+player.getDamagedHp();
+                                    return addi+get.attitude(player, target)-(multi*target.countCards('h'))+player.getDamagedHp();
                                 }
                                 else{
                                     return -1;
