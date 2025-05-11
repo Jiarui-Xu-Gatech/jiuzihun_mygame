@@ -18532,7 +18532,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 if(get.tag(card,'damage')){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
-                                    if(target.hp==1) return [0.85,0.8];
+                                    if(target.hp==1&&!player.hasSkillTag('damageBonus',true,target)) return [0,3];
                                     if(target.isTurnedOver()){
                                         if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=3){
                                             return [0,3];
@@ -18683,18 +18683,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							if(player==_status.event.dying||!player.isTurnedOver()) return 3;
 						}
 					},
-					// effect:{
-					// 	target:function(card,player,target){
-					// 		if(card.name=='guiyoujie') return [0,0.5];
-					// 		if(target.isTurnedOver()){
-					// 			if(get.tag(card,'damage')){
-					// 				if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
-					// 				if(target.hp==1) return;
-					// 				return [1,target.countCards('h')/2];
-					// 			}
-					// 		}
-					// 	}
-					// },
+					effect:{
+						target:function(card,player,target){
+							if (get.tag(card,'recover') || get.tag(card,'save')){
+                                if(target.isTurnedOver()&&target.hp == 0&&player!=target){
+                                    return 0;
+                                }
+                            }
+						}
+					},
 				},
 			},
 
