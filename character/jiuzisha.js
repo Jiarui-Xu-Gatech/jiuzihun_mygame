@@ -44,7 +44,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:["male","wei",4,['zhenjiu_gui','qixing_gui','yunv_gui'],[]],
             moke:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],[]],
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
-            // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
+            tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong",'jiudan_tong'],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
             // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
             
@@ -82,6 +82,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guidouzi_z:'鬼斗子，东域和黑域区域鬼谷城的总督，甚是好酒，手下有五位极擅饮酒的女奴：陈英超、丁亚、彤欣、诗芸、佳男，加上他自己和贴身女伴千心云，总共七人，史称“鬼斗七星”，喝遍各色酒桌无敌手。其中以陈英超的豪放和丁亚的快酒尤其著名，江湖人称“黑白双煞”。对于这些女人，他总结出一套完整的驭女之术，赏罚分明，对乖的女人就宠着，对不乖的就予以惩罚，鬼斗子身边的女人都非常吃这一套。九昕儿拯救韩鑫时，途经鬼谷城，假扮成陪酒女，趁鬼斗子放松警惕时将其灌醉，当然她自己也喝了不少，然后拖着醉醺醺的身子来到鬼斗子家中，用海般的酒量和豪爽的酒品征服了五位女奴，将她们收服为南域五大将，只留下总督鬼斗子孑然一身。',
             moke:'摩可，绰号白眉烟鬼，西域千门最顶尖的千手之一，千术手法与欧若灵不相上下。有烟瘾，烟不离手，在牌局和战场上，善于运用浓烟遮蔽敌人的视线从而创造机会。在助韩鑫成为西域域主的奠基之战——于赌神广场举行的赌神大赛上，他手法形同鬼魅，虚虚实实，以假乱真，立下了汗马功劳！同时，他的烟雾也是危险的，只要他愿意，一点小火星就能将其瞬间引燃，星星火种，便可燎原！不过弥漫的浓浓黑烟散起烟尘也让人看不清前方。原文对他的描述：只见他一身灰色高领长袍，边角都带着羊毛绒边，下着褐色工装裤，脚蹬黑色长筒登山靴，身材高大魁梧，一头油亮的凌乱碎发在风中随意飘散，模样甚是潇洒；而且，他须发包括眉毛竟然全部净白！但他脸却是年轻人的脸，棱角分明的脸甚是俊朗，同样净白，不带一丝皱纹，一双漆黑如墨的眸子透着深邃，看着极有个性。他嘴里吊着一只棕褐色的大雪茄呼呼地抽着，嘴角时不时地吐着一朵一朵的烟圈，隔老远就能闻到一股子烟味儿，漫天飞舞的烟圈使得他浑身烟雾缭绕，给人一种神秘之感。',
             moke2:'摩可，绰号白眉烟鬼，西域千门最顶尖的千手之一，千术手法与欧若灵不相上下。有烟瘾，烟不离手，在牌局和战场上，善于运用浓烟遮蔽敌人的视线从而创造机会。在助韩鑫成为西域域主的奠基之战——于赌神广场举行的赌神大赛上，他手法形同鬼魅，虚虚实实，以假乱真，立下了汗马功劳！同时，他的烟雾也是危险的，只要他愿意，一点小火星就能将其瞬间引燃，星星火种，便可燎原！不过弥漫的浓浓黑烟散起烟尘也让人看不清前方。原文对他的描述：只见他一身灰色高领长袍，边角都带着羊毛绒边，下着褐色工装裤，脚蹬黑色长筒登山靴，身材高大魁梧，一头油亮的凌乱碎发在风中随意飘散，模样甚是潇洒；而且，他须发包括眉毛竟然全部净白！但他脸却是年轻人的脸，棱角分明的脸甚是俊朗，同样净白，不带一丝皱纹，一双漆黑如墨的眸子透着深邃，看着极有个性。他嘴里吊着一只棕褐色的大雪茄呼呼地抽着，嘴角时不时地吐着一朵一朵的烟圈，隔老远就能闻到一股子烟味儿，漫天飞舞的烟圈使得他浑身烟雾缭绕，给人一种神秘之感。',
+            tongxin:'彤欣，南域五大将之一，九昕儿于鬼斗子家中收服的名将，别号“脱衣舞女”，非常擅长热舞。她在清醒和喝醉之后简直判若两人，喝醉了浑身发热特别喜欢脱衣服。她的臀部丰满健硕，手感异常好，喝醉了：“你敢摸我多少下屁股，我就敢喝多少缸酒。”喝醉后屁股气味异常骚气，不是一般人能承受的，夹杂着酒精的致命气息，那些沉迷她美色之人很多都被悄无声息，温水煮青蛙式地熏死了。她酒胆也很大，什么酒都敢尝试一下，敬酒时怎么都不愿将酒盏杯沿低过对方，宁可因此而罚酒10杯！一次宴会她罚酒就能罚30几大杯，但最后依然将在场的每一位都统统灌倒，肚皮撑得滚挺，肥硕的大腿和臀部的肌肤由于喝得太多，走路时踉跄泛着别样醉意的光。',
             monian:'墨念，七大罪中的懒惰之罪，地狱灵魂体为一只混沌熊猫——贝尔芬格。非常慵懒，几乎懒得从地狱来到大陆，最爱吃的食物是鱼。降生北域之后就在昏睡之中，热衷于将事情交给他人来解决而自己就负责养精蓄锐，但他在沉睡时也很难被伤害到。',
         },
 		characterTitle:{
@@ -18574,14 +18575,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay(1.3);
                     if (get.color(trigger.card)=='black'&&trigger.source&&trigger.source.isAlive()&&trigger.source.sex == 'male'){
                         player.popup('zuitun_tong','soil');
-                        game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
+                        game.playAudio('skill','zuitun_tong'+2);
                         game.log(player,'发动了','#g【醉臀】');
                         player.line(trigger.source,'green');
                         trigger.source.draw('nodelay');
                     }
                     else{
                         player.popup('zuitun_tong','soil');
-                        game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
+                        game.playAudio('skill','zuitun_tong'+1);
                         game.log(player,'发动了','#g【醉臀】');
                         if ((player.getHistory('damage',function(evt){
 						    return evt!=event
@@ -18594,6 +18595,94 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
 				},
             },
+
+
+			jiudan_tong:{
+				audio:2,
+				enable:'chooseToUse',
+                direct:true,
+				filter:function(event,player){
+					if(!player.classList.contains('turnedover')) return false;
+					return event.filterCard({name:'jiu',isCard:true},player,event);
+				},
+				content:function(){
+                    player.popup('jiudan_tong','water');
+                    game.playAudio('skill','jiudan_tong'+Math.ceil(2*Math.random()));
+                    game.log(player,'发动了','#g【酒胆】');
+					if(_status.event.getParent(2).type=='dying'){
+						event.dying=player;
+						event.type='dying';
+					}
+					player.turnOver();
+					player.useCard({name:'jiu',isCard:true,cardid:"jiudan_tong_id"},player).set('audio',false);
+				},
+				ai:{
+					save:true,
+					skillTagFilter:function(player){
+						return player.hp<=0&&player.isTurnedOver();
+					},
+					order:5,
+					result:{
+						player:function(player){
+							if(_status.event.parent.name=='phaseUse'){
+								if(player.countCards('h','jiu')>0) return 0;
+								if(player.getEquip('zhuge')&&player.countCards('h','sha')>1) return 0;
+								if(!player.countCards('h','sha')) return 0;
+								var targets=[];
+								var target;
+								var players=game.filterPlayer();
+								for(var i=0;i<players.length;i++){
+									if(get.attitude(player,players[i])<0){
+										if(player.canUse('sha',players[i],true,true)){
+											targets.push(players[i]);
+										}
+									}
+								}
+								if(targets.length){
+									target=targets[0];
+								}
+								else{
+									return 0;
+								}
+								var num=get.effect(target,{name:'sha'},player,player);
+								for(var i=1;i<targets.length;i++){
+									var num2=get.effect(targets[i],{name:'sha'},player,player);
+									if(num2>num){
+										target=targets[i];
+										num=num2;
+									}
+								}
+								if(num<=0) return 0;
+								var e2=target.getEquip(2);
+								if(e2){
+									if(e2.name=='tengjia'){
+										if(!player.countCards('h',{name:'sha',nature:'fire'})&&!player.getEquip('zhuque')) return 0;
+									}
+									if(e2.name=='renwang'){
+										if(!player.countCards('h',{name:'sha',color:'red'})) return 0;
+									}
+									if(e2.name=='baiyin') return 0;
+								}
+								if(player.getEquip('guanshi')&&player.countCards('he')>2) return 1;
+								return target.countCards('h')>3?0:1;
+							}
+							if(player==_status.event.dying||!player.isTurnedOver()) return 3;
+						}
+					},
+					// effect:{
+					// 	target:function(card,player,target){
+					// 		if(card.name=='guiyoujie') return [0,0.5];
+					// 		if(target.isTurnedOver()){
+					// 			if(get.tag(card,'damage')){
+					// 				if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
+					// 				if(target.hp==1) return;
+					// 				return [1,target.countCards('h')/2];
+					// 			}
+					// 		}
+					// 	}
+					// },
+				},
+			},
 
 
 
@@ -19604,7 +19693,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player.chooseTarget("ta流失体力");
                     "step 1"
 					if(result.bool){
-                        result.targets[0].loseHp(10);
+                        result.targets[0].loseHp(5);
                         
 					}
 				},
@@ -20683,10 +20772,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             
             tongxin:"彤欣",
             "jiuhan_tong":"酒酣",
-            "jiuhan_tong_info":"当你受到伤害后，可以令一名角色翻面，然后你翻面并摸2*X张牌，并将X张牌交给该角色（X为你已损失的体力值）。",
+            "jiuhan_tong_info":"当你受到伤害后，可以选择令一名角色翻面，若如此做，则你也翻面并摸你已损失体力值两倍数量的牌，然后若你选择翻面的角色不为自己，则你选择你已损失体力值数量的牌交给该角色。",
             "zuitun_tong":"醉臀",
             "zuitun_tong_info":"锁定技，当你受到牌造成的伤害时，若伤害来源为男性角色且此牌为黑色，则伤害来源摸一张牌；否则，若此伤害是你本回合首次受到的伤害，你回复一点体力，若非首次伤害，你摸一张牌。",
-
+            "jiudan_tong":"酒胆",
+            "jiudan_tong_info":"当你需要使用【酒】时，若你的武将牌背面朝上，你可以翻面，视为使用一张【酒】。",
 
             monian:"墨念",
             "lanyong_mo":"懒慵",

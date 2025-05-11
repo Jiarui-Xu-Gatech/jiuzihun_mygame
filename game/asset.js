@@ -3437,6 +3437,15 @@ window.noname_asset_list=[
 	'audio/die/monian.mp3',
 
 
+	'audio/skill/jiuhan_tong1.mp3',
+	'audio/skill/jiuhan_tong2.mp3', 
+	'audio/skill/zuitun_tong1.mp3', 
+	'audio/skill/zuitun_tong2.mp3', 
+	'audio/skill/jiudan_tong1.mp3',
+	'audio/skill/jiudan_tong2.mp3', 
+	'audio/die/tongxin.mp3',
+
+
 	
 	
 	'font/huangcao.ttf',
