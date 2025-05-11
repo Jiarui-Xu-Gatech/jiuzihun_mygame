@@ -18513,6 +18513,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
 				},
 				ai:{
+                    expose:0.45,
+                    threaten:3.5,
 					maixie:true,
 					maixie_hp:true,
 					effect:{
@@ -18593,6 +18595,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             trigger.player.draw('nodelay');
                         }
                     }
+				},
+                ai:{
+                    threaten:0.4,
 				},
             },
 
