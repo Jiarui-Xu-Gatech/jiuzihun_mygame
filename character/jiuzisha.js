@@ -3871,47 +3871,84 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             nulian_lan:{
                 audio:2,
                 enable:"phaseUse",
-                usable:1,
+                // usable:1,
                 frequent:true,
+                direct:true,
                 prompt:"你可以展示自己的一张手牌，然后展示一名拥有“奴”标记的其他角色的至多四张手牌。其展示的牌中：每有一张颜色相同，你摸一张牌；每有一张点数相同，你回复1点体力。",
                 promptNoCenter:true,
                 group:['nulian_target_lan','nulian_use_lan'],
                 filter:function(event,player){
+                    if (player.hasSkill('nulian_limit')) return false;
                     var has = game.hasPlayer(function(current){
                         return current!=player&&current.countCards('h')>0&&current.hasMark('leinu_lan_mark');
                     });
                     return has&&player.countCards('h')>0;
                 },
-                filterTarget:function(event,player,target){
-                    return target!=player&&target.countCards('h')>0&&target.hasMark('leinu_lan_mark');
-                },
-                filterCard:true,
-                selectCard:function(){
-                    return [1,1];
-                },
-                check:function(){return 1},
-                discard:false,
-                lose:false,
+                // filterTarget:function(event,player,target){
+                //     return target!=player&&target.countCards('h')>0&&target.hasMark('leinu_lan_mark');
+                // },
+                // filterCard:true,
+                // selectCard:function(){
+                //     return [1,1];
+                // },
+                // check:function(){return 1},
+                // discard:false,
+                // lose:false,
                 content:function(){
                     'step 0'
-                    event.colors=[];
-                    event.nums=[];
-                    event.nulianCard = cards[0];
-                    for(var i=0;i<cards.length;i++){
-                        event.colors.push(get.color(cards[i]));
-                        event.nums.push(get.number(cards[i]));
-                    }
-                    player.showCards(cards);
+                    player.chooseCardTarget({
+						position:'h',
+						filterCard:true,
+						selectCard:[1,1],
+						filterTarget:function(event,player,target){
+                            return target!=player&&target.countCards('h')>0&&target.hasMark('leinu_lan_mark');
+                        },
+						ai1:function(card){
+                            return Math.random();
+						},
+						ai2:function(target){
+
+                            if (get.attitude(player,target)>0){
+                                return Math.min(target.countCards('h'),4) - 0.5+0.05*Math.random();
+                            }
+                            else if (get.attitude(player,target)<0){
+                                return Math.min(target.countCards('h'),4) + 0.5+0.05*Math.random();
+                            }
+                            else{
+                                return Math.min(target.countCards('h'),4)+0.05*Math.random();
+                            }
+						},
+						prompt:"奴恋",
+                        prompt2:"你可以展示自己的一张手牌，然后展示一名拥有“奴”标记的其他角色的至多四张手牌。其展示的牌中：每有一张颜色相同，你摸一张牌；每有一张点数相同，你回复1点体力。",
+					});
                     'step 1'
-                    player.choosePlayerCard(target,'h',[1,4],'【奴恋】：请选择'+get.translation(target)+'至多四张手牌展示').ai=function(){return 0.1+Math.random()};
+                    if (result.bool){
+                        var cards = result.cards;
+                        event.target = result.targets[0];
+                        player.logSkill('nulian_lan',event.target);
+                        player.addTempSkill('nulian_limit');
+                        event.colors=[];
+                        event.nums=[];
+                        event.nulianCard = cards[0];
+                        for(var i=0;i<cards.length;i++){
+                            event.colors.push(get.color(cards[i]));
+                            event.nums.push(get.number(cards[i]));
+                        }
+                        player.showCards(cards);
+                    }
+                    else{
+                        event.finish();
+                    }
                     'step 2'
+                    player.choosePlayerCard(event.target,'h',[1,4],'【奴恋】：请选择'+get.translation(event.target)+'至多四张手牌展示').ai=function(){return 0.1+Math.random()};
+                    'step 3'
                     event.cards2=result.cards.slice(0);
-                    target.showCards(event.cards2,get.translation(player)+'展示'+get.translation(target)+'的'+get.cnNumber(event.cards2.length)+'张手牌');
+                    event.target.showCards(event.cards2,get.translation(player)+'展示'+get.translation(event.target)+'的'+get.cnNumber(event.cards2.length)+'张手牌');
                     event.drawNum = 0;
                     event.drawTrueCards = [];
                     event.recoverNum = 0;
                     event.recoverTrueCards = [];
-                    'step 3'
+                    'step 4'
                     for (var i = 0; i < event.cards2.length; i++){
                         var card = event.cards2[i];
                         if(event.colors.contains(get.color(card))){
@@ -3923,7 +3960,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             event.recoverNum++;
                         }
                     }
-                    'step 4'
+                    'step 5'
                     if (event.drawNum > 0){
                         game.log(event.drawTrueCards,'与',event.nulianCard,'颜色相同，',player,'摸'+get.cnNumber(event.drawNum)+'张牌');
                         player.draw(event.drawNum);
@@ -3938,15 +3975,28 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     order:15,
                     threaten:1.5,
                     result:{
-                        target:function(player,target){
-                            return -target.countCards('h');
-                        },
+                        // target:function(player,target){
+                        //     if (get.attitude(player,target)==0){
+                        //         return target.countCards('h');
+                        //     }
+                        //     if (get.attitude(player,target)>0){
+                        //         return -100*target.countCards('h')/get.attitude(player,target);
+                        //     }
+                        //     else{
+                        //         return target.countCards('h');
+                        //     }
+                            
+                        // },
                         player:function(player,target){
-                            if (player.countCards('h')> 0) return 1;
+                            if (player.countCards('h')> 0) return 10;
                             return 0;
                         },
                     },
                 },
+            },
+
+            nulian_limit:{
+                forced:true,
             },
 
 
@@ -18532,7 +18582,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 if(get.tag(card,'damage')){
                                     if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
                                     if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
-                                    if(target.hp==1&&!player.hasSkillTag('damageBonus',true,target)) return [0,3];
+                                    if(target.hp==1&&!player.hasSkillTag('damageBonus',true,target)&&target.hasSkill('jiudan_tong')) return [0,3];
                                     if(target.isTurnedOver()){
                                         if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=3){
                                             return [0,3];
