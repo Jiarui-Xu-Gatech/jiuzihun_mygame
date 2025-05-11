@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             // tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong"],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",1,['yuner_shiyan','yuner_selfDamage','yuner_die','mingwang','jibian_shou'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -3697,7 +3697,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.finish();
                     }
                     "step 4"
-                    if(result.card&&result.suit=='spade'&&result.bool==false){
+                    if(result.card&&(result.suit == 'spade'&&result.number > 1 && result.number < 10 || result.number == 12)&&result.bool==false){
                         game.playAudio('skill','jianyu_len'+Math.ceil(2*Math.random()));
                         game.playAudio('skill','anmou_enda'+3);
 						trigger.source.damage(3,'thunder','nosource');
@@ -4624,7 +4624,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                     });
                     "step 1"
-                    if (result.card&&get.number(result.card) > 9) {
+                    if (result.card&&result.number > 9) {
                         if (!player.storage.haoyin_tushan){
                             player.storage.haoyin_tushan = event.point;
                             player.syncStorage('haoyin_tushan');
@@ -18575,14 +18575,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (get.color(trigger.card)=='black'&&trigger.source&&trigger.source.isAlive()&&trigger.source.sex == 'male'){
                         player.popup('zuitun_tong','soil');
                         game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
-                        game.log(player,'发动了','#g【臀肥】');
+                        game.log(player,'发动了','#g【醉臀】');
                         player.line(trigger.source,'green');
                         trigger.source.draw('nodelay');
                     }
                     else{
                         player.popup('zuitun_tong','soil');
                         game.playAudio('skill','zuitun_tong'+Math.ceil(2*Math.random()));
-                        game.log(player,'发动了','#g【臀肥】');
+                        game.log(player,'发动了','#g【醉臀】');
                         if ((player.getHistory('damage',function(evt){
 						    return evt!=event
                         }).length==0)){

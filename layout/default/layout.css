@@ -17,6 +17,11 @@ src: url('../font/STLITI.TTF') format('truetype');
 font-family: 'LishuCustom', 'KaiTi', cursive;
 }
 
+@font-face {
+font-family: 'xingkaiVS';
+src: url('../font/STXINGKA.TTF') format('truetype');
+}
+
 html {
 	width: 100%;
 	height: 100%;

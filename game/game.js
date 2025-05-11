@@ -31840,7 +31840,7 @@
 					rgba(255, 203, 0, 1) 0 0 10px,
 					rgba(255, 203, 0, 1) 0 0 10px
 				`;
-				VSText.style.fontFamily = '"xingkai", "KaiTi", cursive'; // 选一个艺术字体
+				VSText.style.fontFamily = '"xingkaiVS"'; // 选一个艺术字体
 				VSText.style.transition = 'all 0.5s';
 				ui.arena.appendChild(VSText);
 

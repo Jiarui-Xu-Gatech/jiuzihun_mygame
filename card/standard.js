@@ -1470,8 +1470,6 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					if(result.card&&result.suit!='heart'&&result.bool==false){
 						player.skip('phaseUse');
 					}
-					
-					
 				},
 				ai:{
 					basic:{
