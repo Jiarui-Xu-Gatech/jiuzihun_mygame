@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong",'jiudan_tong'],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','jiuwei_tushan','jibian_shou','yuner_jiedao'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -20135,8 +20135,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // game.playAudio('effect','tie');
 					// game.playAudio('effect','tie_music');
                     // game.tieAnimation(3000);
-                    // game.bestPlayerShow('chenyingchao',3000);
-                    game.neiVSzhu(3000);
+                    game.bestPlayerShow('chenyingchao',3000);
+                    // game.neiVSzhu(3000);
 					
 				},
             },

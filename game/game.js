@@ -31706,7 +31706,8 @@
 			game.broadcastAll(function(bestPlayer_name){
 				//画出玩家
 				var bestPlayer = ui.create.player(null,true);
-				bestPlayer.node.avatar.style.backgroundSize = 'cover';
+				// bestPlayer.node.avatar.style.backgroundSize = 'cover';
+				bestPlayer.node.avatar.style.backgroundSize = '100% auto';
 				bestPlayer.node.avatar.setBackgroundImage('image/character/'+bestPlayer_name+'.jpg');
 				bestPlayer.node.avatar.show();
 				var rand1=Math.round(0.2*100);
