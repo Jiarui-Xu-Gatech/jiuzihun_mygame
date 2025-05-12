@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong",'jiudan_tong'],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_neiVSzhu'],[]],
+            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','jiuwei_tushan'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -1082,6 +1082,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     result:{
                         target:function(player,target){
                             if(target&&target.isDying()) return 2;
+                            if (target.hasSkill('jiuyu_jiu')) return 2;
                             if(target&&!target.isPhaseUsing()) return 0;
                             if(lib.config.mode=='stone'&&!player.isMin()){
                                 if(player.getActCount()+1>=player.actcount) return 0;
@@ -1187,8 +1188,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"                   
                     event.currented.push(event.current);
                     event.current.animate('target');
-                    player.chooseToUse('【酒域】：使用一张【酒】或流失一点体力',{name:'jiu'}).set('ai',function(card){
+                    player.chooseToUse('【酒域】：使用一张【酒】或流失一点体力',{name:'jiu'}).set('ai1',function(card){
+                        if (card.name){
+                            if (card.name == 'jiu' || card.name == 'shan'){
+                                return 150 - get.value(card);
+                            }
+                            if (card.name == 'tao'){
+                                return 90 - get.value(card);
+                            }
+                        }
                         return 100 - get.value(card);
+                    }).set('filterTarget',function(card,player,target){
+                        return player == target;
+                    }).set('ai2',function(target){
+                        return 1;
                     });
                     "step 2"
                     event.result = result;
@@ -1201,7 +1214,27 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // player.line(event.current);
                     }
                     "step 3"
-                    event.current.chooseCard('【酒域】：使用一张【酒】或流失一点体力',1,'h',function(card){return get.name(card)=='jiu';}).set('ai',function(card){  
+                    // event.current.chooseCard('【酒域】：使用一张【酒】或流失一点体力',1,'h',function(card){return get.name(card)=='jiu';}).set('ai',function(card){  
+                    //     if (event.current.hasSkillTag('maihp')){
+                    //         return -10;
+                    //     }
+                    //     if (event.current.hasSkill('yujiu_heng')&&!event.current.hasSkill('yujiu_hp_heng')&&event.current.countCards('e')==0){
+                    //         return 25 - get.value(card);
+                    //     }
+                    //     if (event.current.hasSkill('leyin_lala')){
+                    //         return 25 - get.value(card);
+                    //     }
+                    //     return Math.ceil(15*Math.random()) - get.value(card);
+                    // });
+
+
+
+                    // .chooseToDiscard('【酒域】：使用一张酒或流失一点体力','h',function(card){
+                    //     return get.name(card) == 'jiu';
+                    // }).set('ai',function(card){
+                    //     return Math.ceil(100*Math.random())-get.value(card);
+                    // });
+                    event.current.chooseToUse('【酒域】：使用一张酒或流失一点体力',{name:'jiu'}).set('ai1',function(card){
                         if (event.current.hasSkillTag('maihp')){
                             return -10;
                         }
@@ -1211,16 +1244,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (event.current.hasSkill('leyin_lala')){
                             return 25 - get.value(card);
                         }
-                        return Math.ceil(15*Math.random()) - get.value(card);
+                        var cardV = 0;
+                        if (card.name){
+                            if (card.name == 'tao'){
+                                cardV = -3;
+                            }
+                        }
+                        return Math.ceil(15*Math.random()) - get.value(card)+cardV;
+                    }).set('filterTarget',function(card,player,target){
+                        return player == target;
+                    }).set('ai2',function(target){
+                        return 1;
                     });
-                    // .chooseToDiscard('【酒域】：使用一张酒或流失一点体力','h',function(card){
-                    //     return get.name(card) == 'jiu';
-                    // }).set('ai',function(card){
-                    //     return Math.ceil(100*Math.random())-get.value(card);
-                    // });
-                    // .chooseToUse('【酒域】：使用一张酒或流失一点体力',{name:'jiu'}).set('ai',function(card){
-                    //     return Math.ceil(100*Math.random()) - get.value(card);
-                    // });
                     "step 4"
                     event.result = result;
                     if(event.result.bool == false) {
@@ -1228,7 +1263,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.playAudio('skill','jiuyu_saoxing'+1);
                     }
                     else {
-                        event.current.useCard(result.cards[0],event.current);
+                        // event.current.useCard(result.cards[0],event.current);
                         game.playAudio('skill','jiuyin'+Math.ceil(2*Math.random()));
                     }
                     game.delay(0.5);
@@ -1353,6 +1388,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				trigger:{player:'useCardBefore'},
 				filter:function(event,player){
+                    if (event.cards&&event.cards.length == 1){
+                        return event.cards[0].name != 'sha';
+                    }
 					return event.card.name!='sha'&&event.cards.length > 0;
 				},
 				content:function(event){
