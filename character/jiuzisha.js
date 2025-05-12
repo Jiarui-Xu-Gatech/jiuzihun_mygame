@@ -46,7 +46,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             moke2:["male","wu",3,['yanyin_moke','ningwu_moke','xinghuo_moke','huozhong_moke'],['unseen']],
             tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong",'jiudan_tong'],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','jiuwei_tushan'],[]],
+            yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','jiuwei_tushan','jibian_shou','yuner_jiedao'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -4991,14 +4991,36 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // direct:true,
                 enable:"chooseToUse",
                 filter:function(event,player,target){
+                    if (_status.event&&_status.event.parent&&_status.event.parent.name == 'phaseUse'){
+                        var newfilterTarget = function(card,player,target){
+                            return player!=target;
+                        }
+                        player.storage.jiuweiFilterTarget = newfilterTarget;
+                    }
+                    else if (_status.event&&_status.event.parent&&_status.event.parent.name == 'jiedao'){
+                        var newfilterTarget = function(card,player,target){
+                            return target==_status.event.sourcex;
+                        }
+                        player.storage.jiuweiFilterTarget = newfilterTarget;
+                    }
+                    else{
+                        player.storage.jiuweiFilterTarget = _status.event.filterTarget;
+                    }
                     return !player.hasSkill('jiuzhang_sha_ban') && //(player.countUsed('sha', true) < player.getCardUsable('sha'))&&
                     event.type != 'dying'&&
                     event.filterCard({ name: "sha" });
                 },
                 filterTarget:function (card,player,target){
-                    if(player==target) return false;
-                    return true;
-                    // return player.inRange(target);
+                    if (!player.storage.jiuweiFilterTarget){
+                        return player!=target;
+                    }
+                    else{
+                        return player.storage.jiuweiFilterTarget(card, player, target);
+                    }
+                },
+                complexSelect:false,
+                filterCard:function(card){
+                    return false;
                 },
                 selectTarget:function (){
                     return [1,1];
@@ -5023,11 +5045,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.log('#g【九尾】','出杀判定成功');
                         player.useCard({name:'sha',isCard:true,cardid:"jiuwei_useSha_tushan_id"},target,false);
                         player.storage.successSha = true;
+                        // event.finish();
                         // result = {bool:true}; 
                     } 
                     else {
                         game.log('#g【九尾】','出杀判定失败');
                         player.storage.successSha = false;
+                        // event.cancel();
                         // result = {bool:false}; 
                     }
                 },
@@ -19930,6 +19954,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     var card=get.cardPile2(function(card){
                         return get.name(card)=='baiyin';
+                    });
+                    if (card){
+                        player.gain(card);
+                    }
+					
+				},
+                
+            },
+
+            yuner_jiedao:{
+                enable:"phaseUse",
+                content:function(){
+                    "step 0"
+                    var card=get.cardPile2(function(card){
+                        return get.name(card)=='jiedao';
                     });
                     if (card){
                         player.gain(card);
