@@ -19636,6 +19636,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 1'
                     if (result.bool){
                         player.logSkill('fuyun_tu',trigger.player,'thunder');
+                        game.playAudio('skill','ningwu_moke'+Math.ceil(2+2*Math.random()));
                         var number = Math.floor(trigger.player.countCards('h')/2);
                         event.allCards = trigger.player.getCards('h').randomGets(number);
                     }
