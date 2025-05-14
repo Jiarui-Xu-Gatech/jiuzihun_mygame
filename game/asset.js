@@ -3446,6 +3446,25 @@ window.noname_asset_list=[
 	'audio/die/tongxin.mp3',
 
 
+
+	'audio/skill/aoman_tu1.mp3',
+	'audio/skill/aoman_tu2.mp3', 
+	'audio/skill/aoman_tu3.mp3', 
+	'audio/skill/aoman_tu4.mp3', 
+	'audio/skill/xuebai_tu1.mp3', 
+	'audio/skill/xuebai_tu2.mp3', 
+	'audio/skill/tianyu_tu1.mp3', 
+	'audio/skill/tianyu_tu2.mp3', 
+	'audio/skill/tianyu_tu3.mp3', 
+	'audio/skill/fuyun_tu1.mp3', 
+	'audio/skill/fuyun_tu2.mp3', 
+	'audio/skill/fuyun_tu3.mp3', 
+	'audio/skill/pini_tu1.mp3', 
+	'audio/skill/pini_tu2.mp3', 
+	'audio/skill/pini_tu3.mp3', 
+	'audio/die/baixuetuhuang_t.mp3',
+
+
 	
 	
 	'font/huangcao.ttf',
@@ -3533,6 +3552,8 @@ window.noname_asset_list=[
 	'image/background/chengbao_bg.jpg',
 	'image/background/skyCastle_bg.jpg',
 	'image/background/lodge_bg.jpg',
+	'image/background/xuebai_bg.jpg',
+	'image/background/pini_bg.jpg',
 
 	
 	

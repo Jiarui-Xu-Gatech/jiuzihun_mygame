@@ -132,6 +132,8 @@ window.noname_package={
 		firelion_bg:'火狮',
 		chengbao_bg:'城堡',
 		mingwang2_bg:'冥界',
+		xuebai_bg:'血白',
+		pini_bg:'睥睨',
 		lodge_bg:'森林屋',
 		// planetarian_bg:'星梦',
 		// heaven_bg:'红烧',
