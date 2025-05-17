@@ -52,7 +52,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",50,['yuner_shiyan','yuner_selfDamage','yuner_die','aoman_tu','pini_tu'],[]],
+            // yuner:["female","qun",5,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','qinyin_jian_duo','weiyi_shou'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -4192,16 +4192,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if(result.control=='qinyin_jiashang'){
                         target.addSkill('qinyin_jia_duo');
-                        if (!target.hasSkill('qinyin_end')){
-                            target.addSkill('qinyin_end');
-                        }
+                        // if (!target.hasSkill('qinyin_end')){
+                        //     target.addSkill('qinyin_end');
+                        // }
                         game.log(player,'令',target,'直到下一个结束阶段之前造成伤害+1');
                     }
                     else{
                         target.addSkill('qinyin_jian_duo');
-                        if (!target.hasSkill('qinyin_end')){
-                            target.addSkill('qinyin_end');
-                        }
+                        // if (!target.hasSkill('qinyin_end')){
+                        //     target.addSkill('qinyin_end');
+                        // }
                         game.log(player,'令',target,'直到下一个结束阶段之前造成伤害-1');
                     }
 
@@ -4234,6 +4234,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 trigger:{source:'damageBegin1'},
                 forced: true,
+                locked:true,
                 filter: function (event, player) {
 					return true; // 对所有伤害事件生效
 				},
@@ -4244,7 +4245,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 ai:{
                     damageBonus:true,
-                }
+                },
+                group:"qinyin_end",
 
             },
 
@@ -4256,6 +4258,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 trigger:{source:'damageBegin4'},
                 forced: true,
+                locked:true,
                 filter: function (event, player) {
 					return true; // 对所有伤害事件生效
 				},
@@ -4287,11 +4290,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						}
 					},
 				},
+                group:"qinyin_end",
                 
 
             },
 
             qinyin_end:{
+                audio:false,
                 silent:true,
                 forced:true,
                 trigger:{player:'phaseJieshu'},
@@ -13337,6 +13342,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (result.bool){
                         var skills  = player.getSkillWithInfo();
                         skills.remove('weiyi_shou');
+                        if (skills.contains('jiu')){
+                            skills.remove('jiu');
+                        }
                         // var choices = [];
                         // for (var i = 0; i < skills.length; i++){
                         //     choices.push(get.translation(skills[i]));
@@ -13380,21 +13388,50 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 ai:{
                     threaten:1.7,
-                    effect:{
-                        target:function(card,player,target){
-                            if (get.tag(card,'damage')&&target.countSkillWithInfo()>1&&target.hp==1&&player.countCards('h')>7&&!player.hasSkillTag('jueqing')){
-                                if (Math.random()<0.8){
-                                    return 0;
-                                }
-                            }
-                        },
-                    },
+                    // effect:{
+                    //     target:function(card,player,target){
+                    //         if (get.tag(card,'damage')&&target.countSkillWithInfo()>1&&target.hp==1&&player.countCards('h')>7&&!player.hasSkillTag('jueqing')){
+                    //             if (Math.random()<0.8){
+                    //                 return 0;
+                    //             }
+                    //         }
+                    //     },
+                    // },
                 },
+                group:"weiyi_effect",
             },
 
             hanshou_skill:{
                 silent:true,
                 forced:true,
+            },
+
+            weiyi_effect:{
+                audio:false,
+                silent:true,
+                popup:false,
+                direct:true,
+                trigger:{
+                    target:"shaBefore",
+                },
+                forced:true,
+                filter:function(event,player){
+                    return false;
+                },
+                content:function(event){
+                    event.finish();
+                },
+                ai:{
+                    effect:{
+                        target:function(card,player,target){
+                            if (get.tag(card,'damage')&&target.countSkillWithInfo()>1&&(target.hp==1||(target.hp <= 2 && player.hasSkillTag('damageBonus',true,target)))&&player.countCards('h')>3&&!player.hasSkillTag('jueqing')){
+                                if (Math.random()<1-(1/(player.countCards('h')-2))){
+                                    return [0,0.05*(player.countCards('h')-2)];
+                                }
+                            }
+                        },
+                    },
+                },
             },
 
             
@@ -20366,7 +20403,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player.chooseTarget("ta打你");
                     "step 1"
 					if(result.bool){
-                        player.damage(2,result.targets[0]);
+                        player.damage(10,result.targets[0]);
 					}
 				},
             },
