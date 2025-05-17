@@ -710,11 +710,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 			},
 			checkPlayerResult:function(oneplayer){
-				if(_status.brawl&&_status.brawl.checkResult){
-					// _status.brawl.checkResult();
-					return false;
-				}
-				else if(_status.mode=='purple'){
+				// if(_status.brawl&&_status.brawl.checkResult){
+				// 	// _status.brawl.checkResult();
+				// 	return false;
+				// }
+				if(_status.mode=='purple'){
 					var winner=[];
 					var loser=[];
 					var ye=game.filterPlayer(function(current){
