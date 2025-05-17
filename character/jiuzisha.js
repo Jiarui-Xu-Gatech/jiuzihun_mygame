@@ -13333,7 +13333,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt2('weiyi_shou')).set('ai',function(event,player){
-                        if (get.attitude(event.source,player)>2){
+                        if (get.attitude(event.source,player)>3.8&&get.attitude(player,event.source)>3.8&&event.source==_status.currentPhase){
+                            return false;
+                        }
+                        if (get.attitude(event.source,player)>2&&get.attitude(player,event.source)>2&&Math.random()<0.4){
                             return false;
                         }
                         return player.countCards('h','tao')+player.countCards('h','jiu')+player.hp <= trigger.num;
