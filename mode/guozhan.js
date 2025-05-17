@@ -6860,6 +6860,24 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				}
 				game.showIdentity();
 			},
+			checkPlayerResult:function(oneplayer){
+				if(oneplayer.identity=='ye'){
+					if(oneplayer.classList.contains('dead')){
+						return false;
+					}
+					else{
+						return true;
+					}
+				}
+				else{
+					if(get.population(oneplayer.identity)==0){
+						return false;
+					}
+					else{
+						return true;
+					}
+				}
+			},
 			checkOnlineResult:function(player){
 				if(player.identity=='ye'){
 					return player.isAlive();

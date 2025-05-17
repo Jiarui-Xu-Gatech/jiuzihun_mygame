@@ -196,6 +196,25 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 				}
 			},
+			checkPlayerResult:function(oneplayer){
+				if(game.zhu.isAlive()){
+					if(game.players.length>1) return;
+					if(oneplayer==game.zhu){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				else {
+					if(oneplayer==game.zhu){
+						return false;
+					}
+					else{
+						return true;
+					}
+				}
+			},
 			checkOnlineResult:function(player){
 				if(game.zhu.isAlive()){
 					return player.identity=='zhu';

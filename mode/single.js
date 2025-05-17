@@ -317,6 +317,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			checkResult:function(){
 				game.over(game.me.isAlive());
 			},
+			checkPlayerResult:function(oneplayer){
+				return oneplayer.isAlive();
+			},
 			checkOnlineResult:function(player){
 				return player.isAlive();
 			},
