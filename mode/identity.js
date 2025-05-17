@@ -709,6 +709,124 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 				}
 			},
+			checkPlayerResult:function(oneplayer){
+				if(_status.brawl&&_status.brawl.checkResult){
+					// _status.brawl.checkResult();
+					return false;
+				}
+				else if(_status.mode=='purple'){
+					var winner=[];
+					var loser=[];
+					var ye=game.filterPlayer(function(current){
+						return ['rYe','bYe'].contains(current.identity);
+					});
+					var red=game.filterPlayer(function(current){
+						return ['rZhu','rZhong','bNei'].contains(current.identity);
+					});
+					var blue=game.filterPlayer(function(current){
+						return ['bZhu','bZhong','rNei'].contains(current.identity);
+					})
+					game.countPlayer2(function(current){
+						switch(current.identity){
+							case 'rZhu':
+								if(blue.length+ye.length==0) winner.push(current);
+								if(current.isDead()) loser.push(current);
+								break;
+							case 'rZhong': case 'bNei':
+								if(blue.length+ye.length==0) winner.push(current);
+								if(game.rZhu.isDead()) loser.push(current);
+								break;
+							case 'bZhu':
+								if(red.length+ye.length==0) winner.push(current);
+								if(current.isDead()) loser.push(current);
+								break;
+							case 'bZhong': case 'rNei':
+								if(red.length+ye.length==0) winner.push(current);
+								if(game.bZhu.isDead()) loser.push(current);
+								break;
+							default:
+								if(red.length+blue.length==0) winner.push(current);
+								else if(game.rZhu.isDead()&&game.bZhu.isDead()) loser.push(current);
+								break;
+						}
+					});
+					var winner2=winner.slice(0);
+					var loser2=loser.slice(0);
+					for(var i=0;i<winner.length;i++){
+						if(winner[i].isDead()) winner.splice(i--,1);
+					}
+					for(var i=0;i<loser.length;i++){
+						if(loser[i].isDead()) loser.splice(i--,1);
+					}
+					if(winner.length>0||loser.length==game.players.length){
+						game.broadcastAll(function(winner,loser){
+							_status.winner=winner;
+							_status.loser=loser;
+						},winner,loser);
+						if(loser.length==game.players.length){
+							// game.showIdentity();
+							return false;
+						}
+						else if(winner2.contains(oneplayer)){
+							// game.showIdentity();
+							if(loser2.contains(oneplayer)) return false;
+							else return true;
+						}
+						else{
+							// game.showIdentity();
+							return false;
+						}
+					}
+					return false;
+				}
+				if(!game.zhu){
+					if(get.population('fan')==0){
+						switch(oneplayer.identity){
+							case 'fan':return false;break;
+							case 'zhong':return true;break;
+							default:return false;break;
+						}
+					}
+					else if(get.population('zhong')==0){
+						switch(oneplayer.identity){
+							case 'fan':return true;break;
+							case 'zhong':return false;break;
+							default:return false;break;
+						}
+					}
+					return false;
+				}
+				// if(game.zhu.isAlive()&&get.population('fan')+get.population('nei')>0) return;
+				// if(game.zhong){
+				// 	game.zhong.identity='zhong';
+				// }
+				// game.showIdentity();
+				if(oneplayer.identity=='zhu'||oneplayer.identity=='zhong'||oneplayer.identity=='mingzhong'){
+					if(game.zhu.classList.contains('dead')){
+						return false;
+					}
+					else{
+						return true;
+					}
+				}
+				else if(oneplayer.identity=='nei'){
+					if(game.players.length==1&&oneplayer.isAlive()){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				else{
+					if((get.population('fan')+get.population('zhong')>0||get.population('nei')>1)&&
+						game.zhu.classList.contains('dead')){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+			},
 			checkOnlineResult:function(player){
 				if(_status.winner&&_status.loser){
 					if(_status.loser.length==game.players.length) return null;

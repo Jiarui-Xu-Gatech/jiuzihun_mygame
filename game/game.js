@@ -31256,6 +31256,10 @@
 					table.appendChild(tr);
 					for(i=0;i<game.players.length;i++){
 						var currentScore = 0;
+						//赢了的分高
+						if(game.checkPlayerResult&&game.checkPlayerResult(game.players[i])){
+							currentScore += 0.1;
+						}
 						tr=document.createElement('tr');
 						td=document.createElement('td');
 						td.innerHTML=get.translation(game.players[i]);
@@ -31338,6 +31342,10 @@
 					}
 					for(i=0;i<game.dead.length;i++){
 						var currentScore = 0;
+						//赢了的分高
+						if(game.checkPlayerResult&&game.checkPlayerResult(game.dead[i])){
+							currentScore += 0.1;
+						}
 						tr=document.createElement('tr');
 						td=document.createElement('td');
 						td.innerHTML=get.translation(game.dead[i]);
