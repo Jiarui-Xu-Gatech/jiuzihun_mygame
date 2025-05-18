@@ -4216,8 +4216,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     order:8.5,
                     result:{
                         target:function (player,target){
-                            var threatening = get.threaten(target,player,false);
-                            if (get.attitude(player, target) < 0) return threatening-100+get.attitude(player, target);
+                            var threatening = get.threaten(target,player,false)+target.countCards('h');
+                            if (get.attitude(player, target) < 0) return -threatening-100+get.attitude(player, target);
                             if (get.attitude(player, target) > 0) return 1+get.attitude(player, target);
                             return 0;
                         },
