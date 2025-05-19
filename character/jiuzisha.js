@@ -12218,12 +12218,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (goon&&trigger.player.hasSkillTag('maihp')&&trigger.player.hp>1){
                             return false;
                         }
+                        else if (get.attitude(player, trigger.player)>2&&trigger.player.hasSkillTag('maihp')&&trigger.player.hp>1){
+                            return true;
+                        }
                         if (goon&&trigger.player.hasSkill('weiyi_shou')){
                             if (trigger.player.countSkillWithInfo()>1){
                                 return true;
                             }
                         }
-                        else if (get.attitude(player, trigger.player)>2&&trigger.player.hasSkillTag('maihp')&&trigger.player.hp>1){
+                        if (goon&&player.hasSkill('qinyin_jian_duo')){
                             return true;
                         }
                         var current_player=_status.currentPhase;
@@ -13427,7 +13430,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     effect:{
                         target:function(card,player,target){
-                            if (get.tag(card,'damage')&&target.countSkillWithInfo()>1&&(target.hp==1||(target.hp <= 2 && player.hasSkillTag('damageBonus',true,target)))&&player.countCards('h')>3&&!player.hasSkillTag('jueqing')){
+                            if (get.tag(card,'damage')&&target.countSkillWithInfo()>1&&(target.hasSkill('huitong_shou_limit')||target.countCards('he')==0||target.countCards('he')<=1&&player.hasSkillTag('damageBonus',true,target))&&(target.hp==1||(target.hp <= 2 && player.hasSkillTag('damageBonus',true,target)))&&player.countCards('h')>3&&!player.hasSkillTag('jueqing')){
                                 if (Math.random()<1-(1/(player.countCards('h')-2))){
                                     return [0,0.05*(player.countCards('h')-2)];
                                 }
