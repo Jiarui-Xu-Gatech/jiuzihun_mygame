@@ -135,6 +135,7 @@ window.noname_package={
 		xuebai_bg:'血白',
 		pini_bg:'睥睨',
 		lodge_bg:'森林屋',
+		huoshan2_bg:'千觞',
 		// planetarian_bg:'星梦',
 		// heaven_bg:'红烧',
 		// kyoani_bg:'京都',

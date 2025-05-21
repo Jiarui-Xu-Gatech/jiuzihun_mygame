@@ -15293,7 +15293,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             player.addTempSkill('qianshang_background','phaseAfter');
                             player.storage.qianshang_background = game.getUpperBackgroundName('',player);
                             player.syncStorage('qianshang_background');
-                            game.createClearBackground('huoshan_bg',player);
+                            game.createClearBackground('huoshan2_bg',player);
                         }
                     }
                     else{
@@ -15475,7 +15475,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 onremove:function (player){
                     //改回背景
-                    if (game.getUpperBackgroundName('',player) == 'huoshan_bg'){
+                    if (game.getUpperBackgroundName('',player) == 'huoshan2_bg'){
                         game.createClearBackground(player.storage.qianshang_background,player);
                         player.storage.qianshang_background = '';
                     }

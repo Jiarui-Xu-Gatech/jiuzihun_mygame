@@ -3534,6 +3534,7 @@ window.noname_asset_list=[
 	'image/background/jiuyu_bg.jpg',
 	'image/background/yanjiang_bg.jpg',
 	'image/background/huoshan_bg.jpg',
+	'image/background/huoshan2_bg.jpg',
 	'image/background/mingwang_bg.jpg',
 	'image/background/mingwang2_bg.jpg',
 	'image/background/minghou_bg.jpg',
