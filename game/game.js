@@ -2716,7 +2716,7 @@
 								node.style.fontFamily=link;
 							}
 							else{
-								node.style.fontFamily="'STHeiti','SimHei','Microsoft JhengHei','Microsoft YaHei','WenQuanYi Micro Hei',Helvetica,Arial,sans-serif";
+								node.style.fontFamily="'STHeiti','SimHei','Microsoft JhengHei','Microsoft YaHei','WenQuanYi Micro Hei',Helvetica,Arial,sans-serif,MySymbolFont";
 							}
 							node.style.fontSize='20px';
 						},
@@ -25152,6 +25152,7 @@
 				content:function(){
 					trigger.cancel();
 					trigger.player.loseMaxHp(trigger.num).source=player;
+					game.playAudio('effect','loseMaxHp');
 				},
 			},
 			aozhan:{

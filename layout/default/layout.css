@@ -48,7 +48,7 @@ body {
 	overflow: hidden;
 	text-rendering: optimizeLegibility;
 	transform-origin: top left;
-	font-family: 'STHeiti','SimHei','Microsoft JhengHei','Microsoft YaHei','WenQuanYi Micro Hei',Helvetica,Arial,sans-serif
+	font-family: 'STHeiti','SimHei','Microsoft JhengHei','Microsoft YaHei','WenQuanYi Micro Hei','MySymbolFont',Helvetica,Arial,sans-serif
 }
 
 div {

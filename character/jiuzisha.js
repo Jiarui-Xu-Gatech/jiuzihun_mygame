@@ -47,12 +47,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             tongxin:["female","shu",4,["jiuhan_tong","zuitun_tong",'jiudan_tong'],[]],
             monian:["male","qun",4,["lanyong_mo","sanman_mo","shuaixing_mo"],[]],
             baixuetuhuang_t:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],[]],
+            shiyun_za:["female","shu",3,['mengguan_shi','manjiu_shi','haina_shi','tongyin_shi'],[]],
             
             
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",5,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','qinyin_jian_duo','weiyi_shou'],[]],
+            // yuner:["female","qun",'1/49',['yuner_shiyan','yuner_selfDamage','yuner_die','mengguan_shi','manjiu_shi'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -91,6 +92,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             tongxin:'彤欣，南域五大将之一，九昕儿于鬼斗子家中收服的名将，别号“脱衣舞女”，非常擅长热舞。她在清醒和喝醉之后简直判若两人，喝醉了浑身发热特别喜欢脱衣服。别人喝酒喝多了就不想再喝了，她却恰恰相反，喝多了更想喝，逮到人就开始对饮，直喝到双方都喝得倒地不起为止。她的臀部丰满健硕，手感异常好，喝醉了：“你敢摸我多少下屁股，我就敢喝多少缸酒。”喝醉后屁股气味异常骚气，不是一般人能承受的，夹杂着酒精的致命气息，那些沉迷她美色之人很多都被悄无声息，温水煮青蛙式地熏死了。她酒胆也很大，什么酒都敢尝试一下，敬酒时怎么都不愿将酒盏杯沿低过对方，宁可因此而罚酒10杯！一次宴会她罚酒就能罚30几大杯，但最后依然将在场的每一位都统统灌倒，肚皮撑得滚挺，肥硕的大腿和臀部的肌肤由于喝得太多，走路时踉跄泛着别样醉意的光。后师从王煜灵学习鲸吞江海的灌江之道！',
             monian:'墨念，七大罪中的懒惰之罪，地狱灵魂体为一只混沌熊猫——贝尔芬格。非常慵懒，几乎懒得从地狱来到大陆，最爱吃的食物是鱼。降生北域之后就在昏睡之中，热衷于将事情交给他人来解决而自己就负责养精蓄锐，但他在沉睡时也很难被伤害到。',
             baixuetuhuang_t:'白血兔皇，本名：诺诺·路西法，七大罪中的傲慢之罪，地狱灵魂体为一只骄傲的白兔。生性傲慢，几乎不想从地狱冥界来到大陆，因为她觉得大陆之人不配与她呼吸同样的空气！善用雷电之力，且在夜晚，尤其月圆之夜，实力最为恐怖，而在白天则力量较弱。',
+            shiyun_za:'诗芸，南域五大将之一，九昕儿于鬼斗子家中收服的名将',
         },
 		characterTitle:{
             jinshouzhen:"饕餮夫人",
@@ -5333,6 +5335,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}).length==0;
 				},
 				content:function(){
+                    game.delay(1);
 					if(player.getHistory('damage',function(evt){
 						return evt!=trigger
 					}).length % 2 == 1){
@@ -5558,7 +5561,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						var cards=result.cards;
                         // target.gain(cards,player,'giveAuto','bySelf');
                         target.gain(cards,player,'draw');
-                        target.addSkill('husao_handout_ning_end');
+                        target.addTempSkill('husao_handout_ning_end');
                         player.line(target,'green');
                         if(cards.length > target.hp){
                             target.turnOver();
@@ -19981,6 +19984,562 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
 
+            mengguan_shi:{
+                audio:2,
+                forced:false,
+                init:function(player,skill){
+					if(!player.storage.mengguan_shi) player.storage.mengguan_shi = 0;
+				},
+                intro:{
+                    name:"猛印记",
+                    content:function(storage, player) {
+                        var count = player.storage.mengguan_shi || 0;
+                        return `${count}个`;
+                    },
+                },
+                group:['mengguan_hurt_shi','mengguan_nohe_shi','mengguan_binsi_shi','mengguan_damage_shi'],
+
+            },
+
+            'mengguan_hurt_shi':{
+                audio:false,
+                direct:true,
+                frequent:true,
+                trigger:{
+                    player:"damageEnd",
+                },
+                filter:function(event,player){
+                    return event.num > 0&&player.countCards('h') > 0;
+                },
+                content:function(event){
+                    'step 0'
+                    event.remainNum = trigger.num;
+                    player.chooseBool(get.prompt('mengguan_shi'),'当你受到一点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。').set('ai',function(){
+                        var player=_status.event.player;
+                        if (player.countCards('h')==1&&player.countCards('h','tao')+player.countCards('h','jiu')>0){
+                            if (player.hp<=1&&Math.random()<0.75){
+                                return false;
+                            }
+                            if (Math.random()<0.5){
+                                return false;
+                            }
+                        }
+                        return true;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('mengguan_shi');
+                        player.chooseToDiscard(1,'h',true).set('ai',function(card){
+                            return 7.8 - get.value(card);
+                        });
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (result.bool){
+                        player.draw(1);
+                        if (!player.storage.mengguan_shi){
+                            player.storage.mengguan_shi = 0;
+                        }
+                        player.storage.mengguan_shi++;
+                        player.syncStorage('mengguan_shi');
+                        player.markSkill('mengguan_shi');
+                        event.remainNum--;
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    game.log(player,'获得1个猛印记');
+                    if (player.hasSkill('manjiu_shi')&&player.storage.mengguan_shi%2==1&&player.hp<player.maxHp){
+                        player.logSkill('manjiu_shi');
+                        player.recover(1);
+                    }
+                    'step 4'
+                    if (event.remainNum > 0&&player.countCards('h') > 0){
+                        player.chooseBool(get.prompt('mengguan_shi'),'当你受到一点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。').set('ai',function(){
+                            var player=_status.event.player;
+                            if (player.countCards('h')==1&&player.countCards('h','tao')+player.countCards('h','jiu')>0){
+                                if (player.hp<=1&&Math.random()<0.75){
+                                    return false;
+                                }
+                                if (Math.random()<0.5){
+                                    return false;
+                                }
+                            }
+                            return true;
+                        });
+                        event.goto(1);
+                    }
+                    else{
+                        event.finish();
+                    }
+                },
+                ai:{
+                    maixie_defend:true,
+                    threathen:0.2,
+                    skillTagFilter:function(player,tag){
+						if(tag=='maixie_defend'){
+							if(player.countCards('h')==0) return false;
+						}
+					},
+                },
+            },
+            
+            'mengguan_nohe_shi':{
+                audio:false,
+                direct:true,
+                frequent:true,
+                trigger:{player:'loseEnd'},
+				filter:function(event,player){
+					if(player.countCards('h')&&player.countCards('e')) return false;
+                    if (player.countCards('h')==0){
+                        for(var i=0;i<event.cards.length;i++){
+                            if(event.cards[i].original=='h') return true;
+                        }
+                    }
+					if (player.countCards('e')==0){
+                        for(var i=0;i<event.cards.length;i++){
+                            if(event.cards[i].original=='e') return true;
+                        }
+                    }
+					return false;
+				},
+				content:function(event){
+                    "step 0"
+					player.chooseBool(get.prompt('mengguan_shi'),'当你失去所有手牌或当你失去所有装备区的牌后，你可以获得一个“猛”印记。').set('ai',function(){
+                        return true;
+                    });
+                    "step 1"
+                    if (result.bool){
+                        player.logSkill('mengguan_shi');
+                        if (!player.storage.mengguan_shi){
+                            player.storage.mengguan_shi = 0;
+                        }
+                        var needAdd = 0;
+                        if (player.countCards('h')==0){
+                            for(var i=0;i<trigger.cards.length;i++){
+                                if(trigger.cards[i].original=='h'){
+                                    needAdd++;
+                                    break;
+                                }
+                            }
+                        }
+                        if (player.countCards('e')==0){
+                            for(var i=0;i<trigger.cards.length;i++){
+                                if(trigger.cards[i].original=='e'){
+                                    needAdd++;
+                                    break;
+                                }
+                            }
+                        }
+                        player.storage.mengguan_shi+=needAdd;
+                        player.syncStorage('mengguan_shi');
+                        player.markSkill('mengguan_shi');
+                        game.log(player,'获得'+needAdd+'个猛印记');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    "step 2"
+                    if (player.hasSkill('manjiu_shi')&&player.storage.mengguan_shi%2==1&&player.hp<player.maxHp){
+                        player.logSkill('manjiu_shi');
+                        player.recover(1);
+                    }
+
+				},
+				ai:{
+                    threaten:0.2,
+                    noh:true,
+                    noe:true,
+                    reverseEquip:true,
+					skillTagFilter:function(player,tag){
+						if(tag=='noh'){
+							if(player.countCards('h')!=1) return false;
+						}
+                        if(tag=='noe'||tag=='reverseEquip'){
+							if(player.countCards('e')!=1) return false;
+						}
+					},
+                    effect:{
+						target:function(card,player,target,current){
+                            if (target.hasSkillTag('noe')&&target.hasSkillTag('reverseEquip')){
+                                if(get.type(card)=='equip'&&!get.cardtag(card,'gifts')) return [1,1.5];
+                            }
+						}
+					},
+				},
+
+            },
+            
+            'mengguan_binsi_shi':{
+                audio:false,
+                direct:true,
+                frequent:true,
+                trigger:{
+					global:"dying",
+				},
+				content:function (event){
+                    'step 0'
+                    player.chooseBool(get.prompt('mengguan_shi',trigger.player),'当一名角色进入濒死状态时，你可以令其摸一张牌，若该角色不是你且你拥有“猛”印记，则你失去一个“猛”印记。').set('ai',function(){
+                        var player=_status.event.player;
+                        if (player==trigger.player){
+                            return true;
+                        }
+                        else{
+                            if (!player.storage.mengguan_shi||player.storage.mengguan_shi==0||player.hasSkill('manjiu_shi')&&player.storage.mengguan_shi%2==0&&player.hp<player.maxHp){
+                                return get.attitude(player,trigger.player)>0;
+                            }
+                            else{
+                                return get.attitude(player,trigger.player)>4;
+                            }
+                        }
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('mengguan_shi',trigger.player);
+                        if (!player.storage.mengguan_shi){
+                            player.storage.mengguan_shi = 0;
+                        }
+                        trigger.player.draw();
+                        if (player.storage.mengguan_shi > 0 && player!=trigger.player){
+                            player.storage.mengguan_shi--;
+                            player.syncStorage('mengguan_shi');
+                            if (player.storage.mengguan_shi == 0){
+                                player.unmarkSkill('mengguan_shi');
+                            }
+                            else{
+                                player.markSkill('mengguan_shi');
+                            }
+                            event.goto(2);
+                        }
+                        else{
+                            event.finish();
+                        }
+
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    game.log(player,'失去1个猛印记');
+                    if (player.hasSkill('manjiu_shi')&&player.storage.mengguan_shi%2==1&&player.hp<player.maxHp){
+                        player.logSkill('manjiu_shi');
+                        player.recover(1);
+                    }
+				},
+                ai:{
+                    expose:0.25,
+                },
+
+            },
+            
+            'mengguan_damage_shi':{
+                audio:false,
+                direct:true,
+                frequent:true,
+                trigger:{source:'damageBegin1'},
+                filter: function (event, player) {
+					return player.storage.mengguan_shi && player.storage.mengguan_shi>0; // 对所有伤害事件生效
+				},
+                content: function (event) {
+                    "step 0"
+                    player.chooseBool(get.prompt('mengguan_shi',trigger.player),'当你对一名角色造成伤害时，若你有“猛”印记，则你可以失去一个“猛”印记，令该角色摸一张牌，然后令此次伤害+1。').set('ai',function(target){
+                        if (get.attitude(player, trigger.player) < -4 || get.attitude(trigger.player,player) < -4){
+                            if (trigger.player.hasSkill('luoshen_liyun')&&trigger.player.countCards('hej')==0&&trigger.player.hp<=2){
+                                return false;
+                            }
+                            else{
+                                return true;
+                            }
+                        }
+                        else{
+                            return false;
+                        }
+                    });
+                    "step 1"
+                    if (result.bool) {
+                        player.logSkill('mengguan_shi',trigger.player,'fire');
+                        if (!player.storage.mengguan_shi){
+                            player.storage.mengguan_shi = 0;
+                        }
+                        if(trigger.num >= 1) {
+                            trigger.num++;
+                        }
+                        player.storage.mengguan_shi--;
+                        player.syncStorage('mengguan_shi');
+                        if (player.storage.mengguan_shi == 0){
+                            player.unmarkSkill('mengguan_shi');
+                        }
+                        else{
+                            player.markSkill('mengguan_shi');
+                        }
+                        trigger.player.draw();
+                        game.log(player,'失去1个猛印记');
+                        game.log(player,'猛灌了一大碗烈酒，亮着空碗底，打了个大酒嗝，泛着令人发呕的酒气，硬逼着',trigger.player,'也灌下去一碗，',trigger.player,'被醺灌得甚是难受，此次伤害+1');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (player.hasSkill('manjiu_shi')&&player.storage.mengguan_shi%2==1&&player.hp<player.maxHp){
+                        player.logSkill('manjiu_shi');
+                        player.recover(1);
+                    }
+                },
+                ai:{
+                    expose:0.25,
+                },
+
+            },
+            
+            manjiu_shi:{
+                audio:2,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:"phaseZhunbei",
+                },
+                filter: function (event, player) {
+					return player.storage.mengguan_shi && player.storage.mengguan_shi>0; 
+				},
+                content:function(event){
+                    player.logSkill('manjiu_shi');
+                    player.draw(2*player.storage.mengguan_shi);
+                    game.log(player,'清除'+player.storage.mengguan_shi+'个猛印记');
+                    player.storage.mengguan_shi = 0;
+                    player.syncStorage('mengguan_shi');
+                    player.unmarkSkill('mengguan_shi');
+                    
+                },
+                ai:{
+                    threathen:0.25,
+                },
+
+            },
+            
+            haina_shi:{
+                unique:true,
+				global:'haina_shi_other',
+				audio:2,
+            },
+
+            haina_shi_other:{
+                audio:false,
+                direct:true,
+                enable:'phaseUse',
+                promptNoCenter:true,
+				prompt:function(){
+					var player=_status.event.player;
+					var list=game.filterPlayer(function(target){
+						return target.hasSkill('haina_shi')&&player.canCompare(target);
+					});
+					var str='和'+get.translation(list);
+					if(list.length>1) str+='中的一人';
+					str+='进行拼点。若你没赢，其可以获得两张拼点牌。否则你和其分别收回拼点牌然后你可以令其对一名角色造成1点伤害。';
+					return str;
+				},
+				filter:function(event,player){
+					if(player.countCards('h')==0) return false;
+					return game.hasPlayer(function(target){
+						return target.hasSkill('haina_shi')&&player.canCompare(target);
+					});
+				},
+				filterTarget:function(card,player,target){
+					return target.hasSkill('haina_shi')&&player.canCompare(target);
+				},
+				clearTime:true,
+				prepare:function(cards,player,targets){
+					targets[0].logSkill('haina_shi');
+				},
+				usable:1,
+				content:function(){
+					"step 0"
+                    event.forced=true;
+					"step 1"
+					player.chooseToCompare(target,function(card){
+						if(card.name=='du') return 20;
+						var player=get.owner(card);
+						var target=_status.event.getParent().target;
+						if(player!=target&&get.attitude(player,target)>0){
+							return -get.number(card);
+						}
+						return get.number(card);
+					}).set('preserve','lose');
+					"step 2"
+					if(result.bool==false){
+						var list=[];
+						if(get.position(result.player)=='d') list.push(result.player);
+						if(get.position(result.target)=='d') list.push(result.target);
+						if(!list.length) event.finish();
+						else{
+							event.list=list;
+							target.chooseBool('是否获得'+get.translation(list)+'？').ai=function(){
+								return get.value(list)>0;
+							};
+                            event.goto(3);
+						}
+					}
+					else{
+                        var list=[];
+						if(get.position(result.player)=='d') {
+                            player.$gain2(result.player,false);
+                            game.log(player,'收回拼点牌',result.player);
+                            player.gain(result.player).set('log',false);
+                        }
+						if(get.position(result.target)=='d') {
+                            target.$gain2(result.target,false);
+                            game.log(target,'收回拼点牌',result.target);
+                            target.gain(result.target).set('log',false);
+                        }
+                        event.shiyun = target;
+                        player.chooseTarget(get.translation('haina_shi'),'你可以选择一名角色，令'+get.translation(target)+'对其造成1点伤害。',function(event,player,current){
+                            return current.isAlive();
+                        }).set('ai',function(target2){
+                            return -get.attitude(player,target2);
+                        });
+                        event.goto(4);
+						
+                    }
+					"step 3"
+					if(result.bool) target.gain(event.list,'gain2');
+                    event.finish();
+                    "step 4"
+                    if (result.bool&&result.targets.length>0){
+                        event.shiyun.logSkill('haina_shi',result.targets[0]);
+                        result.targets[0].damage(1,event.shiyun);
+                    }
+                    event.finish();
+
+				},
+				ai:{
+					basic:{
+						order:1
+					},
+					expose:0.2,
+					result:{
+						target:function(player,target){
+							if(player.countCards('h','du')&&get.attitude(player,target)<0) return -1;
+							if(player.countCards('h')<=player.hp) return 0;
+							var maxnum=0;
+							var cards2=target.getCards('h');
+							for(var i=0;i<cards2.length;i++){
+								if(cards2[i].number>maxnum){
+									maxnum=cards2[i].number;
+								}
+							}
+							if(maxnum>10) maxnum=10;
+							if(maxnum<5&&cards2.length>1) maxnum=5;
+							var cards=player.getCards('h');
+							for(var i=0;i<cards.length;i++){
+								if(cards[i].number<maxnum) return 1;
+							}
+							return 0;
+						}
+					}
+				},
+            },
+            
+            tongyin_shi:{
+                audio:2,
+				enable:'phaseUse',
+				viewAs:{name:'wanjian'},
+                init:function(player,skill){
+					if(!player.storage.tongyin_shi) player.storage.tongyin_shi = 0;
+				},
+                filter:function(event,player){
+                    if (player.hasSkill('tongyin_shi_limit')||player.countCards('h')==0) return false;
+                    return true;
+                },
+				filterCard:function(card,player){
+					return true;
+				},
+				selectCard:[1,Infinity],
+				complexCard:true,
+				check:function(card){
+					var player=_status.event.player;
+					var targets=game.filterPlayer(function(current){
+						return player.canUse('wanjian',current);
+					});
+					// var num=0;
+					// for(var i=0;i<targets.length;i++){
+					// 	var eff=get.sgn(get.effect(targets[i],{name:'wanjian'},player,player));
+					// 	if(targets[i].hp==1){
+					// 		eff*=1.5;
+					// 	}
+					// 	num+=eff;
+					// }
+					// if(!player.needsToDiscard(-1)){
+					// 	if(targets.length>=7){
+					// 		if(num<2) return 0;
+					// 	}
+					// 	else if(targets.length>=5){
+					// 		if(num<1.5) return 0;
+					// 	}
+					// }
+					return 6-get.value(card);
+				},
+                group:["tongyin_shi_after"],
+				ai:{
+                    threaten:2.5,
+					basic:{
+						order:1,
+					}
+				},
+            },
+
+
+            tongyin_shi_after:{
+                audio:false,
+                direct:true,
+                forced:true,
+                trigger:{
+                    source:"damageEnd",
+                },
+                filter:function(trigger,player){
+                    if(player!=_status.currentPhase||player.hasSkill('tongyin_shi_limit')||!trigger.card||trigger.card.name!='wanjian') return false;
+                    if (trigger.parent&&trigger.parent.skill&&trigger.parent.skill=="tongyin_shi"){
+                        return true;
+                    }
+                    return false;
+                },
+                content:function(event){
+                    if (trigger.cards&&trigger.cards.length>0){
+                        player.addTempSkill('tongyin_shi_limit');
+                        if (!player.hasSkill('tongyin_shi_phaseJieshu')){
+                            player.addSkill('tongyin_shi_phaseJieshu');
+                        }
+                        player.storage.tongyin_shi = trigger.cards.length;
+                        player.syncStorage('tongyin_shi');
+                    }
+                    
+                },
+            },
+
+            tongyin_shi_phaseJieshu:{
+                audio:false,
+                direct:true,
+                forced:true,
+                trigger:{
+                    player:"phaseJieshu",
+                },
+                filter:function(event,player){
+                    return player.storage.tongyin_shi&&player.storage.tongyin_shi>0;
+                },
+                content:function(event){
+                    player.logSkill('tongyin_shi');
+                    player.draw(player.storage.tongyin_shi);
+                    player.storage.tongyin_shi = 0;
+                    player.syncStorage('tongyin_shi');
+                },
+            },
+
+            tongyin_shi_limit:{
+                forced:true,
+            },
+
+
 
             yuner_shiyan:{
                 // mark:true,
@@ -20409,7 +20968,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player.chooseTarget("ta打你");
                     "step 1"
 					if(result.bool){
-                        player.damage(10,result.targets[0]);
+                        player.damage(2,result.targets[0]);
 					}
 				},
             },
@@ -20478,6 +21037,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
             },
 
+            yuner_discardAll:{
+                enable:"phaseUse",
+                filter:function(event,player){
+					return true;
+				},
+				content:function(){
+                    "step 0"
+					player.chooseTarget("然ta弃掉所有手牌和装备牌");
+                    "step 1"
+					if(result.bool){
+                        result.targets[0].discard(result.targets[0].getCards('he'));
+					}
+				},
+            },
+
             yuner_muma:{
                 enable:"phaseUse",
                 content:function(){
@@ -20537,6 +21111,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 
             },
+
+            
 
 
             yuner_muniu_start_kaer:{
@@ -21493,6 +22069,23 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名未因此技能扣置过牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
             pini_tu2:"睥睨",
             pini_tu2_bg:'✧',
+
+
+            shiyun_za:"诗芸",
+            'mengguan_shi':"猛灌",
+            mengguan_shi_bg:'猛',
+            'mengguan_shi_info':"猛灌",
+            'mengguan_hurt_shi':"猛灌",
+            'mengguan_nohe_shi':"猛灌",
+            'mengguan_binsi_shi':"猛灌",
+            'mengguan_damage_shi':"猛灌",
+            'manjiu_shi':"慢酒",
+            'manjiu_shi_info':"慢酒",
+            'haina_shi':"海纳",
+            'haina_shi_info':"海纳",
+            haina_shi_other:"✧海纳",
+            'tongyin_shi':"痛饮",
+            'tongyin_shi_info':"痛饮",
 
             
             yuner:"允儿",
