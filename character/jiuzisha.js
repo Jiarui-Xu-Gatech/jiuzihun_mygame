@@ -92,7 +92,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             tongxin:'彤欣，南域五大将之一，九昕儿于鬼斗子家中收服的名将，别号“脱衣舞女”，非常擅长热舞。她在清醒和喝醉之后简直判若两人，喝醉了浑身发热特别喜欢脱衣服。别人喝酒喝多了就不想再喝了，她却恰恰相反，喝多了更想喝，逮到人就开始对饮，直喝到双方都喝得倒地不起为止。她的臀部丰满健硕，手感异常好，喝醉了：“你敢摸我多少下屁股，我就敢喝多少缸酒。”喝醉后屁股气味异常骚气，不是一般人能承受的，夹杂着酒精的致命气息，那些沉迷她美色之人很多都被悄无声息，温水煮青蛙式地熏死了。她酒胆也很大，什么酒都敢尝试一下，敬酒时怎么都不愿将酒盏杯沿低过对方，宁可因此而罚酒10杯！一次宴会她罚酒就能罚30几大杯，但最后依然将在场的每一位都统统灌倒，肚皮撑得滚挺，肥硕的大腿和臀部的肌肤由于喝得太多，走路时踉跄泛着别样醉意的光。后师从王煜灵学习鲸吞江海的灌江之道！',
             monian:'墨念，七大罪中的懒惰之罪，地狱灵魂体为一只混沌熊猫——贝尔芬格。非常慵懒，几乎懒得从地狱来到大陆，最爱吃的食物是鱼。降生北域之后就在昏睡之中，热衷于将事情交给他人来解决而自己就负责养精蓄锐，但他在沉睡时也很难被伤害到。',
             baixuetuhuang_t:'白血兔皇，本名：诺诺·路西法，七大罪中的傲慢之罪，地狱灵魂体为一只骄傲的白兔。生性傲慢，几乎不想从地狱冥界来到大陆，因为她觉得大陆之人不配与她呼吸同样的空气！善用雷电之力，且在夜晚，尤其月圆之夜，实力最为恐怖，而在白天则力量较弱。',
-            shiyun_za:'诗芸，南域五大将之一，九昕儿于鬼斗子家中收服的名将',
+            shiyun_za:'诗芸，南域五大将之一，九昕儿于鬼斗子家中收服的名将。她是五大将中身姿最小巧玲珑的，但别看个子小，她酒量惊人，喝酒很慢但也很多，实实在在，酒量在五大将中排名第三，仅次于丁亚，有时甚至能喝倒丁亚，因为她毅力极强，除非远超极限，否则一定要放倒对手才肯罢休，曾经一怒之下一人单挑一整个酒店的客人，猛灌下去堆成小山一般的烈酒后，她还依旧并拢大腿站立着，并说，谁拍她的肚子说她还能喝多少瓶，她就要喝10倍这个数字，正是：海纳百川，有容乃大！后被九昕儿赐予一柄开酒长枪，追随陈英超，与丁亚，彤欣，佳男一同去镇守西北荒芜之地。与陈英超最为亲近，后师从她学习豪饮烈酒的奥义！自己发展出一套痛饮之法和海纳之道，令酒量能在喝慢酒时几何级数地增长！',
         },
 		characterTitle:{
             jinshouzhen:"饕餮夫人",
@@ -111,7 +111,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return true;
                 },
                 frequent:true,
-                direct:false,
+                direct:true,
                 content:function(){
                     "step 0"
                     // 询问玩家是否发动技能
@@ -122,7 +122,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if(result.bool){
                         // 玩家选择发动技能
-                        // player.logSkill('jiuyou'); // 显示技能触发信息
+                        player.logSkill('jiuyou'); // 显示技能触发信息
                         player.draw(); // 玩家摸一张牌
                     }
                 },
@@ -140,7 +140,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     global:["useCard","judge"],
                 },
                 frequent:true,
-                direct:false,
+                direct:true,
                 popup:false,
                 //priority:0,
                 filter:function (event, player) {
@@ -1884,7 +1884,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                     //改变背景
                     if (game.getUpperBackgroundName('',player) != 'honglian_bg'){
-                        player.popup('honglian_binsi_chenyingchao');
+                        // player.popup('honglian_binsi_chenyingchao');
                         if (!player.hasSkill('honglian_background')){
                             player.addTempSkill('honglian_background','phaseJieshu')
                         }
@@ -2065,7 +2065,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 3"
                     player.useCard({ name: 'nanman', isCard: true ,cardid:'honglian_binsi_chenyingchao_id'},event.targets).set('nopopup',true).set('audio',false);
                     game.log(player,"连干"+get.cnNumber(event.targets.length,true)+"大碗白酒，敬在座的各位！喝罢，实在没忍住，打了一个酒嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子");
-                    game.log(player,'发动【红缨】脱离濒死后视为使用了一张【南蛮入侵】');
+                    game.log(player,'发动','#g【红缨】','脱离濒死后视为使用了一张','#y【南蛮入侵】');
                 },
             },
                 
@@ -10228,7 +10228,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (att < 0 && !target.hasSkill('jianyu_limit_len')){
                             if (target.hasSkillTag('nothunder')){return 0;} 
                             else if (has) {return 15-att;}
-                            else if (target.hasSkill('duanxiu_duo'||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo'))){
+                            else if (target.hasSkill('duanxiu_duo')||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo')){
                                 return -0.5;
                             }
                             else{
@@ -13725,8 +13725,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.storage.hanshou_skill.line(player,'green');
                     }
 					"step 3"
-                    player.$gain2(trigger.player.judging[0]);
-                    player.gain(trigger.player.judging[0]);
+                    // player.$gain2(trigger.player.judging[0]);
+                    // player.gain(trigger.player.judging[0]);
                     var card=event.cards[0];
                     if(get.suit(card)=='club') {
                         player.logSkill('jibian_shou');
@@ -18585,7 +18585,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                         addi = 1.8;
                                         multi = -1;
                                     }
-                                    return (addi+get.attitude(player, target)-(multi*target.countCards('h')/5)+player.getDamagedHp())*0.5;
+                                    return (addi+get.attitude(player, target)-(multi*target.countCards('h')/5)+player.getDamagedHp())*(player.getDamagedHp()/7);
                                 }
                                 else{
                                     return -1;
@@ -20189,10 +20189,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         else{
                             if (!player.storage.mengguan_shi||player.storage.mengguan_shi==0||player.hasSkill('manjiu_shi')&&player.storage.mengguan_shi%2==0&&player.hp<player.maxHp){
-                                return get.attitude(player,trigger.player)>0;
+                                return get.attitude(player,trigger.player)>2&&player!=_status.currentPhase;
                             }
                             else{
-                                return get.attitude(player,trigger.player)>4;
+                                return get.attitude(player,trigger.player)>4&&trigger.player.countCards('h')==0&&player!=_status.currentPhase;
                             }
                         }
                     });
@@ -20247,11 +20247,36 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     player.chooseBool(get.prompt('mengguan_shi',trigger.player),'当你对一名角色造成伤害时，若你有“猛”印记，则你可以失去一个“猛”印记，令该角色摸一张牌，然后令此次伤害+1。').set('ai',function(target){
                         if (get.attitude(player, trigger.player) < -4 || get.attitude(trigger.player,player) < -4){
+                            if (trigger.player.hasSkill('jiuyin')){
+                                return false;
+                            }
                             if (trigger.player.hasSkill('luoshen_liyun')&&trigger.player.countCards('hej')==0&&trigger.player.hp<=2){
                                 return false;
                             }
                             else{
-                                return true;
+                                if (trigger.nature == 'fire'&&trigger.player.hasSkillTag('nofire')){
+                                    return false;
+                                }
+                                if (trigger.nature == 'thunder'&&trigger.player.hasSkillTag('nothunder')){
+                                    return false;
+                                }
+                                if (trigger.card&& get.type(trigger.card) == 'trick'&&trigger.player.hasSkillTag('notrick')){
+                                    return false;
+                                }
+                                if (trigger.card){
+                                    return true;
+                                }
+                                else{
+                                    if (trigger.player.hasSkillTag('forbidNoCardDamage')){
+                                        return false;
+                                    }
+                                    else if (trigger.player.hasSkillTag('forbidNoCardButNatureDamage')&&trigger.nature==undefined){
+                                        return false;
+                                    }
+                                    else{
+                                        return true;
+                                    }
+                                }
                             }
                         }
                         else{
@@ -20275,7 +20300,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else{
                             player.markSkill('mengguan_shi');
                         }
-                        trigger.player.draw();
+                        trigger.player.draw('nodelay');
                         game.log(player,'失去1个猛印记');
                         game.log(player,'猛灌了一大碗烈酒，亮着空碗底，打了个大酒嗝，泛着令人发呕的酒气，硬逼着',trigger.player,'也灌下去一碗，',trigger.player,'被醺灌得甚是难受，此次伤害+1');
                     }
@@ -20363,7 +20388,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						var player=get.owner(card);
 						var target=_status.event.getParent().target;
 						if(player!=target&&get.attitude(player,target)>0){
-							return -get.number(card);
+                            if (target.countCards('h')<=2){
+                                return -get.number(card);
+                            }
+							else{
+                                return get.number(card);
+                            }
 						}
 						return get.number(card);
 					}).set('preserve','lose');
@@ -20375,7 +20405,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						if(!list.length) event.finish();
 						else{
 							event.list=list;
-							target.chooseBool('是否获得'+get.translation(list)+'？').ai=function(){
+							target.chooseBool('【海纳】：是否获得'+get.translation(list)+'？').ai=function(){
 								return get.value(list)>0;
 							};
                             event.goto(3);
@@ -20397,7 +20427,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.chooseTarget(get.translation('haina_shi'),'你可以选择一名角色，令'+get.translation(target)+'对其造成1点伤害。',function(event,player,current){
                             return current.isAlive();
                         }).set('ai',function(target2){
-                            return -get.attitude(player,target2);
+                            if (target2.hasSkillTag('forbidNoCardDamage')||target2.hasSkillTag('forbidNoCardButNatureDamage')){
+                                return 0;
+                            }
+                            return get.effect(target2,{name:'sha'},player);
+                            // var add = 0;
+                            // if (target2.hasSkillTag('maixie')){
+                            //     add = -4;
+                            // }
+                            // return -get.attitude(player,target2)/Math.max(1,target2.hp)+add;
                         });
                         event.goto(4);
 						
@@ -20415,13 +20453,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				ai:{
 					basic:{
-						order:1
+						order:1,
 					},
 					expose:0.2,
 					result:{
 						target:function(player,target){
-							if(player.countCards('h','du')&&get.attitude(player,target)<0) return -1;
-							if(player.countCards('h')<=player.hp) return 0;
+							// if(player.countCards('h','du')&&get.attitude(player,target)<0) return -1;
+							if(player.countCards('h')<=player.hp-3) return 0;
 							var maxnum=0;
 							var cards2=target.getCards('h');
 							for(var i=0;i<cards2.length;i++){
@@ -20435,8 +20473,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							for(var i=0;i<cards.length;i++){
 								if(cards[i].number<maxnum) return 1;
 							}
+                            if (Math.random()<0.6) return 1;
 							return 0;
-						}
+						},
+                        player:function(player){
+                            if(player.countCards('h')<=player.hp-3) return 0;
+                            var cards=player.getCards('h');
+                            var maxnum = 3+10*Math.random();
+                            for(var i=0;i<cards.length;i++){
+								if(cards[i].number>maxnum) return 1;
+							}
+                            if (Math.random()<0.3) return 1;
+							return 0;
+                        },
 					}
 				},
             },
@@ -20457,35 +20506,115 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				selectCard:[1,Infinity],
 				complexCard:true,
+                onuse: function (result, player) {
+                    //播放音效
+                    game.playAudio('skill','wanjian_effect');
+
+                    //改变背景
+                    if (game.getUpperBackgroundName('',player) != 'ziluolan_bg'){
+                        if (!player.hasSkill('tongyin_background')){
+                            player.addTempSkill('tongyin_background','phaseJieshu')
+                        }
+                        player.storage.tongyin_background = game.getUpperBackgroundName('',player);
+                        player.syncStorage('tongyin_background');
+                        game.createClearBackground('ziluolan_bg',player);
+                    }   
+                },
 				check:function(card){
+                    //三种情况：1.就用一张 2.用准备要弃掉的多余的牌 3.全部手牌 顺便触发猛灌加伤。
+                    //因为order比较低，所有默认桃和酒能用应该就都用掉了，没用的说明没啥用了，可以制衡一波。
 					var player=_status.event.player;
 					var targets=game.filterPlayer(function(current){
 						return player.canUse('wanjian',current);
 					});
-					// var num=0;
-					// for(var i=0;i<targets.length;i++){
-					// 	var eff=get.sgn(get.effect(targets[i],{name:'wanjian'},player,player));
-					// 	if(targets[i].hp==1){
-					// 		eff*=1.5;
-					// 	}
-					// 	num+=eff;
-					// }
-					// if(!player.needsToDiscard(-1)){
-					// 	if(targets.length>=7){
-					// 		if(num<2) return 0;
-					// 	}
-					// 	else if(targets.length>=5){
-					// 		if(num<1.5) return 0;
-					// 	}
-					// }
+                    if (targets.length == 0){
+                        return -1;
+                    }
+                    var num=0;
+					for(var i=0;i<targets.length;i++){
+						var eff=get.sgn(get.effect(targets[i],{name:'wanjian'},player,player));
+						if(targets[i].hp==1){
+							eff*=1.5;
+						}
+						num+=eff;
+					}
+                    if (targets.length == 1){
+                        if (ui.selected.cards.length==0&&get.attitude(player,targets[0])<=0&&num>0){
+                            return 100- get.value(card);
+                        }
+                        else{
+                            return -1;
+                        }
+                    }
+                    for(var i=0;i<targets.length;i++){
+                        if ((get.attitude(player,targets[i])<-4.3) && get.effect(targets[i],{name:'wanjian'},player,player)>0 && targets[i].hp<=2 &&(player.storage.mengguan_shi==0)){
+                            return 100;
+                        }
+					}
+                    if (targets.length == 2&&Math.random()<0.5){
+                        if (ui.selected.cards.length==0&&(get.attitude(player,targets[0])<=0||get.attitude(player,targets[1])<=0)&&num>=0){
+                            return 100- get.value(card);
+                        }
+                        else{
+                            return -1;
+                        }
+                    }
+                    if (targets.length >= 3&&Math.random()<(1/player.countCards('h'))){
+                        if (ui.selected.cards.length==0&&num>=-2){
+                            return 100- get.value(card);
+                        }
+                        else{
+                            return -1;
+                        }
+                    }
+                    if (player.countCards('h')>player.getHandcardLimit()&&(ui.selected.cards.length<player.countCards('h')-player.getHandcardLimit())&&num>=-3){
+                        return 100 - get.value(card);
+                    }
+                    if(targets.length>=7){
+                        if(num<2) return 0;
+                    }
+                    else if(targets.length>=5){
+                        if(num<1.5) return 0;
+                    }
+                    else{
+                        return 6-get.value(card);
+                    }
 					return 6-get.value(card);
 				},
-                group:["tongyin_shi_after"],
+                group:["tongyin_shi_after","tongyin_binsi_shi"],
 				ai:{
                     threaten:2.5,
 					basic:{
 						order:1,
-					}
+					},
+                    result:{
+                        target:function(player,target){
+                            var nh=target.countCards('h');
+                            if(get.mode()=='identity'){
+                                // if(player.isZhu&&player.hasUnknown(2)) return -100;
+                                if(player.isZhu&&nh<=2&&target.hp<=1) return -100;
+                                if(target.isZhu&&nh<=2&&target.hp<=1) return -100;
+                            }
+                            if(nh==0) return -30;
+                            if(nh==1) return -27;
+                            return -25;
+                        },
+                        player:function(player,target){
+                            if(get.mode()=='identity'){
+                                if(player.isZhu&&player.hasUnknown(4)) return 100;
+                                var zhugongs = game.filterPlayer(function(current) {
+                                    return current.identity == 'zhu';
+                                }); 
+                                if(zhugongs&&zhugongs.length>0&&(player.identity=='zhong'||player.identity=='nei'||player.identity=='mingzhong')&&
+                                (zhugongs[0].countCards('e','tengjia')>0||zhugongs[0].hp >= 2 || zhugongs[0].countCards('h')>=3||player.countCards('h','tao')>0)){
+                                    return 90;
+                                }
+                            }
+                            if(player.countCards('h')>player.hp) return 1;
+                            if(player.hp<=1) return 1;
+                            return 0;
+                        },
+                    },
 				},
             },
 
@@ -20537,6 +20666,85 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             tongyin_shi_limit:{
                 forced:true,
+            },
+
+            tongyin_binsi_shi:{
+                audio:1,
+                animationColor:'thunder',
+				skillAnimation:'epic',
+                popup:false,
+                frequent:true,
+                trigger: {
+                    player: 'dyingAfter', // 脱离濒死时触发
+                },
+                filter: function (event, player) {
+                    // 检查是否满足触发条件
+                    return (event.name == 'dying' && player.hp > 0);
+                },
+                content:function(event){
+                    "step 0"
+                    player.chooseBool(get.prompt("tongyin_shi"),'你脱离濒死，是否发动【痛饮】视为使用一张【万箭齐发】？').set('ai',function(){
+                        var mode=get.mode();
+                        if (mode=='identity'&&(player.identity=='zhong'||player.identity=='mingzhong')){
+                            var zhugongs = game.filterPlayer(function(current) {
+                                return current.identity == 'zhu';
+                            }); 
+                            if ((zhugongs[0].hp < 2) && (zhugongs[0].countCards('h')<5 || zhugongs[0].countCards('e', 'tengjia') < 1)){
+                                return false;
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        return true;
+                    });
+                    "step 1"
+                    if (result.bool) {
+                        
+                        //效果
+                        var targets=game.filterPlayer();
+                        targets.remove(player);
+                        targets.sort(lib.sort.seat);
+                        event.targets = targets;
+                        player.logSkill('tongyin_binsi_shi');
+                    }
+                    else{
+                        event.finish()
+                    }
+                    "step 2"
+                    //改变背景
+                    if (game.getUpperBackgroundName('',player) != 'ziluolan_bg'){
+                        if (!player.hasSkill('tongyin_background')){
+                            player.addTempSkill('tongyin_background','phaseJieshu');
+                        }
+                        player.storage.tongyin_background = game.getUpperBackgroundName('',player);
+                        player.syncStorage('tongyin_background');
+                        game.createClearBackground('ziluolan_bg',player);
+                        game.delay(1);
+                    }
+                    "step 3"
+                    player.useCard({ name: 'wanjian', isCard: true ,cardid:'tongyin_binsi_shi_id'},event.targets).set('nopopup',true).set('audio',false);
+                    game.playAudio('skill','wanjian_effect');
+                    game.log(player,"承陈英超的真传，"+get.cnNumber(event.targets.length,true)+"大碗白酒一股脑儿灌下肚去，敬在座的各位！喝罢，亮着手中的空碗，吸着腮，憋着嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子，正是：青出于蓝而胜于蓝！");
+                    game.log(player,'发动','#g【痛饮】','脱离濒死后视为使用了一张','#y【万箭齐发】');
+                },
+            },
+                
+
+            tongyin_background:{
+                silent:true,
+                popup:false,
+                forced:true,
+                onremove:function (player){
+                    //改回背景
+                    if (game.getUpperBackgroundName('',player) == 'ziluolan_bg'){
+                        game.createClearBackground(player.storage.tongyin_background,player);
+                        player.storage.tongyin_background = '';
+                    }
+                    else{
+                        game.createClearBackground('',player);
+                    }
+				},
             },
 
 
@@ -21968,7 +22176,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'fuyao_shou':"富耀",
             'fuyao_shou_info':"你受到伤害之后，可以展示一张手牌，除非伤害来源弃置X张牌，否则你回复1点体力（X为此牌牌名字数）。",
             'jibian_shou':"机变",
-            'jibian_shou_info':"一名角色的判定牌生效前，你可以选择一张手牌，失去一点体力并摸一张牌，然后打出选择的牌替换判定牌，若你打出的牌是梅花♣，则你再摸一张牌，若你打出的牌是红桃♥，则你回复1点体力。当一名体力值＞0的其他角色回复体力之前，若没有角色濒死且你已受伤，你可以弃一张牌，令此回复转移至你身上。",
+            'jibian_shou_info':"一名角色的判定牌生效前，你可以选择一张手牌，失去一点体力并摸一张牌，然后打出选择的牌代替判定牌，若你打出的牌是梅花♣，则你再摸一张牌，若你打出的牌是红桃♥，则你回复1点体力。当一名体力值＞0的其他角色回复体力之前，若没有角色濒死且你已受伤，你可以弃一张牌，令此回复转移至你身上。",
 
             yawen:"雅雯",
             'langnv_yawen':"狼女",
@@ -22074,18 +22282,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             shiyun_za:"诗芸",
             'mengguan_shi':"猛灌",
             mengguan_shi_bg:'猛',
-            'mengguan_shi_info':"猛灌",
+            'mengguan_shi_info':"当你受到1点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。当你失去所有手牌或当你失去所有装备区的牌后，你可以获得一个“猛”印记。当一名角色进入濒死状态时，你可以令其摸一张牌，若该角色不是你且你拥有“猛”印记，则你失去一个“猛”印记。当你对一名角色造成伤害时，若你有“猛”印记，则你可以失去一个“猛”印记，令该角色摸一张牌，然后令此次伤害+1。",
             'mengguan_hurt_shi':"猛灌",
             'mengguan_nohe_shi':"猛灌",
             'mengguan_binsi_shi':"猛灌",
             'mengguan_damage_shi':"猛灌",
             'manjiu_shi':"慢酒",
-            'manjiu_shi_info':"慢酒",
+            'manjiu_shi_info':"锁定技，当你的“猛”印记数量变化后，若数量为奇数，你回复1点体力。准备阶段，若你有“猛”印记，则你摸“猛”印记两倍数量的牌，并清除所有“猛”印记。",
             'haina_shi':"海纳",
-            'haina_shi_info':"海纳",
+            'haina_shi_info':"其他角色的出牌阶段限一次，其可以与你拼点，若其没赢，则你可以获得所有拼点牌，否则你和其分别收回拼点牌然后其可以令你对一名角色造成1点伤害。",
             haina_shi_other:"✧海纳",
             'tongyin_shi':"痛饮",
-            'tongyin_shi_info':"痛饮",
+            'tongyin_shi_info':"出牌阶段限一次，你可将任意X张手牌当作一张【万箭齐发】使用，若此【万箭齐发】造成了伤害，则本回合结束阶段，你摸X张牌，若此【万箭齐发】未造成伤害，则此技能本回合视为未发动过。当你脱离濒死状态后，你可以视为使用一张【万箭齐发】。",
+            tongyin_binsi_shi:"痛饮",
 
             
             yuner:"允儿",

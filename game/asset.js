@@ -3459,6 +3459,10 @@ window.noname_asset_list=[
 	'audio/die/tongxin.mp3',
 
 
+	'audio/skill/wanjian_effect.mp3', 
+	'audio/die/shiyun_za.mp3',
+
+
 
 	'audio/skill/aoman_tu1.mp3',
 	'audio/skill/aoman_tu2.mp3', 
@@ -3568,6 +3572,7 @@ window.noname_asset_list=[
 	'image/background/lodge_bg.jpg',
 	'image/background/xuebai_bg.jpg',
 	'image/background/pini_bg.jpg',
+	'image/background/ziluolan_bg.jpg',
 
 	
 	
