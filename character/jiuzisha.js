@@ -53,7 +53,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'1/49',['yuner_shiyan','yuner_selfDamage','yuner_die','mengguan_shi','manjiu_shi'],[]],
+            // yuner:["female","qun",49,['yuner_shiyan','yuner_selfDamage','yuner_die','pini_tu','aoman_tu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -19805,6 +19805,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.chooseTarget(get.prompt2('pini_tu'),[1,event.howManyPlayer],function(card,player,target){
                         return _status.event.targets.contains(target)&&!target.hasSkill('pini_tu2')&&target.countCards('he')>0;
                     }).set('ai',function(target){
+                        //被迫在这里限制火攻的发挥，不然火攻每次都打不中。
+                        if (get.name(trigger.card)=='huogong'&&target.countCards('h')<=target.hp){
+                            return -1;
+                        }
                         return -(get.attitude(_status.event.player,target)+get.attitude(target,_status.event.player));
                     }).set('targets',trigger.targets);
                     'step 1'
@@ -19824,7 +19828,25 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 3'
                     game.delay(1.5);
                     player.choosePlayerCard(event.allTargets[event.targetIndex],'he',true,[1,Math.min(event.allTargets[event.targetIndex].countCards('he'),event.allTargets[event.targetIndex].hp)],'###'+get.translation('pini_tu')+'###请选择'+get.translation(event.allTargets[event.targetIndex])+'的牌扣置于其武将牌上').set('ai',function(button){
-						var val=Math.max(get.value(button.link),1);
+                        var val=Math.max(get.value(button.link),1);
+
+                        //这么写没用,ui.selected.cards一直为空，应该是同时选定的
+                        // if (get.name(trigger.card)=='huogong'){
+                        //     var hCards = event.allTargets[event.targetIndex].getCards('h');
+                        //     if (hCards.contains(button.link)){
+                        //         var allselected = ui.selected.cards;
+                        //         var handLen = ui.selected.cards.length;
+                        //         for (var i = 0; i < allselected.length; i++){
+                        //             if (event.allTargets[event.targetIndex].countCards('e',allselected[i])){
+                        //                 handLen--;
+                        //             }
+                        //         }
+                        //         if (handLen>=event.allTargets[event.targetIndex].countCards('h')-1){
+                        //             return -1;
+                        //         }
+                        //     }
+                        // }
+
 						if(button.link==event.allTargets[event.targetIndex].getEquip(2)) return 2*(val+3);
                         var isEquiped = button.link==event.allTargets[event.targetIndex].getEquip(1)||
                         button.link==event.allTargets[event.targetIndex].getEquip(2)||
