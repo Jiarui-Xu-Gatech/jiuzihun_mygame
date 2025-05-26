@@ -20272,6 +20272,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     player.chooseBool(get.prompt('mengguan_shi',trigger.player),'当你对一名角色造成伤害时，若你有“猛”印记，则你可以失去一个“猛”印记，令该角色摸一张牌，然后令此次伤害+1。').set('ai',function(target){
                         if (get.attitude(player, trigger.player) < -4 || get.attitude(trigger.player,player) < -4){
+                            if ((trigger.player.countCards('e','baiyin')>0||trigger.player.hasSkill('tianxian_tushan'))&&!player.hasSkill('qinyin_jian_duo')){
+                                return false;
+                            }
                             if (trigger.player.hasSkill('jiuyin')){
                                 return false;
                             }
