@@ -2069,7 +2069,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     "step 3"
                     player.useCard({ name: 'nanman', isCard: true ,cardid:'honglian_binsi_chenyingchao_id'},event.targets).set('nopopup',true).set('audio',false);
-                    game.log(player,"连干"+get.cnNumber(event.targets.length,true)+"大碗白酒，敬在座的各位！喝罢，实在没忍住，打了一个酒嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子");
+                    game.log(player,"连干"+get.cnNumber(event.targets.length,false)+"大碗白酒，敬在座的各位！喝罢，实在没忍住，打了一个酒嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子");
                     game.log(player,'发动','#g【红缨】','脱离濒死后视为使用了一张','#y【南蛮入侵】');
                 },
             },
@@ -20465,7 +20465,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (target2.hasSkillTag('forbidNoCardDamage')||target2.hasSkillTag('forbidNoCardButNatureDamage')){
                                 return 0;
                             }
-                            return get.effect(target2,{name:'sha'},player)+1.5;
+                            if (get.attitude(player,target2)+get.attitude(target2,player)>0){
+                                return -1;
+                            }
+                            return get.effect(target2,{name:'sha'},player)+3.5;
                             // var add = 0;
                             // if (target2.hasSkillTag('maixie')){
                             //     add = -4;
@@ -20829,7 +20832,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 3"
                     player.useCard({ name: 'wanjian', isCard: true ,cardid:'tongyin_binsi_shi_id'},event.targets).set('nopopup',true).set('audio',false);
                     game.playAudio('skill','wanjian_effect');
-                    game.log(player,"承陈英超的真传，"+get.cnNumber(event.targets.length,true)+"大碗白酒一股脑儿灌下肚去，敬在座的各位！喝罢，亮着手中的空碗，吸着腮，憋着嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子，正是：青出于蓝而胜于蓝！");
+                    game.log(player,"承陈英超的真传，"+get.cnNumber(event.targets.length,false)+"大碗白酒一股脑儿灌下肚去，敬在座的各位！喝罢，亮着手中的空碗，吸着腮，憋着嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子，正是：青出于蓝而胜于蓝！");
                     game.log(player,'发动','#g【痛饮】','脱离濒死后视为使用了一张','#y【万箭齐发】');
                 },
             },
