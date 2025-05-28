@@ -13717,6 +13717,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(result.bool){
                         player.logSkill('jibian_shou');
+                        if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
+                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.line(player,'green');
+                        }
                         player.loseHp(1);
                         player.draw(1);
                         event.cards = result.cards;
@@ -13727,10 +13731,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 2"
                     // player.respond(event.cards,'highlight','jibian_shou','noOrdering');
                     player.respond(event.cards,'highlight','noOrdering');
-                    if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                        player.storage.hanshou_skill.popup('weiyi_shou');
-                        player.storage.hanshou_skill.line(player,'green');
-                    }
+
 					"step 3"
                     // player.$gain2(trigger.player.judging[0]);
                     // player.gain(trigger.player.judging[0]);
