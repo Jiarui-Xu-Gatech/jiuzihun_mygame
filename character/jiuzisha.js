@@ -13751,10 +13751,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         player.recover(1);
                     }
+                    "step 4"
                     trigger.player.judging[0]=event.cards[0];
                     trigger.orderingCards.addArray(event.cards);
                     game.log(trigger.player,'的判定牌改为',event.cards[0]);
-					"step 4"
+					"step 5"
 					game.delay(2);
 				},
 				ai:{
