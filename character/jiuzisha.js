@@ -1390,7 +1390,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 silent:true,
                 forced:true,
                 mark:true,
-                marktext:"&#x1F322;&#xFE0E;",//"酒",
+                marktext:"酒",//"&#x1F322;&#xFE0E;",//"酒",
                 intro:{
                     name:'酒域',
                     content:'【杀】以外的牌视为【酒】',
@@ -1737,7 +1737,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             haoshuang:{
                 audio:2,
                 locked:false,
-                marktext:"&#x1F3F2;&#xFE0E;",//"喝",
+                marktext:"喝",//"&#x1F3F2;&#xFE0E;",//"喝",
                 trigger:{
                     player:"useCard",
                 },
@@ -16881,7 +16881,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				forced:true,
                 locked:true,
                 mark:true,
-                marktext:"&#x1F525;&#xFE0E;",//"暴",
+                marktext:"暴",//"&#x1F525;&#xFE0E;",//"暴",
                 intro:{
                     name:"暴怒",
                     content:"锁定技，你的手牌上限等于体力上限。当你回复体力后，若你的体力值大于1，你失去1点体力。当你失去1点体力后，你摸三张牌，然后若此时是你的回合外，你改为摸五张牌，若此时是你的回合内，你本回合：所有【杀】都视为【火杀】、使用红色【杀】无距离限制、使用【杀】的次数上限+1。",
@@ -22071,7 +22071,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'xuqin_ning':"虚情",
             'xuqin_ning_info':"出牌阶段限一次，你可以弃置两张手牌，令你和一名已受伤的角色各回复1点体力，若如此做，则该角色下个回合开始时失去2点体力。",
             'xuqin_ning_lose':"虚情",
-            xuqin_ning_lose_bg:'&#x1F394;&#xFE0E;',//'❤',
+            xuqin_ning_lose_bg:'❤',//'&#x1F394;&#xFE0E;',//'❤',
             'huiyi_ning':"悔意",
             'huiyi_ning_info':"限定技，你进入濒死前，你可以选择一名角色，你失去技能【狐骚】，令其获得你所有的牌，然后该角色重置武将牌，从牌堆中摸取4种花色的牌各一张并展示之，加1点体力上限，回复1点体力，并获得技能【狐魂】，然后你立即死亡。若在身份局中且你的身份为【主公】，则你死亡之前与该角色交换身份牌。",
             'linghun_ning':"狐魂",
@@ -22179,7 +22179,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "jianyu_len":"剑雨",
             "jianyu_len_info":"每回合每名角色限一次，当一名其他角色获得你的牌后，你可以对其造成1点雷电伤害。",
             jianyu_limit_len:"剑雨",
-            jianyu_limit_len_bg:'&#x1F5F2;&#xFE0E;',//'⚡',
+            jianyu_limit_len_bg:'⚡',//'&#x1F5F2;&#xFE0E;',//'⚡',
             "yinzhen_len":"饮鸩",
             "yinzhen_len_info":"你濒死时，若你的体力上限＞3，你可以减1点体力上限，将体力回复至1点，然后将手牌数摸至体力上限。",
             "duoqin_len":"多情",
@@ -22324,7 +22324,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "yewang_gu_info":"每回合每项限一次，当你成为其他角色使用牌的目标后，若其体力值：大于你，你观看牌堆顶四张牌；等于你，你观看牌堆顶三张牌；小于你，你观看牌堆顶两张牌。你选择其中任意张花色相同的牌获得并展示之，然后本回合与之花色相同的牌对你造成的伤害无效。",
             "gushi_gu":"古石",
             "gushi_gu_info":"每名角色的准备阶段，你可以记录一个未被记录的基本牌或锦囊牌的名称并扣置一张牌，称为“古石”。当其他角色使用牌时，你可以移去一张记录名称相同的“古石”，令此牌无效，然后此角色获得“古石”牌，你获得此角色使用的牌。",
-            gushi_gu_bg:'&#x1F48E;&#xFE0E;',//'石',
+            gushi_gu_bg:'石',//'&#x1F48E;&#xFE0E;',//'石',
             "kuanglie_gu":"狂烈",
             "kuanglie_gu_info":"出牌阶段限一次，你可以用一张手牌与至多三名角色同时拼点，然后依次结算拼点结果，若你赢，则你获得技能【暴怒】直到你下回合开始，然后没赢的角色选择一项：1.受到你造成的1点火焰伤害；2.令你流失1点体力。你与最后一名角色拼点结束后，参与拼点的存活角色收回拼点牌。",
             baonu_gu:'暴怒',
@@ -22401,11 +22401,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'fuyun_tu':"浮云",
             'fuyun_tu_info':"当你成为其他角色使用的带有「伤害」这一标签的基本牌或普通锦囊牌的目标时，你可以令该角色将一半的手牌（向下取整）扣置于其武将牌上，然后本回合结束阶段，若你未死亡，你选择任意一名角色获得这些牌，否则该角色收回这些牌。",
             fuyun_tu2:"浮云",
-            fuyun_tu2_bg:"&#x2601;&#xFE0E;",//"☁",
+            fuyun_tu2_bg:"☁",//"&#x2601;&#xFE0E;",//"☁",
             'pini_tu':"睥睨",
             'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名未因此技能扣置过牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
             pini_tu2:"睥睨",
-            pini_tu2_bg:'&#x1F441;&#xFE0E;',//'✧',
+            pini_tu2_bg:'👁',//'&#x1F441;&#xFE0E;',//'✧',
 
 
             shiyun_za:"诗芸",
