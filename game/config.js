@@ -34,8 +34,8 @@ window.config={
 	volumn_background:2,
 	volumn_audio:8,
 
-	connect_avatar:'caocao',
-	connect_nickname:'无名玩家',
+	connect_avatar:'jiuzi_avator',
+	connect_nickname:'九子魂玩家',
 	config_menu:true,
 	auto_popped_config:true,
 	auto_popped_history:false,
@@ -101,6 +101,10 @@ window.config={
 	show_stat:true,
 	show_playerids:false,
 	show_scrollbar:false,
+
+	show_extensionmaker:false,
+	show_extensionshare:false,
+
 	mousewheel:true,
 	fold_card:true,
 	threed_card:false,
@@ -133,6 +137,8 @@ window.config={
 	gameconfig:false,
 	appearence:false,
 	video:'20',
+	dev:false,
+	update_link:'coding',
 	coin:0,
 
 	intro:'i',

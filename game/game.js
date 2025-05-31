@@ -636,6 +636,13 @@
 						else{
 							map.errstop.hide();
 						}
+
+						map.auto_check_update.hide();
+						map.lucky_star.hide();
+						map.dev.hide();
+						map.errstop.hide();
+						map.update_link.hide();
+
 					}
 				}
 			},
@@ -2906,6 +2913,11 @@
 						else{
 							map.show_extensionshare.hide();
 						}
+
+						//不显示制作扩展
+						map.show_extensionmaker.hide();
+						map.show_extensionshare.hide();
+
 					},
 					show_history:{
 						name:'出牌记录栏',
@@ -3453,7 +3465,7 @@
 						name:'显示分享扩展',
 						init:false,
 						unfrequent:true,
-					}
+					},
 				}
 			},
 			audio:{
@@ -3598,30 +3610,30 @@
 			others:{
 				name:'其它',
 				config:{
-					// reset_database:{
-					// 	name:'重置游戏',
-					// 	onclick:function(){
-					// 		var node=this;
-					// 		if(node._clearing){
-					// 			if(indexedDB) indexedDB.deleteDatabase(lib.configprefix+'data');
-					// 			game.reload();
-					// 			return;
-					// 		}
-					// 		node._clearing=true;
-					// 		node.innerHTML='单击以确认 (3)';
-					// 		setTimeout(function(){
-					// 			node.innerHTML='单击以确认 (2)';
-					// 			setTimeout(function(){
-					// 				node.innerHTML='单击以确认 (1)';
-					// 				setTimeout(function(){
-					// 					node.innerHTML='重置游戏录像';
-					// 					delete node._clearing;
-					// 				},1000);
-					// 			},1000);
-					// 		},1000);
-					// 	},
-					// 	clear:true
-					// },
+					reset_database:{
+						name:'重置游戏',
+						onclick:function(){
+							var node=this;
+							if(node._clearing){
+								if(indexedDB) indexedDB.deleteDatabase(lib.configprefix+'data');
+								game.reload();
+								return;
+							}
+							node._clearing=true;
+							node.innerHTML='单击以确认 (3)';
+							setTimeout(function(){
+								node.innerHTML='单击以确认 (2)';
+								setTimeout(function(){
+									node.innerHTML='单击以确认 (1)';
+									setTimeout(function(){
+										node.innerHTML='重置游戏录像';
+										delete node._clearing;
+									},1000);
+								},1000);
+							},1000);
+						},
+						clear:true
+					},
 					reset_game:{
 						name:'重置游戏设置',
 						onclick:function(){
@@ -3769,6 +3781,9 @@
 						else{
 							map.redownload_game.hide();
 						}
+						//不显示下载
+						map.reset_database.hide();
+						map.redownload_game.hide();
 					}
 					// trim_game:{
 					// 	name:'隐藏非官方扩展包',
@@ -3823,7 +3838,12 @@
 					// 	clear:true
 					// }
 				}
-			}
+			},
+			// config:{
+			// 	update:function(config,map){
+			// 		map.skill.hide();
+			// 	},
+			// },
 		},
 		extensionMenu:{
 			cardpile:{
@@ -4696,6 +4716,7 @@
 						else{
 							map.connect_junzhu.hide();
 						}
+						map.connect_onlyguozhan.hide();
 					},
 					connect_player_number:{
 						name:'游戏人数',
@@ -4785,6 +4806,8 @@
 						else{
 							map.junzhu.hide();
 						}
+						map.onlyguozhan.hide();
+						map.guozhanSkin.hide();
 					},
 					guozhan_mode:{
 						name:'游戏模式',
@@ -13842,7 +13865,10 @@
 						}
 						else{
 							var config={};
-							if(card.nature=='fire'||
+							if (card.name == 'tao'){
+								config.color='green';
+							}
+							else if(card.nature=='fire'||
 								(card.classList&&card.classList.contains('fire'))){
 								config.color='fire';
 							}
@@ -36368,23 +36394,28 @@
 							var banskill;
 
 							if(mode=='skill'){
+								//把技能那一栏去掉
+								// return;
 								var autoskillexpanded=false;
 								var banskillexpanded=false;
-								ui.create.div('.config.more','自动发动 <div>&gt;</div>',page,function(){
-									if(autoskillexpanded){
-										this.classList.remove('on');
-										for(var k=0;k<autoskillNodes.length;k++){
-											autoskillNodes[k].style.display='none';
-										}
-									}
-									else{
-										this.classList.add('on');
-										for(var k=0;k<autoskillNodes.length;k++){
-											autoskillNodes[k].style.display='';
-										}
-									}
-									autoskillexpanded=!autoskillexpanded;
-								});
+								
+								//去掉能够设置自动发动
+								// ui.create.div('.config.more','自动发动 <div>&gt;</div>',page,function(){
+								// 	if(autoskillexpanded){
+								// 		this.classList.remove('on');
+								// 		for(var k=0;k<autoskillNodes.length;k++){
+								// 			autoskillNodes[k].style.display='none';
+								// 		}
+								// 	}
+								// 	else{
+								// 		this.classList.add('on');
+								// 		for(var k=0;k<autoskillNodes.length;k++){
+								// 			autoskillNodes[k].style.display='';
+								// 		}
+								// 	}
+								// 	autoskillexpanded=!autoskillexpanded;
+								// });
+								
 								banskill=ui.create.div('.config.more','双将禁配 <div>&gt;</div>',page,function(){
 									if(banskillexpanded){
 										this.classList.remove('on');
@@ -38442,7 +38473,7 @@
 					}
 					(function(){
 						if(!lib.device&&!lib.db) return;
-						if(lib.config.show_extensionmaker==false) return;
+						if(!lib.config.show_extensionmaker||lib.config.show_extensionmaker==false) return;
 						var page=ui.create.div('#create-extension');
 						var node=ui.create.div('.menubutton.large','制作扩展',start.firstChild,clickMode);
 						node.link=page;
@@ -40553,7 +40584,7 @@
 						createDash('码','编辑代码',dash4);
 					}());
 					(function(){
-						if(lib.config.show_extensionmaker==false) return;
+						if(!lib.config.show_extensionmaker||lib.config.show_extensionmaker==false) return;
 						var page=ui.create.div('');
 						var node=ui.create.div('.menubutton.large','获取扩展',start.firstChild,clickMode);
 						node.link=page;
@@ -40917,7 +40948,7 @@
 						clickMode.call(ui.commandnode);
 					};
 					(function(){
-						if(lib.config.show_extensionmaker==false) return;
+						if(!lib.config.show_extensionmaker||lib.config.show_extensionmaker==false) return;
 						var page=ui.create.div('');
 						var node=ui.create.div('.menubutton.large','更新',start.firstChild,clickMode);
 						node.link=page;
@@ -41719,7 +41750,7 @@
 								clickContainer.call(menuContainer);
 							}
 						});
-						if(lib.config.show_extensionmaker==false) return;
+						if(!lib.config.show_extensionmaker||lib.config.show_extensionmaker==false) return;
 						var page=ui.create.div('');
 						var node=ui.create.div('.menubutton.large','控制',start.firstChild,clickMode);
 						node.link=page;
@@ -41865,7 +41896,7 @@
 						});
 					}());
 					(function(){
-						if(lib.config.show_extensionmaker==false) return;
+						if(!lib.config.show_extensionmaker||lib.config.show_extensionmaker==false) return;
 						var page=ui.create.div('');
 						var node=ui.create.div('.menubutton.large','命令',start.firstChild,clickMode);
 						ui.commandnode=node;
@@ -51395,8 +51426,9 @@
 						}
 						else if(lib.skill[skills[i]].temp||!node.skills.contains(skills[i])||lib.skill[skills[i]].thundertext){
 							if(lib.skill[skills[i]].frequent||lib.skill[skills[i]].subfrequent){
- 							uiintro.add('<div><div class="skill thundertext thunderauto">【'+translation+'】</div><div class="thundertext thunderauto">'+get.skillInfoTranslation(skills[i])+'<br><div class="underlinenode on gray" style="position:relative;padding-left:0;padding-top:7px">自动发动</div></div></div>');
- 							var underlinenode=uiintro.content.lastChild.querySelector('.underlinenode');
+ 							// uiintro.add('<div><div class="skill thundertext thunderauto">【'+translation+'】</div><div class="thundertext thunderauto">'+get.skillInfoTranslation(skills[i])+'<br><div class="underlinenode on gray" style="position:relative;padding-left:0;padding-top:7px">自动发动</div></div></div>');
+ 							uiintro.add('<div><div class="skill thundertext thunderauto">【'+translation+'】</div><div class="thundertext thunderauto">'+get.skillInfoTranslation(skills[i])+'<br><div class="underlinenode on gray" style="display:none">自动发动</div></div></div>');
+							var underlinenode=uiintro.content.lastChild.querySelector('.underlinenode');
  							if(lib.skill[skills[i]].frequent){
  								if(lib.config.autoskilllist.contains(skills[i])){
  									underlinenode.classList.remove('on');
@@ -51420,7 +51452,8 @@
 							}
 						}
 						else if(lib.skill[skills[i]].frequent||lib.skill[skills[i]].subfrequent){
-							uiintro.add('<div><div class="skill">【'+translation+'】</div><div>'+get.skillInfoTranslation(skills[i])+'<br><div class="underlinenode on gray" style="position:relative;padding-left:0;padding-top:7px">自动发动</div></div></div>');
+							// uiintro.add('<div><div class="skill">【'+translation+'】</div><div>'+get.skillInfoTranslation(skills[i])+'<br><div class="underlinenode on gray" style="position:relative;padding-left:0;padding-top:7px">自动发动</div></div></div>');
+							uiintro.add('<div><div class="skill">【'+translation+'】</div><div>'+get.skillInfoTranslation(skills[i])+'<br><div class="underlinenode on gray" style="display:none">自动发动</div></div></div>');
 							var underlinenode=uiintro.content.lastChild.querySelector('.underlinenode');
 							if(lib.skill[skills[i]].frequent){
 								if(lib.config.autoskilllist.contains(skills[i])){
