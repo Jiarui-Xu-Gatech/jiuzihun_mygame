@@ -8321,7 +8321,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.gainPlayerCard(trigger.player,'ej',true);
 					}
 					trigger.cancel();
-				}
+				},
 			},
 			sanyao:{
 				audio:2,

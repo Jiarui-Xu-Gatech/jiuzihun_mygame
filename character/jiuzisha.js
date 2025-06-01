@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard'],[]],
+            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','sanqing_yao'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -9683,7 +9683,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 3"
                     if(event.cards&&event.cards.length>1){
                         player.chooseCardButton('将【瞒天】获得的牌分配给任意角色',true,event.cards,[1,event.cards.length]).set('ai',function(button){
-                            if(ui.selected.buttons.length==0) return 1;
+                            if(ui.selected.buttons.length==0) {
+                                return 1;
+                            }
+                            else{
+                                if (Math.random()<0.5){
+                                    return 1;
+                                }
+                            }
                             return 0;
                         });
                     }
@@ -9800,7 +9807,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 3"
                     if(event.cards&&event.cards.length>1){
                         player.chooseCardButton('将【瞒天】获得的牌分配给任意角色',true,event.cards,[1,event.cards.length]).set('ai',function(button){
-                            if(ui.selected.buttons.length==0) return 1;
+                            if(ui.selected.buttons.length==0) {
+                                return 1;
+                            }
+                            else{
+                                if (Math.random()<0.5){
+                                    return 1;
+                                }
+                            }
                             return 0;
                         });
                     }
@@ -14094,7 +14108,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 mod:{
                     maxHandcard:function(player, num) {
-                        return player.maxHp+(player.maxHp - player.hp); // 手牌上限+2
+                        return num - player.hp + player.maxHp +(player.maxHp - player.hp); // 手牌上限+2
                     },
                     cardUsable:function (card,player,num){
 						if(card.name=='sha') return num+player.storage.yujiu_hp_heng;
@@ -15214,7 +15228,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 mod:{
                     maxHandcard:function(player, num) {
-                        return 0; // 手牌上限+2
+                        return num - player.hp; // 手牌上限+2
                     },
                 },
             },
@@ -15685,7 +15699,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.chooseBool(get.prompt2('liejiu_dong')).set('ai',function(){
+                    player.chooseBool(get.prompt2('liejiu_dong',trigger.source)).set('ai',function(){
                         return get.attitude(player,trigger.source)<0||get.attitude(trigger.source,player)<0;
                     });
                     'step 1'
@@ -20957,11 +20971,209 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
             
             mizhao_nan:{
+                audio:2,
+                forced:true,
+                locked:true,
+                direct:true,
+                group:['mizhao_self_nan','mizhao_others_nan'],
+                ai:{
+                    threaten:1.4,
+                },
+            },
+
+            'mizhao_self_nan':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:"dying",
+                },
+                content:function(event){
+                    'step 0'
+                    player.logSkill('mizhao_nan');
+                    event.suits = ['spade', 'heart', 'diamond', 'club'];
+                    event.cards = [];
+                    for (var i = 0; i < event.suits.length; i++) {
+                        var suit = event.suits[i];
+                        var card=get.cardPile(function(card){
+							return get.suit(card)==suit;
+						});
+                        if (card) {
+                            event.cards.push(card);
+                        }
+                    }
+                    player.showCards(event.cards,'四色【糜沼】牌');
+
+                    'step 1'
+                    player.gain(event.cards, 'draw');
+                },
+
+            },
+            
+            'mizhao_others_nan':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    global:"dyingAfter",
+                },
+                filter:function(trigger,player){
+                    return trigger.player.isAlive()&&trigger.player!=player&&get.distance(player,trigger.player)<=1;
+                },
+                content:function(event){
+                    'step 0'
+                    player.logSkill('mizhao_nan');
+                    event.suits = ['spade', 'heart', 'diamond', 'club'];
+                    event.cards = [];
+                    for (var i = 0; i < event.suits.length; i++) {
+                        var suit = event.suits[i];
+                        var card=get.cardPile(function(card){
+							return get.suit(card)==suit;
+						});
+                        if (card) {
+                            event.cards.push(card);
+                        }
+                    }
+                    player.showCards(event.cards,'四色【糜沼】牌');
+
+                    'step 1'
+                    player.gain(event.cards, 'draw');
+                },
 
             },
             
             sheji_nan:{
+                audio:2,
+                group:['sheji_multi_nan','sheji_hp_nan'],
+            },
 
+            'sheji_multi_nan':{
+                audio:false,
+                direct:true,
+                trigger:{target:'useCardToTargeted'},
+                filter:function(event,player){
+                    if (!event.targets||event.targets.length<=1){
+                        return false;
+                    }
+                    var has = false;
+                    for (var i = 0; i < event.targets.length; i++){
+                        if (event.targets[i]!=player){
+                            has = true;
+                            break;
+                        }
+                    }
+					return event.player!=player&&event.card&&(get.type(event.card)=='trick')&&get.tag(event.card,'damage')&&event.targets.length>1&&has;
+				},
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt('sheji_nan'),'当你成为其他角色伤害类普通锦囊的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。').set('ai',function(){
+                        return true;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('sheji_nan');
+                        event.excludedPlayer = [];
+                        for (var i = 0; i < trigger.targets.length; i++){
+                            if (trigger.targets[i]!=player){
+                                event.excludedPlayer.push(trigger.targets[i]);
+                                trigger.targets[i] = player;
+                            }
+                        }
+                        player.line(event.excludedPlayer,'green');
+                        game.log(player,'令',trigger.card,'对',event.excludedPlayer,'无效，并对自己结算'+get.cnNumber(trigger.targets.length)+'次');
+                    }
+                    else{
+                        event.finish();
+                    }
+                },
+                ai:{
+                    threaten:0.5,
+                    expose:0.15,
+                },
+
+            },
+            
+            'sheji_hp_nan':{
+                audio:2,
+                animationColor:'key',
+				skillAnimation:'legend',
+                direct:true,
+                trigger:{
+                    global:"damageBegin4",
+                },
+                filter:function(trigger,player){
+                    return trigger.player.hp - trigger.num > 0; 
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt('sheji_nan',trigger.player),'当一名角色受到伤害时，若X大于0，你可以令此伤害+X(X为你的体力值减此次伤害的伤害值)，此伤害结算结束之后，该角色回复X点体力，然后若该角色为你，且你还未因本技能增加过上限，则你增加1点体力上限，若不为你，则你失去本技能。').set('ai',function(){
+                        return true;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('sheji_nan',trigger.player);
+                        game.log(player,'令',trigger.player,'本次受到的'+get.cnNumber(trigger.num)+'点伤害增加'+get.cnNumber(trigger.player.hp - trigger.num)+'点');
+                        trigger.player.addTempSkill('sheji_hp2_nan');
+                        trigger.player.addTempSkill('sheji_hp3_nan');
+                        trigger.player.storage.sheji_hp2_nan = player;
+                        trigger.player.storage.sheji_hp3_nan = trigger.player.hp - trigger.num;
+                        trigger.player.syncStorage('sheji_hp2_nan');
+                        trigger.player.syncStorage('sheji_hp3_nan');
+                        trigger.num = trigger.player.hp;
+                    }
+                    else{
+                        event.finish();
+                    }
+
+                },
+                ai:{
+                    threaten:0.5,
+                    expose:0.15,
+                },
+            },
+
+            sheji_hp2_nan:{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:"damageAfter",
+                },
+                filter:function(trigger,player){
+                    return player.isAlive();
+                },
+                content:function(event){
+                    'step 0'
+                    if (player.storage.sheji_hp2_nan.isAlive()){
+                        player.storage.sheji_hp2_nan.logSkill('sheji_nan',player);
+                    }
+                    else{
+                        player.logSkill('sheji_nan',player);
+                    }
+                    player.recover(player.storage.sheji_hp3_nan);
+                    'step 1'
+                    if (player == player.storage.sheji_hp2_nan&&(!player.storage.sheji_nan||player.storage.sheji_nan!=1)){
+                        player.storage.sheji_nan = 1;
+                        player.syncStorage('sheji_nan');
+                        player.logSkill('sheji_hp_nan');
+                        game.playAudio('effect','damage');
+                        player.gainMaxHp();
+                    }
+                    if (player != player.storage.sheji_hp2_nan && player.storage.sheji_hp2_nan.isAlive()&&player.isAlive()){
+                        player.storage.sheji_hp2_nan.logSkill('sheji_hp_nan');
+                        // player.storage.sheji_hp2_nan.popup('sheji_hp_nan','thunder');
+                        // game.playAudio('skill','sheji_nan'+Math.ceil(2*Math.random()));
+                        game.log(player,'未死亡，',player.storage.sheji_hp2_nan,'失去技能','#g【舍己】');
+                        player.storage.sheji_hp2_nan.removeSkill('sheji_nan');
+                    }
+                    'step 2'
+                    player.removeSkill('sheji_hp3_nan');
+                    player.removeSkill('sheji_hp2_nan');
+                },
+            },
+
+            sheji_hp3_nan:{
+                forced:true,
             },
             
             sishui_nan:{
@@ -21021,6 +21233,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
                         }
 						if(ui.selected.targets.length==0){
+                            if (target.hp==target.maxHp){
+                                addNumber = 0;
+                            }
 							if(att>0){
 								if(!_status.event.nojudge&&target.countCards('j',function(card){
 									return game.hasPlayer(function(current){
@@ -21141,11 +21356,88 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     
                 },
+                ai:{
+                    threaten:2.5,
+                    expose:0.5,
+                },
 
             },
             
             sishui_phaseUse_nan:{
+                audio:2,
+                direct:true,
+                trigger:{
+                    global:'phaseUseBegin',
+                },
+                filter:function(trigger,player){
+                    return trigger.player!=player&&player.countCards('hj')>0&&player.hp>0;
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt('sishui_nan',trigger.player),'一名其他角色出牌阶段开始时，你可以令其获得你手牌区和判定区任意X张牌并令其本回合手牌上限-X（X至多为你当前体力值），然后你选择至多X名角色各摸一张牌。').set('ai',function(){
+                        return true;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('sishui_nan',trigger.player);
+                        trigger.player.choosePlayerCard('hj',true,[1,player.hp],player);
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (result.bool){
+                        event.Num = result.cards.length;
+                        trigger.player.gain(result.cards,player,'giveAuto','bySelf');
+                        trigger.player.addTempSkill('sishui_handlimit');
+                        trigger.player.storage.sishui_handlimit = event.Num;
+                        trigger.player.syncStorage('sishui_handlimit');
+                        trigger.player.markSkill('sishui_handlimit');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    player.chooseTarget('【似水】：请选择至多'+get.cnNumber(event.Num)+'名角色各摸一张牌',[1,event.Num]).set('ai',function(target){
+                        var add = 0;
+                        if (player == target){
+                            add = 0.5;
+                        }
+                        return get.attitude(player,target)+get.attitude(target,player)+add;
+                    });
+                    'step 4'
+                    if (result.bool&&result.targets.length>0){
+                        player.logSkill('sishui_nan',result.targets);
+                        for (var i = 0; i < result.targets.length; i++){
+                            result.targets[i].draw('nodelay');
+                        }
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 5'
+                    game.delay(1);
+                },
+                ai:{
+                    threaten:1.5,
+                    expose:0.2,
+                },
 
+            },
+
+            sishui_handlimit:{
+                forced:true,
+                locked:true,
+                mark:true,
+                marktext:'水',
+                intro:{
+                    content:"本回合手牌上限-#",
+                },
+                mod:{
+                    maxHandcard:function(player, num) {
+                        return num - player.storage.sishui_handlimit; 
+                    },
+                },
             },
 
 
@@ -21165,7 +21457,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        player.logSkill('miaoshou_yao');
+                        player.popup('妙手','wood');
+                        game.playAudio('skill','miaoshou_yao'+Math.ceil(2*Math.random()));
+                        game.log(player,'发动了','#g【妙手】');
                         player.draw(2);
                         event.given=0;
                         event.allCards = [];
@@ -21199,7 +21493,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							}
 							return att-4;
 						},
-						prompt:'请选择要给出的卡牌',
+						prompt:'【妙手】：请选择要给出的卡牌',
 					});
                     'step 3'
                     if (result.bool){
@@ -21317,6 +21611,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     },
                     result:{
                         player:function(player){
+                            var dyingPlayer = player;
+                            var has=game.hasPlayer(function(current){
+                                if (current.isDying()){
+                                    dyingPlayer = current;
+                                }
+                            });
+                            if (get.attitude(dyingPlayer,player)+get.attitude(player,dyingPlayer)<0){
+                                return 0;
+                            }
                             if (player.hp < player.maxHp){
                                 return 1;
                             }
@@ -21426,19 +21729,329 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 intro:{
                     content:"出牌阶段限一次，你可以指定一名其他角色，你弃置黑色和红色的手牌各一张，使其体力值与你相同（若该角色体力值大于你，其流失体力值之差的体力，否则，其获得体力值之差的回复效果），结算完成后，若此角色原本的体力值大于你，则你减1点体力上限。",
                 },
-                // enable:'phaseUse',
-                // filter:function(event,player){
+                enable:'phaseUse',
+                filter:function(event,player){
+                    return !player.hasSkill('yaodao_yao_limit')&&player.countCards('he',{color:'red'})>0&&player.countCards('he',{color:'black'})>0;
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseCardTarget({
+						prompt:get.prompt('yaodao_yao'),
+						prompt2:"出牌阶段限一次，你可以指定一名其他角色，你弃置黑色和红色的手牌各一张，使其体力值与你相同（若该角色体力值大于你，其流失体力值之差的体力，否则，其获得体力值之差的回复效果），结算完成后，若此角色原本的体力值大于你，则你减1点体力上限。",
+						filterCard:function(card,player){
+							if (ui.selected.cards.length == 0){
+                                return get.color(card)=='black'||get.color(card)=='red';
+                            }
+                            else if (ui.selected.cards.length == 1){
+                                if (get.color(ui.selected.cards[0])=='red'){
+                                    return get.color(card)=='black';
+                                }
+                                else if (get.color(ui.selected.cards[0])=='black'){
+                                    return get.color(card)=='red';
+                                }
+                                return false;
+                            }
+                            else{
+                                return false;
+                            }
+						},
+						position:'h',
+                        selectCard:[2,2],
+                        complexCard:true,
+						filterTarget:function(card,player,target){
+							if(player==target) return false;
+							return true;
+						},
+						ai1:function(card){
+							return 10-get.value(card);
+						},
+						ai2:function(target){
+                            var player = _status.event.player;
+                            if (target.hp==player.hp){
+                                return -1;
+                            }
+                            if (target.hp==target.maxHp&&target.hp<player.hp){
+                                return -1;
+                            }
+							var att = get.attitude(player,target)+get.attitude(target,player);
+                            var sgn = get.sgn(att);
+                            return sgn*(player.hp-target.hp);
+						},
+					});
+                    'step 1'
+                    if (result.bool&&result.targets.length>0){
+                        player.logSkill('yaodao_yao',result.targets[0]);
+                        player.unmarkSkill('yaodao_yao');
+                        player.addTempSkill('yaodao_yao_limit');
+                        player.discard(result.cards);
+                        event.loseMaxHp = false;
+                        if (result.targets[0].hp > player.hp){
+                            event.loseMaxHp = true;
+                            result.targets[0].loseHp(result.targets[0].hp-player.hp);
+                        }
+                        if (result.targets[0].hp < player.hp){
+                            result.targets[0].recover(player.hp - result.targets[0].hp);
+                        }
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (event.loseMaxHp){
+                        game.delay(2);
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    player.popup('药道','wood');
+                    game.playAudio('effect','damage');
+                    player.loseMaxHp();
+                },
+                ai:{
+                    threaten:7.5,
+                    expose:0.73,
+                    order:function(){
+                        return get.order({name:'tao'})+1;
+                    },
+                    result:{
+                        player:function(player){
+                            var has=game.hasPlayer(function(current){
+                                return current.hp != player.hp&&!(current.hp==current.maxHp&&current.hp<player.hp);
+                            });
+                            if (has){
+                                return 1;
+                            }
+                            else{
+                                return -1;
+                            }
+                        },
+                    },
+                },
 
-                // },
+            },
 
-
+            yaodao_yao_limit:{
+                forced:true,
             },
             
             baiyi_yao:{
+                audio:2,
+                group:['baiyi_source_yao','baiyi_damage_yao'],
+
+            },
+
+            'baiyi_source_yao':{
+                audio:false,
+                direct:true,
+                trigger:{player:'useCardToPlayer'},
+                filter:function(trigger,player){
+					var card=trigger.card;
+                    var has=game.hasPlayer(function(current){
+                        return current!=player&&current!=trigger.target&&!trigger.targets.contains(current);
+                    });
+                    return get.tag(card,'damage')&&has;
+				},
+                content:function(event){
+                    'step 0'
+                    player.chooseTarget(get.prompt('baiyi_source_yao'),'当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择一名除你和该牌目标以外的角色，令其代替你成为此牌使用者。',function(card,player,target){
+						return target!=player&&target!=trigger.target&&!trigger.targets.contains(target);
+					}).set('ai',function(target){
+                        var player=_status.event.player;
+                        if (trigger.targets.length == 1){
+                            if (trigger.targets[0].hasSkillTag('maixie_defend')){
+                                return -(get.attitude(player,target)+get.attitude(target,player));
+                            }
+                            if (get.attitude(player,trigger.targets[0])+get.attitude(trigger.targets[0],player)<0&&target.hasSkillTag('damageBonus',true,trigger.targets[0])){
+                                return 10-(get.attitude(player,trigger.targets[0])+get.attitude(trigger.targets[0],player));
+                            }
+                            if (get.name(trigger.card)=='juedou'){
+                                return -4*(get.attitude(player,target)+get.attitude(target,player))/(1+target.countCards('h'));
+                            }
+                            return -1;
+                        }
+                        else{
+                            return -1;
+                        }
+					});
+                    'step 1'
+                    if (result.bool&&result.targets.length>0){
+                        event.thePlayer = result.targets[0];
+                        player.logSkill('baiyi_yao',event.thePlayer);
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    event.thePlayer.line(trigger.targets,'green');
+                    trigger.untrigger();
+                    trigger.getParent().player=event.thePlayer;
+                    game.log(player,'令',event.thePlayer,'代替自己成为',trigger.card,'的使用者');
+                },
 
             },
             
+            'baiyi_damage_yao':{
+                audio:false,
+                direct:true,
+                trigger:{source:'damageBefore'},
+				filter:function(event,player){
+				    return player!=event.player;
+				},
+				content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt('baiyi_yao'),'当你对其他角色造成伤害前，你可以防止此伤害，然后获得其区域内一张牌。').set('ai',function(){
+                        if(get.damageEffect(trigger.player,player,player)<0) return true;
+                        var att=get.attitude(player,trigger.player);
+                        if(att>0&&trigger.player.countCards('j')) return true;
+                        if(trigger.num>1){
+                            if(att<0) return false;
+                            if(att>0) return true;
+                        }
+                        var cards=trigger.player.getGainableCards(player,'e');
+                        for(var i=0;i<cards.length;i++){
+                            if(get.equipValue(cards[i])>=9) return true;
+                        }
+                        return false;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('baiyi_yao',trigger.player);
+                        if(trigger.player.countGainableCards(player,'hej')){
+                            game.log(player,'防止了对,',trigger.player,'的伤害并获得其区域内的一张牌');
+                            player.gainPlayerCard(trigger.player,'hej',true);
+                        }
+                        else{
+                            game.log(player,'防止了对,',trigger.player,'的伤害');
+                        }
+                        trigger.cancel();
+                    }
+                    else{
+                        event.finish();
+                    }
+				},
+                ai:{
+                    threaten:0.5,
+                    expose:0.15,
+                },
+
+            },
+
+            
             sanqing_yao:{
+                audio:2,
+                direct:true,
+                trigger:{
+                    player:'damageEnd',
+                },
+                filter:function(event,player){
+                    return event.source&&event.source!=player&&event.source.countCards('h')>0;
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt2('sanqing_yao',trigger.source)).set('ai',function(){
+                        if (get.attitude(player,trigger.source)>0){
+                            return trigger.source.countCards('h')>=7;
+                        }
+                        return get.attitude(player,trigger.source)<=0||get.attitude(trigger.source,player)<=0;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.logSkill('sanqing_yao',trigger.source,'green');
+                        game.log(player,'观看',trigger.source,'的手牌');
+                        var cards = trigger.source.getCards('h');
+                        player.chooseCardButton('【三清】：选择三种花色各一张获得之',[3,3],cards).set('filterButton',function(button){
+                            if (ui.selected.buttons.length==0){
+                                return true;
+                            }
+                            else{
+                                var suit = get.suit(button.link);
+                                for (var i = 0; i < ui.selected.buttons.length; i++){
+                                    if (suit == get.suit(ui.selected.buttons[i].link)){
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+                        }).set('ai',function(button){
+                            return get.value(button.link)+Math.random();
+                        });
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (result.bool){
+                        player.showCards(result.links,'三色【三清】牌');
+                        event.allSuit = [];
+                        for (var i = 0; i < result.links.length; i++){
+                            event.allSuit.push(get.suit(result.links[i]))
+                        }
+                        event.allCards = result.links;
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    player.gain(event.allCards,trigger.source,'giveAuto','bySelf');
+                    'step 4'
+                    player.judge(function (card) {
+                        if(event.allSuit.contains(get.suit(card))){
+                            return 0.5;
+                        } 
+                        else{
+                            return 0;
+                        }
+                    });
+                    'step 5'
+                    if (result.card&&result.bool) {
+                        game.log(player,'的','#g【三清】','牌中包含判定牌',result.card,'的花色，','#g【三清】','判定成功');
+                        player.chooseTarget('###三清###选择一名已受伤的角色，你视为对其使用一张【桃】',function(card,player,target){
+                            return target.hp < target.maxHp;
+                        }).set('ai',function(target){
+                            var player = _status.event.player;
+                            var add = 0;
+                            if (player == target){
+                                add = 0.5;
+                            }
+                            return get.effect(target,{name:'tao'},player)+add;
+                        });
+                    }
+                    else{
+                        game.log(player,'的','#g【三清】','牌中不包含判定牌的花色，','#g【三清】','判定失败');
+                        event.finish();
+                    }
+                    'step 6'
+                    if (result.bool&&result.targets.length>0){
+                        player.useCard({name:'tao',isCard:true,cardid:'sanqing_yao_id'},result.targets[0]); 
+                    }
+                    else{
+                        event.finish();
+                    }
+                },
+                ai:{
+                    maixie_defend:true,
+                    expose:0.15,
+					effect:{
+						target:function(card,player,target){
+                            if (get.tag(card,'damage')&&get.attitude(player,target)<0){
+                                if(player.hasSkillTag('jueqing',false,target)) return [1,-1];
+                                var hand = player.getCards('h');
+                                var allSuit = [];
+                                for (var i = 0; i < hand.length; i++){
+                                    if (!allSuit.contains(get.suit(hand[i]))){
+                                        allSuit.push(get.suit(hand[i]));
+                                    }
+                                }
+                                if (allSuit.length>=3){
+                                    return [1,-0.2];
+                                }
+                                return 0.8;
+                            }
+							
+						}
+					},
+                },
 
             },
 
@@ -23012,27 +23625,36 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             jianan_zb:"佳楠",
             'weirui_nan':"葳蕤",
-            'weirui_nan_info':"葳蕤",
+            'weirui_nan_info':"摸牌阶段，你可以选择令摸牌数+X（X为当前场上的装备数），若如此做，则弃牌阶段结束时，你弃置X张牌。",
             'mizhao_nan':"糜沼",
-            'mizhao_nan_info':"糜沼",
+            'mizhao_nan_info':"锁定技，当你进入濒死状态时或当一名你与其距离≤1的其他角色脱离濒死状态时，你展示牌堆或弃牌堆中四种花色的牌各一张，并获得之。",
+            'mizhao_self_nan':"糜沼",
+            'mizhao_others_nan':"糜沼",
             'sheji_nan':"舍己",
-            'sheji_nan_info':"舍己",
+            'sheji_nan_info':"当你成为其他角色伤害类普通锦囊的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。当一名角色受到伤害时，若X大于0，你可以令此伤害+X(X为你的体力值减此次伤害的伤害值)，此伤害结算结束之后，该角色回复X点体力，然后若该角色为你，且你还未因本技能增加过上限，则你增加1点体力上限，若该角色不为你，且其依然存活，则你失去本技能。",
+            'sheji_multi_nan':"舍己",
+            'sheji_hp_nan':"舍己",
             'sishui_nan':"似水",
-            'sishui_nan_info':"似水",
+            'sishui_nan_info':"当你造成或受到伤害之后，你可以移动场上一张牌，若此牌为装备牌，且移出/移入了此次伤害来源或受到伤害角色的区域，则该角色回复1点体力/受到1点无来源伤害。一名其他角色出牌阶段开始时，你可以令其获得你手牌区和判定区任意X张牌并令其本回合手牌上限-X（X至多为你当前体力值），然后你选择至多X名角色各摸一张牌。",
+            'sishui_damage_nan':"似水",
+            'sishui_phaseUse_nan':"似水",
+            sishui_handlimit:"似水",
 
             yaoxianzi_qa:"药仙子",
             'miaoshou_yao':"妙手",
-            'miaoshou_yao_info':"妙手",
+            'miaoshou_yao_info':"当一名角色回复体力之后，若此回复由你使用的卡牌引起，则你可以摸两张牌，然后你可以将至多两张牌交给一至两名其他角色。",
             'huichun_yao':"回春",
-            'huichun_yao_info':"回春",
+            'huichun_yao_info':"你的回合内，你可以将一张红色牌当【桃】使用。出牌阶段限一次，你可以将一张手牌视为【桃】对至多X名已受伤角色使用（X为此牌的点数），结算完成后，若此牌目标角色数≥你当前体力值，你本回合获得技能【药道】。",
             'huichun_hong_yao':"回春",
             'huichun_handcard_yao':"✨回春",
             yaodao_yao:"药道",
-            yaodao_yao_info:"药道",
+            yaodao_yao_info:"出牌阶段限一次，你可以指定一名其他角色，你弃置黑色和红色的手牌各一张，使其体力值与你相同（若该角色体力值大于你，其流失体力值之差的体力，否则，其获得体力值之差的回复效果），结算完成后，若此角色原本的体力值大于你，则你减1点体力上限。",
             'baiyi_yao':"白衣",
-            'baiyi_yao_info':"白衣",
+            'baiyi_yao_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择一名除你和该牌目标以外的角色，令其代替你成为此牌使用者。当你对其他角色造成伤害前，你可以防止此伤害，然后获得其区域内一张牌。",
+            'baiyi_source_yao':"白衣",
+            'baiyi_damage_yao':"白衣",
             'sanqing_yao':"三清",
-            'sanqing_yao_info':"三清",
+            'sanqing_yao_info':"当你受到其他角色造成的伤害后，你可以观看其手牌，若其中包含至少三种花色的牌，你可以选择其中三种花色各一张，展示并获得之，然后你进行一次判定，若你展示的牌中包含判定花色，你可以视为对一名已受伤的角色使用一张【桃】。",
 
             
             yuner:"允儿",

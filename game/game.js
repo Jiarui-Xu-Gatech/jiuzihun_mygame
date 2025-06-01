@@ -19677,7 +19677,7 @@
 					if(lib.translate[name]){
 						this.trySkillAnimate(name,popname,checkShow);
 						if(typeof targets=='object'&&targets.length){
-							var str=(targets[0]==this?'#b自己':targets);
+							var str=(targets[0]==this&&targets.length==1?'#b自己':targets);
 							game.log(this,'对',str,'发动了','【'+get.skillTranslation(name,this)+'】');
 						}
 						else{
