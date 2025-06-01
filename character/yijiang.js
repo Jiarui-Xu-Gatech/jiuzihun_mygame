@@ -10206,7 +10206,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player:function(card,player,target,current){
 							if(get.type(card)=='trick'&&player!=target) return 'zeroplayertarget';
 						}
-					}
+					},
 				}
 			},
 			xinwuyan:{
