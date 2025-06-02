@@ -21299,7 +21299,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					'step 1'
 					event.result=result;
 					if(result.bool){
-						player.line2(result.targets,'green');
+						player.line2(result.targets,'thunder');
 						event.targets=result.targets;
 					}
 					else{
@@ -21390,7 +21390,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        player.logSkill('sishui_nan',trigger.player);
+                        player.logSkill('sishui_nan',trigger.player,'thunder');
                         trigger.player.choosePlayerCard('hj',true,[1,player.hp],player);
                     }
                     else{
@@ -21418,7 +21418,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 4'
                     if (result.bool&&result.targets.length>0){
-                        player.logSkill('sishui_nan',result.targets);
+                        player.logSkill('sishui_nan',result.targets,'thunder');
                         for (var i = 0; i < result.targets.length; i++){
                             result.targets[i].draw('nodelay');
                         }
