@@ -20952,7 +20952,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 direct:true,
                 forced:true,
                 trigger:{
-                    player:"phaseDiscardEnd",
+                    player:"phaseDiscardBegin",
                 },
                 filter:function(trigger,player){
                     return player.storage.weirui_nan&&player.storage.weirui_nan!=0;
@@ -20979,7 +20979,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 direct:true,
                 group:['mizhao_self_nan','mizhao_others_nan'],
                 ai:{
-                    threaten:1.4,
+                    threaten:1.8,
                 },
             },
 
@@ -21078,7 +21078,29 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt('sheji_nan'),'当你成为其他角色伤害类普通锦囊的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。').set('ai',function(){
-                        return true;
+                        if (trigger.targets.length>player.hp+player.countCards('h','tao')+player.countCards('h','jiu')){
+                            return false;
+                        }
+                        else{
+                            var total = 0;
+                            for (var i = 0; i < trigger.targets.length; i++){
+                                if (trigger.targets[i]!=player){
+                                    var att = get.attitude(trigger.targets[i],player)+get.attitude(player,trigger.targets[i]);
+                                    if (att > 0){
+                                        total += 1;
+                                    }
+                                    else{
+                                        total += -1;
+                                    }
+                                }
+                            }
+                            if (total > 0){
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        }
                     });
                     'step 1'
                     if (result.bool){
@@ -21118,16 +21140,81 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt('sheji_nan',trigger.player),'当一名角色受到伤害时，若X大于0，你可以令此伤害+X(X为你的体力值减此次伤害的伤害值)，此伤害结算结束之后，该角色回复X点体力，然后若该角色为你，且你还未因本技能增加过上限，则你增加1点体力上限，若不为你，则你失去本技能。').set('ai',function(){
-                        return true;
+                        var player = _status.event.player;
+                        if (trigger.player==player){
+                            if (player.countCards('h','tao')+player.countCards('h','jiu')==0){
+                                return false;
+                            }
+                            if (player.storage.sheji_nan&&player.storage.sheji_nan==1){
+                                return true;
+                            }
+                            else{
+                                return Math.random()<0.4;
+                            }
+                        }
+                        else{
+                            if (trigger.player.isLinked()&&trigger.nature){
+                                var total = 0;
+                                var has=game.hasPlayer(function(current){
+                                    if (current.isLinked()&&((trigger.nature=='thunder'&&!current.hasSkillTag('nothunder'))||(trigger.nature=='fire'&&!current.hasSkillTag('nofire')))){
+                                        var att = get.attitude(current,player)+get.attitude(player,current);
+                                        var sgn = get.sgn(att);
+                                        if (current.hp <= trigger.player.hp){
+                                            total += -sgn;
+                                        }
+                                    }
+                                });
+                                if (total > 1){
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                            }
+                            var att = get.attitude(trigger.player,player)+get.attitude(player,trigger.player);
+                            if (att>=0){
+                                return false;
+                            }
+                            else{
+                                if (trigger.player.hasSkill('xinruan_mei')||trigger.player.hasSkill('chongsheng_nv')||trigger.player.hasSkill('qixing_gui')){
+                                    return false;
+                                }
+                                var countTao = 0;
+                                countTao += trigger.player.countCards('h','tao')+trigger.player.countCards('h','jiu');
+                                var has=game.hasPlayer(function(current){
+                                    if (get.attitude(current,trigger.player)>0){
+                                        countTao+=current.countCards('h','tao');
+                                    }
+                                });
+                                if (countTao == 0){
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                            }
+                        }
                     });
                     'step 1'
                     if (result.bool){
-                        player.logSkill('sheji_nan',trigger.player);
+                        game.delay(1);
+                        // player.logSkill('sheji_nan',trigger.player,'fire');
+                        player.popup('舍己','fire');
+                        game.playAudio('skill','sheji_nan'+Math.ceil(2*Math.random()));
+                        if (trigger.player==player){
+                            game.log(player,'对','#b自己','发动了','#g【舍己】');
+                        }
+                        else{
+                            game.log(player,'对',trigger.player,'发动了','#g【舍己】');
+                        }
+                        player.line(trigger.player,'fire');
                         game.log(player,'令',trigger.player,'本次受到的'+get.cnNumber(trigger.num)+'点伤害增加'+get.cnNumber(trigger.player.hp - trigger.num)+'点');
                         trigger.player.addTempSkill('sheji_hp2_nan');
                         trigger.player.addTempSkill('sheji_hp3_nan');
+                        trigger.player.addTempSkill('sheji_hp4_nan');
                         trigger.player.storage.sheji_hp2_nan = player;
                         trigger.player.storage.sheji_hp3_nan = trigger.player.hp - trigger.num;
+                        trigger.player.storage.sheji_hp4_nan = trigger;
                         trigger.player.syncStorage('sheji_hp2_nan');
                         trigger.player.syncStorage('sheji_hp3_nan');
                         trigger.num = trigger.player.hp;
@@ -21151,7 +21238,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"damageAfter",
                 },
                 filter:function(trigger,player){
-                    return player.isAlive();
+                    return player.isAlive()&&player.storage.sheji_hp4_nan&&player.storage.sheji_hp4_nan==trigger;
                 },
                 content:function(event){
                     'step 0'
@@ -21178,12 +21265,17 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.storage.sheji_hp2_nan.removeSkill('sheji_nan');
                     }
                     'step 2'
+                    player.removeSkill('sheji_hp4_nan');
                     player.removeSkill('sheji_hp3_nan');
                     player.removeSkill('sheji_hp2_nan');
                 },
             },
 
             sheji_hp3_nan:{
+                forced:true,
+            },
+
+            sheji_hp4_nan:{
                 forced:true,
             },
             
@@ -21356,7 +21448,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}
                     'step 5'
                     if (get.position(event.result.card)=='e'){
-                        if (event.targets[0]==trigger.player||event.targets[0]==trigger.source){
+                        if ((event.targets[0]==trigger.player||event.targets[0]==trigger.source)&&event.targets[0].hp<event.targets[0].maxHp){
                             game.log(event.targets[0],'因','#g【似水】','失去装备牌，回复一点体力');
                             event.targets[0].recover(1);
                         }
@@ -21370,6 +21462,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:2.5,
                     expose:0.5,
+                    maixie_defend:true,
+                    skillTagFilter:function(player,tag){
+						if(tag=='maixie_defend'){
+							return player.canMoveCard(null,false);
+						}
+					},
                 },
 
             },
@@ -21386,12 +21484,52 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt('sishui_nan',trigger.player),'一名其他角色出牌阶段开始时，你可以令其获得你手牌区和判定区任意X张牌并令其本回合手牌上限-X（X至多为你当前体力值），然后你选择至多X名角色各摸一张牌。').set('ai',function(){
-                        return true;
+                        if (trigger.player.getHandcardLimit()>trigger.player.countCards('h')||trigger.player.hasSkill('mantian_skip_mei')||trigger.player.hasSkill('mantian_mei')||trigger.player.hasSkill('mantian_mei_nan')||
+                        trigger.player.hasSkill('duliang_yuling')||trigger.player.hasSkill('yilian_target_collectCard_shui')||
+                    trigger.player.hasSkill('yilian_collectCard_shui')||trigger.player.hasSkill('huaxiang')){
+                            return get.attitude(trigger.player,player)+get.attitude(player,trigger.player)>0;
+                        }
+                        else{
+                            if (get.attitude(trigger.player,player)+get.attitude(player,trigger.player)>0){
+                                if (player.countCards('j')>0){
+                                    return true;
+                                }
+                                if ((trigger.player.hasSkillTag('maixie')||trigger.player.hasSkillTag('maixie_defend'))&&Math.random()<0.4){
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                            }
+                            else{
+                                if (player.countCards('j')>0&&player.countCards('h')==0){
+                                    return true;
+                                }
+                                if (!trigger.player.hasSkill('mantian_mei')&&!trigger.player.hasSkill('mantian_mei_nan')&&!(trigger.player.hasSkillTag('maixie')||trigger.player.hasSkillTag('maixie_defend'))&&Math.random()<0.6){
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                            }
+                        }
                     });
                     'step 1'
                     if (result.bool){
                         player.logSkill('sishui_nan',trigger.player,'thunder');
-                        trigger.player.choosePlayerCard('hj',true,[1,player.hp],player);
+                        event.Me = player;
+                        trigger.player.choosePlayerCard('hj',true,[1,player.hp],player).set('ai',function(button){
+                            if (get.position(button.link)=='j'){
+                                return get.attitude(trigger.player,event.Me)+get.attitude(event.Me,trigger.player);
+                            }
+                            else{
+                                var add = 0;
+                                if (get.attitude(trigger.player,event.Me)+get.attitude(event.Me,trigger.player)<0){
+                                    add = 0.25
+                                }
+                                return 0.6-Math.random()+add;
+                            }
+                        });
                     }
                     else{
                         event.finish();
@@ -21784,9 +21922,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (target.hp==target.maxHp&&target.hp<player.hp){
                                 return -1;
                             }
+                            var multi = 1;
+                            if (lib.config.mode=='identity'&&(target.identity=='zhu')){
+                                multi = 2;
+                            }
 							var att = get.attitude(player,target)+get.attitude(target,player);
                             var sgn = get.sgn(att);
-                            return sgn*(player.hp-target.hp);
+                            return sgn*(player.hp-target.hp)*multi;
 						},
 					});
                     'step 1'
@@ -21869,6 +22011,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						return target!=player&&target!=trigger.target&&!trigger.targets.contains(target);
 					}).set('ai',function(target){
                         var player=_status.event.player;
+                        if (get.name(trigger.card)=='huogong'){
+                            return -1;
+                        }
+                        if (lib.config.mode=='identity'&&player.identity=='fan'&&target.identity=='zhu'){
+                            var hasZhong = false;
+                            for (var i = 0; i < trigger.targets.length; i++){
+                                if((trigger.targets[i].identity == 'zhong'||trigger.targets[i].identity == 'mingzhong')&&trigger.targets[i].hp <=1){
+                                    hasZhong = true;
+                                    break;
+                                }
+                            }
+                            if (hasZhong){
+                                return 100;
+                            }
+                        }
                         if (trigger.targets.length == 1){
                             if (trigger.targets[0].hasSkillTag('maixie_defend')){
                                 return -(get.attitude(player,target)+get.attitude(target,player));
@@ -21894,6 +22051,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.finish();
                     }
                     'step 2'
+                    game.delay(1);
                     event.thePlayer.line(trigger.targets,'green');
                     trigger.untrigger();
                     trigger.getParent().player=event.thePlayer;
@@ -23671,7 +23829,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             jianan_zb:"佳楠",
             'weirui_nan':"葳蕤",
-            'weirui_nan_info':"摸牌阶段，你可以选择令摸牌数+X（X为当前场上的装备数），若如此做，则弃牌阶段结束时，你弃置X张牌。",
+            'weirui_nan_info':"摸牌阶段，你可以选择令摸牌数+X（X为当前场上的装备数），若如此做，则弃牌阶段开始时，你弃置X张牌。",
             'mizhao_nan':"糜沼",
             'mizhao_nan_info':"锁定技，每回合限一次，当你进入濒死状态时或当一名你与其距离≤1的其他角色脱离濒死状态时，你展示牌堆或弃牌堆中四种花色的牌各一张，并获得之。",
             'mizhao_self_nan':"糜沼",
