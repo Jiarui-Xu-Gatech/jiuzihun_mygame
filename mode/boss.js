@@ -11054,7 +11054,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					player.addSkill('jilue');
 					player.awakenSkill('sbaiyin');
 				},
-				derivation:"jilue",
+				derivation:["jilue",'jilue_guicai','jilue_fangzhu','jilue_jizhi','jilue_zhiheng','jilue_wansha'],
 			},
 			jilue:{
 				audio:false,
@@ -14001,6 +14001,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			jilue_wansha:'完杀',
 			jilue_zhiheng:'制衡',
 			jilue_jizhi:'集智',
+			jilue_guicai_info:'当一名角色的判定牌生效前，你可以打出一张牌代替之。',
+			jilue_fangzhu_info:'当你受到伤害后，你可以令一名其他角色翻面，然后该角色摸X张牌（X为你已损失的体力值）。',
+			jilue_wansha_info:'锁定技，你的回合内，不处于濒死状态的其他角色不能使用【桃】。',
+			jilue_zhiheng_info:'出牌阶段限一次，你可以弃置任意张牌，然后摸等量的牌。若你以此法弃置了所有手牌，则你多摸一张牌。',
+			jilue_jizhi_info:'当你使用锦囊牌时，你可以摸一张牌。若此牌是基本牌，你可以弃置此牌然后本回合手牌上限+1。',
 			lianpo:'连破',
 			lianpo_info:'一名角色的回合结束时，若你本回合内杀死过角色，则你可以进行一个额外的回合。',
 			guixin:'归心',
