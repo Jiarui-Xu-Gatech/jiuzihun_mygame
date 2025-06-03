@@ -222,6 +222,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						if (evt.player==target){
 							return 100 - get.value(card,evt.player);
 						}
+						if (evt.player.hasSkill('yuzhong_yan')&&target.isTurnedOver()&&get.attitude(evt.player,target)>0){
+							return 100 - get.value(card,evt.player);
+						}
 						if(get.damageEffect(evt.target,evt.player,evt.player,'fire')-get.attitude(evt.player,target)>0){
 							return 7-get.value(card,evt.player)-get.attitude(evt.player,target);
 						}

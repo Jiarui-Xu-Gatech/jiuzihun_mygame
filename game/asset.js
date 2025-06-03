@@ -427,6 +427,7 @@ window.noname_asset_list=[
 	'audio/die/zuoci.mp3',
 	'audio/effect/damage.mp3',
 	'audio/effect/damage2.mp3',
+	'audio/effect/boundSound.mp3',
 	'audio/effect/loseMaxHp.mp3',
 	'audio/effect/damage_female.mp3',
 	'audio/effect/damage_male.mp3',

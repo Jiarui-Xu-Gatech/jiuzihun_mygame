@@ -96,7 +96,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             baixuetuhuang_t:'白血兔皇，本名：诺诺·路西法，七大罪中的傲慢之罪，地狱灵魂体为一只骄傲的白兔。生性傲慢，几乎不想从地狱冥界来到大陆，因为她觉得大陆之人不配与她呼吸同样的空气！善用雷电之力，且在夜晚，尤其月圆之夜，实力最为恐怖，而在白天则力量较弱。',
             shiyun_za:'诗芸，南域五大将之一，九昕儿于鬼斗子家中收服的名将。她是五大将中身姿最小巧玲珑的，但别看个子小，她酒量惊人，喝酒很慢但也很多，实实在在，酒量在五大将中排名第三，仅次于丁亚，有时甚至能喝倒丁亚，因为她毅力极强，除非远超极限，否则一定要放倒对手才肯罢休，曾经一怒之下一人单挑一整个酒店的客人，猛灌下去堆成小山一般的烈酒后，她还依旧并拢大腿站立着，并说，谁拍她的肚子说她还能喝多少瓶，她就要喝10倍这个数字，正是：海纳百川，有容乃大！后被九昕儿赐予一柄开酒长枪，追随陈英超，与丁亚，彤欣，佳楠一同去镇守西北荒芜之地。与陈英超最为亲近，后师从她学习豪饮烈酒的奥义！自己发展出一套痛饮之法和海纳之道，令酒量能在喝慢酒时几何级数地增长！',
             jianan_zb:'佳楠，南域五大将之一，九昕儿于鬼斗子家中收服的名将。非常可爱的女孩，温柔似水，身姿婀娜丰腴，历史上记载其素有葳蕤之姿。她性格活泼，富有爱心，不希望看着别人醉倒，总是舍己为人让自己多喝酒让对手少喝，可是还是总是喝不醉，吟诗作赋似行云流水，经常让旁人猜字谜，才对自己和两杯，猜错喝一杯，反正都是自己喝。追随陈英超，与丁亚，彤欣，诗芸一同去镇守西北荒芜之地。后师从王月蘅学习灌饮之道，酒量和肚量突飞猛进，竟能一口气喝光一泓糜烂沼泽之酒，甚是骇人！',
-            yaoxianzi_qa:'药仙子，本名韩语黛，原本为韩寿韩家内的制药奴婢，韩鑫在赌神大赛上击败韩寿之后，韩寿逃亡，韩鑫随即整顿韩家余寇，遇到了韩语黛，了解到原来韩月给他的药液是韩语黛所配置，韩鑫念及这药液救过自己两次，想想还是放了她，毕竟医生救死扶伤，也有德，自己没有必要赶尽杀绝，韩语黛连连谢过韩鑫的不杀之恩之后离去。后来她因为机缘巧合跟着药婆婆学习药学之经典《药道》，医术越发高超。学成后入世行医，心怀慈悲之心，救死扶伤，妙手回春，自创一套“三清”之法，能医治各种疑难杂症，故此闻名遐迩，又因她一身白衣飘飘，来去无踪，不求回报，被世人尊称为“药仙子”。九昕儿独闯黑域，伤重归来，韩鑫焦急万分，药仙子为了报答韩鑫多年前的不杀之恩，主动上门医治，才得以保住九昕儿的性命。',
+            yaoxianzi_qa:'药仙子，本名韩语黛，原本为韩寿韩家内的制药奴婢，韩鑫在赌神大赛上击败韩寿之后，韩寿逃亡，韩鑫随即整顿韩家余寇，遇到了韩语黛，了解到原来韩月给他的药液是韩语黛所配置，韩鑫念及这药液救过自己两次，想想还是放了她，毕竟医生救死扶伤，也有德，自己没有必要赶尽杀绝，韩语黛连连谢过韩鑫的不杀之恩之后离去。后来她因为机缘巧合跟着药婆婆学习药学之经典《药道》，医术越发高超。学成后入世行医，心怀慈悲之心，救死扶伤，妙手回春，自创一套“三清”之法，能医治各种疑难杂症，故此闻名遐迩，又因她容貌精致，白衣白发，爱在自己曼妙的胴体上点缀一些青绿色宝石，来去无踪，不求回报，神秘莫测，被世人尊称为“药仙子”、“白衣天使”。九昕儿独闯黑域，伤重归来，韩鑫焦急万分，药仙子为了报答韩鑫多年前的不杀之恩，主动上门医治，才得以保住九昕儿的性命。药仙子，本名韩语黛，原本为韩寿韩家内的制药奴婢，韩鑫在赌神大赛上击败韩寿之后，韩寿逃亡，韩鑫随即整顿韩家余寇，遇到了韩语黛，了解到原来韩月给他的药液是韩语黛所配置，韩鑫念及这药液救过自己两次，想想还是放了她，毕竟医生救死扶伤，也有德，自己没有必要赶尽杀绝，韩语黛连连谢过韩鑫的不杀之恩之后离去。后来她因为机缘巧合跟着药婆婆学习药学之经典《药道》，医术越发高超。学成后入世行医，心怀慈悲之心，救死扶伤，妙手回春，自创一套“三清”之法，能医治各种疑难杂症，故此闻名遐迩，被世人尊称为“药仙子”，又因她容貌精致，白衣白发，爱在自己曼妙的肌肤上点缀一些青绿色宝石，美得迷人心魂，动人心魄，更因她来去无踪，神秘莫测，不求回报，故而又得名“白衣天使”。九昕儿独闯黑域，伤重归来，韩鑫焦急万分，药仙子为了报答韩鑫多年前的不杀之恩，主动上门医治，才得以保住九昕儿的性命。',
         },
 		characterTitle:{
             jinshouzhen:"饕餮夫人",
@@ -7409,7 +7409,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:2,
                 forced:true,
                 locked:true,
-                group:["yuzhong_zhu_yan","yuzhong_fix_yan","yuzhong_attack_yan","yuzhong_damage_yan"],
+                group:["yuzhong_zhu_yan","yuzhong_fix_yan","yuzhong_attack_yan","yuzhong_damage_yan",'yuzhong_effect'],
             },
 
             yuzhong_zhu_yan:{
@@ -7588,6 +7588,38 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     
                 },
 
+            },
+
+            yuzhong_effect:{
+                unique:true,
+				global:'yuzhong_one_effect',
+				audio:false,
+            },
+
+            yuzhong_one_effect:{
+                audio:false,
+                silent:true,
+                popup:false,
+                direct:true,
+                trigger:{
+                    target:"shaBefore",
+                },
+                forced:true,
+                filter:function(event,player){
+                    return false;
+                },
+                content:function(event){
+                    event.finish();
+                },
+                ai:{
+                    effect:{
+                        target:function(card,player,target,current){
+							if(player.hasSkill('yuzhong_yan')&&get.tag(card,'damage')&&target.isTurnedOver()) {
+                                return [0,3];
+                            }
+						},
+                    },
+                },
             },
 
 
@@ -10311,16 +10343,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                     "step 1"
                     if (result.control != 'cancel2'){
+                        // player.line(trigger.player,'green');
                         event.control = result.control;
+                        game.delay(1.25);
                         if(result.control=='duoqin_thunder_gain'){
                             trigger.player.recover(1);
                             // player.recover(1);
-                            player.line(trigger.player,'green');
+                            // player.line(trigger.player,'green');
                         }
                         else{
                             trigger.player.loseHp(1);
                             // player.loseHp(1);
-                            player.line(trigger.player,'green');
+                            // player.line(trigger.player,'green');
                         }    
                         player.logSkill('duoqin_len',trigger.player);
                     }
@@ -21078,6 +21112,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt('sheji_nan'),'当你成为其他角色伤害类普通锦囊的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。').set('ai',function(){
+                        if (player.countCards('e','tengjia')>0&&(get.name(trigger.card)=='wanjian'||get.name(trigger.card)=='nanman')){
+                            if (get.attitude(trigger.player,player)+get.attitude(player,trigger.player)<0){
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        }
+                        
                         if (trigger.targets.length>player.hp+player.countCards('h','tao')+player.countCards('h','jiu')){
                             return false;
                         }
@@ -21197,7 +21240,6 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        game.delay(1);
                         // player.logSkill('sheji_nan',trigger.player,'fire');
                         player.popup('舍己','fire');
                         game.playAudio('skill','sheji_nan'+Math.ceil(2*Math.random()));
@@ -21222,6 +21264,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     else{
                         event.finish();
                     }
+                    'step 2'
+                    game.delay(1);
 
                 },
                 ai:{
@@ -21254,7 +21298,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.storage.sheji_nan = 1;
                         player.syncStorage('sheji_nan');
                         player.logSkill('sheji_hp_nan');
-                        game.playAudio('effect','damage');
+                        game.playAudio('effect','boundSound');
                         player.gainMaxHp();
                     }
                     if (player != player.storage.sheji_hp2_nan && player.storage.sheji_hp2_nan.isAlive()&&player.isAlive()){
@@ -21550,7 +21594,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.chooseTarget('【似水】：请选择至多'+get.cnNumber(event.Num)+'名角色各摸一张牌',[1,event.Num]).set('ai',function(target){
                         var add = 0;
                         if (player == target){
-                            add = 0.5;
+                            add += 0.5;
+                        }
+                        if (target.hasSkill('nvfei_yawen')&&get.attitude(player,target)+get.attitude(target,player)>0){
+                            add += 8.5;
                         }
                         return get.attitude(player,target)+get.attitude(target,player)+add;
                     });
@@ -21628,7 +21675,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							return player!=target&&!event.allTargets.contains(target);
 						},
 						ai1:function(card){
-                            if (player == _status.currentPhase && player.countCards('h') - player.getHandcardLimit() < Math.max(4,player.getHandcardLimit())) return -1;
+                            if (player == _status.currentPhase && player.countCards('h') - player.getHandcardLimit() > Math.max(4,player.getHandcardLimit())) return -1;
 							if(ui.selected.cards.length>0&&Math.random()<0.5) return -1;
 							if(card.name=='du') return 20;
 							return (_status.event.player.countCards('h')-_status.event.player.hp);
@@ -21798,7 +21845,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (get.color(card)=='red'){
                             add = -4;
                         }
-                        return get.number(card)*2 - get.value(card)+add;
+                        if (get.number(card)*2 - get.value(card)+add>0){
+                            return get.number(card)*2 - get.value(card)+add;
+                        }
+                        else{
+                            return get.number(card)*20 - get.value(card)+add;
+                        }
+                        
                     });
                     'step 1'
                     if (result.bool){
@@ -21811,10 +21864,80 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             var validNumber = game.countPlayer(function(current){
                                 return current!=_status.currentPhase&&current.hp<current.maxHp&&get.attitude(_status.currentPhase,current)+get.attitude(current,_status.currentPhase)>0;
                             });
-                            if (target==_status.currentPhase&&player.countCards('he',{color:'red'})>0&&validNumber>=player.hp){
-                                return -1;
+                            event.maxScore = 0;
+                            event.aim = player;
+                            var has=game.hasPlayer(function(current){
+                                if (current != _status.currentPhase){
+                                    var player = _status.currentPhase;
+                                    var score = 0;
+                                    var Hp = current.hp;
+                                    if (current!=_status.currentPhase&&current.hp<current.maxHp&&get.attitude(_status.currentPhase,current)+get.attitude(current,_status.currentPhase)>0){
+                                        Hp += 1;
+                                    }
+                                    if (!(Hp==player.hp)&&!(Hp==current.maxHp&&Hp<player.hp)){
+                                        var multi = 1;
+                                        if (lib.config.mode=='identity'&&(current.identity=='zhu')){
+                                            multi = 2;
+                                        }
+                                        var att = get.attitude(player,current)+get.attitude(current,player);
+                                        var sgn = get.sgn(att);
+                                        var loseEff = 0;
+                                        if (player.hp < Hp&&att<0){
+                                            if (player.maxHp > 1){
+                                                loseEff = 6/Math.max(1,player.maxHp);
+                                            }
+                                            else{
+                                                loseEff = 12/Math.max(1,player.maxHp);
+                                            }
+                                        }
+                                        if (att>0){
+                                            score = sgn*(player.maxHp-Hp)*multi - loseEff;
+                                        }
+                                        else{
+                                            score = sgn*(player.hp-Hp)*multi - loseEff;
+                                        }
+                                        
+                                    }
+                                    if (score > event.maxScore){
+                                        event.maxScore = score;
+                                        event.aim = current;
+                                    }
+                                }
+                            });
+
+                            if (event.aim != player){
+                                if (get.attitude(player,event.aim)+get.attitude(event.aim,player)>0){
+                                    player.storage.huichun_yao = 1;
+                                    player.syncStorage('huichun_yao');
+                                    return get.attitude(player,target)+get.attitude(target,player);
+                                }
+                                else{
+                                    if (event.aim.hp < event.aim.maxHp){
+                                        validNumber += 1;
+                                    }
+                                    if (validNumber>=player.hp){
+                                        player.storage.huichun_yao = 2;
+                                        player.syncStorage('huichun_yao');
+                                        if (target==_status.currentPhase){
+                                            return -1;
+                                        }
+                                        if (target == event.aim){
+                                            return 100;
+                                        }
+                                        return get.attitude(player,target)+get.attitude(target,player);
+                                    }
+                                    else{
+                                        player.storage.huichun_yao = 1;
+                                        player.syncStorage('huichun_yao');
+                                        return get.attitude(player,target)+get.attitude(target,player);
+                                    }
+                                }
                             }
-                            return get.attitude(player,target)+get.attitude(target,player);
+                            else{
+                                player.storage.huichun_yao = 1;
+                                player.syncStorage('huichun_yao');
+                                return get.attitude(player,target)+get.attitude(target,player);
+                            }
 						});
                     }
                     else{
@@ -21880,7 +22003,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 enable:'phaseUse',
                 filter:function(event,player){
-                    return !player.hasSkill('yaodao_yao_limit')&&player.countCards('he',{color:'red'})>0&&player.countCards('he',{color:'black'})>0;
+                    return !player.hasSkill('yaodao_yao_limit')&&player.countCards('h',{color:'red'})>0&&player.countCards('h',{color:'black'})>0;
                 },
                 content:function(event){
                     'step 0'
@@ -21912,7 +22035,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							return true;
 						},
 						ai1:function(card){
-							return 10-get.value(card);
+							return 100-get.value(card);
 						},
 						ai2:function(target){
                             var player = _status.event.player;
@@ -21928,7 +22051,17 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
 							var att = get.attitude(player,target)+get.attitude(target,player);
                             var sgn = get.sgn(att);
-                            return sgn*(player.hp-target.hp)*multi;
+                            var loseEff = 0;
+                            if (player.hp < target.hp){
+                                if (player.maxHp > 1){
+                                    loseEff = 6/Math.max(1,player.maxHp);
+                                }
+                                else{
+                                    loseEff = 12/Math.max(1,player.maxHp);
+                                }
+                                
+                            }
+                            return sgn*(player.hp-target.hp)*multi - loseEff;
 						},
 					});
                     'step 1'
@@ -21965,12 +22098,27 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     threaten:7.5,
                     expose:0.73,
                     order:function(){
-                        return get.order({name:'tao'})+1;
+                        var player = _status.currentPhase;
+                        if (player.storage.huichun_yao&&player.storage.huichun_yao==2){
+                            return get.order({name:'tao'})+15;
+                        }
+                        else{
+                            return get.order({name:'tao'})-0.8;
+                        }
+                        
                     },
                     result:{
                         player:function(player){
                             var has=game.hasPlayer(function(current){
-                                return current.hp != player.hp&&!(current.hp==current.maxHp&&current.hp<player.hp);
+                                if (current.hp != player.hp&&!(current.hp==current.maxHp&&current.hp<player.hp)){
+                                    var att = get.attitude(player,current)+get.attitude(current,player);
+                                    if (att > 0){
+                                        return player.hp > current.hp;
+                                    }
+                                    if (att < 0){
+                                        return player.hp < current.hp;
+                                    }
+                                }
                             });
                             if (has){
                                 return 1;
@@ -22011,6 +22159,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						return target!=player&&target!=trigger.target&&!trigger.targets.contains(target);
 					}).set('ai',function(target){
                         var player=_status.event.player;
+                        var eff = 0;
+                        for (var i = 0; i < trigger.targets.length; i++){
+                            eff += get.effect(trigger.targets[i],{name:'sha',nature:trigger.card.nature},target,player)+0.05;
+                        }
+                        if (eff < 0){
+                            return -1;
+                        }
+
                         if (get.name(trigger.card)=='huogong'){
                             return -1;
                         }
@@ -22056,6 +22212,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     trigger.untrigger();
                     trigger.getParent().player=event.thePlayer;
                     game.log(player,'令',event.thePlayer,'代替自己成为',trigger.card,'的使用者');
+                    'step 3'
+                    game.delay(1);
                 },
 
             },
