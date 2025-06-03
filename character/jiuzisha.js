@@ -21841,11 +21841,24 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseCard('###回春###出牌阶段限一次，你可以将一张手牌视为【桃】对至多X名已受伤角色使用（X为此牌的点数），结算完成后，若此牌目标角色数≥你当前体力值，你本回合获得技能【药道】。','h',1).set('ai',function(card){
+                        var player = _status.event.player;
+                        var handCards = player.getCards('h');
+                        var has = false;
+                        for (var i = 0; i < handCards.length; i++){
+                            var addd = 0;
+                            if (get.color(handCards[i])=='red'){
+                                addd = -4;
+                            }
+                            if (get.number(handCards[i])*2 - get.value(handCards[i])+addd > 0){
+                                has = true;
+                                break;
+                            }
+                        }
                         var add = 0;
                         if (get.color(card)=='red'){
                             add = -4;
                         }
-                        if (get.number(card)*2 - get.value(card)+add>0){
+                        if (has){
                             return get.number(card)*2 - get.value(card)+add;
                         }
                         else{
