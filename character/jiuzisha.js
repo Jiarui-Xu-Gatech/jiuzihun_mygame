@@ -22347,18 +22347,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     'step 2'
                     if (result.bool){
-                        player.showCards(result.links,'三色【三清】牌');
                         event.allSuit = [];
                         for (var i = 0; i < result.links.length; i++){
                             event.allSuit.push(get.suit(result.links[i]))
                         }
                         event.allCards = result.links;
+                        player.gain(event.allCards,trigger.source,'giveAuto','bySelf');
                     }
                     else{
                         event.finish();
                     }
                     'step 3'
-                    player.gain(event.allCards,trigger.source,'giveAuto','bySelf');
+                    player.showCards(event.allCards,'三色【三清】牌');
                     'step 4'
                     player.judge(function (card) {
                         if(event.allSuit.contains(get.suit(card))){
