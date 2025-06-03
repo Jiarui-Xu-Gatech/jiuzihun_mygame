@@ -16967,7 +16967,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 mod:{
 					maxHandcardBase:function(player,num){
-						return player.maxHp;
+						return num + player.maxHp - player.hp;
 					},
 				},
                 group:"baonu_lose_gu",
@@ -21025,12 +21025,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"dying",
                 },
                 filter:function(trigger,player){
-                    return !player.hasSkill('mizhao_limit');
+                    return true;//!player.hasSkill('mizhao_limit');
                 },
                 content:function(event){
                     'step 0'
                     player.logSkill('mizhao_nan');
-                    player.addTempSkill('mizhao_limit');
+                    // player.addTempSkill('mizhao_limit');
                     event.suits = ['spade', 'heart', 'diamond', 'club'];
                     event.cards = [];
                     for (var i = 0; i < event.suits.length; i++) {
@@ -21058,12 +21058,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     global:"dyingAfter",
                 },
                 filter:function(trigger,player){
-                    return !player.hasSkill('mizhao_limit')&&trigger.player.isAlive()&&trigger.player!=player&&get.distance(player,trigger.player)<=1;
+                    return trigger.player.isAlive()&&trigger.player!=player&&get.distance(player,trigger.player)<=1;//&&!player.hasSkill('mizhao_limit')
                 },
                 content:function(event){
                     'step 0'
                     player.logSkill('mizhao_nan');
-                    player.addTempSkill('mizhao_limit');
+                    // player.addTempSkill('mizhao_limit');
                     event.suits = ['spade', 'heart', 'diamond', 'club'];
                     event.cards = [];
                     for (var i = 0; i < event.suits.length; i++) {
@@ -21961,7 +21961,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 3'
                     if (event.taoTargets.length>=player.hp){
                         player.popup('回春','wood');
-                        game.playAudio('skill','huichun_yao'+Math.ceil(2*Math.random()));
+                        game.playAudio('skill','huichun_yao'+Math.ceil(2+2*Math.random()));
                         game.log(player,'发动了','#g【回春】','，本回合获得技能','#g【药道】');
                         player.addTempSkill('yaodao_yao');
                         player.markSkill('yaodao_yao');
@@ -23992,7 +23992,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'weirui_nan':"葳蕤",
             'weirui_nan_info':"摸牌阶段，你可以选择令摸牌数+X（X为当前场上的装备数），若如此做，则弃牌阶段开始时，你弃置X张牌。",
             'mizhao_nan':"糜沼",
-            'mizhao_nan_info':"锁定技，每回合限一次，当你进入濒死状态时或当一名你与其距离≤1的其他角色脱离濒死状态时，你展示牌堆或弃牌堆中四种花色的牌各一张，并获得之。",
+            'mizhao_nan_info':"锁定技，当你进入濒死状态时或当一名你与其距离≤1的其他角色脱离濒死状态时，你展示牌堆或弃牌堆中四种花色的牌各一张，并获得之。",
             'mizhao_self_nan':"糜沼",
             'mizhao_others_nan':"糜沼",
             'sheji_nan':"舍己",
