@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao','yuner_useCard_console'],[]],
+            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao','yuner_useCard_console'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
