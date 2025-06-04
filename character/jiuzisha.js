@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao'],[]],
+            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao','yuner_useCard_console'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -21968,6 +21968,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.taoTargets = result.targets;
                         event.taoTargets.sort(lib.sort.seat);
                         event.origin_name = event.taoCard.name;
+                        game.addVideo('lose',player,[get.cardsInfo([event.taoCard]),get.cardsInfo([]),get.cardsInfo([])]);
                         event.taoCard.name = 'tao',
                         player.useCard(event.taoCard,event.taoTargets);
                     }
@@ -23192,6 +23193,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
 					    
 				},
+            },
+
+            yuner_useCard_console:{
+                audio:false,
+                direct:true,
+                trigger:{
+                    player:"useCard",
+                },
+                filter:function(event,player){
+                    console.log(event.card);
+                    return true;
+                },
+                content:function(event){
+
+                },
             },
 
             
