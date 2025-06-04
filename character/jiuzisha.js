@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao','yaodao_yao'],[]],
+            yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao','yuner_useCard_console'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -21761,7 +21761,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             huichun_yao:{
                 audio:2,
                 derivation:"yaodao_yao",
-                group:['huichun_hong_yao','huichun_handcard_yao'],
+                group:['huichun_handcard_yao','huichun_hong_yao'],
 
             },
 
@@ -21968,15 +21968,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.taoTargets = result.targets;
                         event.taoTargets.sort(lib.sort.seat);
                         event.origin_name = event.taoCard.name;
-                        game.addVideo('lose',player,[get.cardsInfo([event.taoCard]),get.cardsInfo([]),get.cardsInfo([])]);
+                        // game.addVideo('lose',player,[get.cardsInfo([event.taoCard]),get.cardsInfo([]),get.cardsInfo([])]);
                         event.taoCard.name = 'tao',
-                        player.useCard(event.taoCard,event.taoTargets);
+                        player.useCard(event.taoCard,[event.taoCard],event.taoTargets);//完美复现技能viewAs效果
+                        event.taoCard.name = event.origin_name;
                     }
                     else{
                         event.finish();
                     }
                     'step 3'
-                    event.taoCard.name = event.origin_name;
                     if (event.taoTargets.length>=player.hp){
                         player.popup('回春','wood');
                         game.playAudio('skill','huichun_yao'+Math.ceil(2+2*Math.random()));

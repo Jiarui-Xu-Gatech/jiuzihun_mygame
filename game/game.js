@@ -27097,6 +27097,9 @@
 				}
 			}
 		},
+		getTheCard:function(card){
+			return card;
+		},
 		changeLand:function(url,player){
 			game.addVideo('changeLand',player,url);
 			if(url.indexOf('/')===-1){
