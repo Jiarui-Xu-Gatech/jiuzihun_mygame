@@ -255,7 +255,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 game.log(player,'令',trigger.card,'的判定无效');
                             }
                             trigger.cancel();
-                            event.goto(3);
+                            
+                            event.goto(4);
                         }
                     } 
                     else{
@@ -266,6 +267,22 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.broadcastAll(ui.clear);
 					    game.addVideo('uiClear');
                     },1200);
+                    event.goto(5);
+                    "step 4"
+                    setTimeout(function(){
+                        for(var i=0;i<ui.dialogs.length;i++){
+                            if(ui.dialogs[i].videoId==videoId){
+                                ui.dialogs[i].close();
+                            }
+                        }
+                        ui.arena.classList.remove('thrownhighlight');
+                        game.addVideo('judge2',null,event.videoId);
+                        game.broadcastAll(ui.clear);
+					    game.addVideo('uiClear');
+                    },1200);
+                    event.goto(5);
+                    "step 5"
+                    event.finish();
                 },
                 ai:{
                     order: 5,
