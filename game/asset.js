@@ -3487,6 +3487,41 @@ window.noname_asset_list=[
 	'audio/die/shiyun_za.mp3',
 
 
+	'audio/skill/weirui_nan1.mp3', 
+	'audio/skill/weirui_nan2.mp3',
+	'audio/skill/mizhao_nan1.mp3', 
+	'audio/skill/mizhao_nan2.mp3', 
+	'audio/skill/sheji_nan1.mp3', 
+	'audio/skill/sheji_nan2.mp3', 
+	'audio/skill/sheji_hp_nan1.mp3', 
+	'audio/skill/sheji_hp_nan2.mp3', 
+	'audio/skill/sishui_nan1.mp3', 
+	'audio/skill/sishui_nan2.mp3', 
+	'audio/skill/sishui_damage_nan1.mp3', 
+	'audio/skill/sishui_phaseUse_nan1.mp3', 
+	'audio/skill/sishui_handlimit1.mp3', 
+	'audio/die/jianan_zb.mp3',
+
+
+
+	'audio/skill/miaoshou_yao1.mp3', 
+	'audio/skill/miaoshou_yao2.mp3',
+	'audio/skill/huichun_yao1.mp3', 
+	'audio/skill/huichun_yao2.mp3', 
+	'audio/skill/huichun_yao3.mp3', 
+	'audio/skill/huichun_yao4.mp3', 
+	'audio/skill/huichun_hong_yao1.mp3', 
+	'audio/skill/huichun_hong_yao2.mp3', 
+	'audio/skill/baiyi_yao1.mp3', 
+	'audio/skill/baiyi_yao2.mp3', 
+	'audio/skill/baiyi_source_yao1.mp3', 
+	'audio/skill/sanqing_yao1.mp3', 
+	'audio/skill/sanqing_yao2.mp3', 
+	'audio/skill/yaodao_yao1.mp3',
+	'audio/skill/yaodao_yao2.mp3',
+	'audio/die/yaoxianzi_qa.mp3',
+
+
 
 	'audio/skill/aoman_tu1.mp3',
 	'audio/skill/aoman_tu2.mp3', 

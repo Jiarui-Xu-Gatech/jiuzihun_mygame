@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','baiyi_yao'],[]],
+            yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -21330,7 +21330,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             sishui_damage_nan:{
-                audio:false,
+                audio:1,
                 direct:true,
                 trigger:{
                     player:"damageAfter",
@@ -21474,7 +21474,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}
 					'step 4'
 					if(result.bool&&result.links.length){
-                        player.logSkill('sishui_nan');
+                        player.logSkill('sishui_damage_nan');
 						var link=result.links[0];
 						if(get.position(link)=='e'){
 							event.targets[1].equip(link);
@@ -21517,7 +21517,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
             
             sishui_phaseUse_nan:{
-                audio:2,
+                audio:1,
                 direct:true,
                 trigger:{
                     global:'phaseUseBegin',
@@ -21560,7 +21560,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        player.logSkill('sishui_nan',trigger.player,'thunder');
+                        player.logSkill('sishui_phaseUse_nan',trigger.player,'thunder');
                         event.Me = player;
                         trigger.player.choosePlayerCard('hj',true,[1,player.hp],player).set('ai',function(button){
                             if (get.position(button.link)=='j'){
@@ -21603,7 +21603,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 4'
                     if (result.bool&&result.targets.length>0){
-                        player.logSkill('sishui_nan',result.targets,'thunder');
+                        player.logSkill('sishui_handlimit',result.targets,'thunder');
                         for (var i = 0; i < result.targets.length; i++){
                             result.targets[i].draw('nodelay');
                         }
@@ -21622,6 +21622,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             sishui_handlimit:{
+                audio:1,
                 forced:true,
                 locked:true,
                 mark:true,
@@ -21961,10 +21962,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // player.logSkill('huichun_yao');
                         player.popup('回春','wood');
                         game.playAudio('skill','huichun_yao'+Math.ceil(2*Math.random()));
+                        game.playAudio('skill','huichun_yao'+Math.ceil(2+2*Math.random()));
                         game.log(player,'发动了','#g【回春】');
                         player.addTempSkill('huichun_handcard_yao_limit','phaseUseAfter');
                         event.taoTargets = result.targets;
                         event.taoTargets.sort(lib.sort.seat);
+                        event.origin_name = event.taoCard.name;
                         event.taoCard.name = 'tao',
                         player.useCard(event.taoCard,event.taoTargets);
                     }
@@ -21972,6 +21975,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.finish();
                     }
                     'step 3'
+                    event.taoCard.name = event.origin_name;
                     if (event.taoTargets.length>=player.hp){
                         player.popup('回春','wood');
                         game.playAudio('skill','huichun_yao'+Math.ceil(2+2*Math.random()));
@@ -22159,7 +22163,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             'baiyi_source_yao':{
-                audio:false,
+                audio:1,
                 direct:true,
                 trigger:{player:'useCardToPlayer'},
                 filter:function(trigger,player){
@@ -22217,7 +22221,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 1'
                     if (result.bool&&result.targets.length>0){
                         event.thePlayer = result.targets[0];
-                        player.logSkill('baiyi_yao',event.thePlayer);
+                        player.logSkill('baiyi_source_yao',event.thePlayer);
                     }
                     else{
                         event.finish();
