@@ -31104,11 +31104,11 @@
 			if(lib.config.background_audio){
 				if(result===true){
 					game.playBackgroundMusic();
-					game.playAudio('effect','win'+Math.ceil(3*Math.random()));
+					game.playAudio('effect','win'+Math.ceil(4*Math.random()));
 				}
 				else if(result===false){
 					game.playBackgroundMusic();
-					game.playAudio('effect','lose'+Math.ceil(4*Math.random()));
+					game.playAudio('effect','lose'+Math.ceil(5*Math.random()));
 					// game.playAudio('effect','lose'+4);
 				}
 				else{
