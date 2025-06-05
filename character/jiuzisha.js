@@ -14807,7 +14807,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 mark:true,
                 marktext:'纵',
                 intro:{
-                    content:"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将牌移至游戏外后。",
+                    content:"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将牌置于武将牌上后。",
                 },
                 trigger:{
                     player:['useCardAfter',"loseAfter","addCardToStorage"],
@@ -23907,7 +23907,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'dunsheng_lala':"遁生",
             'dunsheng_lala_info':"限定技，一名角色的回合结束后，若牌堆剩余牌数≤你体力值的十倍，则你失去技能【囹圄】，回满体力，并获得一个额外的回合，若场上没有角色“陈英超”，则你于此回合内化身为“陈英超”（本技能锁定发动）。",
             'zongjiu_lala':"纵酒",
-            'zongjiu_lala_info':"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将牌移至游戏外后。",
+            'zongjiu_lala_info':"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将牌置于武将牌上后。",
 
             hanshou:"韩寿",
             'weiyi_shou':"逶迤",
