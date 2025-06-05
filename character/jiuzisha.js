@@ -14807,7 +14807,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 mark:true,
                 marktext:'纵',
                 intro:{
-                    content:"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将牌置于武将牌上后。",
+                    content:"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将自己的牌置于武将牌上后。",
                 },
                 trigger:{
                     player:['useCardAfter',"loseAfter","addCardToStorage"],
@@ -19790,7 +19790,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     trigger.player.syncStorage('fuyun_tu2');
                     trigger.player.markSkill('fuyun_tu2');
                     trigger.player.lose(event.allCards,ui.special,'toStorage');
-                    game.log(player,'将',trigger.player,'的'+get.cnNumber(event.allCards.length)+'张牌扣置于其武将牌上');
+                    game.log(player,'令',trigger.player,'将选中的'+get.cnNumber(event.allCards.length)+'张牌扣置于其武将牌上');
                     'step 3'
                     game.delay(1);
                 },
@@ -23907,7 +23907,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'dunsheng_lala':"遁生",
             'dunsheng_lala_info':"限定技，一名角色的回合结束后，若牌堆剩余牌数≤你体力值的十倍，则你失去技能【囹圄】，回满体力，并获得一个额外的回合，若场上没有角色“陈英超”，则你于此回合内化身为“陈英超”（本技能锁定发动）。",
             'zongjiu_lala':"纵酒",
-            'zongjiu_lala_info':"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将牌置于武将牌上后。",
+            'zongjiu_lala_info':"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将自己的牌置于武将牌上后。",
 
             hanshou:"韩寿",
             'weiyi_shou':"逶迤",
@@ -24011,7 +24011,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'tianyu_tu':"天予",
             'tianyu_tu_info':"锁定技，出牌阶段开始时，若你的体力值低于体力上限，你减一点体力上限，并在本回合获得技能【睥睨】。",
             'fuyun_tu':"浮云",
-            'fuyun_tu_info':"当你成为其他角色使用的带有「伤害」这一标签的基本牌或普通锦囊牌的目标时，你可以令该角色将一半的手牌（向下取整）扣置于其武将牌上，然后本回合结束阶段，若你未死亡，你选择任意一名角色获得这些牌，否则该角色收回这些牌。",
+            'fuyun_tu_info':"当你成为其他角色使用的带有「伤害」这一标签的基本牌或普通锦囊牌的目标时，你可以选择该角色一半的手牌（向下取整），令其将这些牌扣置于其武将牌上，然后本回合结束阶段，若你未死亡，你选择任意一名角色获得这些牌，否则该角色收回这些牌。",
             fuyun_tu2:"浮云",
             fuyun_tu2_bg:"☁",//"&#x2601;&#xFE0E;",//"☁",
             'pini_tu':"睥睨",
