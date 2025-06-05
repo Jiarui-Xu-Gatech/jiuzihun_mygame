@@ -3627,7 +3627,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(result.bool){
                         event.choice.equip=true;
                     }
-                    game.log(player,'猜测',target,'手牌中：',event.choice.basic==true?'有':'无','#y基本牌','，',event.choice.trick==true?'有':'无','#y锦囊牌','，',event.choice.equip==true?'有':'无','#y装备牌');
+                    game.log(player,'猜测',target,'手牌中：',event.choice.basic==true?'有':'无','#y基本牌','，',event.choice.trick==true?'有':'无','#y锦囊牌','，',event.choice.equip==true?'有':'无','#y装备牌'); 
                     game.delay();
                     var reality={
                         basic:false,
