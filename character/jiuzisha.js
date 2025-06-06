@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','huichun_yao','yuner_useCard_console'],[]],
+            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','baoshi_jin'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -12591,8 +12591,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 6'
                     if (event.cardNum > 0 && player.hp < player.maxHp){
                         player.recover(player.maxHp - player.hp);
+                        if (!player.hasSkill('ouni_jin')){
+                            player.addSkill('ouni_jin');
+                            game.log(player,'获得技能','#g【呕逆】');
+                        }
                         game.delay(2);
                     }
+
                     
 
                 },
@@ -23846,7 +23851,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "chengting_sha_jin":"撑挺",
             "chengting_taojiu_jin":"撑挺",
             "baoshi_jin":"暴食",
-            "baoshi_jin_info":"出牌阶段结束时，你可以弃置所有手牌，令其他角色计算与你的距离-1直到你下回合开始，然后你获得所有角色场上的牌（判定区和装备区），你增加X点体力上限（X = 你弃置的手牌数 + 你获得的场上牌数），并回满体力。",
+            "baoshi_jin_info":"出牌阶段结束时，你可以弃置所有手牌，令其他角色计算与你的距离-1直到你下回合开始，然后你获得所有角色场上的牌（判定区和装备区），你增加X点体力上限（X = 你弃置的手牌数 + 你获得的场上牌数），并回满体力，然后若你没有技能【呕逆】，则你获得技能【呕逆】。",
             "ouni_jin":"呕逆",
             "ouni_jin_info":"锁定技，准备阶段，若你的体力上限＞1且有手牌，则你选择一名其他角色，将所有手牌交给该角色，令其非锁定技失效直到本回合结束；然后若你的体力上限＞1，则将体力上限减为1，摸取体力上限变化数量的牌并在本回合获得技能【肚量】。",
 
