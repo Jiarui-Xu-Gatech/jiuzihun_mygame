@@ -11,5 +11,8 @@
     "electron-builder": "^25.1.8",
     "electron-packager": "^17.1.2"
   },
-  "author": "JiaruiXu"
+  "author": "JiaruiXu",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

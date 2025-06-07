@@ -2221,9 +2221,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         return choiceList;
                     };
-                    if(player.isOnline2()){
-                        player.send(func,get.translation(trigger.card),event.videoId,lib.skill.xiaoyue_wusheng.filterx(trigger,player));
-                    }
+                    // if(player.isOnline2()){
+                    //     player.send(func,get.translation(trigger.card),event.videoId,lib.skill.xiaoyue_wusheng.filterx(trigger,player));
+                    // }
                     event.dialog=func(get.translation(trigger.card),event.videoId,lib.skill.xiaoyue_wusheng.filterx(trigger,player));
                     if(player!=game.me||_status.auto){
                         event.dialog.style.display='none';
@@ -2292,9 +2292,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                     });
                     "step 1"
-                    if(player.isOnline2()){
-                        player.send('closeDialog',event.videoId);
-                    }
+                    // if(player.isOnline2()){
+                    //     player.send('closeDialog',event.videoId);
+                    // }
                     event.dialog.close();
                     var map=[
                         function(trigger,player,event){
@@ -16507,11 +16507,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
                             return -5-get.value(card)+eff;
                         });
-						if(player.isOnline2()){
-							player.send(function(storage){
-								game.me.storage.gushi_gu2=storage;
-							},player.storage.gushi_gu2);
-						}
+						// if(player.isOnline2()){
+						// 	player.send(function(storage){
+						// 		game.me.storage.gushi_gu2=storage;
+						// 	},player.storage.gushi_gu2);
+						// }
 					}
 					else{
 						event.finish();
@@ -16614,11 +16614,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							else{
 								player.syncStorage('gushi_gu');
 								player.markSkill('gushi_gu');
-								if(player.isOnline2()){
-									player.send(function(storage){
-										game.me.storage.gushi_gu2=storage;
-									},player.storage.gushi_gu2);
-								}
+								// if(player.isOnline2()){
+								// 	player.send(function(storage){
+								// 		game.me.storage.gushi_gu2=storage;
+								// 	},player.storage.gushi_gu2);
+								// }
 							}
 						}
 						trigger.targets.length=0;
