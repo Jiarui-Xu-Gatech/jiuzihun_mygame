@@ -6192,7 +6192,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }).set('ai', function(target) {
                         // AI逻辑：优先选择敌对角色
                         if(target.hasSkillTag('noturn')) return 0;
-                        if (target.hasSkill('lingyu_lala')) return 0;
+                        if (target.hasSkill('lingyu_lala')&&!(ui.cardPile.childElementCount<=target.hp*15&&!target.hasSkill('dunsheng_limit'))) return 0;
 						var player=_status.event.player;
                         if (!target.isTurnedOver()){
                             if (get.attitude(player,target)+get.attitude(target,player)<0){
@@ -18646,7 +18646,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						return player!=target||player==target;
 					}).ai=function(target){
 						if(target.hasSkillTag('noturn')) return 0;
-                        if (target.hasSkill('lingyu_lala')) return 0;
+                        if (target.hasSkill('lingyu_lala')&&!(ui.cardPile.childElementCount<=target.hp*15&&!target.hasSkill('dunsheng_limit'))) return 0;
 						var player=_status.event.player;
                         if (player == target){
                             if (player.isTurnedOver()){
