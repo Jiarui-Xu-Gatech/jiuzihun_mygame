@@ -1479,7 +1479,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					},
 					result:{
 						target:function(player,target){
-							if (target.hasSkill('lingyu_lala')){
+							if (target.hasSkill('lingyu_lala')&&!(ui.cardPile.childElementCount<=target.hp*15&&!target.hasSkill('dunsheng_limit'))){
 								return 0;
 							}
 							var num=target.hp-target.countCards('h')-2;
