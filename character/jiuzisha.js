@@ -55,7 +55,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','baoshi_jin'],[]],
+            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','testIsDisabledSkill','wushi_liyun'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -10304,9 +10304,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         });
                         var att=get.attitude(_status.event.player,target);
                         if (att < 0 && !target.hasSkill('jianyu_limit_len')){
+                            var hasjiuyin = (target.getSkills(true,false).contains('jiuyin')&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2')));
                             if (target.hasSkillTag('nothunder')){return 0;} 
                             else if (has) {return 15-att;}
-                            else if (target.hasSkill('duanxiu_duo')||target.hasSkill('jiuyin')||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo')){
+                            else if (target.hasSkill('duanxiu_duo')||hasjiuyin||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo')){
                                 return -0.5;
                             }
                             else{
@@ -21398,7 +21399,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						var att=get.attitude(player,target);
 						var sgnatt=get.sgn(att);
                         var addNumber = 0;
-                        if (!(target.hasSkill('yuzhong_yan')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkillTag('forbidNoCardButNatureDamage'))&&(trigger.player==target||trigger.source == target)){
+                        if (!(target.hasSkill('yuzhong_yan')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkillTag('forbidNoCardButNatureDamage')||(target.getSkills(true,false).contains('jiuyin')&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2'))))&&(trigger.player==target||trigger.source == target)){
                             if (att <= 0){
                                 addNumber = -1*(get.effect(target,{name:'sha'},player)+3.5);
                             }
@@ -22481,6 +22482,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
             },
 
+            
+
             yuner_draw2:{
                 // mark:true,
                 // marktext:'烟',
@@ -22551,6 +22554,25 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
 					if(result.bool){
                         result.targets[0].turnOver();
+					}
+				},
+            },
+
+            testIsDisabledSkill:{
+                enable:"phaseUse",
+                filter:function(event,player){
+					return true;
+				},
+				content:function(){
+                    "step 0"
+					player.chooseTarget("谁IsDisabledSkill");
+                    "step 1"
+					if(result.bool){
+                        var skills=result.targets[0].getSkills(true,false);
+                        for (var i = 0; i < skills.length; i++){
+                            console.log(skills[i]);
+                            console.log(result.targets[0].isDisabledSkill(skills[i]));
+                        }
 					}
 				},
             },

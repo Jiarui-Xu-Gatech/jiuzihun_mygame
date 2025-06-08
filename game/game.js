@@ -20501,6 +20501,14 @@
 					}
 					return this;
 				},
+				isDisabledSkill:function(skill){
+					for(var i in this.disabledSkills){
+                        if(i==skill&&this.disabledSkills[i]&&this.disabledSkills[i].length>0){
+                            return true;
+                        }
+                    }
+					return false;
+				},
 				enableSkill:function(skill){
 					for(var i in this.disabledSkills){
 						this.disabledSkills[i].remove(skill);
