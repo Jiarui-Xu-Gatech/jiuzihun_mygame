@@ -31109,7 +31109,7 @@
 				else if(result===false){
 					game.playBackgroundMusic();
 					game.playAudio('effect','lose'+Math.ceil(5*Math.random()));
-					// game.playAudio('effect','lose'+4);
+					// game.playAudio('effect','lose'+5);
 				}
 				else{
 					game.playBackgroundMusic();
