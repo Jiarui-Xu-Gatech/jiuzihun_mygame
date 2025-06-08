@@ -10304,7 +10304,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         });
                         var att=get.attitude(_status.event.player,target);
                         if (att < 0 && !target.hasSkill('jianyu_limit_len')){
-                            var hasjiuyin = (target.getSkills(true,false).contains('jiuyin')&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2')));
+                            var hasjiuyin = (target.getSkills(true,false).contains('jiuyin')&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2')))||(target.hasSkill('haoqin_target')&&target.storage.haoqin_target.countCards('h')> 0);
                             if (target.hasSkillTag('nothunder')){return 0;} 
                             else if (has) {return 15-att;}
                             else if (target.hasSkill('duanxiu_duo')||hasjiuyin||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo')){
@@ -10655,10 +10655,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 current.hasSkill('bihai_shui');
                             });
                             var att=get.attitude(_status.event.player,target);
+                            var hasjiuyin = (target.getSkills(true,false).contains('jiuyin')&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2')))||(target.hasSkill('haoqin_target')&&target.storage.haoqin_target.countCards('h')> 0);
                             if (att < 0 && !target.hasSkill('jianyu_limit_len')){
                                 if (target.hasSkillTag('nothunder')){return 0;} 
                                 else if (has) {return 50-att;}
-                                else if (target.hasSkill('duanxiu_duo')||target.hasSkill('jiuyin')||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo')){
+                                else if (target.hasSkill('duanxiu_duo')||hasjiuyin||target.hasSkill('kuaijiu_ding')||target.hasSkill('yuzhong_yan')||player.hasSkill('qinyin_jian_duo')){
                                     return -0.5;
                                 }
                                 else{
@@ -20378,7 +20379,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if ((trigger.player.countCards('e','baiyin')>0||trigger.player.hasSkill('tianxian_tushan'))&&!player.hasSkill('qinyin_jian_duo')){
                                 return false;
                             }
-                            if (trigger.player.hasSkill('jiuyin')){
+                            var hasjiuyin = (trigger.player.getSkills(true,false).contains('jiuyin'))||(trigger.player.hasSkill('haoqin_target')&&trigger.player.storage.haoqin_target.countCards('h')> 0);
+                            if (hasjiuyin){
                                 return false;
                             }
                             if (trigger.player.hasSkill('luoshen_liyun')&&trigger.player.countCards('hej')==0&&trigger.player.hp<=2){
@@ -21399,7 +21401,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						var att=get.attitude(player,target);
 						var sgnatt=get.sgn(att);
                         var addNumber = 0;
-                        if (!(target.hasSkill('yuzhong_yan')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkillTag('forbidNoCardButNatureDamage')||(target.getSkills(true,false).contains('jiuyin')&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2'))))&&(trigger.player==target||trigger.source == target)){
+                        var hasjiuyin = (target.getSkills(true,false).contains&&target.countCards('h')>0&&(target.getSkills(true,false).contains('zuimei')||target.getSkills(true,false).contains('zuimei2')))||(target.hasSkill('haoqin_target')&&target.storage.haoqin_target.countCards('h')> 0);
+                        if (!(target.hasSkill('yuzhong_yan')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkillTag('forbidNoCardButNatureDamage')||hasjiuyin)&&(trigger.player==target||trigger.source == target)){
                             if (att <= 0){
                                 addNumber = -1*(get.effect(target,{name:'sha'},player)+3.5);
                             }
