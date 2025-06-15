@@ -56,7 +56,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','zhuge_guo'],[]],
+            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','sizhou_guo'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -23046,7 +23046,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             guo.gain(result.cards);
                             guo.$gain2(result.cards);
                             game.log(guo,'获得了',player,'因','#g【丝咒】','弃置的',result.cards);
-                            game.delay(2);
+                            game.delay(1);
                         }
                         else{
                             guo.popup('sizhou_guo');
