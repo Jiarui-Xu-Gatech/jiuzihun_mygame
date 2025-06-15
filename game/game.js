@@ -29674,6 +29674,31 @@
 					return;
 				}
 			},
+			loseFromH:function(player,info){
+				if(player&&info){
+					var hs = [];
+					hs.push(info[0]);
+					hs.push(info[1]);
+					hs.push(info[2]);
+					var phs=player.getCards('h');
+					var checkMatch=function(l1,l2){
+						for(var i=0;i<l1.length;i++){
+							for(var j=0;j<l2.length;j++){
+								if(l2[j].suit==l1[0]&&l2[j].number==l1[1]&&l2[j].name==l1[2]){
+									l2[j].delete();
+									l2.splice(j--,1);
+									break;
+								}
+							}
+						}
+					}
+					checkMatch(hs,phs);
+					ui.updatehl();
+				}
+				else{
+					console.log(player);
+				}
+			},
 			link:function(player,bool){
 				if(player&&player.classList){
 					if(bool){
@@ -29910,6 +29935,9 @@
 			},
 			neiVSzhu:function(time){
 				game.neiVSzhu(time);
+			},
+			youwangAni:function(time){
+				game.youwangAni(time[0],time[1]);
 			},
 			startFight:function(time){
 				game.startFight(time);
@@ -31947,6 +31975,108 @@
 					NeiText.delete();
 					VSText.delete();
 					ZhuText.delete();
+				}, timeoutTime);
+
+			});
+			'step 3'
+			game.pause();
+			_status.timeout=setTimeout(game.resume,timeoutTime);
+
+		},
+		youwangAni:function(crime,timeoutTime){
+			'step 0'
+			if (!_status.video){
+				game.playAudio('effect','neiVSzhu');
+			}
+			game.addVideo('youwangAni',null,[crime,timeoutTime]);
+			'step 1'
+			game.delay(1);
+			game.broadcastAll(ui.clear);
+			game.addVideo('uiClear');
+			'step 2'
+			game.broadcastAll(function(){
+				var rand1=Math.round(0.2*100);
+				var rand2=Math.round(0.38*100);
+				var rand3=Math.round(0.25*40)-20;
+
+				// 创建艺术字
+				var YouwangText = document.createElement('div');
+				YouwangText.innerHTML = crime;
+				YouwangText.style.position = 'absolute';
+				YouwangText.style.left = 'calc(' + 50 + '% - 60px)'; // 在头像右边偏移160px
+				YouwangText.style.top = 'calc(' + 50 + '% - 60px)';   // 稍微调整一下上下对齐
+				YouwangText.style.fontSize = '120px'; // 字体大小
+				YouwangText.style.textShadow = `
+					rgba(255, 203, 0, 1) 0 0 2px,
+					rgba(255, 203, 0, 1) 0 0 5px,
+					rgba(255, 203, 0, 1) 0 0 10px,
+					rgba(255, 203, 0, 1) 0 0 10px
+				`;
+				if (crime == '贪'){
+					YouwangText.style.textShadow = `
+						rgba(255, 203, 0, 1) 0 0 2px,
+						rgba(255, 203, 0, 1) 0 0 5px,
+						rgba(255, 203, 0, 1) 0 0 10px,
+						rgba(255, 203, 0, 1) 0 0 10px
+					`;
+				}
+				if (crime == '嗔'){
+					YouwangText.style.textShadow = `
+						rgba(232, 53, 53,1) 0 0 2px,
+						rgba(232, 53, 53,1) 0 0 5px,
+						rgba(232, 53, 53,1) 0 0 10px,
+						rgba(232, 53, 53,1) 0 0 10px
+					`;
+				}
+				if (crime == '痴'){
+					YouwangText.style.textShadow = `
+						rgba(57, 123, 4,1) 0 0 2px,
+						rgba(57, 123, 4,1) 0 0 5px,
+						rgba(57, 123, 4,1) 0 0 10px,
+						rgba(57, 123, 4,1) 0 0 10px
+					`;
+				}
+				if (crime == '慢'){
+					YouwangText.style.textShadow = `
+						rgba(78, 117, 140,1) 0 0 2px,
+						rgba(78, 117, 140,1) 0 0 5px,
+						rgba(78, 117, 140,1) 0 0 10px,
+						rgba(78, 117, 140,1) 0 0 10px
+					`;
+				}
+				if (crime == '疑'){
+					YouwangText.style.textShadow = `
+						rgba(100, 74, 139,1) 0 0 2px,
+						rgba(100, 74, 139,1) 0 0 5px,
+						rgba(100, 74, 139,1) 0 0 10px,
+						rgba(100, 74, 139,1) 0 0 10px
+					`;
+				}
+				YouwangText.style.fontFamily = '"xingkai","xingkaiVS", "KaiTi", cursive'; // 选一个艺术字体
+				YouwangText.style.transition = 'all 0.5s';
+				ui.arena.appendChild(YouwangText);
+
+				YouwangText.classList.add('zoomin3');
+				YouwangText.hide();
+				YouwangText.style.transitionDuration='0.7s'
+				setTimeout(function(){
+					YouwangText.style.transitionProperty='none';
+					YouwangText.classList.remove('zoomin3');
+					YouwangText.classList.add('zoomout2');
+					setTimeout(function(){
+						YouwangText.style.transitionProperty='';
+						YouwangText.classList.remove('zoomout2');
+						YouwangText.show();
+					},10);
+				},20);
+
+				var interval = setInterval(function(){
+					YouwangText.classList.add('zoomin3');
+				}, timeoutTime); 
+
+				setTimeout(function(){
+					clearInterval(interval);
+					YouwangText.delete();
 				}, timeoutTime);
 
 			});

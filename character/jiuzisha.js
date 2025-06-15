@@ -50,12 +50,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             shiyun_za:["female","shu",3,['mengguan_shi','manjiu_shi','haina_shi','tongyin_shi'],[]],
             jianan_zb:["female","shu",3,['weirui_nan','mizhao_nan','sheji_nan','sishui_nan'],[]],
             yaoxianzi_qa:["female","wu",'2/5',['miaoshou_yao','huichun_yao','baiyi_yao','sanqing_yao'],[]],
+            guoyining_w:["female","qun",'3/6',["motong_guo","zhuge_guo","youwang_guo"],[]],
             
             
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'20/49',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_giveCard','testIsDisabledSkill','wushi_liyun'],[]],
+            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','zhuge_guo'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -10788,7 +10789,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.getParent().name == 'judge'||event.getParent().name == 'phaseJudge'||
                     event.getParent().name == 'cangxin_enda'|| event.getParent().name == 'swapHandcards'||
                     event.getParent().name == 'swapEquip' || event.getParent().name == 'chooseToCompare'
-                    ||event.getParent().name == 'pini_tu'
+                    ||event.getParent().name == 'pini_tu'||event.getParent().name == 'zhuge_guo'
                     // ||event.getParent().name == 'gain'
                 )) {return false;}
                     if ((event.name == 'useCard') && get.type(event.card)=='equip') return false;
@@ -22471,6 +22472,402 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
 
+            motong_guo:{
+
+            },
+            
+            zhuge_guo:{
+                audio:2,
+                direct:true,
+                trigger:{
+                    player:"damageEnd",
+                },
+                filter:function(trigger,player){
+                    return trigger.source&&trigger.source.countCards('h')>0;
+                },
+                content:function(event){
+                    'step 0'
+                    event.numD = trigger.num;
+                    'step 1'
+                    player.chooseBool(get.prompt2('zhuge_guo')).set('ai',function(){
+                        if (trigger.num>1||player.hp<3){
+                            return true;
+                        }
+                        return get.attitude(player,trigger.source)+get.attitude(trigger.source,player)<0;
+                    });
+                    'step 2'
+                    if (result.bool){
+                        player.logSkill('zhuge_guo',trigger.source,'thunder');
+                        event.allH = trigger.source.getCards('h');
+                        trigger.source.showCards(event.allH,get.translation(trigger.source)+'展示手牌');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    event.loseH = [];
+                    for (var i = 0; i < event.allH.length; i++){
+                        if (['basic','trick'].contains(get.type(event.allH[i]))&&get.tag(event.allH[i],'damage')){
+                            event.loseH.push(event.allH[i]);
+                        }
+                    }
+                    event.numLose = 0
+                    if (event.loseH.length>0){
+                        event.numLose = event.loseH.length;
+                        
+                        // game.addVideo('lose',player,[get.cardsInfo(event.loseH),get.cardsInfo([]),get.cardsInfo([])]);
+                        // player.update();
+                        // game.addVideo('loseAfter',player);
+                        
+                        trigger.source.lose(event.loseH,ui.ordering,'visible');
+                    }
+                    'step 4'
+                    if (event.loseH.length>0){
+                        trigger.source.$throw(event.loseH);
+                        game.log(player,'将',trigger.source,'手牌中的',event.loseH,'置于牌堆底');
+            
+                        for (var i = 0; i < event.loseH.length; i++){
+                            ui.cardPile.appendChild(event.loseH[i]);
+                        }
+                        
+                        game.updateRoundNumber();
+                    }
+                    'step 5'
+                    if (event.numLose>0){
+                        trigger.source.draw(event.numLose);
+                    }
+                    'step 6'
+                    if (event.numLose>0&&event.numLose>player.hp){
+                        game.log(trigger.source,'摸取的牌数大于',player,'的体力值');
+                        player.recover(1);
+                    }
+                    'step 7'
+                    if (event.numLose>0&&event.numLose<trigger.source.hp){
+                        game.log(trigger.source,'摸取的牌数小于','#b自己','的体力值');
+                        trigger.source.loseHp(1);
+                    }
+                    event.numD--;
+                    'step 8'
+                    if (event.numD == 0){
+                        event.finish();
+                    }
+                    else{
+                        event.goto(1);
+                    }
+                },
+                ai:{
+                    maixie_defend:true,
+                },
+            },
+            
+            youwang_guo:{
+                audio:2,
+                forced:false,
+                group:['youwang_phaseBefore_guo','youwang_phaseJieshu_guo'],
+                unique:true,
+				global:'youwang_guo_other',
+                derivation:["tan_guo","chen_guo","chi_guo","man_guo","yi_guo","sizhou_guo"],
+            },
+
+            youwang_phaseBefore_guo:{
+                audio:false,
+                locked:true,
+                forced:true,
+                trigger:{
+                    player:"phaseBefore",
+                },
+                filter:function(trigger,player){
+                    var has=game.hasPlayer(function(current){
+                        return current!=player&&current.storage.youwang_guo_other&&current.storage.youwang_guo_other==true;
+                    });
+                    return has&&player.storage.youwang_phaseJieshu_guo;
+                },
+                content:function(event){
+                    'step 0'
+                    event.crime = '';
+                    if (player.storage.youwang_phaseJieshu_guo=='tan'){
+                        game.youwangAni('贪',2000);
+                        event.crime = '贪';
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo=='chen'){
+                        game.youwangAni('嗔',2000);
+                        event.crime = '嗔';
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo=='chi'){
+                        game.youwangAni('痴',2000);
+                        event.crime = '痴';
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo=='man'){
+                        game.youwangAni('慢',2000);
+                        event.crime = '慢';
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo=='yi'){
+                        game.youwangAni('疑',2000);
+                        event.crime = '疑';
+                    }
+                    'step 1'
+                    event.netPlayers = [];
+                    var has=game.hasPlayer(function(current){
+                        if (current!=player&&current.storage.youwang_guo_other&&current.storage.youwang_guo_other==true){
+                            event.netPlayers.push(current);
+                        }
+                    });
+                    event.netPlayers.sort(lib.sort.seat);
+                    player.logSkill('youwang_guo',event.netPlayers,'thunder');
+                    'step 2'
+                    game.log(event.netPlayers,'犯了','#y五毒','中的','#y'+event.crime,'戒：'+get.translation(player.storage.youwang_phaseJieshu_guo+'_guo_info')+'于是落入',player,'精心编织的幽网之中，','获得技能','#g【丝咒】');
+                    for (var i = 0; i < event.netPlayers.length; i++){
+                        event.netPlayers[i].addTempSkill('sizhou_guo',{player:'phaseJieshuAfter'});
+                        event.netPlayers[i].storage.youwang_guo_other = false;
+                        event.netPlayers[i].syncStorage('youwang_guo_other');
+                    }
+
+                },
+
+            },
+
+            youwang_phaseJieshu_guo:{
+                audio:false,
+                direct:true,
+                trigger:{
+                    player:"phaseJieshu",
+                },
+                init:function(player){
+					if(!player.youwang_phaseJieshu_guo) player.youwang_phaseJieshu_guo='';
+                    player.syncStorage('youwang_phaseJieshu_guo');
+				},
+                filter:function(trigger,player){
+                    return true;
+                },
+                content:function(event){
+                    'step 0'
+                    if (!player.storage.youwang_phaseJieshu_guo){
+                        player.storage.youwang_phaseJieshu_guo = '';
+                        player.syncStorage('youwang_phaseJieshu_guo');
+                    }
+                    var controls=[];
+                    if (player.storage.youwang_phaseJieshu_guo!='tan'){
+                        controls.push('贪');
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo!='chen'){
+                        controls.push('嗔');
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo!='chi'){
+                        controls.push('痴');
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo!='man'){
+                        controls.push('慢');
+                    }
+                    if (player.storage.youwang_phaseJieshu_guo!='yi'){
+                        controls.push('疑');
+                    }
+                    controls.push('cancel2');
+					event.controls=controls;
+					player.chooseControl(controls).set('prompt',get.prompt2('youwang_guo')).set('ai',function(){
+                        var ran = Math.random();
+                        var len = event.controls.length - 1;
+                        return event.controls[Math.floor(len*ran)];
+                    });
+                    'step 1'
+                    if (result.control != 'cancel2'){
+                        player.logSkill('youwang_guo');
+                        if (player == game.me){
+                            game.log(player,'选择了','#y五毒','中的','#y'+result.control);
+                        }
+                        else{
+                            game.log(player,'秘密选择了','#y五毒','中的一毒');
+                        }
+                        if (result.control=='贪'){
+                            player.storage.youwang_phaseJieshu_guo = 'tan';
+                        }
+                        if (result.control=='嗔'){
+                            player.storage.youwang_phaseJieshu_guo = 'chen';
+                        }
+                        if (result.control=='痴'){
+                            player.storage.youwang_phaseJieshu_guo = 'chi';
+                        }
+                        if (result.control=='慢'){
+                            player.storage.youwang_phaseJieshu_guo = 'man';
+                        }
+                        if (result.control=='疑'){
+                            player.storage.youwang_phaseJieshu_guo = 'yi';
+                        }
+                        player.syncStorage('youwang_phaseJieshu_guo');
+                    }
+                    else{
+                        player.storage.youwang_phaseJieshu_guo = '';
+                        player.syncStorage('youwang_phaseJieshu_guo');
+                        event.finish();
+                    }
+                },
+
+            },
+
+            youwang_guo_other:{
+                audio:false,
+                direct:true,
+                forced:true,
+                trigger:{
+                    player:['phaseDrawEnd','phaseDiscardBegin','phaseJieshuEnd'],
+                    source:'damageEnd',
+                },
+                filter:function(trigger,player){
+                    if (_status.currentPhase.hasSkill('youwang_guo')) return false;
+                    var guo = player;
+                    var has=game.hasPlayer(function(current){
+                        // if (current.name == 'guoyining_w'||current.name2 == 'guoyining_w'){
+                        //     guo = current;
+                        //     return true;
+                        // }
+                        if (current.hasSkill('youwang_guo')){
+                            guo = current;
+                            return true;
+                        }
+                    });
+                    if (!has) return false;
+                    if (player.hasSkill('youwang_guo')) return false;
+                    if (!guo.storage.youwang_phaseJieshu_guo||guo.storage.youwang_phaseJieshu_guo=='') return false;
+                    if (trigger.name == 'phaseDraw'&&guo.storage.youwang_phaseJieshu_guo=='tan') return true;
+                    if (trigger.name == 'damage'&&player.isPhaseUsing()&&guo.storage.youwang_phaseJieshu_guo=='chen') return true;
+                    if (trigger.name == 'phaseDiscard'&&guo.storage.youwang_phaseJieshu_guo=='chi') return true;
+                    if (trigger.name == 'phaseJieshu'&&guo.storage.youwang_phaseJieshu_guo=='man') return true;
+                    if (trigger.name == 'damage'&&player!=_status.currentPhase&&guo.storage.youwang_phaseJieshu_guo=='yi') return true;
+                    return false;
+                },
+                content:function(event){
+                    if (trigger.name == 'phaseDraw'){
+                        if (trigger.num>2){
+                            player.storage.youwang_guo_other = true;
+                            player.syncStorage('youwang_guo_other');
+                        }
+                    }
+                    if (trigger.name == 'damage'&&player.isPhaseUsing()){
+                        player.storage.youwang_guo_other = true;
+                        player.syncStorage('youwang_guo_other');
+                    }
+                    if (trigger.name == 'phaseDiscard'){
+                        if (player.countCards('h')>player.getHandcardLimit()){
+                            player.storage.youwang_guo_other = true;
+                            player.syncStorage('youwang_guo_other');
+                        }
+                    }
+                    if (trigger.name == 'phaseJieshu'){
+                        var history=player.getHistory('useCard');
+                        var useOther = false;
+                        for(var i=0;i<history.length;i++){
+                            if (history[i].target&&history[i].target!=player){
+                                useOther= true;
+                                break;
+                            }
+                            if (history[i].targets){
+                                for (var j = 0; j < history[i].targets.length; j++){
+                                    if (history[i].targets[j]!=player){
+                                        useOther= true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (!useOther){
+                            player.storage.youwang_guo_other = true;
+                            player.syncStorage('youwang_guo_other');
+                        }
+                    }
+                    if (trigger.name == 'damage'&&player!=_status.currentPhase){
+                        player.storage.youwang_guo_other = true;
+                        player.syncStorage('youwang_guo_other');
+                    }
+
+                },
+            },
+
+            sizhou_guo:{
+                mark:true,
+                forced:true,
+                intro:{
+                    content:"锁定技，你使用或打出牌时，你弃置一张牌。若“郭依宁”在场，则其获得此牌。若你无牌可弃且“郭依宁”在场，则你受到“郭依宁”造成的1点伤害，若此伤害被成功触发，则“郭依宁”回复相应伤害值的体力并令你移除本技能。",
+                },
+                audio:2,
+                direct:true,
+                trigger:{
+                    player:['useCardEnd','respondEnd'],
+                },
+                filter:function(trigger,player){
+                    return true;
+                },
+                content:function(event){
+                    'step 0'
+                    player.logSkill('sizhou_guo');
+                    player.chooseToDiscard('###丝咒###'+get.translation('sizhou_guo_info'),1,true,'he').set('ai',function(card){
+                        if (get.tag(card,'save')){
+                            return -2*get.value(card);
+                        }
+                        else{
+                            return -get.value(card);
+                        }
+                    });
+                    'step 1'
+                    var guo = player;
+                    var has=game.hasPlayer(function(current){
+                        if (current.name == 'guoyining_w'||current.name2 == 'guoyining_w'){
+                            guo = current;
+                            return true;
+                        }
+                    });
+                    if (!has){
+                        event.finish();
+                    }
+                    else{
+                        if (result.cards.length>0){
+                            guo.popup('sizhou_guo');
+                            guo.gain(result.cards);
+                            guo.$gain2(result.cards);
+                            game.log(guo,'获得了',player,'因','#g【丝咒】','弃置的',result.cards);
+                            game.delay(2);
+                        }
+                        else{
+                            guo.popup('sizhou_guo');
+                            guo.line(player,'thunder');
+                            player.damage(1,guo);
+                            game.log(player,'无牌可弃，走投无路，',guo,'趁其不备，对其造成1点伤害');
+                        }
+                    }
+                    
+                },
+
+                group:'sizhou_damage_guo',
+                ai:{
+                    neg:true,
+                },
+
+            },
+
+            sizhou_damage_guo:{
+                audio:false,
+                direct:true,
+                forced:true,
+                trigger:{
+                    player:'damageEnd',
+                },
+                filter:function(trigger,player){
+                    return trigger.parent.name == 'sizhou_guo';
+                },
+                content:function(event){
+                    'step 0'
+                    trigger.source.recover(trigger.num);
+                    'step 1'
+                    if (player.isAlive()){
+                        player.removeSkill('sizhou_guo');
+                        game.log(trigger.source,'令',player,'移除技能','#g【丝咒】');
+                    }
+                    else{
+                        event.finish();
+                    }
+                },
+
+            },
+
+
             yuner_shiyan:{
                 // mark:true,
                 // marktext:'烟',
@@ -23225,8 +23622,17 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // game.playAudio('effect','tie');
 					// game.playAudio('effect','tie_music');
                     // game.tieAnimation(3000);
-                    game.bestPlayerShow('chenyingchao',3000);
+                    // game.bestPlayerShow('chenyingchao',3000);
                     // game.neiVSzhu(3000);
+                    game.youwangAni('贪',2000);
+                    "step 1"
+                    game.youwangAni('嗔',2000);
+                    "step 2"
+                    game.youwangAni('痴',2000);
+                    "step 3"
+                    game.youwangAni('慢',2000);
+                    "step 4"
+                    game.youwangAni('疑',2000);
 					
 				},
             },
@@ -24105,6 +24511,32 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'baiyi_damage_yao':"白衣",
             'sanqing_yao':"三清",
             'sanqing_yao_info':"当你受到其他角色造成的伤害后，你可以观看其手牌，若其中包含至少三种花色的牌，你可以选择其中三种花色各一张，展示并获得之，然后你进行一次判定，若你展示的牌中包含判定花色，你可以视为对一名已受伤的角色使用一张【桃】。",
+
+
+            guoyining_w:"郭依宁",
+            "motong_guo":"魔瞳",
+            "motong_guo_info":"魔瞳",
+            "zhuge_guo":"蛛歌",
+            "zhuge_guo_info":"你每受到1点伤害后，你令伤害来源展示所有手牌，并将其中所有带有「伤害」这一标签的基本牌或普通锦囊牌置于牌堆底，并令其重新摸相应数量的牌，若如此做，则若其摸取的牌数大于你的体力值，你回复1点体力，若其摸取的牌数小于其体力值，其失去1点体力。",
+            "youwang_guo":"幽网",
+            "youwang_guo_info":"结束阶段，你可以选择五毒：“贪、嗔、痴、慢、疑”中的一毒（只对你自己可见），不可与上回合的选择相同。若如此做，则你下回合开始前，所有满足此“毒”条件的角色获得技能【丝咒】直到其下回合结束。",
+            'tan_guo':'贪',
+            'tan_guo_info':'摸牌阶段，摸牌数超过2。',
+            'chen_guo':'嗔',
+            'chen_guo_info':'出牌阶段，造成过伤害。',
+            'chi_guo':'痴',
+            'chi_guo_info':'弃牌阶段，手牌数＞手牌上限。',
+            'man_guo':'慢',
+            'man_guo_info':'自己回合内，未对其他角色使用牌。',
+            'yi_guo':'疑',
+            'yi_guo_info':'自己回合外，对其他角色造成伤害。',
+            'youwang_phaseBefore_guo':"幽网",
+            'youwang_phaseJieshu_guo':"幽网",
+            youwang_guo_other:"幽网",
+            sizhou_guo:"丝咒",
+            sizhou_guo_info:"锁定技，你使用或打出牌时，你弃置一张牌。若“郭依宁”在场，则其获得此牌。若你无牌可弃且“郭依宁”在场，则你受到“郭依宁”造成的1点伤害，若此伤害被成功触发，则“郭依宁”回复相应伤害值的体力并令你移除本技能。",
+            sizhou_damage_guo:"丝咒",
+            sizhou_guo_bg:"🕸",//"🕷"
 
             
             yuner:"允儿",
