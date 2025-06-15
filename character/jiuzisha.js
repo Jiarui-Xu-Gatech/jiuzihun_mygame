@@ -22458,10 +22458,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                         allSuit.push(get.suit(hand[i]));
                                     }
                                 }
-                                if (allSuit.length>=3){
-                                    return [1,-0.2];
+                                if (allSuit.length>=3&&(target.hp>1&&!player.hasSkillTag('damageBonus',true,target))){
+                                    return [0,0.2];
                                 }
-                                return 0.8;
+                                // return 0.8;
                             }
 							
 						}
@@ -22473,11 +22473,165 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
             motong_guo:{
+                audio:2,
+                skillAnimation:"epic",
+                animationColor:"thunder",
+                forced:false,
+                direct:true,
+                trigger:{
+                    global:"phaseZhunbei",
+                },
+                filter:function(trigger,player){
+                    if (trigger.player == player) return false;
+                    if (player.hasSkill('motong_guo_limit')) return false;
+                    return player.hp<player.maxHp;
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt2('motong_guo')).set('ai',function(){
+                        if (trigger.player.hasSkill('lingyu_lala')) return false;
+                        var att = get.attitude(trigger.player,player)+get.attitude(player,trigger.player);
+                        if (att >= 0){
+                            return false;
+                        }
+                        else{
+                            if (lib.config.mode=='identity'&&trigger.player.identity == 'zhu'){
+                                return true;
+                            }
+                            //后置位没敌人了赶紧打。
+                            var has= false;
+                            event.enemy = trigger.player;
+                            while(true){
+                                event.enemy = event.enemy.next;
+                                if (event.enemy==player){
+                                    break;
+                                }
+                                if (event.enemy.isAlive()){
+                                    if (get.attitude(event.enemy,player)+get.attitude(player,event.enemy)<0){
+                                        has = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (has){
+                                return Math.random()<0.4;
+                            }
+                            else{
+                                return true;
+                            }
 
+                        }
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.addTempSkill('motong_guo_limit','roundStart');
+                        event.Num = player.maxHp - player.hp;
+                        event.allCard = [];
+                        event.DamageCard = [];
+                        event.OtherCard = [];
+                        player.logSkill('motong_guo',trigger.player,'thunder');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    game.log(player,'观看并展示牌堆底'+get.cnNumber(event.Num)+'张牌');
+                    if(ui.cardPile.childNodes.length<event.Num){
+                        var discardcards=get.cards(event.Num);
+                        game.cardsDiscard(discardcards);
+                    }
+                    for(var i=0;i<event.Num;i++){
+                        if(ui.cardPile.childNodes.length>i) {
+                            event.allCard.unshift(ui.cardPile.childNodes[ui.cardPile.childNodes.length - 1 - i]);
+                        }
+                    }
+                    for (var i=0;i<event.allCard.length;i++){
+                        if (['basic','trick'].contains(get.type(event.allCard[i]))&&get.tag(event.allCard[i],'damage')){
+                            event.DamageCard.push(event.allCard[i]);
+                        }
+                        else{
+                            event.OtherCard.push(event.allCard[i]);
+                        }
+                        ui.cardPile.removeChild(event.allCard[i]);
+                    }
+                    game.updateRoundNumber();
+                    player.showCards(event.allCard,'牌堆底'+get.cnNumber(event.Num)+'张牌');
+                    'step 3'
+                    if (event.DamageCard.length>0){
+                        event.DIndex = 0;
+                        event.goto(4);
+                    }
+                    else{
+                        event.goto(6);
+                    }
+                    'step 4'
+                    if (player.canUse({name:event.DamageCard[event.DIndex].name},trigger.player,false)){
+                        player.useCard(event.DamageCard[event.DIndex],trigger.player);
+                    }
+                    else{
+                        game.log(player,'无法对',trigger.player,'使用',event.DamageCard[event.DIndex]);
+                        game.cardsDiscard(event.DamageCard[event.DIndex]);
+                    }
+                    'step 5'
+                    event.DIndex++;
+                    game.updateRoundNumber();
+                    if (trigger.player.isAlive()){
+                        if (event.DIndex>=event.DamageCard.length){
+                            event.goto(6);
+                        }
+                        else{
+                            event.goto(4);
+                        }
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 6'
+                    if (event.OtherCard.length>0){
+                        trigger.player.$draw(event.OtherCard.length);
+                        trigger.player.gain(event.OtherCard,'giveAuto','bySelf');
+                        game.log(trigger.player,'获得展示牌中其余的'+get.cnNumber(event.OtherCard.length)+'张牌');
+                    }
+                    game.updateRoundNumber();
+                    'step 7'
+                    if (trigger.player.isMaxHandcard(true)){
+                        player.line(trigger.player,'thunder');
+                        trigger.player.addTempSkill('motong_guo_noUse');
+                        game.log(trigger.player,'的手牌数为全场唯一最多，本回合不能对其他角色使用牌');
+                    }
+
+                },
+
+                ai:{
+                    expose:0.9,
+                    threaten:8.3,
+                },
+
+            },
+
+            motong_guo_limit:{
+                forced:true,
+            },
+
+            motong_guo_noUse:{
+                mark:true,
+                forced:true,
+                intro:{
+                    content:"无法对其他角色使用牌",
+                },
+                mod:{
+					playerEnabled:function(card,player,target){
+						if(player!=target) return false;
+					}
+				},
+                ai:{
+                    neg:true,
+                },
             },
             
             zhuge_guo:{
                 audio:2,
+                forced:false,
                 direct:true,
                 trigger:{
                     player:"damageEnd",
@@ -22490,6 +22644,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.numD = trigger.num;
                     'step 1'
                     player.chooseBool(get.prompt2('zhuge_guo')).set('ai',function(){
+                        if (trigger.source==player){
+                            var allH = trigger.source.getCards('h');
+                            var loseH = [];
+                            for (var i = 0; i < allH.length; i++){
+                                if (['basic','trick'].contains(get.type(allH[i]))&&get.tag(allH[i],'damage')){
+                                    loseH.push(allH[i]);
+                                }
+                            }
+                            if (loseH.length>player.hp){
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        }
                         if (trigger.num>1||player.hp<3){
                             return true;
                         }
@@ -22556,7 +22725,55 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                 },
                 ai:{
+                    threaten:2.6,
+                    expose:0.45,
                     maixie_defend:true,
+                },
+                group:"zhuge_guo_effect",
+            },
+
+            zhuge_guo_effect:{
+                audio:false,
+                silent:true,
+                popup:false,
+                direct:true,
+                trigger:{
+                    target:"shaBefore",
+                },
+                forced:true,
+                filter:function(event,player){
+                    return false;
+                },
+                content:function(event){
+                    event.finish();
+                },
+                ai:{
+                    effect:{
+                        target:function(card,player,target){
+                            if (get.tag(card,'damage')&&target.hasSkill('zhuge_guo')&&(target.hp>1||(target.hp>2&&player.hasSkillTag('damageBonus',true,target)))&&!player.hasSkillTag('jueqing')&&get.attitude(player,target)+get.attitude(target,player)<0){
+                                var allH = player.getCards('h');
+                                var loseH = [];
+                                for (var i = 0; i < allH.length; i++){
+                                    if (['basic','trick'].contains(get.type(allH[i]))&&get.tag(allH[i],'damage')){
+                                        loseH.push(allH[i]);
+                                    }
+                                }
+                                if (loseH.length>0){
+                                    if (loseH.length<player.hp&&loseH.length>target.hp-1){
+                                        return [0,0.2];
+                                    }
+                                    else if (loseH.length<player.hp){
+                                        if (Math.random()<(1/Math.max(1,player.hp))){
+                                            return [0,0.05*(1/Math.max(1,player.hp))];
+                                        }
+                                    }
+                                    else if (loseH.length>target.hp-1){
+                                        return [0,0.05];
+                                    }
+                                }
+                            }
+                        },
+                    },
                 },
             },
             
@@ -22567,6 +22784,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 unique:true,
 				global:'youwang_guo_other',
                 derivation:["tan_guo","chen_guo","chi_guo","man_guo","yi_guo","sizhou_guo"],
+                ai:{
+                    threaten:7.6,
+                },
             },
 
             youwang_phaseBefore_guo:{
@@ -22778,6 +22998,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.syncStorage('youwang_guo_other');
                     }
 
+                },
+                ai:{
+                    neg:true,
                 },
             },
 
@@ -24515,7 +24738,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             guoyining_w:"郭依宁",
             "motong_guo":"魔瞳",
-            "motong_guo_info":"魔瞳",
+            "motong_guo_info":"每轮限一次，一名其他角色的准备阶段，若你已受伤，你可以观看并展示牌堆底的X张牌（X为你已经损失的体力值），然后你依次以此角色为唯一目标使用其中所有带有「伤害」这一标签的基本牌或普通锦囊牌，结算完后，令此角色获得你展示的牌中其余的牌，然后若此角色的手牌数为全场唯一最多，则其本回合不能对其他角色使用牌。",
+            motong_guo_noUse:"魔瞳",
+            motong_guo_noUse_bg:"🕷",
             "zhuge_guo":"蛛歌",
             "zhuge_guo_info":"你每受到1点伤害后，你令伤害来源展示所有手牌，并将其中所有带有「伤害」这一标签的基本牌或普通锦囊牌置于牌堆底，并令其重新摸相应数量的牌，若如此做，则若其摸取的牌数大于你的体力值，你回复1点体力，若其摸取的牌数小于其体力值，其失去1点体力。",
             "youwang_guo":"幽网",
