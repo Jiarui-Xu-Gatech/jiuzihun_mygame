@@ -56,7 +56,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','sizhou_guo'],[]],
+            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasDamaged','yuner_neiVSzhu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -23861,6 +23861,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.youwangAni('慢',2000);
                     "step 4"
                     game.youwangAni('疑',2000);
+                    "step 5"
+                    game.neiVSzhu(3000);
 					
 				},
             },

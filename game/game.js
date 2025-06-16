@@ -31979,8 +31979,14 @@
 
 			});
 			'step 3'
-			game.pause();
-			_status.timeout=setTimeout(game.resume,timeoutTime);
+			if (!_status.video){
+				game.pause();
+				_status.timeout=setTimeout(game.resume,timeoutTime);
+			}
+			else{
+				game.pause();
+				_status.timeout=setTimeout(game.resume,timeoutTime/2);
+			}
 
 		},
 		youwangAni:function(crime,timeoutTime){
@@ -32081,8 +32087,10 @@
 
 			});
 			'step 3'
-			game.pause();
-			_status.timeout=setTimeout(game.resume,timeoutTime);
+			if (!_status.video){
+				game.pause();
+				_status.timeout=setTimeout(game.resume,timeoutTime);
+			}
 
 		},
 		startFight:function(timeoutTime){
@@ -32206,8 +32214,10 @@
 
 			});
 			'step 2'
-			game.pause();
-			_status.timeout=setTimeout(game.resume,timeoutTime);
+			if (!_status.video){
+				game.pause();
+				_status.timeout=setTimeout(game.resume,timeoutTime);
+			}
 
 		},
 		winAnimation:function(timeoutTime){
