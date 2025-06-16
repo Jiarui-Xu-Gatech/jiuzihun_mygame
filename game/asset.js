@@ -3524,6 +3524,18 @@ window.noname_asset_list=[
 	'audio/die/yaoxianzi_qa.mp3',
 
 
+	'audio/skill/youwang_guo3.mp3', 
+	'audio/skill/zhuge_guo1.mp3', 
+	'audio/skill/zhuge_guo2.mp3', 
+	'audio/skill/motong_guo1.mp3', 
+	'audio/skill/motong_guo2.mp3', 
+	'audio/skill/sizhou_guo1.mp3', 
+	'audio/skill/sizhou_guo2.mp3', 
+	'audio/skill/youwang_guo1.mp3', 
+	'audio/skill/youwang_guo2.mp3',
+	'audio/die/guoyining_w.mp3',
+
+
 
 	'audio/skill/aoman_tu1.mp3',
 	'audio/skill/aoman_tu2.mp3', 

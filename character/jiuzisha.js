@@ -22809,6 +22809,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     event.crime = '';
+                    game.playAudio('skill','youwang_guo'+3);
                     if (player.storage.youwang_phaseJieshu_guo=='tan'){
                         game.youwangAni('贪',2000);
                         event.crime = '贪';
