@@ -28397,41 +28397,45 @@
 				for(var i=0;i<players.length;i++){
 					if(lib.config.mode=='identity'){
 						game.players[i].init(players[i].name,players[i].name2);
-						if (_status.mode=='normal'){
-							if(game.players[i]!=game.me&&players[i].identity != 'zhu'){
-								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
-								game.players[i].node.identity.dataset.color='cai';
-								game.players[i].node.identity.classList.add('guessing');
-							}
-							else{
-								game.players[i].setIdentity(players[i].identity);
-							}
-						}
-						else if (_status.mode=='zhong'){
-							if(game.players[i]!=game.me&&players[i].identity != 'mingzhong'){
-								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
-								game.players[i].node.identity.dataset.color='cai';
-								game.players[i].node.identity.classList.add('guessing');
-							}
-							else{
-								game.players[i].setIdentity(players[i].identity);
-							}
-
-						}
-						else if (_status.mode=='purple'){
-							if(game.players[i]!=game.me&&players[i].identity != 'rZhu'&&players[i].identity != 'bZhu'){
-								game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
-								game.players[i].node.identity.dataset.color=(players[i].identity[0]=='r'?'cai2':'cai');
-								game.players[i].node.identity.classList.add('guessing');
-							}
-							else{
-								game.players[i].setIdentity(players[i].identity);
-							}
-						}
-						else{
+						if (players.length<3){
 							game.players[i].setIdentity(players[i].identity);
 						}
-						
+						else{
+							if (_status.mode=='normal'){
+								if(game.players[i]!=game.me&&players[i].identity != 'zhu'){
+									game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
+									game.players[i].node.identity.dataset.color='cai';
+									game.players[i].node.identity.classList.add('guessing');
+								}
+								else{
+									game.players[i].setIdentity(players[i].identity);
+								}
+							}
+							else if (_status.mode=='zhong'){
+								if(game.players[i]!=game.me&&players[i].identity != 'mingzhong'){
+									game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
+									game.players[i].node.identity.dataset.color='cai';
+									game.players[i].node.identity.classList.add('guessing');
+								}
+								else{
+									game.players[i].setIdentity(players[i].identity);
+								}
+
+							}
+							else if (_status.mode=='purple'){
+								if(game.players[i]!=game.me&&players[i].identity != 'rZhu'&&players[i].identity != 'bZhu'){
+									game.players[i].node.identity.firstChild.innerHTML='&#x262F;&#xFE0E;';
+									game.players[i].node.identity.dataset.color=(players[i].identity[0]=='r'?'cai2':'cai');
+									game.players[i].node.identity.classList.add('guessing');
+								}
+								else{
+									game.players[i].setIdentity(players[i].identity);
+								}
+							}
+							else{
+								game.players[i].setIdentity(players[i].identity);
+							}
+						}
 					}
 					else if(lib.config.mode=='doudizhu'||lib.config.mode=='single'){
 						game.players[i].init(players[i].name,players[i].name2);
