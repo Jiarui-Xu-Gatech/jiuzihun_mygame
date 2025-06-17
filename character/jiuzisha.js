@@ -856,6 +856,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:0.7,
                     expose: 0.1,
+                    skipDiscard:true,
                     // result: {
                     //     player: function (player) {
                     //         if (player.num('j') > 0) {
@@ -1964,6 +1965,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     order:9,
                     threaten:10.1,
+                    outPhaseDamage:true,
                     // expose:2.5,
                     wuxie:function(target,card,player,viewer){
                         if(get.attitude(viewer,target)>0&&target.countCards('h','sha')){
@@ -2739,6 +2741,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(){
                     trigger.cancel();
+                },
+                ai:{
+                    skipDiscard:true,
                 },
             },
 
@@ -4994,6 +4999,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     damageBonus:true,
                     respondSha:true,
 					threaten:7.6,
+                    outPhaseDamage:true,
 					// expose:1.3,
 				}
             },
@@ -6945,6 +6951,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     expose:0.35,
 					threaten:1.8,
+                    outPhaseDamage:true,
 					effect:{
 						target:function(card,player,target){
                             var goon = false;
@@ -9600,6 +9607,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 group:['mantian_spade_mei','mantian_recover_mei'],
                 ai:{
                     threaten:3.3,
+                    skipDiscard:true,
                 },
             },
 
@@ -9616,6 +9624,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 group:['mantian_spade_mei_nan','mantian_recover_mei_nan'],
                 ai:{
                     threaten:3.3,
+                    skipDiscard:true,
                 },
 
             },
@@ -9812,6 +9821,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     player.removeSkill("mantian_skip_mei");
                 },
+                ai:{
+                    skipDiscard:true,
+                }
             },
 
 
@@ -9938,6 +9950,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill("mantian_mei_nan");
                     "step 1"
                     player.removeSkill("mantian_skip_mei_nan");
+                },
+                ai:{
+                    skipDiscard:true,
                 },
             },
 
@@ -10207,6 +10222,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:2,
 					expose:0.5,
+                    outPhaseDamage:true,
 				},
 
 
@@ -10759,6 +10775,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 locked:true,
                 forced:true,
                 group:['anmou_draw_enda','anmou_discard_enda','anmou_thunder_enda'],
+                ai:{
+                    outPhaseDamage:true,
+                },
             },
 
             anmou_draw_enda:{
@@ -12066,6 +12085,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     threaten:2.5,
                     damageBonus:true,
+                    outPhaseDamage:true,
                     skillTagFilter:function(player,tag,arg){
                         var right = player.getHistory('damage',function(evt){
                             return evt!=event
@@ -12608,6 +12628,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 ai:{
                     threaten:9,
+                    skipDiscard:true,
                 },
 
             },
@@ -15277,6 +15298,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 group:['huanglang_maxhand_yawen','huanglang_draw_yawen'],
                 ai:{
                     threaten:6.8,
+                    outPhaseDamage:true,
                 },
             },
 
@@ -15810,6 +15832,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     maixie_defend:true,
                     expose:0.15,
+                    outPhaseDamage:true,
 					effect:{
 						target:function(card,player,target){
                             if (get.tag(card,'damage')&&get.attitude(player,target)<0){
@@ -19242,6 +19265,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     expose:0.45,
                     threaten:4,
+                    drawMore:true,
                 },
                 
             },
@@ -20497,6 +20521,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 unique:true,
 				global:'haina_shi_other',
 				audio:3,
+                ai:{
+                    outPhaseDamage:true,
+                },
             },
 
             haina_shi_other:{
@@ -21009,6 +21036,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				ai:{
 					threaten:3.1,
+                    drawMore:true,
 				}
 
             },
@@ -21561,9 +21589,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     player.chooseBool(get.prompt('sishui_nan',trigger.player),'一名其他角色出牌阶段开始时，你可以令其获得你手牌区和判定区任意X张牌并令其本回合手牌上限-X（X至多为你当前体力值），然后你选择至多X名角色各摸一张牌。').set('ai',function(){
-                        if (trigger.player.getHandcardLimit()>trigger.player.countCards('h')||trigger.player.hasSkill('mantian_skip_mei')||trigger.player.hasSkill('mantian_mei')||trigger.player.hasSkill('mantian_mei_nan')||
+                        if (trigger.player.getHandcardLimit()>trigger.player.countCards('h')||trigger.player.hasSkill('mantian_skip_mei')||trigger.player.hasSkill('mantian_skip_mei_nan')||trigger.player.hasSkill('mantian_mei')||trigger.player.hasSkill('mantian_mei_nan')||
                         trigger.player.hasSkill('duliang_yuling')||trigger.player.hasSkill('yilian_target_collectCard_shui')||
-                    trigger.player.hasSkill('yilian_collectCard_shui')||trigger.player.hasSkill('huaxiang')){
+                    trigger.player.hasSkill('yilian_collectCard_shui')||trigger.player.hasSkill('huaxiang')||trigger.player.hasSkill('baoshi_jin')){
                             return get.attitude(trigger.player,player)+get.attitude(player,trigger.player)>0;
                         }
                         else{
@@ -22514,8 +22542,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     }
                                 }
                             }
+                            event.enemyNum = game.countPlayer(function(current){
+                                return get.attitude(current,player)+get.attitude(player,current)<0;
+                            });
                             if (has){
-                                return Math.random()<0.4;
+                                return Math.random()<1/Math.max(1,event.enemyNum);
                             }
                             else{
                                 return true;
@@ -22609,6 +22640,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     expose:0.9,
                     threaten:8.3,
+                    outPhaseDamage:true,
+                    effect:{
+                        target:function(card,player,target){
+                            if ((get.tag(card,'save') || get.tag(card,'recover'))){
+                                var rightTime = player.countCards('h')>=2*player.getHandcardLimit();
+                                if (!rightTime&&player==target&&player.hp>1){
+                                    return 0;
+                                }
+                                if (player==target&&player.hp>0&&player.hp==player.maxHp-1){
+                                    return 0;
+                                }
+                                
+                            }                     
+                        },
+                    },
                 },
 
             },
@@ -22890,8 +22936,48 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					event.controls=controls;
 					player.chooseControl(controls).set('prompt',get.prompt2('youwang_guo')).set('ai',function(){
                         var ran = Math.random();
-                        var len = event.controls.length - 1;
-                        return event.controls[Math.floor(len*ran)];
+                        var newControl = [];
+                        var player = _status.event.player;
+                        for (var i=0; i < event.controls.length;i++){
+                            if (event.controls[i]=='贪'){
+                                var has = game.hasPlayer(function(current){
+                                    return current.hasSkillTag('drawMore')&&get.attitude(player,current)<0;
+                                });
+                                if (has){
+                                    newControl.push(i);
+                                }
+                            }
+                            else if (event.controls[i]=='痴'){
+                                var has = game.hasPlayer(function(current){
+                                    return !current.hasSkillTag('skipDiscard')&&get.attitude(player,current)<0;
+                                });
+                                if (has){
+                                    newControl.push(i);
+                                }
+                            }
+                            else if (event.controls[i]=='疑'){
+                                var has = game.hasPlayer(function(current){
+                                    return current.hasSkillTag('outPhaseDamage')&&get.attitude(player,current)<0;
+                                });
+                                if (has){
+                                    newControl.push(i);
+                                }
+                                else{
+                                    if (Math.random()<0.2){
+                                        newControl.push(i);
+                                    }
+                                }
+                            }
+                            else{
+                                newControl.push(i);
+                            }
+                        }
+                        var len2 = event.controls.length - 1;
+                        if (newControl.length == 0){
+                            return event.controls[Math.floor(len2*ran)];
+                        }
+                        var len = newControl.length - 1;
+                        return event.controls[newControl[Math.floor(len*ran)]];
                     });
                     'step 1'
                     if (result.control != 'cancel2'){
