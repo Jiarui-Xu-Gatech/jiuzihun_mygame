@@ -32218,10 +32218,10 @@
 
 			});
 			'step 2'
-			if (!_status.video){
-				game.pause();
-				_status.timeout=setTimeout(game.resume,timeoutTime);
-			}
+			// if (!_status.video){
+			game.pause();
+			_status.timeout=setTimeout(game.resume,timeoutTime);
+			// }
 
 		},
 		winAnimation:function(timeoutTime){
