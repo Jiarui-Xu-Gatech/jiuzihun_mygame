@@ -22968,6 +22968,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     }
                                 }
                             }
+                            else if (event.controls[i]=='cancel2'){
+                                
+                            }
                             else{
                                 newControl.push(i);
                             }
@@ -22976,8 +22979,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (newControl.length == 0){
                             return event.controls[Math.floor(len2*ran)];
                         }
-                        var len = newControl.length - 1;
-                        return event.controls[newControl[Math.floor(len*ran)]];
+                        var len = newControl.length;
+                        return event.controls[newControl[Math.floor((len-0.01)*ran)]];
                     });
                     'step 1'
                     if (result.control != 'cancel2'){
