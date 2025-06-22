@@ -51,6 +51,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             jianan_zb:["female","shu",3,['weirui_nan','mizhao_nan','sheji_nan','sishui_nan'],[]],
             yaoxianzi_qa:["female","wu",'2/5',['miaoshou_yao','huichun_yao','baiyi_yao','sanqing_yao'],[]],
             guoyining_w:["female","qun",'3/6',["motong_guo","zhuge_guo","youwang_guo"],[]],
+            shanwenqian_u:["female","qun",1,["maoni_qian","anzhua_qian","touxing_qian","chendun_qian"],[]],
             
             
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
@@ -1213,9 +1214,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.createClearBackground('jiuyu_bg',player);
                     //效果
                     // player.awakenSkill('jiuyu');
-                    player.removeSkill('zuimei');
-                    player.addSkill('zuimei2');
-                    game.log(player,"令技能","#g【醉美】","摸牌数-1");
+                    event.haszuimei = false;
+                    if (player.hasSkill('zuimei')){
+                        event.haszuimei = true;
+                        player.removeSkill('zuimei');
+                        player.addSkill('zuimei2');
+                        game.log(player,"令技能","#g【醉美】","摸牌数-1");
+                    }
                     var has=game.hasPlayer(function(current){
                         if (!current.hasSkill('jiuyu_jiu')){
                             current.addTempSkill('jiuyu_jiu','phaseBefore');
@@ -1357,9 +1362,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                     });
                     "step 11"
-                    player.addSkill('zuimei');
-                    player.removeSkill('zuimei2');
-                    game.log(player,"恢复技能","#g【醉美】");
+                    if (event.haszuimei){
+                        player.addSkill('zuimei');
+                        player.removeSkill('zuimei2');
+                        game.log(player,"恢复技能","#g【醉美】");
+                    }
                     event.finish();
                 },
                 ai:{
@@ -1521,6 +1528,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             zuimei_shoupai:{
+                audio:false,
+                direct:true,
+                trigger:{
+                    player:"phaseDiscard",
+                },
+                filter:function(event,player){
+                    return player.countCards('h')>player.hp;
+                },
+                content:function(event){
+                    player.logSkill('zuimei');
+                    game.log(player,'的手牌上限+2');
+                },
                 mod:{
                     maxHandcard:function(player, num) {
                         return num + 2; // 手牌上限+2
@@ -1540,7 +1559,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function() {
                     player.draw(1); // 摸两张牌
                 },
-                group:"zuimei_shoupai",
+                group:"zuimei_shoupai2",
                 prompt:"醉美",
                 prompt2:"你使用【酒】后，可以摸一张牌。",
                 ai:{
@@ -1551,6 +1570,26 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         target:function(card, player, target, current) {
                             if (card.name == "jiu") return [1, 3]; // 增强使用【酒】的价值
                         },
+                    },
+                },
+            },
+
+            zuimei_shoupai2:{
+                audio:false,
+                direct:true,
+                trigger:{
+                    player:"phaseDiscard",
+                },
+                filter:function(event,player){
+                    return player.countCards('h')>player.hp;
+                },
+                content:function(event){
+                    player.logSkill('zuimei');
+                    game.log(player,'的手牌上限+2');
+                },
+                mod:{
+                    maxHandcard:function(player, num) {
+                        return num + 2; // 手牌上限+2
                     },
                 },
             },
@@ -23185,6 +23224,88 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
 
+
+            maoni_qian:{
+				trigger:{
+                    player:["enterGame"],
+                    global:'gameDrawAfter',
+                },
+				forced:true,
+				priority:10,
+				audio:2,
+				filter:function(event,player){
+					return !player.storage.maoni_qian;
+				},
+				content:function(){
+					'step 0'
+					player.storage.maoni_qian=true;
+					var num=game.countGroup();
+                    game.playAudio('effect','boundSound');
+					player.gainMaxHp(num);
+					event.num=num;
+					'step 1'
+					player.recover(event.num);
+					//player.update();
+				},
+				group:['maoni_qian_lose','maoni_qian_change'],
+				subSkill:{
+					lose:{
+						trigger:{global:'dieAfter'},
+						forced:true,
+						audio:false,
+                        direct:true,
+						filter:function(event,player){
+							if(!lib.group.contains(event.player.group)) return false;
+							if(game.hasPlayer(function(current){
+								return current.group==event.player.group;
+							})){
+								return false;
+							}
+							return true;
+						},
+						content:function(){
+                            player.logSkill('maoni_qian');
+                            game.playAudio('effect','damage');
+							player.loseMaxHp();
+						}
+					},
+                    change:{
+                        trigger:{
+                            global:['gainMaxHpEnd','loseMaxHpEnd']
+                        },
+                        forced:true,
+						audio:false,
+                        direct:true,
+                        filter:function(event,player){
+							return true;
+						},
+                        content:function(){
+                            player.logSkill('maoni_qian');
+                            if (trigger.parent&&trigger.parent.triggername == 'gameDrawAfter'){
+                                player.draw(trigger.num,'nodelay');
+                            }
+                            else{
+                                player.draw(trigger.num);
+                            }
+							
+						}
+                    },
+				}
+			},
+            
+            anzhua_qian:{
+
+            },
+            
+            touxing_qian:{
+
+            },
+            
+            chendun_qian:{
+
+            },
+
+
             yuner_shiyan:{
                 // mark:true,
                 // marktext:'烟',
@@ -24314,6 +24435,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "zuimei":"醉美",
             "zuimei_info":"你使用【酒】后可以摸两张牌。你的手牌上限+2。",
             "zuimei2":"醉美",
+            zuimei_shoupai:"醉美",
+            zuimei_shoupai2:"醉美",
 
 
 
@@ -24858,6 +24981,17 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             sizhou_guo_info:"锁定技，你使用或打出牌时，你弃置一张牌。若“郭依宁”在场，则其获得此牌。若你无牌可弃且“郭依宁”在场，则你受到“郭依宁”造成的1点伤害，若此伤害被成功触发，则“郭依宁”回复相应伤害值的体力并令你移除本技能。",
             sizhou_damage_guo:"丝咒",
             sizhou_guo_bg:"🕸",//"🕷"
+
+
+            shanwenqian_u:"单文倩",
+            "maoni_qian":"猫腻",
+            "maoni_qian_info":"猫腻",
+            "anzhua_qian":"暗爪",
+            "anzhua_qian_info":"暗爪",
+            "touxing_qian":"偷腥",
+            "touxing_qian_info":"偷腥",
+            "chendun_qian":"尘遁",
+            "chendun_qian_info":"尘遁",
 
             
             yuner:"允儿",
