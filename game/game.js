@@ -5449,7 +5449,7 @@
 					},
 					connect_avatar:{
 						name:'联机头像',
-						init:'caocao',
+						init:'chenyingchao',
 						item:{},
 						frequent:true,
 						onclick:function(item){
@@ -31101,16 +31101,30 @@
 				if(lib.config.background_audio){
 					if(result2===true){
 						game.playBackgroundMusic();
-						game.playAudio('effect','win');
+						game.playAudio('effect','win'+Math.ceil(4*Math.random()));
 					}
 					else if(result2===false){
 						game.playBackgroundMusic();
-						game.playAudio('effect','lose');
+						game.playAudio('effect','lose'+Math.ceil(5*Math.random()));
+						// game.playAudio('effect','lose'+5);
 					}
 					else{
 						game.playBackgroundMusic();
 						game.playAudio('effect','tie');
+						game.playAudio('effect','tie_music');
 					}
+					// if(result2===true){
+					// 	game.playBackgroundMusic();
+					// 	game.playAudio('effect','win');
+					// }
+					// else if(result2===false){
+					// 	game.playBackgroundMusic();
+					// 	game.playAudio('effect','lose');
+					// }
+					// else{
+					// 	game.playBackgroundMusic();
+					// 	game.playAudio('effect','tie');
+					// }
 				}
 				if(!ui.exit){
 					ui.create.exit();
@@ -36001,11 +36015,11 @@
 							}
 						};
 						if(config.name=='联机昵称'){
-							input.innerHTML=config.init||'无名玩家';
+							input.innerHTML=config.init||'九子魂玩家';
 							input.onblur=function(){
 								input.innerHTML=input.innerHTML.replace(/<br>/g,'');
 								if(!input.innerHTML){
-									input.innerHTML='无名玩家';
+									input.innerHTML='九子魂玩家';
 								}
 								game.saveConfig('connect_nickname',input.innerHTML);
 								game.saveConfig('connect_nickname',input.innerHTML,'connect');
