@@ -16222,7 +16222,7 @@
 					delete this.nickname;
 					delete this.avatar;
 				},
-				initRoom:function(info,info2){
+				initRoom:function(info,info2,info3){
 					if(!this.node.gaming){
 						this.node.gaming=ui.create.div('.gaming','游戏中',this);
 						this.node.gaming.dataset.nature='fire';
@@ -16238,7 +16238,12 @@
 					this.serving=false;
 					if(!info||info=='server'){
 						this.roomempty=true;
-						this.initOL('空房间',info2||'room');
+						if (info3||info3==0){
+							this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
+						}
+						else{
+							this.initOL('空房间',info2||'room');
+						}
 						this.node.hp.innerHTML='';
 						this.roomfull=false;
 						this.roomgaming=false;
@@ -26438,7 +26443,7 @@
 						ui.window.classList.add('more_room');
 						var list2=['bixi_jiuzi','chiwen_jiuzi','pulao_jiuzi','bian_jiuzi','taotie_jiuzi','gongfu_jiuzi','yazi_jiuzi','suanni_jiuzi','jiaotu_jiuzi'];//['re_caocao','re_liubei','re_sunquan','re_zhangjiao','ol_yuanshao','ol_dongzhuo'];
 						for(var i=0;i<ui.rooms.length;i++){
-							ui.rooms[i].initRoom(list[i],list2[i%list2.length]);
+							ui.rooms[i].initRoom(list[i],list2[i%list2.length],i);
 						}
 					}
 					lib.message.client.updateclients(clients,true);
@@ -36264,6 +36269,7 @@
 									name:'出牌时限',
 									init:'30',
 									item:{
+										'5':'5秒',
 										'10':'10秒',
 										'15':'15秒',
 										'30':'30秒',
