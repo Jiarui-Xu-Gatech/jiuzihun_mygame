@@ -32,7 +32,7 @@
 		},
 		updateURL:'https://raw.githubusercontent.com/libccy/noname',
 		mirrorURL:'https://nakamurayuri.coding.net/p/noname/d/noname/git/raw',
-		hallURL:'00.00.000.000',//'47.99.105.222',
+		hallURL:'28.99.945.945',//'47.99.105.222',
 		assetURL:'',
 		changeLog:[],
 		updates:[],
@@ -26436,9 +26436,9 @@
 				updaterooms:function(list,clients){
 					if(ui.rooms){
 						ui.window.classList.add('more_room');
-						var list2=['re_caocao','re_liubei','re_sunquan','re_zhangjiao','ol_yuanshao','ol_dongzhuo'];
+						var list2=['bixi_jiuzi','chiwen_jiuzi','pulao_jiuzi','bian_jiuzi','taotie_jiuzi','gongfu_jiuzi','yazi_jiuzi','suanni_jiuzi','jiaotu_jiuzi'];//['re_caocao','re_liubei','re_sunquan','re_zhangjiao','ol_yuanshao','ol_dongzhuo'];
 						for(var i=0;i<ui.rooms.length;i++){
-							ui.rooms[i].initRoom(list[i],list2[i]);
+							ui.rooms[i].initRoom(list[i],list2[i%list2.length]);
 						}
 					}
 					lib.message.client.updateclients(clients,true);
@@ -27528,6 +27528,10 @@
 		connect:function(ip,callback){
 			if(game.online) return;
 			var withport=false;
+			var ip_origin = ip;
+			if (!ip_origin){
+				ip_origin = '28.99.945.945';
+			}
 			var index=ip.lastIndexOf(':');
 			if(index!=-1){
 				index=parseFloat(ip.slice(index+1));
@@ -27545,7 +27549,12 @@
 					game.ws.close();
 					delete game.ws;
 				}
-				game.ws=new WebSocket('ws://'+ip+'');
+				if (ip_origin == '28.99.945.945'){
+					game.ws = new WebSocket("wss://jiuzihun-server-render.onrender.com");
+				}
+				else{
+					game.ws=new WebSocket('ws://'+ip+'');
+				}
 			}
 			catch(e){
 				alert('错误：无效联机地址');
@@ -27558,7 +27567,12 @@
 			game.ws.onmessage=lib.element.ws.onmessage;
 			game.ws.onerror=lib.element.ws.onerror;
 			game.ws.onclose=lib.element.ws.onclose;
-			_status.ip=ip;
+			if (ip_origin == '28.99.945.945'){
+				_status.ip = ip_origin;
+			}
+			else{
+				_status.ip=ip;
+			}
 		},
 		send:function(){
 			if(game.observe&&arguments[0]!='reinited') return;
@@ -27602,7 +27616,8 @@
 			}
 			else{
 				var WebSocketServer=require('ws').Server;
-				var wss=new WebSocketServer({port:8080});
+				var port_render = process.env.PORT || 8080;
+				var wss=new WebSocketServer({port:port_render});
 
 				game.ip=get.ip();
 

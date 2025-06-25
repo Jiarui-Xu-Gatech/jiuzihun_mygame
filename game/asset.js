@@ -3522,7 +3522,7 @@ window.noname_asset_list=[
 	'audio/skill/yaodao_yao1.mp3',
 	'audio/skill/yaodao_yao2.mp3',
 	'audio/die/yaoxianzi_qa.mp3',
-
+	
 
 	'audio/skill/youwang_guo3.mp3', 
 	'audio/skill/zhuge_guo1.mp3', 
