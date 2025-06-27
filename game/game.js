@@ -27,11 +27,11 @@
 		configprefix:'noname_0.9_',
 		versionOL:27,
 		updateURLS:{
-			coding:'https://nakamurayuri.coding.net/p/noname/d/noname/git/raw',
-			github:'https://raw.githubusercontent.com/libccy/noname',
+			coding:'https://github.com/Jiarui-Xu-Gatech/jiuzihun_mygame',
+			github:'https://jiarui-xu-gatech.github.io/jiuzihun_mygame/',
 		},
-		updateURL:'https://raw.githubusercontent.com/libccy/noname',
-		mirrorURL:'https://nakamurayuri.coding.net/p/noname/d/noname/git/raw',
+		updateURL:'https://github.com/Jiarui-Xu-Gatech/jiuzihun_mygame',
+		mirrorURL:'https://jiarui-xu-gatech.github.io/jiuzihun_mygame/',
 		hallURL:'28.99.945.945',//'47.99.105.222',
 		assetURL:'',
 		changeLog:[],
@@ -16239,7 +16239,12 @@
 					if(!info||info=='server'){
 						this.roomempty=true;
 						if (info3||info3==0){
-							this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
+							if (info2){
+								this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
+							}
+							else{
+								this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
+							}
 						}
 						else{
 							this.initOL('空房间',info2||'room');
@@ -17512,6 +17517,14 @@
 					}
 				},
 				syncStorage:function(skill){
+					if(this.isOnline2()){
+						this.send(function(id, skill, storage){
+							var player = game.players.find(p => p.playerid === id);
+							if (player) {
+								player.storage[skill] = storage;
+							}
+						}, this.playerid, skill, this.storage[skill]);
+                    }
 					switch(get.itemtype(this.storage[skill])){
 						case 'cards':game.addVideo('storage',this,[skill,get.cardsInfo(this.storage[skill]),'cards']);break;
 						case 'card':game.addVideo('storage',this,[skill,get.cardInfo(this.storage[skill]),'card']);break;
@@ -27080,25 +27093,46 @@
 		},
 		createClearBackground:function(src,player){
 			game.addVideo('createClearBackground',player,src);
-			var current=document.body.querySelector('.background.upper');
-			if (current) {
-				current.classList.add('hidden'); // 先隐藏旧背景，触发渐隐
-				setTimeout(() => {
-					current.remove(); // 过渡完成后删除
-				}, 300);
-			}
-			if (src != ''){
-				var node=ui.create.div('.background.upper',document.body);
-				node.setBackgroundImage('image/background/'+src+'.jpg');
-				node.style.backgroundSize='cover';
-				node.style.backgroundPosition='50% 50%';
+			game.broadcastAll(function(src,player){
+				var current=document.body.querySelector('.background.upper');
+				if (current) {
+					current.classList.add('hidden'); // 先隐藏旧背景，触发渐隐
+					setTimeout(() => {
+						current.remove(); // 过渡完成后删除
+					}, 300);
+				}
+				if (src != ''){
+					var node=ui.create.div('.background.upper',document.body);
+					node.setBackgroundImage('image/background/'+src+'.jpg');
+					node.style.backgroundSize='cover';
+					node.style.backgroundPosition='50% 50%';
 
-				node.classList.add('hidden'); // 先隐藏，避免瞬间切换的突兀感
-				ui.refresh(node);
-				setTimeout(() => {
-					node.classList.remove('hidden'); // 渐显新背景
-				}, 50);
-			}
+					node.classList.add('hidden'); // 先隐藏，避免瞬间切换的突兀感
+					ui.refresh(node);
+					setTimeout(() => {
+						node.classList.remove('hidden'); // 渐显新背景
+					}, 50);
+				}
+			},src,player);
+			// var current=document.body.querySelector('.background.upper');
+			// if (current) {
+			// 	current.classList.add('hidden'); // 先隐藏旧背景，触发渐隐
+			// 	setTimeout(() => {
+			// 		current.remove(); // 过渡完成后删除
+			// 	}, 300);
+			// }
+			// if (src != ''){
+			// 	var node=ui.create.div('.background.upper',document.body);
+			// 	node.setBackgroundImage('image/background/'+src+'.jpg');
+			// 	node.style.backgroundSize='cover';
+			// 	node.style.backgroundPosition='50% 50%';
+
+			// 	node.classList.add('hidden'); // 先隐藏，避免瞬间切换的突兀感
+			// 	ui.refresh(node);
+			// 	setTimeout(() => {
+			// 		node.classList.remove('hidden'); // 渐显新背景
+			// 	}, 50);
+			// }
 			
 		},
 		deleteClearBackground:function(src,player){
@@ -31099,6 +31133,9 @@
 				else if(result2==false){
 					dialog.content.firstChild.innerHTML='战斗失败';
 				}
+				else{
+					dialog.content.firstChild.innerHTML='平局';
+				}
 				ui.update();
 				dialog.add(ui.create.div('.placeholder'));
 				for(var i=0;i<game.players.length;i++){
@@ -31173,6 +31210,30 @@
 						game.players[i].setIdentity();
 					}
 				}
+
+				//先隐藏
+				dialog.classList.add('hidden');
+
+				// ★★★ 这里开始插入全场最佳的弹出逻辑 ★★★
+				// var bestPlayerName = 'chenyingchao';
+				var texttimeout = 3000;
+				var ThetimeoutTime = 4000;
+				if(result2==true){
+					game.winAnimation(texttimeout);
+				}
+				else if (result2==false){
+					game.loseAnimation(texttimeout);
+				}
+				else{
+					game.tieAnimation(texttimeout);
+				}
+
+				game.timeoutBestPlayer(bestPlayerName,ThetimeoutTime,texttimeout - 500);
+
+				setTimeout(function(){
+					dialog.classList.remove('hidden'); // 4秒后显示出来
+				},ThetimeoutTime+texttimeout-500);
+
 				return;
 			}
 			if(lib.config.background_audio){
@@ -31815,7 +31876,7 @@
 		},
 		bestPlayerShow:function(bestPlayer_name,timeoutTime){
 			game.addVideo('bestPlayerShow',null,[bestPlayer_name,timeoutTime]);
-			game.broadcastAll(function(bestPlayer_name){
+			game.broadcastAll(function(bestPlayer_name,timeoutTime){
 				//画出玩家
 				var bestPlayer = ui.create.player(null,true);
 				// bestPlayer.node.avatar.style.backgroundSize = 'cover';
@@ -31890,7 +31951,7 @@
 					bestText.delete();
 				}, timeoutTime);
 
-			},bestPlayer_name);
+			},bestPlayer_name,timeoutTime);
 		},
 		neiVSzhu:function(timeoutTime){
 			'step 0'
@@ -31903,7 +31964,7 @@
 			game.broadcastAll(ui.clear);
 			game.addVideo('uiClear');
 			'step 2'
-			game.broadcastAll(function(){
+			game.broadcastAll(function(timeoutTime){
 				var rand1=Math.round(0.2*100);
 				var rand2=Math.round(0.38*100);
 				var rand3=Math.round(0.25*40)-20;
@@ -32015,7 +32076,7 @@
 					ZhuText.delete();
 				}, timeoutTime);
 
-			});
+			},timeoutTime);
 			'step 3'
 			if (!_status.video){
 				game.pause();
@@ -32038,7 +32099,7 @@
 			game.broadcastAll(ui.clear);
 			game.addVideo('uiClear');
 			'step 2'
-			game.broadcastAll(function(){
+			game.broadcastAll(function(crime,timeoutTime){
 				var rand1=Math.round(0.2*100);
 				var rand2=Math.round(0.38*100);
 				var rand3=Math.round(0.25*40)-20;
@@ -32123,7 +32184,7 @@
 					YouwangText.delete();
 				}, timeoutTime);
 
-			});
+			},crime,timeoutTime);
 			'step 3'
 			if (!_status.video){
 				game.pause();
@@ -32138,7 +32199,7 @@
 			}
 			game.addVideo('startFight',null,timeoutTime);
 			'step 1'
-			game.broadcastAll(function(){
+			game.broadcastAll(function(timeoutTime){
 				var rand1=Math.round(0.2*100);
 				var rand2=Math.round(0.38*100);
 				var rand3=Math.round(0.25*40)-20;
@@ -32250,7 +32311,7 @@
 					ZhuText.delete();
 				}, timeoutTime);
 
-			});
+			},timeoutTime);
 			'step 2'
 			// if (!_status.video){
 			game.pause();

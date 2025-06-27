@@ -25013,7 +25013,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             yinka:'印卡',
 
 
-            
+            'bixi_jiuzi':"赑屃",
+            'chiwen_jiuzi':"螭吻",
+            'pulao_jiuzi':"蒲牢",
+            'bian_jiuzi':"狴犴",
+            'taotie_jiuzi':"饕餮",
+            'gongfu_jiuzi':"蚣蝮",
+            'yazi_jiuzi':"睚眦",
+            'suanni_jiuzi':"狻猊",
+            'jiaotu_jiuzi':"椒图",
 
 
 
