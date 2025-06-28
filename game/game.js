@@ -16240,7 +16240,7 @@
 						this.roomempty=true;
 						if (info3||info3==0){
 							if (info2){
-								this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
+								this.initOL('空房间'+get.cnNumber(info3+1,true)+get.translation(info2),info2||'room');
 							}
 							else{
 								this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
