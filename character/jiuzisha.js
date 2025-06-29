@@ -23353,14 +23353,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					};
                     'step 1'
                     trigger.num++;
-                    trigger.player.addTempSkill('anzhua_qian_notao');
-                    game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃')
+                    if (!trigger.player.hasSkill('anzhua_qian_notao')){
+                        trigger.player.addTempSkill('anzhua_qian_notao');
+                        game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃');
+                    }
+                    else{
+                        game.log(player,'令此次伤害+1');
+                    }
                     event.finish();
                     'step 2'
                     trigger.cancel();
                     game.log(player,'防止了此次伤害，并令',trigger.player,'失去1点体力');
                     trigger.player.loseHp(1);
-                    game.delay(1);
+                    'step 3'
                     event.finish();
 				},
                 ai:{
@@ -23413,7 +23418,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     var hasdying=game.hasPlayer(function(current){
                         return current.isDying()&&current.hasSkill('anzhua_qian_notao');
                     });
-                    return hasdying&&event.card&&get.name(event.card)=='tao'&&!player.hasSkill('anzhua_qian_notao');
+                    return hasdying&&event.card&&get.name(event.card)=='tao'&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying());
                 },
                 content:function(event){
                     var has=game.hasPlayer(function(current){
@@ -23435,13 +23440,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         var hasdying=game.hasPlayer(function(current){
                             return current.isDying()&&current.hasSkill('anzhua_qian_notao');
                         });
-                        if(card.name=='tao'&&!player.hasSkill('anzhua_qian_notao')&&hasdying) return false;
+                        if(card.name=='tao'&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying())&&hasdying) return false;
 					},
 					cardEnabled:function(card,player){
                         var hasdying=game.hasPlayer(function(current){
                             return current.isDying()&&current.hasSkill('anzhua_qian_notao');
                         });
-                        if(card.name=='tao'&&!player.hasSkill('anzhua_qian_notao')&&hasdying) return false;
+                        if(card.name=='tao'&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying())&&hasdying) return false;
 					},
 				}
 
@@ -23486,7 +23491,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (result.bool){
                         event.theTarget = result.targets[0];
                         event.theCard = result.cards[0];
-                        player.logSkill('touxing_qian',event.theTarget,'fire');
+                        
+                        // player.logSkill('touxing_qian',event.theTarget,'fire');
+                        player.popup('偷腥','fire');
+                        player.line(event.theTarget,'fire')
+                        game.playAudio('skill','touxing_qian'+Math.ceil(2*Math.random()));
+                        game.log(player,'对',event.theTarget,'发动了','#g【偷腥】');
+                        if(player._hookTrigger){
+                            for(var i=0;i<player._hookTrigger.length;i++){
+                                var info=lib.skill[player._hookTrigger[i]].hookTrigger;
+                            }
+                        }
+                        
                         player.showCards(event.theCard,'【偷腥】♥牌展示');
                     }
                     else{
