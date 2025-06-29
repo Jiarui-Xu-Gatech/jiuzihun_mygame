@@ -3537,6 +3537,19 @@ window.noname_asset_list=[
 
 
 
+	'audio/skill/maoni_qian1.mp3', 
+	'audio/skill/maoni_qian2.mp3', 
+	'audio/skill/anzhua_qian1.mp3', 
+	'audio/skill/anzhua_qian2.mp3',
+	'audio/skill/touxing_qian1.mp3', 
+	'audio/skill/touxing_qian2.mp3', 
+	'audio/skill/touxing_qian3.mp3', 
+	'audio/skill/fanglang_qian1.mp3',
+	'audio/skill/fanglang_qian2.mp3', 
+	'audio/die/shanwenqian_u.mp3',
+
+
+
 	'audio/skill/aoman_tu1.mp3',
 	'audio/skill/aoman_tu2.mp3', 
 	'audio/skill/aoman_tu3.mp3', 

@@ -51,7 +51,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             jianan_zb:["female","shu",3,['weirui_nan','mizhao_nan','sheji_nan','sishui_nan'],[]],
             yaoxianzi_qa:["female","wu",'2/5',['miaoshou_yao','huichun_yao','baiyi_yao','sanqing_yao'],[]],
             guoyining_w:["female","qun",'3/6',["motong_guo","zhuge_guo","youwang_guo"],[]],
-            shanwenqian_u:["female","qun",1,["maoni_qian","anzhua_qian","touxing_qian","huanzong_qian"],[]],
+            shanwenqian_u:["female","qun",1,["maoni_qian","anzhua_qian","touxing_qian","fanglang_qian"],[]],
             
             
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
@@ -99,7 +99,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             shiyun_za:'诗芸，南域五大将之一，九昕儿于鬼斗子家中收服的名将。她是五大将中身姿最小巧玲珑的，但别看个子小，她酒量惊人，喝酒很慢但也很多，实实在在，酒量在五大将中排名第三，仅次于丁亚，有时甚至能喝倒丁亚，因为她毅力极强，除非远超极限，否则一定要放倒对手才肯罢休，曾经一怒之下一人单挑一整个酒店的客人，猛灌下去堆成小山一般的烈酒后，她还依旧并拢大腿站立着，并说，谁拍她的肚子说她还能喝多少瓶，她就要喝10倍这个数字，正是：海纳百川，有容乃大！后被九昕儿赐予一柄开酒长枪，追随陈英超，与丁亚，彤欣，佳楠一同去镇守西北荒芜之地。与陈英超最为亲近，后师从她学习豪饮烈酒的奥义！自己发展出一套痛饮之法和海纳之道，令酒量能在喝慢酒时几何级数地增长！',
             jianan_zb:'佳楠，南域五大将之一，九昕儿于鬼斗子家中收服的名将。非常可爱的女孩，温柔似水，身姿婀娜丰腴，历史上记载其素有葳蕤之姿。她性格活泼，富有爱心，不希望看着别人醉倒，总是舍己为人让自己多喝酒让对手少喝，可是还是总是喝不醉，吟诗作赋似行云流水，经常让旁人猜字谜，才对自己和两杯，猜错喝一杯，反正都是自己喝。追随陈英超，与丁亚，彤欣，诗芸一同去镇守西北荒芜之地。后师从王月蘅学习灌饮之道，酒量和肚量突飞猛进，竟能一口气喝光一泓糜烂沼泽之酒，甚是骇人！',
             yaoxianzi_qa:'药仙子，本名韩语黛，原本为韩寿韩家内的制药奴婢，韩鑫在赌神大赛上击败韩寿之后，韩寿逃亡，韩鑫随即整顿韩家余寇，遇到了韩语黛，了解到原来韩月给他的药液是韩语黛所配置，韩鑫念及这药液救过自己两次，想想还是放了她，毕竟医生救死扶伤，也有德，自己没有必要赶尽杀绝，韩语黛连连谢过韩鑫的不杀之恩之后离去。后来她因为机缘巧合跟着药婆婆学习药学之经典《药道》，医术越发高超。学成后入世行医，心怀慈悲之心，救死扶伤，妙手回春，自创一套“三清”之法，能医治各种疑难杂症，故此闻名遐迩，被世人尊称为“药仙子”，又因她容貌精致，白衣白发，爱在自己曼妙的肌肤上点缀一些青绿色宝石，美得迷人心魂，动人心魄，更因她来去无踪，神秘莫测，不求回报，故而又得名“白衣天使”。九昕儿独闯黑域，伤重归来，韩鑫焦急万分，药仙子为了报答韩鑫多年前的不杀之恩，主动上门医治，才得以保住九昕儿的性命。',
-            guoyining_w:'郭依宁，北域蜘蛛族族长，蓝川之战参与者之一。她个子中等，长得端庄温婉，白玉般皎洁的瓜子脸，淡淡的眉毛，长长的眼睫毛，头上扎一个简易的丸子头，脸颊垂着些许鬓角，看着朴实美观，挺拔的希腊鼻，近乎完美的轮廓线条，红润饱满的嘴唇，笑起来一口白牙显得异常纯净，尤其她那双水灵灵的眼睛，眼波像笼罩着烟一般的薄雾朦胧，仿佛在其中隐藏着无穷的心事。身材优雅，前凸后翘，白皙的大长腿和肚皮，在美丽深陷的肚脐身上，还挂着一个水滴状的肚脐环，由一颗钻石装点，显得异常性感华贵，肚脐环可以将她本就深陷诱惑的肚脐进一步撑大，从那里面可以喷出层层雪白的蛛丝。但千万别被迷人的外表所迷惑，郭依宁人称“魔瞳鬼蛛”，有一只散着魔气的紫色巨瞳，只要望一眼就能令敌人心魄胆寒。她信奉“五毒”，贪嗔痴慢疑，利用其笼络人心，编制出自己的巨大幽网。她食量大的出奇，一个人一顿可以吃下好几头牛才罢休。织网时，她会时不时唱出悠扬的“蛛歌”，迷人心神，使人鬼迷心窍放下对其的戒心并坠入其编织的巨大幽网的深渊之中。据说坠入幽网的人即使不成为郭依宁的盘中餐，也会染上诅咒，此后的生活将会充满不幸。',
+            guoyining_w:'郭依宁，北域蜘蛛族族长，蓝川之战参与者之一。她个子中等，长得端庄温婉，白玉般皎洁的瓜子脸，淡淡的眉毛，长长的眼睫毛，头上扎一个简易的丸子头，脸颊垂着些许鬓角，看着朴实美观，挺拔的希腊鼻，近乎完美的轮廓线条，红润饱满的嘴唇，笑起来一口白牙显得异常纯净，尤其她那双水灵灵的眼睛，眼波像笼罩着烟一般的薄雾朦胧，仿佛在其中隐藏着无穷的心事。身材优雅，前凸后翘，白皙的大长腿和肚皮，在美丽深陷的肚脐身上，还挂着一个水滴状的肚脐环，由一颗钻石装点，显得异常性感华贵，肚脐环可以将她本就深陷诱惑的肚脐进一步撑大，从那里面可以喷出层层雪白的蛛丝。但千万别被迷人的外表所迷惑，郭依宁人称“魔瞳鬼蛛”，有一只散着魔气的紫色巨瞳，只要望一眼就能令敌人心魄胆寒。她信奉“五毒”，贪嗔痴慢疑，利用其笼络人心，编制出自己的巨大幽网。她食量大的出奇，一个人一顿可以吃下好几头牛才罢休。织网时，她会时不时唱出悠扬的“蛛歌”，迷人心神，使人鬼迷心窍放下对其的戒心并坠入其编织的巨大幽网的深渊之中。据说坠入幽网的人即使不成为郭依宁的盘中餐，也会染上诅咒，此后的生活将会充满不幸。多名洞被涂山醉月用迷迭香诱去涂山后，她应金守珍的号召，与饕餮族族长金守珍，猫族族长单文倩一同，组成“珍倩宁”大军讨伐涂山，开启了旷日持久的史诗大战——蓝川之战。',
+            shanwenqian_u:'单文倩，北域猫族族长，蓝川之战的始作俑者。她身着浅蓝色三角内裤和浅蓝色D罩杯文胸，偏瘦的身形，虽然个子不算很高，但身材比例相当好，宛如文艺复兴时期大师们的一件艺术品一般，美得一丝不苟，精致微微偏长的脸颊，高挺的鼻梁，削尖的桃形脸，诺大的双眼绽放着女人的妩媚，可她偏偏是那种严肃认真的性格，不苟言笑，也不是很善于表达。一双眼睛透着严厉，但仔细的人能看出其中那不易察觉的，深深掩盖住，憋住的闷骚和放浪的火焰在隐隐跳动，似乎只要一根导火线，就能将那蓄积已久的欲火点燃，让着矜持的女人屈服于动物的本能，放飞自我，尽情地挑逗，发情，真正展现她女人的天性！也正因如此，这女人能燃起男人们偌大的征服欲！如果征服了这个矜持的女人，将有多大的成就感呀！不过在迷人的外表下，她的爪子在暗中总能以迅雷之势给敌人以致命的一击。曾经她游历于西域偷腥，沾花惹草，并在“醉枕千秋”别馆偶遇过韩鑫，她爱财如命又放浪不羁的个性，以及令韩鑫将金子塞进自己那里的举动，给韩鑫留下了深刻的印象。后她于桃花岛上对多名洞一见钟情，想强掳其去北域，却成了蓝川之战的导火索。多名洞被涂山醉月用迷迭香诱去涂山后，她应金守珍的号召，与饕餮族族长金守珍，蜘蛛族族长郭依宁一同，组成“珍倩宁”大军讨伐涂山，开启了旷日持久的史诗大战——蓝川之战。',
         },
 		characterTitle:{
             jinshouzhen:"饕餮夫人",
@@ -23376,7 +23377,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (tag == 'damageBonus'&&(player.storage.anzhua_qian==true||arg&&arg.inRange(player))){
                             return false;
                         }
-                        if (tag == 'jueqing'&&(player.storage.anzhua_qian!=true)){
+                        if (tag == 'jueqing'&&(player.storage.anzhua_qian!=true||arg&&!player.inRange(arg))){
                             return false;
                         }
 					},
@@ -23482,7 +23483,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						},
 						ai2:function(target){
 							var att=get.attitude(_status.event.player,target)+get.attitude(target,_status.event.player);
-                            return -att/target.countCards('h');
+                            var result = -att/target.countCards('h');
+                            if (target.hasSkillTag('noh')){
+                                result = result/1.3;
+                            }
+                            if (target.hasSkillTag('forbidNoCardDamage')||target.hasSkillTag('forbidNoCardButNatureDamage')){
+                                result = result/2;
+                            }
+                            return result;
 						},
 						prompt:"偷腥",
                         prompt2:"请选择一张红桃花色的手牌，然后选择一名有手牌的其他角色，对其发动本技能。",
@@ -23517,6 +23525,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         controls.push('选项二');
                     }
                     event.theTarget.chooseControl(controls).set('prompt','###偷腥###请选择一项：1.展示一张点数比'+get.translation(player)+'所展示的红桃牌大的方片手牌交给其，然后你对其造成1点伤害并令此技能本回合失效；2.令'+get.translation(player)+'获得你一张手牌，并展示，若此牌颜色为红色，其对你造成1点伤害，若此牌颜色不为红色，则此技能本回合失效。').set('ai',function(){
+                        if (get.attitude(event.theTarget,player)>0){
+                            return '选项二';
+                        }
                         return controls[0];
                     });
                     'step 4'
@@ -23553,6 +23564,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.finish();
                     }
                     else{
+                        game.playAudio('skill','touxing_qian'+3);
                         player.popup('偷腥','soil');
                         player.addTempSkill('touxing_qian_limit');
                         game.log(player,'的技能','#g【偷腥】','本回合失效');
@@ -23585,10 +23597,118 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             touxing_qian_limit:{},
             
-            huanzong_qian:{
+            fanglang_qian:{
+                audio:2,
+                forced:true,
+                locked:true,
+                direct:true,
+                trigger:{
+                    player:"damageEnd",
+                },
+                filter:function(trigger,player){
+                    return true;
+                },
+                content:function(event){
+                    'step 0'
+                    event.Num = trigger.num;
+                    'step 1'
+                    player.logSkill('fanglang_qian');
+                    player.turnOver();
+                    event.Num--;
+                    'step 2'
+                    if (event.Num <= 0){
+                        event.finish();
+                    }
+                    else{
+                        event.goto(1);
+                    }
+                },
+
+                group:['fanglang_draw_qian','fanglang_recover_qian'],
+
+                ai:{
+                    threaten:2.5,
+					maixie:true,
+					maixie_hp:true,
+					effect:{
+						target:function(card,player,target){
+                            if (target.isTurnedOver()){
+                                if(get.tag(card,'damage')){
+                                    if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
+                                    // if(target.hp==1&&(target.countCards('h','tao')>0 || target.countCards('h','jiu')>0)) return [0.1,2.8];
+                                    // if(target.hp==1&&!player.hasSkillTag('damageBonus',true,target)&&target.hasSkill('jiudan_tong')) return [0,3];
+                                    if(target.isTurnedOver()){
+                                        if (!player.hasSkillTag('damageBonus',true,target)||target.countCards('h','tao')>0 || target.countCards('h','jiu')>0||target.hp>=2){
+                                            return [0,target.hp];
+                                        }
+                                        else if (Math.random()<0.1){
+                                            return [0,0.5];
+                                        }
+                                    }
+                                }
+                            }
+
+							else if(get.tag(card,'damage')){
+								if(player.hasSkillTag('jueqing',false,target)) return [1,-2];
+                                if (!player.hasSkillTag('damageBonus',true,target)) return [1,-2];
+								// if(target.hp<=1) return;
+								// if(!target.hasFriend()) return;
+								// var hastarget=false;
+								// var turnfriend=false;
+								// var players=game.filterPlayer();
+								// for(var i=0;i<players.length;i++){
+								// 	if(get.attitude(target,players[i])<0&&!players[i].isTurnedOver()){
+								// 		hastarget=true;
+								// 	}
+								// 	if(get.attitude(target,players[i])>0&&players[i].isTurnedOver()){
+								// 		hastarget=true;
+								// 		turnfriend=true;
+								// 	}
+								// }
+								// if(get.attitude(player,target)>0&&!hastarget) return;
+								// if(turnfriend||target.hp==target.maxHp) return [0.5,1];
+								// if(target.hp>1) return [1,0.5];
+							}
+						}
+					}
+				},
 
             },
 
+
+            fanglang_draw_qian:{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:"turnOverAfter",
+                },
+                filter:function(trigger,player){
+                    return player.hp > 0&&!player.isTurnedOver();
+                },
+                content:function(event){
+                    player.logSkill('fanglang_qian');
+                    game.log(player,'从背面翻至正面后，摸体力值张数的牌');
+                    player.draw(player.hp);
+                },
+            },
+            
+            fanglang_recover_qian:{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:"damageBegin3",
+                },
+                filter:function(trigger,player){
+                    return player.isTurnedOver();
+                },
+                content:function(event){
+                    player.logSkill('fanglang_qian');
+                    game.log(player,'背面朝上受到伤害，回复1点体力');
+                    player.recover(1);
+                },
+            },
 
             yuner_shiyan:{
                 // mark:true,
@@ -25275,8 +25395,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             anzhua_qian_notao:"暗爪",
             "touxing_qian":"偷腥",
             "touxing_qian_info":"出牌阶段，你可以展示一张♥手牌并选择一名有手牌的其他角色，然后此角色选择一项：1.展示一张点数比此♥牌大的♦手牌交给你，然后此角色对你造成1点伤害并令此技能本回合失效；2.令你获得其一张手牌，并展示，若此牌颜色为红色，你对其造成1点伤害，若此牌颜色不为红色，则此技能本回合失效。",
-            "huanzong_qian":"欢纵",
-            "huanzong_qian_info":"欢纵",
+            "fanglang_qian":"放浪",
+            "fanglang_qian_info":"锁定技，当你受到1点伤害后，你翻面。当你从背面翻至正面后，你摸X张牌（X为你的体力值）。当你受到伤害时，若你背面朝上，则你回复1点体力。",
+            'fanglang_draw_qian':"放浪",
+            'fanglang_recover_qian':"放浪",
 
             
             yuner:"允儿",
