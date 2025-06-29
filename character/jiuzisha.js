@@ -51,13 +51,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             jianan_zb:["female","shu",3,['weirui_nan','mizhao_nan','sheji_nan','sishui_nan'],[]],
             yaoxianzi_qa:["female","wu",'2/5',['miaoshou_yao','huichun_yao','baiyi_yao','sanqing_yao'],[]],
             guoyining_w:["female","qun",'3/6',["motong_guo","zhuge_guo","youwang_guo"],[]],
-            shanwenqian_u:["female","qun",1,["maoni_qian","anzhua_qian","touxing_qian","chendun_qian"],[]],
+            shanwenqian_u:["female","qun",1,["maoni_qian","anzhua_qian","touxing_qian","huanzong_qian"],[]],
             
             
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','fuyun_tu'],[]],
+            // yuner:["female","qun",'3/100',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','anzhua_qian'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -18017,6 +18017,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.popup('被无效','metal');
                     game.log(player,'使用的',trigger.card,'与','#g【驭】','：',player.storage.yunv_kong_gui,'，类型相同，被无效化');
                     trigger.cancel();
+                    // trigger.targets.length=0;
+					// trigger.all_excluded=true;
                 },
             },
 
@@ -23295,18 +23297,279 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							
 						}
                     },
-				}
+				},
+                ai:{
+                    threaten:1.1,
+                },
 			},
             
             anzhua_qian:{
+                audio:2,
+                mark:true,
+				locked:true,
+                forced:true,
+				marktext:'🐾',
+                direct:true,
+				intro:{
+                    name:function(storage,player,skill){
+						if(player.storage.anzhua_qian==true) return '暗爪·阴';
+						return '暗爪·阳';
+					},
+					content:function(storage,player,skill){
+						if(player.storage.anzhua_qian==true) return '锁定技，当你对一名角色造成伤害之前，若其在你攻击范围内，你增加一点体力上限并防止此伤害，并令该角色失去1点体力。';
+						return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【桃】。';
+					},
+				},
+                trigger:{
+					source:'damageBefore',
+				},
+                filter:function(trigger,player){
+                    if (player.storage.anzhua_qian==true){
+                        //阴
+                        return player.inRange(trigger.player)||player==trigger.player;
+                    }
+                    else{
+                        //阳
+                        return !trigger.player.inRange(player)&&player!=trigger.player;
+                    }
+                },
+                content:function(event){
+                    'step 0'
+                    player.logSkill('anzhua_qian',trigger.player);
+					if(player.storage.anzhua_qian==true){
+                        //阴
+						player.storage.anzhua_qian=false;
+                        player.syncStorage('anzhua_qian');
+                        game.playAudio('effect','boundSound');
+                        player.gainMaxHp(1);
+                        event.goto(2);
+					}else{
+                        //阳
+						player.storage.anzhua_qian=true;
+                        player.syncStorage('anzhua_qian');
+                        game.playAudio('effect','damage');
+                        player.loseMaxHp(1);
+                        event.goto(1);
+					};
+                    'step 1'
+                    trigger.num++;
+                    trigger.player.addTempSkill('anzhua_qian_notao');
+                    game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃')
+                    event.finish();
+                    'step 2'
+                    trigger.cancel();
+                    game.log(player,'防止了此次伤害，并令',trigger.player,'失去1点体力');
+                    trigger.player.loseHp(1);
+                    game.delay(1);
+                    event.finish();
+				},
+                ai:{
+                    threaten:3.9,
+                    damageBonus:true,
+                    jueqing:true,
+                    skillTagFilter:function(player,tag,arg){
+                        if (tag == 'damageBonus'&&(player.storage.anzhua_qian==true||arg&&arg.inRange(player))){
+                            return false;
+                        }
+                        if (tag == 'jueqing'&&(player.storage.anzhua_qian!=true)){
+                            return false;
+                        }
+					},
+                },
+
+            },
+
+            anzhua_qian_notao:{
+                audio:false,
+                mark:true,
+                marktext:'☣',
+                direct:true,
+                forced:true,
+                locked:true,
+                intro:{
+					content:"锁定技，本回合濒死时，其他角色不能对你使用【桃】",
+				},
+                priority:15,
+                global:'anzhua_qian_notao_other',
+                trigger:{player:'dying'},
+                filter:function(event,player){
+					return player.isDying();
+				},
+				content:function(){},
+                ai:{
+                    neg:true,
+                },
+            },
+
+            anzhua_qian_notao_other:{
+                audio:false,
+                direct:true,
+                forced:true,
+                locked:true,
+                trigger:{
+                    player:"useCardBefore",
+                },
+                filter:function(event,player){
+                    var hasdying=game.hasPlayer(function(current){
+                        return current.isDying()&&current.hasSkill('anzhua_qian_notao');
+                    });
+                    return hasdying&&event.card&&get.name(event.card)=='tao'&&!player.hasSkill('anzhua_qian_notao');
+                },
+                content:function(event){
+                    var has=game.hasPlayer(function(current){
+                        if (current.hasSkill('anzhua_qian_notao')){
+                            current.popup('暗爪','thunder');
+                            // current.line(player)
+                            player.popup('暗爪','thunder');
+                        }
+                    });
+                    player.popup(get.translation(get.name(trigger.card)),'metal');
+                    player.popup('被无效','metal');
+                    game.log(player,'使用的',trigger.card,'被','#g【暗爪】','无效化');
+                    trigger.cancel();
+                    // trigger.targets.length=0;
+					// trigger.all_excluded=true;
+                },
+                mod:{
+					cardSavable:function(card,player){
+                        var hasdying=game.hasPlayer(function(current){
+                            return current.isDying()&&current.hasSkill('anzhua_qian_notao');
+                        });
+                        if(card.name=='tao'&&!player.hasSkill('anzhua_qian_notao')&&hasdying) return false;
+					},
+					cardEnabled:function(card,player){
+                        var hasdying=game.hasPlayer(function(current){
+                            return current.isDying()&&current.hasSkill('anzhua_qian_notao');
+                        });
+                        if(card.name=='tao'&&!player.hasSkill('anzhua_qian_notao')&&hasdying) return false;
+					},
+				}
 
             },
             
             touxing_qian:{
+                audio:2,
+                enable:"phaseUse",
+                direct:true,
+                filter:function(trigger,player){
+                    return player.countCards("h", { suit: "heart" }) >= 0&&!player.hasSkill('touxing_qian_limit');
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt2('touxing_qian')).set('ai',function(){
+                        return true;
+                    });
+                    'step 1'
+                    if (!result.bool){
+                        event.finish();
+                    }
+                    player.chooseCardTarget({
+						position:'h',
+						filterCard:function(card,player){
+							return get.suit(card)=='heart'; 
+						},
+						selectCard:[1,1],
+						filterTarget:function(card,player,target){
+							return player!=target&&target.countCards('h')>0;
+						},
+						ai1:function(card){
+                            return Math.random()+get.number(card);
+						},
+						ai2:function(target){
+							var att=get.attitude(_status.event.player,target)+get.attitude(target,_status.event.player);
+                            return -att/target.countCards('h');
+						},
+						prompt:"偷腥",
+                        prompt2:"请选择一张红桃花色的手牌，然后选择一名有手牌的其他角色，对其发动本技能。",
+					});
+                    'step 2'
+                    if (result.bool){
+                        event.theTarget = result.targets[0];
+                        event.theCard = result.cards[0];
+                        player.logSkill('touxing_qian',event.theTarget,'fire');
+                        player.showCards(event.theCard,'【偷腥】♥牌展示');
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    var controls = [];
+                    if (event.theTarget.countCards('h',function(card){return get.suit(card)=='diamond'&&get.number(card)>get.number(event.theCard);})){
+                        controls.push('选项一');
+                    }
+                    if (event.theTarget.countCards('h')>0){
+                        controls.push('选项二');
+                    }
+                    event.theTarget.chooseControl(controls).set('prompt','###偷腥###请选择一项：1.展示一张点数比'+get.translation(player)+'所展示的红桃牌大的方片手牌交给其，然后你对其造成1点伤害并令此技能本回合失效；2.令'+get.translation(player)+'获得你一张手牌，并展示，若此牌颜色为红色，其对你造成1点伤害，若此牌颜色不为红色，则此技能本回合失效。').set('ai',function(){
+                        return controls[0];
+                    });
+                    'step 4'
+                    if (result.control=='选项一'){
+                        event.theTarget.chooseCard('###偷腥###请选择展示一张点数比'+get.translation(player)+'所展示的红桃牌大的方片手牌交给其，然后你对其造成1点伤害并令此技能本回合失效',true,'h',1,function (card){return get.suit(card)=='diamond'&&get.number(card)>get.number(event.theCard);}).set('ai',function(card){
+                            return -get.value(card);
+                        });
+                        event.goto(5);
+                    }
+                    else{
+                        player.gainPlayerCard(event.theTarget,true,'h');
+                        event.goto(8);
+                    }
+                    'step 5'
+                    event.Diamond = result.cards[0];
+                    event.theTarget.showCards(event.Diamond,'【偷腥】♦牌展示');
+                    'step 6'
+                    player.gain(event.Diamond,event.theTarget,'giveAuto','bySelf');
+                    'step 7'
+                    player.addTempSkill('touxing_qian_limit');
+                    game.log(event.theTarget,'令',player,'的技能','#g【偷腥】','本回合失效');
+                    event.theTarget.line(player,'fire');
+                    player.popup('偷腥','soil');
+                    player.damage(1,event.theTarget);
+                    event.finish();
+                    'step 8'
+                    event.GainCard = result.cards[0];
+                    player.showCards(event.GainCard,'【偷腥】牌展示');
+                    'step 9'
+                    if (get.color(event.GainCard)=='red'){
+                        player.line(event.theTarget,'fire');
+                        player.popup('偷腥','fire');
+                        event.theTarget.damage(1,player);
+                        event.finish();
+                    }
+                    else{
+                        player.popup('偷腥','soil');
+                        player.addTempSkill('touxing_qian_limit');
+                        game.log(player,'的技能','#g【偷腥】','本回合失效');
+                    }
+                    'step 10'
+                    game.delay(1);
+
+                },
+                ai:{
+                    order:20,
+                    threaten:2.5,
+                    expose:0.55,
+					result:{
+                        player:function(player){
+                            var has=game.hasPlayer(function(current){
+                                return current!=player&&current.countCards('h')>0&&get.attitude(current,player)+get.attitude(player,current)<0;
+                            });
+                            if (has){
+                                return 1;
+                            }
+                            else{
+                                return 0;
+                            }
+                        },
+					},
+                    
+				},
 
             },
+
+            touxing_qian_limit:{},
             
-            chendun_qian:{
+            huanzong_qian:{
 
             },
 
@@ -24990,13 +25253,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             shanwenqian_u:"单文倩",
             "maoni_qian":"猫腻",
-            "maoni_qian_info":"猫腻",
+            "maoni_qian_info":"锁定技，游戏开始时，你加X点体力上限，回复X点体力（X为全场势力数）；当其他角色死亡后，若没有与其势力相同的角色，你减1点体力上限；当有角色的体力上限变化时，你摸X张牌（X为其体力上限变化数）。",
             "anzhua_qian":"暗爪",
-            "anzhua_qian_info":"暗爪",
+            "anzhua_qian_info":"转换技，锁定技，当你对一名角色造成伤害之前，阳：若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令本回合该角色濒死时，其他角色不能对该角色使用【桃】；阴：若其在你攻击范围内，你增加一点体力上限并防止此伤害，并令该角色失去1点体力。",
+            anzhua_qian_notao:"暗爪",
             "touxing_qian":"偷腥",
-            "touxing_qian_info":"偷腥",
-            "chendun_qian":"尘遁",
-            "chendun_qian_info":"尘遁",
+            "touxing_qian_info":"出牌阶段，你可以展示一张♥手牌并选择一名有手牌的其他角色，然后此角色选择一项：1.展示一张点数比此♥牌大的♦手牌交给你，然后此角色对你造成1点伤害并令此技能本回合失效；2.令你获得其一张手牌，并展示，若此牌颜色为红色，你对其造成1点伤害，若此牌颜色不为红色，则此技能本回合失效。",
+            "huanzong_qian":"欢纵",
+            "huanzong_qian_info":"欢纵",
 
             
             yuner:"允儿",
