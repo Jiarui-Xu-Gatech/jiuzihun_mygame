@@ -23336,7 +23336,26 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.logSkill('anzhua_qian',trigger.player);
+                    // player.logSkill('anzhua_qian',trigger.player);
+
+                    player.popup('暗爪','thunder');
+                    player.line(trigger.player,'green');
+                    // game.playAudio('skill','anzhua_qian'+Math.ceil(2*Math.random()));
+                    if (player.storage.anzhua_qian==true){
+                        game.playAudio('skill','anzhua_qian'+1);
+                    }
+                    else{
+                        game.playAudio('skill','anzhua_qian'+2);
+                    }
+                    game.log(player,'对',trigger.player,'发动了','#g【暗爪】');
+                    if(player._hookTrigger){
+                        for(var i=0;i<player._hookTrigger.length;i++){
+                            var info=lib.skill[player._hookTrigger[i]].hookTrigger;
+                        }
+                    }
+
+
+
 					if(player.storage.anzhua_qian==true){
                         //阴
 						player.storage.anzhua_qian=false;
