@@ -14340,9 +14340,6 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             return 1- player.countCards('h','sha');
                         } 
                     }
-                    else if (!player.isEmpty(type)&&!player.getCards('e').contains(card)&&get.name(card) != 'zhuge'){
-                        return 11-get.value(card);
-                    }
                     else if (get.name(card) == 'muniu'){
                         var players=game.filterPlayer(function(current){
                             if(!current.getEquip(5)&&current!=player&&!current.isTurnedOver()&&
@@ -14350,12 +14347,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 return true;
                             }
                         });
-                        if (players.length > 0){
-                            return get.value(card);
+                        if (players.length > 0&&player.getCards('e').contains(card)){
+                            if (get.value(card)>7){
+                                return 1;
+                            }
+                            else{
+                                return 1-Math.random();
+                            }
                         }
                         else{
                             return -get.value(card);
                         }
+                    }
+                    else if (!player.isEmpty(type)&&!player.getCards('e').contains(card)&&get.name(card) != 'zhuge'){
+                        return 11-get.value(card);
                     }
                     else{
                         return -get.value(card);
