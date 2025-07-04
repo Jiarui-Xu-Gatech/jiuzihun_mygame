@@ -14327,7 +14327,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         return 11-get.value(card);
                     }
                     else if (!player.hasSkill('yujiu_hp_heng')){
-                        return -10-get.equipValue(card);
+                        if (player.getCards('e').contains(card)&&player.countCards('e')>1){
+                            return 50 + get.equipValue(card);
+                        }
+                        else{
+                            return -10-get.equipValue(card);
+                        }
                     }
                     else if (!player.hasSkill('yini_heng_distance')){
                         return 12-get.value(card);
