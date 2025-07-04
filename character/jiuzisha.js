@@ -183,7 +183,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else if (trigger.name == 'judge'){
                             var trigger2=_status.event.getTrigger();
                             var judging=trigger.player.judging[0];
-                            if (trigger.judgestr == "乐不思蜀" && get.attitude(trigger.player,player)>0 && trigger.player.countCards('h') >= trigger.player.hp  && player.countCards('h')>=4&&trigger2.judge(judging)<0){
+                            if (trigger.judgestr == "乐不思蜀" && get.attitude(player,trigger.player)>4 && trigger.player.countCards('h') >= trigger.player.hp  && player.countCards('he')>=4&&trigger2.judge(judging)<0){
                                 return true;
                             }
                             else if (!(trigger.card) && trigger.getParent() && trigger.getParent().name == "jiuwei_useSha_tushan"){
@@ -21503,7 +21503,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 									});
 								})>0) return 9 + addNumber;
 							}
-							else if(att<0){
+							else if(att<=0){
+                                if (target.countCards('e')==0){
+                                    return att;
+                                }
 								if(game.hasPlayer(function(current){
 									if(current!=target&&get.attitude(player,current)>0){
 										var es=target.getCards('e');
