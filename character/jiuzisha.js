@@ -57,7 +57,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",1,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','anzhua_qian'],[]],
+            // yuner:["female","qun",100,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','anzhua_qian'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -23368,11 +23368,25 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.storage.anzhua_qian=true;
                         player.syncStorage('anzhua_qian');
                         game.playAudio('effect','damage');
-                        player.loseMaxHp(1);
-                        event.goto(1);
+                        trigger.num++;
+                        if (player.maxHp <= 1){
+                            if (!trigger.player.hasSkill('anzhua_qian_notao')){
+                                trigger.player.addTempSkill('anzhua_qian_notao');
+                                game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃');
+                            }
+                            else{
+                                game.log(player,'令此次伤害+1');
+                            }
+                            player.loseMaxHp(1);
+                            event.finish();
+                        }
+                        else{
+                            player.loseMaxHp(1);
+                            event.goto(1);
+                        }
 					};
                     'step 1'
-                    trigger.num++;
+                    // trigger.num++;
                     if (!trigger.player.hasSkill('anzhua_qian_notao')){
                         trigger.player.addTempSkill('anzhua_qian_notao');
                         game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃');
@@ -23460,13 +23474,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         var hasdying=game.hasPlayer(function(current){
                             return current.isDying()&&current.hasSkill('anzhua_qian_notao');
                         });
-                        if(card.name=='tao'&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying())&&hasdying) return false;
+                        if((card.name=='tao'||get.name(card)=='tao')&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying())&&hasdying) return false;
 					},
 					cardEnabled:function(card,player){
                         var hasdying=game.hasPlayer(function(current){
                             return current.isDying()&&current.hasSkill('anzhua_qian_notao');
                         });
-                        if(card.name=='tao'&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying())&&hasdying) return false;
+                        if((card.name=='tao'||get.name(card)=='tao')&&(!player.hasSkill('anzhua_qian_notao')||!player.isDying())&&hasdying) return false;
 					},
 				}
 
