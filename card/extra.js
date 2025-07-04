@@ -678,6 +678,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						return !target.isMin()&&player!=target&&target.isEmpty(5);
 					});
 					next.set('ai',function(target){
+						if (player.hasSkill('yini_heng')){
+							return -1;
+						}
 						return target==_status.event.choice?1:-1;
 					});
 					next.set('choice',choice);
