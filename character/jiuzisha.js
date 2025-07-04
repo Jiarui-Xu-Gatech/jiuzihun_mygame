@@ -23342,10 +23342,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.line(trigger.player,'green');
                     // game.playAudio('skill','anzhua_qian'+Math.ceil(2*Math.random()));
                     if (player.storage.anzhua_qian==true){
-                        game.playAudio('skill','anzhua_qian'+1);
+                        game.playAudio('skill','anzhua_qian'+Math.ceil(1.3*Math.random()));
                     }
                     else{
-                        game.playAudio('skill','anzhua_qian'+2);
+                        game.playAudio('skill','anzhua_qian'+Math.ceil(2 - 1.3*Math.random()));
                     }
                     game.log(player,'对',trigger.player,'发动了','#g【暗爪】');
                     if(player._hookTrigger){
