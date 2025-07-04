@@ -20375,20 +20375,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				ai:{
                     threaten:0.2,
-                    noh:true,
-                    noe:true,
                     reverseEquip:true,
-					skillTagFilter:function(player,tag){
-						if(tag=='noh'){
-							if(player.countCards('h')!=1) return false;
-						}
-                        if(tag=='noe'||tag=='reverseEquip'){
-							if(player.countCards('e')!=1) return false;
-						}
-					},
+                    // noh:true,
+                    // noe:true,
+					// skillTagFilter:function(player,tag){
+					// 	if(tag=='noh'){
+					// 		if(player.countCards('h')!=1) return false;
+					// 	}
+                    //     if(tag=='noe'||tag=='reverseEquip'){
+					// 		if(player.countCards('e')!=1) return false;
+					// 	}
+					// },
                     effect:{
 						target:function(card,player,target,current){
-                            if (target.hasSkillTag('noe')&&target.hasSkillTag('reverseEquip')){
+                            if (target.countCards('e')==1&&target.hasSkillTag('reverseEquip')){
                                 if(get.type(card)=='equip'&&!get.cardtag(card,'gifts')) return [1,1.5];
                             }
 						}
