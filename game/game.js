@@ -30105,72 +30105,76 @@
 			}
 		},
 		addVideo:function(type,player,content){
-			game.broadcastAll(function(type,player,content){
-				if(_status.video||game.online) return;
-				if(!_status.videoInited){
-					if(type=='arrangeLib'){
-					lib.video.push({
-						type:type,
-						player:player,
-						content:content,
-						delay:0
-					});
-				}
-				return;
-				}
-				if(type=='storage'&&player&&player.updateMarks){
-					player.updateMarks();
-				}
-				if(game.getVideoName){
-					var time=get.time();
-					if(!_status.lastVideoLog){
-						_status.lastVideoLog=time;
-					}
-					if(get.itemtype(player)=='player'){
-						player=player.dataset.position;
-					}
-					lib.video.push({
-						type:type,
-						player:player,
-						content:content,
-						delay:time-_status.lastVideoLog
-					});
-					_status.lastVideoLog=time;
-				}	
-
-			},type,player,content);
-
-			// if(_status.video||game.online) return;
-			// if(!_status.videoInited){
-			// 	if(type=='arrangeLib'){
- 			// 	lib.video.push({
- 			// 		type:type,
- 			// 		player:player,
- 			// 		content:content,
- 			// 		delay:0
- 			// 	});
- 			// }
- 			// return;
-			// }
-			// if(type=='storage'&&player&&player.updateMarks){
-			// 	player.updateMarks();
-			// }
-			// if(game.getVideoName){
-			// 	var time=get.time();
-			// 	if(!_status.lastVideoLog){
+			// game.broadcastAll(function(type,player,content){
+			// 	// if(_status.video||game.online) return;
+			// 	if(_status.video) return;
+			// 	if(!_status.videoInited){
+			// 		if(type=='arrangeLib'){
+			// 		lib.video.push({
+			// 			type:type,
+			// 			player:player,
+			// 			content:content,
+			// 			delay:0
+			// 		});
+			// 	}
+			// 	return;
+			// 	}
+			// 	if(type=='storage'&&player&&player.updateMarks){
+			// 		player.updateMarks();
+			// 	}
+			// 	if(game.getVideoName){
+			// 		var time=get.time();
+			// 		if(!_status.lastVideoLog){
+			// 			_status.lastVideoLog=time;
+			// 		}
+			// 		if(get.itemtype(player)=='player'){
+			// 			player=player.dataset.position;
+			// 		}
+			// 		lib.video.push({
+			// 			type:type,
+			// 			player:player,
+			// 			content:content,
+			// 			delay:time-_status.lastVideoLog
+			// 		});
 			// 		_status.lastVideoLog=time;
-			// 	}
-			// 	if(get.itemtype(player)=='player'){
-			// 		player=player.dataset.position;
-			// 	}
-			// 	lib.video.push({
-			// 		type:type,
-			// 		player:player,
-			// 		content:content,
-			// 		delay:time-_status.lastVideoLog
-			// 	});
-			// 	_status.lastVideoLog=time;
-			// }
+			// 	}	
+
+			// },type,player,content);
+
+
+			
+			// if(_status.video||game.online) return;
+			if(_status.video) return;
+			if(!_status.videoInited){
+				if(type=='arrangeLib'){
+ 				lib.video.push({
+ 					type:type,
+ 					player:player,
+ 					content:content,
+ 					delay:0
+ 				});
+ 			}
+ 			return;
+			}
+			if(type=='storage'&&player&&player.updateMarks){
+				player.updateMarks();
+			}
+			if(game.getVideoName){
+				var time=get.time();
+				if(!_status.lastVideoLog){
+					_status.lastVideoLog=time;
+				}
+				if(get.itemtype(player)=='player'){
+					player=player.dataset.position;
+				}
+				lib.video.push({
+					type:type,
+					player:player,
+					content:content,
+					delay:time-_status.lastVideoLog
+				});
+				_status.lastVideoLog=time;
+			}
 		},
 		draw:function(func){
 			lib.canvasUpdates.push(func);
