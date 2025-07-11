@@ -23818,6 +23818,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.currented.push(event.current);
                     event.current.animate('target');
                     event.current.previous.line(event.current,'thunder');
+                    player.popup('恶剧','thunder');
+                    game.playAudio('skill','eju_chou'+3);
                     event.current.gainPlayerCard('h',event.current.previous,true);
 
                     "step 3"

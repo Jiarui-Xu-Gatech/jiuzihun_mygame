@@ -4720,7 +4720,7 @@
 					},
 					connect_player_number:{
 						name:'游戏人数',
-						init:'5',
+						init:'8',
 						item:{
 							'3':'三人',
 							'4':'四人',
@@ -4820,14 +4820,14 @@
 					},
 					player_number:{
 						name:'游戏人数',
-						init:'6',
+						init:'8',
 						item:{
 							'3':'三人',
 							'4':'四人',
 							'5':'五人',
 							'6':'六人',
-							// '7':'七人',
-							// '8':'八人'
+							'7':'七人',
+							'8':'八人'
 						},
 						frequent:true,
 						restart:true,
