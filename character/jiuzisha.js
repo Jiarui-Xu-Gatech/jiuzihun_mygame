@@ -23837,7 +23837,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (event.Number%event.currentNum==0 || event.currentNum%event.Number==0){
                             game.log(event.current,'获得的牌',event.currentCard,'的点数是','#g【恶剧】','牌',event.TheCard,'点数的因数或倍数');
                             player.popup('恶剧','thunder');
-                            game.playAudio('skill','eju_chou'+Math.ceil(2+2*Math.random()));
+                            // game.playAudio('skill','eju_chou'+Math.ceil(2+2*Math.random()));
+                            game.playAudio('skill','eju_chou'+4);
                             game.log(player,'对',event.current,'发动了','#g【恶剧】');
                             player.line(event.current,'thunder');
                             game.playAudio('skill','jianyu_len'+Math.ceil(2*Math.random()));
