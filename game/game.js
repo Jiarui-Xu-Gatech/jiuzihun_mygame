@@ -16348,6 +16348,12 @@
 						return this;
 					}
 					if(online){
+						// game.addVideo('reinit3',this,{
+						// 	from:from,
+						// 	to:to,
+						// 	hp:this.maxHp,
+						// 	avatar2:this.name2==to
+						// });
 						return;
 					}
 					for(var i=0;i<info1[3].length;i++){
@@ -30142,19 +30148,27 @@
 			// },type,player,content);
 
 
-			
+
 			// if(_status.video||game.online) return;
 			if(_status.video) return;
 			if(!_status.videoInited){
 				if(type=='arrangeLib'){
- 				lib.video.push({
- 					type:type,
- 					player:player,
- 					content:content,
- 					delay:0
- 				});
- 			}
- 			return;
+					lib.video.push({
+						type:type,
+						player:player,
+						content:content,
+						delay:0
+					});
+				}
+				if (!_status.videoInited&&game.online){
+					_status.videoInited = true;
+				}
+				if (game.getVideoName&&!game.online){
+					game.broadcastAll(function(getVideoName){
+						game.getVideoName = getVideoName;
+					},game.getVideoName);
+				}
+				return;
 			}
 			if(type=='storage'&&player&&player.updateMarks){
 				player.updateMarks();
@@ -30167,6 +30181,28 @@
 				if(get.itemtype(player)=='player'){
 					player=player.dataset.position;
 				}
+				if (game.online&&!_status.online_init){
+					return;
+				}
+				if (type=="init"&&!game.online){
+					game.broadcastAll(function(type,player,content,time,configmode){
+						_status.online_init = true;
+						_status.online_configmode = configmode;
+						// lib.video.push({
+						// 	type:type,
+						// 	player:player,
+						// 	content:content,
+						// 	delay:time-_status.lastVideoLog
+						// });
+						_status.lastVideoLog=time;
+					},type,player,content,time,lib.config.mode);
+					return;
+				}
+				// if (type=="over"&&!game.online){
+				// 	game.broadcastAll(function(configmode){
+				// 		_status.online_configmode = configmode;
+				// 	},lib.config.mode);
+				// }
 				lib.video.push({
 					type:type,
 					player:player,
@@ -31267,11 +31303,89 @@
 					game.tieAnimation(texttimeout);
 				}
 
-				game.timeoutBestPlayer(bestPlayerName,ThetimeoutTime,texttimeout - 500);
+				// game.timeoutBestPlayer(bestPlayerName,ThetimeoutTime,texttimeout - 500);
 
 				setTimeout(function(){
 					dialog.classList.remove('hidden'); // 4秒后显示出来
 				},ThetimeoutTime+texttimeout-500);
+
+				game.addVideo('over',null,[dialog.content.innerHTML,ThetimeoutTime+texttimeout-500]);
+
+				var vinum=parseInt(lib.config.video);
+				if(!_status.video&&vinum&&game.getVideoName&&window.indexedDB&&_status.videoInited){
+					var store=lib.db.transaction(['video'],'readwrite').objectStore('video');
+					var videos=lib.videos.slice(0);
+					for(var i=0;i<videos.length;i++){
+						if(videos[i].starred){
+							videos.splice(i--,1);
+						}
+					}
+					for(var deletei=0;deletei<5;deletei++){
+						if(videos.length>=vinum){
+							var toremove=videos.pop();
+							lib.videos.remove(toremove);
+							store.delete(toremove.time);
+						}
+						else{
+							break;
+						}
+					}
+					var me=game.me||game.players[0];
+					if(!me) return;
+					var newvid={
+						name:game.getVideoName(),
+						mode:_status.online_configmode||lib.config.mode,
+						video:lib.video,
+						win:result=='战斗胜利',
+						name1:me.name1||me.name,
+						name2:me.name2,
+						time:lib.getUTC(new Date())
+					};
+					var modecharacters=lib.characterPack['mode_'+get.mode()];
+					if(modecharacters){
+						if(get.mode()=='guozhan'){
+							if(modecharacters[newvid.name1]){
+								if(newvid.name1.indexOf('gz_shibing')==0){
+									newvid.name1=newvid.name1.slice(3,11);
+								}
+								else{
+									newvid.name1=newvid.name1.slice(3);
+								}
+							}
+							if(modecharacters[newvid.name2]){
+								if(newvid.name2.indexOf('gz_shibing')==0){
+									newvid.name2=newvid.name2.slice(3,11);
+								}
+								else{
+									newvid.name2=newvid.name2.slice(3);
+								}
+							}
+						}
+						else{
+							if(modecharacters[newvid.name1]){
+								newvid.name1=get.mode()+'::'+newvid.name1;
+							}
+							if(modecharacters[newvid.name2]){
+								newvid.name2=get.mode()+'::'+newvid.name2;
+							}
+						}
+					}
+					if(newvid.name1&&newvid.name1.indexOf('subplayer_')==0){
+						newvid.name1=newvid.name1.slice(10,newvid.name1.lastIndexOf('_'));
+					}
+					if(newvid.name2&&newvid.name2.indexOf('subplayer_')==0){
+						newvid.name1=newvid.name2.slice(10,newvid.name1.lastIndexOf('_'));
+					}
+					lib.videos.unshift(newvid);
+					store.put(newvid);
+					ui.create.videoNode(newvid,true);
+				}
+				for(var i=0;i<lib.onover.length;i++){
+					lib.onover[i](resultbool);
+				}
+				if(game.addRecord){
+					game.addRecord(resultbool);
+				}
 
 				return;
 			}
@@ -31902,10 +32016,17 @@
 				if (audio_skills.length > 0){
 					var numberRan = Math.ceil(audio_skills.length*Math.random())-1;
 					var textAudio = audio_skills[numberRan]+Math.ceil(audio_numbers[numberRan]*Math.random());
-					game.addVideo('playerTimeoutAudio',null,['/'+'skill'+'/'+textAudio,texttimeout+400]);
-					setTimeout(function(){
-						game.playAudio('skill',textAudio);
-					},texttimeout+400);
+					game.broadcastAll(function(textAudio,texttimeout){
+						game.addVideo('playerTimeoutAudio',null,['/'+'skill'+'/'+textAudio,texttimeout+400]);
+						setTimeout(function(){
+							game.playAudio('skill',textAudio);
+						},texttimeout+400);
+					},textAudio,texttimeout);
+
+					// game.addVideo('playerTimeoutAudio',null,['/'+'skill'+'/'+textAudio,texttimeout+400]);
+					// setTimeout(function(){
+					// 	game.playAudio('skill',textAudio);
+					// },texttimeout+400);
 					
 				}
 			}
@@ -31914,8 +32035,9 @@
 			},texttimeout);
 		},
 		bestPlayerShow:function(bestPlayer_name,timeoutTime){
-			game.addVideo('bestPlayerShow',null,[bestPlayer_name,timeoutTime]);
+			// game.addVideo('bestPlayerShow',null,[bestPlayer_name,timeoutTime]);
 			game.broadcastAll(function(bestPlayer_name,timeoutTime){
+				game.addVideo('bestPlayerShow',null,[bestPlayer_name,timeoutTime]);
 				//画出玩家
 				var bestPlayer = ui.create.player(null,true);
 				// bestPlayer.node.avatar.style.backgroundSize = 'cover';

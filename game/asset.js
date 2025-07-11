@@ -3549,6 +3549,28 @@ window.noname_asset_list=[
 	'audio/die/shanwenqian_u.mp3',
 
 
+	'audio/skill/eju_chou1.mp3', 
+	'audio/skill/eju_chou2.mp3', 
+	'audio/skill/eju_chou3.mp3', 
+	'audio/skill/eju_chou4.mp3', 
+	'audio/skill/eju_chou5.mp3', 
+	'audio/skill/eju_chou6.mp3', 
+	'audio/skill/guimo_chou1.mp3', 
+	'audio/skill/guimo_chou2.mp3', 
+	'audio/skill/guimo_chou3.mp3', 
+	'audio/skill/guimo_chou4.mp3', 
+	'audio/skill/guimo_chou5.mp3', 
+	'audio/skill/guimo_chou6.mp3', 
+	'audio/skill/guimo_chou7.mp3', 
+	'audio/skill/guimo_chou8.mp3', 
+	'audio/skill/shenchu_chou1.mp3', 
+	'audio/skill/shenchu_chou2.mp3', 
+	'audio/skill/shenchu_chou3.mp3', 
+	'audio/skill/shenchu_chou4.mp3', 
+	'audio/skill/zhouli_chou1.mp3',
+	'audio/skill/zhouli_chou2.mp3', 
+	'audio/die/xiaochouhuang_zf.mp3',
+
 
 	'audio/skill/aoman_tu1.mp3',
 	'audio/skill/aoman_tu2.mp3', 
@@ -3659,6 +3681,7 @@ window.noname_asset_list=[
 	'image/background/xuebai_bg.jpg',
 	'image/background/pini_bg.jpg',
 	'image/background/ziluolan_bg.jpg',
+	'image/background/eju_bg.jpg',
 
 	
 	

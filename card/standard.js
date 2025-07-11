@@ -1324,6 +1324,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				filterTarget:function(card,player,target){
 					if(ui.selected.targets.length==0){
+						if (player.hasSkill('guimo_chou')){
+							return player!=target;
+						}
 						return (player!=target&&target.getCards('e',{subtype:'equip1'}).length);
 					}
 					else{
@@ -1347,7 +1350,21 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(event.directfalse||result.bool==false){
 						var cards=target.getCards('e',{subtype:'equip1'});
-						if(cards.length) player.gain(cards,target,'give');
+						if(cards.length) {
+							player.gain(cards,target,'give');
+						}
+						else if (cards.length == 0 && player.hasSkill('guimo_chou')){
+							var position=get.is.single()?'he':'hej';
+							if(target.countGainableCards(player,position)){
+								game.log(target,'未出杀且装备区无武器牌，',player,'获得',target,'区域内一张牌');
+								// player.logSkill('guimo_chou');
+								player.popup('鬼没','thunder');
+								game.playAudio('skill','guimo_chou'+Math.ceil(5+3*Math.random()));
+								game.log(player,'发动了','#g【鬼没】');
+								
+								player.gainPlayerCard(position,target,true);
+							}
+						}
 					}
 				},
 				ai:{
