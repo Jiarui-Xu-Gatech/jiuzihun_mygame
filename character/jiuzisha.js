@@ -20805,6 +20805,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						var eff=get.sgn(get.effect(targets[i],{name:'wanjian'},player,player));
 						if(targets[i].hp==1){
 							eff*=1.5;
+                            if (lib.config.mode == 'identity'&&player.identity=='fan'&&targets[i].identity == 'zhu'){
+                                eff*=7;
+                            }
 						}
 						num+=eff;
 					}
