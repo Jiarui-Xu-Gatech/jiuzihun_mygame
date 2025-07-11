@@ -23954,7 +23954,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     name:"jiedao",
                 },
                 viewAsFilter:function(player){
-                    if(!player.countCards('he',{color:'black'})) return false;
+                    if(!player.countCards('he',{suit:'spade'})) return false;
                 },
                 prompt:"将一张黑桃♠牌当【借刀杀人】使用",
                 check:function(card){
