@@ -19275,7 +19275,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if(lib.config.mode=='identity'&&game.zhu.isZhu&&player.identity=='zhong'&&target == game.zhu){
                                 return (addi + 2.7 + Math.random())*prophase;
                             }
-                            var players=get.players(lib.sort.position);
+                            var players=new Array(game.players.length+game.dead.length).fill(0);//get.players(lib.sort.position);
                             var player_position=parseInt(player.dataset.position);
                             var round_position = parseInt(_status.roundStart.dataset.position);
                             var target_position = parseInt(target.dataset.position);
@@ -19509,7 +19509,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     return false;
                                 }
                                 if (current.hasSkill('man_mo')){
-                                    var players=get.players(lib.sort.position);
+                                    var players=new Array(game.players.length+game.dead.length).fill(0);//get.players(lib.sort.position);
                                     var player_position=parseInt(player.dataset.position);
                                     var round_position = parseInt(_status.roundStart.dataset.position);
                                     var current_position = parseInt(current.dataset.position);
@@ -19572,7 +19572,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     return false;
                                 }
                                 if (current.hasSkill('san_mo')){
-                                    var players=get.players(lib.sort.position);
+                                    var players=new Array(game.players.length+game.dead.length).fill(0);//get.players(lib.sort.position);
                                     var player_position=parseInt(player.dataset.position);
                                     var round_position = parseInt(_status.roundStart.dataset.position);
                                     var current_position = parseInt(current.dataset.position);
@@ -24778,7 +24778,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
 					if(result.bool){
                         // console.log(result.targets[0].dataset.position);
-                        // var players=get.players(lib.sort.position);
+                        // var players=new Array(game.players.length+game.dead.length).fill(0);//get.players(lib.sort.position);
                         // for(var i=0;i<players.length;i++){
                         //     console.log('第'+i);
                         //     console.log(players[i]);
