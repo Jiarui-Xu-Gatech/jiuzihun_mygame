@@ -58,7 +58,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",1,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','shenchu_chou'],[]],
+            // yuner:["female","qun",99,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','mingcha_quan'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -3713,8 +3713,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(event.num>1) player.draw(2);
                     'step 7'
                     if(event.num>2){
-                        player.addSkill('minghou_lan_shiling');
-                        player.addSkill('minghou_lan_mingji');
+                        player.addTempSkill('minghou_lan_shiling',{player:'phaseZhunbeiBefore'});
+                        player.addTempSkill('minghou_lan_mingji',{player:'phaseZhunbeiBefore'});
                         player.addSkill('minghou_lan_end');
                         game.log(player,'获得技能','#g【'+get.translation('minghou_lan_mingji')+'】','和','#g【'+get.translation('minghou_lan_shiling')+'】');
                     }
@@ -3930,6 +3930,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 silent:true,
                 popup:false,
                 forced:true,
+                charlotte:true,
                 onremove:function(player){
                     player.logSkill('minghou_lan_shiling');
                     if (player.storage.shiling_change[1] == 'main'){
@@ -3944,6 +3945,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             shiling_mianshang:{
                 forced:true,
+                charlotte:true,
                 silent:true,
                 popup:false,
                 frequent:true,
@@ -3985,6 +3987,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             minghou_lan_end:{
                 forced:true,
                 silent:true,
+                charlotte:true,
                 trigger:{
                     player:'phaseZhunbeiBefore',
                 },
@@ -4063,7 +4066,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.showTheCards = cards;
                         event.target = result.targets[0];
                         player.logSkill('nulian_lan',event.target);
-                        player.addTempSkill('nulian_limit');
+                        player.addTempSkill('nulian_limit','phaseUseAfter');
                         event.colors=[];
                         event.nums=[];
                         event.nulianCard = cards[0];
@@ -4322,6 +4325,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 trigger:{source:'damageBegin1'},
                 forced: true,
                 locked:true,
+                charlotte:true,
                 filter: function (event, player) {
 					return true; // 对所有伤害事件生效
 				},
@@ -4347,6 +4351,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 trigger:{source:'damageBegin4'},
                 forced: true,
                 locked:true,
+                charlotte:true,
                 filter: function (event, player) {
 					return true; // 对所有伤害事件生效
 				},
@@ -4387,6 +4392,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:false,
                 silent:true,
                 forced:true,
+                charlotte:true,
                 trigger:{player:'phaseJieshu'},
                 filter: function(event,player){
                     return player.hasSkill('qinyin_jia_duo')||player.hasSkill('qinyin_jian_duo');
@@ -4677,6 +4683,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // shaRelated:true,
                 group:['duanxiu_nan_duo','duanxiu_noSha_duo','duanxiu_nv_duo'],
                 ai:{
+                    neg:true,
                     // expose:0.2,
 					effect:{
 						target:function(card,player,target){
@@ -5873,6 +5880,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 priority:16,
                 forced:true,
                 direct:true,
+                charlotte:true,
                 mark:true,
                 intro:{
                     name:'虚情',
@@ -7889,6 +7897,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 locked:true,
                 group:['mingcha_sha_quan','mingcha_trick_quan','mingcha_remove_quan','mingcha_wuxie_quan','mingcha_heitrick_quan','mingcha_effect'],
+                onremove:function(player){
+					if (player.hasSkill('mingcha_disable_quan')){
+                        player.removeSkill('mingcha_disable_quan');
+                    }
+                    var has=game.hasPlayer(function(current){
+                        if (current.hasSkill('mingcha_disable_quan')){
+                            // console.log("去了呀");
+                            current.removeSkill('mingcha_disable_quan');
+                        }
+                        else{
+
+                        }
+                        
+                    });
+				},
                 ai:{
                     threaten:1.5,
                 },
@@ -7992,6 +8015,25 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
                             
                         });
+
+
+
+                        //个人角度好像有bug
+                        // if (!player.hasSkill('mingcha_disable_quan')){
+                        //     player.addSkill('mingcha_disable_quan');
+                        //     if (trigger.card.cardid){
+                        //         player.storage.mingcha_remove_quan = trigger.card.cardid;
+                        //         player.syncStorage('mingcha_remove_quan');
+                        //     }
+                        //     else {
+                        //         trigger.card.cardid = 'mingcha_remove_quan_id';
+                        //         player.storage.mingcha_remove_quan = trigger.card.cardid;
+                        //         player.syncStorage('mingcha_remove_quan');
+                        //     }
+                        // }
+                        // else{
+
+                        // }
                     }
                     else{
                         trigger.directHit.addArray(game.filterPlayer(function(current){
@@ -8022,6 +8064,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					
 				},
 				content:function(){
+                    if (player.hasSkill('mingcha_disable_quan')){
+                        player.removeSkill('mingcha_disable_quan');
+                    }
                     var has=game.hasPlayer(function(current){
                         if (current.hasSkill('mingcha_disable_quan')){
                             // console.log("去了呀");
@@ -8035,11 +8080,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
             },
 
-
-
             mingcha_disable_quan:{
                 // mark:true,
-                // marktext:"无",
+                // marktext:"封",
                 // intro:{
                 //     name:'无懈',
                 // },
@@ -8055,6 +8098,41 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     },
 				},
             },
+
+            // mingcha_disable_quan:{
+            //     mark:true,
+            //     marktext:"无",
+            //     intro:{
+            //         name:'无懈',
+            //     },
+            //     audio:false,
+            //     silent:true,
+            //     forced:true,
+            //     unique:true,
+			// 	global:'mingcha_disable_quan_other',
+                
+            // },
+
+
+
+            // mingcha_disable_quan_other:{
+            //     mark:true,
+            //     marktext:"封",
+            //     intro:{
+            //         name:'无懈',
+            //     },
+            //     silent:true,
+            //     forced:true,
+            //     // filter:function(event,player){
+            //     //     return true;
+            //     // },
+
+            //     mod:{
+			// 		cardEnabled2:function(card,player){
+            //             if(card.name=='wuxie') return false;
+            //         },
+			// 	},
+            // },
 
             mingcha_wuxie_quan:{
                 trigger:{
@@ -8169,6 +8247,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 priority:200,
                 firstDo:true,
+                charlotte:true,
                 trigger:{
                     global:["phaseAfter","phaseBefore"],//,"turnOverBefore"],
                     player:"phaseLoop",
@@ -8293,6 +8372,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 forced:true,
                 locked:true,
+                charlotte:true,
                 trigger:{
                     player:"phaseJieshu",
                 },
@@ -8322,6 +8402,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"damageBegin4",
                 },
                 frequent:true,
+                charlotte:true,
                 filter:function(event,player){
                     return player.storage.zhongcheng_target&&player.storage.zhongcheng_target.isAlive()&&event.num > 1;
                 },
@@ -8366,6 +8447,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 popup:false,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:"phaseJieshu",
                 },
@@ -8396,6 +8478,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"damageBegin4",
                 },
                 frequent:true,
+                charlotte:true,
                 filter:function(event,player){
                     return player.storage.quanjinfa&&event.num > 1;
                 },
@@ -8431,10 +8514,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             zhongcheng_end_quan:{
                 silent:true,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:["phaseDiscardBegin",'dieBegin'],
                 },
                 content:function(event){
+                    'step 0'
                     if (player.hasSkill("zhongcheng_self_quan")){
                         player.removeSkill("zhongcheng_self_quan");
                     }
@@ -8453,6 +8538,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         
                     });
+                    'step 1'
+                    player.removeSkill('zhongcheng_end_quan');
                 }
 
             },
@@ -10016,6 +10103,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 locked:true,
                 group:["xinruan_selfDamage_mei","xinruan_jiu_mei"],
+                onremove:function(player){
+                    var has=game.hasPlayer(function(current){
+                        if (current.hasSkill('xinruan_jiu_begin_mei')){
+                            current.removeSkill('xinruan_jiu_begin_mei');
+                        }
+                    });
+                },
 
             },
 
@@ -10291,6 +10385,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     },
                 },
                 silent:true,
+                charlotte:true,
                 trigger:{
                     global:'phaseEnd',
                     player:"dieBegin",
@@ -11942,6 +12037,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             yilian_recover_shui:{
                 silent:true,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:'recoverAfter',
                 },
@@ -11964,6 +12060,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 silent:true,
                 frequent:true,
+                charlotte:true,
                 trigger:{
                     player:'phaseDiscardAfter',
                 },
@@ -12027,6 +12124,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 silent:true,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:'recoverAfter',
                 },
@@ -12050,6 +12148,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 silent:true,
                 frequent:true,
+                charlotte:true,
                 trigger:{
                     player:'phaseDiscardAfter',
                 },
@@ -12105,10 +12204,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             yilian_end_shui:{
                 silent:true,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:["phaseZhunbeiBegin",'dieBegin'],
                 },
                 content:function(event){
+                    'step 0'
                     if (player.hasSkill("yilian_recover_shui")){
                         player.removeSkill("yilian_recover_shui");
                     }
@@ -12125,6 +12226,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         
                     });
+                    'step 1'
+                    player.removeSkill('yilian_end_shui');
                 }
             },
 
@@ -12991,6 +13094,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 locked:true,
                 popup:false,
                 forced:true,
+                charlotte:true,
                 mark:true,
                 marktext:"牛",
                 intro:{
@@ -13056,7 +13160,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         
                     });
-                }
+                },
+                onremove:function(player){
+                    var has=game.hasPlayer(function(current){
+                        if (current.hasSkill('niu_kaer')){
+                            // console.log("yuzhong去了呀");
+                            current.removeSkill('niu_kaer');
+                        }
+                        else if (current.storage.kaer_jiuzi){
+                            delete current.storage.kaer_jiuzi;
+                        }
+                        
+                    });
+                },
             },
 
             muniu_share_kaer:{
@@ -13304,7 +13420,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 1'
                     if(result.bool){
                         player.logSkill('yuanzhu_kaer',trigger.player);
-                        player.addSkill('yuanzhu_end_kaer');
+                        player.addTempSkill('yuanzhu_end_kaer','phaseAfter');
                         player.chooseTarget('选择弃置【牛】牌的目标',"每回合限一次，当有角色濒死时，你可以弃置任意角色【牛】中的一张牌，视为你对濒死角色使用了一张【桃】。",true,function(card,player,target){
                             return target.hasSkill('niu_kaer')&&target.storage.niu_kaer.length>0;
                         }).set('ai',function(target){     
@@ -13358,14 +13474,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
 
             yuanzhu_end_kaer:{
+                audio:false,
+                forced:true,
                 silent:true,
                 popup:false,
-                trigger:{
-                    global:"phaseEnd",
-                },
-                content:function(){
-                    player.removeSkill('yuanzhu_end_kaer');
-                },
+                // trigger:{
+                //     global:"phaseAfter",
+                // },
+                // content:function(){
+                //     player.removeSkill('yuanzhu_end_kaer');
+                // },
             },
             
             yanhua_kaer:{
@@ -13398,7 +13516,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (player.hasSkill('forbidExtraDraw')){
                         player.removeSkill('forbidExtraDraw');
                     }
-                    player.chooseTarget('选择【烟花】的目标',"出牌阶段限，你可以弃置所有【牛】，然后选择至多X名角色（X为弃置【牛】中的总牌数），对每名选中的角色造成1点火焰伤害。",[1,event.num_cards],true,function(card,player,target){
+                    player.chooseTarget('选择【烟花】的目标',"出牌阶段，你可以弃置所有【牛】，然后选择至多X名角色（X为弃置【牛】中的总牌数），对每名选中的角色造成1点火焰伤害。",[1,event.num_cards],true,function(card,player,target){
                         return true;
                     }).set('ai',function(target){     
                         var player = _status.currentPhase;
@@ -14205,6 +14323,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 silent:true,
                 popup:false,
+                charlotte:true,
                 mark:true,
                 marktext:'浴',
                 intro:{
@@ -14513,6 +14632,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
 				trigger:{player:'damageBegin4'},
 				forced:true,
+                charlotte:true,
 				filter:function(event,player){
 					return event.num>1;
 				},
@@ -14568,6 +14688,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 silent:true,
                 popup:false,
+                charlotte:true,
                 trigger:{
                     player:'phaseDrawBegin',
                 },
@@ -14918,6 +15039,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             zongjiu_lala:{
                 audio:1,
                 forced:true,
+                charlotte:true,
                 mark:true,
                 marktext:'纵',
                 intro:{
@@ -15247,6 +15369,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     },
                 },
                 silent:true,
+                charlotte:true,
                 trigger:{
                     global:'phaseEnd',
                     player:"dieBegin",
@@ -17983,6 +18106,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				forced:true,
                 locked:true,
+                charlotte:true,
 				filter:function(event,player){
 					var storage=player.storage.yunv_kong_gui;
 					if(event.name=='damage') return true;
@@ -18036,6 +18160,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:false,
                 popup:false,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:"useCardBefore",
                 },
@@ -18067,6 +18192,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     content:"进行一个额外的回合",
                 },
 				forced:true,
+                charlotte:true,
 				popup:false,
 				audio:false,
                 filter:function(event,player){
@@ -19926,6 +20052,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 locked:true,
                 direct:true,
+                charlotte:true,
                 mark:true,
                 intro:{
                     onunmark:'throw',
@@ -19973,6 +20100,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             fuyun_tu_char:{
                 forced:true,
+                charlotte:true,
             },
 
             pini_tu:{
@@ -20111,6 +20239,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             pini_tu_remove:{
                 audio:false,
                 forced:true,
+                charlotte:true,
                 trigger:{player:'phaseJieshuAfter'},
                 content:function(event){
                     'step 0'
@@ -20962,7 +21091,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     if (trigger.cards&&trigger.cards.length>0){
-                        player.addTempSkill('tongyin_shi_limit');
+                        player.addTempSkill('tongyin_shi_limit','phaseUseAfter');
                         if (!player.hasSkill('tongyin_shi_phaseJieshu')){
                             player.addSkill('tongyin_shi_phaseJieshu');
                         }
@@ -21130,6 +21259,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:false,
                 direct:true,
                 forced:true,
+                charlotte:true,
                 trigger:{
                     player:"phaseDiscardBegin",
                 },
@@ -21774,6 +21904,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:1,
                 forced:true,
                 locked:true,
+                charlotte:true,
                 mark:true,
                 marktext:'水',
                 intro:{
@@ -21783,6 +21914,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     maxHandcard:function(player, num) {
                         return num - player.storage.sishui_handlimit; 
                     },
+                },
+                ai:{
+                    neg:true,
                 },
             },
 
@@ -22238,7 +22372,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (result.bool&&result.targets.length>0){
                         player.logSkill('yaodao_yao',result.targets[0]);
                         player.unmarkSkill('yaodao_yao');
-                        player.addTempSkill('yaodao_yao_limit');
+                        player.addTempSkill('yaodao_yao_limit','phaseUseAfter');
                         player.discard(result.cards);
                         event.loseMaxHp = false;
                         if (result.targets[0].hp > player.hp){
@@ -25671,7 +25805,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             duomingdong: '多名洞',
             "qinyin_duo":'琴音',
-            "qinyin_duo_info":"每回合限一次，出牌阶段你可以弃置一张红色手牌，然后选择一名其他角色，令其直到下一个结束阶段之前造成伤害+1或-1。",
+            "qinyin_duo_info":"出牌阶段限一次，出牌阶段你可以弃置一张红色手牌，然后选择一名其他角色，令其直到下一个结束阶段之前造成伤害+1或-1。",
             "qinyin_jia_duo":'琴音',
             "qinyin_jia_duo_info":'锁定技，造成伤害+1',
             "qinyin_jian_duo":'琴音',
@@ -25722,7 +25856,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'xuqin_ning_lose':"虚情",
             xuqin_ning_lose_bg:'🎔',//'&#x1F394;&#xFE0E;',//'❤',
             'huiyi_ning':"悔意",
-            'huiyi_ning_info':"限定技，你进入濒死前，你可以选择一名角色，你失去技能【狐骚】，令其获得你所有的牌，然后该角色重置武将牌，从牌堆中摸取4种花色的牌各一张并展示之，加1点体力上限，回复1点体力，并获得技能【狐魂】，然后你立即死亡。若在身份局中且你的身份为【主公】，则你死亡之前与该角色交换身份牌。",
+            'huiyi_ning_info':"限定技，当你的体力值≤0时，你可以选择一名角色，你失去技能【狐骚】，令其获得你所有的牌，然后该角色重置武将牌，从牌堆中摸取4种花色的牌各一张并展示之，加1点体力上限，回复1点体力，并获得技能【狐魂】，然后你立即死亡。若在身份局中且你的身份为【主公】，则你死亡之前与该角色交换身份牌。",
             'linghun_ning':"狐魂",
             'linghun_ning_info':"当你翻面后，你可以摸一张牌。",
 
@@ -25932,7 +26066,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "yuanzhu_kaer":"源助",
             "yuanzhu_kaer_info":"每回合限一次，当有角色濒死时，你可以弃置任意角色【牛】中的一张牌，视为你对濒死角色使用了一张【桃】。",
             "yanhua_kaer":"烟花",
-            "yanhua_kaer_info":"出牌阶段限，你可以弃置所有【牛】，然后选择至多X名角色（X为弃置【牛】中的总牌数），对每名选中的角色造成1点火焰伤害。",
+            "yanhua_kaer_info":"出牌阶段，你可以弃置所有【牛】，然后选择至多X名角色（X为弃置【牛】中的总牌数），对每名选中的角色造成1点火焰伤害。",
 
             kalala:"卡拉拉",
             'quanjiu_lala':"劝酒",
