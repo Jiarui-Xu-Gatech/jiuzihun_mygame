@@ -23819,7 +23819,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.current=player.next;
                     event.currented=[];
                     event.NoHarm = true;
-                    "step 2"                   
+                    "step 2"      
+                    if (result){
+                        result.cards = [];
+                    }             
                     event.currented.push(event.current);
                     event.current.animate('target');
                     event.current.previous.line(event.current,'thunder');
@@ -23830,7 +23833,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     else{
                         event.currentNum = -1;
-                        event.goto(5);
+                        event.goto(4);
                     }
                     
 
