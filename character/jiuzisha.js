@@ -6652,6 +6652,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (event.nothasShan&&event.nothasBagua||(event.nothasShan&&!event.nothasBagua&&trigger.player.hasSkill('qinggang_skill'))) {
                             return true; // 满足条件，发动技能
                         }
+                        if (event.nothasShan&&player.storage.xinnian_caoxin>1){
+                            if (Math.random()>2*player.hp/(player.maxHp*Math.max(1,player.storage.xinnian_caoxin))){
+                                return true;
+                            }
+                        }
                         return Math.random()>0.9; // 不满足条件，不发动技能
                     });
                     'step 1'
