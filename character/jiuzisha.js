@@ -23825,7 +23825,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.current.previous.line(event.current,'thunder');
                     player.popup('恶剧','thunder');
                     game.playAudio('skill','eju_chou'+3);
-                    event.current.gainPlayerCard('h',event.current.previous,true);
+                    if (event.current.previous.countCards('h')>0){
+                        event.current.gainPlayerCard('h',event.current.previous,true);
+                    }
+                    else{
+                        event.currentNum = -1;
+                        event.goto(5);
+                    }
+                    
 
                     "step 3"
                     if (result.cards.length>0){
