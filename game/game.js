@@ -30194,9 +30194,9 @@
 						// 	content:content,
 						// 	delay:time-_status.lastVideoLog
 						// });
-						_status.lastVideoLog=time;
+						// _status.lastVideoLog=time;
 					},type,player,content,time,lib.config.mode);
-					return;
+					// return;
 				}
 				// if (type=="over"&&!game.online){
 				// 	game.broadcastAll(function(configmode){
