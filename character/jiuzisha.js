@@ -58,7 +58,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",99,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','mingcha_quan'],[]],
+            // yuner:["female","qun",99,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -20749,7 +20749,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					});
 					var str='和'+get.translation(list);
 					if(list.length>1) str+='中的一人';
-					str+='进行拼点。若你没赢，其可以获得两张拼点牌。否则你和其分别收回拼点牌然后你可以令其对一名角色造成1点伤害。';
+					str+='进行拼点。若其赢，其可以获得两张拼点牌。否则你和其分别收回拼点牌然后你可以令其对一名角色造成1点伤害。';
 					return str;
 				},
 				filter:function(event,player){
@@ -20789,7 +20789,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						return get.number(card);
 					}).set('preserve','lose');
 					"step 2"
-					if(result.bool==false){
+					if(result.winner==target){
 						var list=[];
 						if(get.position(result.player)=='d') list.push(result.player);
 						if(get.position(result.target)=='d') list.push(result.target);
@@ -24905,7 +24905,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(event){
                     "step 0"
-					player.chooseCardTarget("选一张放牌弃掉");
+					player.chooseCardTarget("选一张放牌给出");
                     "step 1"
                     if (result.bool){
                         result.targets[0].gain(result.cards[0],player,'giveAuto');
@@ -26203,7 +26203,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'manjiu_shi':"慢酒",
             'manjiu_shi_info':"锁定技，当你的“猛”印记数量变化后，若数量为奇数，你回复1点体力。准备阶段，若你有“猛”印记，则你摸“猛”印记两倍数量的牌，并清除所有“猛”印记。",
             'haina_shi':"海纳",
-            'haina_shi_info':"其他角色的出牌阶段限一次，其可以与你拼点，若其没赢，则你可以获得所有拼点牌，否则你和其分别收回拼点牌然后其可以令你对一名角色造成1点伤害。",
+            'haina_shi_info':"其他角色的出牌阶段限一次，其可以与你拼点，若你赢，则你可以获得所有拼点牌，否则你和其分别收回拼点牌然后其可以令你对一名角色造成1点伤害。",
             haina_shi_other:"✧海纳",
             'tongyin_shi':"痛饮",
             'tongyin_shi_info':"出牌阶段限一次，你可将任意X张手牌当作一张【万箭齐发】使用，若此【万箭齐发】造成了伤害，则本回合结束阶段，你摸X张牌，若此【万箭齐发】未造成伤害，则此技能本回合视为未发动过。当你脱离濒死状态后，你可以视为使用一张【万箭齐发】。",
