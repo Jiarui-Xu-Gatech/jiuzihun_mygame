@@ -58,7 +58,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",99,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard'],[]],
+            // yuner:["female","qun",99,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -1374,6 +1374,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.finish();
                 },
                 ai:{
+                    phaseUseLimit:true,
                     order:function(){
 						return get.order({name:'sha'})+0.2;
 					},
@@ -2833,6 +2834,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 position:"he",
                 ai:{
+                    phaseUseLimit:true,
                     expose: 0.5,
                     order:1,
                     damageBonus:true,
@@ -4118,6 +4120,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     
                 },
                 ai:{
+                    phaseUseLimit:true,
                     order:15,
                     threaten:1.5,
                     result:{
@@ -4300,6 +4303,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return 11-get.value(card);
                 },
                 ai:{
+                    phaseUseLimit:true,
                     expose: 0.5,
                     threaten:3.5,
                     order:8.5,
@@ -5655,7 +5659,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						var cards=result.cards;
                         // target.gain(cards,player,'giveAuto','bySelf');
                         target.gain(cards,player,'draw');
-                        target.addTempSkill('husao_handout_ning_end');
+                        target.addTempSkill('husao_handout_ning_end','phaseUseAfter');
                         player.line(target,'green');
                         if(cards.length > target.hp){
                             target.turnOver();
@@ -5666,6 +5670,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 
                 ai:{
+                    phaseUseLimit:true,
                     expose:0.2,
                     order:function(skill,player){
 						return 0.1;
@@ -5849,6 +5854,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
 				},
 				ai:{
+                    phaseUseLimit:true,
                     expose:0.05,
 					order:15,
 					result:{
@@ -9118,6 +9124,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 derivation:["dutian_rule_mei"],
                 ai:{
+                    phaseUseLimit:true,
 					order:9,
                     threaten:6,
                     expose:0.6,
@@ -9715,6 +9722,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 derivation:["dutian_rule_mei"],
                 ai:{
+                    phaseUseLimit:true,
 					order:9,
                     threaten:8,
                     expose:0.6,
@@ -11884,6 +11892,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
 				},
                 ai:{
+                    phaseUseLimit:true,
                     threaten:5.5,
                     expose:0.3,
 					order:function(){
@@ -17105,6 +17114,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                 },
                 ai:{
+                    phaseUseLimit:true,
                     order:20,
 					// order:function(){
                     //     return get.order({name:'tao'})-0.2;
@@ -20990,6 +21000,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 group:["tongyin_shi_after","tongyin_binsi_shi"],
 				ai:{
+                    phaseUseLimit:true,
                     threaten:2.5,
 					basic:{
 						order:1,
@@ -22269,6 +22280,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                 },
                 ai:{
+                    phaseUseLimit:true,
                     recover:true,
 					respondTao:true,
                     threaten:7.5,
@@ -22399,6 +22411,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.loseMaxHp();
                 },
                 ai:{
+                    phaseUseLimit:true,
                     threaten:7.5,
                     expose:0.73,
                     order:function(){
@@ -24044,6 +24057,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.finish();
                 },
                 ai:{
+                    phaseUseLimit:true,
                     order:function(){
 						return get.order({name:'tao'})-0.2;
 					},
