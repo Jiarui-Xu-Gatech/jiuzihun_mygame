@@ -1789,9 +1789,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     trigger.num++;
-                    player.popup(get.translation('nvhao'),'fire');
-                    game.playAudio('skill','nvhao'+Math.ceil(2*Math.random()));
-                    game.log(player,'发动了','#g【女豪】');
+                    player.logSkillColor('nvhao',undefined,false,'fire',false,false);
+                    // player.popup(get.translation('nvhao'),'fire');
+                    // game.playAudio('skill','nvhao'+Math.ceil(2*Math.random()));
+                    // game.log(player,'发动了','#g【女豪】');
                     game.log(player,'对',trigger.player,'造成伤害+1，伤害值为','#y'+get.translation(trigger.num));
                     player.removeSkill('nvhao_jiashang');
                     
@@ -3117,15 +3118,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         //效果
                         player.damage(1,'fire',player);
                         event.target = result.targets[0];
-                        // player.logSkill('yuhuo_nv');
-                        player.popup('浴火','soil');
-                        game.playAudio('skill','yuhuo_nv'+Math.ceil(2*Math.random()));
+                        
+                        player.logSkillColor('yuhuo_nv',undefined,false,'soil',true,false);
+                        // player.popup('浴火','soil');
+                        // game.playAudio('skill','yuhuo_nv'+Math.ceil(2*Math.random()));
                         game.log(player,'发动了','#g【浴火】','，令',event.target,'摸牌');
-                        if(player._hookTrigger){
-                            for(var i=0;i<player._hookTrigger.length;i++){
-                                var info=lib.skill[player._hookTrigger[i]].hookTrigger;
-                            }
-                        }
+                        // if(player._hookTrigger){
+                        //     for(var i=0;i<player._hookTrigger.length;i++){
+                        //         var info=lib.skill[player._hookTrigger[i]].hookTrigger;
+                        //     }
+                        // }
                     }
                     else{
                         event.finish();
@@ -7520,7 +7522,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.maxHp--;
 						player.update();
                         // game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
-                        player.logSkill('yuzhong_yan');
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',false,false);
                         game.log(player,'做主公、主将、主帅，不增加体力上限');
 					}
 				}
@@ -7561,8 +7563,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (player.storage.yuzhong_fix_yan == 1){
                                 player.storage.yuzhong_fix_yan = 2;
                                 player.syncStorage('yuzhong_fix_yan');
-                                player.popup('yuzhong_yan');
-                                game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+
+                                player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                                // player.popup('yuzhong_yan');
+                                // game.playAudio('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                                 game.log(player,"发动了","#g【愚忠】","，判定牌不能被修改或无效。");
                             }
                         }
@@ -8200,7 +8204,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 frequent:true,
                 filter:function(event,player){
-                    if (event.player.hasSkill("xianfu_addPhase_quan")){
+                    if (event.player.hasSkill("xianfu_addPhase_quan")||event.player==player){
                         return false;
                     }
                     else if (event.name == "phase" && event.player.getHistory('skipped').contains('phaseUse')&&
@@ -8693,12 +8697,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (player.hasSkill("mantian_mei")){
-                        player.popup("mantian_mei",'thunder');
+                        player.logSkillColor('mantian_mei',undefined,false,'thunder',true,true);
+                        // player.popup("mantian_mei",'thunder');
                         game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (player.hasSkill("mantian_mei_nan")){
-                        player.popup("mantian_mei_nan",'thunder');
+                        player.logSkillColor('mantian_mei_nan',undefined,false,'thunder',true,true);
+                        // player.popup("mantian_mei_nan",'thunder');
                         game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
@@ -8871,12 +8877,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei")){
-                        event.targets[event.loopNum2].popup("mantian_mei",'thunder');
+                        event.targets[event.loopNum2].logSkillColor("mantian_mei",undefined,false,'thunder',true,true);
+                        // event.targets[event.loopNum2].popup("mantian_mei",'thunder');
                         game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei_nan")){
-                        event.targets[event.loopNum2].popup("mantian_mei_nan",'thunder');
+                        event.targets[event.loopNum2].logSkillColor("mantian_mei_nan",undefined,false,'thunder',true,true);
+                        // event.targets[event.loopNum2].popup("mantian_mei_nan",'thunder');
                         game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
@@ -9289,12 +9297,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (player.hasSkill("mantian_mei")){
-                        player.popup("mantian_mei",'thunder');
+                        player.logSkillColor("mantian_mei",undefined,false,'thunder',true,true);
+                        // player.popup("mantian_mei",'thunder');
                         game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (player.hasSkill("mantian_mei_nan")){
-                        player.popup("mantian_mei_nan",'thunder');
+                        player.logSkillColor("mantian_mei_nan",undefined,false,'thunder',true,true);
+                        // player.popup("mantian_mei_nan",'thunder');
                         game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(player,"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
@@ -9467,14 +9477,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     game.delay();
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei")){
-                        // event.targets[event.loopNum2].logSkill("mantian_mei");
-                        event.targets[event.loopNum2].popup("mantian_mei",'thunder');
+                        event.targets[event.loopNum2].logSkillColor("mantian_mei",undefined,false,'thunder',true,true);
+                        // event.targets[event.loopNum2].popup("mantian_mei",'thunder');
                         game.playAudio('skill',"mantian_mei"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
                     if (event.targets[event.loopNum2].hasSkill("mantian_mei_nan")){
-                        // event.targets[event.loopNum2].logSkill("mantian_mei_nan");
-                        event.targets[event.loopNum2].popup("mantian_mei_nan",'thunder');
+                        event.targets[event.loopNum2].logSkillColor("mantian_mei_nan",undefined,false,'thunder',true,true);
+                        // event.targets[event.loopNum2].popup("mantian_mei_nan",'thunder');
                         game.playAudio('skill',"mantian_mei_nan"+Math.ceil(4*Math.random()));
                         game.log(event.targets[event.loopNum2],"发动技能","#g【瞒天】","，将手牌中的","#y"+"♥","和","#y"+"♣","都视为","#y"+"♠");
                     }
@@ -13782,7 +13792,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.logSkill('huitong_shou',trigger.source);
                         game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.popup(get.translation('weiyi_shou'));
                         }
 						game.delay();
 						event.num=result.cards.length;
@@ -13861,7 +13871,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.logSkill('fuyao_shou');
                         game.playAudio('skill','dutian_gold_mei'+Math.ceil(3*Math.random()));
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.popup(get.translation('weiyi_shou'));
                             player.storage.hanshou_skill.line(player,'green');
                         }
 						player.showCards(result.cards,get.translation(player)+'的【富耀】牌展示');
@@ -14003,7 +14013,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					if(result.bool){
                         player.logSkill('jibian_shou');
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.popup(get.translation('weiyi_shou'));
                             player.storage.hanshou_skill.line(player,'green');
                         }
                         player.loseHp(1);
@@ -14024,7 +14034,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(get.suit(card)=='club') {
                         player.logSkill('jibian_shou');
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.popup(get.translation('weiyi_shou'));
                             player.storage.hanshou_skill.line(player,'green');
                         }
                         player.draw('nodelay');
@@ -14032,7 +14042,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(get.suit(card)=='heart') {
                         player.logSkill('jibian_shou');
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.popup(get.translation('weiyi_shou'));
                             player.storage.hanshou_skill.line(player,'green');
                         }
                         player.recover(1);
@@ -14087,7 +14097,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (result.bool){
                         player.logSkill('jibian_shou',trigger.player)
                         if (!player.hasSkill('weiyi_shou')&&player.hasSkill('hanshou_skill')){
-                            player.storage.hanshou_skill.popup('weiyi_shou');
+                            player.storage.hanshou_skill.popup(get.translation('weiyi_shou'));
                         }
                         event.num = trigger.num;
                         game.log(player,'将',trigger.player,'的','#y'+event.num,'点体力回复转移给自己');
@@ -16833,7 +16843,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(result.bool){
                         game.playAudio('skill','gushi_gu'+3);
-						player.popup('gushi_gu');
+						player.logSkillColor("gushi_gu",undefined,false,'water',true,true);
+                        // player.popup('gushi_gu');
                         game.log(player,'发动了','#g【古石】');
                         game.delay(1);
 						var index=player.storage.gushi_gu2.indexOf(trigger.card.name);
@@ -16934,7 +16945,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.theTarget = target;
                     if(event.num1>event.num2){
                         if (!player.hasSkill('baonu_gu')){
-                            player.popup('狂烈','fire');
+                            player.logSkillColor("kuanglie_gu",undefined,false,'fire',true,true);
+                            // player.popup('狂烈','fire');
                             game.playAudio('skill','rongyan_gain_yan2');
                             game.log(player,'发动','#g【狂烈】','获得技能','#g【暴怒】','直到其下回合开始');
                             player.addTempSkill('baonu_gu',{player:"phaseZhunbeiBefore"});
@@ -17214,7 +17226,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     content:"锁定技，你的手牌上限等于体力上限。当你回复体力后，若你的体力值大于1，你失去1点体力。当你失去1点体力后，你摸三张牌，然后若此时是你的回合外，你改为摸五张牌，若此时是你的回合内，你本回合：所有【杀】都视为【火杀】、使用红色【杀】无距离限制、使用【杀】的次数上限+1。",
                 },
 				content:function(){
-                    player.popup('暴怒','fire');
+                    player.logSkillColor("baonu_gu",undefined,false,'fire',true,true);
+                    // player.popup('暴怒','fire');
                     game.playAudio('skill','kuanglie_gu'+Math.ceil(2*Math.random()));
                     game.log(player,'发动了','#g【暴怒】');
 					var num=trigger.num;
@@ -17265,7 +17278,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                 },
                 content:function(){
-                    player.popup('暴怒','fire');
+                    player.logSkillColor("baonu_gu",undefined,false,'fire',true,true);
+                    // player.popup('暴怒','fire');
                     game.log(player,'发动了','#g【暴怒】');
                     player.loseHp(1);
                 },
@@ -17291,7 +17305,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					return event.card&&event.card.name=='sha';
 				},
 				content:function(){
-					player.popup('暴怒','fire');
+                    player.logSkillColor("baonu_gu",undefined,false,'fire',true,true);
+					// player.popup('暴怒','fire');
                     game.playAudio('skill','kuanglie_gu'+Math.ceil(2*Math.random()));
                     game.log(player,'发动了','#g【暴怒】');
                     game.log(player,'将所有','#y杀','视为','#y火杀');
@@ -17982,7 +17997,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         var target=result.targets[0];
                         event.nvTarget = result.targets[0];
                         player.line(target,'fire');
-                        player.popup('驭女','soil');
+                        
+                        player.logSkillColor("yunv_gui",undefined,false,'soil',true,true);
+                        // player.popup('驭女','soil');
                         game.playAudio('skill','yunv_givePhase_gui2');
                         target.chooseCard('he',true,'【驭女】：请将一张牌交给'+get.translation(player)+'并获得一个额外的回合').set('ai',function(card){
                             var addition = 0;
@@ -18608,8 +18625,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.createClearBackground('smoke_bg',player);
                     }
 
-                    player.popup('凝雾','thunder');
-                    // game.playAudio('skill','ningwu_moke'+Math.ceil(2*Math.random()));
+                    player.logSkillColor("ningwu_moke",undefined,false,'thunder',true,true);
+                    // player.popup('凝雾','thunder');
                     game.playAudio('skill','ningwu_moke'+Math.ceil(2+2*Math.random()));
                     game.log(player,'发动了','#g【凝雾】','，本回合获得技能','#g【虚隐】');
                     player.addTempSkill('xuyin_moke');
@@ -18740,9 +18757,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					return event.getParent().name=='draw'&&event.getParent(2).name!='liaoyuan_moke';
 				},
 				content:function (){
-                    player.popup('燎原','soil');
-                    game.playAudio('skill','liaoyuan_moke'+Math.ceil(2*Math.random()));
-                    game.log(player,'发动了','#g【燎原】');
+                    player.logSkillColor('liaoyuan_moke',undefined,false,'soil',false,false);
+                    // player.popup('燎原','soil');
+                    // game.playAudio('skill','liaoyuan_moke'+Math.ceil(2*Math.random()));
+                    // game.log(player,'发动了','#g【燎原】');
 					player.draw('nodelay');
 				},
                 ai:{
@@ -18791,7 +18809,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             player.storage.nongyan_moke = 0;
                         }
                         if (player.storage.nongyan_moke<8){
-                            player.popup('浓烟','thunder');
+                            player.logSkillColor("nongyan_moke",undefined,false,'thunder',true,true);
+                            // player.popup('浓烟','thunder');
                             game.log(player,'发动了','#g【浓烟】');
                             game.log(player,'与其他角色的距离+1');
                             player.storage.nongyan_moke++;
@@ -18856,7 +18875,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					};
 					'step 1'
 					if(result.bool) {
-                        player.popup('火种','soil');
+                        player.logSkillColor("huozhong_moke",undefined,false,'soil',true,true);
+                        // player.popup('火种','soil');
                         game.playAudio('skill','huozhong_moke'+Math.ceil(2*Math.random()));
                         player.line(trigger.player,'fire');
                         game.log(player,'对',trigger.player,'发动了','#g【火种】');
@@ -18947,9 +18967,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}
 					"step 1"
 					if(result.bool){
-						// player.logSkill('jiuhan_tong',result.targets);
                         game.delay(1);
-                        player.popup('jiuhan_tong','soil');
+                        player.logSkillColor("jiuhan_tong",undefined,false,'soil',true,true);
+                        // player.popup('jiuhan_tong','soil');
                         game.playAudio('skill','jiuhan_tong'+Math.ceil(2*Math.random()));
                         var str=(result.targets[0]==player?'#b自己':result.targets);
                         game.log(player,'对',str,'发动了','#g【酒酣】');
@@ -19116,14 +19136,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				content:function(){
                     game.delay(1.3);
                     if (get.color(trigger.card)=='black'&&trigger.source&&trigger.source.isAlive()&&trigger.source.sex == 'male'){
-                        player.popup('zuitun_tong','soil');
+                        player.logSkillColor("zuitun_tong",undefined,false,'soil',true,true);
+                        // player.popup('zuitun_tong','soil');
                         game.playAudio('skill','zuitun_tong'+2);
                         game.log(player,'发动了','#g【醉臀】');
                         player.line(trigger.source,'green');
                         trigger.source.draw('nodelay');
                     }
                     else{
-                        player.popup('zuitun_tong','soil');
+                        player.logSkillColor("zuitun_tong",undefined,false,'soil',true,true);
+                        // player.popup('zuitun_tong','soil');
                         game.playAudio('skill','zuitun_tong'+1);
                         game.log(player,'发动了','#g【醉臀】');
                         if ((player.getHistory('damage',function(evt){
@@ -19151,7 +19173,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					return event.filterCard({name:'jiu',isCard:true},player,event);
 				},
 				content:function(){
-                    player.popup('jiudan_tong','water');
+                    player.logSkillColor("jiudan_tong",undefined,false,'water',true,true);
+                    // player.popup('jiudan_tong','water');
                     game.playAudio('skill','jiudan_tong'+Math.ceil(2*Math.random()));
                     game.log(player,'发动了','#g【酒胆】');
 					if(_status.event.getParent(2).type=='dying'){
@@ -19848,7 +19871,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     global:"die",
                 },
                 content:function(){
-                    player.popup('shuaixing_mo','thunder');
+                    player.logSkillColor("shuaixing_mo",undefined,false,'thunder',true,true);
+                    // player.popup('shuaixing_mo','thunder');
                     game.playAudio('skill','shuaixing_mo'+Math.ceil(2+2*Math.random()));
                     game.log(player,'恢复技能','#g【率性】');
                     player.removeSkill('shuaixing_limit_mo');
@@ -20201,7 +20225,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 4'
                     if(result.bool&&result.links.length){
                         player.line(event.allTargets[event.targetIndex]);
-                        player.popup('睥睨');
+                        player.logSkillColor("pini_tu",undefined,false,'water',true,true);
+                        // player.popup('睥睨');
                         // event.allCards.push(result.links);
                         //choosePlayerCard去重
                         result.links = Array.from(
@@ -20253,7 +20278,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 trigger:{player:'phaseJieshuAfter'},
                 content:function(event){
                     'step 0'
-                    player.popup('睥睨');
+                    player.logSkillColor("pini_tu",undefined,false,'water',true,true);
+                    // player.popup('睥睨');
                     game.playAudio('skill','pini_tu3')
                     event.players = game.filterPlayer();
                     event.players.sort(lib.sort.seat);
@@ -20721,7 +20747,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					return player.storage.mengguan_shi && player.storage.mengguan_shi>0; 
 				},
                 content:function(event){
-                    player.popup('慢酒','thunder');
+                    player.logSkillColor("manjiu_shi",undefined,false,'thunder',true,true);
+                    // player.popup('慢酒','thunder');
                     game.playAudio('skill','manjiu_shi'+Math.ceil(3+2*Math.random()));
                     game.log(player,'发动了','#g【慢酒】','清除'+player.storage.mengguan_shi+'个猛印记');
 
@@ -20855,7 +20882,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.log(player,'令',event.shiyun,'对',result.targets[0],'造成1点伤害')
                         // event.shiyun.logSkill('haina_shi',result.targets[0]);
 
-                        event.shiyun.popup('海纳','thunder');
+                        event.shiyun.logSkillColor("haina_shi",undefined,false,'thunder',true,true);
+                        // event.shiyun.popup('海纳','thunder');
                         event.shiyun.line(result.targets[0],'green');
                         game.playAudio('skill','haina_shi'+Math.ceil(3+2*Math.random()));
                         game.log(event.shiyun,'对',result.targets[0],'发动了','#g【海纳】');
@@ -21124,8 +21152,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return player.storage.tongyin_shi&&player.storage.tongyin_shi>0;
                 },
                 content:function(event){
-                    // player.logSkill('tongyin_shi');
-                    player.popup('痛饮','thunder');
+                    player.logSkillColor("tongyin_shi",undefined,false,'thunder',true,true);
+                    // player.popup('痛饮','thunder');
                     game.playAudio('skill','tongyin_shi'+3);
                     game.log(player,'发动了','#g【痛饮】');
 
@@ -21526,8 +21554,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        // player.logSkill('sheji_nan',trigger.player,'fire');
-                        player.popup('舍己','fire');
+                        player.logSkillColor("sheji_nan",undefined,false,'fire',true,true);
+                        // player.popup('舍己','fire');
                         game.playAudio('skill','sheji_nan'+Math.ceil(2*Math.random()));
                         if (trigger.player==player){
                             game.log(player,'对','#b自己','发动了','#g【舍己】');
@@ -21948,7 +21976,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        player.popup('妙手','wood');
+                        player.logSkillColor("miaoshou_yao",undefined,false,'wood',true,true);
+                        // player.popup('妙手','wood');
                         game.playAudio('skill','miaoshou_yao'+Math.ceil(2*Math.random()));
                         game.log(player,'发动了','#g【妙手】');
                         player.draw(2);
@@ -22253,8 +22282,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     'step 2'
                     if (result.bool){
-                        // player.logSkill('huichun_yao');
-                        player.popup('回春','wood');
+                        player.logSkillColor("huichun_yao",undefined,false,'wood',true,true);
+                        // player.popup('回春','wood');
                         game.playAudio('skill','huichun_yao'+Math.ceil(2*Math.random()));
                         game.playAudio('skill','huichun_yao'+Math.ceil(2+2*Math.random()));
                         game.log(player,'发动了','#g【回春】');
@@ -22272,7 +22301,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     'step 3'
                     if (event.taoTargets.length>=player.hp){
-                        player.popup('回春','wood');
+                        player.logSkillColor("huichun_yao",undefined,false,'wood',true,true);
+                        // player.popup('回春','wood');
                         game.playAudio('skill','huichun_yao'+Math.ceil(2+2*Math.random()));
                         game.log(player,'发动了','#g【回春】','，本回合获得技能','#g【药道】');
                         player.addTempSkill('yaodao_yao');
@@ -23524,9 +23554,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    // player.logSkill('anzhua_qian',trigger.player);
-
-                    player.popup('暗爪','thunder');
+                    player.logSkillColor("anzhua_qian",undefined,false,'thunder',true,true);
+                    // player.popup('暗爪','thunder');
                     player.line(trigger.player,'green');
                     // game.playAudio('skill','anzhua_qian'+Math.ceil(2*Math.random()));
                     if (player.storage.anzhua_qian==true){
@@ -23721,8 +23750,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.theTarget = result.targets[0];
                         event.theCard = result.cards[0];
                         
-                        // player.logSkill('touxing_qian',event.theTarget,'fire');
-                        player.popup('偷腥','fire');
+                        player.logSkillColor("touxing_qian",undefined,false,'fire',true,true);
+                        // player.popup('偷腥','fire');
                         player.line(event.theTarget,'fire')
                         game.playAudio('skill','touxing_qian'+Math.ceil(2*Math.random()));
                         game.log(player,'对',event.theTarget,'发动了','#g【偷腥】');
@@ -23973,6 +24002,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.currented.push(event.current);
                     event.current.animate('target');
                     event.current.previous.line(event.current,'thunder');
+                    
+                    // player.logSkillColor("eju_chou",undefined,false,'thunder',true,true);
                     player.popup('恶剧','thunder');
                     game.playAudio('skill','eju_chou'+3);
                     if (event.current.previous.countCards('h')>0){
@@ -23998,8 +24029,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (event.currentNum != -1){
                         if (event.Number%event.currentNum==0 || event.currentNum%event.Number==0){
                             game.log(event.current,'获得的牌',event.currentCard,'的点数是','#g【恶剧】','牌',event.TheCard,'点数的因数或倍数');
-                            player.popup('恶剧','thunder');
-                            // game.playAudio('skill','eju_chou'+Math.ceil(2+2*Math.random()));
+                            player.logSkillColor("eju_chou",undefined,false,'thunder',true,true);
+                            // player.popup('恶剧','thunder');
                             game.playAudio('skill','eju_chou'+4);
                             game.log(player,'对',event.current,'发动了','#g【恶剧】');
                             player.line(event.current,'thunder');
@@ -24026,7 +24057,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.goto(10);
                     }
                     "step 7"
-                    player.popup('恶剧','wood');
+                    player.logSkillColor("eju_chou",undefined,false,'wood',true,true);
+                    // player.popup('恶剧','wood');
                     game.playAudio('skill','eju_chou'+Math.ceil(4+2*Math.random()));
                     game.log(player,'发动了','#g【恶剧】');
                     player.line(game.filterPlayer(),'green');
@@ -24225,8 +24257,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     "step 1"
                     if (result.bool){
-                        // player.logSkill('guimo_chou');
-                        player.popup('鬼没','thunder');
+                        player.logSkillColor("guimo_chou",undefined,false,'thunder',true,true);
+                        // player.popup('鬼没','thunder');
                         game.playAudio('skill','guimo_chou'+Math.ceil(2+3*Math.random()));
                         game.log(player,'发动了','#g【鬼没】');
 
@@ -24307,10 +24339,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.storage.shenchu_chou=result.links[0][2];
                         player.syncStorage('shenchu_chou');
 						
-                        // player.logSkill('shenchu_chou');
-                        player.popup('神出','water');
-                        game.playAudio('skill','shenchu_chou'+Math.ceil(2*Math.random()));
-                        game.log(player,'发动了','#g【神出】');
+                        player.logSkillColor('shenchu_chou',undefined,false,'water',false,false);
+                        // player.popup('神出','water');
+                        // game.playAudio('skill','shenchu_chou'+Math.ceil(2*Math.random()));
+                        // game.log(player,'发动了','#g【神出】');
 
                         game.log(player,'记录了一个普通锦囊牌或基本牌的名称');
 					}
@@ -24340,8 +24372,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // game.log(player,'发动了','#g【妙手】');
                     game.log(trigger.player,'使用的',trigger.card,'是',player,'#g【神出】','记录的牌');
                     
-                    // player.logSkill('shenchu_chou');
-                    player.popup('神出','metal');
+                    player.logSkillColor("shenchu_chou",undefined,false,'metal',true,true);
+                    // player.popup('神出','metal');
                     game.playAudio('skill','shenchu_chou'+Math.ceil(2+2*Math.random()));
                     game.log(player,'发动了','#g【神出】');
                     
@@ -24458,8 +24490,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						player.storage.shenchu_chou=result.links[0][2];
                         player.syncStorage('shenchu_chou');
 						
-                        // player.logSkill('shenchu_chou');
-                        player.popup('神出','water');
+                        player.logSkillColor("shenchu_chou",undefined,false,'water',true,true);
+                        // player.popup('神出','water');
                         game.playAudio('skill','shenchu_chou'+Math.ceil(2*Math.random()));
                         game.log(player,'发动了','#g【神出】');
 
@@ -25946,7 +25978,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'mingcha_wuxie_quan':"明察",
             'mingcha_heitrick_quan':"明察",
             'xianfu_quan':"贤辅",
-            'xianfu_quan_info':"一名角色的结束阶段，若此角色之前的回合内跳过了摸牌阶段和出牌阶段，则你可以弃两张牌，使其进行一个额外的回合；当一名角色从背面翻至正面时，你可以弃两张牌，使其本回合结束后进行一个额外的回合。",
+            'xianfu_quan_info':"一名其他角色的结束阶段，若此角色之前的回合内跳过了摸牌阶段和出牌阶段，则你可以弃两张牌，使其进行一个额外的回合；当一名其他角色从背面翻至正面时，你可以弃两张牌，使其本回合结束后进行一个额外的回合。",
             "xianfu_addPhase_quan":"贤辅",
             'zhongcheng_quan':"忠诚",
             'zhongcheng_quan_info':"你的弃牌阶段结束时，你可以选择一名角色，直到你的下一个弃牌阶段开始前，其都拥有【忠】印记；你的结束阶段，你将手牌数调整至与拥有【忠】的角色相同；其结束阶段，将手牌数调整至与你相同；你或其受到伤害时，若此伤害值＞1，则另一方可以选择流失一点体力，使此伤害无效。",

@@ -15756,6 +15756,44 @@
  					else this.popup(get.skillTranslation(name,this),'water',false);
 					}
 				},
+				trySkillAnimateColor:function(name,popname,color,checkShow){
+					if(!game.online&&lib.config.skill_animation_type!='off'&&lib.skill[name]&&lib.skill[name].skillAnimation){
+						if(lib.config.skill_animation_type=='default'){
+							checkShow=checkShow||'main';
+						}
+						else{
+							checkShow=false;
+						}
+						if(lib.skill[name].textAnimation){
+							checkShow=false;
+						}
+						this.$skill(lib.skill[name].animationStr||lib.translate[name],lib.skill[name].skillAnimation,lib.skill[name].animationColor,checkShow);
+						return;
+					}
+					var player=this;
+					game.broadcast(function(player,name,popname){
+						player.trySkillAnimateColor(name,popname,color);
+					},player,name,popname);
+					if(lib.animate.skill[name]) lib.animate.skill[name].apply(this,arguments);
+					else{
+						if(popname!=name) {
+							if (!color){
+								this.popup(popname,'water',false);
+							}
+							else{
+								this.popup(popname,color,false);
+							}
+						}
+						else {
+							if (!color){
+								this.popup(get.skillTranslation(name,this),'water',false);
+							}
+							else{
+								this.popup(get.skillTranslation(name,this),color,false);
+							}
+						}
+					}
+				},
 				tryCardAnimate:function(card,name,nature,popname){
 					var player=this;
 					game.broadcast(function(player,card,name,nature,popname){
@@ -19726,6 +19764,65 @@
 						this.markSkill(roundname);
 					}
 					game.trySkillAudio(name,this,true);
+					if(game.chess){
+						this.chessFocus();
+					}
+					if(logv===true){
+						game.logv(this,name,targets,null,true);
+					}
+					else if(info&&info.logv!==false){
+						game.logv(this,name,targets);
+					}
+					if(this._hookTrigger){
+						for(var i=0;i<this._hookTrigger.length;i++){
+							var info=lib.skill[this._hookTrigger[i]].hookTrigger;
+							if(info&&info.log){
+								info.log(this,name,targets);
+							}
+						}
+					}
+				},
+				logSkillColor:function(name,targets,nature,color,customLog,customAudio,logv){
+					if(get.itemtype(targets)=='player') targets=[targets];
+					var nopop=false;
+					var popname=name;
+					if(Array.isArray(name)){
+						popname=name[1];
+						name=name[0];
+					}
+					var checkShow=this.checkShow(name);
+					if(lib.translate[name]){
+						this.trySkillAnimateColor(name,popname,color,checkShow);
+						if (!customLog){
+							if(typeof targets=='object'&&targets.length){
+								var str=(targets[0]==this&&targets.length==1?'#b自己':targets);
+								game.log(this,'对',str,'发动了','【'+get.skillTranslation(name,this)+'】');
+							}
+							else{
+								game.log(this,'发动了','【'+get.skillTranslation(name,this)+'】');
+							}
+						}
+					}
+					if(nature!=false){
+						if(nature===undefined){
+							nature='green';
+						}
+						this.line(targets,nature);
+					}
+					var info=lib.skill[name];
+					if(info&&info.ai&&info.ai.expose!=undefined&&
+						this.logAi&&(!targets||targets.length!=1||targets[0]!=this)){
+						this.logAi(lib.skill[name].ai.expose);
+					}
+					if(info&&info.round){
+						var roundname=name+'_roundcount';
+						this.storage[roundname]=game.roundNumber;
+						this.syncStorage(roundname);
+						this.markSkill(roundname);
+					}
+					if (!customAudio){
+						game.trySkillAudio(name,this,true);
+					}
 					if(game.chess){
 						this.chessFocus();
 					}
