@@ -15757,24 +15757,24 @@
 					}
 				},
 				trySkillAnimateColor:function(name,popname,color,checkShow){
-					if(!game.online&&lib.config.skill_animation_type!='off'&&lib.skill[name]&&lib.skill[name].skillAnimation){
-						if(lib.config.skill_animation_type=='default'){
-							checkShow=checkShow||'main';
-						}
-						else{
-							checkShow=false;
-						}
-						if(lib.skill[name].textAnimation){
-							checkShow=false;
-						}
-						this.$skill(lib.skill[name].animationStr||lib.translate[name],lib.skill[name].skillAnimation,lib.skill[name].animationColor,checkShow);
-						return;
-					}
+					// if(!game.online&&lib.config.skill_animation_type!='off'&&lib.skill[name]&&lib.skill[name].skillAnimation){
+					// 	if(lib.config.skill_animation_type=='default'){
+					// 		checkShow=checkShow||'main';
+					// 	}
+					// 	else{
+					// 		checkShow=false;
+					// 	}
+					// 	if(lib.skill[name].textAnimation){
+					// 		checkShow=false;
+					// 	}
+					// 	this.$skill(lib.skill[name].animationStr||lib.translate[name],lib.skill[name].skillAnimation,lib.skill[name].animationColor,checkShow);
+					// 	return;
+					// }
 					var player=this;
 					game.broadcast(function(player,name,popname){
 						player.trySkillAnimateColor(name,popname,color);
 					},player,name,popname);
-					if(lib.animate.skill[name]) lib.animate.skill[name].apply(this,arguments);
+					if(false&&lib.animate.skill[name]) {lib.animate.skill[name].apply(this,arguments);}
 					else{
 						if(popname!=name) {
 							if (!color){
