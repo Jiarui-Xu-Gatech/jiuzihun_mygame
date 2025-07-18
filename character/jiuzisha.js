@@ -1201,7 +1201,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // forced:true,
                 enable:"phaseUse",
                 usable:1,
-                audio:3,
+                audio:2,
                 skillAnimation:'epic',
                 animationColor:'fire',
                 filterTarget:function(card,player,target){
