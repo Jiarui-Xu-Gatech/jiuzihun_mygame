@@ -1232,7 +1232,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     event.current=player.next;
                     event.currented=[];
-                    "step 1"                   
+                    "step 1"     
+                    if (event.currented.length == 0){
+                        game.playAudio('skill','jiuyu_drink');
+                    }              
                     event.currented.push(event.current);
                     event.current.animate('target');
                     player.chooseToUse('【酒域】：使用一张【酒】或流失一点体力',{name:'jiu'}).set('ai1',function(card){

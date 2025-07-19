@@ -2848,6 +2848,7 @@ window.noname_asset_list=[
 	'audio/skill/jiuyu1.mp3',
 	'audio/skill/jiuyu2.mp3',
 	'audio/skill/jiuyu_saoxing1.mp3',
+	'audio/skill/jiuyu_drink.mp3',
 	'audio/skill/haoqin1.mp3',
 	'audio/skill/haoqin2.mp3',
 	'audio/skill/haoqin_target1.mp3',
