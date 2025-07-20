@@ -53,12 +53,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             guoyining_w:["female","qun",'3/6',["motong_guo","zhuge_guo","youwang_guo"],[]],
             shanwenqian_u:["female","qun",1,["maoni_qian","anzhua_qian","touxing_qian","fanglang_qian"],[]],
             boluosi_za:["male","wei",'4/5',['wuci_bo','chiyang_bo','jinwu_bo'],[]],
+            boluosi_za2:["male","wei",3,['wuci_bo','dunkong_bo','guiji_bo'],['unseen']],
             xiaochouhuang_zf:["male","wei",'3/7',['eju_chou','guimo_chou','shenchu_chou','zhouli_chou'],[]],
             
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",99,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha'],[]],
+            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -102,7 +103,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             yaoxianzi_qa:'药仙子，本名韩语黛，原本为韩寿韩家内的制药奴婢，韩鑫在赌神大赛上击败韩寿之后，韩寿逃亡，韩鑫随即整顿韩家余寇，遇到了韩语黛，了解到原来韩月给他的药液是韩语黛所配置，韩鑫念及这药液救过自己两次，想想还是放了她，毕竟医生救死扶伤，也有德，自己没有必要赶尽杀绝，韩语黛连连谢过韩鑫的不杀之恩之后离去。后来她因为机缘巧合跟着药婆婆学习药学之经典《药道》，医术越发高超。学成后入世行医，心怀慈悲之心，救死扶伤，妙手回春，自创一套“三清”之法，能医治各种疑难杂症，故此闻名遐迩，被世人尊称为“药仙子”，又因她容貌精致，白衣白发，爱在自己曼妙的肌肤上点缀一些青绿色宝石，美得迷人心魂，动人心魄，更因她来去无踪，神秘莫测，不求回报，故而又得名“白衣天使”。九昕儿独闯黑域，伤重归来，韩鑫焦急万分，药仙子为了报答韩鑫多年前的不杀之恩，主动上门医治，才得以保住九昕儿的性命。',
             guoyining_w:'郭依宁，北域蜘蛛族族长，蓝川之战参与者之一。她个子中等，长得端庄温婉，白玉般皎洁的瓜子脸，淡淡的眉毛，长长的眼睫毛，头上扎一个简易的丸子头，脸颊垂着些许鬓角，看着朴实美观，挺拔的希腊鼻，近乎完美的轮廓线条，红润饱满的嘴唇，笑起来一口白牙显得异常纯净，尤其她那双水灵灵的眼睛，眼波像笼罩着烟一般的薄雾朦胧，仿佛在其中隐藏着无穷的心事。身材优雅，前凸后翘，在美丽深陷的肚脐身上，还挂着一个水滴状的肚脐环，由一颗钻石装点，显得异常性感华贵，但千万别被迷人的外表所迷惑，郭依宁人称“魔瞳鬼蛛”，有一只散着魔气的紫色巨瞳，只要望一眼就能令敌人心魄胆寒。她信奉“五毒”，贪嗔痴慢疑，利用其笼络人心，编制出自己的巨大幽网。她食量大的出奇，一个人一顿可以吃下好几头牛才罢休。织网时，她会时不时唱出悠扬的“蛛歌”，迷人心神，使人鬼迷心窍放下对其的戒心并坠入其编织的巨大幽网的深渊之中。据说坠入幽网的人即使不成为郭依宁的盘中餐，也会染上诅咒，此后的生活将会充满不幸。多名洞被涂山醉月用迷迭香诱去涂山后，她应金守珍的号召，与饕餮族族长金守珍，猫族族长单文倩一同，组成“珍倩宁”大军讨伐涂山，开启了旷日持久的史诗大战——蓝川之战。',
             shanwenqian_u:'单文倩，北域猫族族长，蓝川之战的始作俑者。她身着浅蓝色衣衫，偏瘦的身形，虽然个子不算很高，但身材比例相当好，宛如文艺复兴时期大师们的一件艺术品一般，美得一丝不苟，精致微微偏长的脸颊，高挺的鼻梁，削尖的桃形脸，诺大的双眼绽放着女人的妩媚。一双眼睛透着严厉，但仔细的人能看出其中那不易察觉的，深深掩盖住的放浪火焰在隐隐跳动，似乎只要一根导火线，就能将那蓄积已久的欲火点燃，放飞自我，尽情展现她女人的天性！不过在迷人的外表下，她的爪子在暗中总能以迅雷之势给敌人以致命的一击。曾经她游历于西域偷腥，沾花惹草，并在“醉枕千秋”别馆偶遇过韩鑫，她爱财如命又放浪不羁的个性，以及令韩鑫将金子塞进自己那里的举动，给韩鑫留下了深刻的印象。后她于桃花岛上对多名洞一见钟情，想强掳其去北域，却成了蓝川之战的导火索。多名洞被涂山醉月用迷迭香诱去涂山后，她应金守珍的号召，与饕餮族族长金守珍，蜘蛛族族长郭依宁一同，组成“珍倩宁”大军讨伐涂山，开启了旷日持久的史诗大战——蓝川之战。',
-            boluosi_za:'波罗斯',
+            boluosi_za:'波罗斯，十二主神中太阳神阿波罗的继承者，能够化作一只金色的火焰乌鸦翱翔于天际，东域太阳城的守城将军，有出色的领军能力，同时又能通过身上炽阳的气息凝聚高温的火球，绝招是“无慈悲的太阳”。当他将三个太阳通过挤压变成一个时，触发的核聚变能够产生比原子弹还强大的力量。他是九昕儿的前任，即使分手后九昕儿对其依然念念不忘。曹信攻打太阳城时，在水淼儿的帮助下才将其击败。后为情所困，因为种种原因，对凡尘逐渐失望，波罗斯决定出尘入佛，法号“无慈”，一切归于寂静，并在临死时领悟了佛家的禅意，释然了。',
+            boluosi_za2:'波罗斯，十二主神中太阳神阿波罗的继承者，能够化作一只金色的火焰乌鸦翱翔于天际，东域太阳城的守城将军，有出色的领军能力，同时又能通过身上炽阳的气息凝聚高温的火球，绝招是“无慈悲的太阳”。当他将三个太阳通过挤压变成一个时，触发的核聚变能够产生比原子弹还强大的力量。他是九昕儿的前任，即使分手后九昕儿对其依然念念不忘。曹信攻打太阳城时，在水淼儿的帮助下才将其击败。后为情所困，因为种种原因，对凡尘逐渐失望，波罗斯决定出尘入佛，法号“无慈”，一切归于寂静，并在临死时领悟了佛家的禅意，释然了。',
             xiaochouhuang_zf:'小丑皇，东域机械城的实际控制者，神出鬼没，喜欢整人，诡计多端，善于借刀杀人，最爱搞恶作剧。曾借机械城错综复杂的地形将韩鑫和九昕儿困在移动迷宫之中，试图绞杀，然而最终竟然被韩鑫反制，临终之时对韩鑫使用了咒术之礼，烙印于身，带来连连的厄运。',
         },
 		characterTitle:{
@@ -5141,7 +5143,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 filterTarget:function (card,player,target){
                     if (!player.storage.jiuweiFilterTarget){
-                        return player!=target;
+                        return player!=target&&player.canUse({name:'sha'},target,false);
                     }
                     else{
                         return player.storage.jiuweiFilterTarget(card, player, target);
@@ -11412,7 +11414,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (!player.hasSkill('cangxin_start_enda')){
                         player.addSkill('cangxin_start_enda');
                     }
-                    player.logSkill('cangxin_enda');
+                    // player.logSkill('cangxin_enda');
+                    player.logSkillColor('cangxin_enda',undefined,false,'water',false,true);
+                    game.playAudio('skill','cangxin_enda'+2);
+
                     player.draw();
                     if(!player.storage.cangxin_enda) {
                         player.storage.cangxin_enda=[];
@@ -11442,7 +11447,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.syncStorage('cangxin_enda');
                         player.markSkill('cangxin_enda');
                         game.addVideo('storage',player,['cangxin_start_enda',get.cardsInfo(player.storage.cangxin_enda),'cards']);
-                        game.log(player,'将一张牌置于其武将牌上，称为【心】');
+                        game.log(player,'将一张牌置于其武将牌上，称为','#g【心】');
                         player.lose(result.cards[0],ui.special,'toStorage');
                     };
                 },
@@ -13541,7 +13546,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.chooseTarget('选择【烟花】的目标',"出牌阶段，你可以弃置所有【牛】，然后选择至多X名角色（X为弃置【牛】中的总牌数），对每名选中的角色造成1点火焰伤害。",[1,event.num_cards],true,function(card,player,target){
                         return true;
                     }).set('ai',function(target){     
-                        var player = _status.currentPhase;
+                        var player = _status.event.player;
                         // if(target.hasSkillTag('nofire')) return 0;
                         var eff = 0;
                         // if (target.hasSkill('niu_kaer')&&target.hp < target.maxHp){
@@ -13550,7 +13555,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')){
                             eff = eff - 10;
                         }
-                        eff = eff + 8/target.hp;
+                        eff = eff + 8/Math.max(1,target.hp);
                         if (get.attitude(player,target)>0){
                             eff = eff - 10;
                         }
@@ -23294,7 +23299,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     source:'damageEnd',
                 },
                 filter:function(trigger,player){
-                    if (_status.currentPhase.hasSkill('youwang_guo')) return false;
+                    if (player.hasSkill('youwang_guo')) return false;
                     var guo = player;
                     var has=game.hasPlayer(function(current){
                         // if (current.name == 'guoyining_w'||current.name2 == 'guoyining_w'){
@@ -24641,15 +24646,736 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
             wuci_bo:{
+                audio:2,
+                direct:true,
+                trigger:{
+                    player:['phaseDrawBefore','phaseUseBefore'],
+                },
+                filter:function(trigger,player){
+                    return true;
+                },
+                content:function(event){
+                    'step 0'
+                    player.chooseBool(get.prompt2('wuci_bo')).set('ai',function(){
+                        var player = _status.event.player;
+                        var has=game.hasPlayer(function(current){
+                            if ((get.attitude(player,current)+get.attitude(current,player)<0)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage'))){
+                                return true;
+                            }
+                        });
+                        if (!has){
+                            return false;
+                        }
+                        if (trigger.name=='phaseUse'){
+                            if (player.hasSkill('hebian_bo')&&!player.hasSkill('hebian_bo_limit')){
+                                return false;
+                            }
+                            var filter = function(card){ return get.tag(card,'damage') };
+                            if (player.skipList.contains('phaseDiscard')){
+                                if (!player.hasSkill('dunkong_bo')){
+                                    return true;
+                                }
+                                else{
+                                    if (player.countCards('h')<player.hp){
+                                        return true;
+                                    }
+                                    else{
+                                        if (player.countCards('h',filter)==0&&player.countCards('h',{type:'trick'})==0&&player.countCards('h',{type:'delay'})==0&&(player.countCards('h','tao')==0||player.hp>=player.maxHp)){
+                                            return true;
+                                        }
+                                        else{
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (player.countCards('h')<player.getHandcardLimit() + 2||(player.countCards('h',filter)==0&&!(player.hp<player.maxHp&&player.countCards('h','tao')>=player.getHandcardLimit()))){
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        }
+                        if (trigger.name=='phaseDraw'){
+                            var diff = -4.5;
+                            if (player.hasSkill('hebian_bo')&&!player.hasSkill('hebian_bo_limit')){
+                                diff = 2.5;
+                            }
+                            var hasRight = game.hasPlayer(function(current){
+                                if ((get.attitude(player,current)+get.attitude(current,player)<0)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage'))){
+                                    // return get.effect(current,{name:'sha',nature:'fire'},_status.event.player)+diff>0;
+                                    return -get.attitude(player,current)-get.attitude(current,player)+diff>0;
+                                }
+                            });
+                            return hasRight;
+                        }
+                        return true;
+                    });
+                    'step 1'
+                    if (result.bool){
+                        player.chooseTarget('###'+get.translation('wuci_bo')+'###请选择一名其他角色，令其本回合非锁定技失效，并受到你造成的1点火焰伤害。',true,1,function(card,player,target){
+                            return target!=player;
+                        }).set('ai',function(target){
+                            var player = _status.event.player;
+                            var eff = 1;//get.effect(target,{name:'sha',nature:'fire'},_status.event.player);
+                            if(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')){
+                                eff = eff/10;
+                            }
+                            eff = eff * 8/Math.max(1,target.hp);
+                            if (get.attitude(player,target)>0){
+                                eff = -eff;
+                            }
+                            multi = 1;
+                            if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')){
+                                multi = 7.5;
+                            }
+                            console.log(target);
+                            console.log(multi);
+                            console.log(-get.attitude(player,target)-get.attitude(target,player));
+                            console.log(eff);
+                            console.log(multi*(-get.attitude(player,target)-get.attitude(target,player)+eff));
+                            return multi*(-get.attitude(player,target)-get.attitude(target,player)+eff);
+                        });
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 2'
+                    if (result.targets&&result.targets.length>0){
+                        player.logSkillColor('wuci_bo',result.targets[0],'fire','soil',false,false);
+                        var str = '';
+                        if (trigger.name=='phaseDraw'){
+                            str = '摸牌阶段';
+                        }
+                        else if (trigger.name=='phaseUse'){
+                            str = '出牌阶段';
+                        }
+                        trigger.cancel();
+                        game.log(player,'跳过',str,'，令',result.targets[0],'本回合非锁定技失效，并对其造成1点火焰伤害');
+                        result.targets[0].addTempSkill('wuci_fengyin');
+                        result.targets[0].damage(1,'fire',player);
+                    }
+                    else{
+                        event.finish();
+                    }
+                    'step 3'
+                    game.delay(1.5);
 
+                },
+                ai:{
+                    threaten:2.8,
+                    expose:0.7,
+                },
+
+            },
+
+            wuci_fengyin:{
+                init:function(player,skill){
+					var skills=player.getSkills(true,false);
+					for(var i=0;i<skills.length;i++){
+						if(get.is.locked(skills[i])||lib.skill[skills[i]].charlotte){
+							skills.splice(i--,1);
+						}
+					}
+					player.disableSkill(skill,skills);
+
+                    //试验
+                    var returnResult = '非锁定技失效';
+                    var list=[];
+                    for(var i in player.disabledSkills){
+                        if(player.disabledSkills[i].contains(skill)){
+                            list.push(i)
+                        }
+                    }
+                    if(list.length){
+                        var str='，失效技能：';
+                        for(var i=0;i<list.length;i++){
+                            if(lib.translate[list[i]+'_info']){
+                                str+=get.translation(list[i])+'、';
+                            }
+                        }
+                        player.storage.wushi_fengyin = returnResult + str.slice(0,str.length-1);
+                        player.syncStorage('wushi_fengyin');
+                    }
+                    else{
+                        player.storage.wushi_fengyin =  returnResult;
+                        player.syncStorage('wushi_fengyin');
+                    }
+
+				},
+				onremove:function(player,skill){
+					player.enableSkill(skill);
+				},
+				locked:true,
+				charlotte:true,
+				mark:true,
+                marktext:'☀',
+				intro:{
+                    name:'无慈',
+					content:function(storage,player,skill){
+                        if (_status.video){
+                            return player.storage.wushi_fengyin;
+                        }
+                        var returnResult = '非锁定技失效';
+						var list=[];
+						for(var i in player.disabledSkills){
+							if(player.disabledSkills[i].contains(skill)){
+								list.push(i)
+							}
+						}
+						if(list.length){
+							var str='，失效技能：';
+							for(var i=0;i<list.length;i++){
+								if(lib.translate[list[i]+'_info']){
+									str+=get.translation(list[i])+'、';
+								}
+							}
+							player.storage.wushi_fengyin = returnResult + str.slice(0,str.length-1);
+                            player.syncStorage('wushi_fengyin');
+						}
+                        else{
+                            player.storage.wushi_fengyin =  returnResult;
+                            player.syncStorage('wushi_fengyin');
+                        }
+                        return player.storage.wushi_fengyin;
+                        
+					}
+				}
             },
             
             chiyang_bo:{
+                audio:2,
+                forced:true,
+                locked:true,
+                direct:true,
+                group:['chiyang_gameStart_bo','chiyang_nature_bo','chiyang_recover_bo'],
+                ai:{
+                    threaten:2.4,
+                },
+            },
+
+            'chiyang_gameStart_bo':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+					player:["enterGame"],
+                    global:'gameDrawAfter',
+				},
+                filter:function(trigger,player){
+                    return true;
+                },
+                content:function(event){
+                    player.logSkillColor('chiyang_bo',undefined,false,'soil',true,false);
+                    game.log(player,'发动了','#g【'+get.translation('chiyang_bo')+'】','，获得了','#y2','个高温标记');
+                    player.storage.gaowen_skill = 2;
+                    if (!player.hasSkill('gaowen_skill')){
+                        player.addSkill('gaowen_skill');
+                    }
+                    player.syncStorage('gaowen_skill');
+                    player.markSkill('gaowen_skill');
+                },
+
+            },
+            
+            'chiyang_nature_bo':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    source:"damageBegin1",
+                },
+                filter:function(trigger,player){
+                    return trigger.nature!=undefined&&trigger.nature!='fire';
+                },
+                content:function(event){
+                    if (trigger.nature!=undefined){
+                        player.logSkillColor('chiyang_bo',undefined,false,'soil',true,false);
+                        game.log(player,'发动了','#g【'+get.translation('chiyang_bo')+'】','，将属性伤害变为火焰伤害');
+                        trigger.nature = 'fire';
+                    }
+                },
+            },
+            
+            'chiyang_recover_bo':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    source:"damageEnd",
+                },
+                filter:function(trigger,player){
+                    return trigger.nature=='fire'&&trigger.num>0;
+                },
+                content:function(event){
+                    player.logSkillColor('chiyang_bo',undefined,false,'soil',false,false);
+                    if(!player.storage.gaowen_skill){
+                        player.storage.gaowen_skill = 0;
+                    }
+                    player.storage.gaowen_skill++;
+                    if (!player.hasSkill('gaowen_skill')){
+                        player.addSkill('gaowen_skill');
+                    }
+                    player.syncStorage('gaowen_skill');
+                    player.markSkill('gaowen_skill');
+                    game.log(player,'获得','#y1','个高温标记');
+                    if (player.hp>=player.maxHp){
+                        player.draw(1);
+                    }
+                    else{
+                        player.recover(trigger.num);
+                    }
+                    
+                },
+            },
+
+
+            gaowen_skill:{
+                mark:true,
+                marktext:'🌡',
+                intro:{
+                    name:'高温',
+                    content:function(storage, player) {
+                        var count = player.storage.gaowen_skill || 0;
+                        return `${count}个`;
+                    },
+                },
 
             },
             
             jinwu_bo:{
+                audio:2,
+                direct:true,
+                unique:true,
+                juexingji:true,
+                skillAnimation:'legend',
+				animationColor:'metal',
+                derivation:['hebian_bo','chuchen_bo','dunkong_bo','guiji_bo','chanshi_bo'],
+                trigger:{player:'phaseZhunbeiBefore'},
+                forced:true,
+                filter:function(event,player){
+					return player.hasSkill('gaowen_skill')&&(player.storage.gaowen_skill)&&(player.storage.gaowen_skill > player.hp);
+				},
+                content:function(){
+                    "step 0"
+                    //改变背景
+                    if (game.getUpperBackgroundName('',player) != 'jinwu_bg'){
+                        if (!player.hasSkill('jinwu_background')){
+                            player.addTempSkill('jinwu_background','phaseAfter');
+                        }
+                        player.storage.jinwu_background = game.getUpperBackgroundName('',player);
+                        player.syncStorage('jinwu_background');
+                        game.createClearBackground('jinwu_bg',player);
+                    }
+                    game.delay(0.5);
+                    "step 1"
+                    //效果
+                    player.awakenSkill('jinwu_bo');
+                    if (!player.storage.gaowen_skill){
+                        player.storage.gaowen_skill = 0;
+                    }
+                    event.gaowen = player.storage.gaowen_skill;
+                    player.storage.gaowen_skill = 0;
+                    player.syncStorage('gaowen_skill');
+                    player.markSkill('gaowen_skill');
+                    player.unmarkSkill('gaowen_skill');
+                    player.loseMaxHp();
+                    game.playAudio('effect','damage');
+                    player.logSkill('jinwu_bo');
+                    game.log(player,'失去全部','#y'+event.gaowen,'个高温标记');
+                    game.delay(2);
+					"step 2"
+                    game.delay(0.5);
+                    player.addSkill('hebian_bo');
+                    player.addSkill('chuchen_bo');
+                    game.log(player,'获得了技能','#g【核变】','和','#g【出尘】');
+                },
+                ai:{
+					combo:'gaowen_skill',
+                    threaten:9.4,
+				},
+            },
 
+            jinwu_background:{
+                silent:true,
+                popup:false,
+                forced:true,
+                onremove:function (player){
+                    //改回背景
+                    if (game.getUpperBackgroundName('',player) == 'jinwu_bg'){
+                        game.createClearBackground(player.storage.jinwu_background,player);
+                        player.storage.jinwu_background = '';
+                    }
+                    else{
+                        game.createClearBackground('',player);
+                    }
+				},
+            },
+
+
+            'hebian_bo':{
+                audio:2,
+                popup:false,
+                direct:true,
+                enable:"phaseUse",
+                limited:true,
+                init:function (player){
+					player.storage.zuiai_mei=false;
+				},
+                filter:function (event,player){
+					if (!player.storage.gaowen_skill){
+                        player.storage.gaowen_skill = 0;
+                    }
+                    return player.maxHp-1+player.storage.gaowen_skill>0;
+				},
+                skillAnimation:true,
+				animationColor:'soil',
+                content:function(event){
+                    "step 0"
+					player.chooseBool(get.prompt2("hebian_bo")).set('ai',function(event,player){
+                        return true;
+					});
+                    "step 1"
+                    if(result.bool){
+                        event.Num = player.maxHp-1+player.storage.gaowen_skill;
+                        event.gaowen = player.storage.gaowen_skill;
+                        player.chooseTarget('###核变###请选择一名其他角色，你将体力上限减为1并废除武器栏和防具栏，对其造成'+event.Num+'点火焰伤害',true,1,function(card,player,target){
+                            return target!=player;
+                        }).set('ai',function(target){
+                            var player = _status.event.player;
+                            if (!player.storage.gaowen_skill){
+                                player.storage.gaowen_skill = 0;
+                            }
+                            var result = get.effect(target,{name:'sha',nature:'fire'},player);
+                            if ((get.attitude(player,target)<-4||get.attitude(target,player)<-4)&&target.countCards('e','baiyin')==0&&
+                            !(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkill('tianxian_tushan')||(target.hasSkill('jiuyin')&&!target.hasSkill('wuci_fengyin'))||(target.hasSkill('yinzhen_len')&&target.maxHp>3&&!target.hasSkill('wuci_fengyin'))||(target.hasSkill('weiyi_shou')&&target.countSkillWithInfo()>1&&!target.hasSkill('wuci_fengyin')))){
+                                if (lib.config.mode == 'identity'&&player.identity=='fan'&&target.identity=='zhu'){
+                                    result = result + 1000;
+                                }
+                                if (target.hp<player.storage.gaowen_skill+player.maxHp-1){
+                                    result=result*(player.storage.gaowen_skill+player.maxHp-1-target.hp);
+                                }
+                                if (target.hasSkill('wuci_fengyin')){
+                                    result=result*3;
+                                }
+                                return result;
+                            }
+                            else{
+                                return -1;
+                            }
+                        });
+                        
+					}
+                    else{
+                        event.finish();
+                    }
+                    "step 2"
+                    if (result.targets&&result.targets.length>0){
+                        event.target = result.targets[0];
+                        player.awakenSkill('hebian_bo');
+                        player.addSkill('hebian_bo_limit');
+                        player.logSkill('hebian_bo',event.target,'fire');
+                        game.playAudio('skill','multi_loss_maxHp');
+                        player.loseMaxHp(player.maxHp-1);
+                    }
+                    else{
+                        event.finish();
+                    }
+                    "step 3"
+                    player.storage.gaowen_skill = 0;
+                    player.syncStorage('gaowen_skill');
+                    player.markSkill('gaowen_skill');
+                    player.unmarkSkill('gaowen_skill');
+                    game.log(player,'失去全部','#y'+event.gaowen,'个高温标记');
+                    "step 4"
+                    player.disableEquip('equip1');
+					player.disableEquip('equip2');
+                    "step 5"
+                    player.unmarkSkill('hebian_bo');
+                    event.target.damage('fire',event.Num,player);
+
+                },
+                marktext:'⚛',
+                mark:true,
+				intro:{
+					content:"limited",
+				},
+                ai:{
+                    threaten:10.3,
+                    expose:0.8,
+                    order:1.5,
+					result:{
+                        player:function(player,target){
+                            // return 1;
+                            if (!player.storage.gaowen_skill){
+                                player.storage.gaowen_skill=0;
+                            }
+                            var has = game.hasPlayer(function(current){
+                                return current.hp<player.storage.gaowen_skill+player.maxHp-1&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-2||get.attitude(current,player)<-2)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage')||current.hasSkill('tianxian_tushan')||(current.hasSkill('jiuyin')&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('yinzhen_len')&&current.maxHp>3&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('weiyi_shou')&&current.countSkillWithInfo()>1&&!current.hasSkill('wuci_fengyin')));
+                            });
+                            if (!has) return 0;
+                            // if (target){
+                            //     if (get.attitude(player,target) > 0 && get.attitude(target,player) > 0){
+                            //         return 0;
+                            //     }
+                            // }
+                            if (lib.config.mode=='identity'){
+                                if (player.identity=='zhu'&&game.players.length>2){
+                                    if (Math.random()<0.15){
+                                        return 1;
+                                    }
+                                    else{
+                                        return 0;
+                                    }
+                                }
+                                if (player.identity=='fan'){
+                                    if (Math.random()<0.95){
+                                        return 1;
+                                    }
+                                    else{
+                                        return 0;
+                                    }
+                                }
+                            }
+                            // if(player.countCards('h')>player.hp) return 1;
+                            if(player.hp<=1) return 1;
+                            if (Math.random()<0.8){
+                                return 1;
+                            }
+                            else{
+                                return 0;
+                            }
+                        },
+					}
+                },
+            },
+
+            'hebian_bo_limit':{
+                forced:true,
+            },
+            
+            'chuchen_bo':{
+                audio:2,
+                direct:true,
+                unique:true,
+                juexingji:true,
+                skillAnimation:true,
+				animationColor:'wood',
+                derivation:['dunkong_bo','guiji_bo','chanshi_bo'],
+                trigger:{player:'phaseZhunbei'},
+                forced:true,
+                filter:function(event,player){
+					return player.hp<=1;
+				},
+                content:function(){
+                    'step 0'
+                    if (player.name == 'boluosi_za'){
+                        player.reinit(player.name,'boluosi_za2',[player.hp,player.maxHp]);
+                    }
+                    else if (player.name2 == 'boluosi_za'){
+                        player.reinit(player.name2,'boluosi_za2',false);
+                    }
+                    else{
+                        player.reinit(player.name,'boluosi_za2',[player.hp,player.maxHp]);
+                    }
+                    'step 1'
+                    player.awakenSkill('jinwu_bo');
+                    player.awakenSkill('chuchen_bo');
+                    player.logSkill('chuchen_bo');
+                    if (player.hasSkill('chiyang_bo')){
+                        player.removeSkill('chiyang_bo');
+                    }
+                    game.log(player,'失去了技能','#g【炽阳】');
+                    if (!player.hasSkill('dunkong_bo')){
+                        player.addSkill('dunkong_bo');
+                    }
+                    if (!player.hasSkill('guiji_bo')){
+                        player.addSkill('guiji_bo');
+                    }
+                    game.log(player,'获得了技能','#g【遁空】','和','#g【归寂】');
+                    'step 2'
+                    game.playAudio('effect','damage');
+                    player.loseMaxHp();
+                },
+                ai:{
+                    threaten:1.4,
+				},
+            },
+
+            dunkong_bo:{
+                audio:2,
+                forced:true,
+                locked:true,
+                direct:true,
+                group:['dunkong_round_bo','dunkong_skip_bo','dunkong_sha_bo'],
+
+            },
+
+            'dunkong_round_bo':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    global:"roundStart",
+                },
+                content:function(){
+					'step 0'
+                    player.logSkillColor('dunkong_bo',undefined,false,'soil',false,false);
+                    game.log(player,'获得一个额外出牌阶段');
+                    if (!_status.currentPhase){
+                        _status.currentPhase = player;
+                    }
+					player.phaseUse();
+					'step 1'
+					var stat=player.getStat();
+					stat.card={};
+					for(var i in stat.skill){
+						var bool=false;
+						var info=lib.skill[i];
+						if(info.enable!=undefined){
+							if(typeof info.enable=='string'&&info.enable=='phaseUse') bool=true;
+							else if(typeof info.enable=='object'&&info.enable.contains('phaseUse')) bool=true;
+						}
+						if(bool) stat.skill[i]=0;
+					}
+                    'step 2'
+                    player.popup('遁空结束','soil');
+                    game.log(player,'因','#g【遁空】','获得的额外出牌阶段结束');
+				},
+                ai:{
+                    threaten:1.8,
+				},
+
+            },
+            
+            'dunkong_skip_bo':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:"phaseZhunbeiAfter",
+                },
+                content:function(event){
+                    player.logSkill('dunkong_bo');
+                    game.log(player,'跳过每回合的判定阶段、摸牌阶段、弃牌阶段');
+                    player.skip('phaseJudge');
+					player.skip('phaseDraw');
+					player.skip('phaseDiscard');
+                },
+                
+
+            },
+            
+            'dunkong_sha_bo':{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{player:'loseEnd'},
+                filter:function(event,player){
+					if(player.countCards('h')>=player.hp) return false;
+                    var count = 0
+					for(var i=0;i<event.cards.length;i++){
+						if(event.cards[i].original=='h'){
+                            count++;
+                        }
+					}
+                    if (player.countCards('h')+count>=player.hp){
+                        return true;
+                    }
+					return false;
+				},
+                content(){
+                    player.logSkillColor('dunkong_bo',undefined,false,'wood',true,false);
+                    game.log(player,'的手牌数＜体力值，触发技能','#g【遁空】','，不能成为','#y杀','或','#y决斗','的目标');
+                },
+                mod:{
+					targetEnabled:function(card,player,target,now){
+						if(target.countCards('h')<target.hp){
+							if(card.name=='sha'||card.name=='juedou') return false;
+						}
+					}
+				},
+                ai:{
+					noh:true,
+					skillTagFilter:function(player,tag){
+						if(tag=='noh'){
+							if(player.countCards('h')<player.hp) return false;
+						}
+					}
+				},
+            },
+
+            guiji_bo:{
+                audio:2,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:'dieBefore',
+                },
+                derivation:['chanshi_bo'],
+                content:function(event){
+                    'step 0'
+                    player.chooseTarget('###归寂###'+get.translation('guiji_bo_info'),true,1,function(card,player,target){
+                            return target!=player;
+                    }).set('ai',function(target){
+                        var resultr = get.attitude(player,target)+get.attitude(target,player);
+                        if (target.hasSkillTag('phaseUseLimit')){
+                            resultr = resultr * 10;
+                        }
+                        return resultr;
+                    });
+                    'step 1'
+                    console.log(result);
+                    if (result.targets&&result.targets.length>0){
+                        player.logSkillColor('guiji_bo',result.targets[0],'green','wood',false,false);
+                        result.targets[0].addSkill('chanshi_bo');
+                        game.log(result.targets[0],'获得了技能','#g【禅释】');
+                    }
+                    else{
+                        event.finish();
+                    }
+                },
+                ai:{
+                    threaten:1.4,
+				},
+            },
+
+            chanshi_bo:{
+                audio:2,
+                forced:true,
+                direct:true,
+                mark:true,
+                marktext:"禅",
+                intro:{
+                    content:"锁定技，准备阶段结束时，执行一个额外的出牌阶段",
+                },
+                trigger:{
+                    player:"phaseZhunbeiEnd",
+                },
+                content:function(){
+					'step 0'
+                    player.logSkillColor('chanshi_bo',undefined,false,'wood',false,false);
+                    game.log(player,'获得一个额外出牌阶段');
+					player.phaseUse();
+					'step 1'
+					var stat=player.getStat();
+					stat.card={};
+					for(var i in stat.skill){
+						var bool=false;
+						var info=lib.skill[i];
+						if(info.enable!=undefined){
+							if(typeof info.enable=='string'&&info.enable=='phaseUse') bool=true;
+							else if(typeof info.enable=='object'&&info.enable.contains('phaseUse')) bool=true;
+						}
+						if(bool) stat.skill[i]=0;
+					}
+                    'step 2'
+                    player.popup('禅释结束','wood');
+                    game.log(player,'因','#g【禅释】','获得的额外出牌阶段结束');
+				},
+                ai:{
+                    threaten:1.8,
+				},
             },
             
 
@@ -26379,11 +27105,29 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             boluosi_za:"波罗斯",
             'wuci_bo':"无慈",
-            'wuci_bo_info':"无慈",
+            'wuci_bo_info':"你的摸牌阶段或出牌阶段开始前，你可以选择取消执行此阶段，然后选择一名其他角色，令其本回合非锁定技失效，并受到你造成的1点火焰伤害。",
             'chiyang_bo':"炽阳",
-            'chiyang_bo_info':"炽阳",
+            'chiyang_bo_info':"锁定技，游戏开始时，你获得2个“高温”标记。当你造成属性伤害时，你将伤害属性改为火焰伤害。你对一名角色造成火焰伤害后，你获得一个“高温”标记并回复等量体力（若你未受伤则改为摸一张牌）。",
+            'chiyang_gameStart_bo':"炽阳",
+            'chiyang_nature_bo':"炽阳",
+            'chiyang_recover_bo':"炽阳",
             'jinwu_bo':"金乌",
-            'jinwu_bo_info':"金乌",
+            'jinwu_bo_info':"觉醒技，回合开始时，若你拥有的“高温”标记数＞你的体力值，你清除所有“高温”标记，减一点体力上限，并获得技能【核变】和【出尘】。",
+            'hebian_bo':"核变",
+            'hebian_bo_info':"限定技，出牌阶段，你可以选择一名其他角色，你将体力上限减为1、失去所有高温标记、废除武器栏和防具栏，然后对其造成X+Y点火焰伤害（X为你因此减少的体力上限，Y为你失去的“高温”标记数）。",
+            'chuchen_bo':"出尘",
+            'chuchen_bo_info':"觉醒技，准备阶段，若你的体力值≤1，你失去技能【炽阳】，并获得技能【遁空】和【归寂】，然后减一点体力上限。",
+
+            boluosi_za2:"波罗斯",
+            'dunkong_bo':"遁空",
+            'dunkong_bo_info':"锁定技，每轮开始时，你获得一个额外的出牌阶段。你跳过每回合的判定阶段、摸牌阶段、弃牌阶段。若你的手牌数＜体力值，你不能成为【杀】或【决斗】的目标。",
+            'dunkong_round_bo':"遁空",
+            'dunkong_skip_bo':"遁空",
+            'dunkong_sha_bo':"遁空",
+            'guiji_bo':"归寂",
+            'guiji_bo_info':"锁定技，当你死亡时，你选择一名其他角色，令其获得技能【禅释】。",
+            chanshi_bo:"禅释",
+            chanshi_bo_info:"锁定技，你在准备阶段结束时，执行一个额外的出牌阶段。",
 
 
 

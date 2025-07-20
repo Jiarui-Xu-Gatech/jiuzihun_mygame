@@ -138,6 +138,7 @@ window.noname_package={
 		huoshan2_bg:'千觞',
 		ziluolan_bg:'紫蕊',
 		eju_bg:"恶作剧",
+		jinwu_bg:"金乌",
 		// planetarian_bg:'星梦',
 		// heaven_bg:'红烧',
 		// kyoani_bg:'京都',

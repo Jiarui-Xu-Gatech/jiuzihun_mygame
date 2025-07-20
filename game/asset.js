@@ -3683,6 +3683,7 @@ window.noname_asset_list=[
 	'image/background/pini_bg.jpg',
 	'image/background/ziluolan_bg.jpg',
 	'image/background/eju_bg.jpg',
+	'image/background/jinwu_bg.jpg',
 
 	
 	
