@@ -24726,7 +24726,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 eff = -eff;
                             }
                             multi = 1;
-                            if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')){
+                            if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')||target.hasSkill('wuci_fengyin')){
                                 multi = 7.5;
                             }
                             att = get.attitude(player,target)+get.attitude(target,player);
