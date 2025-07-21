@@ -23716,7 +23716,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 enable:"phaseUse",
                 direct:true,
                 filter:function(trigger,player){
-                    return player.countCards("h", { suit: "heart" }) >= 0&&!player.hasSkill('touxing_qian_limit');
+                    return player.countCards("h", { suit: "heart" }) > 0&&!player.hasSkill('touxing_qian_limit');
                 },
                 content:function(event){
                     'step 0'
