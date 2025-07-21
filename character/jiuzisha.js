@@ -24718,7 +24718,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }).set('ai',function(target){
                             var player = _status.event.player;
                             var eff = 1;//get.effect(target,{name:'sha',nature:'fire'},_status.event.player);
-                            if(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')){
+                            if(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')||(target.hasSkill('yuzhong_yan')&&!target.isLinked())){
                                 eff = eff/10;
                             }
                             eff = eff * 8/Math.max(1,target.hp);
@@ -24729,11 +24729,6 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')){
                                 multi = 7.5;
                             }
-                            console.log(target);
-                            console.log(multi);
-                            console.log(-get.attitude(player,target)-get.attitude(target,player));
-                            console.log(eff);
-                            console.log(multi*(-get.attitude(player,target)-get.attitude(target,player)+eff));
                             return multi*(-get.attitude(player,target)-get.attitude(target,player)+eff);
                         });
                     }
