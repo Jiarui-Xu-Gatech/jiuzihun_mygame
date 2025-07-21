@@ -24729,7 +24729,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')){
                                 multi = 7.5;
                             }
-                            return multi*(-get.attitude(player,target)-get.attitude(target,player)+eff);
+                            att = get.attitude(player,target)+get.attitude(target,player);
+                            if (att < 0){
+                                att = -att;
+                            }
+                            return multi*att*eff;
                         });
                     }
                     else{
