@@ -24753,6 +24753,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }).set('ai',function(target){
                             var player = _status.event.player;
                             var eff = 1;//get.effect(target,{name:'sha',nature:'fire'},_status.event.player);
+                            if (get.attitude(player,target)+get.attitude(target,player)>0){
+                                return -1;
+                            }
                             if(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')||(target.hasSkill('yuzhong_yan')&&!target.isLinked())){
                                 eff = eff/10;
                             }
@@ -25156,9 +25159,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             //         return 0;
                             //     }
                             // }
+                            var num_enemy=game.countPlayer(function(current){
+                                if (get.attitude(player,current)+get.attitude(current,player)<0){
+                                    return true;
+                                }
+                            });
+                            var num_friend=game.countPlayer(function(current){
+                                if (get.attitude(player,current)+get.attitude(current,player)>0){
+                                    return true;
+                                }
+                            });
                             if (lib.config.mode=='identity'){
-                                if (player.identity=='zhu'&&game.players.length>2){
-                                    if (Math.random()<0.15){
+                                if (player.identity=='zhu'&&game.players.length>2&&num_enemy>1){
+                                    if (Math.random()<0.05){
                                         return 1;
                                     }
                                     else{
@@ -25166,7 +25179,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     }
                                 }
                                 if (player.identity=='fan'){
-                                    if (Math.random()<0.95){
+                                    if (Math.random()<0.95&&num_friend>1){
                                         return 1;
                                     }
                                     else{
