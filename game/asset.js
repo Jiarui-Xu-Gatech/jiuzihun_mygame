@@ -3550,6 +3550,27 @@ window.noname_asset_list=[
 	'audio/die/shanwenqian_u.mp3',
 
 
+
+	'audio/skill/wuci_bo1.mp3', 
+	'audio/skill/wuci_bo2.mp3', 
+	'audio/skill/chiyang_bo1.mp3', 
+	'audio/skill/chiyang_bo2.mp3', 
+	'audio/skill/jinwu_bo1.mp3', 
+	'audio/skill/jinwu_bo2.mp3', 
+	'audio/skill/hebian_bo1.mp3', 
+	'audio/skill/hebian_bo2.mp3', 
+	'audio/skill/chuchen_bo1.mp3', 
+	'audio/skill/chuchen_bo2.mp3', 
+	'audio/skill/dunkong_bo1.mp3', 
+	'audio/skill/dunkong_bo2.mp3', 
+	'audio/skill/guiji_bo1.mp3', 
+	'audio/skill/guiji_bo2.mp3', 
+	'audio/skill/chanshi_bo1.mp3', 
+	'audio/skill/chanshi_bo2.mp3', 
+	'audio/die/boluosi_za.mp3',
+	'audio/die/boluosi_za2.mp3',
+
+
 	'audio/skill/eju_chou1.mp3', 
 	'audio/skill/eju_chou2.mp3', 
 	'audio/skill/eju_chou3.mp3', 

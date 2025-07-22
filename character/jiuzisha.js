@@ -24668,7 +24668,42 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         if (trigger.name=='phaseUse'){
                             if (player.hasSkill('hebian_bo')&&!player.hasSkill('hebian_bo_limit')){
-                                return false;
+                                if (player.hasSkill('dunkong_bo')){
+                                    var the_enemy = player;
+                                    event.the_enemy = player;
+                                    var num_enemy=game.countPlayer(function(current){
+                                        if (get.attitude(player,current)+get.attitude(current,player)<0){
+                                            event.the_enemy = current;
+                                            return true;
+                                        }
+                                    });
+                                    the_enemy = event.the_enemy;
+                                    if (num_enemy>=1){
+                                        if (lib.config.mode=='identity'&&player.identity=='zhu'){
+                                            if (num_enemy == 1){
+                                                var goodtarget = the_enemy.countCards('e','baiyin')==0&&!(the_enemy.hasSkillTag('nofire')||the_enemy.hasSkillTag('forbidNoCardDamage')||the_enemy.hasSkill('tianxian_tushan')||(the_enemy.hasSkill('jiuyin')&&!the_enemy.hasSkill('wuci_fengyin'))||(the_enemy.hasSkill('yinzhen_len')&&the_enemy.maxHp>3&&!the_enemy.hasSkill('wuci_fengyin'))||(the_enemy.hasSkill('weiyi_shou')&&the_enemy.countSkillWithInfo()>1&&!the_enemy.hasSkill('wuci_fengyin')));
+                                                if (goodtarget){
+                                                    return false;
+                                                }
+                                                else{
+                                                    return true;
+                                                }
+                                            }
+                                            else{
+                                                return true;
+                                            }
+                                        }
+                                        else{
+                                            return Math.random() > (player.hp/player.maxHp);
+                                        }
+                                    }
+                                    else{
+                                        return true;
+                                    }
+                                }
+                                else{
+                                    return false;
+                                }
                             }
                             var filter = function(card){ return get.tag(card,'damage') };
                             if (player.skipList.contains('phaseDiscard')){
@@ -24751,7 +24786,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         trigger.cancel();
                         game.log(player,'跳过',str,'，令',result.targets[0],'本回合非锁定技失效，并对其造成1点火焰伤害');
-                        result.targets[0].addTempSkill('wuci_fengyin');
+                        result.targets[0].addTempSkill('wuci_fengyin',['phaseBegin','phaseAfter']);
                         result.targets[0].damage(1,'fire',player);
                     }
                     else{
@@ -25108,6 +25143,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             // return 1;
                             if (!player.storage.gaowen_skill){
                                 player.storage.gaowen_skill=0;
+                            }
+                            if (player.hasSkill('dunkong_bo')){
+                                return 1;
                             }
                             var has = game.hasPlayer(function(current){
                                 return current.hp<player.storage.gaowen_skill+player.maxHp-1&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-2||get.attitude(current,player)<-2)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage')||current.hasSkill('tianxian_tushan')||(current.hasSkill('jiuyin')&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('yinzhen_len')&&current.maxHp>3&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('weiyi_shou')&&current.countSkillWithInfo()>1&&!current.hasSkill('wuci_fengyin')));
