@@ -393,6 +393,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					},
 					result:{
 						target:function(player,target){
+							if (target.hasSkill('dunkong_bo')){
+								return 0;
+							}
 							if(target.hasJudge('caomu')) return 0;
 							return -1.5/Math.sqrt(target.countCards('h')+1);
 						}

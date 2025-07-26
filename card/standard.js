@@ -1499,6 +1499,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 							if (target.hasSkill('lingyu_lala')&&!(ui.cardPile.childElementCount<=target.hp*15&&!target.hasSkill('dunsheng_limit'))){
 								return 0;
 							}
+							if (target.hasSkill('dunkong_bo')){
+								return 0;
+							}
 							var num=target.hp-target.countCards('h')-2;
 							if(num>-1) return -0.01;
 							if(target.hp<3) num--;
@@ -1552,6 +1555,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					},
 					result:{
 						target:function(player,target){
+							if (target.hasSkill('dunkong_bo')&&player==target){
+								return 1;
+							}
 							var num=game.countPlayer(function(current){
 								var skills=current.getSkills();
 								for(var j=0;j<current.skills.length;j++){
