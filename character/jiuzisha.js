@@ -24646,7 +24646,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
             wuci_bo:{
-                audio:2,
+                audio:4,
                 direct:true,
                 trigger:{
                     player:['phaseDrawBefore','phaseUseBefore'],
@@ -24779,7 +24779,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     'step 2'
                     if (result.targets&&result.targets.length>0){
-                        player.logSkillColor('wuci_bo',result.targets[0],'fire','soil',false,false);
+                        player.logSkillColor('wuci_bo',result.targets[0],'fire','soil',false,true);
+                        if (!player.hasSkill('dunkong_bo')){
+                            game.playAudio('skill','wuci_bo'+Math.ceil(2*Math.random()));
+                        }
+                        else{
+                            game.playAudio('skill','wuci_bo'+Math.ceil(2+2*Math.random()));
+                        }
                         var str = '';
                         if (trigger.name=='phaseDraw'){
                             str = '摸牌阶段';
