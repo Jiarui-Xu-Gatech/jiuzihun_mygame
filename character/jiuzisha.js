@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha'],[]],
+            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_fanmian'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -6668,7 +6668,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.nothasShan = (player.countCards('h', 'shan') == 0);
                     event.nothasBagua = (player.countCards('e', 'bagua') == 0);
                     // 选择一名背面朝上的角色
-                    player.chooseBool(get.prompt('taiji2_caoxin'),'你成为【杀】的目标，是否弃一个信印记，然后翻面并横置，将此【杀】转移给一名其他角色，可以为此【杀】使用者？').set('ai',function(player){
+                    player.chooseBool(get.prompt('taiji2_caoxin'),'你成为【杀】的目标，是否弃一个信印记，然后翻面并横置，将此【杀】转移给一名其他角色，可以为此【杀】使用者？').set('ai',function(){
                         // 检查玩家是否没有【闪】且装备区没有【八卦阵】
                         if (event.nothasShan&&event.nothasBagua||(event.nothasShan&&!event.nothasBagua&&trigger.player.hasSkill('qinggang_skill'))) {
                             return true; // 满足条件，发动技能
@@ -6749,7 +6749,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     'step 0'
-                    player.chooseBool(get.prompt('taiji3_caoxin'),'你成为装备牌的目标，是否获得一个信印记，然后翻面，而后你可以选择令场上任意一名角色（包括你自己）使用这张装备牌？').set('ai',function(player){
+                    player.chooseBool(get.prompt('taiji3_caoxin'),'你成为装备牌的目标，是否获得一个信印记，然后翻面，而后你可以选择令场上任意一名角色（包括你自己）使用这张装备牌？').set('ai',function(){
                         return true;
                     });
                     'step 1'
@@ -6809,7 +6809,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(){
                     'step 0'
-                    player.chooseBool(get.prompt('taiji4_caoxin'),'你成为伤害类锦囊牌的目标，是否获得一个信印记，然后翻面并横置，而后让自己不再是此牌目标？').set('ai',function(player){
+                    player.chooseBool(get.prompt('taiji4_caoxin'),'你成为伤害类锦囊牌的目标，是否获得一个信印记，然后翻面并横置，而后让自己不再是此牌目标？').set('ai',function(){
                         return true;
                     });
                     'step 1'
