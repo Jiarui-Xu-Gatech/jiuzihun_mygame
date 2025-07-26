@@ -25192,6 +25192,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                         return 0;
                                     }
                                 }
+                                if (player.identity=='nei'){
+                                    if (game.players.length>2){
+                                        return 0;
+                                    }
+                                }
                             }
                             // if(player.countCards('h')>player.hp) return 1;
                             if(player.hp<=1) return 1;
