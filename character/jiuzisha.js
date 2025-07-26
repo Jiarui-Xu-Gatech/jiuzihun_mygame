@@ -25157,7 +25157,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 return 1;
                             }
                             var has = game.hasPlayer(function(current){
-                                return current.hp<player.storage.gaowen_skill+player.maxHp-1&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-2||get.attitude(current,player)<-2)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage')||current.hasSkill('tianxian_tushan')||(current.hasSkill('jiuyin')&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('yinzhen_len')&&current.maxHp>3&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('weiyi_shou')&&current.countSkillWithInfo()>1&&!current.hasSkill('wuci_fengyin')));
+                                return current.hp<player.storage.gaowen_skill+player.maxHp-1&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-4||get.attitude(current,player)<-4)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage')||current.hasSkill('tianxian_tushan')||(current.hasSkill('jiuyin')&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('yinzhen_len')&&current.maxHp>3&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('weiyi_shou')&&current.countSkillWithInfo()>1&&!current.hasSkill('wuci_fengyin')));
                             });
                             if (!has) return 0;
                             // if (target){
