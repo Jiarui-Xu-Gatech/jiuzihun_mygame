@@ -24789,7 +24789,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             var player = _status.event.player;
                             var eff = 1;//get.effect(target,{name:'sha',nature:'fire'},_status.event.player);
                             if (get.attitude(player,target)+get.attitude(target,player)>0){
-                                return -1;
+                                if (target.hasSkill('yujiu_hp_heng')&&((target.countCards('e','tengjia')==0&&target.hp!=1)||(target.countCards('e','tengjia')>0&&target.hp!=2))){
+                                    return 0.02;
+                                }
+                                else{
+                                    return -1;
+                                }
+                            }
+                            if (target.hasSkill('yujiu_hp_heng')&&((target.countCards('e','tengjia')==0&&target.hp!=1)||(target.countCards('e','tengjia')>0&&target.hp!=2))){
+                                eff = eff/10;
                             }
                             if(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')||(target.hasSkill('yuzhong_yan')&&!target.isLinked())){
                                 eff = eff/10;
@@ -25126,7 +25134,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
                             var result = get.effect(target,{name:'sha',nature:'fire'},player);
                             if ((get.attitude(player,target)<-4||get.attitude(target,player)<-4)&&target.countCards('e','baiyin')==0&&
-                            !(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkill('tianxian_tushan')||(target.hasSkill('jiuyin')&&!target.hasSkill('wuci_fengyin'))||(target.hasSkill('yinzhen_len')&&target.maxHp>3&&!target.hasSkill('wuci_fengyin'))||(target.hasSkill('weiyi_shou')&&target.countSkillWithInfo()>1&&!target.hasSkill('wuci_fengyin')))){
+                            !(target.hasSkillTag('nofire')||target.hasSkillTag('forbidNoCardDamage')||target.hasSkill('tianxian_tushan')||(target.hasSkill('jiuyin')&&!target.hasSkill('wuci_fengyin'))||(target.hasSkill('yinzhen_len')&&target.maxHp>3&&!target.hasSkill('wuci_fengyin'))||(target.hasSkill('weiyi_shou')&&target.countSkillWithInfo()>1&&!target.hasSkill('wuci_fengyin'))||
+                            (target.hasSkill('yujiu_hp_heng')&&((target.countCards('e','tengjia')==0&&player.storage.gaowen_skill+player.maxHp-1-target.hp!=0)||(target.countCards('e','tengjia')>0&&player.storage.gaowen_skill+player.maxHp-target.hp!=0))))){
                                 if (lib.config.mode == 'identity'&&player.identity=='fan'&&target.identity=='zhu'){
                                     result = result + 1000;
                                 }
@@ -25192,7 +25201,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 return 1;
                             }
                             var has = game.hasPlayer(function(current){
-                                return current.hp<player.storage.gaowen_skill+player.maxHp-1&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-4||get.attitude(current,player)<-4)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage')||current.hasSkill('tianxian_tushan')||(current.hasSkill('jiuyin')&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('yinzhen_len')&&current.maxHp>3&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('weiyi_shou')&&current.countSkillWithInfo()>1&&!current.hasSkill('wuci_fengyin')));
+                                if (current.hasSkill('yujiu_hp_heng')){
+                                    var minus = 1;
+                                    if (current.countCards('e','tengjia')>0){
+                                        minus = 0
+                                    }
+                                    return current.hp==player.storage.gaowen_skill+player.maxHp-minus&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-4||get.attitude(current,player)<-4);
+                                }
+                                else{
+                                    return current.hp<player.storage.gaowen_skill+player.maxHp-1&&current!=player&&current.countCards('e','baiyin')==0&&(get.attitude(player,current)<-4||get.attitude(current,player)<-4)&&!(current.hasSkillTag('nofire')||current.hasSkillTag('forbidNoCardDamage')||current.hasSkill('tianxian_tushan')||(current.hasSkill('jiuyin')&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('yinzhen_len')&&current.maxHp>3&&!current.hasSkill('wuci_fengyin'))||(current.hasSkill('weiyi_shou')&&current.countSkillWithInfo()>1&&!current.hasSkill('wuci_fengyin')));
+                                }
                             });
                             if (!has) return 0;
                             // if (target){
