@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_fanmian'],[]],
+            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','chanshi_bo'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -25432,8 +25432,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					'step 0'
                     player.logSkillColor('chanshi_bo',undefined,false,'wood',false,false);
                     game.log(player,'获得一个额外出牌阶段');
+                    'step 1'
+                    game.delay(2);
+                    'step 2'
 					player.phaseUse();
-					'step 1'
+					'step 3'
 					var stat=player.getStat();
 					stat.card={};
 					for(var i in stat.skill){
@@ -25445,7 +25448,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						}
 						if(bool) stat.skill[i]=0;
 					}
-                    'step 2'
+                    'step 4'
                     player.popup('禅释结束','wood');
                     game.log(player,'因','#g【禅释】','获得的额外出牌阶段结束');
 				},
