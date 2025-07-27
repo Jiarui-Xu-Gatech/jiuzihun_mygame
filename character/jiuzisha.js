@@ -5129,7 +5129,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 filter:function(event,player,target){
                     if (_status.event&&_status.event.parent&&_status.event.parent.name == 'phaseUse'){
                         var newfilterTarget = function(card,player,target){
-                            return player!=target;
+                            return player!=target&&player.canUse({name:'sha'},target,false);
                         }
                         player.storage.jiuweiFilterTarget = newfilterTarget;
                     }
