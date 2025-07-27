@@ -15892,7 +15892,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.finish();
                     }
                     else{
-                        player.logSkill('yexing_dong');
+                        // player.logSkill('yexing_dong');
+                        player.logSkillColor('yexing_dong',undefined,false,'thunder',false,false);
                         if (event.now[0] != player.storage.yexing_dong[0]){
                             if (event.now[0] == 1 && player.storage.yexing_dong[0] == 0){
                                 if (!player.hasSkill('bingtui_dong')){
@@ -16050,7 +16051,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             game.createClearBackground('rainforest_bg',player);
                         }
 
-                        player.logSkill('liejiu_dong',trigger.source,'fire');
+                        // player.logSkill('liejiu_dong',trigger.source,'fire');
+                        player.logSkillColor('liejiu_dong',trigger.source,'fire','wood',false,false);
                         game.log(player,'观看',trigger.source,'的手牌');
                         // player.addTempSkill('liejiu_limit_dong','phaseAfter');
                         var cards = trigger.source.getCards('h');
@@ -16137,20 +16139,24 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(event){
                     if (trigger.name == 'useCard'){
-                        player.logSkill('xiangzhuo_dong');
+                        // player.logSkill('xiangzhuo_dong');
+                        player.logSkillColor('xiangzhuo_dong',undefined,false,'soil',false,false);
                     }
                     else if (trigger.name == 'damage'){
                         if (player == trigger.player){
-                            player.logSkill('xiangzhuo_dong');
+                            // player.logSkill('xiangzhuo_dong');
+                            player.logSkillColor('xiangzhuo_dong',undefined,false,'soil',false,false);
                             trigger.source.line(trigger.player,'fire');
                         }
                         else{
-                            player.logSkill('xiangzhuo_dong');
+                            // player.logSkill('xiangzhuo_dong');
+                            player.logSkillColor('xiangzhuo_dong',undefined,false,'soil',false,false);
                             player.line(trigger.player,'fire');
                         }
                     }
                     else{
-                        player.logSkill('xiangzhuo_dong');
+                        // player.logSkill('xiangzhuo_dong');
+                        player.logSkillColor('xiangzhuo_dong',undefined,false,'soil',false,false);
                         player.line(trigger.player,'fire');
                     }
 
@@ -16293,7 +16299,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.finish();
                     }
                     "step 2"
-                    player.logSkill('aozun_dong');
+                    // player.logSkill('aozun_dong');
+                    player.logSkillColor('aozun_dong',undefined,false,'water',false,false);
                     game.log(player,'将',event.origin,'视为','#y决斗');
                     
                     
@@ -16347,7 +16354,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if (result.bool){
                         event.triggerParent = trigger.getParent();
-                        player.logSkill('aozun_dong');
+                        // player.logSkill('aozun_dong');
+                        player.logSkillColor('aozun_dong',undefined,false,'water',false,false);
                         game.log(player,'观看牌堆底四张牌');
                         event.triggerParent = trigger.getParent();
                         if (event.triggerParent.target&&event.triggerParent.target == player){
@@ -21526,6 +21534,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 0'
                     player.chooseBool(get.prompt('sheji_nan',trigger.player),'当一名角色受到伤害时，若X大于0，你可以令此伤害+X(X为你的体力值减此次伤害的伤害值)，此伤害结算结束之后，该角色回复X点体力，然后若该角色为你，且你还未因本技能增加过上限，则你增加1点体力上限，若不为你，则你失去本技能。').set('ai',function(){
                         var player = _status.event.player;
+                        if (trigger.player.countCards('e','baiyin')>0||trigger.player.hasSkill('tianxian_tushan')){
+                            return false;
+                        }
                         if (trigger.player==player){
                             if (player.countCards('h','tao')+player.countCards('h','jiu')==0){
                                 return false;
