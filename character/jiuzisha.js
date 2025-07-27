@@ -5630,6 +5630,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						},
 						ai2:function(target){
 							var att=get.attitude(_status.event.player,target);
+                            if (target.hasSkill('dunkong_bo')){
+                                if (att > 0){
+                                    if (target.countCards('h')<target.hp&&ui.selected.cards.length+target.countCards('h')>=target.hp){
+                                        return -1;
+                                    }
+                                }
+                                else if (att < 0){
+                                    if (target.countCards('h')<target.hp&&ui.selected.cards.length+target.countCards('h')>=target.hp){
+                                        return -att*6;
+                                    }
+                                }
+                                else{
+                                    return -1;
+                                }
+                            }
 							if (att > 0 && target.isTurnedOver()){
                                 if (ui.selected.cards.length-target.hp > 0){
                                     return (att-target.hp*Math.random())*10;
