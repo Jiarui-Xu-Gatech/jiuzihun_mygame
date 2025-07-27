@@ -280,7 +280,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 4"
                     setTimeout(function(){
                         for(var i=0;i<ui.dialogs.length;i++){
-                            if(ui.dialogs[i].videoId==videoId){
+                            if(ui.dialogs[i].videoId==event.videoId){
                                 ui.dialogs[i].close();
                             }
                         }
