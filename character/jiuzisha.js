@@ -24837,7 +24837,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             str = '出牌阶段';
                         }
                         trigger.cancel();
-                        game.log(player,'跳过',str,'，令',result.targets[0],'本回合非锁定技失效，并对其造成1点火焰伤害');
+                        game.log(player,'取消执行',str,'，令',result.targets[0],'本回合非锁定技失效，并对其造成1点火焰伤害');
                         result.targets[0].addTempSkill('wuci_fengyin',['phaseBegin','phaseAfter']);
                         result.targets[0].damage(1,'fire',player);
                     }
