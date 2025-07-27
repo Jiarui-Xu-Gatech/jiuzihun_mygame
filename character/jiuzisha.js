@@ -4830,15 +4830,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     "step 0"
+                    event.thePlayer = player;
                     player.judge(function (card) {
                         event.point = get.number(card);
-                        if (get.number(card) < 9){
+                        if (!event.thePlayer.storage.haoyin_tushan){
+                            event.thePlayer.storage.haoyin_tushan = 0;
+                            event.thePlayer.syncStorage('haoyin_tushan');
+                        }
+                        if (get.number(card)+event.thePlayer.storage.haoyin_tushan < 9){
                             return -2;
                         }
-                        else if (get.number(card) == 9){
+                        else if (get.number(card)+event.thePlayer.storage.haoyin_tushan == 9){
                             return 4;
                         }
-                        else if (get.number(card) > 9){
+                        else if (get.number(card)+event.thePlayer.storage.haoyin_tushan > 9){
                             return 2;
                         }
                         else{
