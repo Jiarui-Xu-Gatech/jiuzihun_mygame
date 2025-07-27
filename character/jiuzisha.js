@@ -13167,7 +13167,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         return;
                     }
                     else if (player.hp < player.maxHp || player.storage.kaer_jiuzi.hp < player.storage.kaer_jiuzi.maxHp||(player.storage.kaer_jiuzi.countCards('h')<player.storage.kaer_jiuzi.hp&&(!player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw')))){
-                        player.storage.kaer_jiuzi.logSkill('tongzhen_recover_kaer');
+                        // player.storage.kaer_jiuzi.logSkill('tongzhen_recover_kaer');
+                        player.storage.kaer_jiuzi.logSkillColor('tongzhen_recover_kaer',undefined,false,'wood',false,false);
                         if (player.storage.kaer_jiuzi.countCards('h')<player.storage.kaer_jiuzi.hp&&(!player.storage.kaer_jiuzi.hasSkill('forbidExtraDraw'))){
                             if (_status.event.name == 'yanhua_kaer'){
                                 player.storage.kaer_jiuzi.addTempSkill('forbidExtraDraw');
@@ -13319,7 +13320,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.logSkill('tongzhen_draw_kaer');
+                    // player.logSkill('tongzhen_draw_kaer');
+                    player.logSkillColor('tongzhen_draw_kaer',undefined,false,'wood',false,false);
                     if (player.isMaxHandcard(true)){
                         player.draw(1);
                     }
@@ -13364,7 +13366,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.storage.kaer_jiuzi.logSkill('tongzhen_damage_kaer',player);
+                    // player.storage.kaer_jiuzi.logSkill('tongzhen_damage_kaer',player);
+                    player.storage.kaer_jiuzi.logSkillColor('tongzhen_damage_kaer',player,'green','wood',false,false);
                     // trigger.player.gain(player.storage.niu_kaer[0],'draw2','log','fromStorage','bySelf');
                     trigger.player.$give(1,trigger.player,false);
                     var card = player.storage.niu_kaer[0];
@@ -13400,7 +13403,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.storage.kaer_jiuzi.logSkill('tongzhen_attack_kaer',trigger.player);
+                    // player.storage.kaer_jiuzi.logSkill('tongzhen_attack_kaer',trigger.player);
+                    player.storage.kaer_jiuzi.logSkillColor('tongzhen_attack_kaer',trigger.player,'green','wood',false,false);
                     // trigger.player.gain(player.storage.niu_kaer[0],'draw2','log','fromStorage','bySelf');
                     player.$give(1,trigger.player,false);
                     var card = player.storage.niu_kaer[0];
