@@ -20426,7 +20426,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.remainNum = trigger.num;
                     player.chooseBool(get.prompt('mengguan_shi'),'当你受到一点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。').set('ai',function(){
                         var player=_status.event.player;
-                        if (player.countCards('h')==1&&player.countCards('h','tao')+player.countCards('h','jiu')>0){
+                        if (player.countCards('h')==1&&player.countCards('h','tao')+player.countCards('h','jiu')>0&&!(player.hasSkill('manjiu_shi')&&player.hp<player.maxHp)){
                             if (player.hp<=1&&Math.random()<0.75){
                                 return false;
                             }
@@ -20470,7 +20470,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (event.remainNum > 0&&player.countCards('h') > 0){
                         player.chooseBool(get.prompt('mengguan_shi'),'当你受到一点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。').set('ai',function(){
                             var player=_status.event.player;
-                            if (player.countCards('h')==1&&player.countCards('h','tao')+player.countCards('h','jiu')>0){
+                            if (player.countCards('h')==1&&player.countCards('h','tao')+player.countCards('h','jiu')>0&&!(player.hasSkill('manjiu_shi')&&player.hp<player.maxHp)){
                                 if (player.hp<=1&&Math.random()<0.75){
                                     return false;
                                 }
