@@ -92,6 +92,7 @@ window.noname_package={
 		// jiuzi_carve_bg:'九子刻',
 		// jiuzi_rotate_bg:'九子篆',
 		skyCastle_bg:'云城',
+		seaBoat_bg:'蓝海',
 		ol_bg:'龙纹',
 		ring_bg:'金环',
 		maidi_bg:'麦迪',
