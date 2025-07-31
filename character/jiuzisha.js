@@ -24952,7 +24952,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return true;
                 },
                 content:function(event){
-                    player.logSkillColor('chiyang_bo',undefined,false,'soil',true,false);
+                    player.logSkillColor('chiyang_bo',undefined,false,'soil',true,true);
+                    game.playAudio('skill','chiyang_bo'+1);
                     game.log(player,'发动了','#g【'+get.translation('chiyang_bo')+'】','，获得了','#y2','个高温标记');
                     player.storage.gaowen_skill = 2;
                     if (!player.hasSkill('gaowen_skill')){
