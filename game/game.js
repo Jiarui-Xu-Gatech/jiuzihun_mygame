@@ -8361,6 +8361,7 @@
 						var ia=connect_avatar_list[i];
 						lib.mode.connect.config.connect_avatar.item[ia]=lib.translate[ia];
 					}
+					
 					if(lib.config.mode!='connect'){
 						var pilecfg=lib.config.customcardpile[get.config('cardpilename')||'当前牌堆'];
 						if(pilecfg){
@@ -10378,9 +10379,7 @@
 					player.syncStorage('_disableJudge');
 					// player.markSkill('_disableJudge');
 					'step 1'
-					game.broadcastAll(function(player,card){
-						player.$disableJudge();
-					},player);
+					player.$disableJudge();
 				},
 				enableJudge:function(){
 					if(!player.storage._disableJudge) return;
@@ -15477,6 +15476,9 @@
 					},get.subtype(card));
 					player.$equip(card);
 					game.addVideo('equip',player,get.cardInfo(card));
+					// game.broadcast(function(player,cardInfo){
+					// 	game.addVideo('equip',player,cardInfo);
+					// },player,get.cardInfo(card));
 					game.log(player,'装备了',card);
 					"step 5"
 					var info=get.info(card,false);
@@ -15748,8 +15750,8 @@
 					}
 					var player=this;
 					game.broadcast(function(player,name,popname){
- 					player.trySkillAnimate(name,popname);
- 				},player,name,popname);
+						player.trySkillAnimate(name,popname);
+					},player,name,popname);
 					if(lib.animate.skill[name]) lib.animate.skill[name].apply(this,arguments);
 					else{
  					if(popname!=name) this.popup(popname,'water',false);
@@ -15771,9 +15773,9 @@
 					// 	return;
 					// }
 					var player=this;
-					game.broadcast(function(player,name,popname){
+					game.broadcast(function(player,name,popname,color){
 						player.trySkillAnimateColor(name,popname,color);
-					},player,name,popname);
+					},player,name,popname,color);
 					if(false&&lib.animate.skill[name]) {lib.animate.skill[name].apply(this,arguments);}
 					else{
 						if(popname!=name) {
@@ -15797,8 +15799,8 @@
 				tryCardAnimate:function(card,name,nature,popname){
 					var player=this;
 					game.broadcast(function(player,card,name,nature,popname){
- 					player.tryCardAnimate(card,name,nature,popname);
- 				},player,card,name,nature,popname);
+						player.tryCardAnimate(card,name,nature,popname);
+					},player,card,name,nature,popname);
 					if(lib.animate.card[card.name]) lib.animate.card[card.name].apply(this,arguments);
 					else {
 						if(!lib.config.show_card_prompt) return;
@@ -16066,6 +16068,9 @@
 					// game.addVideo('addJudge',player,['判定废除',{name:'disable_judge'}]);
 					game.addVideo('disableJudge',player);
 					ui.updatej(player);
+					game.broadcast(function(player){
+						player.$disableJudge();
+					},player);
 				},
 				$enableJudge:function(){
 					var player=this;
@@ -17561,6 +17566,7 @@
 					}
 				},
 				syncStorage:function(skill){
+					// if(this.isOnline2()&&!game.online){
 					if(this.isOnline2()){
 						this.send(function(id, skill, storage){
 							var player = game.players.find(p => p.playerid === id);
@@ -27812,6 +27818,54 @@
 			ui.window.appendChild(audio);
 			return audio;
 		},
+		playAudioVideoBroadCast:function(){
+			if(_status.video&&arguments[1]!='video') return;
+			var str='';
+			var onerror=null;
+			for(var i=0;i<arguments.length;i++){
+				if(typeof arguments[i]==='string'||typeof arguments[i]=='number'){
+					str+='/'+arguments[i];
+				}
+				else if(typeof arguments[i]=='function'){
+					onerror=arguments[i]
+				}
+				if(_status.video) break;
+			}
+			if(!lib.config.repeat_audio&&_status.skillaudio.contains(str)) return;
+			game.broadcastAll(function(str){
+				_status.skillaudio.add(str);
+				game.addVideo('playAudio',null,str);
+				setTimeout(function(){
+					_status.skillaudio.remove(str);
+				},1000);
+				var audio=document.createElement('audio');
+				audio.autoplay=true;
+				audio.volume=lib.config.volumn_audio/8;
+				if(str.indexOf('.mp3')!=-1||str.indexOf('.ogg')!=-1){
+					audio.src=lib.assetURL+'audio'+str;
+				}
+				else{
+					audio.src=lib.assetURL+'audio'+str+'.mp3';
+				}
+				audio.addEventListener('ended',function(){
+					this.remove();
+				});
+				audio.onerror=function(){
+					if(this._changed){
+						this.remove();
+						if(onerror){
+							onerror();
+						}
+					}
+					else{
+						this.src=lib.assetURL+'audio'+str+'.ogg';
+						this._changed=true;
+					}
+				};
+				ui.window.appendChild(audio);
+				return audio;
+			},str);
+		},
 		playAudioNoAddVideo:function(){
 			// if(_status.video&&arguments[1]!='video') return;
 			var str='';
@@ -30285,21 +30339,52 @@
 					game.broadcastAll(function(type,player,content,time,configmode){
 						_status.online_init = true;
 						_status.online_configmode = configmode;
-						// lib.video.push({
-						// 	type:type,
-						// 	player:player,
-						// 	content:content,
-						// 	delay:time-_status.lastVideoLog
-						// });
-						// _status.lastVideoLog=time;
+						
+						var newContent = [];
+						if (content[0]&&content[0].name==game.me.name){
+							newContent = content;
+						}
+						else{
+							var i = 0;
+							var found = false;
+							while (content.length>i&&(typeof content[i] == 'object' && content[i].name)){
+								if (content[i].name == game.me.name){
+									found = true;
+									var mid = content[i];
+									newContent.push(mid);
+									content.splice(i, 1);
+								}
+								else if(found){
+									var mid = content[i];
+									newContent.push(mid);
+									content.splice(i, 1);
+								}
+								else{
+									i++;
+								}
+							}
+							for (var j = 0; j < content.length; j++){
+								newContent.push(content[j]);
+							}
+						}
+						content = newContent;
+						lib.video.push({
+							type:type,
+							player:player,
+							content:newContent,
+							delay:0,
+						});
+						_status.lastVideoLog=time;
 					},type,player,content,time,lib.config.mode);
-					// return;
+					return;
 				}
 				// if (type=="over"&&!game.online){
 				// 	game.broadcastAll(function(configmode){
 				// 		_status.online_configmode = configmode;
 				// 	},lib.config.mode);
 				// }
+
+
 				lib.video.push({
 					type:type,
 					player:player,
@@ -30307,6 +30392,18 @@
 					delay:time-_status.lastVideoLog
 				});
 				_status.lastVideoLog=time;
+
+
+				// game.broadcast(function(type,player,content,time){
+				// 	lib.video.push({
+				// 		type:type,
+				// 		player:player,
+				// 		content:content,
+				// 		delay:time-_status.lastVideoLog
+				// 	});
+				// 	_status.lastVideoLog=time;
+				// },type,player,content,time);
+				
 			}
 		},
 		draw:function(func){
@@ -32453,7 +32550,7 @@
 		startFight:function(timeoutTime){
 			'step 0'
 			if (!_status.video){
-				game.playAudio('effect','startFight');
+				game.playAudioVideoBroadCast('effect','startFight');
 			}
 			game.addVideo('startFight',null,timeoutTime);
 			'step 1'
@@ -36415,6 +36512,7 @@
 						}
 					}
 					menux=createMenu(['开始','选项','武将','卡牌','扩展','其它'],{
+					// menux=createMenu(['开始','选项','武将','卡牌','其它'],{
 						position:menuContainer,bar:40
 					});
 				}
@@ -38189,21 +38287,21 @@
 						page.classList.add('leftbutton');
 						if(!connectMenu){
 							if(mode.indexOf('mode_')!=0){
-								ui.create.div('.config.pointerspan','<span>隐藏武将包</span>',page,function(){
-									if(this.firstChild.innerHTML=='隐藏武将包'){
-										this.firstChild.innerHTML='武将包将在重启后隐藏';
-										lib.config.hiddenCharacterPack.add(mode);
-										if(!lib.config.prompt_hidepack){
-											alert('隐藏的扩展包可通过选项-其它-重置隐藏内容恢复');
-											game.saveConfig('prompt_hidepack',true);
-										}
-									}
-									else{
-										this.firstChild.innerHTML='隐藏武将包';
-										lib.config.hiddenCharacterPack.remove(mode);
-									}
-									game.saveConfig('hiddenCharacterPack',lib.config.hiddenCharacterPack);
-								});
+								// ui.create.div('.config.pointerspan','<span>隐藏武将包</span>',page,function(){
+								// 	if(this.firstChild.innerHTML=='隐藏武将包'){
+								// 		this.firstChild.innerHTML='武将包将在重启后隐藏';
+								// 		lib.config.hiddenCharacterPack.add(mode);
+								// 		if(!lib.config.prompt_hidepack){
+								// 			alert('隐藏的扩展包可通过选项-其它-重置隐藏内容恢复');
+								// 			game.saveConfig('prompt_hidepack',true);
+								// 		}
+								// 	}
+								// 	else{
+								// 		this.firstChild.innerHTML='隐藏武将包';
+								// 		lib.config.hiddenCharacterPack.remove(mode);
+								// 	}
+								// 	game.saveConfig('hiddenCharacterPack',lib.config.hiddenCharacterPack);
+								// });
 							}
 						}
 						return node;

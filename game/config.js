@@ -34,7 +34,7 @@ window.config={
 	volumn_background:2,
 	volumn_audio:8,
 
-	connect_avatar:'jiuzi_avator',
+	connect_avatar:'chenyingchao',
 	connect_nickname:'九子魂玩家',
 	config_menu:true,
 	auto_popped_config:true,
@@ -149,7 +149,7 @@ window.config={
 	cards:['standard','extra'],
 	characters:['jiuzisha'],
 	connect_characters:[],
-	connect_cards:[],
+	connect_cards:['sp','guozhan'],
 	plays:[],
 	extensions:[],
 	banned:[],
