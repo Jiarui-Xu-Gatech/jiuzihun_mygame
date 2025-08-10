@@ -112,7 +112,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						},target,card,target==targets[0]&&cards.length==1);
 						if(target==targets[0]&&cards.length==1){
 							if(card.clone&&(card.clone.parentNode==target.parentNode||card.clone.parentNode==ui.arena)){
-								game.addVideo('gain2',target,get.cardsInfo([card]));
+								game.broadcastAll(function(target,card){
+									game.addVideo('gain2',target,get.cardsInfo([card]));
+								},target,card);
 							}
 						}
 					}
