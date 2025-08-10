@@ -7009,7 +7009,7 @@
 					str+='\n-------------';
 					str+='\n'+line;
 					str+='\n'+column;
-					str+='\n'+err.stack;
+					str += '\n' + (err && err.stack ? err.stack : '[no err.stack info]');
 					alert(str);
 					window.ea=Array.from(arguments);
 					window.em=msg;

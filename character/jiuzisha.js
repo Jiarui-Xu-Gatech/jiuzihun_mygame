@@ -16433,7 +16433,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						game.updateRoundNumber();
                         // trigger.result={bool:true,card:result.links[0]};
                         trigger.result={bool:true,card:{name:'sha',suit:result.links[0].suit,number:result.links[0].number,nature:result.links[0].nature,isCard:true}};
-                        player.$throwordered(result.links[0],true);
+                        
+                        game.broadcastAll(function(player,card){
+                            player.$throwordered(card,true);
+                        },player,result.links[0]);
+                        // player.$throwordered(result.links[0],true);
                         game.addVideo('throwordered',player,[get.cardInfo(result.links[0]),'',event.videoId]);
 
                         game.delay(1);
