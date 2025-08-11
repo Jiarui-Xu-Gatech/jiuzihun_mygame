@@ -169,6 +169,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			}
 			_status.videoInited=true,
 			game.addVideo('init',null,info);
+			game.addVideo('guozhanUnknown',event.playerx);
 			if(_status.mode=='mingjiang'){
 				game.showIdentity(true);
 				

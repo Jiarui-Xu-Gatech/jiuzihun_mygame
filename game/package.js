@@ -168,6 +168,7 @@ window.noname_package={
 		music_limitless:'无限电子',
 		music_FMIXChina:'红裙舞姬',
 		music_shaolinSoccer:'少林足球',
+		music_FarOut:'超智远谋',
 		music_sevenSwords:'七剑战歌',
 		music_steinsDoor:'命运之门',
 		music_mingyuetianya:'明月天涯',

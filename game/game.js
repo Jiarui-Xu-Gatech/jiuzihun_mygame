@@ -4859,11 +4859,12 @@
 						name:'鏖战背景音乐',
 						item:{
 							disabled:'不启用',
-							online:'Online',
-							rewrite:'Rewrite',
-							chaoming:'潮鸣',
+							farout:'超智远谋',
+							online:'远程征战',
+							rewrite:'复兴战国',
+							chaoming:'潮鸣江海',
 						},
-						init:'rewrite',
+						init:'farout',
 						onclick:function(item){
 							game.saveConfig('aozhan_bgm',item,this._link.config.mode);
 							if(_status._aozhan==true) game.playBackgroundMusic();
@@ -28944,6 +28945,17 @@
 			},
 			countDownHide:function(){
 				ui.timer.hide();
+			},
+			guozhanUnknown:function(player){
+				game.broadcastAll(function(player){
+					for(var i=0;i<game.players.length;i++){
+						game.players[i].name='unknown'+get.distance(player,game.players[i],'absolute');
+						game.players[i].node.name_seat=ui.create.div('.name.name_seat',get.verticalStr(lib.translate[game.players[i].name]),game.players[i]);
+						// if(game.players[i]==game.me){
+						// 	lib.translate[game.players[i].name]+='（你）';
+						// }
+					}
+				},player);
 			},
 			dieAfterWordsOn:function(player,strtrans){
 				var str = strtrans[0];
