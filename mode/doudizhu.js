@@ -1113,8 +1113,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			},
 		},
 		translate:{
-			zhu:"主",
-			fan:"反",
+			zhu:"地",
+			fan:"农",
 			zhu2:"地主",
 			fan2:"农民",
 			random2:"随机",

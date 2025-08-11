@@ -17673,36 +17673,62 @@
 					if(!identity) identity=this.identity;
 					game.addVideo('setIdentity',this,identity);
 					if (identity == 'leaderLord_friend'){
-						this.node.identity.firstChild.innerHTML='君';
-						this.node.identity.dataset.color=get.translation('trueColor');
+						game.broadcastAll(function(player){
+							player.node.identity.firstChild.innerHTML='君';
+							player.node.identity.dataset.color=get.translation('trueColor');
+						},this);
+						// this.node.identity.firstChild.innerHTML='君';
+						// this.node.identity.dataset.color=get.translation('trueColor');
 						return this;
 					}
 					if (identity == 'leaderLord_enemy'){
-						this.node.identity.firstChild.innerHTML='怪';//'兽';
-						this.node.identity.dataset.color=get.translation('falseColor');
+						game.broadcastAll(function(player){
+							player.node.identity.firstChild.innerHTML='怪';//'兽';
+							player.node.identity.dataset.color=get.translation('falseColor');
+						},this);
+						// this.node.identity.firstChild.innerHTML='怪';//'兽';
+						// this.node.identity.dataset.color=get.translation('falseColor');
 						return this;
 					}
 					if(get.is.jun(this)){
-						this.node.identity.firstChild.innerHTML='君';
+						game.broadcastAll(function(player){
+							player.node.identity.firstChild.innerHTML='君';
+						},this);
+						// this.node.identity.firstChild.innerHTML='君';
 					}
 					else{
-						if (lib.config.mode != 'doudizhu'){
-							this.node.identity.firstChild.innerHTML=get.translation(identity);
+						if (lib.config.mode != 'doudizhu'&&_status.online_configmode!='doudizhu'){
+							game.broadcastAll(function(player){
+								player.node.identity.firstChild.innerHTML=get.translation(identity);
+							},this);
+							// this.node.identity.firstChild.innerHTML=get.translation(identity);
 						}
 						else{
 							if (identity == 'zhu'){
-								this.node.identity.firstChild.innerHTML='地';
+								game.broadcastAll(function(player){
+									player.node.identity.firstChild.innerHTML='地';
+								},this);
+								// this.node.identity.firstChild.innerHTML='地';
 							}
 							else if (identity == 'fan'){
-								this.node.identity.firstChild.innerHTML='农';
+								game.broadcastAll(function(player){
+									player.node.identity.firstChild.innerHTML='农';
+								},this);
+								// this.node.identity.firstChild.innerHTML='农';
 							}
 							else{
-								this.node.identity.firstChild.innerHTML=get.translation(identity);
+								game.broadcastAll(function(player){
+									player.node.identity.firstChild.innerHTML=get.translation(identity);
+								},this);
+								// this.node.identity.firstChild.innerHTML=get.translation(identity);
 							}
 						}
 						
 					}
-					this.node.identity.dataset.color=identity;
+					game.broadcastAll(function(player){
+						player.node.identity.dataset.color=identity;
+					},this);
+					// this.node.identity.dataset.color=identity;
 					return this;
 				},
 				insertPhase:function(skill,insert){
