@@ -7019,7 +7019,12 @@
 					game.print(msg);
 					game.print(line);
 					game.print(column);
-					game.print(err.stack);
+					if (err && err.stack){
+						game.print(err.stack);
+					}
+					else{
+						game.print('[no err.stack info]');
+					}
 					if(!lib.config.errstop){
 						_status.withError=true;
 						game.loop();
