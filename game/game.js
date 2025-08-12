@@ -32012,7 +32012,8 @@
 				dialog.add(ui.create.div('.placeholder'));
 
 				for(var i=0;i<game.players.length;i++){
-					if(!_status.connectMode&&game.players[i].isUnderControl(true)&&game.layout!='long2') continue;
+					//这个代码避免重复看牌，但我的风格希望完美一点，每个人牌都有比较好
+					// if(!_status.connectMode&&game.players[i].isUnderControl(true)&&game.layout!='long2') continue;
 					var hs=game.players[i].getCards('h');
 					if(hs.length){
 						dialog.add('<div class="text center">'+get.translation(game.players[i])+'</div>');
@@ -32020,7 +32021,8 @@
 					}
 				}
 				for(var i=0;i<game.dead.length;i++){
-					if(!_status.connectMode&&game.dead[i].isUnderControl(true)&&game.layout!='long2') continue;
+					//这个代码避免重复看牌，但我的风格希望完美一点，每个人牌都有比较好
+					// if(!_status.connectMode&&game.dead[i].isUnderControl(true)&&game.layout!='long2') continue;
 					var hs=game.dead[i].getCards('h');
 					if(hs.length){
 						dialog.add('<div class="text center">'+get.translation(game.dead[i])+'</div>');
