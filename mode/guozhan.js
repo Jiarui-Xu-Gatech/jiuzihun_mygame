@@ -3515,6 +3515,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					game.playAudioVideoBroadCast('effect','neiVSzhu');
 					game.broadcastAll(function(){
 					_status._aozhan=true;
+					game.addVideo('aozhan_startfight');
 					ui.aozhan=ui.create.div('.touchinfo.left',ui.window);
 					ui.aozhan.innerHTML='鏖战模式';
 					if(ui.time3) ui.time3.style.display='none';

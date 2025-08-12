@@ -28976,6 +28976,10 @@
 					}
 				},player);
 			},
+			aozhan_startfight:function(){
+				_status._aozhan=true;
+				game.playBackgroundMusic();
+			},
 			dieAfterWordsOn:function(player,strtrans){
 				var str = strtrans[0];
 				var node=ui.create.div('.damage.dieidentity',str,player);
