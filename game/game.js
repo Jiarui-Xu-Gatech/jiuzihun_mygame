@@ -23307,14 +23307,22 @@
 					}
 					else{
 						node.classList.add('damageadded');
-						node.style.fontFamily = '"LishuCustom", "KaiTi", cursive'; // 选一个艺术字体
-						if (str == '鏖战模式'&&nature == 'fire'){
-							node.style.textShadow = `
-								rgba(178, 59, 2,1) 0 0 2px,
-								rgba(178, 59, 2,1) 0 0 5px,
-								rgba(178, 59, 2,1) 0 0 10px,
-								rgba(178, 59, 2,1) 0 0 10px
-							`;
+						if (str == '鏖战模式'){
+							node.style.fontFamily = '"LishuCustom", "KaiTi", cursive'; // 选一个艺术字体
+							if (nature == 'fire'){
+								node.style.textShadow = `
+									rgba(178, 59, 2,1) 0 0 2px,
+									rgba(178, 59, 2,1) 0 0 5px,
+									rgba(178, 59, 2,1) 0 0 10px,
+									rgba(178, 59, 2,1) 0 0 10px
+								`;
+							}
+							else if (node.dataset.nature=='soil'){
+								node.dataset.nature = 'fire';
+							}
+						}
+						else{
+							node.style.fontFamily = '"xingkai", "KaiTi", cursive'; 
 						}
 					}
 					setTimeout(function(){

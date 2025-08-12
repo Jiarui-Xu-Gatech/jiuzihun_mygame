@@ -26324,7 +26324,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     game.delay(4);
                     "step 2"
-                    player.$fullscreenpop('鏖战模式','soil');
+                    player.$fullscreenpop('赌天','thunder');
 				},
             },
 
