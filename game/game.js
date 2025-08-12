@@ -32106,7 +32106,7 @@
 					if(!me) return;
 					var newvid={
 						name:game.getVideoName(),
-						mode:lib.config.mode,
+						mode:_status.online_configmode||lib.config.mode,
 						video:lib.video,
 						win:result=='战斗胜利',
 						name1:me.name1||me.name,
@@ -50626,7 +50626,7 @@
 		},
 		mode:function(){
 			if(_status.connectMode){
-				return lib.configOL.mode;
+				return _status.online_configmode||lib.configOL.mode;
 			}
 			else{
 				return lib.config.mode;

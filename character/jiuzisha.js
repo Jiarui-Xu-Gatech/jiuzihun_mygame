@@ -5971,7 +5971,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             huiyi_ning:{
                 audio:1,
-                mode:['identity'],
+                // mode:['identity'],
 				unique:true,
                 // mark:true,
                 // direct:true,
@@ -6073,7 +6073,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     
                     player.line(event.target,'fire');
                     var mode=get.mode();
-                    if (mode=='identity'&&player.identity=='zhu'){
+                    if ((mode=='identity'||_status.online_configmode == 'identity')&&player.identity=='zhu'){
                         game.broadcastAll(function(player,target,shown){
                             var identity=player.identity;
                             player.identity=target.identity;
