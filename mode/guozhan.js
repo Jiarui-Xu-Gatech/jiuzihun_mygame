@@ -3512,6 +3512,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var color=get.groupnature(player.group,"raw");
 					if(player.isUnseen()) color='fire';
 					player.$fullscreenpop('鏖战模式',color); 
+					game.playAudioVideoBroadCast('effect','neiVSzhu');
 					game.broadcastAll(function(){
 					_status._aozhan=true;
 					ui.aozhan=ui.create.div('.touchinfo.left',ui.window);

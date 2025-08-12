@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','dunkong_bo'],[]],
+            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_fullscreen'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -26313,6 +26313,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
 
                 },
+            },
+
+
+            yuner_fullscreen:{
+                enable:"phaseUse",
+                content:function(){
+                    "step 0"
+                    player.$fullscreenpop('鏖战模式','fire');
+                    "step 1"
+                    game.delay(4);
+                    "step 2"
+                    player.$fullscreenpop('鏖战模式','soil');
+				},
             },
 
             

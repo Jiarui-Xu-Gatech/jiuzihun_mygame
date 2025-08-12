@@ -23307,11 +23307,20 @@
 					}
 					else{
 						node.classList.add('damageadded');
+						node.style.fontFamily = '"LishuCustom", "KaiTi", cursive'; // 选一个艺术字体
+						if (str == '鏖战模式'&&nature == 'fire'){
+							node.style.textShadow = `
+								rgba(178, 59, 2,1) 0 0 2px,
+								rgba(178, 59, 2,1) 0 0 5px,
+								rgba(178, 59, 2,1) 0 0 10px,
+								rgba(178, 59, 2,1) 0 0 10px
+							`;
+						}
 					}
 					setTimeout(function(){
 						node.delete();
 						node.style.transform='scale(1.5)'
-					},avatar?1600:1000);
+					},avatar?1600:1400);
 				},
 				$damagepop:function(num,nature,font,nobroadcast){
 					if(typeof num=='number'||typeof num=='string'){
@@ -29426,6 +29435,7 @@
 						case 0:
 						player.classList.remove('unseen_v');
 						player.classList.remove('unseen');
+						player.name = player.name1;
 						break;
 						case 1:
 						player.classList.remove('unseen2_v');
@@ -29436,6 +29446,7 @@
 						player.classList.remove('unseen2_v');
 						player.classList.remove('unseen');
 						player.classList.remove('unseen2');
+						player.name = player.name1;
 						break;
 					}
 				}
