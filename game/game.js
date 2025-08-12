@@ -28948,7 +28948,9 @@
 				}
 			},
 			setNickname:function(player,str){
-				player.node.nameol.innerHTML=str;
+				if (str!=''&&player.node&&player.node.nameol){
+					player.node.nameol.innerHTML=str;
+				}
 			},
 			countDownShow:function(){
 				ui.timer.show();
@@ -30572,9 +30574,10 @@
 					return;
 				}
 				else{
+
 					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','reinit3','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton'];
 
-					if (noBroadCast.contains(type)){
+					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
 						// console.log(delayValue);
 						// console.log(typeof delayValue);
@@ -32802,11 +32805,12 @@
 			game.addVideo('startFight',null,timeoutTime);
 			'step 1'
 			game.broadcastAll(function(timeoutTime){
-				var players=game.players.concat(game.dead);
-				for (var i = 0; i < players.length; i++){
-					players[i].setNickname();
+				if (_status.connectMode){
+					var players=game.players.concat(game.dead);
+					for (var i = 0; i < players.length; i++){
+						players[i].setNickname();
+					}
 				}
-
 				var rand1=Math.round(0.2*100);
 				var rand2=Math.round(0.38*100);
 				var rand3=Math.round(0.25*40)-20;
