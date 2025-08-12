@@ -132,6 +132,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var player=lib.playerOL[i];
 					if(player){
 						player.identity=state[i].identity;
+						player.setIdentity();
 					}
 				}
 			},

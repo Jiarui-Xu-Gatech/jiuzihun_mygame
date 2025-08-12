@@ -8940,15 +8940,15 @@
 					ui.css.styles.remove();
 				}
 				ui.css.styles=lib.init.sheet();
-				ui.css.styles.sheet.insertRule('#arena .player>.name,#arena .button.character>.name {font-family: '+(lib.config.name_font||'xinwei')+',xinwei}',0);
+				ui.css.styles.sheet.insertRule('#arena .player>.name,#arena .button.character>.name {font-family: '+(lib.config.name_font||'xinwei')+',xinwei,MySymbolFont}',0);
 				ui.css.styles.sheet.insertRule('#arena .player .identity>div {font-family: '+(lib.config.identity_font||'huangcao')+',MySymbolFont,xinwei}',0);
-				ui.css.styles.sheet.insertRule('.button.character.newstyle>.identity {font-family: '+(lib.config.identity_font||'huangcao')+',xinwei}',0);
+				ui.css.styles.sheet.insertRule('.button.character.newstyle>.identity {font-family: '+(lib.config.identity_font||'huangcao')+',xinwei,MySymbolFont}',0);
 				if(lib.config.cardtext_font&&lib.config.cardtext_font!='default'){
 					ui.css.styles.sheet.insertRule('.card div:not(.info):not(.background) {font-family: '+lib.config.cardtext_font+';}',0);
 				}
 				if(lib.config.global_font&&lib.config.global_font!='default'){
-					ui.css.styles.sheet.insertRule('#window {font-family: '+lib.config.global_font+',xinwei}',0);
-					ui.css.styles.sheet.insertRule('#window #control{font-family: STHeiti,SimHei,Microsoft JhengHei,Microsoft YaHei,WenQuanYi Micro Hei,Helvetica,Arial,sans-serif}',0);
+					ui.css.styles.sheet.insertRule('#window {font-family: '+lib.config.global_font+',xinwei,MySymbolFont}',0);
+					ui.css.styles.sheet.insertRule('#window #control{font-family: STHeiti,SimHei,Microsoft JhengHei,Microsoft YaHei,WenQuanYi Micro Hei,Helvetica,Arial,sans-serif,MySymbolFont}',0);
 				}
 				switch(lib.config.glow_phase){
 					case 'yellow':ui.css.styles.sheet.insertRule('#arena .player:not(.selectable):not(.selected).glow_phase {box-shadow: rgba(0, 0, 0, 0.3) 0 0 0 1px, rgb(217, 152, 62) 0 0 15px, rgb(217, 152, 62) 0 0 15px !important;}',0);break;
@@ -11363,7 +11363,13 @@
 					ui.create.connectPlayers(game.ip);
 					if(!window.isNonameServer){
 						var me=game.connectPlayers[0];
-						me.setIdentity('zhu');
+						me.node.identity.firstChild.innerHTML='主';
+						me.node.identity.dataset.color='zhu';
+						// game.broadcastAll(function(player){
+						// 	player.node.identity.firstChild.innerHTML='主';
+						// 	player.node.identity.dataset.color='zhu';
+						// },me);
+						// me.setIdentity('zhu');
 						me.initOL(lib.config.connect_nickname,lib.config.connect_avatar);
 						me.playerid='1';
 						game.onlinezhu='1';
@@ -17698,13 +17704,7 @@
 						// this.node.identity.firstChild.innerHTML='君';
 					}
 					else{
-						if (lib.config.mode != 'doudizhu'&&_status.online_configmode!='doudizhu'){
-							game.broadcastAll(function(player){
-								player.node.identity.firstChild.innerHTML=get.translation(identity);
-							},this);
-							// this.node.identity.firstChild.innerHTML=get.translation(identity);
-						}
-						else{
+						if (lib.config.mode == 'doudizhu'||_status.online_configmode=='doudizhu'){
 							if (identity == 'zhu'){
 								game.broadcastAll(function(player){
 									player.node.identity.firstChild.innerHTML='地';
@@ -17718,17 +17718,27 @@
 								// this.node.identity.firstChild.innerHTML='农';
 							}
 							else{
-								game.broadcastAll(function(player){
+								game.broadcastAll(function(player,identity){
 									player.node.identity.firstChild.innerHTML=get.translation(identity);
-								},this);
+								},this,identity);
 								// this.node.identity.firstChild.innerHTML=get.translation(identity);
 							}
 						}
+						else{
+							//这地方不要broadcast了 因为身份场要隐匿一下
+							// game.broadcastAll(function(player,identity){
+							// 	player.node.identity.firstChild.innerHTML=get.translation(identity);
+							// },this,identity);
+							this.node.identity.firstChild.innerHTML=get.translation(identity);
+							this.node.identity.dataset.color=identity;
+							return;
+							// this.node.identity.firstChild.innerHTML=get.translation(identity);
+						}
 						
 					}
-					game.broadcastAll(function(player){
+					game.broadcastAll(function(player,identity){
 						player.node.identity.dataset.color=identity;
-					},this);
+					},this,identity);
 					// this.node.identity.dataset.color=identity;
 					return this;
 				},
@@ -27174,7 +27184,13 @@
 								game.connectPlayers[i].initOL(map[i][0],map[i][1]);
 								game.connectPlayers[i].playerid=map[i][2];
 								if(map[i][3]=='zhu'){
-									game.connectPlayers[i].setIdentity('zhu');
+									// game.broadcastAll(function(player){
+									// 	player.node.identity.firstChild.innerHTML='主';
+									// 	player.node.identity.dataset.color='zhu';
+									// },game.connectPlayers[i]);
+									game.connectPlayers[i].node.identity.firstChild.innerHTML='主';
+									game.connectPlayers[i].node.identity.dataset.color='zhu';
+									// game.connectPlayers[i].setIdentity('zhu');
 									if(map[i][2]==game.onlineID){
 										game.onlinezhu=true;
 										if(ui.roomInfo){
@@ -32807,6 +32823,12 @@
 				game.playAudioVideoBroadCast('effect','startFight');
 			}
 			game.addVideo('startFight',null,timeoutTime);
+			//加入game.getIdentityList2以防其他人没有加载到
+			if (game.getIdentityList2){
+				game.broadcastAll(function(func){
+					game.getIdentityList2 = func;
+				},game.getIdentityList2);
+			}
 			'step 1'
 			game.broadcastAll(function(timeoutTime){
 				if (_status.connectMode){
@@ -45428,6 +45450,8 @@
 						player.classList.add('unselectable2');
 					}
 				}
+				game.connectPlayers[0].node.identity.firstChild.innerHTML='主';
+				game.connectPlayers[0].node.identity.dataset.color='zhu';
 
 				var bar=ui.create.div(ui.window);
 				bar.style.height='20px';
