@@ -23322,7 +23322,7 @@
 							}
 						}
 						else{
-							node.style.fontFamily = '"xingkai", "KaiTi", cursive'; 
+							node.style.fontFamily = '"xinwei", "xingkai", "KaiTi", cursive'; 
 						}
 					}
 					setTimeout(function(){
