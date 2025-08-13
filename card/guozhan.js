@@ -822,18 +822,18 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			},
 			dinglanyemingzhu_skill:{
 				equipSkill:true,
-				inherit:'zhiheng',
-				filter:function(event,player){
-					return !player.hasSkill('gzzhiheng',true);
-				},
-				selectCard:function(){
-					var player=_status.event.player;
-					return [1,player.maxHp];
-				},
-				filterCard:function(card,player){
-					return card!=player.getEquip(5);
-				},
-				prompt:'出牌阶段限一次，你可以弃置至多X张牌（X为你的体力上限），然后摸等量的牌'
+				inherit:'bihai_shui',
+				// filter:function(event,player){
+				// 	return !player.hasSkill('gzzhiheng',true);
+				// },
+				// selectCard:function(){
+				// 	var player=_status.event.player;
+				// 	return [1,player.maxHp];
+				// },
+				// filterCard:function(card,player){
+				// 	return card!=player.getEquip(5);
+				// },
+				// prompt:'出牌阶段限一次，你可以弃置至多X张牌（X为你的体力上限），然后摸等量的牌'
 			},
 			g_dinglanyemingzhu_ai:{
 				ai:{
@@ -1358,11 +1358,14 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			minguangkai_cancel:'明光铠',
 			minguangkai_link:'明光铠',
 			minguangkai_info:'锁定技，当你成为【火烧连营】、【火攻】或火【杀】的目标时，取消之；若你是小势力角色，你不会被横置。',
-			dinglanyemingzhu:'定澜夜明珠',
+			dinglanyemingzhu:'定海夜明珠',//'定澜夜明珠',
 			dinglanyemingzhu_bg:'珠',
-			dinglanyemingzhu_info:'锁定技，你视为拥有技能“制衡”，若你已经有“制衡”，则改为取消弃置牌数的限制。',
-			dinglanyemingzhu_skill:'制衡',
-			dinglanyemingzhu_skill_info:'出牌阶段限一次，你可以弃置至多X张牌（X为你的体力上限），然后摸等量的牌',
+			// dinglanyemingzhu_info:'锁定技，你视为拥有技能“制衡”，若你已经有“制衡”，则改为取消弃置牌数的限制。',
+			// dinglanyemingzhu_skill:'制衡',
+			// dinglanyemingzhu_skill_info:'出牌阶段限一次，你可以弃置至多X张牌（X为你的体力上限），然后摸等量的牌',
+			dinglanyemingzhu_info:'锁定技，你视为拥有技能“碧海”。',
+			dinglanyemingzhu_skill:'碧海',
+			dinglanyemingzhu_skill_info:'锁定技，火焰伤害对你无效。一名角色受到火焰伤害时，若伤害值＞1则-1；一名角色受到雷电伤害时，若伤害值≤1则+1。',
 			feilongduofeng:'飞龙夺凤',
 			feilongduofeng2:'飞龙夺凤',
 			feilongduofeng3:'飞龙夺凤',
