@@ -30595,7 +30595,7 @@
 				}
 				else{
 
-					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','reinit3','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight'];
+					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight'];
 
 					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
