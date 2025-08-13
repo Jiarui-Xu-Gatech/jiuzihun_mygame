@@ -6197,10 +6197,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.syncStorage('xinnian_caoxin');
                 },
                 content:function(){
-                    player.storage.xinnian_caoxin = 1;
-                    player.syncStorage('xinnian_caoxin');
-                    player.markSkill('xinnian_caoxin');
-                    game.log(player,'获得1个信印记');
+                    if (!player.storage.xinnian_caoxin||player.storage.xinnian_caoxin==0){
+                        player.storage.xinnian_caoxin = 1;
+                        player.syncStorage('xinnian_caoxin');
+                        player.markSkill('xinnian_caoxin');
+                        game.log(player,'获得1个信印记');
+                    }
                 },
                 group:["xinnian_shanwuxie_caoxin","xinnian_phaseBegin_caoxin"],
                 ai:{
@@ -6861,6 +6863,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 trigger:{
                     player:"enterGame",
                 },
+                direct:true,
                 popup:false,
                 marktext:"狂",
                 // mark:true,
@@ -6876,9 +6879,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.storage.kuaijiu_ding = 0;
                     player.syncStorage('kuaijiu_ding');
                 },
-                // content:function(){
-                //     player.markSkill("kuaijiu_ding");
-                // },
+                content:function(){
+                    // player.markSkill("kuaijiu_ding");
+                },
                 group:["kuaijiu_juedou_ding","kuaijiu_loseDamage_ding","kuaijiu_addDamage_ding"],
 
 
@@ -7248,7 +7251,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             rongyan_gain_yan:{
                 audio:2,
-                popup:false,
+                direct:true,
                 trigger:{
                     player:['enterGame','damageEnd'],
                 },
