@@ -9904,21 +9904,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.recover(player.maxHp - player.hp);
                     player.logSkill('mantian_mei');
                     "step 1"
                     player.judge(function (card) {
                         if(get.suit(card)=='spade'){
-                            return 2;
+                            return 10;
                         } 
                         else{
-                            return -0.5;
+                            return -3.5;
                         }
                     });
                     if(trigger.delay==false) game.delay();
                     game.delay();
                     "step 2"
                     if (result.card&&result.judge >= 0){
+                        player.recover(player.maxHp - player.hp);
                         if (trigger.name == 'damage'){
                             if (!player.hasSkill("mantian_skip_mei")){
                                 player.addSkill("mantian_skip_mei");
@@ -10031,7 +10031,6 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.recover(player.maxHp - player.hp);
                     player.logSkill('mantian_mei_nan');
                     "step 1"
                     player.judge(function (card) {
@@ -10046,6 +10045,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     "step 2"
                     if (result.card&&result.judge >= 0){
+                        player.recover(player.maxHp - player.hp);
                         if (trigger.name == 'damage'){
                             if (!player.hasSkill("mantian_skip_mei_nan")){
                                 player.addSkill("mantian_skip_mei_nan");
@@ -11559,13 +11559,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'damageBegin4',
                 },
                 filter:function(event,player){                    
-                    return player.storage.cangxin_enda&&player.storage.cangxin_enda.length > 0;
+                    return (!event.source||event.source!=player)&&player.storage.cangxin_enda&&player.storage.cangxin_enda.length > 0;
                 },
                 content:function(event){
                     'step 0'
                     if (trigger.nature == 'thunder'){
                         player.logSkill('cangxin_enda');
-                        game.log(player,'免疫了此次伤害');
+                        if (trigger.source){
+                            game.log(player,'免疫了','来自',trigger.source,'的',get.cnNumber(trigger.num),'点雷电伤害');
+                        }
+                        else{
+                            game.log(player,'免疫了',get.cnNumber(trigger.num),'点雷电伤害');
+                        }
                         trigger.num = 0;
                         trigger.cancel();
                         event.finish();
@@ -11574,7 +11579,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (player.hp < player.maxHp){
                         if (!trigger.card || !trigger.cards){
                             player.logSkill('cangxin_enda');
-                            game.log(player,'免疫了此次伤害');
+                            if (trigger.source){
+                                game.log(player,'免疫了','来自',trigger.source,'的',get.cnNumber(trigger.num),'点伤害');
+                            }
+                            else{
+                                game.log(player,'免疫了',get.cnNumber(trigger.num),'点伤害');
+                            }
                             trigger.num = 0;
                             trigger.cancel();
                             event.finish();
@@ -11590,7 +11600,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             var xinsuit = get.suit(player.storage.cangxin_enda[0]);
                             if (get.suit(trigger.card) != xinsuit){
                                 player.logSkill('cangxin_enda');
-                                game.log(player,'免疫了此次伤害');
+                                if (trigger.source){
+                                game.log(player,'免疫了','来自',trigger.source,'的',get.cnNumber(trigger.num),'点伤害');
+                                }
+                                else{
+                                    game.log(player,'免疫了',get.cnNumber(trigger.num),'点伤害');
+                                }
                                 trigger.num = 0;
                                 trigger.cancel();
                                 event.finish();
@@ -11621,7 +11636,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'damageEnd',
                 },
                 filter:function(event,player){
-                    if (player.storage.cangxin_enda&&player.storage.cangxin_enda.length>0&&player.isAlive()&&player.storage.cangxin_start_enda&&player.storage.cangxin_start_enda==2){
+                    if ((!event.source||event.source!=player)&&player.storage.cangxin_enda&&player.storage.cangxin_enda.length>0&&player.isAlive()&&player.storage.cangxin_start_enda&&player.storage.cangxin_start_enda==2){
                         return true;
                     }
                     else{
@@ -26883,11 +26898,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'dutian_mei_nan':"赌天",
             'dutian_mei_nan_info':"出牌阶段限一次，你可以选择两张手牌，并选择至多三名有至少两张手牌的其他角色，然后这些角色分别选择两张手牌；接着你从牌堆顶翻出两张【公牌】，展示并放回牌堆顶，公牌的花色和点数不受玩家技能影响；然后你和其他被选中角色分别展示自己选择的牌，每名角色分别用自己展示的牌与公牌组合；【赌天点数】总和最大者为赢家，获得其他参与者所有手牌，其余参与者为输家，每位输家分别对自己造成1点伤害。",
             'mantian_mei':"瞒天",
-            'mantian_mei_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞1点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你立刻回满体力，并进行一次判定，若结果为♠，则你跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
+            'mantian_mei_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞1点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你进行一次判定，若结果为♠，则你立刻回满体力，跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
             'mantian_recover_mei':"瞒天",
             'mantian_skip_mei_bg':'✡',//'&#x2721;&#xFE0E;',//'✡',
             'mantian_mei_nan':"瞒天",
-            'mantian_mei_nan_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞1点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你立刻回满体力，并进行一次判定，若结果为♠，则你跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
+            'mantian_mei_nan_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞1点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你进行一次判定，若结果为♠，则你立刻回满体力，跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
             'mantian_recover_mei_nan':"瞒天",
             'mantian_skip_mei_nan_bg':'✡',//'&#x2721;&#xFE0E;',//'✡',
             mantian_spade_mei:"瞒天",
@@ -26930,7 +26945,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "roufa_enda":"肉伐",
             "roufa_enda_info":"每回合出牌阶段限一次，你可以指定一名角色，然后令所有女性角色选择一项：1.对指定的角色使用【杀】，2.你获得她一张牌。",
             'cangxin_enda':"藏心",
-            'cangxin_enda_info':"锁定技，游戏开始时，你摸一张牌，并将一张手牌背面朝上置于武将牌上，称为【心】；当你有【心】时，雷电伤害对你无效，当你的体力值＜体力上限并受到伤害时，若非卡牌伤害或伤害牌的花色与【心】不同，则此伤害对你无效，若伤害牌花色与【心】相同，则你受到的伤害+1；你第一次在体力值＜体力上限时受到伤害后，你展示【心】，并将【心】正面朝上；当你濒死时，若你的手牌中没有【桃】或【酒】，则你失去【心】，并将体力回复至1点，然后你失去此技能。",
+            'cangxin_enda_info':"锁定技，游戏开始时，你摸一张牌，并将一张手牌背面朝上置于武将牌上，称为【心】；当你有【心】时，其他角色对你造成的雷电伤害无效，当你的体力值＜体力上限并受到其他角色的伤害时，若非卡牌伤害或伤害牌的花色与【心】不同，则此伤害对你无效，若伤害牌花色与【心】相同，则你受到的伤害+1；你第一次在体力值＜体力上限时受到其他角色的伤害后，你展示【心】，并将【心】正面朝上；当你濒死时，若你的手牌中没有【桃】或【酒】，则你失去【心】，并将体力回复至1点，然后你失去此技能。",
             'cangxin_start_enda':'藏心',
             'cangxin_end_enda':'藏心',
             'cangxin_damage_enda':'藏心',
@@ -27272,7 +27287,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'dunkong_skip_bo':"遁空",
             'dunkong_sha_bo':"遁空",
             'guiji_bo':"归寂",
-            'guiji_bo_info':"锁定技，当你死亡时，你选择一名其他角色，令其获得技能【禅释】。",
+            'guiji_bo_info':"锁定技，死亡之前，你选择一名其他角色，令其获得技能【禅释】。",
             chanshi_bo:"禅释",
             chanshi_bo_info:"锁定技，你在准备阶段结束时，执行一个额外的出牌阶段。",
 

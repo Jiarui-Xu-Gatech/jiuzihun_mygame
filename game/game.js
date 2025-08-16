@@ -12785,8 +12785,8 @@
 						game.check();
 						game.pause();
 						if(event.createDialog&&!event.dialog&&Array.isArray(event.createDialog)){
- 						event.dialog=ui.create.dialog.apply(this,event.createDialog);
- 					}
+ 							event.dialog=ui.create.dialog.apply(this,event.createDialog);
+ 						}
 						else if(event.prompt!=false){
 							var str;
 							if(typeof event.prompt=='string') str=event.prompt;
@@ -18767,8 +18767,17 @@
 						if(info.onuse){
 							info.onuse(result,this);
 						}
+						// console.log('打印noclearcountdown变true的条件')
+						// console.log(info.direct);
+						// console.log(info.clearTime);
+						// console.log('打印完成');
 						if(info.direct&&!info.clearTime){
-							_status.noclearcountdown=true;
+							// _status.noclearcountdown=true;
+							
+							//以上这一行是导致countdown在本地消不掉的罪魁祸首，于是改成以下的代码
+							if (game.online){
+								_status.noclearcountdown=true;
+							}
 						}
 					}
 					if(event.logSkill){
@@ -27799,6 +27808,10 @@
 				ui.timer.hide();
 				game.addVideo('countDownHide');
 			}
+			// ui.timer.hide();
+			// game.addVideo('countDownHide');
+			//以防bug:本地不知什么原因不消除timer，非常诡异
+			
 			if(_status.connectMode&&!game.online&&game.me){
 				if(game.me._hide_all_timer){
 					delete game.me._hide_all_timer;
@@ -33271,6 +33284,10 @@
 		},
 		delay:function(time,time2){
 			if(_status.paused) return;
+			
+			//联机时不要delay?
+			// if (_status.connectMode) return;
+
 			game.pause();
 			if(typeof time!='number') time=1;
 			if(typeof time2!='number') time2=0;
