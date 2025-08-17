@@ -26989,7 +26989,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "lashou_loseHp_jin":"辣手",
             "lashou_jueqing_jin":"辣手",
             "chengting_jin":"撑挺",
-            "chengting_jin_info":"锁定技，你手牌中的装备牌除了坐骑牌以外都视为【杀】；你手牌中的延迟锦囊牌都视为【酒】；你回满体力时，若你的体力上限>1，则你弃置所有装备区的牌，然后与你距离为1的其他角色将手牌数弃至与其体力值相同。",
+            "chengting_jin_info":"锁定技，你手牌中的装备牌除了坐骑牌以外都视为【杀】；你手牌中的延迟锦囊牌都视为【酒】；你回满体力时，若你的体力上限＞1，则你弃置所有装备区的牌，然后与你距离为1的其他角色将手牌数弃至与其体力值相同。",
             "chengting_sha_jin":"撑挺",
             "chengting_taojiu_jin":"撑挺",
             'chengting_discard_jin':"撑挺",
