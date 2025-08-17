@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_fullscreen'],[]],
+            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yini_draw_heng','wuci_bo','man_mo'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -14666,7 +14666,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
 					'step 0'
-					player.chooseTarget(get.prompt('yini_heng'),'回合结束阶段，你可以选择一名本回合发动过【旖旎】置入装备的角色，直到你的下回合开始，当该角色受到＞1点的伤害时，防止此伤害，然后若这是本局游戏首次，你增加1点体力上限，并将摸牌阶段永久改为：选择一名其他角色，令其摸两张牌。',function(card,player,target){
+					player.chooseTarget(get.prompt('yini_heng'),'回合结束阶段，你可以选择一名本回合发动过【旖旎】置入装备的角色，直到你的下回合开始，当该角色受到＞1点的伤害时，防止此伤害，然后若这是本局游戏首次，你增加1点体力上限，并将摸牌阶段永久改为：你跳过此阶段，并选择一名其他角色，令其摸两张牌。',function(card,player,target){
 						return player.storage.yini_heng.contains(target);
 					}).set('ai',function(target){
 						if(get.attitude(_status.event.player,target)>0){
@@ -14728,7 +14728,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.log(player.storage.yini_target_heng,'防止了',player,'受到的'+get.cnNumber(event.numberD)+'点伤害');
                         player.storage.yini_target_heng.gainMaxHp();
                         player.storage.yini_target_heng.addSkill('yini_draw_heng');
-                        game.log(player.storage.yini_target_heng,'的摸牌阶段永久改为：选择一名其他角色，令其摸两张牌');
+                        game.log(player.storage.yini_target_heng,'的摸牌阶段永久改为：你跳过此阶段，并选择一名其他角色，令其摸两张牌');
                         event.goto(2);
                     }
                     else{
@@ -14776,7 +14776,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     'step 0'
                     trigger.cancel();
-                    player.chooseTarget('###'+get.translation('yini_heng')+'###你的摸牌阶段永久改为：选择一名其他角色，令其摸两张牌。',true,function(card,player,target){
+                    player.chooseTarget('###'+get.translation('yini_heng')+'###你的摸牌阶段永久改为：你跳过此阶段，并选择一名其他角色，令其摸两张牌。',true,function(card,player,target){
                         return player != target;
                     }).set('ai',function(target){
                         var player = _status.currentPhase;
@@ -19619,7 +19619,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(){
                     if (trigger.name == 'phaseDraw'){
-                        if (player.storage.man_mo.isAlive()){
+                        if (player.storage.man_mo&&player.storage.man_mo.isAlive()){
                             player.storage.man_mo.logSkill('sanman_mo');
                             player.storage.man_mo.line(player);
                         }
@@ -19630,7 +19630,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         trigger.num+=2;
                     }
                     else if (trigger.name == 'phaseDiscard'){
-                        if (player.storage.man_mo.isAlive()){
+                        if (player.storage.man_mo&&player.storage.man_mo.isAlive()){
                             player.storage.man_mo.logSkill('sanman_mo');
                             player.storage.man_mo.line(player);
                         }
@@ -19640,7 +19640,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.log(player,'手牌上限+2');
                     }
                     else if (trigger.name == 'useCard'){
-                        if (player.storage.man_mo.isAlive()){
+                        if (player.storage.man_mo&&player.storage.man_mo.isAlive()){
                             player.storage.man_mo.logSkill('sanman_mo');
                             player.storage.man_mo.line(player);
                         }
@@ -27006,7 +27006,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'yujiu_gain_heng':"浴酒",
             'yujiu_hp_heng':'浴酒',
             'yini_heng':"旖旎",
-            'yini_heng_info':"出牌阶段，你可以将一张装备牌置于一名其他角色装备区里，然后摸一张牌；每回合第一次发动【旖旎】置入装备后，本回合你计算与其他角色的距离时-1。回合结束阶段，你可以选择一名本回合发动过【旖旎】置入装备的角色，直到你的下回合开始，当该角色受到＞1点的伤害时，防止此伤害，然后若这是本局游戏首次，你增加1点体力上限，回满体力，并将摸牌阶段永久改为：选择一名其他角色，令其摸两张牌。",
+            'yini_heng_info':"出牌阶段，你可以将一张装备牌置于一名其他角色装备区里，然后摸一张牌；每回合第一次发动【旖旎】置入装备后，本回合你计算与其他角色的距离时-1。回合结束阶段，你可以选择一名本回合发动过【旖旎】置入装备的角色，直到你的下回合开始，当该角色受到＞1点的伤害时，防止此伤害，然后若这是本局游戏首次，你增加1点体力上限，回满体力，并将摸牌阶段永久改为：你跳过此阶段，并选择一名其他角色，令其摸两张牌。",
             'yini_target_heng':'旖旎',
             'yini_animation_heng':'旖旎',
             'wenshi_heng':"吻噬",
