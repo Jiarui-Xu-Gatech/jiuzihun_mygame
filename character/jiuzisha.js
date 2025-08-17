@@ -6921,6 +6921,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.storage.kuaijiu_ding++;
                         player.syncStorage('kuaijiu_ding');
                         player.markSkill("kuaijiu_ding");
+
                         trigger.untrigger();
                         trigger.set('responded',true);
                         trigger.result={bool:true,card:{name:'sha',isCard:true}};
@@ -6928,6 +6929,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // player.popup(get.translation('kuaijiu_juedou_ding'));
                         player.logSkill('kuaijiu_juedou_ding');
                         game.log(player,'获得1个狂印记');
+
+                        if (!player.hasSkill('yujin_ding')){
+                            player.addSkill('yujin_ding');
+                            game.log(player,'获得技能','#g【余劲】');
+                        }
                     }
                 },
                 ai:{
@@ -6958,6 +6964,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.storage.kuaijiu_ding++;
                         player.syncStorage('kuaijiu_ding');
                         player.markSkill("kuaijiu_ding");
+
                         if(trigger.num >= 1) {
                             trigger.num--;
                         }
@@ -6965,7 +6972,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // player.popup(get.translation('kuaijiu_loseDamage_ding'));
                         player.logSkill('kuaijiu_loseDamage_ding');
                         game.log(player,'获得1个狂印记');
-                        game.log(player,'自罚了一大杯白酒，受到伤害-1')
+                        game.log(player,'自罚了一大杯白酒，受到伤害-1');
+
+                        if (!player.hasSkill('yujin_ding')){
+                            player.addSkill('yujin_ding');
+                            game.log(player,'获得技能','#g【余劲】');
+                        }
                     }
                 }
             },
@@ -8235,7 +8247,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (event.player.hasSkill("xianfu_addPhase_quan")||event.player==player){
                         return false;
                     }
-                    else if (event.name == "phase" && event.player.getHistory('skipped').contains('phaseUse')&&
+                    else if (event.name == "phaseJieshu" && event.player.getHistory('skipped').contains('phaseUse')&&
                     event.player.getHistory('skipped').contains('phaseDraw')){
                         return player.countCards('he') >= 2;
                     }
@@ -10003,7 +10015,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     trigger.cancel();
                     player.logSkill("mantian_mei");
-                    game.log(player,'跳过了弃牌阶段')
+                    game.log(player,'跳过了弃牌阶段');
                     "step 1"
                     player.removeSkill("mantian_skip_mei");
                 },
@@ -15523,9 +15535,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     }
                     game.delay(0.5);
                     "step 1"
+                    player.addSkill('huanglang_yawen');
+                    game.log(player,'获得了技能','#g【皇血】');
 					player.loseMaxHp();
-					player.addSkill('huanglang_yawen');
-					game.log(player,'获得了技能','#g【皇血】');
 					player.awakenSkill(event.name);
 					player.storage[event.name]=true;
                     player.insertPhase('hanbian_yawen',true);
@@ -15583,7 +15595,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     player.logSkill('huanglang_yawen');
-                    game.log(player,'跳过摸牌阶段');
+                    game.log(player,'跳过了摸牌阶段');
                     trigger.cancel();
                 },
                 mod:{
@@ -15597,7 +15609,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 silent:true,
                 popup:false,
                 forced:true,
-                trigger:{player:['loseAfter','changeHp']},
+                trigger:{player:['loseAfter','changeHp','gainMaxHpEnd','loseMaxHpEnd']},
 				frequent:true,
 				filter:function(event,player){
 					return player.countCards('h')<player.getDamagedHp();
@@ -24864,7 +24876,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             str = '出牌阶段';
                         }
                         trigger.cancel();
-                        game.log(player,'取消执行',str,'，令',result.targets[0],'本回合非锁定技失效，并对其造成1点火焰伤害');
+                        game.log(player,'跳过了',str,'，令',result.targets[0],'本回合非锁定技失效，并对其造成1点火焰伤害');
                         result.targets[0].addTempSkill('wuci_fengyin',['phaseBegin','phaseAfter']);
                         result.targets[0].damage(1,'fire',player);
                     }
@@ -26836,7 +26848,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             dingya:"丁亚",
             'kuaijiu_ding':"快酒",
-            'kuaijiu_ding_info':"当你在决斗中需要打出【杀】时，你可以获得一个狂印记，视为打出了一张【杀】；当你即将受到一次伤害时，你可以获得一个狂印记，令此次伤害值-1；当你即将造成一次伤害时，若你拥有至少1个狂印记，你可以弃一个狂印记，令此次伤害值+1。",
+            'kuaijiu_ding_info':"当你在决斗中需要打出【杀】时，你可以获得一个狂印记，视为打出了一张【杀】；当你即将受到一次伤害时，你可以获得一个狂印记，令此次伤害值-1；当你即将造成一次伤害时，若你拥有至少1个狂印记，你可以弃一个狂印记，令此次伤害值+1；当你因此技能获得狂印记时，若你没有技能【余劲】，则你获得技能【余劲】。",
             "kuaijiu_juedou_ding":"快酒",
             "kuaijiu_loseDamage_ding":"快酒",
             "kuaijiu_addDamage_ding":"快酒",
@@ -27072,9 +27084,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'nvfei_yawen':"女匪",
             'nvfei_yawen_info':"当你摸牌时，你可以选择少摸任意张牌，并获得等量的其他角色的各一张牌。",
             'hanbian_yawen':"寒变",
-            'hanbian_yawen_info':"觉醒技，一名角色的回合结束后，若你的体力值为1，你减1点体力上限，然后获得技能【皇血】，并获得一个额外的回合。",
+            'hanbian_yawen_info':"觉醒技，一名角色的回合结束后，若你的体力值为1，你获得技能【皇血】，然后减1点体力上限，并获得一个额外的回合。",
             'huanglang_yawen':"皇血",
-            'huanglang_yawen_info':"锁定技，你的手牌上限为0。你始终跳过每回合的摸牌阶段。当你的手牌数＜X时，你将手牌摸至X张（X为你已损失的体力值）。",
+            'huanglang_yawen_info':"锁定技，你的手牌上限为0。你始终跳过摸牌阶段。当你的手牌数＜X时，你将手牌摸至X张（X为你已损失的体力值）。",
             'huanglang_maxhand_yawen':"皇血",
             'huanglang_draw_yawen':"皇血",
 
@@ -27267,7 +27279,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             boluosi_za:"波罗斯",
             'wuci_bo':"无慈",
-            'wuci_bo_info':"你的摸牌阶段或出牌阶段开始前，你可以选择取消执行此阶段，然后选择一名其他角色，令其本回合非锁定技失效，并受到你造成的1点火焰伤害。",
+            'wuci_bo_info':"你的摸牌阶段或出牌阶段开始前，你可以选择跳过此阶段，然后选择一名其他角色，令其本回合非锁定技失效，并受到你造成的1点火焰伤害。",
             'chiyang_bo':"炽阳",
             'chiyang_bo_info':"锁定技，游戏开始时，你获得2个“高温”标记。当你造成属性伤害时，你将伤害属性改为火焰伤害。你对一名角色造成火焰伤害后，你获得一个“高温”标记并回复等量体力（若你未受伤则改为摸一张牌）。",
             'chiyang_gameStart_bo':"炽阳",
