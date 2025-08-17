@@ -26174,7 +26174,11 @@
 						var target=event.targets.shift();
 						//这里加入判断 如果中途被解锁了就不会被传导到了
 						if (target.isLinked()){
+							game.log(target,'在连环中，受到传导伤害');
 							target.damage.apply(target,event._args.slice(0));
+						}
+						else{
+							game.log(target,'已不在连环中，不受到传导伤害');
 						}
 						event.redo();
 					}
