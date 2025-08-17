@@ -7011,24 +7011,29 @@
 					str+='\n'+line;
 					str+='\n'+column;
 					str += '\n' + (err && err.stack ? err.stack : '[no err.stack info]');
-					alert(str);
-					window.ea=Array.from(arguments);
-					window.em=msg;
-					window.el=line;
-					window.ec=column;
-					window.eo=err;
-					game.print(msg);
-					game.print(line);
-					game.print(column);
-					if (err && err.stack){
-						game.print(err.stack);
+					if (!(err && err.stack)){
+						game.loop();
 					}
 					else{
-						game.print('[no err.stack info]');
-					}
-					if(!lib.config.errstop){
-						_status.withError=true;
-						game.loop();
+						alert(str);
+						window.ea=Array.from(arguments);
+						window.em=msg;
+						window.el=line;
+						window.ec=column;
+						window.eo=err;
+						game.print(msg);
+						game.print(line);
+						game.print(column);
+						if (err && err.stack){
+							game.print(err.stack);
+						}
+						else{
+							game.print('[no err.stack info]');
+						}
+						if(!lib.config.errstop){
+							_status.withError=true;
+							game.loop();
+						}
 					}
 				};
 
