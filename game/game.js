@@ -26172,7 +26172,10 @@
 					"step 2"
 					if(event.targets.length){
 						var target=event.targets.shift();
-						target.damage.apply(target,event._args.slice(0));
+						//这里加入判断 如果中途被解锁了就不会被传导到了
+						if (target.isLinked()){
+							target.damage.apply(target,event._args.slice(0));
+						}
 						event.redo();
 					}
 				},
