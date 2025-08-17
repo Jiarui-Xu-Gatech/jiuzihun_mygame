@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yini_draw_heng','wuci_bo','man_mo'],[]],
+            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','jiuwei_tushan','yuner_giveCard'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -5127,13 +5127,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // direct:true,
                 enable:"chooseToUse",
                 filter:function(event,player,target){
-                    if (_status.event&&_status.event.parent&&_status.event.parent.name == 'phaseUse'){
+                    if (_status.event&&((_status.event.parent&&_status.event.parent.name == 'phaseUse')||(game.online&&_status.event._modparent&&_status.event._modparent.name=='phaseUse'))){
                         var newfilterTarget = function(card,player,target){
                             return player!=target&&player.canUse({name:'sha'},target,false);
                         }
                         player.storage.jiuweiFilterTarget = newfilterTarget;
                     }
-                    else if (_status.event&&_status.event.parent&&_status.event.parent.name == 'jiedao'){
+                    else if (_status.event&&((_status.event.parent&&_status.event.parent.name == 'jiedao')||(game.online&&_status.event._modparent&&_status.event._modparent.name=='jiedao'))){
                         var newfilterTarget = function(card,player,target){
                             return target==_status.event.sourcex;
                         }
@@ -5277,7 +5277,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:2,
                 trigger:{source:'damageBegin1'},
                 frequent:true,
-                // direct:true,
+                direct:true,
                 forced:false,
                 line:'thunder',
                 filter:function(event,player){
@@ -5293,6 +5293,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if(result.bool){
+                        player.logSkill('jiuwei_jiashang_tushan');
                         player.judge(function (card) {
                             return get.number(card) <= 9 ? 2 : -2; // 判定点数 ≤ 9 则成功
                         });
