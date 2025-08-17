@@ -4804,7 +4804,10 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								for(var i=0;i<event.dialog.buttons.length;i++){
 									if(event.dialog.buttons[i].classList.contains('selected')){
 										var name=event.dialog.buttons[i].link;
-										player.sex=lib.character[name][0];
+										
+										//改性别干嘛？
+										// player.sex=lib.character[name][0];
+										
 										player.group=lib.character[name][1];
 										// player.node.identity.style.backgroundColor=get.translation(player.group+'Color');
 										break;
