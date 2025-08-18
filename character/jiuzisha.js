@@ -5218,23 +5218,32 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // jueqing:true,
 					result:{
 						target:function(player,target){
+                            var outPhase = 0;
+                            if (player!=_status.currentPhase){
+                                outPhase = 0.8;
+                                if (_status.event&&player.hp<player.maxHp&&((_status.event.parent&&_status.event.parent.name == 'jiuyu')||(_status.event._modparent&&_status.event._modparent.name=='jiuyu'))){
+                                    outPhase -= 1.6;
+                                }
+                            }
+                            
+
                             var judgePro = 0;
                             var has = game.hasPlayer(function(current){
                                 if (current.hasSkillTag('judgePro')){
-                                    if (get.attitude(current,player)>=0){
+                                    if (get.attitude(current,player)>0){
                                         judgePro+=0.7;
                                     }
-                                    else{
+                                    if (get.attitude(current,player)<0){
                                         judgePro-=0.7;
                                     }
                                 }
                             });
                             if (target.hasSkill('forbidNoSuit')||target.hasSkillTag('forbidNoNumber',true,player)){
-                                return 0 - judgePro;
+                                return 0 - judgePro - outPhase;
                             }
                             if (get.attitude(player,target) < 0){
                                 if (target.hasSkillTag('maixie')||target.hasSkillTag('maixie_hp')) return -20;
-							    return -get.effect(target,{name:'sha'},player)*7 - judgePro;
+							    return -get.effect(target,{name:'sha'},player)*7 - judgePro - outPhase;
                             }
                             else{
                                 return 0;
