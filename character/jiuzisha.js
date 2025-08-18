@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",3,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','jiuwei_tushan','yuner_giveCard'],[]],
+            // yuner:["female","qun",160,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','jiuwei_tushan','yuner_giveCard','jibian_shou'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -5127,6 +5127,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // direct:true,
                 enable:"chooseToUse",
                 filter:function(event,player,target){
+                    if (player.hasSkill('jiuwei_block')){
+                        return false;
+                    }
                     if (_status.event&&((_status.event.parent&&_status.event.parent.name == 'phaseUse')||(game.online&&_status.event._modparent&&_status.event._modparent.name=='phaseUse'))){
                         var newfilterTarget = function(card,player,target){
                             return player!=target&&player.canUse({name:'sha'},target,false);
@@ -5187,8 +5190,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     else {
                         game.log('#g【九尾】','出杀判定失败');
                         player.storage.successSha = false;
-                        // event.cancel();
-                        // result = {bool:false}; 
+                        var theParent = event.getParent('chooseToUse');
+                        if (theParent&&theParent.result){
+                            if (theParent.parent&&(theParent.parent.name=='phaseUse')||(theParent._modparent&&(game.online&&theParent._modparent.name=='phaseUse'))){
+                                // theParent.result.bool = false;
+                            }
+                            else{
+                                var theParent = event.getParent('chooseToUse');
+                                theParent.result = null;
+                                theParent.responded = false;
+                                player.addTempSkill('jiuwei_block', 'chooseToUseAfter'); 
+                                theParent.goto(0);
+                            }
+                            // game.resume();
+                        }
+                        event.finish();
                     }
                 },
 
@@ -5227,6 +5243,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}
 				}
 
+            },
+
+            'jiuwei_block':{
+                forced:true,
             },
 
             jiuwei_shou_tushan:{
@@ -7287,7 +7307,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return true;
                 },
                 content:function(event){
-                    if (trigger.name != "enterGame"){
+                    'step 0'
+                    if (trigger.name == "enterGame"){
+                        event.finish();
+                    }
+                    'step 1'
+                    player.chooseBool(get.prompt('rongyan_yan'),'你每受到一次伤害，可获得一个炎印记。').set('ai',function(){
+                        return true;
+                    });
+                    'step 2'
+                    if (result.bool){
                         if (!player.storage.rongyan_gain_yan){
                             player.storage.rongyan_gain_yan = 1;
                             
@@ -7299,9 +7328,34 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         player.markSkill('rongyan_gain_yan');
                         // game.playAudioVideoBroadCast('skill','rongyan_gain_yan'+Math.ceil(2*Math.random()));
-                        player.logSkill('rongyan_gain_yan');
+                        
+                        // player.logSkill('rongyan_gain_yan');
+                        player.logSkillColor('rongyan_gain_yan',undefined,false,'soil',false,false);
+                        
                         game.log(player,'获得1个炎印记');
                     }
+                    else{
+                        event.finish();
+                    }
+
+                    // if (trigger.name != "enterGame"){
+                    //     if (!player.storage.rongyan_gain_yan){
+                    //         player.storage.rongyan_gain_yan = 1;
+                            
+                    //         player.syncStorage('rongyan_gain_yan');
+                    //     }
+                    //     else {
+                    //         player.storage.rongyan_gain_yan++;
+                    //         player.syncStorage('rongyan_gain_yan');
+                    //     }
+                    //     player.markSkill('rongyan_gain_yan');
+                    //     // game.playAudioVideoBroadCast('skill','rongyan_gain_yan'+Math.ceil(2*Math.random()));
+                        
+                    //     // player.logSkill('rongyan_gain_yan');
+                    //     player.logSkillColor('rongyan_gain_yan',undefined,false,'soil',false,false);
+                        
+                    //     game.log(player,'获得1个炎印记');
+                    // }
                     
                 },
             },
@@ -7366,7 +7420,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                         }
                         
-                        player.logSkill('rongyan_huo_silent_yan');
+                        // player.logSkill('rongyan_huo_silent_yan');
+                        player.logSkillColor('rongyan_huo_silent_yan',undefined,false,'soil',false,false);
                         game.log(player,'令此伤害为火焰伤害，并横置伤害目标');
                     }
                 }
@@ -7417,7 +7472,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if (result.bool) {
                         game.log(player,'失去1个炎印记');
-                        player.logSkill('rongyan_save_yan');
+
+                        // player.logSkill('rongyan_save_yan');
+                        player.logSkillColor('rongyan_save_yan',undefined,false,'soil',false,false);
+
                         player.storage.rongyan_gain_yan--;
                         player.syncStorage('rongyan_gain_yan');
                         if (trigger.player == player){
@@ -7663,6 +7721,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             yuzhong_attack_yan:{
                 // audio:'yuzhong_yan',
+                direct:true,
                 forced:true,
                 locked:true,
                 popup:"愚忠",
@@ -7675,13 +7734,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content(event){
                     "step 0"
                     if (!player.isTurnedOver()){
-                        game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                        // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         game.log(player,"正面朝上，发动技能","#g【愚忠】","，摸一张牌");
                         player.draw(1);
                         trigger.player.line(player,'fire');
                     }
                     else{
-                        game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                        // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         game.log(player,"背面朝上，发动技能","#g【愚忠】","，",trigger.player,"摸一张牌");
                         trigger.player.draw(1);
                         player.line(trigger.player,'fire');
@@ -7690,7 +7751,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (trigger.player.isTurnedOver()){
                         trigger.cancel();
                         trigger.player.turnOver();
-                        game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                        // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         game.log(trigger.player,"背面朝上，",player,"发动技能","#g【愚忠】","，防止此伤害并令",trigger.player,"翻回正面");
                         player.line(trigger.player,'green');
                     }
@@ -7700,6 +7762,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             
             yuzhong_damage_yan:{
                 // audio:'yuzhong_yan',
+                direct:true,
                 forced:true,
                 locked:true,
                 popup:"愚忠",
@@ -7712,18 +7775,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content(event){
                     "step 0"
                     if (trigger.nature == 'fire'&& trigger.notLink() && player.isLinked()){
-                        game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                        // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         game.log(player,"是铁索传导的起点，火焰伤害+1");
                         trigger.num++;
                     }
                     "step 1"
                     if (trigger.card && get.type(trigger.card, 'trick') == 'trick'){
-                        game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                        // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         game.log(player,"受到锦囊牌伤害+1");
                         trigger.num++;
                     }
                     else if (!trigger.card){
-                        game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
+                        player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
+                        // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
                         game.log(player,"受到非卡牌伤害-1");
                         trigger.num--;
                     }
