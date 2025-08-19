@@ -6807,11 +6807,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 1'
                     if (result.bool){
                         player.chooseTarget("请选择一名角色，令其使用"+get.translation(trigger.card), function(card, player, target) {
-                            var type=get.subtype(trigger.card);
+                            var type=get.subtype(_status.event.triggerCard);
                             return (target != player || target == player)&&!target.isDisabled(type); // 筛选目标：背面朝上的角色，且不能是自己
                         }).set('ai', function(target) {
                             return get.attitude(player, target);
-                        });
+                        })
+                        .set('triggerCard',trigger.card);
                     }
                     else{
                         event.finish();
@@ -14520,6 +14521,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.loseHp(1);
                         player.storage.yujiu_hp_heng++;
                         player.syncStorage('yujiu_hp_heng');
+                        player.markSkill('yujiu_hp_heng');
                     }
                 },
                 mod:{
@@ -18305,6 +18307,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             if (get.type2(magic)==get.type2(i,trigger.hs.contains(i)?player:false)){
                                 player.storage.yunv_kong_gui_markcount++;
                                 player.syncStorage('yunv_kong_gui');
+                                game.broadcastAll(function(player,storage,markcount){
+                                    player.storage = storage;
+                                    player.storage.yunv_kong_gui_markcount = markcount;
+                                    player.markSkill('yunv_kong_gui');
+                                },player,player.storage,player.storage.yunv_kong_gui_markcount);
                             }
                         }
 					}
@@ -18321,12 +18328,22 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         event.goto(1);
                     }
 					else {
+                        game.broadcastAll(function(player,storage,markcount){
+                            player.storage = storage;
+                            player.storage.yunv_kong_gui_markcount = markcount;
+                        },player,player.storage,player.storage.yunv_kong_gui_markcount);
                         player.syncStorage('yunv_kong_gui');
                         player.markSkill('yunv_kong_gui');
                         event.finish();
                     }
                     'step 1'
                     player.unmarkSkill('yunv_kong_gui');
+                    game.broadcastAll(function(player,storage){
+                        player.storage = storage;
+                        if (player.storage.yunv_kong_gui_markcount){
+                            delete player.storage.yunv_kong_gui_markcount;
+                        }
+                    },player,player.storage);
                     game.log(player,'失去','#g【驭】');
                     player.removeSkill('yunv_kong_gui');
 				},

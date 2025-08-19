@@ -11423,6 +11423,7 @@
 					}
 					'step 1'
 					if(result&&result.bool){
+						game.playAudioNoAddVideo('effect','discard');
 						var hs=game.me.getCards('h')
 						for(var i=0;i<hs.length;i++){
 							hs[i].discard(false);
@@ -11438,6 +11439,15 @@
 					};
 					var sendback=function(result,player){
 						if(result&&result.bool){
+							// 让对应客户端自己播音效
+							if(player.isOnline2()){
+								player.send(function(){
+									game.playAudioNoAddVideo('effect','discard');
+								});
+							}
+							else if(player == game.me){
+								game.playAudioNoAddVideo('effect','discard');
+							}
 							var hs=player.getCards('h')
 							game.addVideo('lose',player,[get.cardsInfo(hs),[],[]]);
 							game.broadcastAll(function(player,hs){
@@ -16792,6 +16802,8 @@
 						linked:this.isLinked(),
 						turnedover:this.isTurnedOver(),
 						phaseNumber:this.phaseNumber,
+						marks:this.marks,
+						storage:this.storage,
 					}
 					for(var i=0;i<state.judges.length;i++){
 						state.views[i]=state.judges[i].viewAs;
@@ -17649,6 +17661,12 @@
 					// 		}
 					// 	}, this.playerid, skill, this.storage[skill]);
                     // }
+
+					//试试加入updateMark会怎么样，是否联网时也行了？
+					// for(var i in this.marks){
+					// 	this.updateMark(i);
+					// }
+
 					switch(get.itemtype(this.storage[skill])){
 						case 'cards':game.addVideo('storage',this,[skill,get.cardsInfo(this.storage[skill]),'cards']);break;
 						case 'card':game.addVideo('storage',this,[skill,get.cardInfo(this.storage[skill]),'card']);break;
@@ -26988,7 +27006,24 @@
 							player.hujia=info.hujia;
 							player.sex=info.sex;
 							player.side=info.side;
-							player.phaseNumber=info.phaseNumber,
+							player.phaseNumber=info.phaseNumber;
+
+							player.storage = info.storage;
+							// 恢复 marks
+							if(info.marks){
+								for(var markName in info.marks){
+									var markInfo = info.marks[markName];
+
+									if(lib.skill[markName]){
+										markInfo=lib.skill[markName].intro;
+									}
+									// 直接调用 player.mark 来生成 UI
+									// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
+									player.marks[markName] = player.mark(markName,markInfo);
+								}
+							}
+							
+							
 							player.setNickname();
 							if(info.dead){
 								player.classList.add('dead');
