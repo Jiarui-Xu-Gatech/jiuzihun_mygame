@@ -27064,7 +27064,7 @@
 									info.judges[i].viewAs=info.views[i];
 									info.judges[i].node.background.innerHTML=lib.translate[info.views[i]+'_bg']||get.translation(info.views[i])[0]
 								}
-								player.node.judges.appendChild(info.judges[i]);
+								player.node.judges.appendChild(get.infoCard(get.cardInfo(info.judges[i])));
 							}
 							ui.updatej(player);
 							if(!player.setModeState){
