@@ -2978,6 +2978,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         player.storage.wushi_fengyin = returnResult + str.slice(0,str.length-1);
                         player.syncStorage('wushi_fengyin');
+                        game.broadcastAll(function(player,str){
+                            player.storage.wushi_fengyin = str;
+                            player.markSkill('wushi_fengyin');
+                        },player,player.storage.wushi_fengyin);
                     }
                     else{
                         player.storage.wushi_fengyin =  returnResult;
@@ -2998,6 +3002,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (_status.video){
                             return player.storage.wushi_fengyin;
                         }
+                        if (player.storage.wushi_fengyin){
+                            return player.storage.wushi_fengyin;
+                        }
                         var returnResult = '非锁定技失效';
 						var list=[];
 						for(var i in player.disabledSkills){
@@ -3014,6 +3021,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							}
 							player.storage.wushi_fengyin = returnResult + str.slice(0,str.length-1);
                             player.syncStorage('wushi_fengyin');
+                            player.markSkill('wushi_fengyin');
 						}
                         else{
                             player.storage.wushi_fengyin =  returnResult;
@@ -13116,6 +13124,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         player.storage.ouni_fengyin = returnResult + str.slice(0,str.length-1);
                         player.syncStorage('ouni_fengyin');
+                        game.broadcastAll(function(player,str){
+                            player.storage.ouni_fengyin = str;
+                            player.markSkill('ouni_fengyin');
+                        },player,player.storage.ouni_fengyin);
                     }
                     else{
                         player.storage.ouni_fengyin =  returnResult;
@@ -13136,6 +13148,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (_status.video){
                             return player.storage.ouni_fengyin;
                         }
+                        if (player.storage.ouni_fengyin){
+                            return player.storage.ouni_fengyin;
+                        }
                         var returnResult = '非锁定技失效';
 						var list=[];
 						for(var i in player.disabledSkills){
@@ -13152,6 +13167,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							}
 							player.storage.ouni_fengyin = returnResult + str.slice(0,str.length-1);
                             player.syncStorage('ouni_fengyin');
+                            player.markSkill('ouni_fengyin');
 						}
                         else{
                             player.storage.ouni_fengyin =  returnResult;
@@ -17867,26 +17883,30 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                     //试验一下
                     var returnResult = '非锁定技失效';
-						var list=[];
-						for(var i in player.disabledSkills){
-							if(player.disabledSkills[i].contains(skill)){
-								list.push(i)
-							}
-						}
-						if(list.length){
-							var str='，失效技能：';
-							for(var i=0;i<list.length;i++){
-								if(lib.translate[list[i]+'_info']){
-									str+=get.translation(list[i])+'、';
-								}
-							}
-							player.storage.jieran_fengyin = returnResult + str.slice(0,str.length-1);
-                            player.syncStorage('jieran_fengyin');
-						}
-                        else{
-                            player.storage.jieran_fengyin =  returnResult;
-                            player.syncStorage('jieran_fengyin');
+                    var list=[];
+                    for(var i in player.disabledSkills){
+                        if(player.disabledSkills[i].contains(skill)){
+                            list.push(i)
                         }
+                    }
+                    if(list.length){
+                        var str='，失效技能：';
+                        for(var i=0;i<list.length;i++){
+                            if(lib.translate[list[i]+'_info']){
+                                str+=get.translation(list[i])+'、';
+                            }
+                        }
+                        player.storage.jieran_fengyin = returnResult + str.slice(0,str.length-1);
+                        player.syncStorage('jieran_fengyin');
+                        game.broadcastAll(function(player,str){
+                            player.storage.jieran_fengyin = str;
+                            player.markSkill('jieran_fengyin');
+                        },player,player.storage.jieran_fengyin);
+                    }
+                    else{
+                        player.storage.jieran_fengyin =  returnResult;
+                        player.syncStorage('jieran_fengyin');
+                    }
 
 				},
 				onremove:function(player,skill){
@@ -17900,6 +17920,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     name:'孑然',
 					content:function(storage,player,skill){
                         if (_status.video){
+                            return player.storage.jieran_fengyin;
+                        }
+                        if (player.storage.jieran_fengyin){
                             return player.storage.jieran_fengyin;
                         }
                         var returnResult = '非锁定技失效';
@@ -17918,6 +17941,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							}
 							player.storage.jieran_fengyin = returnResult + str.slice(0,str.length-1);
                             player.syncStorage('jieran_fengyin');
+                            player.markSkill('jieran_fengyin');
 						}
                         else{
                             player.storage.jieran_fengyin =  returnResult;
@@ -25012,12 +25036,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 str+=get.translation(list[i])+'、';
                             }
                         }
-                        player.storage.wushi_fengyin = returnResult + str.slice(0,str.length-1);
-                        player.syncStorage('wushi_fengyin');
+                        player.storage.wuci_fengyin = returnResult + str.slice(0,str.length-1);
+                        player.syncStorage('wuci_fengyin');
+                        game.broadcastAll(function(player,str){
+                            player.storage.wuci_fengyin = str;
+                            player.markSkill('wuci_fengyin');
+                        },player,player.storage.wuci_fengyin);
                     }
                     else{
-                        player.storage.wushi_fengyin =  returnResult;
-                        player.syncStorage('wushi_fengyin');
+                        player.storage.wuci_fengyin =  returnResult;
+                        player.syncStorage('wuci_fengyin');
                     }
 
 				},
@@ -25032,7 +25060,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     name:'无慈',
 					content:function(storage,player,skill){
                         if (_status.video){
-                            return player.storage.wushi_fengyin;
+                            return player.storage.wuci_fengyin;
+                        }
+                        if (player.storage.wuci_fengyin){
+                            return player.storage.wuci_fengyin;
                         }
                         var returnResult = '非锁定技失效';
 						var list=[];
@@ -25048,14 +25079,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 									str+=get.translation(list[i])+'、';
 								}
 							}
-							player.storage.wushi_fengyin = returnResult + str.slice(0,str.length-1);
-                            player.syncStorage('wushi_fengyin');
+							player.storage.wuci_fengyin = returnResult + str.slice(0,str.length-1);
+                            player.syncStorage('wuci_fengyin');
 						}
                         else{
-                            player.storage.wushi_fengyin =  returnResult;
-                            player.syncStorage('wushi_fengyin');
+                            player.storage.wuci_fengyin =  returnResult;
+                            player.syncStorage('wuci_fengyin');
                         }
-                        return player.storage.wushi_fengyin;
+                        return player.storage.wuci_fengyin;
                         
 					}
 				}
