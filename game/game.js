@@ -23374,6 +23374,89 @@
 						node.style.transform='scale(1.5)'
 					},avatar?1600:1400);
 				},
+				$fullscreenpopNoBroadcase:function(str,nature,avatar){
+					game.addVideo('fullscreenpop',this,[str,nature,avatar]);
+					var node=ui.create.div('.damage');
+					if(avatar&&this.node){
+						if(avatar=='vice'){
+							if(lib.character[this.name2]){
+								avatar=this.node.avatar2;
+							}
+						}
+						else{
+							if(lib.character[this.name]){
+								avatar=this.node.avatar;
+							}
+						}
+						if(!get.is.div(avatar)){
+							avatar=false;
+						}
+					}
+					else{
+						avatar=false;
+					}
+					if(avatar){
+						node.classList.add('fullscreenavatar');
+						ui.create.div('',ui.create.div(node));
+						// ui.create.div('',str.split('').join('<br>'),ui.create.div('.text.textbg',node));
+						ui.create.div('','<div>'+str.split('').join('</div><br><div>')+'</div>',ui.create.div('.text',node));
+						node.firstChild.firstChild.style.backgroundImage=avatar.style.backgroundImage;
+						node.dataset.nature=nature||'unknown';
+						var num=0;
+						var nodes=node.lastChild.firstChild.querySelectorAll('div');
+						var interval=setInterval(function(){
+							if(num<nodes.length){
+								nodes[num].classList.add('flashtext');
+								num++;
+							}
+							else{
+								clearInterval(interval);
+							}
+						},100);
+					}
+					else{
+						avatar=false;
+						node.innerHTML=str;
+						node.dataset.nature=nature||'soil';
+					}
+					if(avatar){
+						var rect1=ui.window.getBoundingClientRect();
+						var rect2=this.getBoundingClientRect();
+						var dx=Math.round(2*rect2.left+rect2.width-rect1.width);
+						var dy=Math.round(2*rect2.top+rect2.height-rect1.height);
+						node.style.transform='scale(0.5) translate('+dx+'px,'+dy+'px)';
+					}
+					ui.window.appendChild(node);
+					ui.refresh(node);
+					if(avatar){
+						node.style.transform='scale(1)';
+						node.style.opacity=1;
+					}
+					else{
+						node.classList.add('damageadded');
+						if (str == '鏖战模式'){
+							node.style.fontFamily = '"LishuCustom", "KaiTi", cursive'; // 选一个艺术字体
+							if (nature == 'fire'){
+								node.style.textShadow = `
+									rgba(178, 59, 2,1) 0 0 2px,
+									rgba(178, 59, 2,1) 0 0 5px,
+									rgba(178, 59, 2,1) 0 0 10px,
+									rgba(178, 59, 2,1) 0 0 10px
+								`;
+							}
+							else if (node.dataset.nature=='soil'){
+								node.dataset.nature = 'fire';
+							}
+						}
+						else{
+							node.style.fontFamily = '"xinwei", "xingkai", "KaiTi", cursive'; 
+						}
+					}
+					setTimeout(function(){
+						node.delete();
+						node.style.transform='scale(1.5)'
+					},avatar?1600:1400);
+				},
 				$damagepop:function(num,nature,font,nobroadcast){
 					if(typeof num=='number'||typeof num=='string'){
 						game.addVideo('damagepop',this,[num,nature,font]);
@@ -26297,7 +26380,7 @@
 						game.broadcast(function(player){
 							player.setNickname();
 						},player);
-						this.send('reinit',lib.configOL,get.arenaState(),game.getState?game.getState():{},game.ip,null,_status.onreconnect,game.getVideoName,lib.config.mode);
+						this.send('reinit',lib.configOL,get.arenaState(),game.getState?game.getState():{},game.ip,null,_status.onreconnect,game.getVideoName,lib.config.mode,_status._aozhan);
 					}
 					else if(version!=lib.versionOL){
 						this.send('denied','version');
@@ -26880,7 +26963,7 @@
 						}
 					}
 				},
-				reinit:function(config,state,state2,ip,observe,onreconnect,getVideoName,configmode){
+				reinit:function(config,state,state2,ip,observe,onreconnect,getVideoName,configmode,aozhan_bool){
 
 					//这里保证能存录像了
 					if(!_status.video){
@@ -27275,6 +27358,43 @@
 						}
 						ui.updatehl();
 						ui.create.connecting(true);
+
+						if (aozhan_bool){
+							var color=get.groupnature(game.me.group,"raw");
+							if(game.me.isUnseen()) color='fire';
+							player.$fullscreenpopNoBroadcase('鏖战模式',color); 
+							game.playAudio('effect','neiVSzhu');
+
+							_status._aozhan=true;
+							game.addVideo('aozhan_startfight');
+							ui.aozhan=ui.create.div('.touchinfo.left',ui.window);
+							ui.aozhan.innerHTML='鏖战模式';
+							if(ui.time3) ui.time3.style.display='none';
+							ui.aozhanInfo=ui.create.system('鏖战模式',null,true);
+							lib.setPopped(ui.aozhanInfo,function(){
+								var uiintro=ui.create.dialog('hidden');
+								uiintro.add('鏖战模式');
+								var list=[
+									'当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。',
+									'在鏖战模式下，任何角色均不是非转化的【桃】的合法目标。【桃】可以被当做【杀】或【闪】使用或打出。',
+									'进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。'
+								];
+								var intro='<ul style="text-align:left;margin-top:0;width:450px">';
+								for(var i=0;i<list.length;i++){
+									intro+='<li>'+list[i];
+								}
+								intro+='</ul>'
+								uiintro.add('<div class="text center">'+intro+'</div>');
+								var ul=uiintro.querySelector('ul');
+								if(ul){
+									ul.style.width='180px';
+								}
+								uiintro.add(ui.create.div('.placeholder'));
+								return uiintro;
+							},250);
+							game.playBackgroundMusic();
+						}
+
 					});
 				},
 				exec:function(func){
@@ -32880,7 +33000,11 @@
 					dialog.content.firstChild.innerHTML='平局';
 				}
 				ui.update();
-				dialog.add(ui.create.div('.placeholder'));
+
+				
+				// dialog.add(ui.create.div('.placeholder'));
+
+
 				// for(var i=0;i<game.players.length;i++){
 				// 	var hs=game.players[i].getCards('h');
 				// 	if(hs.length){
@@ -32897,7 +33021,9 @@
 				// 	}
 				// }
 				
-				dialog.add(ui.create.div('.placeholder.slim'));
+				// dialog.add(ui.create.div('.placeholder.slim'));
+
+
 				if(lib.config.background_audio){
 					if(result2===true){
 						game.playBackgroundMusic();

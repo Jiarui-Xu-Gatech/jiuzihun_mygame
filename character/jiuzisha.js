@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",160,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','jiuwei_tushan','yuner_giveCard','jibian_shou'],[]],
+            // yuner:["female","qun",160,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard','pini_tu'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -20338,7 +20338,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(event.getParent().triggeredTargets3.length>1) return false;
                     if(!['basic','trick'].contains(get.type(event.card))) return false;
                     var has_nopini=game.hasPlayer(function(current){
-                        if (event.targets.contains(current)&&!current.hasSkill('pini_tu2')&&current.countCards('he')>0){
+                        //睥睨修改前
+                        // if (event.targets.contains(current)&&!current.hasSkill('pini_tu2')&&current.countCards('he')>0){
+                        if (event.targets.contains(current)&&current.countCards('he')>0){
                             return true;
                         }
                     });
@@ -20349,12 +20351,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function (event){
                     'step 0'
                     event.howManyPlayer = game.countPlayer(function(current){
-                        if (trigger.targets.contains(current)&&!current.hasSkill('pini_tu2')&&current.countCards('he')>0){
+                        //睥睨修改前
+                        // if (trigger.targets.contains(current)&&!current.hasSkill('pini_tu2')&&current.countCards('he')>0){
+                        if (trigger.targets.contains(current)&&current.countCards('he')>0){
                             return true;
                         }
                     });
                     player.chooseTarget(get.prompt2('pini_tu'),[1,event.howManyPlayer],function(card,player,target){
-                        return _status.event.targets.contains(target)&&!target.hasSkill('pini_tu2')&&target.countCards('he')>0;
+                        //睥睨修改前
+                        // return _status.event.targets.contains(target)&&!target.hasSkill('pini_tu2')&&target.countCards('he')>0;
+                        return _status.event.targets.contains(target)&&target.countCards('he')>0;
                     }).set('ai',function(target){
                         //被迫在这里限制火攻的发挥，不然火攻每次都打不中。
                         // if (get.name(trigger.card)=='huogong'&&target.countCards('h')<=target.hp){
@@ -20424,9 +20430,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         new Map(result.links.map(item => [item.cardid, item])).values()
                         );
                         event.allTargets[event.targetIndex].$give(result.links.length,event.allTargets[event.targetIndex],false);
-                        event.allTargets[event.targetIndex].storage.pini_tu2=result.links.slice(0);
-                        // game.addVideo('storage',event.allTargets[event.targetIndex],['pini_tu2',get.cardsInfo(event.allTargets[event.targetIndex].storage.pini_tu2),'cards']);
-                        event.allTargets[event.targetIndex].addTempSkill('pini_tu2');
+                        if (!event.allTargets[event.targetIndex].hasSkill('pini_tu2')){
+                            event.allTargets[event.targetIndex].addTempSkill('pini_tu2');
+                        }
+                        if (event.allTargets[event.targetIndex].storage.pini_tu2){
+                            event.allTargets[event.targetIndex].storage.pini_tu2=event.allTargets[event.targetIndex].storage.pini_tu2.concat(result.links.slice(0));
+                        }
+                        else{
+                            event.allTargets[event.targetIndex].storage.pini_tu2=result.links.slice(0);
+                        }
                         event.allTargets[event.targetIndex].syncStorage('pini_tu2');
 						event.allTargets[event.targetIndex].lose(result.links,ui.special,'toStorage');
                         event.allTargets[event.targetIndex].markSkill('pini_tu2');
@@ -27300,7 +27312,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             fuyun_tu2:"浮云",
             fuyun_tu2_bg:"☁",//"&#x2601;&#xFE0E;",//"☁",
             'pini_tu':"睥睨",
-            'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名未因此技能扣置过牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
+            //睥睨修改前的
+            // 'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名未因此技能扣置过牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
+            'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名有牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
             pini_tu2:"睥睨",
             pini_tu2_bg:'👁',//'&#x1F441;&#xFE0E;',//'✧',
 
