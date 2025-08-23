@@ -26380,7 +26380,7 @@
 						game.broadcast(function(player){
 							player.setNickname();
 						},player);
-						this.send('reinit',lib.configOL,get.arenaState(),game.getState?game.getState():{},game.ip,null,_status.onreconnect,game.getVideoName,lib.config.mode,_status._aozhan);
+						this.send('reinit',lib.configOL,get.arenaState(),game.getState?game.getState():{},game.ip,null,_status.onreconnect,game.getVideoName,lib.config.mode,_status._aozhan,game.getIdentityList2,game.getUpperBackgroundName('',undefined),game.reinitCreateClearBackground);
 					}
 					else if(version!=lib.versionOL){
 						this.send('denied','version');
@@ -26963,7 +26963,7 @@
 						}
 					}
 				},
-				reinit:function(config,state,state2,ip,observe,onreconnect,getVideoName,configmode,aozhan_bool){
+				reinit:function(config,state,state2,ip,observe,onreconnect,getVideoName,configmode,aozhan_bool,getIdentityList2,upperBackgoundPictureName,reinitCreateClearBackground){
 
 					//这里保证能存录像了
 					if(!_status.video){
@@ -27046,29 +27046,33 @@
 
 					//在这里加入录像
 					var stateVideo = get.parsedResult(state);
+					var state_origin = state;
 					for(var i in stateVideo.players){
 						var po = stateVideo.players[i].position;
 						var player = (po < MePos? po - MePos + parseInt(stateVideo.number):po - MePos).toString();
 						var info = stateVideo.players[i];
-						for (var skill in info.storage){
-							switch(get.itemtype(info.storage[skill])){
-								case 'cards':game.addVideo('reinitStorage',player,[skill,get.cardsInfo(info.storage[skill]),'cards']);break;
-								case 'card':game.addVideo('reinitStorage',player,[skill,get.cardInfo(info.storage[skill]),'card']);break;
-								default:
-								try{
-									game.addVideo('reinitStorage',player,[skill,JSON.parse(JSON.stringify(info.storage[skill]))]);
-								}
-								catch(e){
-									console.log(info.storage[skill]);
-								}
-							}
+
+						// for (var skill in info.storage){
+						// 	switch(get.itemtype(info.storage[skill])){
+						// 		case 'cards':game.addVideo('reinitStorage',player,[skill,get.cardsInfo(info.storage[skill]),'cards']);break;
+						// 		case 'card':game.addVideo('reinitStorage',player,[skill,get.cardInfo(info.storage[skill]),'card']);break;
+						// 		default:
+						// 		try{
+						// 			game.addVideo('reinitStorage',player,[skill,JSON.parse(JSON.stringify(info.storage[skill]))]);
+						// 		}
+						// 		catch(e){
+						// 			console.log(info.storage[skill]);
+						// 		}
+						// 	}
+						// }
+						// if(info.marks){
+						// 	for(var markName in info.marks){
+						// 		game.addVideo('reinitMark',player,[markName]);
+						// 	}
+						// }
+						if (info.nickname){
+							game.addVideo('reinitSetNickname',player,info.nickname);
 						}
-						if(info.marks){
-							for(var markName in info.marks){
-								game.addVideo('reinitMark',player,[markName]);
-							}
-						}
-						game.addVideo('reinitSetNickname',player,info.nickname);
 						if(info.dead){
 							game.addVideo('reinitDie',player);
 						}
@@ -27224,20 +27228,24 @@
 							// 		}
 							// 	}
 							// }
-							// 恢复 marks
-							if(info.marks){
-								for(var markName in info.marks){
-									var markInfo = info.marks[markName];
 
-									if(lib.skill[markName]){
-										markInfo=lib.skill[markName].intro;
-									}
-									// 直接调用 player.mark 来生成 UI
-									// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
-									player.marks[markName] = player.mark(markName,markInfo);
-									// game.addVideo('reinitMark',player.dataset.position.toString(),[markName]);
-								}
-							}
+
+
+
+							// // 恢复 marks
+							// if(info.marks){
+							// 	for(var markName in info.marks){
+							// 		var markInfo = info.marks[markName];
+
+							// 		if(lib.skill[markName]){
+							// 			markInfo=lib.skill[markName].intro;
+							// 		}
+							// 		// 直接调用 player.mark 来生成 UI
+							// 		// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
+							// 		player.marks[markName] = player.mark(markName,markInfo);
+							// 		// game.addVideo('reinitMark',player.dataset.position.toString(),[markName]);
+							// 	}
+							// }
 							
 							
 							player.setNickname();
@@ -27359,6 +27367,9 @@
 						ui.updatehl();
 						ui.create.connecting(true);
 
+						reinitCreateClearBackground(upperBackgoundPictureName,undefined);
+						game.addVideo('reinitCreateClearBackground','0',upperBackgoundPictureName);
+
 						if (aozhan_bool){
 							var color=get.groupnature(game.me.group,"raw");
 							if(game.me.isUnseen()) color='fire';
@@ -27393,6 +27404,54 @@
 								return uiintro;
 							},250);
 							game.playBackgroundMusic();
+						}
+
+						if (getIdentityList2){
+							game.getIdentityList2 = getIdentityList2;
+						}
+
+						var stateVideo2 = get.parsedResult(state_origin);
+						for(var i in lib.playerOL){
+							var player = lib.playerOL[i];
+
+							player.storage = stateVideo2.players[i].storage;
+							var info = stateVideo2.players[i];
+
+
+							// 恢复 marks
+							if(info.marks){
+								for(var markName in info.marks){
+									var markInfo = info.marks[markName];
+
+									if(lib.skill[markName]){
+										markInfo=lib.skill[markName].intro;
+									}
+									// 直接调用 player.mark 来生成 UI
+									// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
+									player.marks[markName] = player.mark(markName,markInfo);
+									// game.addVideo('reinitMark',player.dataset.position.toString(),[markName]);
+								}
+							}
+
+							for (var skill in info.storage){
+								switch(get.itemtype(info.storage[skill])){
+									case 'cards':game.addVideo('reinitStorage',player,[skill,get.cardsInfo(info.storage[skill]),'cards']);break;
+									case 'card':game.addVideo('reinitStorage',player,[skill,get.cardInfo(info.storage[skill]),'card']);break;
+									default:
+									try{
+										game.addVideo('reinitStorage',player,[skill,JSON.parse(JSON.stringify(info.storage[skill]))]);
+									}
+									catch(e){
+										console.log(skill);
+										console.log(info.storage[skill]);
+									}
+								}
+							}
+							if(info.marks){
+								for(var markName in info.marks){
+									game.addVideo('reinitMark',player,[markName]);
+								}
+							}
 						}
 
 					});
@@ -27605,7 +27664,7 @@
 			return node;
 		},
 		getUpperBackgroundName:function(src,player){
-			game.addVideo('getUpperBackgroundName',player,src);
+			// game.addVideo('getUpperBackgroundName',player,src);
 			var current=document.body.querySelector('.background.upper');
 			var result = '';
 			if(current){
@@ -27680,6 +27739,28 @@
 			// 		node.classList.remove('hidden'); // 渐显新背景
 			// 	}, 50);
 			// }
+			
+		},
+		reinitCreateClearBackground:function(src,player){
+			var current=document.body.querySelector('.background.upper');
+			if (current) {
+				current.classList.add('hidden'); // 先隐藏旧背景，触发渐隐
+				setTimeout(() => {
+					current.remove(); // 过渡完成后删除
+				}, 300);
+			}
+			if (src != ''){
+				var node=ui.create.div('.background.upper',document.body);
+				node.setBackgroundImage('image/background/'+src+'.jpg');
+				node.style.backgroundSize='cover';
+				node.style.backgroundPosition='50% 50%';
+
+				node.classList.add('hidden'); // 先隐藏，避免瞬间切换的突兀感
+				ui.refresh(node);
+				setTimeout(() => {
+					node.classList.remove('hidden'); // 渐显新背景
+				}, 50);
+			}
 			
 		},
 		deleteClearBackground:function(src,player){
@@ -29340,10 +29421,6 @@
 						ui.refresh(ui.arena);
 						ui.arena.show();
 						game.players[i].init(players[i].name,players[i].name2);
-						console.log(content);
-						console.log(game.players[i])
-						console.log(get.translation(players[i].side+'Zhu'))
-						console.log(get.translation(players[i].side+'Color'))
 						game.players[i].node.identity.firstChild.innerHTML=get.translation(players[i].side+'Zhu');
 						game.players[i].node.identity.dataset.color=get.translation(players[i].side+'Color');
 						// game.players[i].node.identity.firstChild.innerHTML=players[i].identity;
@@ -29605,6 +29682,9 @@
 			},
 			createClearBackground:function(player,src){
 				game.createClearBackground(src,player);
+			},
+			reinitCreateClearBackground:function(player,src){
+				game.reinitCreateClearBackground(src,player);
 			},
 			dieShowIdentity:function(player,identity){
 				player.node.identity.firstChild.innerHTML=get.translation(identity+'_bg');	
@@ -30495,6 +30575,11 @@
 					},500);
 				}
 			},
+			reinitSetNickname:function(player,str){
+				if (str!=''&&player.node&&player.node.nameol){
+					player.node.nameol.innerHTML=str;
+				}
+			},
 			reinitDie:function(player){
 				if(!player){
 					console.log('reinitDie');
@@ -31320,7 +31405,7 @@
 				}
 				else{
 
-					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage'];
+					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground'];
 
 					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
