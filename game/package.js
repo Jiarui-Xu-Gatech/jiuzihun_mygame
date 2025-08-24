@@ -181,6 +181,7 @@ window.noname_package={
 		music_weare:'海盗宝藏',
 		music_buwu:'天下布武',
 		music_ninelie:'王冠之战',
+		music_fantasyThreeKingdoms:'幻想三国',		
 		music_steinsOverture:'命运序曲',
 		music_taoyuanjieyi:'桃园结义',
 		music_siji:'四季',

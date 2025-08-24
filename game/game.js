@@ -32529,11 +32529,11 @@
 				if(lib.config.background_audio){
 					if(result===true){
 						game.playBackgroundMusic();
-						game.playAudio('effect','win'+Math.ceil(4*Math.random()));
+						game.playAudio('effect','win'+Math.ceil(6*Math.random()));
 					}
 					else if(result===false){
 						game.playBackgroundMusic();
-						game.playAudio('effect','lose'+Math.ceil(5*Math.random()));
+						game.playAudio('effect','lose'+Math.ceil(6*Math.random()));
 						// game.playAudio('effect','lose'+5);
 					}
 					else{
@@ -33187,11 +33187,11 @@
 				if(lib.config.background_audio){
 					if(result2===true){
 						game.playBackgroundMusic();
-						game.playAudio('effect','win'+Math.ceil(4*Math.random()));
+						game.playAudio('effect','win'+Math.ceil(6*Math.random()));
 					}
 					else if(result2===false){
 						game.playBackgroundMusic();
-						game.playAudio('effect','lose'+Math.ceil(5*Math.random()));
+						game.playAudio('effect','lose'+Math.ceil(6*Math.random()));
 						// game.playAudio('effect','lose'+5);
 					}
 					else{
