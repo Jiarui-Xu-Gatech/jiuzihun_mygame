@@ -27413,26 +27413,8 @@
 						var stateVideo2 = get.parsedResult(state_origin);
 						for(var i in lib.playerOL){
 							var player = lib.playerOL[i];
-
-							player.storage = stateVideo2.players[i].storage;
 							var info = stateVideo2.players[i];
-
-
-							// 恢复 marks
-							if(info.marks){
-								for(var markName in info.marks){
-									var markInfo = info.marks[markName];
-
-									if(lib.skill[markName]){
-										markInfo=lib.skill[markName].intro;
-									}
-									// 直接调用 player.mark 来生成 UI
-									// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
-									player.marks[markName] = player.mark(markName,markInfo);
-									// game.addVideo('reinitMark',player.dataset.position.toString(),[markName]);
-								}
-							}
-
+							player.storage = info.storage;
 							for (var skill in info.storage){
 								switch(get.itemtype(info.storage[skill])){
 									case 'cards':game.addVideo('reinitStorage',player,[skill,get.cardsInfo(info.storage[skill]),'cards']);break;
@@ -27447,11 +27429,36 @@
 									}
 								}
 							}
+
+
+							// 恢复 marks
 							if(info.marks){
 								for(var markName in info.marks){
+									var markInfo = info.marks[markName];
+									var markChar = false;
+									if(lib.skill[markName]){
+										markInfo=lib.skill[markName].intro;
+										if (lib.skill[markName].mark == 'character'){
+											markChar = true;
+										}
+									}
+									// 直接调用 player.mark 来生成 UI
+									// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
+									player.marks[markName] = player.mark(markName,markInfo);
 									game.addVideo('reinitMark',player,[markName]);
+									if (markChar){
+										var target = player.storage[markName];
+										if(typeof target=='object'){
+											target=target.name;
+										}
+										player.marks[markName].querySelector('.background').innerHTML = '';
+										player.marks[markName].querySelector('.background.skillmark').innerHTML = '';
+										player.marks[markName].setBackground(target,'character');
+										game.addVideo('reinitMarkCharacter',player,[markName,target]);
+									}
 								}
 							}
+
 						}
 
 					});
@@ -30774,6 +30781,13 @@
 					player.marks[content.id].setBackground(content.target,'character');
 				}
 			},
+			reinitMarkCharacter:function(player,content){
+				if(player&&content&&player.marks[content[0]]){
+					player.marks[content[0]].querySelector('.background').innerHTML = '';
+					player.marks[content[0]].querySelector('.background.skillmark').innerHTML = '';
+					player.marks[content[0]].setBackground(content[1],'character');
+				}
+			},
 			mark:function(player,content){
 				if(player&&content){
 					var mark=player.mark(content.id,content);
@@ -31404,8 +31418,7 @@
 					return;
 				}
 				else{
-
-					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground'];
+					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter'];
 
 					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
