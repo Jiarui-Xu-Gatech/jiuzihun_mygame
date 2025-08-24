@@ -27334,8 +27334,13 @@
 									info.judges[i].viewAs=info.views[i];
 									info.judges[i].node.background.innerHTML=lib.translate[info.views[i]+'_bg']||get.translation(info.views[i])[0]
 								}
-								player.node.judges.appendChild(get.infoCard(get.cardInfo(info.judges[i])));
-								// game.addVideo('reinitJudge',player,[get.cardInfo(info.judges[i])]);
+								var info_new_judge = get.infoCard(get.cardInfo(info.judges[i]));
+								//这里我应该怎么操作才能把info.judges[i]里面的其他信息全部掏出来给info_new_judge呢？你都已经知道了card的所有features，把info.judges[i]除了背景以外的其他东西都掏出来给info_new_judge为什么办不到呢？
+								//以下这样就可以！！！！
+								info_new_judge.cardid = info.judges[i].cardid;
+								lib.cardOL[info.judges[i].cardid] = info_new_judge;
+
+								player.node.judges.appendChild(info_new_judge);
 							}
 							ui.updatej(player);
 							if(!player.setModeState){
