@@ -20180,6 +20180,42 @@
 					},this.storage[name],this,name,info,card);
 					return this;
 				},
+				onlineMarkSkill:function(name,info,card){
+					if(info===true){
+						this.syncStorage(name);
+						info=null;
+					}
+					var storage = this.storage[name];
+					var player = this;
+					if(storage!=undefined){
+						player.storage[name]=storage;
+					}
+					if(!info){
+						if(player.marks[name]){
+							player.updateMarks();
+							return;
+						}
+						if(lib.skill[name]){
+							info=lib.skill[name].intro;
+						}
+						if(!info){
+							return;
+						}
+					}
+					if(player.marks[name]){
+						player.marks[name].info=info;
+					}
+					else{
+						if(card){
+							player.marks[name]=player.mark(card,info,name);
+						}
+						else{
+							player.marks[name]=player.mark(name,info);
+						}
+					}
+					player.updateMarks();
+					return this;
+				},
 				unmarkSkill:function(name){
 					game.addVideo('unmarkSkill',this,name);
 					game.broadcast(function(player,name){
@@ -20620,13 +20656,20 @@
 						}
 					}
 					else{
-						if(this.skills.contains(skill)) return;
 						var info=lib.skill[skill];
+						if(this.skills.contains(skill)) {
+							// if (game.online && info.mark){
+							// 	this.send(function(player,skill){
+							// 		player.onlineMarkSkill(skill);
+							// 	},this,skill);
+							// }
+							return;
+						}
 						if(!info) return;
 						if(!nobroadcast){
-							game.broadcast(function(player,skill){
+							game.broadcast(function(player,skill,info){
 								player.skills.add(skill);
-							},this,skill);
+							},this,skill,info);
 						}
 						this.skills.add(skill);
 						this.addSkillTrigger(skill);
@@ -20672,6 +20715,7 @@
 								this.markSkillCharacter(skill,this.storage[skill],caption,intro);
 							}
 							else{
+								//原来的代码
 								this.markSkill(skill);
 							}
 						}
@@ -26391,7 +26435,7 @@
 					else if(!_status.waitingForPlayer){
 						if(game.phaseNumber&&lib.configOL.observe){
 							lib.node.observing.push(this);
-							this.send('reinit',lib.configOL,get.arenaState(),game.getState?game.getState():{},game.ip,game.players[0].playerid);
+							this.send('reinit',lib.configOL,get.arenaState(),game.getState?game.getState():{},game.ip,game.players[0].playerid,null,game.getVideoName,lib.config.mode,_status._aozhan,game.getIdentityList2,game.getUpperBackgroundName('',undefined),game.reinitCreateClearBackground);
 							if(!ui.removeObserve){
 								ui.removeObserve=ui.create.system('移除旁观',function(){
 									lib.configOL.observe=false;
@@ -27446,7 +27490,12 @@
 									// 直接调用 player.mark 来生成 UI
 									// markInfo 可能是数量，也可能是对象，根据你服务端保存的格式决定
 									player.marks[markName] = player.mark(markName,markInfo);
-									game.addVideo('reinitMark',player,[markName]);
+									if (lib.skill[markName].mark==true&&lib.character[player.name]&&lib.character[player.name][3]&&lib.character[player.name][3].contains(markName)){
+										//player.update那里存了录像了，这里就不存了，不然录像里会有两个重复的mark
+									}
+									else{
+										game.addVideo('reinitMark',player,[markName]);
+									}
 									if (markChar){
 										var target = player.storage[markName];
 										if(typeof target=='object'){

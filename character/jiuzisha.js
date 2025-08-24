@@ -4819,14 +4819,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             haoyin_tushan:{
                 audio:2,
                 frequent:false,
-				trigger:{player:'phaseDrawBegin2'},
+				trigger:{
+                    player:['phaseDrawBegin2'],
+                },
                 mark:true,
                 marktext:"尾",
                 intro:{
                     name:"尾",
                     content:function(storage, player) {
                         // 检查 player.storage.haoyin_tushan 是否存在，若不存在则显示为 0
-                        var count = player.storage.haoyin_tushan || 0;
+                        var count = 0;
+                        if (player.storage){
+                            count = player.storage.haoyin_tushan || 0;
+                        }
                         return `已获得${count}个尾印记`;
                     },
                 },
@@ -4900,11 +4905,25 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
 				},
+                group:['haoyin_tushan_mark'],
                 ai:{
 					threaten:0.3,
 					// expose:0.1,
 				}
                 
+            },
+
+            haoyin_tushan_mark:{
+                audio:false,
+                forced:true,
+                direct:true,
+                trigger:{
+                    player:["enterGame"],
+                    global:'gameDrawAfter',
+                },
+                content:function(event){
+                    player.markSkill('haoyin_tushan');
+                },
             },
 
             
@@ -23742,18 +23761,29 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 direct:true,
 				intro:{
                     name:function(storage,player,skill){
+                        if (!player.storage){
+                            return '暗爪·阳';
+                        }
 						if(player.storage.anzhua_qian==true) return '暗爪·阴';
 						return '暗爪·阳';
 					},
 					content:function(storage,player,skill){
+                        if (!player.storage){
+                            return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【桃】。';
+                        }
 						if(player.storage.anzhua_qian==true) return '锁定技，当你对一名角色造成伤害之前，若其在你攻击范围内，你增加一点体力上限并防止此伤害，并令该角色失去1点体力。';
 						return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【桃】。';
 					},
 				},
                 trigger:{
+                    player:["enterGame"],
+                    global:'gameDrawAfter',
 					source:'damageBefore',
 				},
                 filter:function(trigger,player){
+                    if (trigger.name!='damage'){
+                        return true;
+                    }
                     if (player.storage.anzhua_qian==true){
                         //阴
                         return player.inRange(trigger.player)||player==trigger.player;
@@ -23765,6 +23795,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
+                    if (trigger.name!='damage'){
+                        player.markSkill('anzhua_qian');
+                        event.finish();
+                        return;
+                    }
                     player.logSkillColor("anzhua_qian",undefined,false,'thunder',true,true);
                     // player.popup('暗爪','thunder');
                     player.line(trigger.player,'green');
@@ -23788,6 +23823,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         //阴
 						player.storage.anzhua_qian=false;
                         player.syncStorage('anzhua_qian');
+                        game.broadcastAll(function(player,anzhua_qian){
+                            player.storage.anzhua_qian = anzhua_qian;
+                            player.update();
+                        },player,player.storage.anzhua_qian);
+                        player.markSkill('anzhua_qian');
                         game.playAudioVideoBroadCast('effect','boundSound');
                         player.gainMaxHp(1);
                         event.goto(2);
@@ -23795,6 +23835,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         //阳
 						player.storage.anzhua_qian=true;
                         player.syncStorage('anzhua_qian');
+                        game.broadcastAll(function(player,anzhua_qian){
+                            player.storage.anzhua_qian = anzhua_qian;
+                            player.update();
+                        },player,player.storage.anzhua_qian);
+                        player.markSkill('anzhua_qian');
                         game.playAudioVideoBroadCast('effect','damage');
                         trigger.num++;
                         if (player.maxHp <= 1){
