@@ -16807,6 +16807,7 @@
 						isUnseen0:this.isUnseen(0),
 						isUnseen1:this.isUnseen(1),
 						jiuNode:this.node.jiu&&lib.config.jiu_effect,
+						isCurrentPhase:this == _status.currentPhase,
 					}
 					for(var i=0;i<state.judges.length;i++){
 						state.views[i]=state.judges[i].viewAs;
@@ -27119,6 +27120,7 @@
 							game.addVideo('reinitSetNickname',player,info.nickname);
 						}
 						if(info.dead){
+							game.addVideo('reinitSetIdentity',player,info.identity?info.identity:'');
 							game.addVideo('reinitDie',player);
 						}
 						if(info.linked){
@@ -27518,6 +27520,13 @@
 								player.node.jiu=ui.create.div('.playerjiu',player.node.avatar);
 								player.node.jiu2=ui.create.div('.playerjiu',player.node.avatar2);
 								game.addVideo('reinitJiuNode',player);
+							}
+
+							if (info.isCurrentPhase){
+								if(lib.config.glow_phase){
+									player.classList.add('glow_phase');
+								}
+								game.addVideo('reinitPhaseChange',player);
 							}
 
 							player.update();
@@ -29963,6 +29972,21 @@
 					console.log(player);
 				}
 			},
+			reinitPhaseChange:function(player){
+				if(player){
+					var glowing=document.querySelector('.glow_phase');
+					if(glowing){
+						glowing.classList.remove('glow_phase');
+					}
+					if(lib.config.glow_phase){
+						player.classList.add('glow_phase');
+						// player.dataset.glow_phase=lib.config.glow_phase;
+					}
+				}
+				else{
+					console.log(player);
+				}
+			},
 			playerfocus:function(player,time){
 				if(player&&player.playerfocus){
 					player.playerfocus(time);
@@ -30278,7 +30302,15 @@
 					player.setIdentity(identity);
 				}
 				else{
-					console.log(num);
+					console.log(player);
+				}
+			},
+			reinitSetIdentity:function(player,identity){
+				if(player&&identity){
+					player.setIdentity(identity);
+				}
+				else{
+					console.log(player);
 				}
 			},
 			showCharacter:function(player,num){
@@ -31485,7 +31517,7 @@
 					return;
 				}
 				else{
-					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter','reinitJiuNode'];
+					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter','reinitJiuNode','reinitPhaseChange','reinitSetIdentity'];
 
 					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
