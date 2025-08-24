@@ -16806,6 +16806,7 @@
 						storage:this.storage,
 						isUnseen0:this.isUnseen(0),
 						isUnseen1:this.isUnseen(1),
+						jiuNode:this.node.jiu&&lib.config.jiu_effect,
 					}
 					for(var i=0;i<state.judges.length;i++){
 						state.views[i]=state.judges[i].viewAs;
@@ -27459,6 +27460,12 @@
 								}
 							}
 
+							if (info.jiuNode){
+								player.node.jiu=ui.create.div('.playerjiu',player.node.avatar);
+								player.node.jiu2=ui.create.div('.playerjiu',player.node.avatar2);
+								game.addVideo('reinitJiuNode',player);
+							}
+
 							player.update();
 
 						}
@@ -29107,6 +29114,10 @@
 						delete player.node.jiu2;
 					}
 				}
+			},
+			reinitJiuNode:function(player){
+				player.node.jiu=ui.create.div('.playerjiu',player.node.avatar);
+				player.node.jiu2=ui.create.div('.playerjiu',player.node.avatar2);
 			},
 			init:function(players){
 				if(game.chess) return;
@@ -31420,7 +31431,7 @@
 					return;
 				}
 				else{
-					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter'];
+					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter','reinitJiuNode'];
 
 					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
