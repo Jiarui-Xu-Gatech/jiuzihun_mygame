@@ -140,7 +140,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				var step1=function(){
 					ui.create.dialog('《九子魂》——智慧与策略的奇幻冒险');
 					game.saveConfig('new_tutorial',true);
-					ui.dialog.add('<div class="text">曾经辉煌的龙神在一场远古浩劫中陨落，九道魂魄随之散落人间，隐藏着无尽的力量与秘密……');
+					ui.dialog.add('<div class="text">曾经辉煌的渊祖在一场远古浩劫中陨落，九道魂魄随之散落人间，隐藏着无尽的力量与秘密……');
 					// ui.dialog.add('<div class="text">在这片动荡的世界，你将成为勇士，集结英雄，运筹帷幄，运用智慧与策略，与各方势力角逐，追寻九魂，探寻真相。是守护，还是掠夺？是并肩作战，还是彼此为敌？你的每一个决策，都将改写这片天地的命运！');
 					ui.dialog.add('<div class="text center">让我们从最经典的身份模式开始探险吧！');
 					ui.auto.hide();
