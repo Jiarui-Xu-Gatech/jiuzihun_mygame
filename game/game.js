@@ -16808,6 +16808,7 @@
 						isUnseen1:this.isUnseen(1),
 						jiuNode:this.node.jiu&&lib.config.jiu_effect,
 						isCurrentPhase:this == _status.currentPhase,
+						special_identity:this.special_identity,
 					}
 					for(var i=0;i<state.judges.length;i++){
 						state.views[i]=state.judges[i].viewAs;
@@ -27529,6 +27530,51 @@
 								game.addVideo('reinitPhaseChange',player);
 							}
 
+							if (info.dead){
+								player.node.count.innerHTML='0';
+								player.node.hp.hide();
+								player.node.equips.hide();
+								player.node.count.hide();
+								if (_status.online_configmode=='identity'){
+									var str = '';
+									var trans= false;
+									if (player.style){
+										trans = player.style.transform;
+									}
+									if(info.special_identity){
+										str=get.translation(info.special_identity);
+									}
+									else{
+										str=get.translation(player.identity+'2');
+									}
+									game.addVideo('reinitDieAfterWordsOn',player,[str,trans]);
+									if(!player.node.dieidentity){
+										var node=ui.create.div('.damage.dieidentity',str,player);
+										if(str=='野心家'){
+											node.style.fontSize='55px';
+										}
+										ui.refresh(node);
+										node.style.opacity=1;
+										player.node.dieidentity=node;
+									}
+									if(trans){
+										if(trans.indexOf('rotateY')!=-1){
+											player.node.dieidentity.style.transform='rotateY(180deg)';
+										}
+										else if(trans.indexOf('rotateX')!=-1){
+											player.node.dieidentity.style.transform='rotateX(180deg)';
+										}
+										else{
+											player.node.dieidentity.style.transform='';
+										}
+									}
+									else{
+										player.node.dieidentity.style.transform='';
+									}
+									
+								}
+							}
+
 							player.update();
 
 						}
@@ -29854,6 +29900,31 @@
 					player.node.dieidentity.style.transform='';
 				}
 			},
+			reinitDieAfterWordsOn:function(player,strtrans){
+				var str = strtrans[0];
+				var node=ui.create.div('.damage.dieidentity',str,player);
+				if(str=='野心家'){
+					node.style.fontSize='55px';
+				}
+				ui.refresh(node);
+				node.style.opacity=1;
+				player.node.dieidentity=node;
+				var trans=strtrans[1];
+				if(trans){
+					if(trans.indexOf('rotateY')!=-1){
+						player.node.dieidentity.style.transform='rotateY(180deg)';
+					}
+					else if(trans.indexOf('rotateX')!=-1){
+						player.node.dieidentity.style.transform='rotateX(180deg)';
+					}
+					else{
+						player.node.dieidentity.style.transform='';
+					}
+				}
+				else{
+					player.node.dieidentity.style.transform='';
+				}
+			},
 			updateRoundNumber:function(roundpile){
 				game.broadcastAll(function(num1,num2){
 					if(ui.cardPileNumber) {
@@ -30692,6 +30763,10 @@
 					return;
 				}
 				player.classList.add('dead');
+				player.node.count.innerHTML='0';
+				player.node.hp.hide();
+				player.node.equips.hide();
+				player.node.count.hide();
 				if(lib.config.die_move!='off'){
 					player.$dieflip(lib.config.die_move);
 				}
@@ -31517,7 +31592,7 @@
 					return;
 				}
 				else{
-					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter','reinitJiuNode','reinitPhaseChange','reinitSetIdentity'];
+					var noBroadCast = ['playerTimeoutAudio','bestPlayerShow','timeoutBestPlayer','over','disableJudge','disableEquip','enableJudge','enableEquip','log','draw','drawCard','playAudio','gain2','damage','damagepop','updateRoundNumber','update','throw','directgain','die','line','showTimer','hideTimer','playerfocus','changeMarkCharacter','compareMultiple','compare','compare2','give','giveCard','gain','gainCard','fullscreenpop','flame','setNickName','loseAnimation','winAnimation','tieAnimation','countDownShow','countDownSet','countDownEnd','countDownHide','showCardsCardButton','aozhan_startfight','reinitOnline','reinitMark','reinitSetNickname','reinitDie','reinitAddLink','reinitTurnOver','reinitJudge','reinitEquip','reinitStorage','reinitCreateClearBackground','reinitMarkCharacter','reinitJiuNode','reinitPhaseChange','reinitSetIdentity','reinitDieAfterWordsOn'];
 
 					if (noBroadCast.contains(type)||!_status.connectMode){
 						var delayValue = time-_status.lastVideoLog;
