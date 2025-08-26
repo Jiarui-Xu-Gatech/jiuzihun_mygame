@@ -27573,6 +27573,7 @@
 									}
 									
 								}
+
 							}
 
 							player.update();
@@ -30772,6 +30773,14 @@
 				}
 				if(lib.element.player&&lib.element.player.$dieAfter){
 					lib.element.player.$dieAfter.call(player);
+				}
+				if (player.skills){
+					for (var i=0; i < player.skills.length;i++){
+						var info=lib.skill[player.skills[i]];
+						if (info&&info.mark){
+							player.unmarkSkill(player.skills[i]);
+						}
+					}
 				}
 			},
 			reinitAddLink:function(player){
