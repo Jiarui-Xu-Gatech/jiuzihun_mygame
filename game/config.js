@@ -186,7 +186,7 @@ window.config={
 			choice:{
 				zhu:5,
 				zhong:4,
-				nei:8,
+				nei:5,
 				fan:3,
 			},
 			show_identity:true,

@@ -4654,7 +4654,7 @@
 					},
 					choice_zhu:{
 						name:'主公候选武将数',
-						init:'3',
+						init:'5',
 						restart:true,
 						item:{
 							'3':'三',
