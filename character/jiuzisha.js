@@ -25973,6 +25973,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
             },
 
+            yuner_WasDamageThunder:{
+                enable:"phaseUse",
+                filter:function(event,player){
+					return true;
+				},
+				content:function(){
+                    "step 0"
+					player.chooseTarget("ta用雷打你");
+                    "step 1"
+					if(result.bool){
+                        player.damage(2,'thunder',result.targets[0]);
+					}
+				},
+            },
+
             yuner_selfDamageFire:{
                 enable:"phaseUse",
                 filter:function(event,player){
