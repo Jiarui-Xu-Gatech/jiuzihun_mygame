@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",160,['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard','pini_tu'],[]],
+            // yuner:["female","qun",'80/160',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -10012,7 +10012,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 filter:function(event,player){
                     if (event.name == 'damage'){
                         return (event.source!=undefined)&&(event.player == event.source)&&
-                        (event.player==player)||(event.nature == "thunder"&&event.num > 1);
+                        (event.player==player)||(event.nature == "thunder"&&event.num > 2);
                     }
                     else{
                         return player.getHistory('skipped').contains('phaseUse')||player.getHistory('skipped').contains('phaseDraw');
@@ -10034,7 +10034,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     "step 2"
                     if (result.card&&result.judge >= 0){
-                        player.recover(player.maxHp - player.hp);
+
+                        //改为只回复1点体力
+                        // player.recover(player.maxHp - player.hp);
+                        player.recover(1);
+
+
                         if (trigger.name == 'damage'){
                             if (!player.hasSkill("mantian_skip_mei")){
                                 player.addSkill("mantian_skip_mei");
@@ -10139,7 +10144,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 filter:function(event,player){
                     if (event.name == 'damage'){
                         return (event.source!=undefined)&&(event.player == event.source)&&
-                        (event.player==player)||(event.nature == "thunder"&&event.num > 1);
+                        (event.player==player)||(event.nature == "thunder"&&event.num > 2);
                     }
                     else{
                         return player.getHistory('skipped').contains('phaseUse')||player.getHistory('skipped').contains('phaseDraw');
@@ -10161,7 +10166,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.delay();
                     "step 2"
                     if (result.card&&result.judge >= 0){
-                        player.recover(player.maxHp - player.hp);
+                        //改为只回复1点体力
+                        // player.recover(player.maxHp - player.hp);
+                        player.recover(1);
+
+
                         if (trigger.name == 'damage'){
                             if (!player.hasSkill("mantian_skip_mei_nan")){
                                 player.addSkill("mantian_skip_mei_nan");
@@ -25959,7 +25968,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player.chooseTarget("你雷打ta");
                     "step 1"
 					if(result.bool){
-                        result.targets[0].damage(1,'thunder',player);
+                        result.targets[0].damage(2,'thunder',player);
 					}
 				},
             },
@@ -27091,11 +27100,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'dutian_mei_nan':"赌天",
             'dutian_mei_nan_info':"出牌阶段限一次，你可以选择两张手牌，并选择至多三名有至少两张手牌的其他角色，然后这些角色分别选择两张手牌；接着你从牌堆顶翻出两张【公牌】，展示并放回牌堆顶，公牌的花色和点数不受玩家技能影响；然后你和其他被选中角色分别展示自己选择的牌，每名角色分别用自己展示的牌与公牌组合；【赌天点数】总和最大者为赢家，获得其他参与者所有手牌，其余参与者为输家，每位输家分别对自己造成1点伤害。",
             'mantian_mei':"瞒天",
-            'mantian_mei_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞1点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你进行一次判定，若结果为♠，则你立刻回满体力，跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
+            'mantian_mei_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞2点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你进行一次判定，若结果为♠，则你立刻回复1点体力，跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
             'mantian_recover_mei':"瞒天",
             'mantian_skip_mei_bg':'✡',//'&#x2721;&#xFE0E;',//'✡',
             'mantian_mei_nan':"瞒天",
-            'mantian_mei_nan_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞1点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你进行一次判定，若结果为♠，则你立刻回满体力，跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
+            'mantian_mei_nan_info':"锁定技，你的♥和♣都视为♠；你对自己造成伤害后，或你受到＞2点的雷属性伤害后，亦或弃牌阶段前你跳过了摸牌阶段或出牌阶段：你进行一次判定，若结果为♠，则你立刻回复1点体力，跳过下一个弃牌阶段，并观看牌堆顶的两张牌，然后将这些牌交给任意角色。",
             'mantian_recover_mei_nan':"瞒天",
             'mantian_skip_mei_nan_bg':'✡',//'&#x2721;&#xFE0E;',//'✡',
             mantian_spade_mei:"瞒天",
