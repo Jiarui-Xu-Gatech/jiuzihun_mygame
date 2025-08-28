@@ -1497,7 +1497,7 @@
 						init:'xinround',
 						item:{
 							default:'默认',
-							// official:'勾玉',
+							official:'经典',
 							emotion:'表情',
 							glass:'勾玉',
 							round:'国战',
