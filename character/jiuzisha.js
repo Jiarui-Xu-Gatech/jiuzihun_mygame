@@ -66,7 +66,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 		characterIntro:{
 			ouruoling:"欧若灵，西域第一美人儿，西域千门最顶尖的千手之一，九幽精灵鸟仅存的后裔，善于飞行，相貌极其精致，如凌波仙子般水灵秀气，丰姿冶丽，仿佛上天有意细细雕琢出来一般；她秀雅绝俗，自有一股轻灵之气，肌肤娇嫩、神态悠闲、美目流盼、含辞未吐、气若幽兰，说不尽的温柔可人；身材无限接近九昕儿一般的完美，娇躯时常散发着茉莉的清香，除了九昕儿以外无人的颜值能在她之上；全金发的手下，韩鑫的好友；原西域千门赌场掌管财务的户部尚书，后兼任韩鑫的治粟总长，总管账目和运送粮草，是全金发的得力助手。早年为一绿翅小鸟，被全金发所救，并为他的无私和爱所感动，爱上了全金发；为了全金发加入了千门，由于长得实在太美了，成为无数男人心中的女神，升官极其顺利，很快就成了全金发的副手，单相思着全金发，可是由于害羞和含蓄不敢表露自己的情愫。性格单纯，聪颖，贤惠，含蓄又专情；数学非常好，算账从来没有出过错；大叔控，有时会自作多情，沉浸在自己与全金发的美好幻想之中无法自拔。对爱人非常周到和体贴，也非常容易满足，全金发一个微笑和一句夸赞就能让她开心好几天。",
             hanxin:"韩鑫，九子魂中的螭吻之魂，师从玫贤学习控天之道，在玫贤死后继位西域之主和千门门主，相貌英俊，脾气暴躁但智商特别高。封神图和新月羽毛扇的持有者。荒野神庙之主老方丈的养子，实则是冥王哈迪斯贴身仆人和保镖：帕格尼，的私生子，拥有看透一个人昨日和明日内命运的能力但这种能力会耗费他极大的精力且对神的继承者无用。早年通过算命维持生计。但由于一伙强盗的入侵（实则是雅典娜的阴谋中的一环），将其父亲杀害，使他开始发奋用功。时而会特别暴躁，时而又保持理智，可以玩弄敌人于股掌之间。从小在荒漠中练就了一身强悍的身体和灵巧的身手，并当过一段时间的“怪盗绅士”。跟随法贤先生学习“控欲”，“控念”与“控天”之术，成了一个运筹帷幄的人，极善揣测人心和设计精妙复杂的计划和策略，在与雅典娜大战中取得最后的无尚光明之剑——阿波罗之剑并斩杀雅典娜的心魔，使世界恢复和平，不甘心做哈迪斯的棋子，他闯冥界，得到了哈迪斯的符印，成了新一任的冥神，并完成了十二主神的重新封神的任务。",
-            jiuxiner:"九昕儿，九子魂中的椒图之魂，南域之主，江湖四圣之一，“东烟，西赌，南饮，北食”中的“南饮”，七大罪中的色欲之罪，地狱灵魂体为一头梅花鹿，酒神之女，酒神狄俄尼索斯的继承者，历史上以其独创的“酒之领域”而闻名。她的身材天生就是完美的胴体，容颜被韩鑫形容为“拥有不食人间烟火的仙子气质”，且天生就刀枪不入，肚量大的惊人，性格在清醒时很贤淑，善解人意，非常关心韩鑫。好喝酒，无酒不欢，酒后会变成一个好战豪放的人，经常误事所幸有韩鑫帮她收烂摊子。最反感的事就是别人质疑她的酒量，与人拼起酒来命都不要。有一群好酒的女酒友，个个酒量惊人但也只能拜服在她的裙摆之下。她跟着父亲酒神狄俄尼索斯学习控酒之术，能改变整个战场的法则，将原本刀枪剑戟的对决转变为拼酒量的对决，史称“酒之领域”。是韩鑫最亲近和信赖的人。",//她也很爱韩鑫，通过自己的声誉招揽了众多女子军和酒友的帮助。",
+            jiuxiner:"九昕儿，九子魂中的椒图之魂，南域之主，江湖四圣之一，“东烟，西赌，南饮，北食”中的“南饮”，七大罪中的色欲之罪，地狱灵魂体为一头梅花鹿，酒神之女，酒神狄俄尼索斯的继承者，历史上以其独创的“酒之领域”而闻名。她的身材天生就是完美的胴体，容颜被韩鑫形容为“拥有不食人间烟火的仙子气质”，且天生就刀枪不入，肚量大的惊人，性格在清醒时很贤淑，善解人意，非常关心韩鑫。好喝酒，无酒不欢，酒后会变成一个好战豪放的人，经常误事所幸有韩鑫帮她收烂摊子。最反感的事就是别人质疑她的酒量，与人拼起酒来命都不要。有一群好酒的女酒友，个个酒量惊人但也只能拜服在她的裙摆之下。她跟着父亲酒神狄俄尼索斯学习控酒之术，能改变整个战场的法则，将原本刀枪剑戟的对决转变为酣战量的对决，史称“酒之领域”。是韩鑫最亲近和信赖的人。",//她也很爱韩鑫，通过自己的声誉招揽了众多女子军和酒友的帮助。",
             chenyingchao:"陈英超，南域五大将之首，后荣升南域第四位女王，巾帼女王，领地为南域西北的荒芜之地。历史上以在西北荒芜之地的“倒喝垂杨柳”，在红缨桥赤水滩的“三雄战英超”而闻名天下。九昕儿于鬼斗子家中收服的名将，“黑煞”，与丁亚并称为“黑白双煞”，开头酒量一般，但性格极度豪爽，酒品与九昕儿不相上下，被九昕儿视为知己，训练她酒量，之后酒量突飞猛进，很快成为酒量仅次于三女王的存在。长相身材英姿飒爽，秀气豪放，颜值仅次于九昕儿，被冠以“巾帼女王”“女中飒爽豪杰”“酒族第一猛将”等称号。被九昕儿赐予两把开瓶匕首，甚是帅气。曾经为救卡尔的对象，只身一人独闯黑虎域，与黑虎王喝了三天三夜的酒，又与雅典娜三千军团对饮，硬是喝出一条酒路，并在喝了那么多之后，又对战雅典娜的三个部下，子龙，冰河，舜，并险胜，几乎是平手，救出了卡尔的对象卡拉拉，后人为了纪念这场战役，称其为“三雄战英超”！",
             wusheng_wusheng:"无声，东域长老之首，啸月天狼的后裔，喜欢用面纱遮住面容，相貌棱角分明银色的头发配上黝黑的肌肤，非常帅气。先祖为冷月祖父的坐骑双头啸月狼凯奥特。初时为一头雪狼，为冷月所救，就此爱上冷月，在众人都反对的情况下，力排众议帮助冷月稳固了在东域的地位。对冷月无比忠诚，无论什么要求都会尽力帮忙。为了帮助冷月，无声进化为狼人形态。无声的狼人化有四重：第一重为蓝幽狼（坐骑形态）；第二重为兽人蓝月狼（直立形态）；第三重为啸月天狼（成熟形态）；第四重为利爪啸月天狼（完全体形态）；攻击力和速度都阶梯式提升，这种能力很难开发，只有冷月遇到危险时无声才能进化。",
             wangyuling:"王煜灵，南域三女王之一，腰刀女王，领地为南域东北的内陆地区。肚量大得吓人，与九昕儿几乎平分秋色，酒量也很好，但在三女王中酒量算最差的。有个癖好，所有碰到她腰刀的东西都要进她的肚子。有一次她的腰刀碰到了一条大河的水，把整个河都被喝干了，河水，包括所有鱼虾，全部喝进了她的肚子。有一次，她的腰刀掉进了海里，整个海平面都下降了许多，要不是她的肚子已经被撑得再咽下一口水就会撑爆的地步，可能整片海洋都不存在了。开始不服九昕儿，后来被九昕儿的酒品折服，彻底臣服。",
@@ -77,16 +77,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             tushanzuiyue: "涂山醉月，涂山之主，拥有无尽酒壶能够不断续酒，喝酒后会妖力大涨，喝得酩酊大醉时能觉醒最强奥义：九尾！蓝川之战中，以一句“涂山，我罩了！”名留青史，但这美人儿喝得太多了也会神志不清，敌我不分。曾与饕餮夫人交好，一次，涂山醉月过蓝河到饕餮族（饕餮峻）做客，似是要与饕餮一族交好，适逢饕餮夫人金守珍外出奔丧。多名洞接待了她，多名洞这美男子，美艳动人，深深吸引了涂山醉月，涂山族有爱与美丽之神——维纳斯，所遗留的爱情迷迭香，涂山醉月在蓝河豪华游轮船上，和多名洞共进晚餐。浪漫晚风，多情波浪，夕阳微微染红朦胧的天空，岸边景色宜人，让人神清气爽，心潮澎湃，空气中弥漫着桂花香以及荷尔蒙的味道，将迷迭香用在了多名洞身上，将他强行掰直，爱上自己，然后将他带走。金守珍闻讯赶回，一听此事极度愤怒，但已追赶不上。她向猫族女王单文倩，蜘蛛族女王郭依宁，以及蜂女蒯嘉慧求援，同时号令北域盟友，组成一支拥有1186只战舰和10万大军的号称“珍倩宁”的三族联军，沿着蓝河逆流而上向北直逼涂山城下。蓝河在北域支流形成的爱琴海。饕餮统治的区域与涂山正好隔着爱琴海。涂山依靠蓝河在北域支流形成的爱琴海沿岸地势形成的蓝川天险，稳若泰山，固若金汤，易守难攻。由此，著名的“蓝川之战”因一个美貌的男子拉开了序幕。",
             zhangning_jiuzi: "张宁，原名涂山宁，涂山狐族人，只是她贪图一时之欢，被驱逐出境，才逃到了西域，后被张貂蝉所纳为妾后才改名叫张宁。韩鑫的初恋。在狼女雅雯的战役中与韩鑫摩擦出火花，但后来驱利附势勾搭上了有钱的公子哥韩寿，隧抛弃了韩鑫，但内心深处，她还是过意不去，为了让自己良心安定，她当着韩鑫的面惩罚自己，来表明恩断义绝。",
             caoxin:"曹信，九子魂中的睚眦之魂，战神阿瑞斯的继承者，曹炎的弟弟，皮肤幽蓝色，拥有巨力和以力打力的神通，金刚不坏之身，是领军打仗的奇才，人送外号“兵仙”。早年为雅典娜贴身保镖和男妓，因不满现状和有志不能伸而与哥哥逃出雅典之城。和舜之间有着微秒的感情，一辉是他的劲敌。",
-            dingya:"丁亚，南域五大将之一，九昕儿于鬼斗子家中收服的名将，“白煞”，与陈英超并称为“黑白双煞”，喝酒速度极度惊人，最快甚至超过九昕儿，好喝快酒，但酒量跟不上，经常是第一个醉倒的，与陈英超非常合得来，性格也极豪放，最喜欢豪放之人，与人喜欢畅饮，说话语速飞快，喝酒速度也做前锋。后师从董笑蓉学习灌醉百兽的千觞不醉之道，与人决斗拼酒绝不落下风！",
+            dingya:"丁亚，南域五大将之一，九昕儿于鬼斗子家中收服的名将，“白煞”，与陈英超并称为“黑白双煞”，喝酒速度极度惊人，最快甚至超过九昕儿，好喝快酒，但酒量跟不上，经常是第一个醉倒的，与陈英超非常合得来，性格也极豪放，最喜欢豪放之人，与人喜欢畅饮，说话语速飞快，喝酒速度也做前锋。后师从董笑蓉学习灌醉百兽的千觞不醉之道，与人酣战绝不落下风！",
             caoyan:"曹炎，九子魂中的赑屃之魂，又作碧玺，火神赫菲斯托斯的继承者，曹信的哥哥，拥有高温的身体和融化万物的“熔炎龙拳”，对锻造之术极为讲究，韩鑫的羽扇，九昕儿的紫砂内衣都由他打造。早年与曹战为侍奉雅典娜的贴身男妓，但后来对雅典娜滥杀生灵感到不满，自己又有志不能伸，于是和弟弟一同逃出雅典之城。雅典娜对其还留着些许微妙的感情。",
             quanjinfa:"全金发，是原西方赌场的老管家，后在西赌大会上结识韩鑫。对法贤和韩鑫都忠心耿耿，特殊能力是一根金头发可以变成任何东西，但他头发长得很慢。",
             meixian:"玫贤，原西域之主，千门原门主，江湖四圣之一，“东烟，西赌，南饮，北食”中的“西赌”，曾化名法贤先生，被人称为神算子，赌神，赌博计算之术无人能及，也是“撒旦之劫”的策划者，曾经拥有自己的势力造孽套多，被人追杀，看到这一切的罪过，她后悔了，在被人追杀的途中，算出自己命不久矣，在荒野之庙的浩劫中救下韩鑫，将自己今生所学托付给他，最后被九幽屠杀鸟的利爪命中要害，含笑而终。",
-            lenyue:"冷月，九子魂中的狴犴之魂，东域冷氏皇朝的公主，狩猎之神阿尔忒弥斯的继承者。早年隐姓埋名寄养在韩门，化名韩月，韩门遭灭族后流亡他乡，后结识韩鑫，然后追爱不得后返回东域。“东烟”冷恩达的唯一继承人，后为“月夜女王”，是继恩达之后暗谋军团的总指挥，擅长刺杀之术，“以烟为引杀人于呼吸之间”，主宠是暗蚊和玫瑰花瓣，能够在暗黑空间中自由穿梭，前不见蚊，后不见影，必要时能放出闪电，似一根根剑雨一般，令敌人转瞬间毙命。对韩鑫有特殊的情愫，为了韩鑫找九昕儿单挑。自己的父亲被韩鑫设计所害也没有杀韩鑫而是放走了他，独自饮下苦难的鸩酒。",
+            lenyue:"冷月，九子魂中的狴犴之魂，东域冷氏皇朝的公主，狩猎之神阿尔忒弥斯的继承者。早年隐姓埋名寄养在韩门，化名韩月，韩门遭灭族后流亡他乡，后结识韩鑫，然后追爱不得后返回东域。“东烟”冷恩达的唯一继承人，后为“月夜女王”，是继恩达之后暗谋军团的总指挥，擅长刺杀之术，“以烟为引杀人于呼吸之间”，主宠是暗烟蚊和玫瑰花瓣，能够在暗黑空间中自由穿梭，前不见蚊，后不见影，必要时能放出闪电，似一根根剑雨一般，令敌人转瞬间毙命。对韩鑫有特殊的情愫，为了韩鑫找九昕儿单挑。自己的父亲被韩鑫设计所害也没有杀韩鑫而是放走了他，独自饮下苦难的鸩酒。",
             lenenda:"冷恩达，东域之主，“江湖四圣”之一，“东烟，西赌，南饮，北食”中的“东烟”，拥有烟一般虚无缥缈的完美刺杀之术，拥有自己的杀手军团“暗烟”，只接受神的委托，心脏长在左肩上（由一颗碧绿坚硬的钻石保护在其上）,所以被人刺杀从未死去。“撒旦之劫”的参与者之一，后死于镜中自己的刺杀。喜欢带一张面无表情的冷脸面具，一般人看不到他的长相。宠物为独眼（红色）响尾蛇，长得其貌不扬，像一根皮带，善于悄无声息地接近目标，然后一击致命。在东域拥有最恐怖的杀手军团，几乎全是女性，而这些女人都是带刺的玫瑰，只要冷恩达一声令下，就会不顾一切地为冷恩达铲除异己。",
             jinshouzhen:"金守珍，九子魂中的饕餮之魂，史称“饕餮夫人”，北域之主，“江湖四圣”之一的“北食”，七大罪中的暴食之罪，地狱灵魂体为一条巨蟒，赫拉（婚姻和生育之神）的继承者，身姿丰腴性感，拥有300个老公，生了2000个子孙，拥有世人所无法想象的吞噬之术，与九昕儿直接用强悍的肉身将酒喝进腹中不同，饕餮夫人在腹中形成了一个异次元空间的入口，所以虽然她的食量惊人，但并没有进入自己的肚子。用此法，她可以吞下一整个世界，只要是她嘴巴能装下的东西就能从世界上消失，但缺点是不能长期使用吞噬之术，否则腹中一直空空如也会饥饿而亡。有自己的老公孩子食神军团，军团的人都是靠强悍肉身硬吃的。嫉妒九昕儿的容貌，经常找机会和九昕儿较量并设计要铲除她。有一次，被她逮到机会，灌得九昕儿差点撑不住，还好韩鑫在场看穿了饕餮夫人的弱点：由于大战时间太长，她自己一直不进食饿得撑不住只好认输，九昕儿才得救。总喜欢做各种化学实验让自己变得更美。后来和多名洞在一起，并因为这个男人而发动了历史上著名的“蓝川之战”！",//，被多名洞虐腹感到快感。",
-            shuimiaoer:"水淼儿，九子魂中的蚣蝮之魂，碧海公主，七大罪中的嫉妒之罪，地狱灵魂体为一条鲨鱼，爱同性的百合，深爱着九昕儿，奈何九昕儿爱的是韩鑫，曾经为了得到九昕儿与九昕儿拼酒，却没想到没能将九昕儿灌醉，自己先醉了……",//用她的原话说：“那本小姐今天就把你灌醉，然后开房把你办了，看你以后从不从我！”结果逞能喝了7大瓶儿威士忌，喝得醉醺醺的，却还是没能将九昕儿灌醉……",
-            wangyueheng:"王月蘅，南域三女王之一，沼泽女王，领地为南域西南的沼泽地带。肚量酒量都一级棒，虽然肚量不如腰刀女王，但酒量是绝对没话说，喜欢在酒精沼泽中泡澡，除了酒，什么也不喝，声称酒是她的命。距离她方圆10米内就能闻到浓郁的酒精味。有一次要发大水，她怕酒精沼泽里的酒精被稀释，直接将六个沼泽地的酒精全部喝进腹中，撑得医生都没办法，但说什么也不上厕所，直到大水退了，才又将酒精全部吐回酒精沼泽中，此举令她名扬天下。能在任何地方脱下衣服洗澡，甚至在油锅里也能洗澡。因为她身上纹了一条龙，可以调节温度和湿度，所以沼泽女王的洗澡功力很强。陈英超刚进入南域时不服沼泽女王，与她拼酒。两人超负荷喝下了无数烈酒，陈英超撑得两眼发直，直俞呕吐，突然失去了战意，这股强烈的吐意挡都挡不住。但是在酒族，呕吐是一件很羞耻的事情，有呕吐物在地上的人一辈子都会有心理阴影甚至种下心魔导致之后的喝酒之路无法再有长进。王月蘅见状，突然温柔地揽过陈英超的纤腰，嘴唇轻轻含住陈英超的嘴“想吐就吐出来吧~”，陈英超：“沼泽女王……”陈英超感受着这股温柔的力量再也把持不住，大口吐起来，只是并没有到地上，而是进了王月蘅本就撑得发硬的肚腹之中。王月蘅娇喉一滚一滚，强忍着腹内剧烈的饱胀之感喝下陈英超的呕吐之物。陈英超喝得虽然已经迷糊了，但依旧能感受到王月蘅那温柔旖旎的力量，心中感动，史称：一吻噬恩仇！友情提示：沐浴沼泽女王王月蘅沼泽的酒，然后再被她喝下去，就能加快肌肤生长，促进伤口复原，但过于微小的伤口可能起到反作用。",
-            dongxiaorong:"董笑蓉，南域三女王之一，百兽女王，领地为南域东南的丛林地带。酒量肚量一级棒，喜欢在丛林中用狗寻找猎物，一旦发现大型猛兽，就将其抓住，与其拼酒，且拼酒从来都是动物喝一杯，她喝一缸，而且必须喝倒才算完，否则她就会继续喝下去。喝酒喜欢并着双腿，保持淑女之姿，没有并着腿喝下去的酒不算数，所以被另外两位女王戏称为“并腿女王”。有一次连续抓住了一大群，接近两千多头猛兽，包括巨型猛犸，梁龙兽，宰相兽（拥有海量的巨大肚量），巨腹河马兽等等，她一口气通通都喝倒，竟然还能接着回去在九昕儿的生日派对上豪饮，来者不拒！",
+            shuimiaoer:"水淼儿，九子魂中的蚣蝮之魂，碧海公主，七大罪中的嫉妒之罪，地狱灵魂体为一条鲨鱼，爱同性的百合，深爱着九昕儿，奈何九昕儿爱的是韩鑫，曾经为了得到九昕儿与九昕儿酣战，却没想到没能将九昕儿灌醉，自己先醉了……",//用她的原话说：“那本小姐今天就把你灌醉，然后开房把你办了，看你以后从不从我！”结果逞能喝了7大瓶儿威士忌，喝得醉醺醺的，却还是没能将九昕儿灌醉……",
+            wangyueheng:"王月蘅，南域三女王之一，沼泽女王，领地为南域西南的沼泽地带。肚量酒量都一级棒，虽然肚量不如腰刀女王，但酒量是绝对没话说，喜欢在酒精沼泽中泡澡，除了酒，什么也不喝，声称酒是她的命。距离她方圆10米内就能闻到浓郁的酒精味。有一次要发大水，她怕酒精沼泽里的酒精被稀释，直接将六个沼泽地的酒精全部喝进腹中，撑得医生都没办法，但说什么也不上厕所，直到大水退了，才又将酒精全部吐回酒精沼泽中，此举令她名扬天下。能在任何地方脱下衣服洗澡，甚至在油锅里也能洗澡。因为她身上纹了一条龙，可以调节温度和湿度，所以沼泽女王的洗澡功力很强。陈英超刚进入南域时不服沼泽女王，与她酣战。两人超负荷喝下了无数烈酒，陈英超撑得两眼发直，直俞呕吐，突然失去了战意，这股强烈的吐意挡都挡不住。但是在酒族，呕吐是一件很羞耻的事情，有呕吐物在地上的人一辈子都会有心理阴影甚至种下心魔导致之后的喝酒之路无法再有长进。王月蘅见状，突然温柔地揽过陈英超的纤腰，嘴唇轻轻含住陈英超的嘴“想吐就吐出来吧~”，陈英超：“沼泽女王……”陈英超感受着这股温柔的力量再也把持不住，大口吐起来，只是并没有到地上，而是进了王月蘅本就撑得发硬的肚腹之中。王月蘅娇喉一滚一滚，强忍着腹内剧烈的饱胀之感喝下陈英超的呕吐之物。陈英超喝得虽然已经迷糊了，但依旧能感受到王月蘅那温柔旖旎的力量，心中感动，史称：一吻噬恩仇！友情提示：沐浴沼泽女王王月蘅沼泽的酒，然后再被她喝下去，就能加快肌肤生长，促进伤口复原，但过于微小的伤口可能起到反作用。",
+            dongxiaorong:"董笑蓉，南域三女王之一，百兽女王，领地为南域东南的丛林地带。酒量肚量一级棒，喜欢在丛林中用狗寻找猎物，一旦发现大型猛兽，就将其抓住，与其酣战，且酣战从来都是动物喝一杯，她喝一缸，而且必须喝倒才算完，否则她就会继续喝下去。喝酒喜欢并着双腿，保持淑女之姿，没有并着腿喝下去的酒不算数，所以被另外两位女王戏称为“并腿女王”。有一次连续抓住了一大群，接近两千多头猛兽，包括巨型猛犸，梁龙兽，宰相兽（拥有海量的巨大肚量），巨腹河马兽等等，她一口气通通都喝倒，竟然还能接着回去在九昕儿的生日派对上豪饮，来者不拒！",
             kaer:"卡尔，九子魂中的狻猊之魂，一个天真无邪的北域矮人国小牧童，拥有童真之力，无人可伤他，农业与丰收之神德墨忒尔的继承者,喜欢玩烟花爆竹。",
             kalala:"卡拉拉，矮人国的小公主，娇小可人，卡尔的爱人，被雅典娜困于黑域，后陈英超受九昕儿之命去营救卡拉拉。经过黑虎域时，陈英超与黑虎王定下赌约连喝三天三夜的酒，卡拉拉看热闹不嫌事大，待陈英超喝倒一众黑虎域高手后，还是又劝又灌陈英超喝酒，原本就喝了非常多的陈英超差点没挺住，所幸英超美人酒量实在过硬。",
             hanshou:"韩门公子，家财万贯，是千门的对头，冷月（韩月）的忠实追求者。由于察觉了韩月对韩鑫的感情，将韩鑫视为劲敌。通过金钱的诱惑，从韩鑫手里抢走了初恋张宁的心。",
@@ -188,7 +188,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else if (trigger.name == 'judge'){
                             var trigger2=_status.event.getTrigger();
                             var judging=trigger.player.judging[0];
-                            if (trigger.judgestr == "乐不思蜀" && get.attitude(player,trigger.player)>4 && trigger.player.countCards('h') >= trigger.player.hp  && player.countCards('he')>=5-trigger.player.countCards('h')/5&&trigger2.judge(judging)<0){
+                            if (trigger.judgestr == "囹圄迷魂" && get.attitude(player,trigger.player)>4 && trigger.player.countCards('h') >= trigger.player.hp  && player.countCards('he')>=5-trigger.player.countCards('h')/5&&trigger2.judge(judging)<0){
                                 return true;
                             }
                             else if (!(trigger.card) && trigger.getParent() && trigger.getParent().name == "jiuwei_useSha_tushan"){
@@ -355,7 +355,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					player:"damageBegin4",
 				},
                 frequent:true,
-				direct:false,
+				direct:true,
 				filter:function (event, player) {
 					return true; // 针对所有伤害触发
 				},
@@ -376,6 +376,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                    "step 1"
                    if (result.bool) {
+                        player.logSkill('mizui');
                         player.judge(function (card) {
                             if(get.suit(card)=='heart'){
                                 return 2;
@@ -409,7 +410,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					target:"shaBefore",
 				},
                 frequent:true,
-				direct:false,
+				direct:true,
 				filter:function (event, player) {
 					
 					return (event.card.name=='sha'&&get.color(event.card)!='black')
@@ -423,6 +424,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     "step 1"
                    if (result.bool) {
+                        player.logSkill('mizui');
                         player.judge(function (card) {
                             if(get.suit(card)=='heart'){
                                 return 2;
@@ -459,13 +461,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return get.color(card)=='black';
                 },
                 position:"he",
+                skillPopupColor:'water',
                 viewAs:{
                     name:"shunshou",
                 },
                 viewAsFilter:function(player){
                     if(!player.countCards('he',{color:'black'})) return false;
                 },
-                prompt:"将一张黑色牌当【顺手牵羊】使用",
+                prompt:"将一张黑色牌当【盗亦有道】使用",
                 check:function(card){
                     var player=_status.currentPhase;
                     if (get.name(card) == 'nanman'||get.name(card) == 'wanjian'||get.name(card) == 'lebu'){
@@ -888,7 +891,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				content:function(){
                     "step 0"
 					var check= player.countCards('h')>2||player.countCards('j','lebu')>0;
-					player.chooseTarget(get.prompt("huaxiang"),"跳过判定阶段和摸牌阶段，视为对一名其他角色使用一张【杀】",function(card,player,target){
+					player.chooseTarget(get.prompt("huaxiang"),"跳过判定阶段和摸牌阶段，视为对一名其他角色使用一张【冲】",function(card,player,target){
 						if(player==target) return false;
 						return player.canUse({name:'sha'},target,false);
 					}).set('check',check).set('ai',function(target){
@@ -935,7 +938,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					var check=(player.hasSkill('dutian_mei_nan')&&player.countCards('h')>=2) || player.countCards('h')>=4||player.countCards('he',{color:'black'})>=2;
 					player.chooseCardTarget({
 						prompt:get.prompt('huaxiang'),
-						prompt2:"弃置一张装备牌并跳过出牌阶段，视为对一名其他角色使用一张【杀】",
+						prompt2:"弃置一张器具牌并跳过出牌阶段，视为对一名其他角色使用一张【冲】",
 						filterCard:function(card,player){
 							return get.type(card)=='equip'&&lib.filter.cardDiscardable(card,player)
 						},
@@ -984,7 +987,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				content:function(){
                     "step 0"
 					var check=player.needsToDiscard()||player.isTurnedOver()||Math.random()<0.8;
-					player.chooseTarget(get.prompt('huaxiang'),"跳过弃牌阶段并将武将牌翻面，视为对一名其他角色使用一张【杀】",function(card,player,target){
+					player.chooseTarget(get.prompt('huaxiang'),"跳过弃牌阶段并将武将牌翻面，视为对一名其他角色使用一张【冲】",function(card,player,target){
 						if(player==target) return false;
 						return player.canUse({name:'sha'},target,false);
 					}).set('check',check).set('ai',function(target){
@@ -1019,7 +1022,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
                     "step 3"
                     if (player.storage.result1){
-                        player.chooseCard('h',true,'弃置一张手牌，若以此法弃置的是装备牌，则你改为使用之').set('ai',function(card){
+                        player.chooseCard('h',true,'弃置一张手牌，若以此法弃置的是器具牌，则你改为使用之').set('ai',function(card){
                             if(get.type(card)=='equip'){
                                 var equipType = get.subtype(card);
                                 if (player.countCards('e',{subtype:equipType})>0){
@@ -1335,7 +1338,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 7"
                     event.currented.push(event.current);
                     event.current.animate('target');
-                    event.current.chooseToUse('【酒域】：使用一张【杀】或回复一点体力',{name:'sha'},function(card,player,target){
+                    event.current.chooseToUse('【酒域】：使用一张【冲】或回复一点体力',{name:'sha'},function(card,player,target){
 						if(player==target) return false;
 						if(!player.canUse('sha',target)) return false;
 						if(get.distance(player,target)<=1) return true;
@@ -1434,7 +1437,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 marktext:"🌢",//"&#x1F322;&#xFE0E;",//"酒",
                 intro:{
                     name:'酒域',
-                    content:'【杀】以外的牌视为【酒】',
+                    content:'【冲】以外的牌视为【酒】',
                 },
                 mod:{
 					cardname:function(card,player,name){
@@ -1478,8 +1481,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if(result.bool){        
                         var target=result.targets[0];
-                        player.logSkill('haoqin',target); 
-                        player.line(target,'green');
+                        // player.logSkill('haoqin',target); 
+                        // player.line(target,'green');
+                        player.logSkillColor('haoqin',target,true,'soil',false,false);
                         game.log(target,'成为了','#g【豪情】','的目标，其受到的伤害均由',player,'承担');
                         target.storage.haoqin_target=player;
                         target.addSkill('haoqin_target');
@@ -1645,6 +1649,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 trigger:{player:'damageBegin4'},
                 forced:true,
                 popup:false,
+                direct:true,
                 filter:function(event,player){
                     return player.isAlive() && player.storage.haoqin_target.isAlive();
                 },
@@ -1652,7 +1657,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     game.playAudioVideoBroadCast('skill','haoqin_target'+Math.ceil(2*Math.random()));                 
                     var target=player.storage.haoqin_target;
                     trigger.player.line(target,'green');
-                    target.popup(get.translation('haoqin'));
+                    target.logSkillColor('haoqin',player,false,'soil',false,true);
+                    // target.popup(get.translation('haoqin'));
                     //trigger.targets.remove(player);
                     //trigger.targets.push(target);	
                     //trigger.target = target;
@@ -1695,7 +1701,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:"loseAfter",
                 },
                 frequent:true,
-                direct:false,
+                direct:true,
                 filter:function(event,player){
                     return event.es&&event.es.length>0;
                 },
@@ -1714,7 +1720,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         return;
                     }
                     // 技能效果
-                    
+                    player.logSkillColor('nvhao',undefined,false,'soil',false,false);
                     event.count=trigger.es.length;
                     "step 2"
                     event.count--;
@@ -1914,6 +1920,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // popup:false,
                 // skillAnimation:"epic",
                 // animationColor:"fire",
+                skillPopupColor:'fire',
                 init:function(player){
                     player.storage.honglian_equip=[1,1,1,1];
                 },
@@ -1951,7 +1958,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
 				position:'e',
 				viewAs:{name:'nanman'},
-				prompt:'每回合每个装备栏各限一次，你可以将一个装备栏中的一张装备牌当作【南蛮入侵】使用。',
+				prompt:'每回合每个器具栏各限一次，你可以将一个器具栏中的一张器具牌当作【红莲醉舞】使用。',
                 onuse: function (result, player) {
                     //播放武器音效
                     game.playAudioVideoBroadCast('skill','sword_sound'+1);
@@ -2098,7 +2105,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.chooseBool(get.prompt("honglian_chenyingchao"),'你脱离濒死，是否发动【红缨】视为使用一张【南蛮入侵】？').set('ai',function(){
+                    player.chooseBool(get.prompt("honglian_chenyingchao"),'你脱离濒死，是否发动【红缨】视为使用一张【红莲醉舞】？').set('ai',function(){
                         if (player.hasSkill('zongjiu_lala')&&player.hp == 1&&player.countCards('h','tao')+player.countCards('h','jiu')==0){
                             if (Math.random()<0.65){
                                 return false;
@@ -2145,7 +2152,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 3"
                     player.useCard({ name: 'nanman', isCard: true ,cardid:'honglian_binsi_chenyingchao_id'},event.targets).set('nopopup',true).set('audio',false);
                     game.log(player,"连干"+get.cnNumber(event.targets.length,false)+"大碗白酒，敬在座的各位！喝罢，实在没忍住，打了一个酒嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子");
-                    game.log(player,'发动','#g【红缨】','脱离濒死后视为使用了一张','#y【南蛮入侵】');
+                    game.log(player,'发动','#g【红缨】','脱离濒死后视为使用了一张','#y【红莲醉舞】');
                 },
             },
                 
@@ -2172,6 +2179,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:2,
                 forced:false,
                 frequent: false,
+                direct:true,
                 trigger:{
                     global:"useCardAfter",
                 },
@@ -2183,6 +2191,16 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     })>0;
                 },
                 content:function(){
+                    'step 0'
+                    player.chooseBool(get.prompt2('dizhong')).set('ai',function(){
+                        return true;
+                    });
+                    'step 1'
+                    if (!result.bool){
+                        event.finish();
+                        return;
+                    }
+                    player.logSkillColor('dizhong',undefined,false,'thunder',false,false);
                     var num=game.countPlayer2(function(current){
                             return current.getHistory('damage',function(evt){
                                 return evt.getParent(2)==trigger;
@@ -2517,7 +2535,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     player.logSkill('lang_skill_damage_bonus');
-                    game.log(player,"发动技能","#g【嗜血】","，将",trigger.card,"视为雷属性","#y【杀】");
+                    game.log(player,"发动技能","#g【嗜血】","，将",trigger.card,"视为雷属性","#y【冲】");
                 },
                 mod:{
 					cardnature:function(card){
@@ -2604,7 +2622,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.allPosition = [];
                     event.num=0;
                     player.line(targets);
-                    player.chooseControl('手牌区','装备区','判定区').set('ai',function(){
+                    player.chooseControl('手牌区','器具区','判定区').set('ai',function(){
                         if(game.hasPlayer(function(current){
                             return current.countCards('j')&&current!=player&&get.attitude(player,current)>0;
                         })) return 2;
@@ -2613,7 +2631,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 2"
                     event.range={
                         手牌区:['h','e','j'],
-                        装备区:['e','h','j'],
+                        器具区:['e','h','j'],
                         判定区:['j','h','e'],
                     }[result.control||'手牌区'];
                     "step 3"
@@ -3180,7 +3198,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                 var has = game.hasPlayer(function(current){
                                     if(current.isLinked()&&!current.hasSkillTag('nofire')&&!current.hasSkillTag('maixie')){
                                         if (get.attitude(player,current)+get.attitude(current,player)>0){
-                                            //看藤甲，血量，技能影响
+                                            //看紫砂宝衣，血量，技能影响
                                             if (current.countCards('e','tengjia')>0){
                                                 if (current.hp <= 2){
                                                     linkEffect -= 10;
@@ -3199,7 +3217,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                             }
                                         }
                                         if (get.attitude(player,current)+get.attitude(current,player)<0){
-                                            //看藤甲，血量，技能影响
+                                            //看紫砂宝衣，血量，技能影响
                                             if (current.countCards('e','tengjia')>0){
                                                 if (current.hp <= 2){
                                                     linkEffect += 10;
@@ -3664,7 +3682,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             trick:false,
                             equip:false,
                         }
-                        player.chooseBool('是否押基本牌？').ai=function(event,player){
+                        player.chooseBool('是否押行动牌？').ai=function(event,player){
                             var rand=0.95;
                             if(!target.countCards('h',{type:['basic']})) rand=0.05;
                             if(!target.countCards('h')) rand=0;
@@ -3679,7 +3697,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(result.bool){
                         event.choice.basic=true;
                     }
-                    player.chooseBool('是否押锦囊牌？').ai=function(event,player){
+                    player.chooseBool('是否押策略牌？').ai=function(event,player){
                         var rand=0.9;
                             if(!target.countCards('h',{type:['trick','delay']})) rand=0.1;
                             if(!target.countCards('h')) rand=0;
@@ -3689,7 +3707,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(result.bool){
                         event.choice.trick=true;
                     }
-                    player.chooseBool('是否押装备牌？').ai=function(event,player){
+                    player.chooseBool('是否押器具牌？').ai=function(event,player){
                         var rand=0.75;
                             if(!target.countCards('h',{type:['equip']})) rand=0.25;
                             if(!target.countCards('h')) rand=0;
@@ -3699,7 +3717,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(result.bool){
                         event.choice.equip=true;
                     }
-                    game.log(player,'猜测',target,'手牌中：',event.choice.basic==true?'有':'无','#y基本牌','，',event.choice.trick==true?'有':'无','#y锦囊牌','，',event.choice.equip==true?'有':'无','#y装备牌'); 
+                    game.log(player,'猜测',target,'手牌中：',event.choice.basic==true?'有':'无','#y行动牌','，',event.choice.trick==true?'有':'无','#y策略牌','，',event.choice.equip==true?'有':'无','#y器具牌'); 
                     game.delay();
                     var reality={
                         basic:false,
@@ -4729,7 +4747,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     //game.playAudioVideoBroadCast('skill','duanxiu_duo'+Math.ceil(2*Math.random()));
-                    game.log(player,'不能闪避男性角色的','#y【杀】');
+                    game.log(player,'不能闪避男性角色的','#y【冲】');
                     trigger.getParent().directHit.add(player);
                 },
             },
@@ -5107,7 +5125,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 frequent:false,
                 shaRelated:true,
                 prompt:"九尾",
-                prompt2:"你可以发动技能【九尾】判定出【杀】，是否发动？",
+                prompt2:"你可以发动技能【九尾】判定出【冲】，是否发动？",
                 trigger: { player: "chooseToRespondBegin" },
                 check:function(trigger,player){
                     if (trigger.getParent()&&trigger.getParent().name == 'yunv_shashan_gui'){
@@ -5121,7 +5139,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return true;
                 },
                 filter: function (event, player) {
-                    return event.filterCard({ name: "sha" }); // 是否需要【杀】
+                    return event.filterCard({ name: "sha" }); // 是否需要【冲】
                 },
                 content: function () {
                     "step 0"
@@ -5130,13 +5148,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     "step 1"
                     if (result.card&&result.bool) {
-                        game.log('#g【九尾】','出杀判定成功');
+                        game.log('#g【九尾】','出冲判定成功');
                         trigger.untrigger();
                         trigger.set('responded',true);
                         trigger.result={bool:true,card:{name:'sha',isCard:true}}
                     }
                     else{
-                        game.log('#g【九尾】','出杀判定失败');
+                        game.log('#g【九尾】','出冲判定失败');
                     }
                 },
                 
@@ -5148,7 +5166,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:2,
                 frequent:false,
                 shaRelated:true,
-                prompt:"你可以选择一个目标，发动技能【九尾】判定向其出杀，是否发动？",
+                prompt:"你可以选择一个目标，发动技能【九尾】判定向其出冲，是否发动？",
                 priority:10,
                 line:'thunder',
                 // direct:true,
@@ -5201,21 +5219,21 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 0"
                     // player.popup('jiuwei_useSha_tushan');
                     // player.line(target,'thunder');
-                    // game.log(player,'对',target,'发动','#g【九尾】','判定向其出杀');
+                    // game.log(player,'对',target,'发动','#g【九尾】','判定向其出冲');
                     player.judge(function (card) {
                         return get.number(card) <= 9 ? 2 : -2; // 判定点数 ≤ 9 则成功
                     });
                     "step 1"
                     if (result.card&&result.bool) {
-                        // 判定成功，视为对目标使用了一张【杀】
-                        game.log('#g【九尾】','出杀判定成功');
+                        // 判定成功，视为对目标使用了一张【冲】
+                        game.log('#g【九尾】','出冲判定成功');
                         player.useCard({name:'sha',isCard:true,cardid:"jiuwei_useSha_tushan_id"},target,false);
                         player.storage.successSha = true;
                         // event.finish();
                         // result = {bool:true}; 
                     } 
                     else {
-                        game.log('#g【九尾】','出杀判定失败');
+                        game.log('#g【九尾】','出冲判定失败');
                         player.storage.successSha = false;
                         var theParent = event.getParent('chooseToUse');
                         if (theParent&&theParent.result){
@@ -5386,24 +5404,24 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 intro: {
                     name:"眷念",
-                    content: "当前回合已使用了9张杀",
+                    content: "当前回合已使用了9张冲",
                 },
                 filter: function (event, player) {
-                    return event.card && event.card.name == "sha"; // 只关注【杀】
+                    return event.card && event.card.name == "sha"; // 只关注【冲】
                 },
                 init: function (player) {
-                    player.storage.juannian_tushan = 0; // 初始化出杀计数
+                    player.storage.juannian_tushan = 0; // 初始化出冲计数
                     player.syncStorage('juannian_tushan');
                 },
                 content: function () {
-                    // 每使用一次【杀】，计数器+1
+                    // 每使用一次【冲】，计数器+1
                     player.storage.juannian_tushan++;
                     player.syncStorage('juannian_tushan');
                     if (player.storage.juannian_tushan == 9) {
-                        // 第九张【杀】触发技能效果
+                        // 第九张【冲】触发技能效果
                         game.playAudioVideoBroadCast('skill','juannian_tushan'+Math.ceil(2*Math.random()));
                         player.logSkill('juannian_tushan');
-                        player.addSkill("jiuzhang_sha_ban"); // 添加禁止出杀的技能
+                        player.addSkill("jiuzhang_sha_ban"); // 添加禁止出冲的技能
                         player.syncStorage('juannian_tushan');
                         player.markSkill("juannian_tushan"); // 标记技能
                     }
@@ -5429,7 +5447,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             jiuzhang_sha_ban: {
                 mod: {
                     cardEnabled: function (card, player) {
-                        if (card.name == "sha") return false; // 禁止【杀】的使用
+                        if (card.name == "sha") return false; // 禁止【冲】的使用
                     },
                 },
             },
@@ -6473,7 +6491,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // silent:true,
                 frequent:false,
                 priority:11,
-                prompt2:'是否选择与一名正面朝上的角色交换装备区内的牌？',
+                prompt2:'是否选择与一名正面朝上的角色交换器具区内的牌？',
                 popup:false,
                 trigger:{
                     player:"phaseJieshu",
@@ -6492,10 +6510,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     // 选择一名背面朝上的角色
-                    player.chooseTarget("请选择一名正面朝上的角色，与其交换装备区的牌", function(card, player, target) {
+                    player.chooseTarget("请选择一名正面朝上的角色，与其交换器具区的牌", function(card, player, target) {
                         return target != player && !target.isTurnedOver(); // 筛选目标：背面朝上的角色，且不能是自己
                     }).set('ai', function(target) {
-                        // AI 逻辑：优先选择装备牌多的角色
+                        // AI 逻辑：优先选择器具牌多的角色
                         var player = _status.currentPhase;
                         if (player.getEquip('bagua')){
                             return -1;
@@ -6534,7 +6552,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // game.playAudioVideoBroadCast('skill','yinyang_zhuangbei_caoxin'+Math.ceil(2*Math.random()));
                         // player.popup(get.translation('yinyang_zhuangbei_caoxin'));
                         
-                        // game.log(player,'与'+get.translation(target)+'交换了装备牌');
+                        // game.log(player,'与'+get.translation(target)+'交换了器具牌');
 
                     } else {
                         event.finish(); // 如果未选择目标，直接结束技能流程
@@ -6734,7 +6752,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 frequent:true,
                 popup:false,
-                // prompt2:"你成为【杀】的目标，是否弃一个信印记，然后翻面并横置，将此【杀】转移给一名不为此【杀】使用者的其他角色？",
+                // prompt2:"你成为【冲】的目标，是否弃一个信印记，然后翻面并横置，将此【冲】转移给一名不为此【冲】使用者的其他角色？",
                 filter:function (event, player) {
 					var judge_caoxin = player.storage.xinnian_caoxin&& player.storage.xinnian_caoxin>0 && player.isTurnedOver();
                     if(event.card.name!='sha') return false;
@@ -6747,8 +6765,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.nothasShan = (player.countCards('h', 'shan') == 0);
                     event.nothasBagua = (player.countCards('e', 'bagua') == 0);
                     // 选择一名背面朝上的角色
-                    player.chooseBool(get.prompt('taiji2_caoxin'),'你成为【杀】的目标，是否弃一个信印记，然后翻面并横置，将此【杀】转移给一名其他角色，可以为此【杀】使用者？').set('ai',function(){
-                        // 检查玩家是否没有【闪】且装备区没有【八卦阵】
+                    player.chooseBool(get.prompt('taiji2_caoxin'),'你成为【冲】的目标，是否弃一个信印记，然后翻面并横置，将此【冲】转移给一名其他角色，可以为此【冲】使用者？').set('ai',function(){
+                        // 检查玩家是否没有【守】且器具区没有【烟鬼雪茄】
                         if (event.nothasShan&&event.nothasBagua||(event.nothasShan&&!event.nothasBagua&&trigger.player.hasSkill('qinggang_skill'))) {
                             return true; // 满足条件，发动技能
                         }
@@ -6761,7 +6779,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     'step 1'
                     if (result.bool){
-                        player.chooseTarget("请选择一名将此【杀】转移的目标", function(card, player, target) {
+                        player.chooseTarget("请选择一名将此【冲】转移的目标", function(card, player, target) {
                             // var trigger=_status.event;
                             return target != player //&& target!=trigger.player; // 筛选目标
                         }).set('ai', function(target) {
@@ -6828,7 +6846,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     'step 0'
-                    player.chooseBool(get.prompt('taiji3_caoxin'),'你成为装备牌的目标，是否获得一个信印记，然后翻面，而后你可以选择令场上任意一名角色（包括你自己）使用这张装备牌？').set('ai',function(){
+                    player.chooseBool(get.prompt('taiji3_caoxin'),'你成为器具牌的目标，是否获得一个信印记，然后翻面，而后你可以选择令场上任意一名角色（包括你自己）使用这张器具牌？').set('ai',function(){
                         return true;
                     });
                     'step 1'
@@ -6889,7 +6907,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(){
                     'step 0'
-                    player.chooseBool(get.prompt('taiji4_caoxin'),'你成为伤害类锦囊牌的目标，是否获得一个信印记，然后翻面并横置，而后让自己不再是此牌目标？').set('ai',function(){
+                    player.chooseBool(get.prompt('taiji4_caoxin'),'你成为伤害类策略牌的目标，是否获得一个信印记，然后翻面并横置，而后让自己不再是此牌目标？').set('ai',function(){
                         return true;
                     });
                     'step 1'
@@ -6952,11 +6970,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 trigger: { player: "chooseToRespondBegin" },
                 filter: function (event, player) {
-                    return event.filterCard({ name: "sha" })&& event.getParent().card &&get.name(event.getParent().card)=='juedou'; // 是否需要【杀】
+                    return event.filterCard({ name: "sha" })&& event.getParent().card &&get.name(event.getParent().card)=='juedou'; // 是否需要【冲】
                 },
                 content: function () {
                     "step 0"
-                    player.chooseBool(get.prompt('kuaijiu_juedou_ding'),'决斗时需要你打出杀，是否获得1个狂印记，视为打出了一张杀？').set('ai',function(){
+                    player.chooseBool(get.prompt('kuaijiu_juedou_ding'),'酣战时需要你打出冲，是否获得1个狂印记，视为打出了一张冲？').set('ai',function(){
                         if (trigger.getParent()&&trigger.getParent().name == 'yunv_shashan_gui'){
                             if (get.attitude(player,trigger.getParent().player)>2){
                                 return true;
@@ -7091,7 +7109,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event,player){
                     "step 0"
-                    player.chooseBool(get.prompt("kuangyin_ding"),'你已经成为单体非延迟类锦囊牌目标，是否将其视为决斗？你决斗时，你的手牌都可以视为杀打出。').set('ai',function(){
+                    player.chooseBool(get.prompt("kuangyin_ding"),'你已经成为单体非延迟类策略牌目标，是否将其视为酣战？你酣战时，你的手牌都可以视为冲打出。').set('ai',function(){
                         return get.attitude(trigger.player,player)<0;
                     });
                     "step 1"
@@ -7102,10 +7120,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // evt.targets.remove(player);
                         // trigger.cancel();
                         player.logSkill('kuangyin_ding');
-                        game.log(player,'将',event.origin,'视为','#y决斗');
+                        game.log(player,'将',event.origin,'视为','#y酣战');
                         // trigger.player.useCard({name:'juedou',suit:event.origin.suit,number:event.origin.number,isCard:true,cardid:event.origin.cardid,cards:[event.origin]},player).set('audio',false);  
                         event.origin.name = 'juedou';
-                        trigger.player.popup('决斗','metal');
+                        trigger.player.popup('酣战','metal');
                         trigger.player.line(player,'fire');
                         
                     }
@@ -7271,7 +7289,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1";
                     if (result.bool && result.targets.length) {
                         var target = result.targets[0];
-                        // 视为对目标使用了一张【决斗】
+                        // 视为对目标使用了一张【酣战】
                         player.useCard({ name: 'juedou', isCard: true ,cardid:'fenfen_juedou_ding_id'}, target).set('skill','fenfen_juedou_ding');
                         // game.playAudioVideoBroadCast('skill','fenfen_ding'+Math.ceil(2*Math.random()));
                         // player.logSkill('fenfen_juedou_ding');
@@ -7821,7 +7839,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (trigger.card && get.type(trigger.card, 'trick') == 'trick'){
                         player.logSkillColor('yuzhong_yan',undefined,false,'soil',true,false);
                         // game.playAudioVideoBroadCast('skill','yuzhong_yan'+Math.ceil(2*Math.random()));
-                        game.log(player,"受到锦囊牌伤害+1");
+                        game.log(player,"受到策略牌伤害+1");
                         trigger.num++;
                     }
                     else if (!trigger.card){
@@ -8090,7 +8108,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 ai:{
                     effect:{
                         target:function(card,player,target){
-                            if (get.type(card)=='trick'&&get.color(card)!='black'&&target!=player){
+                            if (get.type(card)=='trick'&&get.color(card)=='red'&&target!=player){
                                 return 'zerotarget';
                             }
                             
@@ -8148,7 +8166,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(event){
                     player.logSkill('mingcha_quan');
-                    game.log(player,'的非延迟锦囊牌无法被','#y【无懈可击】','响应');
+                    game.log(player,'的非延迟策略牌无法被','#y【以策制策】','响应');
                     if (trigger.card.name!='wuxie'){
                         var has=game.hasPlayer(function(current){
                             if (!current.hasSkill('mingcha_disable_quan')){
@@ -8238,7 +8256,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // mark:true,
                 // marktext:"封",
                 // intro:{
-                //     name:'无懈',
+                //     name:'制策',
                 // },
                 silent:true,
                 forced:true,
@@ -8257,7 +8275,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             //     mark:true,
             //     marktext:"无",
             //     intro:{
-            //         name:'无懈',
+            //         name:'制策',
             //     },
             //     audio:false,
             //     silent:true,
@@ -8273,7 +8291,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             //     mark:true,
             //     marktext:"封",
             //     intro:{
-            //         name:'无懈',
+            //         name:'制策',
             //     },
             //     silent:true,
             //     forced:true,
@@ -8317,7 +8335,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 frequent:true,
                 filter:function (event, player) {
-                    if(event.card&&get.type(event.card)=='trick'&&get.color(event.card)!='black'&&event.player&&event.player!=player){
+                    if(event.card&&get.type(event.card)=='trick'&&get.color(event.card)=='red'&&event.player&&event.player!=player){
                         return true;
                     }
                     else{
@@ -8326,7 +8344,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(){
                     player.logSkill('mingcha_quan');
-                    game.log(player,'成为非黑色非延迟锦囊牌的目标，取消之，并摸一张牌');
+                    game.log(player,'成为红色非延迟策略牌的目标，取消之，并摸一张牌');
                     var evt = trigger.getParent();
                     evt.triggeredTargets2.remove(player);
                     evt.targets.remove(player);
@@ -10332,7 +10350,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         
                     });
                     player.logSkill("xinruan_mei");
-                    game.log(player,"濒死，令每名其他角色的","#y【酒】","和","#y♠","手牌可以视为","#y【桃】","使用。");
+                    game.log(player,"濒死，令每名其他角色的","#y【酒】","和","#y♠","手牌可以视为","#y【药】","使用。");
                     game.delay(2);
                     'step 2'
                     game.delay(2);
@@ -10749,7 +10767,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     "step 0"
-                    player.chooseBool(get.prompt("duoqin_len"),'你已经成为黑色单体非延迟类锦囊牌目标，是否将其视为【雷杀】？').set('ai',function(){
+                    player.chooseBool(get.prompt("duoqin_len"),'你已经成为黑色单体非延迟类策略牌目标，是否将其视为【雷冲】？').set('ai',function(){
                         if (get.attitude(trigger.player,player)<0 && get.tag(trigger.card,'damage')){
                             return Math.random()<0.98;
                         }
@@ -10778,11 +10796,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // evt.targets.remove(player);
                         // trigger.cancel();
                         player.logSkill('duoqin_len');
-                        game.log(player,'将',event.origin,'视为','#y雷杀');
+                        game.log(player,'将',event.origin,'视为','#y雷冲');
                         // trigger.player.useCard({name:'sha',suit:event.origin.suit,number:event.origin.number,nature:'thunder',isCard:true,cardid:event.origin.cardid,cards:[event.origin]},player,true).set('audio',false);  
                         event.origin.name = 'sha';
                         event.origin.nature = 'thunder';
-                        trigger.player.popup('杀','thunder');
+                        trigger.player.popup('冲','thunder');
                         trigger.player.line(player,'green');
 
                         if (trigger.player==_status.currentPhase){
@@ -10834,7 +10852,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
 					'step 0'
                     event.go = false;
-                    player.chooseBool(get.prompt('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【杀】不计入使用次数').set('ai',function(){
+                    player.chooseBool(get.prompt('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【冲】不计入使用次数').set('ai',function(){
                         var go=false;
                         if(get.attitude(player,trigger.player)>0){
                             if(get.nature(trigger.card)=='thunder'){
@@ -10915,7 +10933,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         //         }
                         //     }
                         // }
-                        var next=player.chooseToDiscard(get.translation('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【杀】不计入使用次数','he');
+                        var next=player.chooseToDiscard(get.translation('zhuxing_len'),'弃置一张牌'+(get.nature(trigger.card)=='thunder'?'并摸一张牌':'')+'，令'+get.translation(trigger.player)+'本次使用的【冲】不计入使用次数','he');
                         next.set('ai',function(card){
                             if(_status.event.go){
                                 return 20-get.value(card);
@@ -11435,7 +11453,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					if(event.loop < event.targets.length){
 						event.current=event.targets[event.loop];
 						if(event.current.countCards('he')&&event.realTarget.isAlive()){
-							event.current.chooseToUse("【肉伐】：向"+get.translation(event.realTarget)+"使用一张【杀】或"+get.translation(player)+"获得你一张牌",{name:'sha'},event.realTarget,-1);
+							event.current.chooseToUse("【肉伐】：向"+get.translation(event.realTarget)+"使用一张【冲】或"+get.translation(player)+"获得你一张牌",{name:'sha'},event.realTarget,-1);
 						}
 					}
 					else{
@@ -11453,7 +11471,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					if(result.bool==false){
                         if (event.current.countCards('he')){
                             player.gainPlayerCard(event.current,true,'he');
-                            game.log(event.current,'未向',event.realTarget,'出【杀】，',player,'获得其一张牌')
+                            game.log(event.current,'未向',event.realTarget,'出【冲】，',player,'获得其一张牌')
                         }
 					}
                     else{
@@ -11999,8 +12017,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         return player!= current && player.canUse({name:'sha'},current,true);//player.inRange(current);
                     });
                     var choice=[];
-					if (has) {choice.push('视为使用一张【杀】');}
-                    choice.push('令本回合出杀次数+1');
+					if (has) {choice.push('视为使用一张【冲】');}
+                    choice.push('令本回合出冲次数+1');
 					player.chooseControl(choice).set('prompt',get.prompt2('chengneng_shui')).set('ai',function(event,player){
                         if(choice.length==1) return 0;
                         else{
@@ -12042,8 +12060,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         
 					});
                     'step 3'
-                    if (result.control == '视为使用一张【杀】'){
-                        player.chooseTarget(get.prompt('chengneng_shui'),'请选择使用【杀】的目标',true,function(card,player,target){
+                    if (result.control == '视为使用一张【冲】'){
+                        player.chooseTarget(get.prompt('chengneng_shui'),'请选择使用【冲】的目标',true,function(card,player,target){
                             if(player==target) return false;
                             return player.canUse({name:'sha'},target,true);
                         }).set('ai',function(target){
@@ -12060,7 +12078,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             
                         });
                     }
-                    else if (result.control == '令本回合出杀次数+1'){
+                    else if (result.control == '令本回合出冲次数+1'){
                         player.storage.useExtraSha++;
                         event.finish();
                     }
@@ -12541,7 +12559,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     trigger.cancel();
                     'step 1'
                     player.logSkill('baihe_nan_shui');
-                    game.log(player,'成为了男性角色',event.target,'伤害类锦囊牌',event.cardCard,'的目标后，','将自己从此牌目标中移除，并以',event.target,'为唯一目标反打这张',event.cardCard);
+                    game.log(player,'成为了男性角色',event.target,'伤害类策略牌',event.cardCard,'的目标后，','将自己从此牌目标中移除，并以',event.target,'为唯一目标反打这张',event.cardCard);
                     player.useCard({ name: event.cardName, isCard: true ,suit:event.cardSuit,number:event.cardNumber,cardid:event.cardCardid,cards:[event.cardCard]},event.target);//.set('skill','baihe_nan_shui');
                     player.line(event.target,'green');
 
@@ -12615,7 +12633,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     var goon = get.attitude(player, trigger.player) < 0;
                     var lowHp = Math.random()+(1 - trigger.player.hp/trigger.player.maxHp) > 0.75;
                     var selfGood = Math.random()+player.hp/player.maxHp > 0.8;
-                    var next = player.chooseToDiscard(get.prompt('lashou_jin'),'当一名角色流失体力后，你可以立刻弃一张【桃】或【酒】，令其流失1点体力。');
+                    var next = player.chooseToDiscard(get.prompt('lashou_jin'),'当一名角色流失体力后，你可以立刻弃一张【药】或【酒】，令其流失1点体力。');
                     next.ai = function (card) {
                         if (goon&&trigger.player.hasSkillTag('maihp')&&trigger.player.hp>1){
                             return -1;
@@ -12805,7 +12823,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill('chengting_taojiu_jin');
                     game.log(player,'的肚皮撑挺得太大，身上的装备都会被滚挺的肚皮崩弹出去，砸伤别人');
                     game.playAudioVideoBroadCast('skill','chengting_sha_jin'+1);
-                    game.log(player,"将装备牌视为","#y杀");
+                    game.log(player,"将器具牌视为","#y冲");
                 },
                 mod:{
 					cardname:function(card,player,name){
@@ -12833,7 +12851,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill('chengting_taojiu_jin');
                     game.log(player,'的肚皮撑挺得太大，任何的拖延都不再有空间，将被她当做酒一般喝进那肚里');
                     game.playAudioVideoBroadCast('skill','jiuyin'+1);
-                    game.log(player,"将延迟锦囊牌视为","#y酒");
+                    game.log(player,"将延迟策略牌视为","#y酒");
                 },
                 mod:{
 					cardname:function(card,player,name){
@@ -13623,7 +13641,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if(result.bool){
                         player.logSkill('yuanzhu_kaer',trigger.player);
                         player.addTempSkill('yuanzhu_end_kaer','phaseAfter');
-                        player.chooseTarget('选择弃置【牛】牌的目标',"每回合限一次，当有角色濒死时，你可以弃置任意角色【牛】中的一张牌，视为你对濒死角色使用了一张【桃】。",true,function(card,player,target){
+                        player.chooseTarget('选择弃置【牛】牌的目标',"每回合限一次，当有角色濒死时，你可以弃置任意角色【牛】中的一张牌，视为你对濒死角色使用了一张【药】。",true,function(card,player,target){
                             return target.hasSkill('niu_kaer')&&target.storage.niu_kaer.length>0;
                         }).set('ai',function(target){     
                                 return get.attitude(player,target)+10*Math.random();            
@@ -14341,7 +14359,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 viewAsFilter:function(player){
                     return player.countCards('e')>0;
                 },
-                prompt:"将一张装备区的牌当【酒】使用",
+                prompt:"将一张器具区的牌当【酒】使用",
                 check:function(card){
                     if(_status.event.type=='dying') return 200-get.value(card);
                     var player = _status.event.player;
@@ -14454,7 +14472,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.chooseBool(get.prompt('yujiu_heng'),'你使用【酒】后，若你的判定区和装备区没有被完全废除，且本轮还未通过此技能获得效果，你可以弃置装备区所有牌并废除判定区或一个装备区，若如此做，则你于本轮获得【浴酒】效果。').set('ai',function(){
+                    player.chooseBool(get.prompt('yujiu_heng'),'你使用【酒】后，若你的判定区和器具区没有被完全废除，且本轮还未通过此技能获得效果，你可以弃置器具区所有牌并废除判定区或一个器具区，若如此做，则你于本轮获得【浴酒】效果。').set('ai',function(){
                         var player = _status.event.player;
                         if (player.hp <= 0 && player.countCards('h','tao')+player.countCards('h','jiu') == 0 && player.countCards('e') > 0){
                             return false;
@@ -14490,7 +14508,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.chooseControl(choices).set('ai',function(event,player){
                             if (choices.length == 5) return 1;
                             return choices.length - 2;
-                        }).set('prompt','###'+get.prompt('yujiu_heng')+'###你使用【酒】后，若你的判定区和装备区没有被完全废除，且本轮还未通过此技能获得效果，你可以弃置装备区所有牌并废除判定区或一个装备区，若如此做，则你于本轮获得【浴酒】效果。');
+                        }).set('prompt','###'+get.prompt('yujiu_heng')+'###你使用【酒】后，若你的判定区和器具区没有被完全废除，且本轮还未通过此技能获得效果，你可以弃置器具区所有牌并废除判定区或一个器具区，若如此做，则你于本轮获得【浴酒】效果。');
                     }
                     else{
                         event.finish();
@@ -14530,7 +14548,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 marktext:'浴',
                 intro:{
                     name:'浴酒',
-                    content:'本轮手牌上限 = 体力上限 + 已损失体力值。本轮体力值变化后：1.体力值≠0且＜体力上限-1，不进入濒死直接回满体力；2.体力值＝体力上限且体力上限≠1，流失1点体力并令本轮每回合出杀次数+1（目前已+#）',
+                    content:'本轮手牌上限 = 体力上限 + 已损失体力值。本轮体力值变化后：1.体力值≠0且＜体力上限-1，不进入濒死直接回满体力；2.体力值＝体力上限且体力上限≠1，流失1点体力并令本轮每回合出冲次数+1（目前已+#）',
                 },
                 trigger:{
                     player:"changeHp",
@@ -14706,7 +14724,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					var type=get.subtype(card);
 					return player!=target&&!target.isDisabled(type);
 				},
-                prompt:"出牌阶段，你可以将一张装备牌置于一名其他角色装备区里，然后摸一张牌；每回合第一次发动【旖旎】置入装备后，本回合你计算与其他角色的距离时-1。",
+                prompt:"出牌阶段，你可以将一张器具牌置于一名其他角色器具区里，然后摸一张牌；每回合第一次发动【旖旎】置入装备后，本回合你计算与其他角色的距离时-1。",
                 content:function(){
                     'step 0'
                     event.cards = cards;
@@ -15246,7 +15264,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 mark:true,
                 marktext:'纵',
                 intro:{
-                    content:"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将自己的牌置于武将牌上后。",
+                    content:"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张策略牌后，2.将自己的牌置于武将牌上后。",
                 },
                 trigger:{
                     player:['useCardAfter',"loseAfter","addCardToStorage"],
@@ -15415,10 +15433,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.logSkill('lingyu_lala');
                     trigger.cancel();
                     if (trigger.source){
-                        game.log(player,'免疫了来自',trigger.source,'的非锦囊、非属性伤害');
+                        game.log(player,'免疫了来自',trigger.source,'的非策略、非属性伤害');
                     }
                     else{
-                        game.log(player,'免疫了非锦囊、非属性伤害');
+                        game.log(player,'免疫了非策略、非属性伤害');
                     }
                     
                 },
@@ -16212,7 +16230,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.log(player,'观看',trigger.source,'的手牌');
                         // player.addTempSkill('liejiu_limit_dong','phaseAfter');
                         var cards = trigger.source.getCards('h');
-                        player.chooseCardButton('【猎酒】：选择一张【杀】或【酒】获得之',cards).set('filterButton',function(button){
+                        player.chooseCardButton('【猎酒】：选择一张【冲】或【酒】获得之',cards).set('filterButton',function(button){
                             return get.name(button.link)=='sha'||get.name(button.link)=='jiu';
                         }).set('ai',function(button){
                             var add = 0;
@@ -16404,7 +16422,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.chooseBool(get.prompt('aozun_dong'),"当你使用【杀】指定目标后，你可以将此牌视为【决斗】并继承此【杀】的伤害值。").set('ai',function(event,player){
+                    player.chooseBool(get.prompt('aozun_dong'),"当你使用【冲】指定目标后，你可以将此牌视为【酣战】并继承此【冲】的伤害值。").set('ai',function(event,player){
                         if (trigger.stocktargets&&trigger.stocktargets.length>0&&trigger.stocktargets.length<=1&&trigger.stocktargets[0].hasSkillTag('notrick')){
                             return false;
                         }
@@ -16457,7 +16475,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 2"
                     // player.logSkill('aozun_dong');
                     player.logSkillColor('aozun_dong',undefined,false,'water',false,false);
-                    game.log(player,'将',event.origin,'视为','#y决斗');
+                    game.log(player,'将',event.origin,'视为','#y酣战');
                     
                     
                     // player.useCard({name:'juedou',suit:event.origin.suit,number:event.origin.number,isCard:true,cardid:event.origin.cardid,cards:event.cards,},event.targets).set('audio',false); 
@@ -16465,7 +16483,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // event.originName = event.origin.name;
                     event.origin.name = 'juedou';
                     // player.useCard(event.origin,event.targets).set('audio',false);  
-                    player.popup('决斗','metal');
+                    player.popup('酣战','metal');
                     player.line(event.targets,'green');
 
                     //step 3
@@ -16504,7 +16522,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     if (trigger.skillwarn){
                         warnText = trigger.skillwarn+'。';
                     }
-                    player.chooseBool(get.prompt('aozun_dong'),'<span class="thundertext">'+warnText+'</span>'+"当你需要打出【杀】时，你可以观看牌堆底四张牌，若其中有【杀】，你可以选择其中一张【杀】打出，若其中没有【杀】，你可以获得这四张牌中的一张并将剩余三张牌置于牌堆顶。").set('ai',function(event,player){
+                    player.chooseBool(get.prompt('aozun_dong'),'<span class="thundertext">'+warnText+'</span>'+"当你需要打出【冲】时，你可以观看牌堆底四张牌，若其中有【冲】，你可以选择其中一张【冲】打出，若其中没有【冲】，你可以获得这四张牌中的一张并将剩余三张牌置于牌堆顶。").set('ai',function(event,player){
                         return true;
                     });
                     "step 1"
@@ -16538,7 +16556,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             }
                         }
                         if (has){
-                            player.chooseCardButton('【傲樽】：选择一张【杀】打出',cards).set('filterButton',function(button){
+                            player.chooseCardButton('【傲樽】：选择一张【冲】打出',cards).set('filterButton',function(button){
                                 return get.type(button.link)=='basic'&&_status.event.getTrigger().filterCard(button.link);
                             }).set('ai',function(button){
                                 if (event.triggerParent&&event.triggerParent.name&&event.triggerParent.name == 'juedou'){
@@ -16894,13 +16912,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					for(var i=0;i<lib.inpile.length;i++){
 						var type=get.type(lib.inpile[i]);
 						if(type=='basic'){
-							list1.push(['基本','',lib.inpile[i]]);
+							list1.push(['行动','',lib.inpile[i]]);
 						}
 						else if(type=='trick'){
-							list2.push(['锦囊','',lib.inpile[i]]);
+							list2.push(['策略','',lib.inpile[i]]);
 						}
 						else if(type=='delay'){
-							list3.push(['锦囊','',lib.inpile[i]]);
+							list3.push(['策略','',lib.inpile[i]]);
 						}
 					}
                     event.notReady = (player.countCards('h','tao')+player.countCards('h','jiu') == player.countCards('he'));
@@ -17419,7 +17437,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 marktext:"🔥",//"&#x1F525;&#xFE0E;",//"暴",
                 intro:{
                     name:"暴怒",
-                    content:"锁定技，你的手牌上限等于体力上限。当你回复体力后，若你的体力值大于1，你失去1点体力。当你失去1点体力后，你摸三张牌，然后若此时是你的回合外，你改为摸五张牌，若此时是你的回合内，你本回合：所有【杀】都视为【火杀】、使用红色【杀】无距离限制、使用【杀】的次数上限+1。",
+                    content:"锁定技，你的手牌上限等于体力上限。当你回复体力后，若你的体力值大于1，你失去1点体力。当你失去1点体力后，你摸三张牌，然后若此时是你的回合外，你改为摸五张牌，若此时是你的回合内，你本回合：所有【冲】都视为【火冲】、使用红色【冲】无距离限制、使用【冲】的次数上限+1。",
                 },
 				content:function(){
                     player.logSkillColor("baonu_gu",undefined,false,'fire',true,true);
@@ -17505,9 +17523,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					// player.popup('暴怒','fire');
                     game.playAudioVideoBroadCast('skill','kuanglie_gu'+Math.ceil(2*Math.random()));
                     game.log(player,'发动了','#g【暴怒】');
-                    game.log(player,'将所有','#y杀','视为','#y火杀');
+                    game.log(player,'将所有','#y冲','视为','#y火冲');
                     if (get.suit(trigger.card) == 'heart'||get.suit(trigger.card) == 'diamond'||get.color(trigger.card)=='red'){
-                        game.log(player,'红色的','#y杀','无距离限制');
+                        game.log(player,'红色的','#y冲','无距离限制');
                     }
 				}
             },
@@ -17575,7 +17593,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.playAudioVideoBroadCast('skill','yunv_gui8');
                     }
 					var eff=get.effect(trigger.target,trigger.card,trigger.player,trigger.player);
-					trigger.player.chooseToDiscard('【斟酒】：弃置一张基本牌并视为使用了一张【酒】，否则【杀】对'+get.translation(trigger.target)+'无效',function(card){
+					trigger.player.chooseToDiscard('【斟酒】：弃置一张行动牌并视为使用了一张【酒】，否则【冲】对'+get.translation(trigger.target)+'无效',function(card){
 						return get.type(card)=='basic';
 					}).set('ai',function(card){
 						if(_status.event.eff>0||get.attitude(trigger.player,trigger.target)<-1-2*Math.random()||get.attitude(trigger.target,trigger.player)<-1-2*Math.random()){
@@ -17597,7 +17615,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						}
                         game.playAudioVideoBroadCast('card',trigger.player.sex,'jiu');
                         trigger.player.popup('酒','metal');
-                        game.log(trigger.player,'视为在出杀前对','#b自己','使用了','#y酒');
+                        game.log(trigger.player,'视为在出冲前对','#b自己','使用了','#y酒');
                         game.delay(1.5);
                         event.goto(2);
                     }
@@ -17634,7 +17652,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     //     game.playAudioVideoBroadCast('skill','yunv_gui8');
                     // }
 					var eff=get.effect(trigger.target,trigger.card,trigger.player,trigger.player);
-					trigger.player.chooseToDiscard('【斟酒】：弃置一张基本牌并视为使用了一张【酒】，否则【杀】对'+get.translation(trigger.target)+'无效',function(card){
+					trigger.player.chooseToDiscard('【斟酒】：弃置一张行动牌并视为使用了一张【酒】，否则【冲】对'+get.translation(trigger.target)+'无效',function(card){
 						return get.type(card)=='basic';
 					}).set('ai',function(card){
 						if(_status.event.eff>0||get.attitude(trigger.player,trigger.target)<-1-2*Math.random()||get.attitude(trigger.target,trigger.player)<-1-2*Math.random()){
@@ -17656,7 +17674,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						}
                         game.playAudioVideoBroadCast('card',trigger.player.sex,'jiu');
                         trigger.player.popup('酒','metal');
-                        game.log(trigger.player,'视为在出杀前对','#b自己','使用了','#y酒');
+                        game.log(trigger.player,'视为在出冲前对','#b自己','使用了','#y酒');
                         game.delay(1.5);
                         event.goto(2);
                     }
@@ -18006,7 +18024,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     "step 0"
-                    player.chooseBool('###是否发动【驭女】？###当你需要使用【闪】、打出【杀】或【闪】时，你可以令其他女性角色选择是否打出一张【杀】或【闪】（视为由你使用或打出）。').set('ai',function(){
+                    player.chooseBool('###是否发动【驭女】？###当你需要使用【守】、打出【冲】或【守】时，你可以令其他女性角色选择是否打出一张【冲】或【守】（视为由你使用或打出）。').set('ai',function(){
                         if(get.damageEffect(player,trigger.player,player)-1>=0) return false;
                         return true;
                     });
@@ -18025,11 +18043,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     event.Word = '';
                     event.EnglishWord = '';
                     if (trigger.filterCard({name:'shan'},player,event)){
-                        event.Word = '闪';
+                        event.Word = '守';
                         event.EnglishWord = 'shan';
                     }
                     else{
-                        event.Word = '杀';
+                        event.Word = '冲';
                         event.EnglishWord = 'sha';
                     }
                     var has=game.hasPlayer(function(current){
@@ -18057,7 +18075,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             return (get.attitude(event.player,event.source)-2);
                         });
                         next.set('skillwarn','替'+get.translation(player)+'打出一张'+event.Word);
-                        if (event.Word == '闪'){
+                        if (event.Word == '守'){
                             next.autochoose=lib.filter.autoRespondShan;
                         }
                         else{
@@ -19495,13 +19513,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (!player.storage.lanyong_mo.contains(lib.inpile[i])){
                             var type=get.type(lib.inpile[i]);
                             if(type=='basic'){
-                                list1.push(['基本','',lib.inpile[i]]);
+                                list1.push(['行动','',lib.inpile[i]]);
                             }
                             else if(type=='trick'){
-                                list2.push(['锦囊','',lib.inpile[i]]);
+                                list2.push(['策略','',lib.inpile[i]]);
                             }
                             else if(type=='delay'){
-                                list3.push(['延时锦囊','',lib.inpile[i]]);
+                                list3.push(['延时策略','',lib.inpile[i]]);
                             }
                         }
 					}
@@ -19704,11 +19722,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         target.addTempSkill('man_mo','roundStart');
                         target.storage.man_mo = player;
                         target.syncStorage('man_mo');
-                        game.log(player,'令',target,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2');
+                        game.log(player,'令',target,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【冲】次数上限+2，3.手牌上限+2');
                         player.addTempSkill('san_mo','roundStart');
                         player.storage.san_mo = player;
                         player.syncStorage('san_mo');
-                        game.log(player,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1');
+                        game.log(player,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【冲】次数上限-1，3.手牌上限-1');
                     }
                     else{
                         event.finish();
@@ -19735,7 +19753,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 marktext:"漫",
 				intro:{
 					name:'漫',
-					content:'本轮的回合：摸牌数+2、出杀次数+2、手牌上限+2',
+					content:'本轮的回合：摸牌数+2、出冲次数+2、手牌上限+2',
 				},
 				mod:{
 					cardUsable:function (card,player,num){
@@ -19792,7 +19810,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else{
                             player.logSkill('sanman_mo');
                         }
-                        game.log(player,'出牌阶段使用【杀】次数上限+2');
+                        game.log(player,'出牌阶段使用【冲】次数上限+2');
                     }
                     
 				},
@@ -19806,7 +19824,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 marktext:"散",
 				intro:{
 					name:'散',
-					content:'本轮的回合：摸牌数-1、出杀次数-1、手牌上限-1',
+					content:'本轮的回合：摸牌数-1、出冲次数-1、手牌上限-1',
 				},
 				mod:{
 					cardUsable:function (card,player,num){
@@ -20033,11 +20051,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     current.addTempSkill('san_mo','roundStart');
                                     current.storage.san_mo = player;
                                     current.syncStorage('san_mo');
-                                    game.log(player,'令',current,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1');
+                                    game.log(player,'令',current,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【冲】次数上限-1，3.手牌上限-1');
                                     player.addTempSkill('man_mo','roundStart');
                                     player.storage.man_mo = player;
                                     player.syncStorage('man_mo');
-                                    game.log(player,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2');
+                                    game.log(player,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【冲】次数上限+2，3.手牌上限+2');
                                 }
                             });
                         }
@@ -20057,11 +20075,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                                     current.addTempSkill('man_mo','roundStart');
                                     current.storage.man_mo = player;
                                     current.syncStorage('man_mo');
-                                    game.log(player,'令',current,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2');
+                                    game.log(player,'令',current,'本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【冲】次数上限+2，3.手牌上限+2');
                                     player.addTempSkill('san_mo','roundStart');
                                     player.storage.san_mo = player;
                                     player.syncStorage('san_mo');
-                                    game.log(player,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1');
+                                    game.log(player,'本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【冲】次数上限-1，3.手牌上限-1');
                                 }
                             });
                         }
@@ -20202,10 +20220,17 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player:'phaseUseBegin',
                 },
                 filter:function(event,player){
-                    return player.hp < player.maxHp;
+                    return player.hp < player.maxHp || player.hp == player.maxHp;
                 },
                 content:function(event){
                     'step 0'
+                    if (player.hp == player.maxHp){
+                        player.logSkillColor("tianyu_tu",undefined,false,'water',false,false);
+                        game.playAudioVideoBroadCast('effect','boundSound');
+                        player.gainMaxHp(1);
+                        event.goto(4);
+                    }
+                    'step 1'
                     //改变背景
                     if (game.getUpperBackgroundName('',player) != 'pini_bg'){
                         if (!player.hasSkill('pini_background')){
@@ -20215,13 +20240,19 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.syncStorage('pini_background');
                         game.createClearBackground('pini_bg',player);
                     }
-                    'step 1'
+                    'step 2'
                     player.logSkill('tianyu_tu');
                     game.playAudioVideoBroadCast('effect','damage');
                     player.loseMaxHp(1);
-                    'step 2'
+                    'step 3'
                     player.addTempSkill('pini_tu');
                     game.log(player,'本回合获得技能','#g【睥睨】');
+                    event.finish();
+                    return;
+                    'step 4'
+                    game.delay(1);
+                    event.finish();
+                    return;
                 },
                 ai:{
 					threaten:2.4,
@@ -20741,7 +20772,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(event){
                     "step 0"
-					player.chooseBool(get.prompt('mengguan_shi'),'当你失去所有手牌或当你失去所有装备区的牌后，你可以获得一个“猛”印记。').set('ai',function(){
+					player.chooseBool(get.prompt('mengguan_shi'),'当你失去所有手牌或当你失去所有器具区的牌后，你可以获得一个“猛”印记。').set('ai',function(){
                         return true;
                     });
                     "step 1"
@@ -21177,6 +21208,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				filterCard:function(card,player){
 					return true;
 				},
+                skillPopupColor:'thunder',
 				selectCard:[1,Infinity],
 				complexCard:true,
                 onuse: function (result, player) {
@@ -21195,7 +21227,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
 				check:function(card){
                     //三种情况：1.就用一张 2.用准备要弃掉的多余的牌 3.全部手牌 顺便触发猛灌加伤。
-                    //因为order比较低，所有默认桃和酒能用应该就都用掉了，没用的说明没啥用了，可以制衡一波。
+                    //因为order比较低，所有默认药和酒能用应该就都用掉了，没用的说明没啥用了，可以制衡一波。
 					var player=_status.event.player;
 					var targets=game.filterPlayer(function(current){
 						return player.canUse('wanjian',current);
@@ -21413,7 +21445,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.chooseBool(get.prompt("tongyin_shi"),'你脱离濒死，是否发动【痛饮】视为使用一张【万箭齐发】？').set('ai',function(){
+                    player.chooseBool(get.prompt("tongyin_shi"),'你脱离濒死，是否发动【痛饮】视为使用一张【乱剑穿心】？').set('ai',function(){
                         if (player.hasSkill('zongjiu_lala')&&player.hp == 1&&player.countCards('h','tao')+player.countCards('h','jiu')==0){
                             if (Math.random()<0.87){
                                 return false;
@@ -21462,7 +21494,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     player.useCard({ name: 'wanjian', isCard: true ,cardid:'tongyin_binsi_shi_id'},event.targets).set('nopopup',true).set('audio',false);
                     game.playAudioVideoBroadCast('skill','wanjian_effect');
                     game.log(player,"承陈英超的真传，"+get.cnNumber(event.targets.length,false)+"大碗白酒一股脑儿灌下肚去，敬在座的各位！喝罢，亮着手中的空碗，吸着腮，憋着嗝，晃晃悠悠着大腿迈前一步又踉跄着后退半步，醉醺醺的样子，正是：青出于蓝而胜于蓝！");
-                    game.log(player,'发动','#g【痛饮】','脱离濒死后视为使用了一张','#y【万箭齐发】');
+                    game.log(player,'发动','#g【痛饮】','脱离濒死后视为使用了一张','#y【乱剑穿心】');
                 },
             },
                 
@@ -21656,7 +21688,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     'step 0'
-                    player.chooseBool(get.prompt('sheji_nan'),'当你成为其他角色伤害类普通锦囊的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。').set('ai',function(){
+                    player.chooseBool(get.prompt('sheji_nan'),'当你成为其他角色伤害类普通策略牌的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。').set('ai',function(){
                         if (player.countCards('e','tengjia')>0&&(get.name(trigger.card)=='wanjian'||get.name(trigger.card)=='nanman')){
                             if (get.attitude(trigger.player,player)+get.attitude(player,trigger.player)<0){
                                 return true;
@@ -21891,7 +21923,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 0'
                     event.nojudge = false;
                     event.prompt = get.prompt("sishui_nan");
-                    event.prompt2 = "当你造成或受到伤害之后，你可以移动场上一张牌，若此牌为装备牌，且移出/移入了此次伤害来源或受到伤害角色的区域，则该角色回复1点体力/受到1点无来源伤害。";
+                    event.prompt2 = "当你造成或受到伤害之后，你可以移动场上一张牌，若此牌为器具牌，且移出/移入了此次伤害来源或受到伤害角色的区域，则该角色回复1点体力/受到1点无来源伤害。";
 					event.forced = false;
                     var next=player.chooseTarget(2,function(card,player,target){
 						if(ui.selected.targets.length){
@@ -22045,11 +22077,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 5'
                     if (get.position(event.result.card)=='e'){
                         if ((event.targets[0]==trigger.player||event.targets[0]==trigger.source)&&event.targets[0].hp<event.targets[0].maxHp){
-                            game.log(event.targets[0],'因','#g【似水】','失去装备牌，回复一点体力');
+                            game.log(event.targets[0],'因','#g【似水】','失去器具牌，回复一点体力');
                             event.targets[0].recover(1);
                         }
                         if (event.targets[1]==trigger.player||event.targets[1]==trigger.source){
-                            game.log(event.targets[1],'因','#g【似水】','获得装备牌，受到一点无来源伤害');
+                            game.log(event.targets[1],'因','#g【似水】','获得器具牌，受到一点无来源伤害');
                             event.targets[1].damage(1,'nosource');
                         }
                     }
@@ -22337,6 +22369,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 filterCard:function(card){
                     return get.color(card)=='red';
                 },
+                skillPopupColor:'wood',
                 position:'he',
                 viewAs:{
                     name:"tao",
@@ -22344,7 +22377,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 viewAsFilter:function(player){
                     return player.countCards('he')>0;
                 },
-                prompt:"你的回合内，你可以将一张红色牌当【桃】使用。",
+                prompt:"你的回合内，你可以将一张红色牌当【药】使用。",
                 check:function(card){
                     var player = _status.currentPhase;
                     if (get.name(card)=='tao'){
@@ -22403,7 +22436,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     'step 0'
-                    player.chooseCard('###回春###出牌阶段限一次，你可以将一张手牌视为【桃】对至多X名已受伤角色使用（X为此牌的点数），结算完成后，若此牌目标角色数≥你当前体力值，你本回合获得技能【药道】。','h',1).set('ai',function(card){
+                    player.chooseCard('###回春###出牌阶段限一次，你可以将一张手牌视为【药】对至多X名已受伤角色使用（X为此牌的点数），结算完成后，若此牌目标角色数≥你当前体力值，你本回合获得技能【药道】。','h',1).set('ai',function(card){
                         var player = _status.event.player;
                         var handCards = player.getCards('h');
                         var has = false;
@@ -22741,7 +22774,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content:function(event){
                     'step 0'
-                    player.chooseTarget(get.prompt('baiyi_source_yao'),'当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择一名除你和该牌目标以外的角色，令其代替你成为此牌使用者。',function(card,player,target){
+                    player.chooseTarget(get.prompt('baiyi_source_yao'),'当你使用带有「伤害」这一标签的行动牌或普通策略牌指定目标后，你可以选择一名除你和该牌目标以外的角色，令其代替你成为此牌使用者。',function(card,player,target){
 						return target!=player&&target!=trigger.target&&!trigger.targets.contains(target);
 					}).set('ai',function(target){
                         var player=_status.event.player;
@@ -22954,7 +22987,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 5'
                     if (result.card&&result.bool) {
                         game.log(player,'的','#g【三清】','牌中包含判定牌',result.card,'的花色，','#g【三清】','判定成功');
-                        player.chooseTarget('###三清###选择一名已受伤的角色，你视为对其使用一张【桃】',function(card,player,target){
+                        player.chooseTarget('###三清###选择一名已受伤的角色，你视为对其使用一张【药】',function(card,player,target){
                             return target.hp < target.maxHp;
                         }).set('ai',function(target){
                             var player = _status.event.player;
@@ -23778,10 +23811,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					},
 					content:function(storage,player,skill){
                         if (!player.storage){
-                            return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【桃】。';
+                            return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【药】。';
                         }
 						if(player.storage.anzhua_qian==true) return '锁定技，当你对一名角色造成伤害之前，若其在你攻击范围内，你增加一点体力上限并防止此伤害，并令该角色失去1点体力。';
-						return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【桃】。';
+						return '锁定技，当你对一名角色造成伤害之前，若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令其他角色本回合不能对该角色使用【药】。';
 					},
 				},
                 trigger:{
@@ -23854,7 +23887,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         if (player.maxHp <= 1){
                             if (!trigger.player.hasSkill('anzhua_qian_notao')){
                                 trigger.player.addTempSkill('anzhua_qian_notao');
-                                game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃');
+                                game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y药');
                             }
                             else{
                                 game.log(player,'令此次伤害+1');
@@ -23871,7 +23904,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     // trigger.num++;
                     if (!trigger.player.hasSkill('anzhua_qian_notao')){
                         trigger.player.addTempSkill('anzhua_qian_notao');
-                        game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y桃');
+                        game.log(player,'令此次伤害+1，并令本回合',trigger.player,'濒死时，其他角色不能对其使用','#y药');
                     }
                     else{
                         game.log(player,'令此次伤害+1');
@@ -23908,7 +23941,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 locked:true,
                 intro:{
-					content:"锁定技，本回合濒死时，其他角色不能对你使用【桃】",
+					content:"锁定技，本回合濒死时，其他角色不能对你使用【药】",
 				},
                 priority:15,
                 global:'anzhua_qian_notao_other',
@@ -24507,7 +24540,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 },
                 content:function(event){
                     "step 0"
-                    player.chooseBool(get.prompt('guimo_chou'),'当一名其他角色在【借刀杀人】结算中使用【杀】，你可以代替其成为此【杀】使用者。').set('ai',function(){
+                    player.chooseBool(get.prompt('guimo_chou'),'当一名其他角色在【借刀杀人】结算中使用【冲】，你可以代替其成为此【冲】使用者。').set('ai',function(){
                         if (trigger.targets&&trigger.targets.length>0){
                             if (trigger.targets[0].hasSkillTag('maixie_defend')){
                                 return Math.random()>1.5*(trigger.targets[0].hp/Math.max(1,trigger.targets[0].maxHp));
@@ -24562,13 +24595,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					for(var i=0;i<lib.inpile.length;i++){
 						var type=get.type(lib.inpile[i]);
 						if(type=='basic'){
-							list1.push(['基本','',lib.inpile[i]]);
+							list1.push(['行动','',lib.inpile[i]]);
 						}
 						else if(type=='trick'){
-							list2.push(['锦囊','',lib.inpile[i]]);
+							list2.push(['策略','',lib.inpile[i]]);
 						}
 						else if(type=='delay'){
-							// list3.push(['锦囊','',lib.inpile[i]]);
+							// list3.push(['策略','',lib.inpile[i]]);
 						}
 					}
                     event.notReady = (player.countCards('h','tao')+player.countCards('h','jiu') == player.countCards('he'));
@@ -24609,7 +24642,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         // game.playAudioVideoBroadCast('skill','shenchu_chou'+Math.ceil(2*Math.random()));
                         // game.log(player,'发动了','#g【神出】');
 
-                        game.log(player,'记录了一个普通锦囊牌或基本牌的名称');
+                        game.log(player,'记录了一个普通策略牌或行动牌的名称');
 					}
 					else{
                         player.storage.shenchu_chou='';
@@ -24713,13 +24746,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					for(var i=0;i<lib.inpile.length;i++){
 						var type=get.type(lib.inpile[i]);
 						if(type=='basic'){
-							list1.push(['基本','',lib.inpile[i]]);
+							list1.push(['行动','',lib.inpile[i]]);
 						}
 						else if(type=='trick'){
-							list2.push(['锦囊','',lib.inpile[i]]);
+							list2.push(['策略','',lib.inpile[i]]);
 						}
 						else if(type=='delay'){
-							// list3.push(['锦囊','',lib.inpile[i]]);
+							// list3.push(['策略','',lib.inpile[i]]);
 						}
 					}
                     event.notReady = (player.countCards('h','tao')+player.countCards('h','jiu') == player.countCards('he'));
@@ -24760,7 +24793,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.playAudioVideoBroadCast('skill','shenchu_chou'+Math.ceil(2*Math.random()));
                         game.log(player,'发动了','#g【神出】');
 
-                        game.log(player,'记录了一个普通锦囊牌或基本牌的名称');
+                        game.log(player,'记录了一个普通策略牌或行动牌的名称');
 					}
 					else{
                         player.storage.shenchu_chou='';
@@ -24803,7 +24836,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     'step 0'
 					trigger.source.clearSkills();
                     trigger.source.addSkill('zhouli_chou_notao');
-                    game.log(trigger.source,'失去所有技能，且濒死时，其他角色不能再对其使用【桃】');
+                    game.log(trigger.source,'失去所有技能，且濒死时，其他角色不能再对其使用【药】');
                     'step 1'
                     if (trigger.source.maxHp > player.maxHp){
                         trigger.source.loseMaxHp(trigger.source.maxHp-player.maxHp);
@@ -24836,12 +24869,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             zhouli_chou_notao:{
                 audio:false,
                 mark:true,
-                marktext:'咒',
+                marktext:'咒',//'🕱',
                 direct:true,
                 forced:true,
                 locked:true,
                 intro:{
-					content:"失去所有技能，濒死时其他角色不能对你使用【桃】",
+					content:"失去所有技能，濒死时其他角色不能对你使用【药】",
 				},
                 priority:15,
                 global:'zhouli_chou_notao_other',
@@ -25634,7 +25667,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
                 content(){
                     player.logSkillColor('dunkong_bo',undefined,false,'wood',true,false);
-                    game.log(player,'的手牌数＜体力值，触发技能','#g【遁空】','，不能成为','#y杀','或','#y决斗','的目标');
+                    game.log(player,'的手牌数＜体力值，触发技能','#g【遁空】','，不能成为','#y冲','或','#y酣战','的目标');
                 },
                 mod:{
 					targetEnabled:function(card,player,target,now){
@@ -25735,7 +25768,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             yuner_shiyan:{
                 // mark:true,
-                // marktext:'咒',
+                // marktext:'壶',
                 // intro:{
                 //     name:'试验',
                 // },
@@ -26226,7 +26259,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(){
                     "step 0"
-					player.chooseTarget("ta杀你");
+					player.chooseTarget("ta冲你");
                     "step 1"
 					if(result.bool){
                         result.targets[0].useCard({name:'sha',isCard:true},player,false);
@@ -26241,7 +26274,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(){
                     "step 0"
-					player.chooseTarget("ta决斗你");
+					player.chooseTarget("ta酣战你");
                     "step 1"
 					if(result.bool){
                         result.targets[0].useCard({name:'juedou',isCard:true},player,false);
@@ -26256,7 +26289,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(){
                     "step 0"
-					player.chooseTarget("废除ta所有装备区");
+					player.chooseTarget("废除ta所有器具区");
                     "step 1"
 					if(result.bool){
                         result.targets[0].disableEquip('equip1');
@@ -26290,7 +26323,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(){
                     "step 0"
-					player.chooseTarget("然ta弃掉所有手牌和装备牌");
+					player.chooseTarget("然ta弃掉所有手牌和器具牌");
                     "step 1"
 					if(result.bool){
                         result.targets[0].discard(result.targets[0].getCards('he'));
@@ -26725,7 +26758,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					else{
 						event.target2=result.targets[0];
 						var list=['手牌区'];
-						if(lib.card[card.name].type=='equip'&&event.target2.isEmpty(lib.card[card.name].subtype)) list.push('装备区');
+						if(lib.card[card.name].type=='equip'&&event.target2.isEmpty(lib.card[card.name].subtype)) list.push('器具区');
 						if(lib.card[card.name].type=='delay'&&!event.target2.storage._disableJudge&&!event.target2.hasJudge(card.name)) list.push('判定区');
 						if(list.length==1) event._result={control:list[0]};
 						else{
@@ -26750,7 +26783,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							}
 							else next.animate='draw';
 						}
-						else if(result.control=='装备区'){
+						else if(result.control=='器具区'){
 							if(event.target1) event.target1.$give(card,event.target2);
 							event.target2.equip(card);
 						}
@@ -26779,7 +26812,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 			
 		},
 
-        //废除装备栏时显示的卡牌
+        //废除器具栏时显示的卡牌
 		card:{
 			"feichu_equip1":{
 				type:"equip",
@@ -26843,11 +26876,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'jiuyou': '九幽',
             'jiuyou_info':"每当有判定发生时，你可以摸一张牌。",
             'jingling': '精灵',
-            'jingling_info': "你可以弃置两张牌，使一次判定或一张锦囊牌无效。",
+            'jingling_info': "你可以弃置两张牌，使一次判定或一张策略牌无效。",
             'yongzhuang': '泳装',
-            'yongzhuang_info': "锁定技，当你的防具栏为空时，黑色的杀对你无效。",
+            'yongzhuang_info': "锁定技，当你的防具栏为空时，黑色的冲对你无效。",
             'mizui':'迷醉',
-            'mizui_info':"当你成为非黑色杀的目标或受到伤害时，你可以进行一次判定，若结果为♥，则此杀或此次伤害无效。",
+            'mizui_info':"当你成为非黑色冲的目标或受到伤害时，你可以进行一次判定，若结果为♥，则此冲或此次伤害无效。",
             
 
             hanxin: '韩鑫',
@@ -26863,13 +26896,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             huaxiang2:'滑翔',
             huaxiang4:'滑翔',
             'guaidao':"怪盗",
-            "guaidao_info":"你可以将一张黑色牌当做【顺手牵羊】使用。",
+            "guaidao_info":"你可以将一张黑色牌当做【盗亦有道】使用。",
             "jingguai":"精怪",
             "jingguai_info":"一名角色的判定牌生效前，你可以打出一张红色牌替换之；当你受到伤害时，若你的武将牌背面朝上，则你可在此伤害结算后将武将牌翻回正面。",
             "mingwang":"冥王",
             "mingwang_info":"当一名其他角色进入濒死状态时，你可以弃置三张♠牌，令该角色立即死亡。当你的体力值≤0时，你可以令一名其他角色进行判定，若结果为♠，则你回满体力；若结果点数为K，则该角色立即死亡并令你失去本技能。",
             "huaxiang":"滑翔",
-            "huaxiang_info":"你可以选择一至三项: 1. 跳过判定阶段和摸牌阶段; 2. 跳过出牌阶段并弃置一张装备牌; 3. 跳过弃牌阶段并将你的武将牌翻面。你每选择一项，视为你对一名其他角色使用一张没有距离限制的【杀】，且如果你选择了第三项，则你可以摸五张牌，然后弃置一张手牌，若以此法弃置的是装备牌，则你改为使用之。",
+            "huaxiang_info":"你可以选择一至三项: 1. 跳过判定阶段和摸牌阶段; 2. 跳过出牌阶段并弃置一张器具牌; 3. 跳过弃牌阶段并将你的武将牌翻面。你每选择一项，视为你对一名其他角色使用一张没有距离限制的【冲】，且如果你选择了第三项，则你可以摸五张牌，然后弃置一张手牌，若以此法弃置的是器具牌，则你改为使用之。",
 
 			
 
@@ -26883,7 +26916,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "jiuyin":"酒瘾",
             "jiuyin_info":"你可以将一张手牌当作【酒】使用。",
             "jiuyu":"酒域",
-            "jiuyu_info":"出牌阶段限一次，你令【醉美】的摸牌数-1，并令所有角色的手牌中除【杀】以外的牌都视为【酒】，然后你依次与除你外的所有角色对饮【酒】（对饮过程：你先使用一张【酒】, 否则失去1点体力，然后此角色使用一张【酒】，否则失去1点体力。）；此过程结束后，你令除你外的所有角色依次对距离最近的其他角色使用一张【杀】，否则回复1点体力；最后，所有角色手牌视为【酒】的限制解除，你恢复技能【醉美】。",
+            "jiuyu_info":"出牌阶段限一次，你令【醉美】的摸牌数-1，并令所有角色的手牌中除【冲】以外的牌都视为【酒】，然后你依次与除你外的所有角色对饮【酒】（对饮过程：你先使用一张【酒】, 否则失去1点体力，然后此角色使用一张【酒】，否则失去1点体力。）；此过程结束后，你令除你外的所有角色依次对距离最近的其他角色使用一张【冲】，否则回复1点体力；最后，所有角色手牌视为【酒】的限制解除，你恢复技能【醉美】。",
             'jiuyu_jiu':'酒域',
             "haoqin":"豪情",
             "haoqin_info":"回合结束阶段，你可选择一名其他角色，若如此做，直到你的下回合开始，所有角色对该角色造成的伤害均转移到你身上。",
@@ -26902,23 +26935,23 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             honglian_binsi_chenyingchao:'红缨',
             dizhong:"敌众",
             "nvhao":"女豪",
-            "nvhao_info":"当你失去装备区内的牌后，你可以摸两张牌然后弃置一张手牌，然后若你的下一次伤害未通过此技能加伤，你可以令你下一次造成的伤害+1。",
+            "nvhao_info":"当你失去器具区内的牌后，你可以摸两张牌然后弃置一张手牌，然后若你的下一次伤害未通过此技能加伤，你可以令你下一次造成的伤害+1。",
             "haoshuang":"豪爽",
-            "haoshuang_info":"当你使用锦囊牌或任意形式转换的【南蛮入侵】时，你可以摸一张牌。若此牌为基本牌，则你可以弃置之，然后令本回合手牌上限+1。",
+            "haoshuang_info":"当你使用策略牌或任意形式转换的【红莲醉舞】时，你可以摸一张牌。若此牌为行动牌，则你可以弃置之，然后令本回合手牌上限+1。",
             "honglian_chenyingchao":"红缨",
-            "honglian_chenyingchao_info":"每回合每个装备栏(武器栏，防具栏，坐骑栏，宝具栏)各限一次，你可以将一个装备栏中的一张装备牌当作【南蛮入侵】使用。当你脱离濒死状态时，你可以视为使用一张【南蛮入侵】。",
+            "honglian_chenyingchao_info":"每回合每个器具栏(武器栏，防具栏，坐骑栏，宝具栏)各限一次，你可以将一个器具栏中的一张器具牌当作【红莲醉舞】使用。当你脱离濒死状态时，你可以视为使用一张【红莲醉舞】。",
             'honglian_binsi_chenyingchao':"红缨",
             "dizhong":"敌众",
-            "dizhong_info":"每回合限一次，一名角色使用的【南蛮入侵】结算完成后，你可以摸X张牌（X为受到过此牌伤害的角色数）。",
+            "dizhong_info":"每回合限一次，一名角色使用的【红莲醉舞】结算完成后，你可以摸X张牌（X为受到过此牌伤害的角色数）。",
             
             
             wusheng_wusheng: '无声',
             xiaoyue_wusheng:'啸月',
             shixue:'嗜血',
             'xiaoyue_wusheng':"啸月",
-            "xiaoyue_wusheng_info":"锁定技，你计算与其他角色的初始距离-1，当你于回合内使用牌时，你本回合计算与其他角色的距离额外-1。你的回合内，若你至场上所有其他角色的距离均≤1，则当你使用【杀】或普通锦囊牌选择唯一目标后，你选择至多两项：1.为此牌多指定一个目标；2.令此牌无视防具；3.令此牌不可被抵消；4.此牌造成伤害时摸一张牌。",
+            "xiaoyue_wusheng_info":"锁定技，你计算与其他角色的初始距离-1，当你于回合内使用牌时，你本回合计算与其他角色的距离额外-1。你的回合内，若你至场上所有其他角色的距离均≤1，则当你使用【冲】或普通策略牌选择唯一目标后，你选择至多两项：1.为此牌多指定一个目标；2.令此牌无视防具；3.令此牌不可被抵消；4.此牌造成伤害时摸一张牌。",
             "shixue":"嗜血",
-            "shixue_info":"一名角色的回合结束时，若你本回合内杀死过角色，则你可以进行一个额外的回合，这一回合中你造成的伤害+1且将所有【杀】视为【雷杀】。",
+            "shixue_info":"一名角色的回合结束时，若你本回合内杀死过角色，则你可以进行一个额外的回合，这一回合中你造成的伤害+1且将所有【冲】视为【雷冲】。",
 			"lang_skill_damage_bonus":"嗜血",
             
             
@@ -26931,7 +26964,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'guanjiang_yuling':"灌江",
             "guanjiang_yuling_info":"当你受到1点伤害后，你可以按照你选择的区域优先度随机获得每名其他角色区域里的一张牌，然后你翻面。",
             "duliang_yuling":"肚量",
-            "duliang_yuling_info":"弃牌阶段开始时，若你于本回合跳过出牌阶段或在出牌阶段内没有使用或打出过【杀】、【酒】或【桃】中的任意一张牌，则你可以跳过此阶段。",
+            "duliang_yuling_info":"弃牌阶段开始时，若你于本回合跳过出牌阶段或在出牌阶段内没有使用或打出过【冲】、【酒】或【药】中的任意一张牌，则你可以跳过此阶段。",
             guao_hp:'伤害',
 			guao_maxHp:'体力上限',
 
@@ -26940,11 +26973,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "meigui_liyun":"玫瑰",
             "meigui_liyun_info":"出牌阶段限两次，你可以选择下列一项并对你攻击范围内的一名其他角色造成2点雷电伤害：1. 失去1点；2. 弃置一张武器牌。伤害结算完成后，若此角色并未死亡，则你失去1点体力。",
             "wushi_liyun":"武士",
-            "wushi_liyun_info":"当你使用【杀】指定一名角色为目标后，你可以令该角色的非锁定技失效直到回合结束，然后其弃置一张牌，并令你进行一次判定，除非判定结果与该角色弃置的牌花色相同，否则其不能使用【闪】抵消此【杀】。",
+            "wushi_liyun_info":"当你使用【冲】指定一名角色为目标后，你可以令该角色的非锁定技失效直到回合结束，然后其弃置一张牌，并令你进行一次判定，除非判定结果与该角色弃置的牌花色相同，否则其不能使用【守】抵消此【冲】。",
             'wushi_fengyin':'武士',
             'wushi_fengyin_bg':'✟',//'&#x271F;&#xFE0E;',//'✟',//'✙',//'✞',//'✙',
             "luoshen_liyun":'裸身',
-            "luoshen_liyun_info":'你濒死时，若你的区域内（判定区、装备区、手牌区）有至少一张牌，你可以弃置你区域内所有牌，将体力回复至1点。',
+            "luoshen_liyun_info":'你濒死时，若你的区域内（判定区、器具区、手牌区）有至少一张牌，你可以弃置你区域内所有牌，将体力回复至1点。',
             "jisu_liyun":"疾袭",
             "jisu_liyun_info":"锁定技，你计算与其他角色的距离时-2。",
 
@@ -26960,9 +26993,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "jingtong_lan":"经痛",
             "jingtong_lan_info":"锁定技，拥有“奴”标记的角色受到伤害后，你摸一张牌。",
             "minghou_lan":"冥后",
-            "minghou_lan_info":"每回合限一次，当你于出牌阶段使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以猜测其中的一个目标的手牌中是否有基本牌，锦囊牌或装备牌。若你猜中的项目数：≥1，此牌对该角色的伤害+1；≥2，你摸两张牌；≥3，你获得技能〖冥祭〗和技能〖嗜灵〗直到下回合开始。",
+            "minghou_lan_info":"每回合限一次，当你于出牌阶段使用带有「伤害」这一标签的行动牌或普通策略牌指定目标后，你可以猜测其中的一个目标的手牌中是否有行动牌，策略牌或器具牌。若你猜中的项目数：≥1，此牌对该角色的伤害+1；≥2，你摸两张牌；≥3，你获得技能〖冥祭〗和技能〖嗜灵〗直到下回合开始。",
             "nulian_lan":"奴恋",
-            "nulian_lan_info":"出牌阶段限一次，你可以展示自己的一张手牌，然后展示一名拥有“奴”标记的其他角色的至多四张手牌。其展示的牌中：每有一张颜色相同，你摸一张牌；每有一张点数相同，你回复1点体力；一名角色使用基本牌或普通锦囊牌指定你为目标时，若其有“奴”标记，你可以取消之，然后其失去“奴”标记；你使用基本牌或普通锦囊牌仅指定一名角色为目标时，你可以多指定任意名带有“奴”标记的角色为目标，然后其失去“奴”标记。",
+            "nulian_lan_info":"出牌阶段限一次，你可以展示自己的一张手牌，然后展示一名拥有“奴”标记的其他角色的至多四张手牌。其展示的牌中：每有一张颜色相同，你摸一张牌；每有一张点数相同，你回复1点体力；一名角色使用行动牌或普通策略牌指定你为目标时，若其有“奴”标记，你可以取消之，然后其失去“奴”标记；你使用行动牌或普通策略牌仅指定一名角色为目标时，你可以多指定任意名带有“奴”标记的角色为目标，然后其失去“奴”标记。",
             'nulian_target_lan':"奴恋",
             'nulian_use_lan':"奴恋",
 
@@ -26982,7 +27015,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "taose_duo":'桃色',
             "taose_duo_info":"每回合限一次，出牌阶段你可以选择X名女性角色，X至多为3，然后你弃置X张牌，令她们依次失去1点体力。",
             "duanxiu_duo":'断袖',
-            "duanxiu_duo_info":"锁定技，你无法向男性角色出杀，且男性角色若向你出杀则你不可以闪避；当你受到伤害时，若伤害来源为女性角色，则此伤害-1。",
+            "duanxiu_duo_info":"锁定技，你无法向男性角色出冲，且男性角色若向你出冲则你不可以闪避；当你受到伤害时，若伤害来源为女性角色，则此伤害-1。",
             "duanxiu_nan_duo":"断袖",
             "duanxiu_nv_duo":"断袖",
             "duanxiu_noSha_duo":"断袖",
@@ -27003,13 +27036,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "mingding_tushan":"酩酊",
             "mingding_tushan_info":"觉醒技，准备阶段，若你的“尾”印记数量≥9，则移除所有“尾”印记，然后你加1点体力上限，回复满体力，摸九张牌，失去技能【豪饮】，获得技能【九尾】和【眷念】。",
             "jiuwei_tushan":"九尾",
-            "jiuwei_tushan_info":"每当你需要使用或打出一张【杀】时，你可以进行一次判定：若判定结果点数≤9，则视为你使用或打出了一张【杀】；你发动【九尾】使用的【杀】无距离限制且此【杀】不计入限制的使用次数；当你受到伤害后，你可以进行一次判定：若判定结果点数≤9，你对伤害来源造成1点伤害；当你造成伤害时，你可以进行一次判定：若判定结果点数≤9，你可以令此伤害+1。",
+            "jiuwei_tushan_info":"每当你需要使用或打出一张【冲】时，你可以进行一次判定：若判定结果点数≤9，则视为你使用或打出了一张【冲】；你发动【九尾】使用的【冲】无距离限制且此【冲】不计入限制的使用次数；当你受到伤害后，你可以进行一次判定：若判定结果点数≤9，你对伤害来源造成1点伤害；当你造成伤害时，你可以进行一次判定：若判定结果点数≤9，你可以令此伤害+1。",
             "jiuwei_respondSha_tushan":"九尾",
             "jiuwei_useSha_tushan":"九尾",
             "jiuwei_shou_tushan":"九尾",
             "jiuwei_jiashang_tushan":"九尾",
             "juannian_tushan":"眷念",
-            "juannian_tushan_info":"锁定技，你每回合使用【杀】的次数不能超过9。",
+            "juannian_tushan_info":"锁定技，你每回合使用【冲】的次数不能超过9。",
 
 
             zhangning_jiuzi:"涂山宁",
@@ -27031,20 +27064,20 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             caoxin:"曹信",
             "xinnian_caoxin":"信念",
-            "xinnian_caoxin_info":"游戏开始时，你获得1个信印记；当你使用或打出【闪】时，你获得一个信印记，并摸一张牌；当你使用或打出【无懈可击】时，你获得一个信印记，并摸一张牌；你的出牌阶段开始时，你获得场上背面朝上的角色数的信印记。",
+            "xinnian_caoxin_info":"游戏开始时，你获得1个信印记；当你使用或打出【守】时，你获得一个信印记，并摸一张牌；当你使用或打出【以策制策】时，你获得一个信印记，并摸一张牌；你的出牌阶段开始时，你获得场上背面朝上的角色数的信印记。",
             "xinnian_shanwuxie_caoxin":"信念",
             "xinnian_phaseBegin_caoxin":"信念",
             "yinyang_caoxin":"阴阳",
-            "yinyang_caoxin_info":"当你从背面翻至正面时，你可以令一名其他角色翻面；准备阶段，你可以选择与一名背面朝上的角色交换手牌；你的回合结束时，你可以选择与一名正面朝上的角色交换装备区内的牌。",
+            "yinyang_caoxin_info":"当你从背面翻至正面时，你可以令一名其他角色翻面；准备阶段，你可以选择与一名背面朝上的角色交换手牌；你的回合结束时，你可以选择与一名正面朝上的角色交换器具区内的牌。",
             "yinyang_origin_caoxin":"阴阳",
             "yinyang_shoupai_caoxin":"阴阳",
             "yinyang_zhuangbei_caoxin":"阴阳",
             "bingxian_caoxin":"兵仙",
-            "bingxian_caoxin_info":"锁定技，你的回合内，你获得的牌，除了装备牌以外，均会在当前回合的弃牌阶段前置入弃牌堆；你的回合外，当你不因此技能效果获得牌时，摸一张牌。",
+            "bingxian_caoxin_info":"锁定技，你的回合内，你获得的牌，除了器具牌以外，均会在当前回合的弃牌阶段前置入弃牌堆；你的回合外，当你不因此技能效果获得牌时，摸一张牌。",
             "bingxian_draw_caoxin":"兵仙",
             "bingxian_discard_caoxin":"兵仙",
             "taiji_caoxin":"太极",
-            "taiji_caoxin_info":"当你的信印记数量＞0时，你可以发动以下效果：1.当你受到伤害时，若你正面朝上，则你可以弃一个信印记，然后翻面，令此伤害-1，并令伤害来源受到其自己造成的1点相同属性的伤害；2.当你成为【杀】的目标时，若你背面朝上，则你可以弃一个信印记，然后翻面并横置，将此【杀】转移给一名其他角色，可以为此【杀】使用者；3.当你成为装备牌的目标时，若你正面朝上，则你可以获得一个信印记，然后翻面，而后你可以选择令场上任意一名角色（包括你自己）使用这张装备牌；4.当你成为一张伤害类锦囊牌的目标时，若你背面朝上，则你可以获得一个信印记，然后翻面并横置，而后你不再是此牌目标。",
+            "taiji_caoxin_info":"当你的信印记数量＞0时，你可以发动以下效果：1.当你受到伤害时，若你正面朝上，则你可以弃一个信印记，然后翻面，令此伤害-1，并令伤害来源受到其自己造成的1点相同属性的伤害；2.当你成为【冲】的目标时，若你背面朝上，则你可以弃一个信印记，然后翻面并横置，将此【冲】转移给一名其他角色，可以为此【冲】使用者；3.当你成为器具牌的目标时，若你正面朝上，则你可以获得一个信印记，然后翻面，而后你可以选择令场上任意一名角色（包括你自己）使用这张器具牌；4.当你成为一张伤害类策略牌的目标时，若你背面朝上，则你可以获得一个信印记，然后翻面并横置，而后你不再是此牌目标。",
             "taiji1_caoxin":"太极",
             "taiji2_caoxin":"太极",
             "taiji3_caoxin":"太极",
@@ -27053,18 +27086,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             dingya:"丁亚",
             'kuaijiu_ding':"快酒",
-            'kuaijiu_ding_info':"当你在决斗中需要打出【杀】时，你可以获得一个狂印记，视为打出了一张【杀】；当你即将受到一次伤害时，你可以获得一个狂印记，令此次伤害值-1；当你即将造成一次伤害时，若你拥有至少1个狂印记，你可以弃一个狂印记，令此次伤害值+1；当你因此技能获得狂印记时，若你没有技能【余劲】，则你获得技能【余劲】。",
+            'kuaijiu_ding_info':"当你在酣战中需要打出【冲】时，你可以获得一个狂印记，视为打出了一张【冲】；当你即将受到一次伤害时，你可以获得一个狂印记，令此次伤害值-1；当你即将造成一次伤害时，若你拥有至少1个狂印记，你可以弃一个狂印记，令此次伤害值+1；当你因此技能获得狂印记时，若你没有技能【余劲】，则你获得技能【余劲】。",
             "kuaijiu_juedou_ding":"快酒",
             "kuaijiu_loseDamage_ding":"快酒",
             "kuaijiu_addDamage_ding":"快酒",
             'kuangyin_ding':"狂饮",
-            'kuangyin_ding_info':"其他角色对你使用的非延迟类锦囊牌（包括【借刀杀人】）且你为唯一目标时，若此牌不为【决斗】或【南蛮入侵】，你可以将此牌视为【决斗】。当你决斗时，你的手牌都可以视为【杀】打出。",
+            'kuangyin_ding_info':"其他角色对你使用的非延迟类策略牌（包括【借刀杀人】）且你为唯一目标时，若此牌不为【酣战】或【红莲醉舞】，你可以将此牌视为【酣战】。当你酣战时，你的手牌都可以视为【冲】打出。",
             "kuangyin_sha_ding":"狂饮",
             'yujin_ding':"余劲",
             'yujin_ding_info':"锁定技，你的准备阶段，若你有狂印记且数量＜你的体力上限，你清除所有狂印记；若你有狂印记且数量≥你的体力上限且≤你双倍的体力上限，则你进行一次判定：若结果为♥，则清除狂印记；若结果为其他花色或你的狂印记数量＞你双倍的体力上限，则你清除狂印记，并对自己造成狂印记数量的伤害。",
             'yujin_animation_ding':"余劲",
             'fenfen_ding':"忿忿",
-            'fenfen_ding_info':"当你受到伤害后，若你正面朝上，你可以翻面，然后摸两张牌；当你翻回正面或脱离濒死时，你可以选择一个角色为目标，视为向其使用了一张【决斗】。",
+            'fenfen_ding_info':"当你受到伤害后，若你正面朝上，你可以翻面，然后摸两张牌；当你翻回正面或脱离濒死时，你可以选择一个角色为目标，视为向其使用了一张【酣战】。",
             'fenfen_juedou_ding':"忿忿",
             'fenfen_damaged_ding':"忿忿",
 
@@ -27078,9 +27111,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'rongyan_huo_silent_yan':"熔炎",
             'rongyan_save_yan':"熔炎",
             'longquan_yan':"龙拳",
-            'longquan_yan_info':"你的回合内限一次，你使用【杀】指定目标后，你可以弃置手牌区和装备区所有牌，然后摸等量的牌，并令所有其他角色均成为此【杀】的目标，此【杀】结算完后，你翻面。",
+            'longquan_yan_info':"你的回合内限一次，你使用【冲】指定目标后，你可以弃置手牌区和器具区所有牌，然后摸等量的牌，并令所有其他角色均成为此【冲】的目标，此【冲】结算完后，你翻面。",
             'yuzhong_yan':"愚忠",
-            'yuzhong_yan_info':"锁定技，你的判定牌不能被无效或修改；你做主公、主将、主帅时，不增加体力上限；你即将对一名角色造成伤害时，若你正面朝上，则你摸一张牌，若你背面朝上，该角色摸一张牌，若该角色背面朝上，则此伤害无效，改为令其从背面翻回正面；当你受到伤害时：1.若来自锦囊牌，此伤害+1；2.若伤害非卡牌伤害，此伤害-1；3.若为火焰伤害，且你为铁索传导的起点，则此伤害+1。",
+            'yuzhong_yan_info':"锁定技，你的判定牌不能被无效或修改；你做主公、主将、主帅时，不增加体力上限；你即将对一名角色造成伤害时，若你正面朝上，则你摸一张牌，若你背面朝上，该角色摸一张牌，若该角色背面朝上，则此伤害无效，改为令其从背面翻回正面；当你受到伤害时：1.若来自策略牌，此伤害+1；2.若伤害非卡牌伤害，此伤害-1；3.若为火焰伤害，且你为铁索传导的起点，则此伤害+1。",
             'yuzhong_zhu_yan':"愚忠",
             'yuzhong_fix_yan':"愚忠",
             'yuzhong_panding_yan':"愚忠",
@@ -27094,10 +27127,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             quanjinfa:"全金发",
             'mingcha_quan':"明察",
-            'mingcha_quan_info':"锁定技，你所有黑杀的花色皆视为♦；你使用的非延时锦囊牌不能被【无懈可击】响应；当一名角色使用或打出【无懈可击】时，你摸一张牌；当你成为其他角色使用非延迟锦囊牌的目标时，若此牌颜色不为黑色，则此牌对你无效然后你摸一张牌。",
+            'mingcha_quan_info':"锁定技，你所有黑冲的花色皆视为♦；你使用的非延时策略牌不能被【以策制策】响应；当一名角色使用或打出【以策制策】时，你摸一张牌；当你成为其他角色使用非延迟策略牌的目标时，若此牌颜色为红色，则此牌对你无效然后你摸一张牌。",
             'mingcha_sha_quan':"明察",
             'mingcha_trick_quan':"明察",
-            'mingcha_disable_quan':"封无懈",
+            'mingcha_disable_quan':"封制策",
             'mingcha_wuxie_quan':"明察",
             'mingcha_heitrick_quan':"明察",
             'xianfu_quan':"贤辅",
@@ -27125,11 +27158,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             mantian_spade_mei:"瞒天",
             mantian_spade_mei_nan:"瞒天",
             'xinruan_mei':"心软",
-            'xinruan_mei_info':"锁定技，一名其他角色对自己造成伤害后，你也对自己造成等量伤害；你濒死时，其他角色的【酒】和♠花色的手牌也可以视为【桃】，对你使用。",
+            'xinruan_mei_info':"锁定技，一名其他角色对自己造成伤害后，你也对自己造成等量伤害；你濒死时，其他角色的【酒】和♠花色的手牌也可以视为【药】，对你使用。",
             "xinruan_selfDamage_mei":"心软",
             "xinruan_jiu_mei":"心软",
             'zuiai_mei':"醉爱",
-            'zuiai_mei_info':"限定技，当一名男性角色使用【桃】或【酒】或♠牌令你脱离濒死状态时，你可以选择令其获得技能【赌天】，然后你减一点体力上限，失去技能【瞒天】并废除判定区。若此角色使用的牌包含【酒】或♠牌或其拥有技能【精怪】，则其额外获得技能【瞒天】。",
+            'zuiai_mei_info':"限定技，当一名男性角色使用【药】或【酒】或♠牌令你脱离濒死状态时，你可以选择令其获得技能【赌天】，然后你减一点体力上限，失去技能【瞒天】并废除判定区。若此角色使用的牌包含【酒】或♠牌或其拥有技能【精怪】，则其额外获得技能【瞒天】。",
             
             lenyue:"冷月",
             "jianyu_len":"剑雨",
@@ -27139,14 +27172,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "yinzhen_len":"饮鸩",
             "yinzhen_len_info":"你濒死时，若你的体力上限＞3，你可以减1点体力上限，将体力回复至1点，然后将手牌数摸至体力上限。",
             "duoqin_len":"多情",
-            "duoqin_len_info":"当你使用的锦囊牌置入弃牌堆后，你可以选择一名其他角色，你从弃牌堆获得此牌并将之交给此角色；当一名角色受到雷电伤害后，你可以令其失去1点体力，或回复1点体力，然后你也跟着失去或回复1点体力；当你成为其他角色使用普通锦囊牌的唯一目标时，若此牌颜色为黑色，则你可以将其视为【雷杀】，且此【杀】计入此角色本回合使用次数。",
+            "duoqin_len_info":"当你使用的策略牌置入弃牌堆后，你可以选择一名其他角色，你从弃牌堆获得此牌并将之交给此角色；当一名角色受到雷电伤害后，你可以令其失去1点体力，或回复1点体力，然后你也跟着失去或回复1点体力；当你成为其他角色使用普通策略牌的唯一目标时，若此牌颜色为黑色，则你可以将其视为【雷冲】，且此【冲】计入此角色本回合使用次数。",
             "duoqin_useAfter_len":"多情",
             "duoqin_thunder_len":"多情",
             "duoqin_leisha_len":"多情",
             'duoqin_thunder_gain':"回复1点体力",
             'duoqin_thunder_lose':"失去1点体力",
             'zhuxing_len':"助兴",
-            'zhuxing_len_info':"当一名角色于其出牌阶段内使用【杀】时，你可以弃置一张牌，令此【杀】不计入出牌阶段的使用次数，然后若此【杀】为雷杀，你摸一张牌；你受到1点雷电伤害后，可以摸三张牌，然后将至多三张牌交给任意角色。",
+            'zhuxing_len_info':"当一名角色于其出牌阶段内使用【冲】时，你可以弃置一张牌，令此【冲】不计入出牌阶段的使用次数，然后若此【冲】为雷冲，你摸一张牌；你受到1点雷电伤害后，可以摸三张牌，然后将至多三张牌交给任意角色。",
             'zhuxing_sha_len':"助兴",
             'zhuxing_damage_len':"助兴",
             
@@ -27160,9 +27193,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "kezheng_enda_info":"一名其他角色的回合结束阶段，若其手牌数多于你，则你可以选择一项：1.令其交给你一张手牌，2.流失1点体力并令其将手牌数弃至与你相同；一名角色的回合结束阶段开始时，若其手牌数为0，则你可以令其摸一张牌。",
             'kezheng_draw_enda':"苛政",
             "roufa_enda":"肉伐",
-            "roufa_enda_info":"每回合出牌阶段限一次，你可以指定一名角色，然后令所有女性角色选择一项：1.对指定的角色使用【杀】，2.你获得她一张牌。",
+            "roufa_enda_info":"每回合出牌阶段限一次，你可以指定一名角色，然后令所有女性角色选择一项：1.对指定的角色使用【冲】，2.你获得她一张牌。",
             'cangxin_enda':"藏心",
-            'cangxin_enda_info':"锁定技，游戏开始时，你摸一张牌，并将一张手牌背面朝上置于武将牌上，称为【心】；当你有【心】时，来自其他角色或无来源的雷电伤害对你无效，当你的体力值＜体力上限并受到来自其他角色或无来源的伤害时，若非卡牌伤害或伤害牌的花色与【心】不同，则此伤害对你无效，若伤害牌花色与【心】相同，则你受到的伤害+1；你第一次在体力值＜体力上限时受到来自其他角色或无来源的伤害后，你展示【心】，并将【心】正面朝上；当你濒死时，若你的手牌中没有【桃】或【酒】，则你失去【心】，并将体力回复至1点，然后你失去此技能。",
+            'cangxin_enda_info':"锁定技，游戏开始时，你摸一张牌，并将一张手牌背面朝上置于武将牌上，称为【心】；当你有【心】时，来自其他角色或无来源的雷电伤害对你无效，当你的体力值＜体力上限并受到来自其他角色或无来源的伤害时，若非卡牌伤害或伤害牌的花色与【心】不同，则此伤害对你无效，若伤害牌花色与【心】相同，则你受到的伤害+1；你第一次在体力值＜体力上限时受到来自其他角色或无来源的伤害后，你展示【心】，并将【心】正面朝上；当你濒死时，若你的手牌中没有【药】或【酒】，则你失去【心】，并将体力回复至1点，然后你失去此技能。",
             'cangxin_start_enda':'藏心',
             'cangxin_end_enda':'藏心',
             'cangxin_damage_enda':'藏心',
@@ -27176,65 +27209,65 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'bihai_self_shui':"碧海",
             'bihai_thunder_shui':"碧海",
             "chengneng_shui":"逞能",
-            "chengneng_shui_info":"出牌阶段限两次，若你的手牌上限＞0，你可以令自己本回合手牌上限-1，视为使用一张【酒】，然后你选择一项：1.视为使用一张【杀】，2.令本回合出杀次数+1。出牌阶段结束时，若你本回合发动过技能【逞能】，则你对自己造成X点伤害（X为你本回合发动【逞能】的次数）。",
+            "chengneng_shui_info":"出牌阶段限两次，若你的手牌上限＞0，你可以令自己本回合手牌上限-1，视为使用一张【酒】，然后你选择一项：1.视为使用一张【冲】，2.令本回合出冲次数+1。出牌阶段结束时，若你本回合发动过技能【逞能】，则你对自己造成X点伤害（X为你本回合发动【逞能】的次数）。",
             'chengneng_lose_shui':"逞能",
             "yilian_shui":"依恋",
             "yilian_shui_info":"准备阶段，你可以选择一名女性角色，成为【依恋】，直到你的下个准备阶段；你和【依恋】对象之一回复体力时，另一方也回复等量体力；你和【依恋】对象之一的弃牌阶段结束时，另一方可以获得此阶段弃置的所有牌。",
             yilian_target_recover_shui:'依恋',
             "baihe_shui":"百合",
-            "baihe_shui_info":"锁定技，你成为【桃】的目标时，若使用者是女性，则你额外回复1点体力；你每回合第一次造成伤害时，若受伤角色是男性则造成伤害+1；你成为伤害类锦囊牌的目标时，若使用者是男性，则你将自己从此牌目标中移除，然后你以此牌使用者为唯一目标使用此张锦囊牌。",
+            "baihe_shui_info":"锁定技，你成为【药】的目标时，若使用者是女性，则你额外回复1点体力；你每回合第一次造成伤害时，若受伤角色是男性则造成伤害+1；你成为伤害类策略牌的目标时，若使用者是男性，则你将自己从此牌目标中移除，然后你以此牌使用者为唯一目标使用此张策略牌。",
             "baihe_nv_shui":"百合",
             "baihe_nan_shui":"百合",
             'baihe_trick_shui':"百合",
 
             jinshouzhen:"金守珍",
             "lashou_jin":"辣手",
-            "lashou_jin_info":"当一名其他女性角色受到【杀】造成的伤害之后，你可以立刻向其使用一张无视距离的【杀】。当一名角色流失体力后，你可以立刻弃一张【桃】或【酒】，令其流失1点体力。你对一名角色造成伤害之前，你可以防止此伤害，并令其流失1点体力。",
+            "lashou_jin_info":"当一名其他女性角色受到【冲】造成的伤害之后，你可以立刻向其使用一张无视距离的【冲】。当一名角色流失体力后，你可以立刻弃一张【药】或【酒】，令其流失1点体力。你对一名角色造成伤害之前，你可以防止此伤害，并令其流失1点体力。",
             "lashou_sha_jin":"辣手",
             "lashou_loseHp_jin":"辣手",
             "lashou_jueqing_jin":"辣手",
             "chengting_jin":"撑挺",
-            "chengting_jin_info":"锁定技，你手牌中的装备牌除了坐骑牌以外都视为【杀】；你手牌中的延迟锦囊牌都视为【酒】；你回满体力时，若你的体力上限＞1，则你弃置所有装备区的牌，然后与你距离为1的其他角色将手牌数弃至与其体力值相同。",
+            "chengting_jin_info":"锁定技，你手牌中的器具牌除了坐骑牌以外都视为【冲】；你手牌中的延迟策略牌都视为【酒】；你回满体力时，若你的体力上限＞1，则你弃置所有器具区的牌，然后与你距离为1的其他角色将手牌数弃至与其体力值相同。",
             "chengting_sha_jin":"撑挺",
             "chengting_taojiu_jin":"撑挺",
             'chengting_discard_jin':"撑挺",
             "baoshi_jin":"暴食",
-            "baoshi_jin_info":"出牌阶段结束时，你可以弃置所有手牌，令其他角色计算与你的距离-1直到你下回合开始，然后你获得所有角色场上的牌（判定区和装备区），你增加X点体力上限（X = 你弃置的手牌数 + 你获得的场上牌数），并回满体力，然后若你没有技能【呕逆】，则你获得技能【呕逆】。",
+            "baoshi_jin_info":"出牌阶段结束时，你可以弃置所有手牌，令其他角色计算与你的距离-1直到你下回合开始，然后你获得所有角色场上的牌（判定区和器具区），你增加X点体力上限（X = 你弃置的手牌数 + 你获得的场上牌数），并回满体力，然后若你没有技能【呕逆】，则你获得技能【呕逆】。",
             "ouni_jin":"呕逆",
             "ouni_jin_info":"锁定技，准备阶段，若你的体力上限＞1且有手牌，则你选择一名其他角色，将所有手牌交给该角色，令其非锁定技失效直到本回合结束；然后若你的体力上限＞1，则将体力上限减为1，摸取体力上限变化数量的牌并在本回合获得技能【肚量】。",
 
             
             wangyueheng:"王月蘅",
             'yujiu_heng':"浴酒",
-            'yujiu_heng_info':"你可以将一张装备区的牌当作【酒】使用。你使用【酒】后，若你的判定区和装备区没有被完全废除，且本轮还未通过此技能获得效果，你可以弃置装备区所有牌并废除判定区或一个装备区，然后你于本轮获得【浴酒】锁定效果：你本轮手牌上限 = 体力上限 + 已损失体力值，且当你本轮体力值变化后：1.若你的体力值≠0且＜你的体力上限-1，你不进入濒死直接回满体力；2.若你的体力值＝体力上限且你的体力上限≠1，你流失1点体力并令本轮每回合出杀次数+1。",
+            'yujiu_heng_info':"你可以将一张器具区的牌当作【酒】使用。你使用【酒】后，若你的判定区和器具区没有被完全废除，且本轮还未通过此技能获得效果，你可以弃置器具区所有牌并废除判定区或一个器具区，然后你于本轮获得【浴酒】锁定效果：你本轮手牌上限 = 体力上限 + 已损失体力值，且当你本轮体力值变化后：1.若你的体力值≠0且＜你的体力上限-1，你不进入濒死直接回满体力；2.若你的体力值＝体力上限且你的体力上限≠1，你流失1点体力并令本轮每回合出冲次数+1。",
             'yujiu_equip_heng':'浴酒',
             'yujiu_gain_heng':"浴酒",
             'yujiu_hp_heng':'浴酒',
             'yini_heng':"旖旎",
-            'yini_heng_info':"出牌阶段，你可以将一张装备牌置于一名其他角色装备区里，然后摸一张牌；每回合第一次发动【旖旎】置入装备后，本回合你计算与其他角色的距离时-1。回合结束阶段，你可以选择一名本回合发动过【旖旎】置入装备的角色，直到你的下回合开始，当该角色受到＞1点的伤害时，防止此伤害，然后若这是本局游戏首次，你增加1点体力上限，回满体力，并将摸牌阶段永久改为：你跳过此阶段，并选择一名其他角色，令其摸两张牌。",
+            'yini_heng_info':"出牌阶段，你可以将一张器具牌置于一名其他角色器具区里，然后摸一张牌；每回合第一次发动【旖旎】置入装备后，本回合你计算与其他角色的距离时-1。回合结束阶段，你可以选择一名本回合发动过【旖旎】置入装备的角色，直到你的下回合开始，当该角色受到＞1点的伤害时，防止此伤害，然后若这是本局游戏首次，你增加1点体力上限，回满体力，并将摸牌阶段永久改为：你跳过此阶段，并选择一名其他角色，令其摸两张牌。",
             'yini_target_heng':'旖旎',
             'yini_animation_heng':'旖旎',
             'wenshi_heng':"吻噬",
             'wenshi_heng_info':"一名其他角色弃牌阶段开始时，若其手牌数高于体力值，你可以令其交给你X张牌，然后其回复X点体力，你流失X点体力（X为其手牌数与体力值之差）。",
             'zuizhao_heng':"醉沼",
-            'zuizhao_heng_info':"锁定技，其他角色出牌阶段结束时，若此阶段有四种花色进入过弃牌堆，你展示弃牌堆中四种花色的牌各一张，将其中能使用的装备牌置于你的装备区，获得其他牌，并将体力值流失至1点，然后在此回合结束后获得一个额外的回合。",
+            'zuizhao_heng_info':"锁定技，其他角色出牌阶段结束时，若此阶段有四种花色进入过弃牌堆，你展示弃牌堆中四种花色的牌各一张，将其中能使用的器具牌置于你的器具区，获得其他牌，并将体力值流失至1点，然后在此回合结束后获得一个额外的回合。",
             'zuizhao_addPhase_heng':'醉沼',
 
 
             dongxiaorong:"董笑蓉",
             'qianshang_dong':"千觞",
-            'qianshang_dong_info':"每回合限一次，你的回合内，你使用【决斗】指定目标后，可以流失体力至1点，并令所有其他角色均成为此【决斗】的目标。此【决斗】结算完后，每名其他受伤角色依次选择是否与你共同回复1点体力并令你获得其区域内任意一张牌。",
+            'qianshang_dong_info':"每回合限一次，你的回合内，你使用【酣战】指定目标后，可以流失体力至1点，并令所有其他角色均成为此【酣战】的目标。此【酣战】结算完后，每名其他受伤角色依次选择是否与你共同回复1点体力并令你获得其区域内任意一张牌。",
             'yexing_dong':"野性",
             'yexing_dong_info':"锁定技，若你的体力值：≤3，你拥有技能【并腿】；≤2，你拥有技能【猎酒】；≤1，你拥有技能【象酌】。",
             'aozun_dong':"傲樽",
-            'aozun_dong_info':"当你使用【杀】指定目标后，你可以将此牌视为【决斗】并继承此【杀】的伤害值。当你需要打出【杀】时，你可以观看牌堆底四张牌，若其中有【杀】，你可以选择其中一张【杀】打出，若其中没有【杀】，你可以获得这四张牌中的一张并将剩余三张牌置于牌堆顶。",
+            'aozun_dong_info':"当你使用【冲】指定目标后，你可以将此牌视为【酣战】并继承此【冲】的伤害值。当你需要打出【冲】时，你可以观看牌堆底四张牌，若其中有【冲】，你可以选择其中一张【冲】打出，若其中没有【冲】，你可以获得这四张牌中的一张并将剩余三张牌置于牌堆顶。",
             'aozun_respond_dong':"傲樽",
             bingtui_dong:"并腿",
             bingtui_dong_info:"锁定技，当你每回合非首次受到伤害时，若你有手牌，你弃置所有手牌并防止此伤害，然后若你弃置的手牌数大于伤害值，你摸取两者之差数量的牌，若在你的回合内，你再摸伤害值两倍数量的牌。",
             liejiu_dong:"猎酒",
-            liejiu_dong_info:"你的回合外，当你受到其他角色的伤害后，若存在伤害来源，你可以观看其手牌，若其中有【杀】或【酒】，你可以获得其中一张【杀】或【酒】并视为对伤害来源使用了一张【决斗】。",
+            liejiu_dong_info:"你的回合外，当你受到其他角色的伤害后，若存在伤害来源，你可以观看其手牌，若其中有【冲】或【酒】，你可以获得其中一张【冲】或【酒】并视为对伤害来源使用了一张【酣战】。",
             xiangzhuo_dong:"象酌",
-            xiangzhuo_dong_info:"锁定技，你【决斗】时，【决斗】双方第1次响应此【决斗】需打出1张【杀】，第2次响应需额外打出1张【杀】，第3次响应需额外打出2张【杀】，第4次响应需额外打出3张【杀】，以此类推，直到【决斗】中的一方在需要额外打出X张【杀】响应此【决斗】时未成功打出足够的【杀】为止，然后其受到【决斗】另一方造成的伤害额外+X。",
+            xiangzhuo_dong_info:"锁定技，你【酣战】时，【酣战】双方第1次响应此【酣战】需打出1张【冲】，第2次响应需额外打出1张【冲】，第3次响应需额外打出2张【冲】，第4次响应需额外打出3张【冲】，以此类推，直到【酣战】中的一方在需要额外打出X张【冲】响应此【酣战】时未成功打出足够的【冲】为止，然后其受到【酣战】另一方造成的伤害额外+X。",
             xiangzhuo_sha:"象酌",
 
 
@@ -27250,7 +27283,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             tongzhen_attack_kaer:"童真",
             tongzhen_recover_kaer:"童真",
             "yuanzhu_kaer":"源助",
-            "yuanzhu_kaer_info":"每回合限一次，当有角色濒死时，你可以弃置任意角色【牛】中的一张牌，视为你对濒死角色使用了一张【桃】。",
+            "yuanzhu_kaer_info":"每回合限一次，当有角色濒死时，你可以弃置任意角色【牛】中的一张牌，视为你对濒死角色使用了一张【药】。",
             "yanhua_kaer":"烟花",
             "yanhua_kaer_info":"出牌阶段，你可以弃置所有【牛】，然后选择至多X名角色（X为弃置【牛】中的总牌数），对每名选中的角色造成1点火焰伤害。",
 
@@ -27260,14 +27293,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'leyin_lala':"乐饮",
             'leyin_lala_info':"锁定技，一名角色使用【酒】后，你摸一张牌。",
             'lingyu_lala':"囹圄",
-            'lingyu_lala_info':"锁定技，你始终跳过出牌阶段。当你的牌被弃置或被其他角色获得后，你摸取失去牌一半数量的牌（向上取整）。当你受到伤害时，若非属性伤害且非锦囊牌造成的伤害，此伤害无效。",
+            'lingyu_lala_info':"锁定技，你始终跳过出牌阶段。当你的牌被弃置或被其他角色获得后，你摸取失去牌一半数量的牌（向上取整）。当你受到伤害时，若非属性伤害且非策略牌造成的伤害，此伤害无效。",
             'lingyu_phaseUse_lala':"囹圄",
             'lingyu_discard_lala':"囹圄",
             'lingyu_damage_lala':"囹圄",
             'dunsheng_lala':"遁生",
             'dunsheng_lala_info':"限定技，一名角色的回合结束后，若牌堆剩余牌数≤你体力值的十倍，则你失去技能【囹圄】，回满体力，并获得一个额外的回合，若场上没有角色“陈英超”，则你于此回合内化身为“陈英超”（本技能锁定发动）。",
             'zongjiu_lala':"纵酒",
-            'zongjiu_lala_info':"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张锦囊牌后，2.将自己的牌置于武将牌上后。",
+            'zongjiu_lala_info':"锁定技，当你满足以下条件之一时，你流失1点体力并视为使用一张【酒】：1.使用一张策略牌后，2.将自己的牌置于武将牌上后。",
 
             hanshou:"韩寿",
             'weiyi_shou':"逶迤",
@@ -27299,18 +27332,18 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "yewang_gu":"野望",
             "yewang_gu_info":"每回合每项限一次，当你成为其他角色使用牌的目标后，若其体力值：大于你，你观看牌堆顶四张牌；等于你，你观看牌堆顶三张牌；小于你，你观看牌堆顶两张牌。你选择其中任意张花色相同的牌获得并展示之，然后本回合与之花色相同的牌对你造成的伤害无效。",
             "gushi_gu":"古石",
-            "gushi_gu_info":"每名角色的准备阶段，你可以记录一个未被记录的基本牌或锦囊牌的名称并扣置一张牌，称为“古石”。当其他角色使用牌时，你可以移去一张记录名称相同的“古石”，令此牌无效，然后此角色获得“古石”牌，你获得此角色使用的牌。",
+            "gushi_gu_info":"每名角色的准备阶段，你可以记录一个未被记录的行动牌或策略牌的名称并扣置一张牌，称为“古石”。当其他角色使用牌时，你可以移去一张记录名称相同的“古石”，令此牌无效，然后此角色获得“古石”牌，你获得此角色使用的牌。",
             "gushi_gu2":"古石",
             gushi_gu_bg:'💎',//'&#x1F48E;&#xFE0E;',//'石',
             "kuanglie_gu":"狂烈",
             "kuanglie_gu_info":"出牌阶段限一次，你可以用一张手牌与至多三名角色同时拼点，然后依次结算拼点结果，若你赢，则你获得技能【暴怒】直到你下回合开始，然后没赢的角色选择一项：1.受到你造成的1点火焰伤害；2.令你流失1点体力。你与最后一名角色拼点结束后，参与拼点的存活角色收回拼点牌。",
             baonu_gu:'暴怒',
-            baonu_gu_info:'锁定技，你的手牌上限等于体力上限。当你回复体力后，若你的体力值大于1，你失去1点体力。当你失去1点体力后，你摸三张牌，然后若此时是你的回合外，你改为摸五张牌，若此时是你的回合内，你本回合：所有【杀】都视为【火杀】、使用红色【杀】无距离限制、使用【杀】的次数上限+1。',
+            baonu_gu_info:'锁定技，你的手牌上限等于体力上限。当你回复体力后，若你的体力值大于1，你失去1点体力。当你失去1点体力后，你摸三张牌，然后若此时是你的回合外，你改为摸五张牌，若此时是你的回合内，你本回合：所有【冲】都视为【火冲】、使用红色【冲】无距离限制、使用【冲】的次数上限+1。',
 
 
             guidouzi_z:'鬼斗子',
             'zhenjiu_gui':"斟酒",
-            'zhenjiu_gui_info':"锁定技，当其他玩家使用【杀】指定你为目标或你使用【杀】指定其他角色为目标时，【杀】的使用者需额外弃掉一张基本牌并视为在出杀前使用了一张【酒】，否则此【杀】无效。你进入濒死时，若你有“星”，则你失去一个“星”视为使用了一张【酒】。",
+            'zhenjiu_gui_info':"锁定技，当其他玩家使用【冲】指定你为目标或你使用【冲】指定其他角色为目标时，【冲】的使用者需额外弃掉一张行动牌并视为在出冲前使用了一张【酒】，否则此【冲】无效。你进入濒死时，若你有“星”，则你失去一个“星”视为使用了一张【酒】。",
             'zhenjiu_target_gui':"斟酒",
             'zhenjiu_player_gui':"斟酒",
             'zhenjiu_dying_gui':"斟酒",
@@ -27318,12 +27351,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'qixing_gui_info':"锁定技，游戏开始时，你获得X个“星”，你的手牌上限增加“星”的数量（X为全场女性角色数+1且至多为7）。当你失去最后一个“星”后，你失去技能【七星】，获得技能【孑然】。",
             'qixing_end_gui':'七星',
             'yunv_gui':"驭女",
-            'yunv_gui_info':"当你需要使用【闪】、打出【杀】或【闪】时，你可以令其他女性角色选择是否打出一张【杀】或【闪】（视为由你使用或打出）。你可以跳过出牌阶段，然后弃牌阶段开始时，你可以弃置一张手牌，并可以选择一名有牌的女性角色，令她交给你一张牌并获得一个额外的回合，当其于此额外回合内造成伤害之后，你摸一张牌；然后你可以将弃置的手牌置于一名没有【驭】的女性角色武将牌上，称为【驭】，其与【驭】同类型的卡牌将无法使用或打出，若其使用与【驭】同类型的牌则无效；该角色受伤时，或于弃牌阶段弃置至少两张与【驭】同类型的牌后，将【驭】置入弃牌堆。",
+            'yunv_gui_info':"当你需要使用【守】、打出【冲】或【守】时，你可以令其他女性角色选择是否打出一张【冲】或【守】（视为由你使用或打出）。你可以跳过出牌阶段，然后弃牌阶段开始时，你可以弃置一张手牌，并可以选择一名有牌的女性角色，令她交给你一张牌并获得一个额外的回合，当其于此额外回合内造成伤害之后，你摸一张牌；然后你可以将弃置的手牌置于一名没有【驭】的女性角色武将牌上，称为【驭】，其与【驭】同类型的卡牌将无法使用或打出，若其使用与【驭】同类型的牌则无效；该角色受伤时，或于弃牌阶段弃置至少两张与【驭】同类型的牌后，将【驭】置入弃牌堆。",
             'yunv_shashan_gui':'驭女',
             'yunv_givePhase_gui':'驭女',
             'yunv_kong_gui':'驭女',
             'jieran_gui':'孑然',
-            'jieran_gui_info':'限定技，准备阶段，你可以令一名其他角色的非锁定技失效。此角色每回合结束阶段开始时，其视为对你使用X张无视距离的【杀】(X为其技能已失效的回合数)；你死亡时，此角色重新获得失效的技能。',
+            'jieran_gui_info':'限定技，准备阶段，你可以令一名其他角色的非锁定技失效。此角色每回合结束阶段开始时，其视为对你使用X张无视距离的【冲】(X为其技能已失效的回合数)；你死亡时，此角色重新获得失效的技能。',
             'jieran_gui_bg':'&#x262F;&#xFE0E;',//'☯',//阴阳八卦图
             'jieran_sha':'孑然',
             'jieran_fengyin_bg':'孑',
@@ -27359,10 +27392,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             monian:"墨念",
             "lanyong_mo":"懒慵",
-            "lanyong_mo_info":"当你成为带有「伤害」这一标签的牌的目标后，你可以声明一种未以此法声明过的基本牌或锦囊牌的牌名，令使用者选择一项：1.弃置一张你声明的牌，并摸X张牌（X为你申明的牌名的字数）；2.令此牌对你无效。当你于出牌阶段使用第一张牌时，你可令此牌的牌名视为未通过此技能声明过。",
+            "lanyong_mo_info":"当你成为带有「伤害」这一标签的牌的目标后，你可以声明一种未以此法声明过的行动牌或策略牌的牌名，令使用者选择一项：1.弃置一张你声明的牌，并摸X张牌（X为你申明的牌名的字数）；2.令此牌对你无效。当你于出牌阶段使用第一张牌时，你可令此牌的牌名视为未通过此技能声明过。",
             "lanyong_refresh_mo":'懒慵',
             "sanman_mo":"散漫",
-            "sanman_mo_info":"每轮开始时，你可以选择一名角色，令其本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【杀】次数上限+2，3.手牌上限+2；若如此做，则你本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【杀】次数上限-1，3.手牌上限-1。",
+            "sanman_mo_info":"每轮开始时，你可以选择一名角色，令其本轮的回合：1.摸牌阶段摸牌数+2，2.出牌阶段使用【冲】次数上限+2，3.手牌上限+2；若如此做，则你本轮的回合：1.摸牌阶段摸牌数-1，2.出牌阶段使用【冲】次数上限-1，3.手牌上限-1。",
             "shuaixing_mo":"率性",
             "shuaixing_mo_info":"准备阶段，你可以令所有受到【散漫】效果影响的其他角色与你交换对应的【散漫】效果，然后此技能失效直到一名角色死亡。",
 
@@ -27375,15 +27408,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'xuebai_tu':"血白",
             'xuebai_tu_info':"每回合限一次，当你受到属性伤害时，你可以流失1点体力，防止此伤害，然后回复X点体力（X为此次伤害的伤害值）。",
             'tianyu_tu':"天予",
-            'tianyu_tu_info':"锁定技，出牌阶段开始时，若你的体力值低于体力上限，你减一点体力上限，并在本回合获得技能【睥睨】。",
+            'tianyu_tu_info':"锁定技，出牌阶段开始时，若你的体力值低于体力上限，你减一点体力上限，并在本回合获得技能【睥睨】，若你的体力值等于体力上限，你增加一点体力上限。",
             'fuyun_tu':"浮云",
-            'fuyun_tu_info':"当你成为其他角色使用的带有「伤害」这一标签的基本牌或普通锦囊牌的目标时，你可以选择该角色一半的手牌（向下取整），令其将这些牌扣置于其武将牌上，然后本回合结束阶段，若你未死亡，你选择任意一名角色获得这些牌，否则该角色收回这些牌。",
+            'fuyun_tu_info':"当你成为其他角色使用的带有「伤害」这一标签的行动牌或普通策略牌的目标时，你可以选择该角色一半的手牌（向下取整），令其将这些牌扣置于其武将牌上，然后本回合结束阶段，若你未死亡，你选择任意一名角色获得这些牌，否则该角色收回这些牌。",
             fuyun_tu2:"浮云",
             fuyun_tu2_bg:"☁",//"&#x2601;&#xFE0E;",//"☁",
             'pini_tu':"睥睨",
             //睥睨修改前的
-            // 'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名未因此技能扣置过牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
-            'pini_tu_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择此牌目标中任意名有牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
+            // 'pini_tu_info':"当你使用带有「伤害」这一标签的行动牌或普通策略牌指定目标后，你可以选择此牌目标中任意名未因此技能扣置过牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
+            'pini_tu_info':"当你使用带有「伤害」这一标签的行动牌或普通策略牌指定目标后，你可以选择此牌目标中任意名有牌的角色，然后你分别将选中的每名角色的至多X张牌扣置于其武将牌上（X为其体力值）。若如此做，当前回合结束后，该角色获得其武将牌上因本技能扣置的所有牌。",
             pini_tu2:"睥睨",
             pini_tu2_bg:'👁',//'&#x1F441;&#xFE0E;',//'✧',
 
@@ -27391,7 +27424,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             shiyun_za:"诗芸",
             'mengguan_shi':"猛灌",
             mengguan_shi_bg:'猛',
-            'mengguan_shi_info':"当你受到1点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。当你失去所有手牌或当你失去所有装备区的牌后，你可以获得一个“猛”印记。当一名角色进入濒死状态时，你可以令其摸一张牌，若该角色不是你且你拥有“猛”印记，则你失去一个“猛”印记。当你对一名角色造成伤害时，若你有“猛”印记，则你可以失去一个“猛”印记，令该角色摸一张牌，然后令此次伤害+1。",
+            'mengguan_shi_info':"当你受到1点伤害后，你可以弃置一张手牌并摸一张牌，然后获得一个“猛”印记。当你失去所有手牌或当你失去所有器具区的牌后，你可以获得一个“猛”印记。当一名角色进入濒死状态时，你可以令其摸一张牌，若该角色不是你且你拥有“猛”印记，则你失去一个“猛”印记。当你对一名角色造成伤害时，若你有“猛”印记，则你可以失去一个“猛”印记，令该角色摸一张牌，然后令此次伤害+1。",
             'mengguan_hurt_shi':"猛灌",
             'mengguan_nohe_shi':"猛灌",
             'mengguan_binsi_shi':"猛灌",
@@ -27402,7 +27435,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'haina_shi_info':"其他角色的出牌阶段限一次，其可以与你拼点，若你赢，则你可以获得所有拼点牌，否则你和其分别收回拼点牌然后其可以令你对一名角色造成1点伤害。",
             haina_shi_other:"✧海纳",
             'tongyin_shi':"痛饮",
-            'tongyin_shi_info':"出牌阶段限一次，你可将任意X张手牌当作一张【万箭齐发】使用，若此【万箭齐发】造成了伤害，则本回合结束阶段，你摸X张牌，若此【万箭齐发】未造成伤害，则此技能本回合视为未发动过。当你脱离濒死状态后，你可以视为使用一张【万箭齐发】。",
+            'tongyin_shi_info':"出牌阶段限一次，你可将任意X张手牌当作一张【乱剑穿心】使用，若此【乱剑穿心】造成了伤害，则本回合结束阶段，你摸X张牌，若此【乱剑穿心】未造成伤害，则此技能本回合视为未发动过。当你脱离濒死状态后，你可以视为使用一张【乱剑穿心】。",
             tongyin_binsi_shi:"痛饮",
 
 
@@ -27414,11 +27447,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'mizhao_self_nan':"糜沼",
             'mizhao_others_nan':"糜沼",
             'sheji_nan':"舍己",
-            'sheji_nan_info':"当你成为其他角色伤害类普通锦囊的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。当一名角色受到伤害时，若X大于0，你可以令此伤害+X(X为此角色的体力值减此次伤害的伤害值)，此伤害结算结束之后，该角色回复X点体力，然后若该角色为你，且你还未因本技能增加过上限，则你增加1点体力上限，若该角色不为你，且其依然存活，则你失去本技能。",
+            'sheji_nan_info':"当你成为其他角色伤害类普通策略的目标时，若你不是唯一目标，你可以令此牌对除你以外的其他角色无效，并改为对你结算X次（X为此牌的目标数）。当一名角色受到伤害时，若X大于0，你可以令此伤害+X(X为此角色的体力值减此次伤害的伤害值)，此伤害结算结束之后，该角色回复X点体力，然后若该角色为你，且你还未因本技能增加过上限，则你增加1点体力上限，若该角色不为你，且其依然存活，则你失去本技能。",
             'sheji_multi_nan':"舍己",
             'sheji_hp_nan':"舍己",
             'sishui_nan':"似水",
-            'sishui_nan_info':"当你造成或受到伤害之后，你可以移动场上一张牌，若此牌为装备牌，且移出/移入了此次伤害来源或受到伤害角色的区域，则该角色回复1点体力/受到1点无来源伤害。一名其他角色出牌阶段开始时，你可以令其获得你手牌区和判定区任意X张牌并令其本回合手牌上限-X（X至多为你当前体力值），然后你选择至多X名角色各摸一张牌。",
+            'sishui_nan_info':"当你造成或受到伤害之后，你可以移动场上一张牌，若此牌为器具牌，且移出/移入了此次伤害来源或受到伤害角色的区域，则该角色回复1点体力/受到1点无来源伤害。一名其他角色出牌阶段开始时，你可以令其获得你手牌区和判定区任意X张牌并令其本回合手牌上限-X（X至多为你当前体力值），然后你选择至多X名角色各摸一张牌。",
             'sishui_damage_nan':"似水",
             'sishui_phaseUse_nan':"似水",
             sishui_handlimit:"似水",
@@ -27427,26 +27460,26 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'miaoshou_yao':"妙手",
             'miaoshou_yao_info':"当一名角色回复体力之后，若此回复由你使用的卡牌引起，则你可以摸两张牌，然后你可以将至多两张牌交给一至两名其他角色。",
             'huichun_yao':"回春",
-            'huichun_yao_info':"你的回合内，你可以将一张红色牌当【桃】使用。出牌阶段限一次，你可以将一张手牌视为【桃】对至多X名已受伤角色使用（X为此牌的点数），结算完成后，若此牌目标角色数≥你当前体力值，你本回合获得技能【药道】。",
+            'huichun_yao_info':"你的回合内，你可以将一张红色牌当【药】使用。出牌阶段限一次，你可以将一张手牌视为【药】对至多X名已受伤角色使用（X为此牌的点数），结算完成后，若此牌目标角色数≥你当前体力值，你本回合获得技能【药道】。",
             'huichun_hong_yao':"回春",
             'huichun_handcard_yao':"✨回春",
             yaodao_yao:"药道",
             yaodao_yao_info:"出牌阶段限一次，你可以指定一名其他角色，你弃置黑色和红色的手牌各一张，使其体力值与你相同（若该角色体力值大于你，其流失体力值之差的体力，否则，其获得体力值之差的回复效果），结算完成后，若此角色原本的体力值大于你，则你减1点体力上限。",
             'baiyi_yao':"白衣",
-            'baiyi_yao_info':"当你使用带有「伤害」这一标签的基本牌或普通锦囊牌指定目标后，你可以选择一名除你和该牌目标以外的角色，令其代替你成为此牌使用者。当你对其他角色造成伤害前，你可以防止此伤害，然后获得其区域内一张牌。",
+            'baiyi_yao_info':"当你使用带有「伤害」这一标签的行动牌或普通策略牌指定目标后，你可以选择一名除你和该牌目标以外的角色，令其代替你成为此牌使用者。当你对其他角色造成伤害前，你可以防止此伤害，然后获得其区域内一张牌。",
             'baiyi_source_yao':"白衣",
             'baiyi_damage_yao':"白衣",
             'sanqing_yao':"三清",
-            'sanqing_yao_info':"当你受到其他角色造成的伤害后，你可以观看其手牌，若其中包含至少三种花色的牌，你可以选择其中三种花色各一张，展示并获得之，然后你进行一次判定，若你展示的牌中包含判定花色，你可以视为对一名已受伤的角色使用一张【桃】。",
+            'sanqing_yao_info':"当你受到其他角色造成的伤害后，你可以观看其手牌，若其中包含至少三种花色的牌，你可以选择其中三种花色各一张，展示并获得之，然后你进行一次判定，若你展示的牌中包含判定花色，你可以视为对一名已受伤的角色使用一张【药】。",
 
 
             guoyining_w:"郭依宁",
             "motong_guo":"魔瞳",
-            "motong_guo_info":"每轮限一次，一名其他角色的准备阶段，若你已受伤，你可以观看并展示牌堆底的X张牌（X为你已经损失的体力值），然后你依次以此角色为唯一目标使用其中所有带有「伤害」这一标签的基本牌或普通锦囊牌，结算完后，令此角色获得你展示的牌中其余的牌，然后若此角色的手牌数为全场唯一最多，则其本回合不能对其他角色使用牌。",
+            "motong_guo_info":"每轮限一次，一名其他角色的准备阶段，若你已受伤，你可以观看并展示牌堆底的X张牌（X为你已经损失的体力值），然后你依次以此角色为唯一目标使用其中所有带有「伤害」这一标签的行动牌或普通策略牌，结算完后，令此角色获得你展示的牌中其余的牌，然后若此角色的手牌数为全场唯一最多，则其本回合不能对其他角色使用牌。",
             motong_guo_noUse:"魔瞳",
             motong_guo_noUse_bg:"🕷",
             "zhuge_guo":"蛛歌",
-            "zhuge_guo_info":"你每受到1点伤害后，你令伤害来源展示所有手牌，并将其中所有带有「伤害」这一标签的基本牌或普通锦囊牌置于牌堆底，并令其重新摸相应数量的牌，若如此做，则若其摸取的牌数大于你的体力值，你回复1点体力，若其摸取的牌数小于其体力值，其失去1点体力。",
+            "zhuge_guo_info":"你每受到1点伤害后，你令伤害来源展示所有手牌，并将其中所有带有「伤害」这一标签的行动牌或普通策略牌置于牌堆底，并令其重新摸相应数量的牌，若如此做，则若其摸取的牌数大于你的体力值，你回复1点体力，若其摸取的牌数小于其体力值，其失去1点体力。",
             "youwang_guo":"幽网",
             "youwang_guo_info":"结束阶段，你可以选择五毒：“贪、嗔、痴、慢、疑”中的一毒（只对你自己可见），不可与上回合的选择相同。若如此做，则你下回合开始前，所有满足此“毒”条件的角色获得技能【丝咒】直到其下回合结束。",
             'tan_guo':'贪',
@@ -27474,7 +27507,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'maoni_qian_lose':"猫腻",
             'maoni_qian_change':"猫腻",
             "anzhua_qian":"暗爪",
-            "anzhua_qian_info":"转换技，锁定技，当你对一名角色造成伤害之前，阳：若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令本回合该角色濒死时，其他角色不能对该角色使用【桃】；阴：若其在你攻击范围内，你增加一点体力上限并防止此伤害，并令该角色失去1点体力。",
+            "anzhua_qian_info":"转换技，锁定技，当你对一名角色造成伤害之前，阳：若你不在其攻击范围内，你减一点体力上限令此伤害+1，并令本回合该角色濒死时，其他角色不能对该角色使用【药】；阴：若其在你攻击范围内，你增加一点体力上限并防止此伤害，并令该角色失去1点体力。",
             anzhua_qian_notao:"暗爪",
             "touxing_qian":"偷腥",
             "touxing_qian_info":"出牌阶段，你可以展示一张♥手牌并选择一名有手牌的其他角色，然后此角色选择一项：1.展示一张点数比此♥牌大的♦手牌交给你，然后此角色对你造成1点伤害并令此技能本回合失效；2.令你获得其一张手牌，并展示，若此牌颜色为红色，你对其造成1点伤害，若此牌颜色不为红色，则此技能本回合失效。",
@@ -27501,7 +27534,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
             boluosi_za2:"波罗斯",
             'dunkong_bo':"遁空",
-            'dunkong_bo_info':"锁定技，每轮开始时，你获得一个额外的出牌阶段。你跳过每回合的判定阶段、摸牌阶段、弃牌阶段。若你的手牌数＜体力值，你不能成为【杀】或【决斗】的目标。",
+            'dunkong_bo_info':"锁定技，每轮开始时，你获得一个额外的出牌阶段。你跳过每回合的判定阶段、摸牌阶段、弃牌阶段。若你的手牌数＜体力值，你不能成为【冲】或【酣战】的目标。",
             'dunkong_round_bo':"遁空",
             'dunkong_skip_bo':"遁空",
             'dunkong_sha_bo':"遁空",
@@ -27516,14 +27549,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'eju_chou':"恶剧",
             'eju_chou_info':"出牌阶段限一次，你可以摸一张牌，展示并记录下此牌的点数X；然后从你的下家开始到你为止结束，逆时针结算，每名角色依次获得其上家一张手牌并展示，若此牌点数是X的因数或倍数，其受到你造成的一点雷电伤害；结算完后，若无角色受到伤害，则你令所有角色依次回复一点体力。",
             'guimo_chou':"鬼没",
-            'guimo_chou_info':"你可以将一张黑桃♠花色的牌当【借刀杀人】使用；当一名其他角色在【借刀杀人】结算中使用【杀】，你可以代替其成为此【杀】使用者；你的【借刀杀人】可以对装备区无武器牌的角色使用，若其装备区没有武器牌且未出杀，则你改为获得其区域内一张牌。",
+            'guimo_chou_info':"你可以将一张黑桃♠花色的牌当【借刀杀人】使用；当一名其他角色在【借刀杀人】结算中使用【冲】，你可以代替其成为此【冲】使用者；你的【借刀杀人】可以对器具区无武器牌的角色使用，若其器具区没有武器牌且未出冲，则你改为获得其区域内一张牌。",
             'guimo_chou_jiedao':"鬼没",
             'guimo_chou_sha':"鬼没",
             'shenchu_chou':"神出",
-            'shenchu_chou_info':"每轮开始时，你可记录一个普通锦囊牌或基本牌的名称（覆盖之前的记录）。每回合限X次（X为你当前体力值），当其他角色下次使用记录的牌结算后，你观看牌堆顶两张牌并将这些牌交给任意角色，若你将两张牌都交给其他角色则你回复1点体力，结算完成后，你可再记录一个普通锦囊牌或基本牌的名称。",
+            'shenchu_chou_info':"每轮开始时，你可记录一个普通策略牌或行动牌的名称（覆盖之前的记录）。每回合限X次（X为你当前体力值），当其他角色下次使用记录的牌结算后，你观看牌堆顶两张牌并将这些牌交给任意角色，若你将两张牌都交给其他角色则你回复1点体力，结算完成后，你可再记录一个普通策略牌或行动牌的名称。",
             shenchu_chou2:"神出",
             'zhouli_chou':"咒礼",
-            'zhouli_chou_info':"锁定技，杀死你的角色失去当前的所有技能，且濒死时，其他角色不能再对其使用【桃】，然后其体力上限变为你的体力上限并回满体力。",
+            'zhouli_chou_info':"锁定技，杀死你的角色失去当前的所有技能，且濒死时，其他角色不能再对其使用【药】，然后其体力上限变为你的体力上限并回满体力。",
             zhouli_chou_notao:"咒礼",
 
 
