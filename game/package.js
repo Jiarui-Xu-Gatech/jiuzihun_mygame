@@ -23,8 +23,9 @@ window.noname_package={
 		// xianjian:'仙剑奇侠传',
 	},
 	card:{
-		standard:'标准',
-		extra:'军争',
+		jiuzihunCard:'九子魂',
+		// standard:'标准',
+		// extra:'军争',
 		sp:'SP',
 		guozhan:'国战',
 		// zhulu:'逐鹿天下',

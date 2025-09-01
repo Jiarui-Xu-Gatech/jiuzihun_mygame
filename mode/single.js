@@ -200,7 +200,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				game.broadcastAll(function(){
 					_status.mode='changban';
 					lib.translate.bingliang_info='目标角色判定阶段进行判定：若判定结果不为梅花，则跳过该角色的摸牌阶段。';
-					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3';
+					lib.translate.zhuge_info='锁定技，出牌阶段，你使用冲的次数上限+3';
 				});
 				for(var i=0;i<lib.card.list.length;i++){
 					var card=lib.card.list[i];
@@ -902,7 +902,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				direct:true,
 				content:function(){
-					player.chooseUseTarget('nanman',get.prompt('manyi'),'视为使用一张【南蛮入侵】').logSkill='manyi';
+					player.chooseUseTarget('nanman',get.prompt('manyi'),'视为使用一张【红莲醉舞】').logSkill='manyi';
 				},
 			},
 			wanrong:{
@@ -1058,7 +1058,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				position:'he',
 				viewAs:{name:'bingliang'},
-				prompt:'将一黑色的基本牌或装备牌当兵粮寸断使用',
+				prompt:'将一黑色的行动牌或器具牌当兵粮寸断使用',
 				check:function(card){return 6-get.value(card)},
 				ai:{
 					order:9
@@ -1084,7 +1084,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				viewAsFilter:function(player){
 					if(!player.countCards('e')) return false;
 				},
-				prompt:'将一张装备区中的牌当闪使用或打出',
+				prompt:'将一张器具区中的牌当守使用或打出',
 				position:'e',
 				check:function(){return 1},
 				ai:{
@@ -1185,8 +1185,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			zhangjiao:'张角',
 			old_caoren:'曹仁',
 			old_zhoutai:'周泰',
-			shuiyanqijunx_info:'出牌阶段，对一名其他角色使用。目标角色选择一项：1、弃置装备区里的所有牌；2、受到你造成的1点伤害。',
-			guohe_info:'出牌阶段，对有牌的一名其他角色使用。你选择一项：①弃置其装备区里的一张牌。②观看其手牌并弃置其中的一张。',
+			shuiyanqijunx_info:'出牌阶段，对一名其他角色使用。目标角色选择一项：1、弃置器具区里的所有牌；2、受到你造成的1点伤害。',
+			guohe_info:'出牌阶段，对有牌的一名其他角色使用。你选择一项：①弃置其器具区里的一张牌。②观看其手牌并弃置其中的一张。',
 			shunshou_info:'出牌阶段，对距离为1且有牌的一名其他角色使用。你获得其的一张牌。',
 		},
 		translate:{
@@ -1199,13 +1199,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			dianjiang2:'点将单挑',
 			
 			manyi:'蛮裔',
-			manyi_info:'锁定技，【南蛮入侵】对你无效。当你登场时，你可以视为使用一张【南蛮入侵】。',
+			manyi_info:'锁定技，【红莲醉舞】对你无效。当你登场时，你可以视为使用一张【红莲醉舞】。',
 			wanrong:'婉容',
-			wanrong_info:'当你成为【杀】的目标后，你可以摸一张牌。',
+			wanrong_info:'当你成为【冲】的目标后，你可以摸一张牌。',
 			sgzhiheng:'制衡',
 			sgzhiheng_info:'出牌阶段限一次，你可以弃置至多两张牌，然后摸等量的牌。',
 			xiechan:'挟缠',
-			xiechan_info:'限定技，出牌阶段，你可以和对手拼点。若你赢/没赢，你/其视为对其/你使用一张【决斗】。',
+			xiechan_info:'限定技，出牌阶段，你可以和对手拼点。若你赢/没赢，你/其视为对其/你使用一张【酣战】。',
 			huwei:'虎威',
 			huwei_info:'当你登场时，你可以视为使用一张【水淹七军】。',
 			sgkuanggu:'狂骨',
@@ -1213,23 +1213,23 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			suzi:'肃资',
 			suzi_info:'当其他角色区域内的牌因死亡而进入弃牌堆后，你可以获得之。',
 			cangji:'藏机',
-			cangji_info:'当你死亡时，你可以将装备区内的所有牌移动到游戏外。若如此做，你的下一名角色登场时，你将这些牌置入你的装备区。',
+			cangji_info:'当你死亡时，你可以将器具区内的所有牌移动到游戏外。若如此做，你的下一名角色登场时，你将这些牌置入你的器具区。',
 			sgrenwang:'仁望',
-			sgrenwang_info:'当你于一名其他角色的出牌阶段内成为该角色使用的【杀】或普通锦囊牌的目标后，若此牌不是其本阶段内对你使用的第一张【杀】或普通锦囊牌，则你可以弃置该角色的一张牌。',
+			sgrenwang_info:'当你于一名其他角色的出牌阶段内成为该角色使用的【冲】或普通策略牌的目标后，若此牌不是其本阶段内对你使用的第一张【冲】或普通策略牌，则你可以弃置该角色的一张牌。',
 			sgduanliang:'断粮',
-			sgduanliang_info:'出牌阶段，若你本回合内使用牌指定过其他角色为目标，则你可以将一张黑色基本牌或装备牌当做【兵粮寸断】使用。',
+			sgduanliang_info:'出牌阶段，若你本回合内使用牌指定过其他角色为目标，则你可以将一张黑色行动牌或器具牌当做【兵粮寸断】使用。',
 			sgqingguo:'倾国',
-			sgqingguo_info:'你可以将一张装备区内的牌当做【闪】使用或打出。',
+			sgqingguo_info:'你可以将一张器具区内的牌当做【守】使用或打出。',
 			pianyi:'翩仪',
 			pianyi_info:'锁定技，当你于对手的回合内登场时，你结束此回合。',
 			yinli:'姻礼',
-			yinli_info:'其他角色的装备牌于其回合内进入弃牌堆后，你可以获得之。',
+			yinli_info:'其他角色的器具牌于其回合内进入弃牌堆后，你可以获得之。',
 			shenju:'慎拒',
 			shenju_info:'锁定技，你的手牌上限+X（X为你对手的体力值）。',
 		},
 		help:{
 		'血战长坂':'<div style="margin:10px">游戏规则</div><ul style="margin-top:0"><li>选将阶段<br>双方在游戏开始时由系统随机分配身份。分配到先手身份的玩家优先出牌，分配到后手身份的玩家优先选将。<br>双方各自随机获得3名暗置武将，同时从将池中随机选出6名明置武将，由后手玩家开始，按照一次1张-2张-2张-1张的顺序，轮流选择获得明置武将。之后双方各从自己的6名武将中选择2名分别作为主将和副将进行游戏。<li>胜利条件<br>对方死亡。'+
-			'<li>双将规则<br>双将主将决定角色的性别和势力，体力上限为主副将体力上限的平均值，向下取整。体力上限为3的角色可在游戏开始后更换一次起始手牌。<li>牌堆<br>牌堆中移除【木牛流马】【闪电】，♣花色的【藤甲】和【无懈可击 ♦️Q】️</ul>',
+			'<li>双将规则<br>双将主将决定角色的性别和势力，体力上限为主副将体力上限的平均值，向下取整。体力上限为3的角色可在游戏开始后更换一次起始手牌。<li>牌堆<br>牌堆中移除【无尽酒壶】【闪电】，♣花色的【紫砂宝衣】和【以策制策 ♦️Q】️</ul>',
 		},
 	};
 });

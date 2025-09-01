@@ -1145,7 +1145,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			// },
 
 			duzhansanguo:{
-				name:'毒战三国',
+				name:'毒战九魂',
 				mode:'identity',
 				intro:'牌堆中额外添加10%的毒',
 				showcase:function(init){
@@ -1183,7 +1183,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				content:{
 					cardPile:function(list){
-						game.identityVideoName='毒战三国杀';
+						game.identityVideoName='毒战九子魂';
 						lib.config.bannedcards.remove('du');
 						if(game.bannedcards) game.bannedcards.remove('du');
 						var num=Math.ceil(list.length/10);
@@ -1197,7 +1197,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			// daozhiyueying:{
 			// 	name:'导师月英',
 			// 	mode:'identity',
-			// 	intro:'牌堆中所有普通锦囊牌数量翻倍；移除拥有集智技能的角色',
+			// 	intro:'牌堆中所有普通策略牌数量翻倍；移除拥有集智技能的角色',
 			// 	showcase:function(init){
 			// 		var node=this;
 			// 		var player1,player2;
@@ -1349,10 +1349,10 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				name:'唯我独尊',
 				mode:'identity',
 				intro:[
-					'牌堆中杀的数量增加30%！',
+					'牌堆中冲的数量增加30%！',
 					'游戏开始时，主公获得一枚战神标记',
-					'拥有战神标记的角色的【杀】造成的伤害+1',
-					'受到杀造成的伤害后战神印记将移到伤害来源的武将牌上',
+					'拥有战神标记的角色的【冲】造成的伤害+1',
+					'受到冲造成的伤害后战神印记将移到伤害来源的武将牌上',
 					// '战神曹信的九子之魂——睚眦，带你领略杀戮的快感！',
 				],
 				showcase:function(init){
@@ -1433,7 +1433,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					lib.skill.weiwoduzun={
 						mark:true,
 						intro:{
-							content:'【杀】造成的伤害+1'
+							content:'【冲】造成的伤害+1'
 						},
 						group:['weiwoduzun_damage','weiwoduzun_lose'],
 						subSkill:{
@@ -1635,7 +1635,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			// 	intro:[
 			// 		'主公必选曹操',
 			// 		'其余玩家从曹休、文聘、曹洪、张郃、夏侯渊、徐晃、许褚这些武将中随机选中一个',
-			// 		'游戏开始时将麒麟弓和爪黄飞电各置于每名角色的装备区内，大宛马洗入牌堆，移除其他的武器牌和坐骑牌'
+			// 		'游戏开始时将滑翔羽和爪黄飞电各置于每名角色的器具区内，大宛马洗入牌堆，移除其他的武器牌和坐骑牌'
 			// 	],
 			// 	init:function(){
 			// 		game.saveConfig('player_number','8','identity');
@@ -1997,7 +1997,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
  			// 			},
  			// 			_jiazu_shu:{
  			// 				popup:'蜀义',
- 			// 				prompt2:'你使用【杀】上限+1；出牌阶段结束时，若你于此阶段使用【杀】次数不少于2，摸一张牌。',
+ 			// 				prompt2:'你使用【冲】上限+1；出牌阶段结束时，若你于此阶段使用【冲】次数不少于2，摸一张牌。',
  			// 				mod:{
  			// 					cardUsable:function(card,player,num){
  			// 						if(card.name=='sha'&&player.group=='shu') return num+1;
@@ -2092,7 +2092,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
  			// 			_jiazu_awaken_shu:{
  			// 				popup:'成都',
  			// 				intro:{
- 			// 					content:'锁定技，当你使用【杀】造成伤害后，你摸一张牌。',
+ 			// 					content:'锁定技，当你使用【冲】造成伤害后，你摸一张牌。',
  			// 				},
  			// 				trigger:{source:'damageEnd'},
  			// 				forced:true,
@@ -2104,7 +2104,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
  			// 			_jiazu_awaken_wu:{
  			// 				popup:'武昌',
  			// 				intro:{
- 			// 					content:'锁定技，当你使用装备牌时，你摸一张牌。',
+ 			// 					content:'锁定技，当你使用器具牌时，你摸一张牌。',
  			// 				},
  			// 				trigger:{player:'useCard'},
  			// 				forced:true,
@@ -2116,7 +2116,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
  			// 			_jiazu_awaken_qun:{
  			// 				popup:'邺城',
  			// 				intro:{
- 			// 					content:'锁定技，当你使用锦囊牌指定其他角色为目标后，你摸一张牌。',
+ 			// 					content:'锁定技，当你使用策略牌指定其他角色为目标后，你摸一张牌。',
  			// 				},
  			// 				trigger:{player:'useCardToPlayered'},
  			// 				forced:true,
@@ -2177,7 +2177,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
   			// 			},
   			// 			_jiazu_shu:{
   			// 				popup:'蜀义',
-  			// 				prompt2:'你使用【杀】上限+1；出牌阶段结束时，若你于此阶段使用【杀】次数不少于2，摸一张牌。',
+  			// 				prompt2:'你使用【冲】上限+1；出牌阶段结束时，若你于此阶段使用【冲】次数不少于2，摸一张牌。',
   			// 			},
   			// 			_jiazu_wu:{
   			// 				popup:'吴耀',
@@ -2200,19 +2200,19 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
   			// 			_jiazu_awaken_shu:{
   			// 				popup:'成都',
   			// 				intro:{
-  			// 					content:'锁定技，当你使用【杀】造成伤害后，你摸一张牌。',
+  			// 					content:'锁定技，当你使用【冲】造成伤害后，你摸一张牌。',
   			// 				},
   			// 			},
   			// 			_jiazu_awaken_wu:{
   			// 				popup:'武昌',
   			// 				intro:{
-  			// 					content:'锁定技，当你使用装备牌时，你摸一张牌。',
+  			// 					content:'锁定技，当你使用器具牌时，你摸一张牌。',
   			// 				},
   			// 			},
   			// 			_jiazu_awaken_qun:{
   			// 				popup:'邺城',
   			// 				intro:{
-  			// 					content:'锁定技，当你使用锦囊牌指定其他角色为目标后，你摸一张牌。',
+  			// 					content:'锁定技，当你使用策略牌指定其他角色为目标后，你摸一张牌。',
   			// 				},
   			// 			},
   			// 			_jiazu_awaken_key:{
@@ -2546,14 +2546,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							['摸三张牌',function(){
 								game.zhu.draw(3);
 							}],
-							['将一张防具牌置入装备区并摸一张牌',function(){
+							['将一张防具牌置入器具区并摸一张牌',function(){
 								var card=get.cardPile(function(card){
 									return get.subtype(card)=='equip2'&&!get.cardtag(card,'gifts');
 								});
 								if(card) game.zhu.equip(card);
 								game.zhu.draw();
 							}],
-							['将一张武器牌置入装备区并摸一张牌',function(){
+							['将一张武器牌置入器具区并摸一张牌',function(){
 								var card=get.cardPile(function(card){
 									return get.subtype(card)=='equip1'&&!get.cardtag(card,'gifts');
 								});
@@ -2572,7 +2572,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								game.zhu.draw(5);
 								game.fan.draw(2);
 							}],
-							['将一张武器牌和一张防具牌置入装备区',function(){
+							['将一张武器牌和一张防具牌置入器具区',function(){
 								var card=get.cardPile(function(card){
 									return get.subtype(card)=='equip1'&&!get.cardtag(card,'gifts');
 								});
@@ -2582,7 +2582,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								});
 								if(card2) game.zhu.equip(card2);
 							}],
-							['将一张武器牌和一张防御坐骑牌置入装备区',function(){
+							['将一张武器牌和一张防御坐骑牌置入器具区',function(){
 								var card=get.cardPile(function(card){
 									return get.subtype(card)=='equip1'&&!get.cardtag(card,'gifts');
 								});
@@ -2599,7 +2599,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								game.zhu.restoreSkill('oldniepan');
 								game.zhu._oldniepan=true;
 							}],
-							['获得两张锦囊牌',function(){
+							['获得两张策略牌',function(){
 								var list=[];
 								while(list.length<2){
 									var card=get.cardPile(function(card){
@@ -2627,7 +2627,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 								game.zhu.draw();
 								game.fan.damage(game.zhu);
 							}],
-							['获得五张基本牌',function(){
+							['获得五张行动牌',function(){
 								var list=[];
 								while(list.length<5){
 									var card=get.cardPile(function(card){
@@ -3871,8 +3871,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			// 					var cname=lib.cardPack[lib.config.cards[i]][j];
 			// 					pileaddlist.push([cname,get.translation(cname)]);
 			// 					if(cname=='sha'){
-			// 						pileaddlist.push(['huosha','火杀']);
-			// 						pileaddlist.push(['leisha','雷杀']);
+			// 						pileaddlist.push(['huosha','火冲']);
+			// 						pileaddlist.push(['leisha','雷冲']);
 			// 					}
 			// 				}
 			// 			}
@@ -3937,7 +3937,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			// 				fakecard([cardpileaddname.value,cardpileaddsuit.value,cardpileaddnumber.value],line6_h,capt_h);
 			// 				capt_h.style.display='block';
 			// 			});
-			// 			var cc_e=ui.create.node('button','加入装备区',line5,function(){
+			// 			var cc_e=ui.create.node('button','加入器具区',line5,function(){
 			// 				if(get.type(cardpileaddname.value)!='equip') return;
 			// 				var subtype=get.subtype(cardpileaddname.value);
 			// 				for(var i=0;i<line6_e.childElementCount;i++){
@@ -3970,7 +3970,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 
 			// 			var capt_h=ui.create.div(style2,'','手牌区',this);
 			// 			var line6_h=ui.create.div(style2,this);
-			// 			var capt_e=ui.create.div(style2,'','装备区',this);
+			// 			var capt_e=ui.create.div(style2,'','器具区',this);
 			// 			var line6_e=ui.create.div(style2,this);
 			// 			var capt_j=ui.create.div(style2,'','判定区',this);
 			// 			var line6_j=ui.create.div(style2,this);

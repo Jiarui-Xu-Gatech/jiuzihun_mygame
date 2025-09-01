@@ -731,7 +731,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					if(target.hasSha()){
 						target.chooseToUse(function(card,player,event){
 							return get.name(card)=='sha'&&lib.filter.filterCard.apply(this,arguments);
-						},'使用一张杀，或交给'+get.translation(player)+'两张牌');
+						},'使用一张冲，或交给'+get.translation(player)+'两张牌');
 					}
 					else{
 						event.directfalse=true;
@@ -2174,7 +2174,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				ruleSkill:true,
 				popup:false,
 				forced:true,
-				prompt:'是否将此【杀】改为神属性？',
+				prompt:'是否将此【冲】改为神属性？',
 				filter:function(event,player){
 					return player.group=='shen'&&event.card.name=='sha';
 				},
@@ -5967,7 +5967,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				position:'he',
 				viewAs:{name:'tao'},
-				prompt:'将一张红色牌当桃使用',
+				prompt:'将一张红色牌当药使用',
 				check:function(card){return 8-get.value(card)},
 				ai:{
 					order:5,
@@ -7101,7 +7101,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					'step 0'
 					player.line(trigger.player,'green');
-					var next=trigger.player.chooseCard(true,'选择保留一张手牌和一张装备区内的牌，然后弃置其它牌','he',function(card){
+					var next=trigger.player.chooseCard(true,'选择保留一张手牌和一张器具区内的牌，然后弃置其它牌','he',function(card){
 						switch(get.position(card)){
 							case 'h':{
 								if(ui.selected.cards.length){
@@ -7933,7 +7933,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张红桃牌当作桃使用';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张红桃牌当作药使用';
 				},
 				position:'he',
 				check:function(card,event){
@@ -7955,7 +7955,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张方片当作火杀使用或打出';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张方片当作火冲使用或打出';
 				},
 				position:'he',
 				check:function(card,event){
@@ -7977,7 +7977,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张黑桃牌当作无懈可击使用';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张黑桃牌当作以策制策使用';
 				},
 				position:'he',
 				check:function(card,event){
@@ -7999,7 +7999,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张梅花牌当作闪使用或打出';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张梅花牌当作守使用或打出';
 				},
 				position:'he',
 				check:function(card,event){
@@ -9033,7 +9033,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					return player.hasSkillTag('respondTao')||player.countCards('h','tao')>0;
 				},
 				content:function(){
-					player.chooseToUse({name:'tao'},'神躯：是否使用一张桃？').logSkill='shenqu';
+					player.chooseToUse({name:'tao'},'神躯：是否使用一张药？').logSkill='shenqu';
 				}
 			},
 			jiwu:{
@@ -9189,7 +9189,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var suit=get.suit(result.card);
 					var target=trigger.target;
 					var num=target.countCards('h','shan');
-					target.chooseToDiscard('请弃置一张'+get.translation(suit)+'牌，否则不能使用闪抵消此杀','he',function(card){
+					target.chooseToDiscard('请弃置一张'+get.translation(suit)+'牌，否则不能使用守抵消此冲','he',function(card){
 						return get.suit(card)==_status.event.suit;
 					}).set('ai',function(card){
 						var num=_status.event.num;
@@ -9232,7 +9232,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					'step 0'
 					var list=['弃置至多两名其他角色的合计两张牌'];
-					if(lib.skill.rexuanfeng.canMoveCard(player)) list.push('将一名其他角色装备区内的一张牌移动到另一名角色的装备区内');
+					if(lib.skill.rexuanfeng.canMoveCard(player)) list.push('将一名其他角色器具区内的一张牌移动到另一名角色的器具区内');
 					player.chooseControl('cancel2').set('choiceList',list).set('prompt',get.prompt('rexuanfeng')).set('ai',function(){
 						if(lib.skill.rexuanfeng.canMoveCard(player,true)) return 1;
 						return 0;
@@ -9321,7 +9321,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					});
 					next.set('multitarget',true);
 					next.set('targetprompt',['被移走','移动目标']);
-					next.set('prompt',event.prompt||'移动场上的一张装备牌');
+					next.set('prompt',event.prompt||'移动场上的一张器具牌');
 					next.set('forced',true);
 					'step 6'
 					if(result.bool){
@@ -9758,7 +9758,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					else{
 						event.target2=result.targets[0];
 						var list=['手牌区'];
-						if(lib.card[card.name].type=='equip'&&event.target2.isEmpty(lib.card[card.name].subtype)) list.push('装备区');
+						if(lib.card[card.name].type=='equip'&&event.target2.isEmpty(lib.card[card.name].subtype)) list.push('器具区');
 						if(lib.card[card.name].type=='delay'&&!event.target2.storage._disableJudge&&!event.target2.hasJudge(card.name)) list.push('判定区');
 						if(list.length==1) event._result={control:list[0]};
 						else{
@@ -9783,7 +9783,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							}
 							else next.animate='draw';
 						}
-						else if(result.control=='装备区'){
+						else if(result.control=='器具区'){
 							if(event.target1) event.target1.$give(card,event.target2);
 							event.target2.equip(card);
 						}
@@ -10102,22 +10102,22 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							if(lib.filter.cardUsable({name:'sha'},player,event.getParent('chooseToUse'))&&game.hasPlayer(function(current){
 								return player.canUse('sha',current);
 							})){
-								list.push(['基本','','sha']);
-								list.push(['基本','','sha','fire']);
-								list.push(['基本','','sha','thunder']);
+								list.push(['行动','','sha']);
+								list.push(['行动','','sha','fire']);
+								list.push(['行动','','sha','thunder']);
 							}
 							if(lib.filter.cardUsable({name:'tao'},player,event.getParent('chooseToUse'))&&game.hasPlayer(function(current){
 								return player.canUse('tao',current);
 							})){
-								list.push(['基本','','tao']);
+								list.push(['行动','','tao']);
 							}
 							if(lib.filter.cardUsable({name:'jiu'},player,event.getParent('chooseToUse'))&&game.hasPlayer(function(current){
 								return player.canUse('jiu',current);
 							})){
-								list.push(['基本','','jiu']);
+								list.push(['行动','','jiu']);
 							}
 							if(list.length){
-								player.chooseButton(['是否视为使用一张基本牌？',[list,'vcard']]).set('ai',function(button){
+								player.chooseButton(['是否视为使用一张行动牌？',[list,'vcard']]).set('ai',function(button){
 									var player=_status.event.player;
 									var card={name:button.link[2],nature:button.link[3]};
 									if(card.name=='tao'){
@@ -10330,7 +10330,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						event.finish();
 					}
 					else{
-						player.chooseTarget(get.prompt('olzhiti'),'废除一名角色的一个随机装备栏',function(card,player,target){
+						player.chooseTarget(get.prompt('olzhiti'),'废除一名角色的一个随机器具栏',function(card,player,target){
 							return target.countDisabled()<5;
 						}).set('ai',function(target){
 							return -get.attitude(_status.event.player,target)*(target.countCards('e')+1)
@@ -10561,7 +10561,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					"step 1"
 					event.num=0;
 					player.line(targets,'green');
-					player.chooseControl('手牌区','装备区','判定区').set('ai',function(){
+					player.chooseControl('手牌区','器具区','判定区').set('ai',function(){
 						if(game.hasPlayer(function(current){
 							return current.countCards('j')&&current!=player&&get.attitude(player,current)>0;
 						})) return 2;
@@ -10570,7 +10570,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					"step 2"
 					event.range={
 						手牌区:['h','e','j'],
-						装备区:['e','h','j'],
+						器具区:['e','h','j'],
 						判定区:['j','h','e'],
 					}[result.control||'手牌区'];
 					"step 3"
@@ -11974,7 +11974,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张红桃牌当作桃使用';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张红桃牌当作药使用';
 				},
 				position:'he',
 				check:function(card,event){
@@ -11996,7 +11996,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张方片当作火杀使用或打出';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张方片当作火冲使用或打出';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12018,7 +12018,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张黑桃牌当作无懈可击使用';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张黑桃牌当作以策制策使用';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12040,7 +12040,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张梅花牌当作闪使用或打出';
+					return '将'+get.cnNumber(Math.max(1,_status.event.player.hp))+'张梅花牌当作守使用或打出';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12077,12 +12077,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				//技能发动时机
 				enable:['chooseToUse','chooseToRespond'],
 				//发动时提示的技能描述
-				prompt:'将♦牌当做杀，♥牌当做桃，♣牌当做闪，♠牌当做无懈可击使用或打出',
+				prompt:'将♦牌当做冲，♥牌当做药，♣牌当做守，♠牌当做以策制策使用或打出',
 				//动态的viewAs
 				viewAs:function(cards,player){
 					var name=false;
 					var nature=null;
-					//根据选择的卡牌的花色 判断要转化出的卡牌是闪还是火杀还是无懈还是桃
+					//根据选择的卡牌的花色 判断要转化出的卡牌是守还是火冲还是制策还是药
 					switch(get.suit(cards[0],player)){
 						case 'club':name='shan';break;
 						case 'diamond':name='sha';nature='fire';break;
@@ -12123,7 +12123,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				selectCard:[1,2],
 				//确保选择第一张牌后 重新检测第二张牌的合法性 避免选择两张花色不同的牌
 				complexCard:true,
-				//选牌范围：手牌区和装备区
+				//选牌范围：手牌区和器具区
 				position:'he',
 				//选牌合法性判断
 				filterCard:function(card,player,event){
@@ -12134,13 +12134,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var filter=event._backup.filterCard;
 					//获取卡牌花色
 					var name=get.suit(card,player);
-					//如果这张牌是梅花并且当前时机能够使用/打出闪 那么这张牌可以选择
+					//如果这张牌是梅花并且当前时机能够使用/打出守 那么这张牌可以选择
 					if(name=='club'&&filter({name:'shan',cards:[card]},player,event)) return true;
-					//如果这张牌是方片并且当前时机能够使用/打出火杀 那么这张牌可以选择
+					//如果这张牌是方片并且当前时机能够使用/打出火冲 那么这张牌可以选择
 					if(name=='diamond'&&filter({name:'sha',cards:[card],nature:'fire'},player,event)) return true;
-					//如果这张牌是黑桃并且当前时机能够使用/打出无懈 那么这张牌可以选择
+					//如果这张牌是黑桃并且当前时机能够使用/打出制策 那么这张牌可以选择
 					if(name=='spade'&&filter({name:'wuxie',cards:[card]},player,event)) return true;
-					//如果这张牌是红桃并且当前时机能够使用/打出桃 那么这张牌可以选择
+					//如果这张牌是红桃并且当前时机能够使用/打出药 那么这张牌可以选择
 					if(name=='heart'&&filter({name:'tao',cards:[card]},player,event)) return true;
 					//上述条件都不满足 那么就不能选择这张牌
 					return false;
@@ -12149,13 +12149,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				filter:function(event,player){
 					//获取当前时机的卡牌选择限制
 					var filter=event.filterCard;
-					//如果当前时机能够使用/打出火杀并且角色有方片 那么可以发动技能
+					//如果当前时机能够使用/打出火冲并且角色有方片 那么可以发动技能
 					if(filter({name:'sha',nature:'fire'},player,event)&&player.countCards('he',{suit:'diamond'})) return true;
-					//如果当前时机能够使用/打出闪并且角色有梅花 那么可以发动技能
+					//如果当前时机能够使用/打出守并且角色有梅花 那么可以发动技能
 					if(filter({name:'shan'},player,event)&&player.countCards('he',{suit:'club'})) return true;
-					//如果当前时机能够使用/打出桃并且角色有红桃 那么可以发动技能
+					//如果当前时机能够使用/打出药并且角色有红桃 那么可以发动技能
 					if(filter({name:'tao'},player,event)&&player.countCards('he',{suit:'heart'})) return true;
-					//如果当前时机能够使用/打出无懈可击并且角色有黑桃 那么可以发动技能
+					//如果当前时机能够使用/打出以策制策并且角色有黑桃 那么可以发动技能
 					if(filter({name:'wuxie'},player,event)&&player.countCards('he',{suit:'spade'})) return true;
 					return false;
 				},
@@ -12163,7 +12163,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					respondSha:true,
 					respondShan:true,
 					save:true,
-					//让系统知道角色“有杀”“有闪”“有桃”
+					//让系统知道角色“有冲”“有守”“有药”
 					skillTagFilter:function(player,tag){
 						var name;
 						switch(tag){
@@ -12194,7 +12194,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						return 2;
 					},
 				},
-				//让系统知道玩家“有无懈”
+				//让系统知道玩家“有制策”
 				hiddenCard:function(player,name){
 					return name=='wuxie'&&player.countCards('he',{suit:'spade'})>0;
 				},
@@ -12262,7 +12262,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:'longhun1',
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将至多两张红桃牌当作桃使用';
+					return '将至多两张红桃牌当作药使用';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12282,7 +12282,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:'longhun2',
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将至多两张方片牌当作火杀使用或打出';
+					return '将至多两张方片牌当作火冲使用或打出';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12302,7 +12302,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:'longhun3',
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将至多两张黑桃牌当作无懈可击使用';
+					return '将至多两张黑桃牌当作以策制策使用';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12322,7 +12322,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				audio:'longhun4',
 				enable:['chooseToUse','chooseToRespond'],
 				prompt:function(){
-					return '将至多两张梅花牌当作闪使用或打出';
+					return '将至多两张梅花牌当作守使用或打出';
 				},
 				position:'he',
 				check:function(card,event){
@@ -12501,8 +12501,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				marktext:'龙',
 				intro:{
 					content:function(storage,player,skill){
-						if(player.storage.nzry_longnu==true) return '锁定技，出牌阶段开始时，你减1点体力上限并摸一张牌，然后本回合你的锦囊牌均视为雷杀且无使用次数限制';
-						return '锁定技，出牌阶段开始时，你流失一点体力并摸一张牌，然后本回合你的红色手牌均视为火杀且无距离限制';
+						if(player.storage.nzry_longnu==true) return '锁定技，出牌阶段开始时，你减1点体力上限并摸一张牌，然后本回合你的策略牌均视为雷冲且无使用次数限制';
+						return '锁定技，出牌阶段开始时，你流失一点体力并摸一张牌，然后本回合你的红色手牌均视为火冲且无距离限制';
 					},
 				},
 				audio:2,
@@ -12546,7 +12546,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						},
 					},
 					'2':{
-						prompt:'本回合你的锦囊牌均视为雷杀且无使用次数限制',
+						prompt:'本回合你的策略牌均视为雷冲且无使用次数限制',
 						mod:{
 							cardname:function(card,player){
 								if(['trick','delay'].contains(lib.card[card.name].type)) return 'sha';
@@ -13108,7 +13108,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						},
 						content:function(){
 							'step 0'
-							player.chooseTarget(get.prompt('drlt_jieying'),"将“营”交给一名角色；其摸牌阶段多摸一张牌，出牌阶段使用【杀】的次数上限+1且手牌上限+1。该角色回合结束后，其移去“营”标记，然后你获得其所有手牌。",function(card,player,target){
+							player.chooseTarget(get.prompt('drlt_jieying'),"将“营”交给一名角色；其摸牌阶段多摸一张牌，出牌阶段使用【冲】的次数上限+1且手牌上限+1。该角色回合结束后，其移去“营”标记，然后你获得其所有手牌。",function(card,player,target){
 								return target!=player;
 							}).ai=function(target){
 								if(get.attitude(player,target)>0)
@@ -13261,7 +13261,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			wushuang2:'无双',
 			jiuchi:'酒池',
 			jueqing:'绝情',
-			wushuang_info:'锁定技，当你使用【杀】或【决斗】指定目标后，你令此牌需要依次使用或打出两张【闪】或【杀】响应。',
+			wushuang_info:'锁定技，当你使用【冲】或【酣战】指定目标后，你令此牌需要依次使用或打出两张【守】或【冲】响应。',
 			jiuchi_info:'你可以将一张♠手牌当作【酒】使用。',
 			jueqing_info:'锁定技，你即将造成的伤害均视为失去体力。',
 
@@ -13332,17 +13332,17 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_yaoshou:'妖兽',
 			boss_yaoshou_info:'锁定技，你与其他角色计算-2。',
 			boss_duqu:'毒躯',
-			boss_duqu_info:'锁定技，你受到伤害时，伤害来源获得1枚“蛇毒”标记；你自身不会拥有“蛇毒”标记；你的“桃”均视为“杀”。“蛇毒”标记：锁定技，拥有“蛇毒”标记的角色回合开始时，需要选择弃置X张牌或者失去X点体力，然后弃置一枚“蛇毒”标记。X为其拥有的“蛇毒”标记个数。',
+			boss_duqu_info:'锁定技，你受到伤害时，伤害来源获得1枚“蛇毒”标记；你自身不会拥有“蛇毒”标记；你的“药”均视为“冲”。“蛇毒”标记：锁定技，拥有“蛇毒”标记的角色回合开始时，需要选择弃置X张牌或者失去X点体力，然后弃置一枚“蛇毒”标记。X为其拥有的“蛇毒”标记个数。',
 			boss_shedu:'蛇毒',
 			boss_jiushou:'九首',
 			boss_jiushou_info:'锁定技，你的手牌上限始终为9，你的出牌阶段开始时以及你的回合结束时，将手牌补至手牌上限，你始终跳过你的摸牌阶段。',
 			boss_echou_switch:'恶臭',
 			boss_echou:'恶臭',
-			boss_echou_info:'体力值首次减少至一半或更少时激活此技能。锁定技，除你之外的其他角色使用“桃”或“酒”时，获得1枚“蛇毒”标记。',
+			boss_echou_info:'体力值首次减少至一半或更少时激活此技能。锁定技，除你之外的其他角色使用“药”或“酒”时，获得1枚“蛇毒”标记。',
 			boss_bingxian:'兵燹',
-			boss_bingxian_info:'锁定技，其他角色的回合结束时，若其回合内没有使用杀，则视为你对其使用一张“杀”。',
+			boss_bingxian_info:'锁定技，其他角色的回合结束时，若其回合内没有使用冲，则视为你对其使用一张“冲”。',
 			boss_juyuan:'巨猿',
-			boss_juyuan_info:'锁定技，你的体力上限+5，你的出牌阶段内，若你的体力少于上一次你的回合结束时的体力，则你本回合使用“杀”可额外指定1个目标。',
+			boss_juyuan_info:'锁定技，你的体力上限+5，你的出牌阶段内，若你的体力少于上一次你的回合结束时的体力，则你本回合使用“冲”可额外指定1个目标。',
 			boss_xushi_switch:'蓄势',
 			boss_xushi:'蓄势',
 			boss_xushi_info:'体力值首次减少至一半或更少时激活此技能。锁定技，你的出牌阶段结束时，你令自己翻面；当你的武将牌从背面翻至正面时，对所有其他角色造成随机1至2点伤害。',
@@ -13356,7 +13356,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_fengdong:'封冻',
 			boss_fengdong_info:'锁定技，你的回合内，其他角色的非锁定技无效。',
 			boss_xunyou:'巡游',
-			boss_xunyou_info:'锁定技，其他角色回合开始时，你随机获得场上除你以外的一名角色区域内的一张牌，若你获得的是装备牌，则你使用之。',
+			boss_xunyou_info:'锁定技，其他角色回合开始时，你随机获得场上除你以外的一名角色区域内的一张牌，若你获得的是器具牌，则你使用之。',
 			boss_sipu:'司圃',
 			boss_sipu_switch:'司圃',
 			boss_sipu_info:'体力值首次减少至一半或更少时激活此技能。锁定技，你的出牌阶段内，若你使用的牌数小于等于2张，其他角色无法使用或打出牌。',
@@ -13364,14 +13364,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_wuzang:'无脏',
 			boss_wuzang_info:'锁定技，摸牌阶段，你的摸牌基数改为X（X为你的体力值一半且至少为5）；你的手牌上限基数为0',
 			boss_xiangde:'相德',
-			boss_xiangde_info:'锁定技，其他角色对你造成伤害时，若其装备区内有武器牌，此伤害+1',
+			boss_xiangde_info:'锁定技，其他角色对你造成伤害时，若其器具区内有武器牌，此伤害+1',
 			boss_yinzei:'隐贼',
 			boss_yinzei_switch:'隐贼',
 			boss_yinzei_info:'体力值首次减少至一半或更少时激活此技能。锁定技，若你没有手牌，其他角色对你造成伤害后，随机弃置一张牌',
 			boss_zhue:'助恶',
 			boss_zhue_info:'锁定技，每当一名其他角色造成伤害后，你与伤害来源各摸一张牌',
 			boss_futai:'复态',
-			boss_futai_info:'锁定技，你的回合外，其他角色不能使用【桃】；你的回合开始时，你令所有角色回复1点体力',
+			boss_futai_info:'锁定技，你的回合外，其他角色不能使用【药】；你的回合开始时，你令所有角色回复1点体力',
 			boss_yandu:'厌笃',
 			boss_yandu_switch:'厌笃',
 			boss_yandu_info:'体力值首次减少至一半或更少时激活此技能。锁定技，其他角色回合结束后，若其未造成过伤害，你获得其一张牌',
@@ -13381,7 +13381,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_nitai_info:'锁定技，防止你于回合内受到的伤害；你于回合外受到火属性伤害+1',
 			boss_luanchang:'乱常',
 			boss_luanchang_switch:'乱常',
-			boss_luanchang_info:'体力值首次减少至一半或更少时激活此技能。锁定技，回合开始时，你视为使用【南蛮入侵】；回合结束时，你视为使用【万箭齐发】',
+			boss_luanchang_info:'体力值首次减少至一半或更少时激活此技能。锁定技，回合开始时，你视为使用【红莲醉舞】；回合结束时，你视为使用【乱剑穿心】',
 			boss_tanyu:'贪欲',
 			boss_tanyu_info:'锁定技，跳过你的弃牌阶段；结束阶段，若你的手牌数为全场最多，失去1点体力',
 			boss_cangmu:'藏目',
@@ -13390,29 +13390,29 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_jicai_switch:'积财',
 			boss_jicai_info:'体力值首次减少至一半或更少时激活此技能。锁定技，一名角色回复体力后，你与其各摸一张牌',
 			boss_xiongshou:'凶兽',
-			boss_xiongshou_info:'锁定技，你使用【杀】对体力值小于你的角色造成的伤害+1；你与其他角色距离-1；你不能被翻面',
+			boss_xiongshou_info:'锁定技，你使用【冲】对体力值小于你的角色造成的伤害+1；你与其他角色距离-1；你不能被翻面',
 			sadouchengbing:'撒豆成兵',
 			sadouchengbing_info:'出牌阶段对自己使用，若你的势力为“神”，摸X张牌；否则将你手牌补至X；（X为你的体力上限且至多为5）',
 			yihuajiemu:'移花接木',
-			yihuajiemu_info:'出牌阶段对一名有牌的其他角色使用，令其使用一张【杀】，或交给你两张牌',
+			yihuajiemu_info:'出牌阶段对一名有牌的其他角色使用，令其使用一张【冲】，或交给你两张牌',
 			guilongzhanyuedao:'鬼龙斩月刀',
-			guilongzhanyuedao_info:'锁定技，你使用的红色【杀】不能被【闪】响应',
+			guilongzhanyuedao_info:'锁定技，你使用的红色【冲】不能被【守】响应',
 			guofengyupao:'国风玉袍',
-			guofengyupao_info:'锁定技，你不能成为其他角色使用普通锦囊牌的目标',
+			guofengyupao_info:'锁定技，你不能成为其他角色使用普通策略牌的目标',
 			chiyanzhenhunqin:'赤焰镇魂琴',
 			chiyanzhenhunqin_info:'锁定技，你造成的伤害均视为具有火属性',
 			qimenbagua:'奇门八卦',
-			qimenbagua_info:'锁定技，其他角色使用的【杀】对你无效',
+			qimenbagua_info:'锁定技，其他角色使用的【冲】对你无效',
 			juechenjinge:'绝尘金戈',
 			juechenjinge_info:'锁定技，敌方角色计算与己方其他角色距离+1',
 			xiuluolianyuji:'修罗炼狱戟',
-			xiuluolianyuji_info:'你使用【杀】可以额外指定任意名攻击范围内的其他角色为目标；锁定技，你使用【杀】造成的伤害+1，然后令受到伤害的角色回复1点体力',
+			xiuluolianyuji_info:'你使用【冲】可以额外指定任意名攻击范围内的其他角色为目标；锁定技，你使用【冲】造成的伤害+1，然后令受到伤害的角色回复1点体力',
 			xuwangzhimian:'虚妄之冕',
 			xuwangzhimian_info:'锁定技，摸牌阶段，你额外摸两张牌；你的手牌上限-1',
 			chixueqingfeng:'赤血青锋',
-			chixueqingfeng_info:'锁定技，你使用【杀】结算结束前，目标角色不能使用或打出手牌，且此【杀】无视其防具',
+			chixueqingfeng_info:'锁定技，你使用【冲】结算结束前，目标角色不能使用或打出手牌，且此【冲】无视其防具',
 			longfenghemingjian:'鸾凤和鸣剑',
-			longfenghemingjian_info:'你使用的【雷杀】或【火杀】指定目标后，可令对方选择弃置一张牌或令你摸一张牌',
+			longfenghemingjian_info:'你使用的【雷冲】或【火冲】指定目标后，可令对方选择弃置一张牌或令你摸一张牌',
 			qicaishenlu:'七彩神鹿',
 			qicaishenlu_info:'锁定技，你计算与其他角色的距离时-1，当你造成属性伤害时，你令此伤害+1。',
    boss_mengpohuihun:'回魂',
@@ -13442,37 +13442,37 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_lingqu:'灵躯',
 			boss_lingqu_info:'锁定技，当你受到伤害后，你摸一张牌，然后手牌上限+1；防止你受到的大于1点的伤害',
 			boss_zirun:'滋润',
-			boss_zirun_info:'锁定技，准备阶段开始时，你令所有角色摸一张牌，若其装备区内有牌，则其额外摸一张牌',
+			boss_zirun_info:'锁定技，准备阶段开始时，你令所有角色摸一张牌，若其器具区内有牌，则其额外摸一张牌',
 			boss_juehong:'决洪',
-			boss_juehong_info:'锁定技，准备阶段开始时，你令所有敌方角色自己弃置自己的装备区内的所有牌，若其装备区内没有牌，则改为你弃置其一张手牌',
+			boss_juehong_info:'锁定技，准备阶段开始时，你令所有敌方角色自己弃置自己的器具区内的所有牌，若其器具区内没有牌，则改为你弃置其一张手牌',
 			boss_zaoyi:'皂仪',
-			boss_zaoyi_info:'锁定技，只要水神玄冥存活，你不会成为敌方角色使用锦囊牌的目标，只要水神共工存活，你不会成为敌方角色使用基本牌的目标。水神玄冥和水神共工均死亡后，你摸四张牌，然后从下回合开始，每个回合开始时使体力值最少的敌方角色失去所有体力',
+			boss_zaoyi_info:'锁定技，只要水神玄冥存活，你不会成为敌方角色使用策略牌的目标，只要水神共工存活，你不会成为敌方角色使用行动牌的目标。水神玄冥和水神共工均死亡后，你摸四张牌，然后从下回合开始，每个回合开始时使体力值最少的敌方角色失去所有体力',
 			boss_baiyi:'白仪',
 			boss_baiyi_info:'锁定技，每名敌方角色的摸牌阶段，若当前轮数小于3，其少摸一张牌；第五轮开始时，每名敌方角色弃置两张牌；当己方角色受到的雷电伤害时，若当前轮数小于7，其防止此伤害',
 			boss_qingzhu:'擎柱',
-			boss_qingzhu_info:'锁定技，你跳过弃牌阶段，若你没有“殛顶”，你于出牌阶段不能使用【杀】',
+			boss_qingzhu_info:'锁定技，你跳过弃牌阶段，若你没有“殛顶”，你于出牌阶段不能使用【冲】',
 			boss_jiazu:'枷足',
-			boss_jiazu_info:'锁定技，回合开始时，弃置你上家和下家的敌方角色的装备区内的坐骑牌',
+			boss_jiazu_info:'锁定技，回合开始时，弃置你上家和下家的敌方角色的器具区内的坐骑牌',
 			boss_jiding:'殛顶',
-			boss_jiding_info:'锁定技，其他己方角色受到伤害后，若伤害来源为敌方角色，则你视为对伤害来源使用雷【杀】，若此【杀】造成伤害，蓐收回复1点体力。然后你失去此技能（只有发动了才会失去，没发动不会失去）',
+			boss_jiding_info:'锁定技，其他己方角色受到伤害后，若伤害来源为敌方角色，则你视为对伤害来源使用雷【冲】，若此【冲】造成伤害，蓐收回复1点体力。然后你失去此技能（只有发动了才会失去，没发动不会失去）',
 			boss_xingqiu:'刑秋',
 			boss_xingqiu_info:'锁定技，每两轮的出牌阶段开始时，你横置所有敌方角色，然后使明刑柱获得【殛顶】',
 			boss_kuangxiao:'狂啸',
-			boss_kuangxiao_info:'锁定技，你的回合内，你使用【杀】没有距离限制，且指定所有敌方角色为目标',
+			boss_kuangxiao_info:'锁定技，你的回合内，你使用【冲】没有距离限制，且指定所有敌方角色为目标',
 			boss_shenyi:'神裔',
 			boss_shenyi_info:'锁定技，你的武将牌始终正面向上，你的判定区内的牌效果反转',
 			boss_shenen:'神恩',
 			boss_shenen_info:'锁定技，所有己方角色使用牌无距离限制；所有敌方角色摸牌阶段多摸一张牌且手牌上限+1',
 			boss_fentian:'焚天',
-			boss_fentian_info:'锁定技，你造成的伤害视为火焰伤害；你使用红色牌无距离和次数限制，且不可被其他角色使用【闪】或【无懈可击】响应',
+			boss_fentian_info:'锁定技，你造成的伤害视为火焰伤害；你使用红色牌无距离和次数限制，且不可被其他角色使用【守】或【以策制策】响应',
 			boss_fentian2:'焚天',
 			boss_xingxia:'行夏',
 			boss_xingxia_info:'每两轮限一次，出牌阶段，你可以对焰灵造成2点火焰伤害，然后令每名敌方角色选择一项：1.弃置一张红色牌；2.你对其造成1点火焰伤害',
 			boss_huihuo:'回火',
-			boss_huihuo_info:'锁定技，当你死亡时，你对所有敌方角色各造成3点火焰伤害；出牌阶段，你可以多使用一张【杀】',
+			boss_huihuo_info:'锁定技，当你死亡时，你对所有敌方角色各造成3点火焰伤害；出牌阶段，你可以多使用一张【冲】',
 			boss_furan:'复燃',
 			boss_furan2:'复燃',
-			boss_furan_info:'当你濒死时，所有敌方角色视为可以将红色牌当【桃】对你使用',
+			boss_furan_info:'当你濒死时，所有敌方角色视为可以将红色牌当【药】对你使用',
 			boss_chiyi:'赤仪',
 			boss_chiyi2:'赤仪',
 			boss_chiyi_info:'锁定技，从第三轮开始，敌方角色受到的伤害+1；第五轮开始时，你对所有角色各造成1点火焰伤害；第七轮开始时，你对焰灵造成5点火焰伤害',
@@ -13491,13 +13491,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_yuance:'远策',
 			boss_yuance_info:'每当一名角色受到其他角色的伤害，你可以选择一项并进行一次判定：1. 若结果为黑色，受伤害角色失去一点体力，否则伤害来源失去一点体力；2. 若结果为红色，受伤害角色回复一点体力，否则伤害来源回复一点体力',
 			boss_qizuo:'奇佐',
-			boss_qizuo_info:'你可以令你的普通锦囊牌额外结算一次',
+			boss_qizuo_info:'你可以令你的普通策略牌额外结算一次',
 			boss_guixin:'归心',
 			boss_guixin_info:'锁定技，其他角色摸牌时，若摸牌数不少于2，须将摸到的牌中的一张交给你',
 			xiongcai:'雄才',
 			xiongcai_info:'锁定技，你在回合结束后随机获得一个魏势力角色的所有技能',
 			xiaoxiong:'枭雄',
-			xiaoxiong_info:'锁定技，每当一名其他角色使用一张基本牌或锦囊牌，你获得一张与之同名的牌；在一名其他角色的结束阶段，若其本回合没有使用牌，你对其造成一点伤害',
+			xiaoxiong_info:'锁定技，每当一名其他角色使用一张行动牌或策略牌，你获得一张与之同名的牌；在一名其他角色的结束阶段，若其本回合没有使用牌，你对其造成一点伤害',
 			boss_zhangwu:'章武',
 			boss_zhangwu_info:'每当你受到一次伤害，你可以弃置任意张牌并令伤害来源选择一项：弃置等量的牌，或受到等量的伤害',
 			xiangxing:'禳星',
@@ -13508,23 +13508,23 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			xiangxing6_info:'此次受到的是火属性伤害',
 			xiangxing5_info:'此次受到的是雷属性伤害',
 			xiangxing4_info:'此次为失去体力',
-			xiangxing3_info:'一名其他角色有至少4件装备',
+			xiangxing3_info:'一名其他角色有至少4件器具',
 			xiangxing2_info:'你的判定区内至少有2张牌',
 			xiangxing1_info:'场上只有2名存活角色',
 			gaiming:'改命',
 			gaiming_info:'锁定技，在你的判定牌生效前，你观看牌堆顶的7张牌并选择一张作为判定结果，此结果不可更改',
 			fengqi:'风起',
-			fengqi_info:'准备阶段和结束阶段，你可以视为使用任意一张普通锦囊牌',
+			fengqi_info:'准备阶段和结束阶段，你可以视为使用任意一张普通策略牌',
 
 			jiaoxia:'皎霞',
 			jiaoxia_info:'每当你成为红色牌的目标，你可以摸一张牌',
 			lingbo:'凌波',
-			lingbo_info:'每当你使用或打出一张闪，你可以摸两张牌',
+			lingbo_info:'每当你使用或打出一张守，你可以摸两张牌',
 			tiandao:'天道',
 			tiandao_info:'任意一名角色的判定生效前，你可以打出一张牌替换之',
 			yunshen:'云身',
 			yunshen2:'云身',
-			yunshen_info:'每当你使用或打出一张闪时，你可以令你的防御距离+1；准备阶段，你将累计的防御距离清零，然后摸等量的牌',
+			yunshen_info:'每当你使用或打出一张守时，你可以令你的防御距离+1；准备阶段，你将累计的防御距离清零，然后摸等量的牌',
 			lianji:'连计',
 			lianji_info:'出牌阶段限一次，你可以选择一张手牌并指定两名角色进行拼点，拼点赢的角色获得此牌，并对没赢的角色造成一点伤害',
 			mazui:'麻醉',
@@ -13537,13 +13537,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_mengtai:'萌态',
 			boss_mengtai_info:'锁定技，若你的出牌阶段被跳过，你跳过本回合的弃牌阶段；若你的摸牌阶段被跳过，结束阶段开始时，你摸三张牌',
 			boss_ruizhi:'睿智',
-			boss_ruizhi_info:'锁定技，其他角色的准备阶段开始时，其选择一张手牌和一张装备区里的牌，然后弃置其余的牌',
+			boss_ruizhi_info:'锁定技，其他角色的准备阶段开始时，其选择一张手牌和一张器具区里的牌，然后弃置其余的牌',
 			boss_jingjue:'警觉',
 			boss_jingjue_info:'每当你于回合外失去牌时，你可以进行一次判定，若结果为红色，你回复1点体力',
 			boss_renxing:'任性',
 			boss_renxing_info:'锁定技，你的回合外，一名角色受到1点伤害后或回复1点体力时，你摸一张牌',
 			boss_nbaonu:'暴怒',
-			boss_nbaonu_info:'锁定技，摸牌阶段，你改为摸X张牌（X为4到你体力值间的随机数）；若你的体力值小于5，则你使用【杀】造成的伤害+1且无次数限制',
+			boss_nbaonu_info:'锁定技，摸牌阶段，你改为摸X张牌（X为4到你体力值间的随机数）；若你的体力值小于5，则你使用【冲】造成的伤害+1且无次数限制',
 			boss_shouyi:'兽裔',
 			boss_shouyi_info:'锁定技，你使用牌无距离限制',
 
@@ -13552,7 +13552,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_qixiang:'祺祥',
 			boss_qixiang1:'祺祥',
 			boss_qixiang2:'祺祥',
-			boss_qixiang_info:'乐不思蜀判定时，你的方块判定牌视为红桃；兵粮寸断判定时，你的黑桃判定牌视为草花',
+			boss_qixiang_info:'囹圄迷魂判定时，你的方块判定牌视为红桃；海盗洗掠判定时，你的黑桃判定牌视为草花',
 
 			qiwu:'栖梧',
 			qiwu_info:'锁定技。每当你使用一张梅花牌，你回复一点体力',
@@ -13560,18 +13560,18 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			jizhen_info:'结束阶段，你可以令所至多两名已受伤角色摸一张牌',
 
 			boss_yushou:'驭兽',
-			boss_yushou_info:'出牌阶段开始时，你可以对所有敌方角色使用一张南蛮入侵',
+			boss_yushou_info:'出牌阶段开始时，你可以对所有敌方角色使用一张红莲醉舞',
 			boss_moyany:'魔炎',
 			boss_moyany_info:'每当你于回合外失去牌时，你可以进行一次判定，若结果为红色，你对一名其他角色造成2点火焰伤害',
 			boss_modao:'魔道',
 			boss_modao_info:'锁定技，准备阶段，你摸两张牌',
 			boss_mojian:'魔箭',
-			boss_mojian_info:'出牌阶段开始时，你可以对所有敌方角色使用一张万箭齐发',
+			boss_mojian_info:'出牌阶段开始时，你可以对所有敌方角色使用一张乱剑穿心',
 			boss_danshu:'丹术',
 			boss_danshu_info:'每当你于回合外失去牌时，你可以进行一次判定，若结果为红色，你回复1点体力',
 
 			boss_zuijiu:'醉酒',
-			boss_zuijiu_info:'锁定技，你的【杀】额外造成1点伤害',
+			boss_zuijiu_info:'锁定技，你的【冲】额外造成1点伤害',
 			boss_taiping:'太平',
 			boss_taiping_info:'锁定技，摸牌阶段摸牌时，你的摸牌数量+2',
 			boss_suoming:'索命',
@@ -13582,7 +13582,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_baolian:'暴敛',
 			boss_baolian_info:'锁定技，结束阶段，你摸两张牌',
 			boss_manjia:'蛮甲',
-			boss_manjia_info:'锁定技，若你的装备区内没有防具牌，则你视为装备了[藤甲]',
+			boss_manjia_info:'锁定技，若你的器具区内没有防具牌，则你视为装备了[紫砂宝衣]',
 			boss_xiaoshou:'枭首',
 			boss_xiaoshou_info:'结束阶段，对体力不小于你的一名其他角色造成3点伤害',
 			boss_guiji:'诡计',
@@ -13599,11 +13599,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_beiming:'悲鸣',
 			boss_beiming_info:'锁定技，当你死亡时，你令杀死你的角色弃置所有手牌',
 			boss_guimei:'鬼魅',
-			boss_guimei_info:'锁定技，你不能成为延时类锦囊的目标',
+			boss_guimei_info:'锁定技，你不能成为延时类策略的目标',
 			boss_didong:'地动',
 			boss_didong_info:'结束阶段，你可以选择一名敌方角色将其武将牌翻面',
 			boss_shanbeng:'山崩',
-			boss_shanbeng_info:'锁定技，当你死亡时，你令所有其他角色弃置其装备区内的所有牌',
+			boss_shanbeng_info:'锁定技，当你死亡时，你令所有其他角色弃置其器具区内的所有牌',
 
 			boss_chiyan_intro1:'&nbsp;第一关',
 			boss_chiyan_intro1_info:'挑战朱雀',
@@ -13660,7 +13660,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			longhun4:'龙魂♣︎',
 
 			zhanjiang:'斩将',
-			zhanjiang_info:'准备阶段开始时，如果其他角色的装备区内有【青釭剑】，你可以获得之',
+			zhanjiang_info:'准备阶段开始时，如果其他角色的器具区内有【魔瞳】，你可以获得之',
 
 			boss_qiangzheng:'强征',
 			boss_qiangzheng_info:'锁定技，结束阶段，你获得每个敌方角色的一张手牌',
@@ -13677,14 +13677,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			yuehun:'月魂',
 			yuehun_info:'结束阶段，你可以回复一点体力并摸两张牌',
 			fengwu:'风舞',
-			fengwu_info:'出牌阶段限一次，可令除你外的所有角色依次对与其距离最近的另一名角色使用一张【杀】，无法如此做者失去1点体力。',
+			fengwu_info:'出牌阶段限一次，可令除你外的所有角色依次对与其距离最近的另一名角色使用一张【冲】，无法如此做者失去1点体力。',
 			boss_wange:'笙歌',
 
 			huanhua:'幻化',
 			huanhua_info:'锁定技，游戏开始时，你获得其他角色的所有技能，体力上限变为其他角色之和；其他角色于摸牌阶段摸牌时，你摸等量的牌；其他角色于弃牌阶段弃牌时，你弃置等量的手牌',
 
 			boss_leiji:'雷击',
-			boss_leiji_info:'每当你使用或打出一张【闪】，可令任意一名角色进行一次判定，若结果为黑色，其受到一点雷电伤害，然后你摸一张牌',
+			boss_leiji_info:'每当你使用或打出一张【守】，可令任意一名角色进行一次判定，若结果为黑色，其受到一点雷电伤害，然后你摸一张牌',
 			jidian:'亟电',
 			jidian_info:'每当你造成一次伤害，可以指定距离受伤害角色1以内的一名其他角色进行判定，若结果为黑色，该角色受到一点雷电伤害',
 
@@ -13712,11 +13712,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_juejing_info:'锁定技，摸牌阶段开始时，你不摸牌；锁定技，若你的手牌数小于4，你将手牌补至四张',
 
 			boss_jizhi:'集智',
-			boss_jizhi_info:'每当你使用一张非转化的非基本牌，你可以摸一张牌并展示之',
+			boss_jizhi_info:'每当你使用一张非转化的非行动牌，你可以摸一张牌并展示之',
 			boss_guiyin:'归隐',
 			boss_guiyin_info:'锁定技，体力值比你多的角色无法在回合内对你使用卡牌',
 			boss_gongshen:'工神',
-			boss_gongshen_info:'锁定技，除你之外的角色没有装备区；你不能成为其他角色的延时锦囊牌的目标',
+			boss_gongshen_info:'锁定技，除你之外的角色没有器具区；你不能成为其他角色的延时策略牌的目标',
 
 			fanghua:'芳华',
 			fanghua_info:'结束阶段，你可以令所有已翻面角色流失一点体力',
@@ -13724,7 +13724,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			tashui_info:'每当你使用或打出一张黑色牌，你可以令一名其他角色翻面',
 
 			boss_wuxin:'无心',
-			boss_wuxin_info:'锁定技，你防止即将受到的伤害，改为流失一点体力；你不能成为其他角色的延时锦囊的目标',
+			boss_wuxin_info:'锁定技，你防止即将受到的伤害，改为流失一点体力；你不能成为其他角色的延时策略的目标',
 			shangshix:'伤逝',
 			shangshix2:'伤逝',
 			shangshix_info:'锁定技，你的手牌数至少为4，结束阶段，若你的体力值大于1，你令场上所有角色流失一点体力',
@@ -13736,14 +13736,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			xiuluo:'修罗',
 			xiuluo_info:'准备阶段，你可以弃置一张牌，然后弃置你判定区内一张同花色的牌。你可以重复此流程。',
 			shenqu:'神躯',
-			shenqu_info:'每名角色的准备阶段，若你的手牌数少于或等于你的体力上限数，你可以摸两张牌；当你受到伤害后，你可以使用一张【桃】',
+			shenqu_info:'每名角色的准备阶段，若你的手牌数少于或等于你的体力上限数，你可以摸两张牌；当你受到伤害后，你可以使用一张【药】',
 			jiwu:'极武',
 			jiwu_info:'出牌阶段，你可以弃置一张牌，然后获得一项：“强袭”、“铁骑”(界)、“旋风”、“完杀”，直到回合结束',
 			
 			"boss_jingjia":"精甲",
-			"boss_jingjia_info":"锁定技，游戏开始时，将本局游戏中加入的装备随机置入你的装备区。",
+			"boss_jingjia_info":"锁定技，游戏开始时，将本局游戏中加入的器具随机置入你的器具区。",
 			"boss_aozhan":"鏖战",
-			"boss_aozhan_info":"锁定技，若你装备区内有：武器牌，你可以多使用一张【杀】；防具牌，防止你受到的超过1点的伤害；坐骑牌，摸牌阶段多摸一张牌；宝物牌，跳过你的判定阶段。",
+			"boss_aozhan_info":"锁定技，若你器具区内有：武器牌，你可以多使用一张【冲】；防具牌，防止你受到的超过1点的伤害；坐骑牌，摸牌阶段多摸一张牌；宝物牌，跳过你的判定阶段。",
 			
 			"shufazijinguan_skill":"束发紫金冠",
 			"shufazijinguan_skill_info":"准备阶段，你可以对一名其他角色造成1点伤害。",
@@ -13752,9 +13752,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"hongmianbaihuapao_skill":"红棉百花袍",
 			"hongmianbaihuapao_skill_info":"锁定技，防止你受到的属性伤害。",
 			"wushuangfangtianji_skill":"无双方天戟",
-			"wushuangfangtianji_skill_info":"你使用【杀】对目标角色造成伤害后，可以摸一张牌或弃置目标角色一张牌。",
+			"wushuangfangtianji_skill_info":"你使用【冲】对目标角色造成伤害后，可以摸一张牌或弃置目标角色一张牌。",
 			"wushuangfangtianji":"无双方天戟",
-			"wushuangfangtianji_info":"你使用【杀】对目标角色造成伤害后，可以摸一张牌或弃置目标角色一张牌。",
+			"wushuangfangtianji_info":"你使用【冲】对目标角色造成伤害后，可以摸一张牌或弃置目标角色一张牌。",
 			"shufazijinguan":"束发紫金冠",
 			"shufazijinguan_info":"准备阶段，你可以对一名其他角色造成1点伤害。",
 			"hongmianbaihuapao":"红棉百花袍",
@@ -13764,11 +13764,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			
 			boss_qinguangwang:'秦广王',
 			boss_panguan:'判官',
-			boss_panguan_info:'	锁定技，你不能成为延时类锦囊的目标。',
+			boss_panguan_info:'	锁定技，你不能成为延时类策略的目标。',
 			boss_juhun:'拘魂',
 			boss_juhun_info:'锁定技，结束阶段，你令随机一名其他角色的武将牌翻面或横置。',
 			boss_wangxiang:'望乡',
-			boss_wangxiang_info:'锁定技，当你死亡时，你令所有其他角色弃置其装备区内的所有牌。',
+			boss_wangxiang_info:'锁定技，当你死亡时，你令所有其他角色弃置其器具区内的所有牌。',
 			boss_chujiangwang:'楚江王',
 			boss_bingfeng:'冰封',
 			boss_bingfeng_info:'锁定技，你死亡时，若杀死你的角色武将牌是正面朝上， 你令其翻面。',
@@ -13788,9 +13788,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_xuechi_info:'锁定技，你的回合结束时，令随机一名其他角色失去2点体力。',
 			boss_yanluowang:'阎罗王',
 			boss_tiemian:'铁面',
-			boss_tiemian_info:'锁定技，你的防具区没有牌时，视为你装备【仁王盾】。',
+			boss_tiemian_info:'锁定技，你的防具区没有牌时，视为你装备【九幽坎肩】。',
 			boss_zhadao:'铡刀',
-			boss_zhadao_info:'锁定技，你使用【杀】指定目标后，你令目标角色防具无效。',
+			boss_zhadao_info:'锁定技，你使用【冲】指定目标后，你令目标角色防具无效。',
 			boss_zhuxin:'诛心',
 			boss_zhuxin_info:'锁定技，你死亡时，你令场上血量最少的一名其他角色受到2点伤害。',
 			boss_bianchengwang:'卞城王',
@@ -13802,14 +13802,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_leizhu_info:'锁定技，你死亡时，对所有其他角色造成依次造成1点雷属性伤害。',
 			boss_taishanwang:'泰山王',
 			boss_fudu:'服毒',
-			boss_fudu_info:'锁定技，其他角色使用【桃】时，你令随机另一名其他角色失去1点体力。',
+			boss_fudu_info:'锁定技，其他角色使用【药】时，你令随机另一名其他角色失去1点体力。',
 			boss_kujiu:'苦酒',
 			boss_kujiu_info:'锁定技，其他角色准备阶段，你令其失去1点体力，然后该角色视为使用一张【酒】。',
 			boss_renao:'热恼',
 			boss_renao_info:'锁定技，你死亡时，你令随机一名其他角色受到3点火属性伤害。',
 			boss_dushiwang:'都市王',
 			boss_remen:'热闷',
-			boss_remen_info:'锁定技，若你的装备区内没有防具牌，则【南蛮入侵】、【万箭齐发】和普通【杀】对你无效。',
+			boss_remen_info:'锁定技，若你的器具区内没有防具牌，则【红莲醉舞】、【乱剑穿心】和普通【冲】对你无效。',
 			boss_zhifen:'炙焚',
 			boss_zhifen_info:'锁定技，准备阶段，你随机选择一名其他角色，获得其1张手牌（没有则不获得），并对其造成1点火属性伤害。',
 			boss_huoxing:'火刑',
@@ -13825,7 +13825,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_lunhui:'轮回',
 			boss_lunhui_info:'锁定技，准备阶段，若你的体力小于等于2，则你与场上除你以外体力最高且大于2的角色交换体力值。',
 			boss_wangsheng:'往生',
-			boss_wangsheng_info:'锁定技，你的出牌阶段开始时，视为你随机使用一张【南蛮入侵】或【万箭齐发】。',
+			boss_wangsheng_info:'锁定技，你的出牌阶段开始时，视为你随机使用一张【红莲醉舞】或【乱剑穿心】。',
 			boss_zlfanshi:'反噬',
 			boss_zlfanshi_info:'锁定技，每个回合你受到第一次伤害后，若再次受到伤害，则对随机一名其他角色造成1点伤害。',
 					//孟婆:
@@ -13835,7 +13835,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"boss_wanghun":"忘魂",
 			"boss_wanghun_info":"锁定技，你死亡时，令随机两名敌方角色各随机失去一个技能（主公技除外），并在牌堆中加入2张回魂。(回魂只能在挑战模式出现)",
 			"boss_wangshi":"往事",
-			"boss_wangshi_info":"锁定技，你存活时，敌方角色的回合开始时，令其于本回合不能使用或打出随机一种类型的牌（基本、锦囊、装备）。",
+			"boss_wangshi_info":"锁定技，你存活时，敌方角色的回合开始时，令其于本回合不能使用或打出随机一种类型的牌（行动、策略、器具）。",
 			"boss_wangshi2":"往事",
 			"boss_wangshi2_info":"",
 			//地藏王:
@@ -13852,9 +13852,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"boss_sdyl_playerlevel1":"一阶",
 			"boss_sdyl_playerlevel1_info":"",
 			"boss_sdyl_playerlevel2":"二阶",
-			"boss_sdyl_playerlevel2_info":"开局随机使用一张装备牌，起始手牌+1",
+			"boss_sdyl_playerlevel2_info":"开局随机使用一张器具牌，起始手牌+1",
 			"boss_sdyl_playerlevel3":"三阶",
-			"boss_sdyl_playerlevel3_info":"出杀次数+1，体力上限+1",
+			"boss_sdyl_playerlevel3_info":"出冲次数+1，体力上限+1",
 			"boss_sdyl_playerlevel4":"四阶",
 			"boss_sdyl_playerlevel4_info":"摸牌阶段多摸一张牌，起始手牌+1",
 			"boss_sdyl_playerlevel5":"重生",
@@ -13863,13 +13863,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"boss_sdyl_bosslevel1":"一阶",
 			"boss_sdyl_bosslevel1_info":"",
 			"boss_sdyl_bosslevel2":"二阶",
-			"boss_sdyl_bosslevel2_info":"登场时随机使用一张装备牌",
+			"boss_sdyl_bosslevel2_info":"登场时随机使用一张器具牌",
 			"boss_sdyl_bosslevel3":"三阶",
-			"boss_sdyl_bosslevel3_info":"出杀次数+1，回合开始获得一张【杀】，体力上限+1，起始手牌+1",
+			"boss_sdyl_bosslevel3_info":"出冲次数+1，回合开始获得一张【冲】，体力上限+1，起始手牌+1",
 			"boss_sdyl_bosslevel4":"四阶",
 			"boss_sdyl_bosslevel4_info":"摸牌阶段多摸一张牌，手牌上限+1",
 			"boss_sdyl_bosslevel5":"五阶",
-			"boss_sdyl_bosslevel5_info":"登场时视为使用一张【南蛮入侵】且此【南蛮入侵】伤害+1。体力上限+1，起始手牌+1",
+			"boss_sdyl_bosslevel5_info":"登场时视为使用一张【红莲醉舞】且此【红莲醉舞】伤害+1。体力上限+1，起始手牌+1",
 			*/
 			"boss_sunce":"那个男人",
 			"boss_hunzi":"魂姿",
@@ -13900,7 +13900,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			shanrangzhaoshu_info:'其他角色于回合外获得牌后，若是其本回合内第一次获得牌，则你可以选择一项：交给其一张牌，或令其交给你一张牌。',
 			xingtianpojunfu_info:'当你于出牌阶段内使用牌指定唯一目标后，你可弃置两张牌。若如此做，其本回合内不能使用或打出牌且其防具技能无效。',
 			jinwuluorigong_info:'当你于出牌阶段内一次性失去了两张以上的手牌后，你可以弃置一名其他角色等量的牌。',
-			TheDayIBecomeAGod:'神杀',
+			TheDayIBecomeAGod:'神冲',
 			thedayibecomeagod:'传承',
 			thedayibecomeagod_info:'选择一名其他己方角色。若其势力非神，则改为神势力；若其势力为神，则将武将牌翻至正面，回复体力至体力上限，并将手牌摸至5 ',
 			gubuzifeng:'故步自封',
@@ -13927,10 +13927,10 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"nzry_cuike":"摧克",
 			"nzry_cuike_info":"出牌阶段开始时，若“军略”标记的数量为奇数，你可以对一名角色造成一点伤害；若“军略”标记的数量为偶数，你可以横置一名角色并弃置其区域内的一张牌。然后，若“军略”标记的数量超过7个，你可以移去全部“军略”标记并对所有其他角色造成一点伤害",
 			"nzry_dinghuo":"绽火",
-			"nzry_dinghuo_info":"限定技，出牌阶段，你可以移去全部“军略”标记，令至多等量的已横置角色弃置所有装备区内的牌。然后，你对其中一名角色造成1点火焰伤害。",
+			"nzry_dinghuo_info":"限定技，出牌阶段，你可以移去全部“军略”标记，令至多等量的已横置角色弃置所有器具区内的牌。然后，你对其中一名角色造成1点火焰伤害。",
 			"shen_liubei":"神刘备",
 			"nzry_longnu":"龙怒",
-			"nzry_longnu_info":"转换技，锁定技，①出牌阶段开始时，你失去1点体力并摸一张牌，然后本回合内你的红色手牌均视为火【杀】且无距离限制。②出牌阶段开始时，你减1点体力上限并摸一张牌，然后本回合你的锦囊牌均视为雷【杀】且无使用次数限制。",
+			"nzry_longnu_info":"转换技，锁定技，①出牌阶段开始时，你失去1点体力并摸一张牌，然后本回合内你的红色手牌均视为火【冲】且无距离限制。②出牌阶段开始时，你减1点体力上限并摸一张牌，然后本回合你的策略牌均视为雷【冲】且无使用次数限制。",
 			"nzry_jieying":"结营",
 			"nzry_jieying_info":"锁定技，游戏开始时或当你的武将牌重置时，你横置；所有已横置的角色手牌上限+2；结束阶段，你横置一名其他角色。",
 			
@@ -13940,14 +13940,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"drlt_poxi":"魄袭",
 			"drlt_poxi_info":"出牌阶段限一次，你可以观看一名其他角色的手牌，然后你可以弃置你与其手牌中的四张花色不同的牌。若如此做，根据此次弃置你的牌的数量执行以下效果：零张，扣减一点体力上限；一张，你结束出牌阶段且本回合手牌上限-1；三张，你回复一点体力；四张，你摸四张牌",
 			"drlt_jieying":"劫营",
-			"drlt_jieying_info":"回合开始时，若场上没有拥有“营”标记的角色，你获得1个“营”标记；结束阶段，你可以将你的一个“营”标记交给一名角色；有“营”标记的角色摸牌阶段多摸一张牌，出牌阶段使用【杀】的次数上限+1，手牌上限+1。有“营”的其他角色回合结束时，其移去“营”标记，然后你获得其所有手牌。",
+			"drlt_jieying_info":"回合开始时，若场上没有拥有“营”标记的角色，你获得1个“营”标记；结束阶段，你可以将你的一个“营”标记交给一名角色；有“营”标记的角色摸牌阶段多摸一张牌，出牌阶段使用【冲】的次数上限+1，手牌上限+1。有“营”的其他角色回合结束时，其移去“营”标记，然后你获得其所有手牌。",
 			drlt_jieying_mark:"劫营",
 			"drlt_duorui1":"失效技能",
 			"drlt_duorui1_bg":"锐",
 			"drlt_duorui":"夺锐",
-			"drlt_duorui_info":"当你于出牌阶段内对一名其他角色造成伤害后，你可以废除你装备区内的一个装备栏（若已全部废除则可以跳过此步骤），然后获得该角色的一个技能直到其的下回合结束或其死亡(觉醒技，限定技，主公技等特殊技能除外)。若如此做，该角色该技能失效且你不能再发动〖夺锐〗直到你失去以此法获得的技能。",
+			"drlt_duorui_info":"当你于出牌阶段内对一名其他角色造成伤害后，你可以废除你器具区内的一个器具栏（若已全部废除则可以跳过此步骤），然后获得该角色的一个技能直到其的下回合结束或其死亡(觉醒技，限定技，主公技等特殊技能除外)。若如此做，该角色该技能失效且你不能再发动〖夺锐〗直到你失去以此法获得的技能。",
 			"drlt_zhiti":"止啼",
-			"drlt_zhiti_info":"锁定技，你攻击范围内已受伤的其他角色手牌上限-1；当你拼点或【决斗】胜利，或受到伤害后，你恢复一个装备栏",
+			"drlt_zhiti_info":"锁定技，你攻击范围内已受伤的其他角色手牌上限-1；当你拼点或【酣战】胜利，或受到伤害后，你恢复一个器具栏",
 			
 			shen_zhaoyun:'神赵云',
 			shen_guanyu:'神关羽',
@@ -13960,30 +13960,30 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			xinjuejing:'绝境',
 			xinjuejing_info:'锁定技，你的手牌上限+2；当你进入或脱离濒死状态时，你摸一张牌。',
 			relonghun:'龙魂',
-			relonghun_info:'你可以将同花色的一至两张牌按下列规则使用或打出：红桃当【桃】，方块当火【杀】，梅花当【闪】，黑桃当普【无懈可击】。若你以此法使用了两张红色牌，则此牌回复值或伤害值+1。若你以此法使用了两张黑色牌，则你弃置当前回合角色一张牌。',
+			relonghun_info:'你可以将同花色的一至两张牌按下列规则使用或打出：红桃当【药】，方块当火【冲】，梅花当【守】，黑桃当普【以策制策】。若你以此法使用了两张红色牌，则此牌回复值或伤害值+1。若你以此法使用了两张黑色牌，则你弃置当前回合角色一张牌。',
 			xinlonghun:'龙魂',
 			xinlonghun1:'龙魂♥︎',
 			xinlonghun2:'龙魂♦︎',
 			xinlonghun3:'龙魂♠︎',
 			xinlonghun4:'龙魂♣︎',
-			xinlonghun_info:'你可以将同花色的一至两张牌按下列规则使用或打出：红桃当【桃】，方块当火【杀】，梅花当【闪】，黑桃当普【无懈可击】。若你以此法使用了两张红色牌，则此牌回复值或伤害值+1。若你以此法使用了两张黑色牌，则你弃置当前回合角色一张牌。',
+			xinlonghun_info:'你可以将同花色的一至两张牌按下列规则使用或打出：红桃当【药】，方块当火【冲】，梅花当【守】，黑桃当普【以策制策】。若你以此法使用了两张红色牌，则此牌回复值或伤害值+1。若你以此法使用了两张黑色牌，则你弃置当前回合角色一张牌。',
 			longhun:'龙魂',
 			longhun1:'龙魂♥︎',
 			longhun2:'龙魂♦︎',
 			longhun3:'龙魂♠︎',
 			longhun4:'龙魂♣︎',
 			juejing:'绝境',
-			longhun_info:'你可以将同花色的X张牌按下列规则使用或打出：红桃当【桃】，方块当具火焰伤害的【杀】，梅花当【闪】，黑桃当【无懈可击】（X为你当前的体力值且至少为1）',
+			longhun_info:'你可以将同花色的X张牌按下列规则使用或打出：红桃当【药】，方块当具火焰伤害的【冲】，梅花当【守】，黑桃当【以策制策】（X为你当前的体力值且至少为1）',
 			juejing_info:'锁定技，摸牌阶段，你摸牌的数量改为你已损失的体力值+2；你的手牌上限+2。',
 			wushen:'武神',
-			wushen_info:'锁定技，你的红桃手牌均视为【杀】；锁定技，你使用红桃【杀】无距离和次数限制且不可被响应。',
+			wushen_info:'锁定技，你的红桃手牌均视为【冲】；锁定技，你使用红桃【冲】无距离和次数限制且不可被响应。',
 			wuhun:'武魂',
 			wuhun21:'武魂',
 			wuhun22:'武魂',
 			wuhun23:'武魂',
 			wuhun2:'武魂',
 			wuhun3:'武魂',		
-			wuhun_info_alter:'锁定技，当你受到1点伤害后，你令伤害来源获得1枚“梦魇”标记；当你死亡时，你令拥有最多“梦魇”标记的一名其他角色判定，若结果不为【桃】或【桃园结义】，则该角色死亡。',
+			wuhun_info_alter:'锁定技，当你受到1点伤害后，你令伤害来源获得1枚“梦魇”标记；当你死亡时，你令拥有最多“梦魇”标记的一名其他角色判定，若结果不为【药】或【甘霖天降】，则该角色死亡。',
 			wuhun_info:'锁定技，杀死你的角色立即进入濒死状态',
 			shelie:'涉猎',
 			gongxin:'攻心',
@@ -13995,7 +13995,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			sbaiyin:'拜印',
 			sbaiyin_info:'觉醒技，准备阶段开始时，若你的“忍”标记数不小于4，你减1点体力上限，然后获得〖极略〗',
 			jilue:'极略',
-			jilue_info:'当一名角色的判定牌生效前，你可以弃1枚“忍”标记并发动〖鬼才〗；每当你受到伤害后，你可以弃1枚“忍”标记并发动〖放逐〗；当你使用锦囊牌时，你可以弃1枚“忍”标记并发动〖集智〗；出牌阶段限一次，你可以弃1枚“忍”标记并发动〖制衡〗；出牌阶段，你可以弃1枚“忍”标记并获得〖完杀〗直到回合结束。',
+			jilue_info:'当一名角色的判定牌生效前，你可以弃1枚“忍”标记并发动〖鬼才〗；每当你受到伤害后，你可以弃1枚“忍”标记并发动〖放逐〗；当你使用策略牌时，你可以弃1枚“忍”标记并发动〖集智〗；出牌阶段限一次，你可以弃1枚“忍”标记并发动〖制衡〗；出牌阶段，你可以弃1枚“忍”标记并获得〖完杀〗直到回合结束。',
 			jilue_guicai:'鬼才',
 			jilue_fangzhu:'放逐',
 			jilue_wansha:'完杀',
@@ -14003,9 +14003,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			jilue_jizhi:'集智',
 			jilue_guicai_info:'当一名角色的判定牌生效前，你可以打出一张牌代替之。',
 			jilue_fangzhu_info:'当你受到伤害后，你可以令一名其他角色翻面，然后该角色摸X张牌（X为你已损失的体力值）。',
-			jilue_wansha_info:'锁定技，你的回合内，不处于濒死状态的其他角色不能使用【桃】。',
+			jilue_wansha_info:'锁定技，你的回合内，不处于濒死状态的其他角色不能使用【药】。',
 			jilue_zhiheng_info:'出牌阶段限一次，你可以弃置任意张牌，然后摸等量的牌。若你以此法弃置了所有手牌，则你多摸一张牌。',
-			jilue_jizhi_info:'当你使用锦囊牌时，你可以摸一张牌。若此牌是基本牌，你可以弃置此牌然后本回合手牌上限+1。',
+			jilue_jizhi_info:'当你使用策略牌时，你可以摸一张牌。若此牌是行动牌，你可以弃置此牌然后本回合手牌上限+1。',
 			lianpo:'连破',
 			lianpo_info:'一名角色的回合结束时，若你本回合内杀死过角色，则你可以进行一个额外的回合。',
 			guixin:'归心',
@@ -14043,13 +14043,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			wuqian:'无前',
 			wuqian_info:'出牌阶段，你可以弃置两枚暴怒标记并获得技能【无双】直到回合结束',
 			wumou:'无谋',
-			wumou_info:'锁定技，当你使用普通锦囊牌时，你选择一项：1.弃置1枚“暴怒”标记；2.失去1点体力。',
+			wumou_info:'锁定技，当你使用普通策略牌时，你选择一项：1.弃置1枚“暴怒”标记；2.失去1点体力。',
 			ol_wuqian:'无前',
 			ol_wuqian_info:'出牌阶段，你可以弃置2枚“暴怒”标记并选择一名本回合内未选择过的其他角色，你获得技能〖无双〗并令其防具无效直到回合结束。',
 			ol_shenfen:'神愤',
-			ol_shenfen_info:'出牌阶段限一次，你可以弃置6枚“暴怒”标记并选择所有其他角色，对这些角色各造成1点伤害。然后这些角色先各弃置其装备区里的牌，再各弃置四张手牌。最后你将你的武将牌翻面。',
+			ol_shenfen_info:'出牌阶段限一次，你可以弃置6枚“暴怒”标记并选择所有其他角色，对这些角色各造成1点伤害。然后这些角色先各弃置其器具区里的牌，再各弃置四张手牌。最后你将你的武将牌翻面。',
 			"new_wuhun":"武魂",
-			"new_wuhun_info":"锁定技，当你受到伤害后，伤害来源获得X个“梦魇”标记（X为伤害点数）。锁定技，当你死亡时，你选择一名“梦魇”标记数量最多的其他角色。该角色进行判定：若判定结果不为【桃】或【桃园结义】，则该角色死亡。",
+			"new_wuhun_info":"锁定技，当你受到伤害后，伤害来源获得X个“梦魇”标记（X为伤害点数）。锁定技，当你死亡时，你选择一名“梦魇”标记数量最多的其他角色。该角色进行判定：若判定结果不为【药】或【甘霖天降】，则该角色死亡。",
 			"new_guixin":"归心",
 			"new_guixin_info":"当你受到1点伤害后，你可以按照你选择的区域优先度随机获得每名其他角色区域里的一张牌，然后你翻面。",
 			ol_zhangliao:'OL神张辽',
@@ -14057,7 +14057,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			olduorui2:'夺锐',
 			olduorui_info:'当你于出牌阶段内对一名角色造成伤害后，你可以选择该角色武将牌上的一个技能。若如此做，你结束出牌阶段，且你令此技能于其下个回合结束之前无效。',
 			olzhiti:'止啼',
-			olzhiti_info:'锁定技，你攻击范围内已受伤角色的手牌上限-1。若场上已受伤的角色数：不小于1，你的手牌上限+1；不小于3，你于摸牌阶段开始时令额定摸牌数+1；不小于5，回合结束时，你废除一名角色的一个随机装备栏。',
+			olzhiti_info:'锁定技，你攻击范围内已受伤角色的手牌上限-1。若场上已受伤的角色数：不小于1，你的手牌上限+1；不小于3，你于摸牌阶段开始时令额定摸牌数+1；不小于5，回合结束时，你废除一名角色的一个随机器具栏。',
 			shen_caopi:'神曹丕',
 			chuyuan:'储元',
 			chuyuan_info:'一名角色受到伤害后，若你武将牌上「储」的数量小于体力上限，你可以令其摸一张牌。然后其将一张手牌置于你的武将牌上，称为「储」。',
@@ -14072,7 +14072,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			qixian:'七弦',
 			qixian_info:'锁定技，你的手牌上限视为7。',
 			caopi_xingdong:'行动',
-			caopi_xingdong_info:'出牌阶段限一次，你可以将一张【杀】或普通锦囊牌交给一名其他角色，然后该角色选择一项：对除你以外的角色使用此牌并在此牌结算完成后和你各摸一张牌；或跳过下回合的判定阶段和摸牌阶段。',
+			caopi_xingdong_info:'出牌阶段限一次，你可以将一张【冲】或普通策略牌交给一名其他角色，然后该角色选择一项：对除你以外的角色使用此牌并在此牌结算完成后和你各摸一张牌；或跳过下回合的判定阶段和摸牌阶段。',
 			
 			key_kagari:'篝',
 			kagari_zongsi:'纵丝',
@@ -14084,11 +14084,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"new_rejianxiong":"奸雄",
 			"new_rejianxiong_info":"当你受到伤害后，你可以获得对你造成伤害的牌并摸一张牌。",
 			rerende:'仁德',
-			rerende_info:'出牌阶段，你可以将至少一张手牌交给其他角色，然后你于此阶段内不能再以此法交给该角色牌；若你于此阶段内给出的牌首次达到两张，你可以视为使用一张基本牌',
+			rerende_info:'出牌阶段，你可以将至少一张手牌交给其他角色，然后你于此阶段内不能再以此法交给该角色牌；若你于此阶段内给出的牌首次达到两张，你可以视为使用一张行动牌',
 			rezhiheng:'制衡',
 			rezhiheng_info:'出牌阶段限一次，你可以弃置任意张牌并摸等量的牌，若你在发动〖制衡〗时弃置了所有手牌，则你多摸一张牌。',
 			olluanji:'乱击',
-			olluanji_info:'你可以将两张花色相同的手牌当做【万箭齐发】使用。当你使用【万箭齐发】选择目标后，你可以为此牌减少一个目标。',
+			olluanji_info:'你可以将两张花色相同的手牌当做【乱剑穿心】使用。当你使用【乱剑穿心】选择目标后，你可以为此牌减少一个目标。',
 			olluanji_remove:'乱击',
 
 
@@ -14097,11 +14097,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			qiangxi_info:'出牌阶段限一次，你可以失去一点体力或弃置一张武器牌，然后对你攻击范围内的一名其他角色造成一点伤害。',
 			qiangxix_info:'出牌阶段限两次，你可以失去一点体力或弃置一张武器牌，然后一名本阶段内未成为过〖强袭〗的目标的其他角色造成一点伤害。',
 			retieji:'铁骑',
-			retieji_info:'当你使用【杀】指定一名角色为目标后，你可以进行一次判定并令该角色的非锁定技失效直到回合结束，除非该角色弃置一张与判定结果花色相同的牌，否则不能使用【闪】抵消此【杀】。',
+			retieji_info:'当你使用【冲】指定一名角色为目标后，你可以进行一次判定并令该角色的非锁定技失效直到回合结束，除非该角色弃置一张与判定结果花色相同的牌，否则不能使用【守】抵消此【冲】。',
 			rexuanfeng:'旋风',
-			rexuanfeng_info:'当你失去装备区内的牌时，或于弃牌阶段弃置了两张或更多的手牌后，你可以依次弃置一至两名其他角色的共计两张牌，或将一名其他角色装备区内的一张牌移动到另一名其他角色的装备区内。',
+			rexuanfeng_info:'当你失去器具区内的牌时，或于弃牌阶段弃置了两张或更多的手牌后，你可以依次弃置一至两名其他角色的共计两张牌，或将一名其他角色器具区内的一张牌移动到另一名其他角色的器具区内。',
 			wansha:'完杀',
-			wansha_info:'锁定技，你的回合内，除你以外，不处于濒死状态的角色不能使用【桃】。',
+			wansha_info:'锁定技，你的回合内，除你以外，不处于濒死状态的角色不能使用【药】。',
 
 		},
 		get:{

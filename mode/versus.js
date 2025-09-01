@@ -120,13 +120,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				if(lib.character.xiahoudun) lib.character.xiahoudun[3]=['ganglie_three'];
 				if(!get.config('enable_all_cards')){
 					lib.translate.wuzhong_info+='若对方存活角色多于己方，则额外摸一张牌。';
-					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3。';
+					lib.translate.zhuge_info='锁定技，出牌阶段，你使用冲的次数上限+3。';
 					lib.card.list=lib.cardsThree;
 					game.fixedPile=true;
 				}
 				else if (get.config('enable_all_cards')){
 					lib.translate.wuzhong_info+='若对方存活角色多于己方，则额外摸一张牌。';
-					lib.translate.zhuge_info='锁定技，出牌阶段，你使用杀的次数上限+3。';
+					lib.translate.zhuge_info='锁定技，出牌阶段，你使用冲的次数上限+3。';
 				}
 				else if(Array.isArray(lib.config.forbidthreecard)){
 					for(var i=0;i<lib.card.list.length;i++){
@@ -4126,14 +4126,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 
 			wenji:'问计',
 			wenji2:'问计',
-			wenji_info:'队友的出牌阶段开始时，你可令其交给你一张手牌，若此牌为锦囊牌，则非队友角色计算与你的距离+1直到你的下个回合开始',
+			wenji_info:'队友的出牌阶段开始时，你可令其交给你一张手牌，若此牌为策略牌，则非队友角色计算与你的距离+1直到你的下个回合开始',
 			tunjiang:'屯江',
 			tunjiang_info:'结束阶段开始时，若你于本回合的出牌阶段使用过至少两张牌且未造成过伤害，你可以选择一项：1.你摸两张牌；2.队友摸两张牌',
 			xingzhao:'兴棹',
 			xingzhao2:'兴棹',
 			xingzhao3:'兴棹',
 			xingzhao_bg:'棹',
-			xingzhao_info:'锁定技，若你和队友持有的龙船至宝数合计为：1个以上，你具有技能“恂恂”；2个以上，当你或队友使用装备牌时，其摸一张牌；3个以上，你和队友跳过判定阶段',
+			xingzhao_info:'锁定技，若你和队友持有的龙船至宝数合计为：1个以上，你具有技能“恂恂”；2个以上，当你或队友使用器具牌时，其摸一张牌；3个以上，你和队友跳过判定阶段',
 
 			boss_liedixuande:'烈帝玄德',
 			boss_gongshenyueying:'工神月英',
@@ -4158,19 +4158,19 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_didongjg:'地动',
 			boss_didongjg_info:'结束阶段，你可以选择一名敌方角色将其武将牌翻面',
 			boss_mojianjg:'魔箭',
-			boss_mojianjg_info:'出牌阶段开始时，你可以对所有敌方角色使用一张万箭齐发',
+			boss_mojianjg_info:'出牌阶段开始时，你可以对所有敌方角色使用一张乱剑穿心',
 			boss_jiguan:'机关',
-			boss_jiguan_info:'锁定技，你不能成为【乐不思蜀】的目标',
+			boss_jiguan_info:'锁定技，你不能成为【囹圄迷魂】的目标',
 			boss_lingyu:'灵愈',
 			boss_lingyu_info:'结束阶段，你可以将自己的武将牌翻面，然后令所有已受伤的己方其他角色回复1点体力',
 			boss_tianyun:'天陨',
-			boss_tianyun_info:'结束阶段，你可以失去1点体力，然后令一名敌方角色受到2点火焰伤害并弃置其装备区里的所有牌',
+			boss_tianyun_info:'结束阶段，你可以失去1点体力，然后令一名敌方角色受到2点火焰伤害并弃置其器具区里的所有牌',
 			boss_zhenwei:'镇卫',
 			boss_zhenwei_info:'锁定技，其他己方角色的防御距离+1',
 			boss_benlei:'奔雷',
 			boss_benlei_info:'锁定技，准备阶段，对敌方攻城器械造成2点雷电伤害',
 			boss_nailuo:'奈落',
-			boss_nailuo_info:'结束阶段，你可以将你的武将牌翻面，令所有敌方角色弃置装备区内的所有牌',
+			boss_nailuo_info:'结束阶段，你可以将你的武将牌翻面，令所有敌方角色弃置器具区内的所有牌',
 			boss_tanshi:'贪食',
 			boss_tanshi_info:'锁定技，结束阶段开始时，你须弃置一张手牌',
 			boss_tunshi:'吞噬',
@@ -4184,9 +4184,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_gongshenjg:'工神',
 			boss_gongshenjg_info:'结束阶段，若已方器械已受伤，你可以为其回复一点体力；否则你可以对敌方器械造成一点火焰伤害',
 			boss_zhinang:'智囊',
-			boss_zhinang_info:'准备阶段，你可以亮出牌堆顶的三张牌，你可以将其中锦囊或装备牌交给一名己方角色',
+			boss_zhinang_info:'准备阶段，你可以亮出牌堆顶的三张牌，你可以将其中策略或器具牌交给一名己方角色',
 			boss_jingmiao:'精妙',
-			boss_jingmiao_info:'锁定技，每当敌方角色使用的无懈可击生效后，你令其失去1点体力',
+			boss_jingmiao_info:'锁定技，每当敌方角色使用的以策制策生效后，你令其失去1点体力',
 			boss_biantian:'变天',
 			boss_biantian_info:'锁定技，准备阶段，你进行一次判定，若为红色，直到下个回合开始前，令敌方所有角色处于“狂风”状态，若为黑桃，直到下个回合开始前，令己方所有角色处于“大雾”状态',
 			boss_biantian2:'大雾',
@@ -4202,9 +4202,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			boss_chuanyun:'穿云',
 			boss_chuanyun_info:'结束阶段，你可以对体力比你多的一名其他角色造成1点伤害',
 			boss_leili:'雷厉',
-			boss_leili_info:'每当你的[杀]造成伤害后，你可以对另一名敌方角色造成1点雷电伤害',
+			boss_leili_info:'每当你的[冲]造成伤害后，你可以对另一名敌方角色造成1点雷电伤害',
 			boss_fengxing:'风行',
-			boss_fengxing_info:'准备阶段，你可以选择一名敌方角色，若如此做，视为对其使用了一张[杀]',
+			boss_fengxing_info:'准备阶段，你可以选择一名敌方角色，若如此做，视为对其使用了一张[冲]',
 			boss_skonghun:'控魂',
 			boss_skonghun_info:'出牌阶段开始时，若你已损失体力值不小于敌方角色数，你可以对所有敌方角色各造成1点雷电伤害，然后你恢复X点体力（X为受到伤害的角色数）',
 			boss_fanshi:'反噬',
@@ -4220,7 +4220,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			zong:'粽',
 			zong_info:'1. 出牌阶段对自己使用，回复1点体力；2. 自己或队友濒死时对其使用，目标角色回复1点体力',
 			xionghuangjiu:'雄黄酒',
-			xionghuangjiu_info:'1. 出牌阶段对自己使用，本回合使用的下一张【杀】伤害+1；若队友已死亡，改为使本回合使用的下一张牌伤害+1；2. 自己濒死时使用，回复1点体力',
+			xionghuangjiu_info:'1. 出牌阶段对自己使用，本回合使用的下一张【冲】伤害+1；若队友已死亡，改为使本回合使用的下一张牌伤害+1；2. 自己濒死时使用，回复1点体力',
 			tongzhougongji:'同舟共济',
 			tongzhougongji_info:'出牌阶段使用，选择一项：1.摸X张牌（X为你所在势力拥有的龙船至宝数）；2.你和队友各摸一张牌',
 			lizhengshangyou:'力争上游',
@@ -4234,9 +4234,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			liangcaokuifa:'粮草匮乏',
 			liangcaokuifa_info:'锁定技，所有角色摸牌阶段的额定摸牌数-1。当一名角色使用的牌结算完成后，若其因此牌造成了伤害，则其摸一张牌。',
 			zhanyanliangzhuwenchou:'斩颜良诛文丑',
-			zhanyanliangzhuwenchou_info:'锁定技，一名角色的回合开始时，其选择一项：视为使用一张不可被【无懈可击】响应的【决斗】，或失去1点体力。',
+			zhanyanliangzhuwenchou_info:'锁定技，一名角色的回合开始时，其选择一项：视为使用一张不可被【以策制策】响应的【酣战】，或失去1点体力。',
 			shishengshibai:'十胜十败',
-			shishengshibai_info:'锁定技，一名角色使用牌时，若此牌是整局游戏使用的第整十张牌且此牌不为延时锦囊牌或装备牌，则此牌所有目标角色再次成为此牌的目标角色。',
+			shishengshibai_info:'锁定技，一名角色使用牌时，若此牌是整局游戏使用的第整十张牌且此牌不为延时策略牌或器具牌，则此牌所有目标角色再次成为此牌的目标角色。',
 		},
 		skill:{
 			huoshaowuchao:{
@@ -4274,7 +4274,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						isCard:true,
 						storage:{nowuxie:true}
 					},
-					'选择一名角色，视为对其使用【决斗】','或点【取消】失去1点体力');
+					'选择一名角色，视为对其使用【酣战】','或点【取消】失去1点体力');
 					'step 1'
 					if(!result.bool) player.loseHp();
 				},
@@ -4419,7 +4419,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							str='具有技能“恂恂”';
 						}
 						if(num>=2){
-							str+='；当你或队友使用装备牌时，其摸一张牌';
+							str+='；当你或队友使用器具牌时，其摸一张牌';
 						}
 						if(num>=3){
 							str+='；你和队友跳过判定阶段';
@@ -5209,7 +5209,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						event.finish();
 					}
 					else{
-						var dialog=ui.create.dialog('将三张牌中的锦囊牌或装备牌交给一己方名角色','hidden');
+						var dialog=ui.create.dialog('将三张牌中的策略牌或器具牌交给一己方名角色','hidden');
 						dialog.add(event.cards);
 						for(var i=0;i<dialog.buttons.length;i++){
 							if(event.cards2.contains(dialog.buttons[i].link)){

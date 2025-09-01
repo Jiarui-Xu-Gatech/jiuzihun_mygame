@@ -165,21 +165,21 @@
 						intro:'当候选目标只有1个时，点击目标后无需再点击确认',
 					},
 					skip_shan:{
-						name:'无闪自动取消',
+						name:'无守自动取消',
 						init:false,
 						unfrequent:true,
-						intro:'当自己需要使用或打出闪时，若自己没有闪，则跳过该步骤',
+						intro:'当自己需要使用或打出守时，若自己没有守，则跳过该步骤',
 					},
 					wuxie_self:{
-						name:'不无懈自己',
+						name:'不制策自己',
 						init:true,
 						unfrequent:true,
-						intro:'自己使用的单目标普通锦囊即将生效时，不询问无懈',
+						intro:'自己使用的单目标普通策略即将生效时，不询问制策',
 					},
 					tao_enemy:{
-						name:'不对敌方出桃',
+						name:'不对敌方出药',
 						init:false,
-						intro:'双方阵营明确的模式中（如对决），敌方角色濒死时不询问出桃',
+						intro:'双方阵营明确的模式中（如对决），敌方角色濒死时不询问出药',
 						unfrequent:true,
 					},
 					enable_drag:{
@@ -2618,7 +2618,7 @@
 						}
 					},
 					textequip:{
-						name:'装备显示',
+						name:'器具显示',
 						init:'image',
 						unfrequent:true,
 						item:{
@@ -2699,7 +2699,7 @@
 					},
 					cardtext_font:{
 						name:'卡牌字体',
-						init:'default',
+						init:'xingkai',//'default',
 						unfrequent:true,
 						item:{},
 						textMenu:function(node,link){
@@ -3092,14 +3092,14 @@
 						unfrequent:true,
 					},
 					hide_card_prompt_basic:{
-						name:'隐藏基本牌信息',
-						intro:'不显示基本牌名称',
+						name:'隐藏行动牌信息',
+						intro:'不显示行动牌名称',
 						init:false,
 						unfrequent:true,
 					},
 					hide_card_prompt_equip:{
-						name:'隐藏装备牌信息',
-						intro:'不显示装备牌名称',
+						name:'隐藏器具牌信息',
+						intro:'不显示器具牌名称',
 						init:false,
 						unfrequent:true,
 					},
@@ -3182,7 +3182,7 @@
 					transparent_dialog:{
 						name:'堆叠对话框虚化',
 						init:false,
-						intro:'当具有static属性的对话框堆叠（如五谷丰登对话框中提示无懈可击）时，将后方的对话框变为半透明',
+						intro:'当具有static属性的对话框堆叠（如饕餮盛宴对话框中提示以策制策）时，将后方的对话框变为半透明',
 						onclick:function(bool){
 							game.saveConfig('transparent_dialog',bool);
 							if(bool){
@@ -3235,8 +3235,8 @@
 						unfrequent:true
 					},
 					popequip:{
-						name:'触屏装备选择',
-						intro:'设置触屏布局中选择装备的方式',
+						name:'触屏器具选择',
+						intro:'设置触屏布局中选择器具的方式',
 						init:true,
 						unfrequent:true,
 					},
@@ -3432,8 +3432,8 @@
 						}
 					},
 					show_wuxie:{
-						name:'显示无懈按钮',
-						intro:'在右上角显示不询问无懈',
+						name:'显示制策按钮',
+						intro:'在右上角显示不询问制策',
 						init:false,
 						unfrequent:true,
 						onclick:function(bool){
@@ -3447,7 +3447,7 @@
 						}
 					},
 					wuxie_right:{
-						name:'无懈按钮靠左',
+						name:'制策按钮靠左',
 						init:true,
 						unfrequent:true,
 					},
@@ -3472,6 +3472,11 @@
 				name:'音效',
 				config:{
 					update:function(config,map){
+						//隐藏器具配音
+						if(map.equip_audio){
+							map.equip_audio.hide();
+						}
+
 						if(lib.config.background_music=='music_custom'&&(lib.device||lib.node)){
 							map.import_music.show();
 						}
@@ -3515,7 +3520,7 @@
 						init:true,
 					},
 					equip_audio:{
-						name:'装备配音',
+						name:'器具配音',
 						init:false,
 					},
 					repeat_audio:{
@@ -3853,12 +3858,12 @@
 					restart:true,
 				},
 				intro:{
-					name:'将杀闪等牌在牌堆中的比例维持在与军争牌堆相同，防止开启扩展包后被过多地稀释',
+					name:'将冲守等牌在牌堆中的比例维持在与军争牌堆相同，防止开启扩展包后被过多地稀释',
 					clear:true,
 					nopointer:true,
 				},
 				sha:{
-					name:'杀',
+					name:'冲',
 					init:'1',
 					item:{
 						'1':'补充全部',
@@ -3867,7 +3872,7 @@
 					}
 				},
 				huosha:{
-					name:'火杀',
+					name:'火冲',
 					init:'1',
 					item:{
 						'1':'补充全部',
@@ -3876,7 +3881,7 @@
 					}
 				},
 				leisha:{
-					name:'雷杀',
+					name:'雷冲',
 					init:'1',
 					item:{
 						'1':'补充全部',
@@ -3885,7 +3890,7 @@
 					}
 				},
 				shan:{
-					name:'闪',
+					name:'守',
 					init:'1',
 					item:{
 						'1':'补充全部',
@@ -3894,7 +3899,7 @@
 					}
 				},
 				tao:{
-					name:'桃',
+					name:'药',
 					init:'0',
 					item:{
 						'1':'补充全部',
@@ -3912,7 +3917,7 @@
 					}
 				},
 				wuxie:{
-					name:'无懈可击',
+					name:'以策制策',
 					init:'0.5',
 					item:{
 						'1':'补充全部',
@@ -3921,7 +3926,7 @@
 					}
 				},
 				nanman:{
-					name:'南蛮入侵',
+					name:'红莲醉舞',
 					init:'0',
 					item:{
 						'1':'补充全部',
@@ -3930,7 +3935,7 @@
 					}
 				},
 				wanjian:{
-					name:'万箭齐发',
+					name:'乱剑穿心',
 					init:'0',
 					item:{
 						'1':'补充全部',
@@ -3939,7 +3944,7 @@
 					}
 				},
 				guohe:{
-					name:'过河拆桥',
+					name:'玉石同碎',
 					init:'0',
 					item:{
 						'1':'补充全部',
@@ -3948,7 +3953,7 @@
 					}
 				},
 				shunshou:{
-					name:'顺手牵羊',
+					name:'盗亦有道',
 					init:'0',
 					item:{
 						'1':'补充全部',
@@ -3957,7 +3962,7 @@
 					}
 				},
 				tiesuo:{
-					name:'铁索连环',
+					name:'锁心连环',
 					init:'0',
 					item:{
 						'1':'补充全部',
@@ -4746,7 +4751,7 @@
 					connect_aozhan:{
 						name:'鏖战模式',
 						init:true,
-						intro:'若开启此选项，则将在游戏中引入“鏖战模式”的规则：<br>当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。<br>◇在鏖战模式下，【桃】只能当做【杀】或【闪】使用或打出，不能用来回复体力。<br>注：进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。',
+						intro:'若开启此选项，则将在游戏中引入“鏖战模式”的规则：<br>当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。<br>◇在鏖战模式下，【药】只能当做【冲】或【守】使用或打出，不能用来回复体力。<br>注：进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。',
 						frequent:true,
 						restart:true,
 					},
@@ -4848,7 +4853,7 @@
 						init:true,
 						frequent:true,
 						restart:true,
-						intro:'若开启此选项，则将在游戏中引入“鏖战模式”的规则：<br>当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。<br>◇在鏖战模式下，【桃】只能当做【杀】或【闪】使用或打出，不能用来回复体力。<br>注：进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。',
+						intro:'若开启此选项，则将在游戏中引入“鏖战模式”的规则：<br>当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。<br>◇在鏖战模式下，【药】只能当做【冲】或【守】使用或打出，不能用来回复体力。<br>注：进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。',
 					},
 					viewnext:{
 						name:'观看下家副将',
@@ -6253,24 +6258,24 @@
 		},
 		help:{
 			'游戏操作':'<ul><li>长按/鼠标悬停/右键单击显示信息<li>手牌过多超出屏幕时，可以滑动鼠标滚轮，使手牌向左/右划动，从而浏览所有手牌<li>触屏模式中，双指点击切换暂停；下划显示菜单，上划切换托管<li>键盘快捷键<br>'+
-			'<table><tr><td>A<td>切换托管<tr><td>W<td>切换不询问无懈<tr><td>空格<td>暂停</table><li>编辑牌堆<br>在卡牌包中修改牌堆后，将自动创建一个临时牌堆，在所有模式中共用，当保存当前牌堆后，临时牌堆被清除。每个模式可设置不同的已保存牌堆，设置的牌堆优先级大于临时牌堆</ul>',
+			'<table><tr><td>A<td>切换托管<tr><td>W<td>切换不询问制策<tr><td>空格<td>暂停</table><li>编辑牌堆<br>在卡牌包中修改牌堆后，将自动创建一个临时牌堆，在所有模式中共用，当保存当前牌堆后，临时牌堆被清除。每个模式可设置不同的已保存牌堆，设置的牌堆优先级大于临时牌堆</ul>',
 			// '游戏命令':'<div style="margin:10px">变量名</div><ul style="margin-top:0"><li>场上角色<br>game.players<li>阵亡角色<br>game.dead'+
 			// '<li>玩家<br>game.me<li>玩家的上/下家<br>game.me.previous/next'+
 			// '<li>玩家的上/下家（含阵亡）<br>game.me.previousSeat/<br>nextSeat'+
 			// '<li>牌堆<br>ui.cardPile<li>弃牌堆<br>ui.discardPile</ul>'+
 			// '<div style="margin:10px">角色属性</div><ul style="margin-top:0"><li>体力值<br>player.hp'+
-			// '<li>体力上限<br>player.maxHp<li>身份<br>player.identity<li>手牌<br>player.getCards("h")<li>装备牌<br>player.getCards("e")<li>判定牌<br>player.getCards("j")'+
+			// '<li>体力上限<br>player.maxHp<li>身份<br>player.identity<li>手牌<br>player.getCards("h")<li>器具牌<br>player.getCards("e")<li>判定牌<br>player.getCards("j")'+
 			// '<li>是否存活/横置/翻面<br>player.isAlive()/<br>isLinked()/<br>isTurnedOver()</ul>'+
 			// '<div style="margin:10px">角色操作</div><ul style="margin-top:0"><li>受到伤害<br>player.damage(source,<br>num)'+
 			// '<li>回复体力<br>player.recover(num)<li>摸牌<br>player.draw(num)<li>获得牌<br>player.gain(cards)<li>弃牌<br>player.discard(cards)'+
 			// '<li>使用卡牌<br>player.useCard(card,<br>targets)<li>死亡<br>player.die()<li>复活<br>player.revive(hp)</ul>'+
 			// '<div style="margin:10px">游戏操作</div><ul style="margin-top:0"><li>在命令框中输出结果<br>game.print(str)<li>清除命令框中的内容<br>cls<li>上一条/下一条输入的内容<br>up/down<li>游戏结束<br>game.over(bool)'+
 			// '<li>角色资料<br>lib.character<li>卡牌资料<br>lib.card</ul>',
-			'游戏名词':'<ul><li>使用:【杀】、【酒】、【桃】、锦囊牌、装备牌，和用【闪】响应【杀】时是使用牌。'+
-			'<li>打出:响应【万箭齐发】、【南蛮入侵】、【决斗】等时为打出牌。'+
-			'<li>注意区分打出牌和使用牌的区别：每名角色每回合限制使用一张【杀】和【酒】，是使用牌，而非打出牌，打出牌的数量没有限制。'
+			'游戏名词':'<ul><li>使用:【冲】、【酒】、【药】、策略牌、器具牌，和用【守】响应【冲】时是使用牌。'+
+			'<li>打出:响应【乱剑穿心】、【红莲醉舞】、【酣战】等时为打出牌。'+
+			'<li>注意区分打出牌和使用牌的区别：每名角色每回合限制使用一张【冲】和【酒】，是使用牌，而非打出牌，打出牌的数量没有限制。'
 			// '<li>护甲：和体力类似，每点护甲可抵挡一点伤害，但不影响手牌上限'+
-			// '<li>随从：通过技能获得，拥有独立的技能、手牌区和装备区（共享判定区），出场时替代主武将的位置；随从死亡时自动切换回主武将'+
+			// '<li>随从：通过技能获得，拥有独立的技能、手牌区和器具区（共享判定区），出场时替代主武将的位置；随从死亡时自动切换回主武将'+
 			// '<li>发现：从三张随机亮出的牌中选择一张，若无特殊说明，则获得此牌'+
 			// '<li>蓄力技：发动时可以增大黄色的数字。若如此做，红色数字于技能的结算过程中改为原来的两倍'
 		},
@@ -9516,11 +9521,11 @@
 							num[lib.card.list[i][1]]++;
 						}
 					}
-					var str='基本牌'+aa+'； '+'锦囊牌'+bb+'； '+'装备牌'+cc+'； '+'其它牌'+dd
+					var str='行动牌'+aa+'； '+'策略牌'+bb+'； '+'器具牌'+cc+'； '+'其它牌'+dd
 					console.log(str);
 					str='红桃牌'+sa+'； '+'方片牌'+sb+'； '+'梅花牌'+sc+'； '+'黑桃牌'+sd
 					console.log(str);
-					str='杀'+sha+'； '+'黑杀'+heisha+'； '+'红杀'+hongsha+'； '+'闪'+shan+'； '+'桃'+tao+'； '+'酒'+jiu+'； '+'无懈'+wuxie
+					str='冲'+sha+'； '+'黑冲'+heisha+'； '+'红冲'+hongsha+'； '+'守'+shan+'； '+'药'+tao+'； '+'酒'+jiu+'； '+'制策'+wuxie
 					console.log(str);
 					if(arguments[1]){
 						for(var i=1;i<=13;i++){
@@ -9926,16 +9931,16 @@
 			shenColor:"#ffe14c",
 			westernColor:"#ffe14c",
 			keyColor:"#c9b1fd",
-			basic:'基本',
-			equip:'装备',
-			trick:'锦囊',
-			delay:'延时锦囊',
+			basic:'行动',
+			equip:'器具',
+			trick:'策略',
+			delay:'延迟策略',
 			character:'角色',
 			revive:'复活',
 			equip1:'武器',
 			equip2:'防具',
-			equip3:'防御马',
-			equip4:'攻击马',
+			equip3:'防御坐骑',
+			equip4:'攻击坐骑',
 			equip5:'宝物',
 			zero:'零',
 			one:'一',
@@ -9951,7 +9956,7 @@
 			_chongzhu:'重铸',
 			_lianhuan:'连环',
 			_lianhuan2:'连环',
-			_kamisha:'神杀',
+			_kamisha:'神冲',
 			qianxing:'潜行',
 			mianyi:'免疫',
 			fengyin:'封印',
@@ -10289,7 +10294,7 @@
 					else{
 						event.list=list;
 						var next=player.chooseControl(list);
-						next.set('prompt','请选择恢复一个装备栏');
+						next.set('prompt','请选择恢复一个器具栏');
 						if(!event.ai) event.ai=function(event,player,list){
 							return list.randomGet();
 						}
@@ -10315,7 +10320,7 @@
 					else{
 						event.list=list;
 						var next=player.chooseControl(list);
-						next.set('prompt','请选择废除一个装备栏');
+						next.set('prompt','请选择废除一个器具栏');
 						if(!event.ai) event.ai=function(event,player,list){
 							return list.randomGet();
 						}
@@ -10334,7 +10339,7 @@
 				},
 				swapEquip:function(){
 					"step 0"
-					game.log(player,'和',target,'交换了装备区中的牌')
+					game.log(player,'和',target,'交换了器具区中的牌')
 					var e1=player.getCards('e');
 					var todis1=[];
 					for(var i=0;i<e1.length;i++){
@@ -12000,7 +12005,7 @@
 									else str+=get.cnNumber(range[0])+'至'+get.cnNumber(range[1]);
 									str+='张';
 									if(event.position=='h'||event.position==undefined) str+='手';
-									if(event.position=='e') str+='装备';
+									if(event.position=='e') str+='器具';
 									str+='牌';
 								}
 								event.dialog=ui.create.dialog(str);
@@ -12742,7 +12747,7 @@
 									else str+=get.cnNumber(range[0])+'至'+get.cnNumber(range[1]);
 									str+='张';
 									if(event.position=='h'||event.position==undefined) str+='手';
-									if(event.position=='e') str+='装备';
+									if(event.position=='e') str+='器具';
 									str+='牌';
 								}
 								event.dialog=ui.create.dialog(str);
@@ -13255,7 +13260,7 @@
 						else if(event.position[i]=='e'){
 							var es=target.getCards('e');
 							if(es.length){
-								event.dialog.addText('装备区');
+								event.dialog.addText('器具区');
 								event.dialog.add(es);
 								directh=false;
 							}
@@ -13344,7 +13349,7 @@
 						else str+=get.cnNumber(range[0])+'至'+get.cnNumber(range[1]);
 						str+='张';
 						if(event.position=='h'||event.position==undefined) str+='手';
-						if(event.position=='e') str+='装备';
+						if(event.position=='e') str+='器具';
 						str+='牌';
 						event.prompt=str;
 					}
@@ -13373,7 +13378,7 @@
 						else if(event.position[i]=='e'){
 							var es=target.getDiscardableCards(player,'e');
 							if(es.length){
-								event.dialog.addText('装备区');
+								event.dialog.addText('器具区');
 								event.dialog.add(es);
 								directh=false;
 							}
@@ -13489,7 +13494,7 @@
 						else str+=get.cnNumber(range[0])+'至'+get.cnNumber(range[1]);
 						str+='张';
 						if(event.position=='h'||event.position==undefined) str+='手';
-						if(event.position=='e') str+='装备';
+						if(event.position=='e') str+='器具';
 						str+='牌';
 						event.prompt=str;
 					}
@@ -13518,7 +13523,7 @@
 						else if(event.position[i]=='e'){
 							var es=target.getGainableCards(player,'e');
 							if(es.length){
-								event.dialog.addText('装备区');
+								event.dialog.addText('器具区');
 								event.dialog.add(es);
 								directh=false;
 							}
@@ -13883,7 +13888,12 @@
 							cardaudio=false;
 						}
 						if(lib.skill[event.skill].log!=false){
-							player.logSkill(event.skill);
+							if (!get.info(event.skill).skillPopupColor){
+								player.logSkill(event.skill);
+							}
+							else{
+								player.logSkillColor(event.skill,undefined,false,get.info(event.skill).skillPopupColor,false,false);
+							}
 						}
 						if(get.info(event.skill).popname){
 							player.tryCardAnimate(card,event.card.name,'metal',true);
@@ -14384,7 +14394,12 @@
 					if(!info.direct){
 						game.log(player,str,'【'+get.skillTranslation(skill,player)+'】');
 						if(info.logv!==false) game.logv(player,skill,targets);
-						player.trySkillAnimate(skill,skill,checkShow);
+						if (!info.skillPopupColor){
+							player.trySkillAnimate(skill,skill,checkShow);
+						}
+						else{
+							player.trySkillAnimateColor(skill,skill,info.skillPopupColor,checkShow);
+						}	
 					}
 					if(event.addCount!=false){
 						if(player.stat[player.stat.length-1].skill[skill]==undefined){
@@ -15686,7 +15701,20 @@
 							event.node=card.copy('thrown','center',ui.arena).animate('start');
 						}
 						else{
-							event.node=player.$throwordered(card.copy(),true);
+							// var newcard = card.copy();
+							// console.log(newcard.innerHTML)
+							// console.log(newcard.innerHTML.style)
+							// if (newcard.childNodes){
+							// 	for (var i in newcard.childNodes){
+							// 		console.log(i);
+							// 		console.log(newcard.childNodes[i])
+							// 		if (newcard.childNodes[i].style){
+							// 			newcard.childNodes[i].style.transform = newcard.childNodes[i].style.transform + "rotateY(180deg)";
+							// 		}
+							// 	}
+							// }
+							// event.node=player.$throwordered_judge(newcard,true);
+							event.node=player.$throwordered_judge(card.copy(),true);
 						}
 						if(lib.cardOL) lib.cardOL[cardid]=event.node;
 						event.node.cardid=cardid;
@@ -22602,7 +22630,147 @@
 					lib.listenEnd(node);
 					return node;
 				},
-				$throwordered2:function(node,nosource){
+				$throwordered_judge: function(node, nosource, norotate) {
+					node.classList.add('thrown');
+					node.classList.add('center');
+					node.hide();
+
+					// 更明确地控制过渡：transform 用 0.3s，left/top/opacity 也给个相同节奏
+					node.style.transition = 'transform 0.7s ease, opacity 1.4s ease, left 0.1s ease, top 0.1s ease';
+					// node.style.transitionProperty = 'left,top,opacity,transform';
+
+					if (nosource) {
+						// 保持原样（你原代码这里是注释掉的）
+					} else {
+						// 如果用户明确要求不旋转(norotate === true)，保留原有的 translate 逻辑
+						if (norotate == true) {
+							// ---- 原来的 translate 逻辑（复制你原代码的 dx/dy 计算并应用） ----
+							var nx = [50, -52];
+							var ny = [50, -52];
+							nx = nx[0] * ui.arena.offsetWidth / 100 + nx[1];
+							ny = ny[0] * ui.arena.offsetHeight / 100 + ny[1];
+							var dx, dy;
+							if (game.chess) {
+								var rect = this.getBoundingClientRect();
+								dx = rect.left + this.offsetWidth / 2 - 52 - nx;
+								dy = rect.top + this.offsetHeight / 2 - 52 - ny;
+							} else {
+								dx = this.getLeft() + this.offsetWidth / 2 - 52 - nx;
+								dy = this.getTop() + this.offsetHeight / 2 - 52 - ny;
+								if (get.is.mobileMe(this)) {
+									dx += get.cardOffset();
+									if (ui.arena.classList.contains('oblongcard')) {
+										dy -= 16;
+									}
+								}
+							}
+							if (node.style.transform && node.style.transform != 'none' && node.style.transform.indexOf('translate') == -1) {
+								node.style.transform += ' translate(' + dx + 'px,' + dy + 'px)';
+							} else {
+								node.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+							}
+							// ---- end 原 translate ----
+						} else {
+							// NOROTATE 未显式为 true -> 我们要做“单纯快速旋转”：
+							// 先把初始样式设置成翻面（背面朝向），没有位移
+							// var originTransform2 = node.style.transform || '';
+							// node.style.transform = ('perspective(800px) ' + originTransform2 + ' rotateY(0deg)').trim();
+							node.style.transform = 'perspective(800px) rotateY(180deg)';
+							// 不在这里做 show/animate —— 因为函数后面会把所有 thrown 元素统一设置 translate，
+							// 那会覆盖 transform，所以我们会在“分组摆位”之后再触发真正的旋转动画（见下文）。
+						}
+					}
+
+					ui.arena.appendChild(node);
+					ui.refresh(node);
+
+					// 清理 ui.thrown 数组里已失效的项，然后 push 新节点
+					for (var i = 0; i < ui.thrown.length; i++) {
+						if (ui.thrown[i].parentNode != ui.arena || ui.thrown[i].classList.contains('removing')) {
+							ui.thrown.splice(i--, 1);
+						}
+					}
+					ui.thrown.push(node);
+
+					// 下面这段是你原有的“按 4 分组排列”逻辑 —— 它会设置每个 throwns 的 transform（通常是 translate(...)）
+					var uithrowns = ui.thrown.slice(0);
+					var tops;
+					switch (Math.floor((ui.thrown.length - 1) / 4)) {
+						case 0:
+							tops = [0];
+							break;
+						case 1:
+							tops = [-57, 57];
+							break;
+						case 2:
+							tops = [-114, 0, 114];
+							break;
+						default:
+							tops = [-171, -57, 57, 171];
+					}
+					while (uithrowns.length) {
+						var throwns = uithrowns.splice(0, Math.min(uithrowns.length, 4));
+						switch (throwns.length) {
+							case 1:
+								throwns[0]._transthrown = 'translate(0px,';
+								break;
+							case 2:
+								throwns[0]._transthrown = 'translate(-57px,';
+								throwns[1]._transthrown = 'translate(57px,';
+								break;
+							case 3:
+								throwns[0]._transthrown = 'translate(-114px,';
+								throwns[1]._transthrown = 'translate(0,';
+								throwns[2]._transthrown = 'translate(114px,';
+								break;
+							case 4:
+								throwns[0]._transthrown = 'translate(-171px,';
+								throwns[1]._transthrown = 'translate(-57px,';
+								throwns[2]._transthrown = 'translate(57px,';
+								throwns[3]._transthrown = 'translate(171px,';
+								break;
+						}
+						var top;
+						if (tops.length) {
+							top = tops.shift();
+						} else {
+							top = 0;
+						}
+						if (game.chess) top -= 30;
+						for (var i = 0; i < throwns.length; i++) {
+							// 这里会把 transform 设为 translate(..., toppx)
+							throwns[i].style.transform = throwns[i]._transthrown + top + 'px)';
+							delete throwns[i]._transthrown;
+						}
+					}
+
+					// 到这里所有 thrown 元素都已有最终的 translate(...)（如果它们该有的话）
+					// 如果我们想做单纯旋转（norotate !== true），需要在“最终 transform”基础上再做一次快速 rotateY 动画。
+					if (norotate != true) {
+						// 取当前 transform（通常是 translate(...)，或我们之前设置的 rotateY(180deg)）
+						var final = node.style.transform || '';
+						// 移除可能已有的 rotateY(...)（避免重复），仅保留 translate(...) 等
+						final = final.replace(/rotateY\([^)]*\)/g, '').trim();
+						if (final === '' || final === 'none') final = '';
+						// 在 transform 前面插入 perspective，防止翻转看起来扁平
+						var base = ('perspective(1200px) ' + final).trim();
+
+						// 先把元素瞬间放到“最终位移 + 翻面（180deg）”的初始状态
+						node.style.transform = (base + ' rotateY(360deg)').trim();
+
+						// 强制回流，确保浏览器把上面的初始样式应用（等同于 ui.refresh 的效果）
+						void node.offsetWidth;
+
+						// 触发到“最终位移 + 正面（0deg）”的过渡 — 这将以 0.3s 完成旋转
+						// node.style.transform = (base + ' rotateY(0deg)').trim();
+
+					}
+
+					node.show();
+					lib.listenEnd(node);
+					return node;
+				},
+				$throwordered2:function(node,nosource,norotate){
 					node.classList.add('thrown');
 					node.classList.add('center');
 					node.hide();
@@ -23784,7 +23952,13 @@
 								this.node.image.setBackgroundImage('image/mode/'+lib.card[bg].modeimage+'/card/'+bg+'.png');
 							}
 							else{
-								this.node.image.setBackgroundImage('image/card/'+bg+'.png');
+								if (bg == 'sha' && (card[3]=='fire'||card[3]=='thunder')){
+									this.node.image.setBackgroundImage('image/card/'+card[3]+bg+'.png');
+								}
+								else{
+									this.node.image.setBackgroundImage('image/card/'+bg+'.png');
+								}
+								
 							}
 						}
 					}
@@ -23946,6 +24120,9 @@
 					}
 					for(var i=0;i<name.length;i++){
 						this.node.name.innerHTML+=name[i]+'<br/>';
+					}
+					if(lib.config.cardtext_font == 'xingkai'){  
+						this.node.name.style.fontSize = '20px';  
 					}
 					if(name.length>=5){
 						this.node.name.classList.add('long');
@@ -25624,7 +25801,7 @@
 						viewAsFilter:function (player){
 							if(!player.countCards('h','tao')) return false;
 						},
-						prompt:"将一张桃当杀使用或打出",
+						prompt:"将一张药当冲使用或打出",
 						check:function (){return 1},
 						ai:{
 							effect:{
@@ -25650,7 +25827,7 @@
 						viewAs:{
 							name:"shan",
 						},
-						prompt:"将一张桃当闪打出",
+						prompt:"将一张药当守打出",
 						check:function (){return 1},
 						viewAsFilter:function (player){
 							if(!player.countCards('h','tao')) return false;
@@ -27440,7 +27617,7 @@
 								uiintro.add('鏖战模式');
 								var list=[
 									'当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。',
-									'在鏖战模式下，任何角色均不是非转化的【桃】的合法目标。【桃】可以被当做【杀】或【闪】使用或打出。',
+									'在鏖战模式下，任何角色均不是非转化的【药】的合法目标。【药】可以被当做【冲】或【守】使用或打出。',
 									'进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。'
 								];
 								var intro='<ul style="text-align:left;margin-top:0;width:450px">';
@@ -30632,7 +30809,7 @@
 						judging.copy('thrown','center','thrownhighlight',ui.arena).animate('start');
 					}
 					else{
-						player.$throwordered(judging.copy('thrownhighlight'),true);
+						player.$throwordered_judge(judging.copy('thrownhighlight'),true);
 					}
 					var dialogUI = ui.create.dialog(content[1]);
 					dialogUI.videoId=content[2];
@@ -39968,8 +40145,8 @@
 									var cname=lib.cardPack[lib.config.cards[i]][j];
 									pileaddlist.push([cname,get.translation(cname)]);
 									if(cname=='sha'){
-										pileaddlist.push(['huosha','火杀']);
-										pileaddlist.push(['leisha','雷杀']);
+										pileaddlist.push(['huosha','火冲']);
+										pileaddlist.push(['leisha','雷冲']);
 									}
 								}
 							}
@@ -45807,7 +45984,7 @@
 				ui.cardPileButton=ui.create.system('牌堆',null,true);
 				ui.cardPileButton.style.display='none';
 				lib.setPopped(ui.cardPileButton,ui.click.cardPileButton,220);
-				ui.wuxie=ui.create.system('不询问无懈',ui.click.wuxie,true);
+				ui.wuxie=ui.create.system('不询问制策',ui.click.wuxie,true);
 				if(!lib.config.touchscreen){
 					lib.setPopped(ui.config2,ui.click.pauseconfig,170);
 				}
@@ -52630,7 +52807,7 @@
 				else{
 					str2=get.translation(str.name);
 				}
-				if(str2=='杀'){
+				if(str2=='冲'){
 					if(str.nature=='fire'){
 						str2='火'+str2;
 					}
@@ -53685,7 +53862,7 @@
 						uiintro.addSmall(storage.hs);
 					}
 					if(storage.es.length){
-						uiintro.addText('装备区');
+						uiintro.addText('器具区');
 						uiintro.addSmall(storage.es);
 					}
 				}
@@ -53870,10 +54047,10 @@
 							}
 							if(lib.card[name].unique&&lib.card[name].type=='equip'){
 								if(lib.cardPile.guozhan&&lib.cardPack.guozhan.contains(name)){
-									uiintro.add('<div class="text center">专属装备</div>').style.marginTop='-5px';
+									uiintro.add('<div class="text center">专属器具</div>').style.marginTop='-5px';
 								}
 								else{
-									uiintro.add('<div class="text center">特殊装备</div>').style.marginTop='-5px';
+									uiintro.add('<div class="text center">特殊器具</div>').style.marginTop='-5px';
 								}
 							}
 						}
@@ -54118,7 +54295,7 @@
 			}
 			else if(node.classList.contains('equips')&&ui.arena.classList.contains('selecting')){
 				(function(){
-					uiintro.add('选择装备');
+					uiintro.add('选择器具');
 					uiintro.addSmall(Array.from(node.childNodes),true);
 					uiintro.clickintro=true;
 					ui.control.hide();

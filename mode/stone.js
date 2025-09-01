@@ -4451,7 +4451,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					'step 0'
 					if(player.countCards('e')){
-						player.chooseToDiscard('e','是否弃置一张装备区内的牌令伤害+1？').ai=function(card){
+						player.chooseToDiscard('e','是否弃置一张器具区内的牌令伤害+1？').ai=function(card){
 							return 7-get.value(card);
 						}
 					}
@@ -6282,7 +6282,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					"step 0"
 					event.chooser=player.getLeader();
-					event.chooser.chooseToDiscard('是否弃置一张装备牌令'+get.translation(player)+'摸三张牌？',
+					event.chooser.chooseToDiscard('是否弃置一张器具牌令'+get.translation(player)+'摸三张牌？',
 					'he',function(card){
 						return get.type(card)=='equip';
 					}).ai=function(card){
@@ -7377,7 +7377,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						ai2:function(target){
 							return get.damageEffect(target,player,player);
 						},
-						prompt:'偷袭：弃置一张装备区内的牌并对一名敌方角色一点伤害'
+						prompt:'偷袭：弃置一张器具区内的牌并对一名敌方角色一点伤害'
 					});
 					player.line(event.chooser);
 					"step 1"
@@ -8757,7 +8757,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				content:function(){
 					"step 0"
 					event.chooser=player.getLeader();
-					event.chooser.chooseTarget('暗影：选择敌方一名角色视为对其使用一张杀',function(card,player,target){
+					event.chooser.chooseTarget('暗影：选择敌方一名角色视为对其使用一张冲',function(card,player,target){
 						return lib.filter.targetEnabled({name:'sha'},event.chooser,target);
 					}).ai=function(target){
 						return get.effect(target,{name:'sha'},event.chooser);
@@ -9526,7 +9526,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			stone_zibao_info:'结合结束后立即死亡',
 
 			spell_cigu:'刺骨',
-			spell_cigu_info:'造成一点伤害，你可以弃置一张装备区内的牌令伤害+1',
+			spell_cigu_info:'造成一点伤害，你可以弃置一张器具区内的牌令伤害+1',
 			spell_jianrenluanwu:'剑刃乱舞',
 			spell_jianrenluanwu_info:'弃置你的武器牌，并对所有敌方角色造成一点伤害',
 			spell_daoshan:'刀扇',
@@ -9541,7 +9541,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			spell_mengun:'闷棍',
 			spell_mengun_info:'令一名敌方随从死亡（不触发死亡技能），将一张该随从的复制置入对手的手牌',
 			spell_anzhongpohuai:'暗中破坏',
-			spell_anzhongpohuai_info:'随机杀死一名敌方随从，随机弃置敌方的一张装备牌',
+			spell_anzhongpohuai_info:'随机杀死一名敌方随从，随机弃置敌方的一张器具牌',
 			spell_beici:'背刺',
 			spell_beici_info:'令一名未受伤的随从流失一点体力',
 			spell_weijisifu:'危机四伏',
@@ -9657,7 +9657,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 
 			stone_mianyang:'绵羊',
 			mage_mianyang:'绵羊',
-			mage_mianyang_info:'锁定技，你不能使用杀',
+			mage_mianyang_info:'锁定技，你不能使用冲',
 
 			stone_beijunmushi:'北郡牧师',
 			stone_guangyaozhizi:'光耀之子',
@@ -9723,7 +9723,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			rogue_jielue:'劫掠',
 			rogue_jielue_info:'每当己方主将装备一把武器牌，摸两张牌',
 			rogue_jiaoyi:'交易',
-			rogue_jiaoyi_info:'你出场时，己方主将可以弃置一张装备牌令你摸三张牌',
+			rogue_jiaoyi_info:'你出场时，己方主将可以弃置一张器具牌令你摸三张牌',
 
 			rogue_touqie:'偷窃',
 			rogue_touqie_info:'每当你造成一次伤害，己方主将从牌库中获得一张牌',
@@ -9732,7 +9732,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			rogue_cisha:'刺杀',
 			rogue_cisha_info:'每当你对一名随从造成伤害，受伤害随从立即死亡',
 			rogue_touxi:'偷袭',
-			rogue_touxi_info:'你出场时，己方主将可弃置一张装备区内的牌并对一名敌方角色造成一点伤害',
+			rogue_touxi_info:'你出场时，己方主将可弃置一张器具区内的牌并对一名敌方角色造成一点伤害',
 			rogue_qiancang:'潜藏',
 			rogue_qiancang_info:'你出场时，对所有未受伤害的敌方随从造成一点伤害',
 			rogue_zhaomu:'结伙',
@@ -9880,7 +9880,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			mage_yufa:'驭法',
 			mage_yufa_info:'每当己方主将使用一次职业技能，令其获得一点行动值',
 			mage_yanshu:'炎术',
-			mage_yanshu_info:'你出场时，造成X点火焰伤害，随机分配到敌方随从上，X为己方主将装备区内装备牌的数量',
+			mage_yanshu_info:'你出场时，造成X点火焰伤害，随机分配到敌方随从上，X为己方主将器具区内器具牌的数量',
 			mage_pingxu:'冯虚',
 			mage_pingxu_info:'你出场时，己方主将从三张随机法术牌中选择一张加入手牌',
 
@@ -9951,7 +9951,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			druid_renya:'刃牙',
 			druid_renya_info:'你出场时，己方主将可以选择一项：令你摸一张牌并将武将牌翻至正面，或令你增加一点体力上限并获得技能潜行',
 			druid_yuehuo:'月火',
-			druid_yuehuo_info:'所有锦囊牌造成的伤害+1',
+			druid_yuehuo_info:'所有策略牌造成的伤害+1',
 			druid_qicheng:'骑乘',
 			druid_qicheng_info:'你死亡时，随机召唤一个行动消耗为1的随从',
 			druid_chicheng:'驰骋',
@@ -10031,13 +10031,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			_warlock_skillx:'炼狱',
 			_warlock_skillx_info:'召唤一个地狱火',
 			_rogue_skill:'出鞘',
-			_rogue_skill_info:'装备一把武器和一个随机非武器装备',
+			_rogue_skill_info:'装备一把武器和一个随机非武器器具',
 			_paladin_skill:'动员',
 			_paladin_skill_info:'召唤一名士兵',
 			_hunter_skill:'射击',
 			_hunter_skill_info:'对敌方主将造成一点伤害',
 			_druid_skill:'猛击',
-			_druid_skill_info:'视为使用一张不计入出杀次数的杀',
+			_druid_skill_info:'视为使用一张不计入出冲次数的冲',
 
 			stone_tuteng1:'石爪图腾',
 			stone_tuteng2:'灼热图腾',
@@ -10063,11 +10063,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			stone_kutongsiseng1_info:'你出场时，己方主将于本结束阶段摸一张牌',
 			stone_yuanguanying:'远古暗影',
 			stone_yuanguanying1:'暗影',
-			stone_yuanguanying1_info:'你出场时，己方主将可视为对一名敌方角色使用一张杀',
+			stone_yuanguanying1_info:'你出场时，己方主将可视为对一名敌方角色使用一张冲',
 
 			stone_dijieshicong:'低阶侍从',
 			stone_dijieshicong1:'持枪',
-			stone_dijieshicong1_info:'你出场时，敌方主将随机弃置一张装备牌',
+			stone_dijieshicong1_info:'你出场时，敌方主将随机弃置一张器具牌',
 			stone_yaosaishouwei:'要塞守卫',
 			stone_yaosaishouwei1:'守卫',
 			stone_yaosaishouwei1_info:'你出场时，己方主将本回合手牌上限+2',
@@ -10119,9 +10119,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			stone_fatiaozhuru1_info:'结束阶段，若你没有手牌，你摸两张牌',
 
 			stonesha:'进攻',
-			stonesha_info:'锁定技，你的装备牌均视为杀',
+			stonesha_info:'锁定技，你的器具牌均视为冲',
 			stoneshan:'格挡',
-			stoneshan_info:'锁定技，你的随从和法术牌均视为闪',
+			stoneshan_info:'锁定技，你的随从和法术牌均视为守',
 
 			stonecharacter:'随从',
 			spell_shengerpingdeng:'生而平等',
@@ -10139,7 +10139,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			spell_zhiliaozhichu:'治疗之触',
 			spell_zhiliaozhichu_info:'令目标随从恢复所有体力值并获得嘲讽',
 			chaofeng:'嘲讽',
-			chaofeng_info:'同阵营的无嘲讽角色不以能成为杀的目标',
+			chaofeng_info:'同阵营的无嘲讽角色不以能成为冲的目标',
 			spell_wangzhezhufu:'王者祝福',
 			spell_wangzhezhufu_info:'令一名随从增加两点体力和体力上限并摸两张牌',
 			spell_diyulieyan:'地狱烈焰',
@@ -10149,9 +10149,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			spell_zhiliaoshui:'治疗水',
 			spell_zhiliaoshui_info:'出牌阶段对自己使用，恢复两点体力值；或于濒死阶段对一名角色使用，令目标恢复一点体力',
 			spell_yanmie:'极恶之咒',
-			spell_yanmie_info:'交换你与敌方主将的装备区，并摸若干张牌直到你的手牌数与敌方主将相等',
+			spell_yanmie_info:'交换你与敌方主将的器具区，并摸若干张牌直到你的手牌数与敌方主将相等',
 			spell_xiaoshi:'消失',
-			spell_xiaoshi_info:'令敌方主将将所有装备区内的牌收入手牌，并弃置其若干张手牌，直到其手牌数与你相等',
+			spell_xiaoshi_info:'令敌方主将将所有器具区内的牌收入手牌，并弃置其若干张手牌，直到其手牌数与你相等',
 
 			stonecard:'法术',
 			mode_stone_card_config:'炉石模式',
@@ -10170,22 +10170,22 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			'<li>牧师：回复一点体力'+
 			'<li>战士：获得一点护甲（不能超过3点）'+
 			'<li>术士：牌库中摸两张牌'+
-			'<li>潜行者：装备一把武器和一个随机非武器装备'+
+			'<li>潜行者：装备一把武器和一个随机非武器器具'+
 			'<li>圣骑士：召唤一名士兵'+
 			'<li>猎人：对敌方主将造成一点伤害'+
-			'<li>德鲁伊：视为使用一张不计入出杀次数的杀</ul>'+
+			'<li>德鲁伊：视为使用一张不计入出冲次数的冲</ul>'+
 			'<div style="margin:10px">怒气值</div><ul style="margin-top:0"><li>每当友方随从受到伤害获得3点怒气值，主将受到伤害获得6点怒气值'+
 			'<li>每有一个友方随从死亡，获得10点怒气值，主将死亡获得20点怒气值'+
 			'<li>结束阶段，若己方随从数少于对方会获得10X点怒气值，X为随从数之差'+
 			'<li>怒气值达到100时不再增加。准备阶段，若怒气值己满，可消耗全部怒气值和4点行动值并召唤一名传说随从</ul>'+
 			'<div style="margin:10px">战斗</div><ul style="margin-top:0"><li>场上有两名主将进行对抗，主将的体力上限+1'+
-			'<li>游戏牌堆移除了乐不思蜀等跳过出牌阶段以及包含翻面功能的卡牌'+
-			'<li>主将出牌阶段的出牌数量（行动值）有上限，从1开始递增，后手的首个回合有一点额外行动值，装备牌不计入出牌上限<li>游戏每进行一轮，主将的出牌上限+1，直到增加至6'+
-			'<li>使用随从牌可召唤一个随从，随从出场时背面朝上。每一方在场的随从数不能超过4<li>随从于摸牌阶段摸牌基数为1，随从的法术和随从牌均视为闪，装备牌均视为杀<li>'+
+			'<li>游戏牌堆移除了囹圄迷魂等跳过出牌阶段以及包含翻面功能的卡牌'+
+			'<li>主将出牌阶段的出牌数量（行动值）有上限，从1开始递增，后手的首个回合有一点额外行动值，器具牌不计入出牌上限<li>游戏每进行一轮，主将的出牌上限+1，直到增加至6'+
+			'<li>使用随从牌可召唤一个随从，随从出场时背面朝上。每一方在场的随从数不能超过4<li>随从于摸牌阶段摸牌基数为1，随从的法术和随从牌均视为守，器具牌均视为冲<li>'+
 			'随从与其他所有角色相互距离基数为1<li>'+
 			'主将杀死对方随从后获得一个额外的行动值并从牌库中获得一张牌，杀死己方随从无惩罚，随从杀死随从无效果'+
 			'<li>主将在随从满员时可重铸随从牌，但回合内总的重铸次数不能超过3；若重铸的牌为随从牌或法术牌，则摸牌改为获得一张随机法术牌'+
-			'<li>嘲讽：若一方阵营中有嘲讽角色，则同阵营的无嘲讽角色不以能成为杀目标'+
+			'<li>嘲讽：若一方阵营中有嘲讽角色，则同阵营的无嘲讽角色不以能成为冲目标'+
 			'<li>行动顺序为先主将后随从。主将或随从死亡后立即移出游戏，主将死亡后替补登场，替补登场时摸3+X张牌，X为对方存活的随从数，无替补时游戏结束'
 		}
 	};

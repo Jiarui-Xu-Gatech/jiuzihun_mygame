@@ -474,15 +474,15 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						var list2=[];
 						for(var i=0;i<list.length;i++){
 							if(i==0){
-								list2.push(['基本','','sha']);
-								list2.push(['基本','','sha','fire']);
-								list2.push(['基本','','sha','thunder']);
+								list2.push(['行动','','sha']);
+								list2.push(['行动','','sha','fire']);
+								list2.push(['行动','','sha','thunder']);
 							}
 							else if(i<3){
-								list2.push(['基本','',list[i]]);
+								list2.push(['行动','',list[i]]);
 							}
 							else{
-								list2.push(['锦囊','',list[i]]);
+								list2.push(['策略','',list[i]]);
 							}
 						}
 						dialog.add([list2,'vcard']);
@@ -1027,7 +1027,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						},
 						mark:true,
 						intro:{
-							content:function(storage){if(storage) return '使用【杀】的次数上限+'+storage+'，手牌上限+'+storage}
+							content:function(storage){if(storage) return '使用【冲】的次数上限+'+storage+'，手牌上限+'+storage}
 						}
 					}
 				}
@@ -1410,7 +1410,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						},
 						content:function(){
 							'step 0'
-							player.chooseBool('是否发动【总御】，与'+get.translation(trigger.player)+'交换装备区内坐骑牌？');
+							player.chooseBool('是否发动【总御】，与'+get.translation(trigger.player)+'交换器具区内坐骑牌？');
 							'step 1'
 							if(result.bool){
 								player.logSkill('gzzongyu',trigger.player);
@@ -1493,7 +1493,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					'step 0'
 					var choices=[];
 					if(game.hasPlayer(function(current){return current.isUnseen()})) choices.push('选择一名未确定势力的角色');
-					if(game.hasPlayer(function(current){return current!=player&&!current.isUnseen()})&&player.countCards('h',{type:'basic'})) choices.push('交给一名已确定势力角色一张基本牌');
+					if(game.hasPlayer(function(current){return current!=player&&!current.isUnseen()})&&player.countCards('h',{type:'basic'})) choices.push('交给一名已确定势力角色一张行动牌');
 					player.chooseControl(choices).set('ai',function(){
 						if(choices.length>1){
 							var player=_status.event.player;
@@ -1517,7 +1517,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						return target!=player&&target.identity=='unknown'
 					},true);
 					else player.chooseCardTarget({
-						prompt:'征辟</br></br><div class="center text">交给一名已确定势力角色一张基本牌，然后该角色交给你一张非基本牌或两张基本牌</div>',
+						prompt:'征辟</br></br><div class="center text">交给一名已确定势力角色一张行动牌，然后该角色交给你一张非行动牌或两张行动牌</div>',
 						position:'h',
 						filterCard:function(card){return get.type(card)=='basic'},
 						filterTarget:function(card,player,target){
@@ -1545,8 +1545,8 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 					'step 3'
 					var choices=[];
-					if(target.countCards('he',{type:['trick','delay','equip']})) choices.push('一张非基本牌');
-					if(target.countCards('h',{type:'basic'})>1) choices.push('两张基本牌');
+					if(target.countCards('he',{type:['trick','delay','equip']})) choices.push('一张非行动牌');
+					if(target.countCards('h',{type:'basic'})>1) choices.push('两张行动牌');
 					if(choices.length) target.chooseControl(choices).set('ai',function(event,player){
 						if(choices.length>1){
 							if(player.countCards('he',{type:['trick','delay','equip']},function(card){return get.value(card)<7})) return 0;
@@ -1563,7 +1563,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						else event.finish();
 					}
 					'step 4'
-					var check=(result.control=='一张非基本牌');
+					var check=(result.control=='一张非行动牌');
 					target.chooseCard('he',(check?1:2),{type:(check?['trick','delay','equip']:'basic')},true);
 					'step 5'
 					if(result.cards){
@@ -2024,7 +2024,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						viewAsFilter:function (player){
 							if(!player.countCards('h','shan')) return false;
 						},
-						prompt:"将一张闪当杀使用或打出",
+						prompt:"将一张守当冲使用或打出",
 						check:function (){return 1},
 						ai:{
 							effect:{
@@ -2051,7 +2051,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						viewAs:{
 							name:"shan",
 						},
-						prompt:"将一张杀当闪使用或打出",
+						prompt:"将一张冲当守使用或打出",
 						check:function (){return 1},
 						viewAsFilter:function (player){
 							if(!player.countCards('h','sha')) return false;
@@ -2135,7 +2135,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					player.draw(event.num);
 					if(event.num>2) player.turnOver();
 					'step 1'
-					player.chooseCard('h',true,'弃置一张手牌，若以此法弃置的是装备牌，则你改为使用之').set('ai',function(card){
+					player.chooseCard('h',true,'弃置一张手牌，若以此法弃置的是器具牌，则你改为使用之').set('ai',function(card){
 						if(get.type(card)=='equip'){
 							return 5-get.value(card);
 						}
@@ -2189,7 +2189,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				onuse:function (result,player){
 					if(get.distance(player,result.targets[0])>2) player.addTempSkill('new_duanliang_off');
 				},
-				prompt:"将一黑色的基本牌或装备牌当兵粮寸断使用",
+				prompt:"将一黑色的行动牌或器具牌当海盗洗掠使用",
 				check:function (card){return 6-get.value(card)},
 				ai:{
 					order:9,
@@ -2708,7 +2708,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						viewAsFilter:function (player){
 							if(!player.countCards('h','shan')) return false;
 						},
-						prompt:"将一张闪当杀使用或打出",
+						prompt:"将一张守当冲使用或打出",
 						check:function (){return 1},
 						ai:{
 							effect:{
@@ -2735,7 +2735,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						viewAs:{
 							name:"shan",
 						},
-						prompt:"将一张杀当闪使用或打出",
+						prompt:"将一张冲当守使用或打出",
 						check:function (){return 1},
 						viewAsFilter:function (player){
 							if(!player.countCards('h','sha')) return false;
@@ -3300,7 +3300,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					var suit=get.suit(result.card);
 					var target=trigger.target;
 					var num=target.countCards('h','shan');
-					target.chooseToDiscard('请弃置一张'+get.translation(suit)+'牌，否则不能使用闪抵消此杀','he',function(card){
+					target.chooseToDiscard('请弃置一张'+get.translation(suit)+'牌，否则不能使用守抵消此冲','he',function(card){
 						return get.suit(card)==_status.event.suit;
 					}).set('ai',function(card){
 						var num=_status.event.num;
@@ -3355,7 +3355,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					dialog:function (event,player){
 						var list=['yuanjiao','zhibi'];
 						for(var i=0;i<list.length;i++){
-								list[i]=['锦囊','',list[i]];
+								list[i]=['策略','',list[i]];
 						}
 						return ui.create.dialog('鬼术',[list,'vcard']);
 					},
@@ -3525,7 +3525,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						uiintro.add('鏖战模式');
 						var list=[
 							'当游戏中仅剩四名或更少角色时（七人以下游戏时改为三名或更少），若此时全场没有超过一名势力相同的角色，则从一个新的回合开始，游戏进入鏖战模式直至游戏结束。',
-							'在鏖战模式下，任何角色均不是非转化的【桃】的合法目标。【桃】可以被当做【杀】或【闪】使用或打出。',
+							'在鏖战模式下，任何角色均不是非转化的【药】的合法目标。【药】可以被当做【冲】或【守】使用或打出。',
 							'进入鏖战模式后，即使之后有两名或者更多势力相同的角色出现，仍然不会取消鏖战模式。'
 						];
 						var intro='<ul style="text-align:left;margin-top:0;width:450px">';
@@ -3619,7 +3619,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				group:["zhulianbihe_skill_draw","zhulianbihe_skill_tao"],
 				mark:true,
 				intro:{
-					content:"◇出牌阶段，你可以弃置此标记 然后摸两张牌。<br>◇你可以将此标记当做【桃】使用。",
+					content:"◇出牌阶段，你可以弃置此标记 然后摸两张牌。<br>◇你可以将此标记当做【药】使用。",
 				},
 			},
 			"yinyang_skill":{
@@ -3960,7 +3960,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						});
 					}
 					if(move&&use){
-						target.chooseControlList(['使用一张装备牌','将装备区里的一张牌移动至另一名与你势力相同的角色的装备区里']);
+						target.chooseControlList(['使用一张器具牌','将器具区里的一张牌移动至另一名与你势力相同的角色的器具区里']);
 					}
 					else if(move){
 						event.goto(3);
@@ -3979,12 +3979,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						event.goto(3);
 					}
 					'step 2'
-					target.chooseToUse('使用一张装备牌',function(card,player){
+					target.chooseToUse('使用一张器具牌',function(card,player){
 						return get.type(card)=='equip'&&lib.filter.filterCard(card,player);
 					});
 					event.finish();
 					'step 3'
-					target.chooseCardButton(target.getCards('e'),'移动一件装备').set('filterButton',function(button){
+					target.chooseCardButton(target.getCards('e'),'移动一件器具').set('filterButton',function(button){
 						var player=_status.event.player;
 						return game.hasPlayer(function(current){
 							return current!=player&&current.canEquip(button.link);
@@ -4412,7 +4412,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if(content&&content.length){
 							dialog.addSmall(content);
 						}
-						dialog.addText('<ul style="margin-top:5px;padding-left:22px;"><li>每名吴势力角色的出牌阶段限一次，该角色可以将一张装备牌置于“缘江烽火图”上，称之为“烽火”。<li>根据“烽火”的数量，所有吴势力角色可于其准备阶段开始时选择并获得其中一个技能直到回合结束：一张以上~英姿；两张以上~好施；三张以上~涉猎；四张以上~度势；五张以上~可额外选择一项。<li>锁定技，当你受到【杀】或锦囊牌造成的伤害后，你将一张“烽火”置入弃牌堆。',false)
+						dialog.addText('<ul style="margin-top:5px;padding-left:22px;"><li>每名吴势力角色的出牌阶段限一次，该角色可以将一张器具牌置于“缘江烽火图”上，称之为“烽火”。<li>根据“烽火”的数量，所有吴势力角色可于其准备阶段开始时选择并获得其中一个技能直到回合结束：一张以上~英姿；两张以上~好施；三张以上~涉猎；四张以上~度势；五张以上~可额外选择一项。<li>锁定技，当你受到【冲】或策略牌造成的伤害后，你将一张“烽火”置入弃牌堆。',false)
 					}
 				}
 			},
@@ -4445,7 +4445,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							'xietianzi','shuiyanqijunx','lulitongxin','lianjunshengyan','chiling','diaohulishan','yuanjiao','huoshaolianying','zhibi','yiyi',
 						];
 						for(var i=0;i<list.length;i++){
-							list[i]=['锦囊','',list[i]];
+							list[i]=['策略','',list[i]];
 						}
 						return ui.create.dialog(get.translation('gzqice'),[list,'vcard']);
 					},
@@ -5016,7 +5016,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						}
 					},
 					prompt:function(links,player){
-						return '选择杀的目标';
+						return '选择冲的目标';
 					}
 				},
 				ai:{
@@ -5174,7 +5174,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if(content&&content.length){
 							dialog.addSmall(content);
 						}
-						dialog.addText('<ul style="margin-top:5px;padding-left:22px;"><li>当你计算群势力角色数时，每一张“天兵”均可视为一名群势力角色。<li>每当你失去体力时，你可改为将一张“天兵”置入弃牌堆。<li>与你势力相同的角色可将一张“天兵”当【杀】使用或打出。',false)
+						dialog.addText('<ul style="margin-top:5px;padding-left:22px;"><li>当你计算群势力角色数时，每一张“天兵”均可视为一名群势力角色。<li>每当你失去体力时，你可改为将一张“天兵”置入弃牌堆。<li>与你势力相同的角色可将一张“天兵”当【冲】使用或打出。',false)
 					}
 				}
 			},
@@ -5446,7 +5446,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				nopop:true,
 				mark:true,
 				intro:{
-					content:"@<div style=\"margin-top:-5px\"><div class=\"skill\">【武圣】</div><div class=\"skillinfo\">将“红色牌”改为“任意牌”</div><div class=\"skill\">【咆哮】</div><div class=\"skillinfo\">增加描述“你使用的【杀】无视其他角色的防具”</div><div class=\"skill\">【龙胆】</div><div class=\"skillinfo\">增加描述“你每发动一次‘龙胆’便摸一张牌”</div><div class=\"skill\">【烈弓】</div><div class=\"skillinfo\">增加描述“你的攻击范围+1”</div><div class=\"skill\">【铁骑】</div><div class=\"skillinfo\">将“一张明置的武将牌”改为“所有明置的武将牌”</div></div>",
+					content:"@<div style=\"margin-top:-5px\"><div class=\"skill\">【武圣】</div><div class=\"skillinfo\">将“红色牌”改为“任意牌”</div><div class=\"skill\">【咆哮】</div><div class=\"skillinfo\">增加描述“你使用的【冲】无视其他角色的防具”</div><div class=\"skill\">【龙胆】</div><div class=\"skillinfo\">增加描述“你每发动一次‘龙胆’便摸一张牌”</div><div class=\"skill\">【烈弓】</div><div class=\"skillinfo\">增加描述“你的攻击范围+1”</div><div class=\"skill\">【铁骑】</div><div class=\"skillinfo\">将“一张明置的武将牌”改为“所有明置的武将牌”</div></div>",
 				}
 			},
 			jizhao:{
@@ -5839,7 +5839,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				mark:true,
 				intro:{
-					content:'若与你势力相同的一名角色于其回合内使用的第一张牌为【杀】，则该角色可以在此【杀】结算完成后获得之'
+					content:'若与你势力相同的一名角色于其回合内使用的第一张牌为【冲】，则该角色可以在此【冲】结算完成后获得之'
 				},
 				content:function(){
 					var cards=[];
@@ -6300,7 +6300,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					"step 1"
 					if(result.bool){
 						var nono=(get.damageEffect(trigger.player,player,trigger.player)>=0);
-						trigger.player.chooseToDiscard('弃置一张装备牌，或受到一点伤害','he',{type:'equip'}).set('ai',function(card){
+						trigger.player.chooseToDiscard('弃置一张器具牌，或受到一点伤害','he',{type:'equip'}).set('ai',function(card){
 							if(_status.event.nono){
 								return 0;
 							}
@@ -7411,11 +7411,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			junling5_eff:'军令五',
 			junling6:'军令六',
 			junling6_bg:'令',
-			junling6_info:'若被执行，执行者选择一张手牌和一张装备区内牌（若有），然后弃置其余的牌。',
+			junling6_info:'若被执行，执行者选择一张手牌和一张器具区内牌（若有），然后弃置其余的牌。',
 					
 			gz_cuimao:'崔琰毛玠',
 			gzzhengbi:'征辟',
-			gzzhengbi_info:'出牌阶段开始时，你可以选择一项：选择一名未确定势力的角色，你对其使用的牌无距离限制且不计入使用次数，直到其明置武将牌或回合结束；或将一张基本牌交给一名有明置武将牌的角色，然后其交给你一张非基本牌或两张基本牌。',
+			gzzhengbi_info:'出牌阶段开始时，你可以选择一项：选择一名未确定势力的角色，你对其使用的牌无距离限制且不计入使用次数，直到其明置武将牌或回合结束；或将一张行动牌交给一名有明置武将牌的角色，然后其交给你一张非行动牌或两张行动牌。',
 			gzfengying:'奉迎',
 			gzfengying_info:'限定技，你可以将所有手牌当【挟天子以令诸侯】使用（无视大势力限制），然后所有与你势力相同的角色将手牌补至体力上限。',
 			gz_yujin:'于禁',
@@ -7429,14 +7429,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			gzxuanhuo:'眩惑',
 			gzxuanhuo_info:'与你势力相同的其他角色的出牌阶段限一次，该角色可以交给你一张牌并弃置一张牌，然后获得以下一项场上没有的技能直到回合结束：〖武圣〗、〖咆哮〗、〖龙胆〗、〖铁骑〗、〖烈弓〗、〖狂骨〗。',
 			gzenyuan:'恩怨',
-			gzenyuan_info:'锁定技，当其他角色对你使用【桃】时，该角色摸一张牌；当你受到伤害后，伤害来源须交给你一张手牌或失去1点体力。',
+			gzenyuan_info:'锁定技，当其他角色对你使用【药】时，该角色摸一张牌；当你受到伤害后，伤害来源须交给你一张手牌或失去1点体力。',
 			gzbuyi:'补益',
 			gzbuyi_info:'每回合限一次，当一名与你势力相同的角色脱离濒死状态后，你可以选择一个“军令”，令伤害来源选择一项：执行该军令，或令该脱离濒死状态的角色回复一点体力。',
 			gz_lukang:'陆抗',
 			keshou:'恪守',
 			keshou_info:'当你受到伤害时，你可以弃置两张颜色相同的牌。若如此做，此伤害-1。然后若场上没有与你势力相同的其他角色，则你进行判定，若结果为红色，你摸一张牌。',
 			zhuwei:'筑围',
-			zhuwei_info:'当你的判定牌生效后，若此牌为【杀】或【决斗】，你可以获得之。然后，你可令当前回合角色本回合内使用【杀】的次数上限和手牌上限+1。',
+			zhuwei_info:'当你的判定牌生效后，若此牌为【冲】或【酣战】，你可以获得之。然后，你可令当前回合角色本回合内使用【冲】的次数上限和手牌上限+1。',
 			gz_yuanshu:'袁术',
 			gzweidi:'伪帝',
 			gzweidi_info:'出牌阶段限一次，你可以指定一名本回合从牌堆获得过牌的其他角色并选择一个“军令”，令其选择一项：执行该军令；或令你获得其所有手牌，然后交给其等量的牌。',
@@ -7460,12 +7460,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			huibian:'挥鞭',
 			huibian_info:'出牌阶段限一次，你可以选择一名魏势力角色和另一名已受伤的魏势力角色。若如此做，你对前者造成一点伤害，然后其摸两张牌，然后后者回复一点体力。',
 			gzzongyu:'总御',
-			gzzongyu_info:'当【六龙骖驾】进入其他角色的装备区后，你可以将你装备区内所有坐骑牌（至少一张）与【六龙骖驾】交换位置。锁定技，当你使用坐骑牌后，若场上或弃牌堆中有【六龙骖驾】，则将【六龙骖驾】置入你的装备区。',
+			gzzongyu_info:'当【六龙骖驾】进入其他角色的器具区后，你可以将你器具区内所有坐骑牌（至少一张）与【六龙骖驾】交换位置。锁定技，当你使用坐骑牌后，若场上或弃牌堆中有【六龙骖驾】，则将【六龙骖驾】置入你的器具区。',
 					
 			xindiaodu:"调度",
-			"xindiaodu_info":"当与你势力相同的角色使用装备牌时，其可以摸一张牌；出牌阶段开始时，你可以获得与你势力相同的一名角色装备区内的一张牌，然后你可以将此牌交给另一名与你势力相同的其他角色。",
+			"xindiaodu_info":"当与你势力相同的角色使用器具牌时，其可以摸一张牌；出牌阶段开始时，你可以获得与你势力相同的一名角色器具区内的一张牌，然后你可以将此牌交给另一名与你势力相同的其他角色。",
 			yigui:"役鬼",
-			"yigui_info":"当你首次明置此武将牌时，你将剩余武将牌堆的两张牌扣置于游戏外，称为“魂”；你可以展示一张“魂”并将其置入剩余武将牌堆，视为使用了一张本回合内未以此法使用过的基本牌或普通锦囊牌。（若此牌需指定目标，则目标须为未确定势力的角色或野心家或与此“魂”势力相同的角色）",
+			"yigui_info":"当你首次明置此武将牌时，你将剩余武将牌堆的两张牌扣置于游戏外，称为“魂”；你可以展示一张“魂”并将其置入剩余武将牌堆，视为使用了一张本回合内未以此法使用过的行动牌或普通策略牌。（若此牌需指定目标，则目标须为未确定势力的角色或野心家或与此“魂”势力相同的角色）",
 			"yigui_init":"役鬼",
 			"yigui_init_info":"",
 			"yigui_refrain":"役鬼",
@@ -7484,7 +7484,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"yinyang_skill_info":"",
 			"zhulianbihe_skill_draw":"珠联•摸牌",
 			"zhulianbihe_skill_draw_info":"",
-			"zhulianbihe_skill_tao":"珠联•桃",
+			"zhulianbihe_skill_tao":"珠联•药",
 			"zhulianbihe_skill_tao_info":"",
 			"yinyang_skill_draw":"阴阳鱼",
 			"yinyang_skill_draw_info":"",
@@ -7494,19 +7494,19 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"yinyang_add_info":"",
 			
 			"new_jushou":"据守",
-			"new_jushou_info":"结束阶段，你可以摸X张牌（X为亮明势力数），然后弃置一张手牌。若以此法弃置的牌为装备牌，则改为使用此牌。若X大于2，则你将武将牌叠置。",
+			"new_jushou_info":"结束阶段，你可以摸X张牌（X为亮明势力数），然后弃置一张手牌。若以此法弃置的牌为器具牌，则改为使用此牌。若X大于2，则你将武将牌叠置。",
 			"new_duanliang":"断粮",
-			"new_duanliang_info":"出牌阶段，你可以将一张黑色基本牌或黑色装备牌当做【兵粮寸断】使用。你使用【兵粮寸断】没有距离限制。若你对距离超过2的角色发动了〖断粮〗，则本回合不能再发动〖断粮〗。",
+			"new_duanliang_info":"出牌阶段，你可以将一张黑色行动牌或黑色器具牌当做【海盗洗掠】使用。你使用【海盗洗掠】没有距离限制。若你对距离超过2的角色发动了〖断粮〗，则本回合不能再发动〖断粮〗。",
 			"new_shushen":"淑慎",
 			"new_shushen_info":"当你回复1点体力后，你可令一名其他角色摸一张牌。",
 			"new_fenji":"奋激",
 			"new_fenji_info":"一名角色的结束阶段开始时，若其没有手牌，你可以令其摸两张牌，然后你失去1点体力。",
 			"new_luanji":"乱击",
-			"new_luanji_info":"你可以将两张与你本回合以此法转化的花色均不相同的手牌当【万箭齐发】使用。当一名与你势力相同的角色因响应此牌而打出【闪】时，该角色摸一张牌。",
+			"new_luanji_info":"你可以将两张与你本回合以此法转化的花色均不相同的手牌当【乱剑穿心】使用。当一名与你势力相同的角色因响应此牌而打出【守】时，该角色摸一张牌。",
 			"new_qingcheng":"倾城",
-			"new_qingcheng_info":"出牌阶段，你可以弃置一张黑色牌并选择一名武将牌均明置的其他角色，然后你暗置其一张武将牌。若你以此法弃置的牌为装备牌，则你可以暗置另一名武将牌均明置的角色的一张武将牌。",
+			"new_qingcheng_info":"出牌阶段，你可以弃置一张黑色牌并选择一名武将牌均明置的其他角色，然后你暗置其一张武将牌。若你以此法弃置的牌为器具牌，则你可以暗置另一名武将牌均明置的角色的一张武将牌。",
 			"new_kongcheng":"空城",
-			"new_kongcheng_info":"锁定技，若你没有手牌，1.当你成为【杀】或【决斗】的目标时，取消之；2.你的回合外，其他角色交给你牌后，你将这些牌置于你的武将牌上。摸牌阶段开始时，你获得武将牌上的这些牌。",
+			"new_kongcheng_info":"锁定技，若你没有手牌，1.当你成为【冲】或【酣战】的目标时，取消之；2.你的回合外，其他角色交给你牌后，你将这些牌置于你的武将牌上。摸牌阶段开始时，你获得武将牌上的这些牌。",
 			"new_keji":"克己",
 			"new_keji_info":"锁定技，若你没有在出牌阶段内使用过颜色不同的牌，则你本回合的手牌上限+4。",
 			"keji_add":"克己",
@@ -7514,13 +7514,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"new_mouduan":"谋断",
 			"new_mouduan_info":"结束阶段，若你于本回合内使用过四种花色或三种类别的牌，则你可以移动场上的一张牌。",
 			"new_longdan":"龙胆",
-			"new_longdan_info":"你可以将【杀】当【闪】，【闪】当【杀】使用或打出。当你发动〖龙胆〗使用的【杀】被【闪】抵消时，你可以对另一名角色造成1点伤害；当你发动〖龙胆〗使用的【闪】抵消了【杀】时，你可以令一名其他角色回复1点体力（不能是【杀】的使用者）。",
+			"new_longdan_info":"你可以将【冲】当【守】，【守】当【冲】使用或打出。当你发动〖龙胆〗使用的【冲】被【守】抵消时，你可以对另一名角色造成1点伤害；当你发动〖龙胆〗使用的【守】抵消了【冲】时，你可以令一名其他角色回复1点体力（不能是【冲】的使用者）。",
 			"fz_new_longdan":"龙胆",
-			"fz_new_longdan_info":"你可以将【杀】当【闪】，【闪】当【杀】使用或打出。当你发动〖龙胆〗使用的【杀】被【闪】抵消时，你可以对另一名角色造成1点伤害；当你发动〖龙胆〗使用的【闪】抵消了【杀】时，你可以令一名其他角色回复1点体力（不能是【杀】的使用者）。",
+			"fz_new_longdan_info":"你可以将【冲】当【守】，【守】当【冲】使用或打出。当你发动〖龙胆〗使用的【冲】被【守】抵消时，你可以对另一名角色造成1点伤害；当你发动〖龙胆〗使用的【守】抵消了【冲】时，你可以令一名其他角色回复1点体力（不能是【冲】的使用者）。",
 			"new_paoxiao":"咆哮",
-			"new_paoxiao_info":"锁定技，你使用【杀】无数量限制；当你于一回合内使用第二张【杀】时，摸一张牌。",
+			"new_paoxiao_info":"锁定技，你使用【冲】无数量限制；当你于一回合内使用第二张【冲】时，摸一张牌。",
 			"new_kurou":"苦肉",
-			"new_kurou_info":"出牌阶段限一次，你可以弃置一张牌，然后失去1点体力并摸三张牌，本回合使用【杀】的次数上限+1。",
+			"new_kurou_info":"出牌阶段限一次，你可以弃置一张牌，然后失去1点体力并摸三张牌，本回合使用【冲】的次数上限+1。",
 			"kurou_effect":"苦肉",
 			"kurou_effect_info":"",
 			"new_chuli":"除疠",
@@ -7542,7 +7542,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			"fengyin_vice":"封印[副将]",
 			"fengyin_vice_info":"",
 			"new_tieji":"铁骑",
-			"new_tieji_info":"当你使用【杀】指定目标后，你可以令其一张明置的武将牌上的非锁定技于本回合内失效，然后你进行判定，除非该角色弃置与结果花色相同的一张牌，否则其不能使用【闪】响应此【杀】。",
+			"new_tieji_info":"当你使用【冲】指定目标后，你可以令其一张明置的武将牌上的非锁定技于本回合内失效，然后你进行判定，除非该角色弃置与结果花色相同的一张牌，否则其不能使用【守】响应此【冲】。",
 			hmkyuanyu:"远域",
 			"hmkyuanyu_info":"锁定技，当你受到伤害时，若伤害来源与你的座次不相邻，防止此伤害。",
 			hmkguishu:"鬼术",
@@ -7567,21 +7567,21 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			guo_tag:'国',
 			qianhuan:'千幻',
 			qianhuan_bg:'幻',
-			qianhuan_info:'当与你势力相同的一名角色受到伤害后，你可以将一张与你武将牌上花色均不同的牌置于你的武将牌上。当一名与你势力相同的角色成为基本牌或锦囊牌的唯一目标时，你可以移去一张“千幻”牌，取消之。',
+			qianhuan_info:'当与你势力相同的一名角色受到伤害后，你可以将一张与你武将牌上花色均不同的牌置于你的武将牌上。当一名与你势力相同的角色成为行动牌或策略牌的唯一目标时，你可以移去一张“千幻”牌，取消之。',
 			gzzhiman:'制蛮',
-			gzzhiman_info:'当你对其他角色造成伤害时，你可以防止此伤害。若如此做，你获得其装备区或判定区里的一张牌。然后若该角色与你势力相同，该角色可以变更副将。',
+			gzzhiman_info:'当你对其他角色造成伤害时，你可以防止此伤害。若如此做，你获得其器具区或判定区里的一张牌。然后若该角色与你势力相同，该角色可以变更副将。',
 			
 			gzdiancai:'典财',
 			gzdiancai_info:'其他角色的出牌阶段结束时，若你于此阶段失去了x张或更多的牌，则你可以将手牌摸至体力上限。若如此做，你可以变更副将（x为你的体力值）。',
 			xuanlve:'旋略',
-			xuanlve_info:'当你失去装备区里的牌后，你可以弃置一名其他角色的一张牌。',
+			xuanlve_info:'当你失去器具区里的牌后，你可以弃置一名其他角色的一张牌。',
 			yongjin:'勇进',
-			yongjin_info:'限定技，出牌阶段，你可以依次移动场上的至多三张装备牌。',
+			yongjin_info:'限定技，出牌阶段，你可以依次移动场上的至多三张器具牌。',
 			lianzi:'敛资',
-			lianzi_info:'出牌阶段限一次，你可以弃置一张手牌，然后亮出牌堆顶X张牌（X为吴势力角色装备区里的牌和“烽火”的总和），获得其中所有与你弃置牌类别相同的牌，将其余的牌置入弃牌堆，若你以此法一次获得了三张或更多的牌，则你失去技能〖敛资〗并获得技能〖制衡〗。',
+			lianzi_info:'出牌阶段限一次，你可以弃置一张手牌，然后亮出牌堆顶X张牌（X为吴势力角色器具区里的牌和“烽火”的总和），获得其中所有与你弃置牌类别相同的牌，将其余的牌置入弃牌堆，若你以此法一次获得了三张或更多的牌，则你失去技能〖敛资〗并获得技能〖制衡〗。',
 			gzqice:'奇策',
 			gzqice_backup:'奇策',
-			gzqice_info:'出牌阶段限一次，你可以将所有手牌当做任意一张普通锦囊牌使用（此牌的目标数不能超过你的手牌数）。然后，你可以变更副将。',
+			gzqice_info:'出牌阶段限一次，你可以将所有手牌当做任意一张普通策略牌使用（此牌的目标数不能超过你的手牌数）。然后，你可以变更副将。',
 			gzyuejian:'约俭',
 			gzyuejian_info:'锁定技，与你势力相同角色的弃牌阶段开始时，若其本回合未使用牌指定过其他势力的角色为目标，则该角色本回合手牌上限+X（X为其已损失的体力值）。',
 			gzxiongsuan:'凶算',
@@ -7592,14 +7592,14 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			gzxinsheng_info:'当你受到伤害后，你可以从剩余武将牌堆中扣置一张牌加入到“化身”牌中。',
 
 			jubao:'聚宝',
-			jubao_info:'锁定技，你装备区里的宝物牌不能被其他角色获得。结束阶段开始时，若场上或弃牌堆有【定澜夜明珠】，则你摸一张牌，然后获得装备区里有【定澜夜明珠】角色的一张牌。',
+			jubao_info:'锁定技，你器具区里的宝物牌不能被其他角色获得。结束阶段开始时，若场上或弃牌堆有【定澜夜明珠】，则你摸一张牌，然后获得器具区里有【定澜夜明珠】角色的一张牌。',
 			jiahe:'嘉禾',
 			jiahe_info:'君主技，只要此武将牌处于明置状态，你便拥有“缘江烽火图”。',
 			jiahe_put:'烽火',
-			jiahe_put_info:'出牌阶段限一次，你可以将一张装备牌置于“缘江烽火图”上，称之为“烽火”。',
+			jiahe_put_info:'出牌阶段限一次，你可以将一张器具牌置于“缘江烽火图”上，称之为“烽火”。',
 			jiahe_skill:'缘江烽火图',
 			yuanjiangfenghuotu:'缘江烽火图',
-			yuanjiangfenghuotu_info:'每名吴势力角色的出牌阶段限一次，该角色可以将一张装备牌置于“缘江烽火图”上，称之为“烽火”。<br>根据“烽火”的数量，所有吴势力角色可于其准备阶段开始时选择并获得其中一个技能直到回合结束：一张以上：〖英姿〗；两张以上：〖好施〗；三张以上：〖涉猎〗；四张以上：〖度势〗；五张以上：可额外选择一项。<br>锁定技，当你受到【杀】或锦囊牌造成的伤害后，你将一张“烽火”置入弃牌堆。',
+			yuanjiangfenghuotu_info:'每名吴势力角色的出牌阶段限一次，该角色可以将一张器具牌置于“缘江烽火图”上，称之为“烽火”。<br>根据“烽火”的数量，所有吴势力角色可于其准备阶段开始时选择并获得其中一个技能直到回合结束：一张以上：〖英姿〗；两张以上：〖好施〗；三张以上：〖涉猎〗；四张以上：〖度势〗；五张以上：可额外选择一项。<br>锁定技，当你受到【冲】或策略牌造成的伤害后，你将一张“烽火”置入弃牌堆。',
 			yuanjiangfenghuotu_ab:'江图',
 			yuanjiangfenghuotu_bg:'图',
 			wuxin:'悟心',
@@ -7613,13 +7613,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			huangjintianbingfu:'黄巾天兵符',
 			huangjintianbingfu_ab:'兵符',
 			huangjintianbingfu_bg:'符',
-			huangjintianbingfu_info:'锁定技 ：当你计算群势力角色数时，每一张“天兵”均可视为一名群势力角色。<br>当你失去体力时，你可改为将一张“天兵”置入弃牌堆。<br>与你势力相同的角色可将一张“天兵”当作【杀】使用或打出。',
+			huangjintianbingfu_info:'锁定技 ：当你计算群势力角色数时，每一张“天兵”均可视为一名群势力角色。<br>当你失去体力时，你可改为将一张“天兵”置入弃牌堆。<br>与你势力相同的角色可将一张“天兵”当作【冲】使用或打出。',
 			wuhujiangdaqi:'五虎将大旗',
 			wuhujiangdaqi_ab:'将旗',
 			wuhujiangdaqi_bg:'旗',
-			wuhujiangdaqi_info:'存活的蜀势力角色的技能按以下规则改动：<br><strong>武圣</strong>：将“红色牌”改为“任意牌”<br><strong>咆哮</strong>：增加描述“你使用的【杀】无视其他角色的防具”<br><strong>龙胆</strong>：增加描述“你发动〖龙胆〗使用或打出牌时摸一张牌”<br><strong>烈弓</strong>：增加描述“你的攻击范围+1”<br><strong>铁骑</strong>：将“一张明置的武将牌”改为“所有明置的武将牌”',
+			wuhujiangdaqi_info:'存活的蜀势力角色的技能按以下规则改动：<br><strong>武圣</strong>：将“红色牌”改为“任意牌”<br><strong>咆哮</strong>：增加描述“你使用的【冲】无视其他角色的防具”<br><strong>龙胆</strong>：增加描述“你发动〖龙胆〗使用或打出牌时摸一张牌”<br><strong>烈弓</strong>：增加描述“你的攻击范围+1”<br><strong>铁骑</strong>：将“一张明置的武将牌”改为“所有明置的武将牌”',
 			zhangwu:'章武',
-			zhangwu_info:'锁定技。当【飞龙夺凤】进入弃牌堆或其他角色的装备区时，你获得之。当你失去【飞龙夺风】时，展示之，然后将此牌置于牌堆底并摸两张牌',
+			zhangwu_info:'锁定技。当【飞龙夺凤】进入弃牌堆或其他角色的器具区时，你获得之。当你失去【飞龙夺风】时，展示之，然后将此牌置于牌堆底并摸两张牌',
 			shouyue:'授钺',
 			shouyue_info:'君主技。只要此武将牌处于明置状态，你便拥有“五虎将大旗”。',
 			jizhao:'激诏',
@@ -7631,7 +7631,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			gzmingshi_info:'锁定技，当你受到伤害时，若伤害来源有暗置的武将牌，此伤害-1。',
 			fengshi:'锋矢',
 			fengshi_sha:'锋矢',
-			fengshi_info:'阵法技，在一个围攻关系中，若你是围攻角色，则你或另一名围攻角色使用【杀】指定被围攻角色为目标后，可令该角色弃置装备区内的一张牌。',
+			fengshi_info:'阵法技，在一个围攻关系中，若你是围攻角色，则你或另一名围攻角色使用【冲】指定被围攻角色为目标后，可令该角色弃置器具区内的一张牌。',
 			gzsuishi:'随势',
 			gzsuishi2:'随势',
 			gzsuishi_info:'锁定技，其他角色进入濒死状态时，若伤害来源与你势力相同，你摸一张牌；其他角色死亡时，若其与你势力相同，你失去1点体力。',
@@ -7646,16 +7646,16 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			gzcunsi:'存嗣',
 			gzcunsi_info:'出牌阶段，你可以移除此武将牌并选择一名角色，然后其获得技能〖勇决〗，若你选择的目标角色不是自己，则其摸两张牌。',
 			gzyongjue:'勇决',
-			gzyongjue_info:'与你势力相同的一名角色于其回合内使用【杀】结算完成后，若此牌是其本回合内使用的第一张牌，则其可以获得此牌对应的所有实体牌。',
+			gzyongjue_info:'与你势力相同的一名角色于其回合内使用【冲】结算完成后，若此牌是其本回合内使用的第一张牌，则其可以获得此牌对应的所有实体牌。',
 			gzqianxi:'潜袭',
 			gzqianxi_info:'准备阶段开始时，你可以进行判定，然后你选择距离为1的一名角色，直到回合结束，该角色不能使用或打出与结果颜色相同的手牌',
 			gzshangyi:'尚义',
 			gzshangyi_info:'出牌阶段限一次，你可以令一名其他角色观看你的手牌。若如此做，你选择一项：1.观看其手牌并可以弃置其中的一张黑色牌；2.观看其所有暗置的武将牌。',
 			niaoxiang:'鸟翔',
 			niaoxiang_sha:'鸟翔',
-			niaoxiang_info:'阵法技，在同一个围攻关系中，若你是围攻角色，则你或另一名围攻角色使用【杀】指定被围攻角色为目标后，该角色需依次使用两张【闪】才能抵消。',
+			niaoxiang_info:'阵法技，在同一个围攻关系中，若你是围攻角色，则你或另一名围攻角色使用【冲】指定被围攻角色为目标后，该角色需依次使用两张【守】才能抵消。',
 			yicheng:'疑城',
-			yicheng_info:'当与你势力相同的一名角色成为【杀】的目标后，你可以令该角色摸一张牌，然后弃置一张牌。',
+			yicheng_info:'当与你势力相同的一名角色成为【冲】的目标后，你可以令该角色摸一张牌，然后弃置一张牌。',
 			yizhi:'遗志',
 			yizhi_info:'副将技，此武将牌减少半个阴阳鱼。若你的主将拥有技能〖观星〗，则将其描述中的X改为5；若你的主将没有技能〖观星〗，则你视为拥有技能〖观星〗。',
 			tianfu:'天覆',
@@ -7663,9 +7663,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			ziliang:'资粮',
 			ziliang_info:'副将技，当与你势力相同的一名角色受到伤害后，你可以将一张“田”交给该角色 ',
 			gzjixi:'急袭',
-			gzjixi_info:'主将技，此武将牌减少半个阴阳鱼。你可以将一张“田”当作【顺手牵羊】使用。',
+			gzjixi_info:'主将技，此武将牌减少半个阴阳鱼。你可以将一张“田”当作【盗亦有道】使用。',
 			huyuan:'护援',
-			huyuan_info:'结束阶段开始时，你可以将一张装备牌置入一名角色的装备区，然后你可以弃置该角色距离为1的一名角色的一张牌。',
+			huyuan_info:'结束阶段开始时，你可以将一张器具牌置入一名角色的器具区，然后你可以弃置该角色距离为1的一名角色的一张牌。',
 			heyi:'鹤翼',
 			heyi_info:'阵法技，与你处于同一队列的其他角色视为拥有技能【飞影】。',
 			gz_shibing1wei:'魏兵',
@@ -7679,13 +7679,13 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			gzduanchang:'断肠',
 			gzduanchang_info:'锁定技，当你死亡时，你令杀死你的角色失去一张武将牌上的所有技能。',
 			gzweimu:'帷幕',
-			gzweimu_info:'锁定技，当你成为黑色锦囊牌的目标时，取消之。',
+			gzweimu_info:'锁定技，当你成为黑色策略牌的目标时，取消之。',
 			gzqianxun:'谦逊',
-			gzqianxun_info:'锁定技，当你成为【顺手牵羊】或【乐不思蜀】的目标时，取消之。',
+			gzqianxun_info:'锁定技，当你成为【盗亦有道】或【囹圄迷魂】的目标时，取消之。',
 			gzkongcheng:'空城',
-			gzkongcheng_info:'锁定技，当你成为【杀】或【决斗】的目标时，若你没有手牌，则取消之',
+			gzkongcheng_info:'锁定技，当你成为【冲】或【酣战】的目标时，若你没有手牌，则取消之',
 			gzxiaoji:'枭姬',
-			gzxiaoji_info:'当你失去装备区里的牌后，你可以摸两张牌。',
+			gzxiaoji_info:'当你失去器具区里的牌后，你可以摸两张牌。',
 			gzrende:'仁德',
 			gzrende_info:'出牌阶段，你可以将任意张手牌交给其他角色，然后若你于此阶段内给出第三张“仁德”牌时，你回复1点体力',
 			gzzhiheng:'制衡',
@@ -7693,7 +7693,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			duoshi:'度势',
 			duoshi_info:'出牌阶段限四次，你可以将一张红色手牌当做【以逸待劳】使用。',
 			gzxiaoguo:'骁果',
-			gzxiaoguo_info:'其他角色的结束阶段开始时，你可以弃置一张基本牌，令该角色选择一项：1.弃置一张装备牌；2.受到你对其造成的1点伤害。',
+			gzxiaoguo_info:'其他角色的结束阶段开始时，你可以弃置一张行动牌，令该角色选择一项：1.弃置一张器具牌；2.受到你对其造成的1点伤害。',
 			
 			guozhan_default:"国战标准",
 			guozhan_zhen:"君临天下·阵",
@@ -7958,7 +7958,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 							var position='',num0=0;
 							if(player.countCards('h')){position+='h';num0++;}
 							if(player.countCards('e')){position+='e';num0++;}
-							player.chooseCard('选择一张手牌和一张装备区内牌（若有），然后弃置其余的牌',position,num0,function(card){
+							player.chooseCard('选择一张手牌和一张器具区内牌（若有），然后弃置其余的牌',position,num0,function(card){
 								if(ui.selected.cards.length) return get.position(card)!=get.position(ui.selected.cards[0]);
 								return true;
 							},true).set('complexCard',true).set('ai',function(card){return get.value(card)});
