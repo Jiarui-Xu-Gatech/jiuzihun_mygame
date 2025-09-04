@@ -11734,7 +11734,7 @@
 									var filter=event.filterCard;
 									str='请使用'+get.cnNumber(event.selectCard[0])+'张'
 									if(filter.name){
-										str+=get.translation(filter.name);
+										str+='【'+get.translation(filter.name)+'】';
 									}
 									else{
 										str+='牌';
@@ -17985,7 +17985,7 @@
 							var str='请打出'+get.cnNumber(next.selectCard[0])+'张'
 							if(filter){
 								if(filter.name){
-									str+=get.translation(filter.name);
+									str+='【'+get.translation(filter.name)+'】';
 								}
 								else{
 									str+='牌';
@@ -17997,7 +17997,7 @@
 							if(_status.event.getParent().name=='useCard'){
 								var cardname=_status.event.name;
 								if(lib.card[cardname]&&lib.translate[cardname]){
-									str+='响应'+lib.translate[cardname];
+									str+='响应'+'【'+lib.translate[cardname]+'】';
 								}
 							}
 							next.dialog=str;

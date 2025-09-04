@@ -85,14 +85,14 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						event._result={bool:true,result:'shaned'};
 					}
 					else{
-						var next=target.chooseToUse('请使用一张守响应冲');
+						var next=target.chooseToUse('请使用一张【守】响应【冲】');
 						next.set('type','respondShan');
 						next.set('filterCard',function(card,player){
 							if(get.name(card)!='shan') return false;
 							return lib.filter.cardEnabled(card,player,'forceEnable');
 						});
 						if(event.shanRequired>1){
-							next.set('prompt2','（共需使用'+event.shanRequired+'张守）');
+							next.set('prompt2','（共需使用'+event.shanRequired+'张【守】）');
 						}
 						next.set('ai1',function(card){
 							var target=_status.event.player;
@@ -951,6 +951,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						// var next=event.turn.chooseToRespond({name:'sha'});
 						//酣战这里修改为如果没有冲，可以用酒代替冲
 						var next;
+						var strPrompt = '';
 						if (event.turn.countCards('h','sha')!=0){
 							next=event.turn.chooseToRespond({name:'sha'});
 						}
@@ -958,10 +959,14 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 							next=event.turn.chooseToRespond(function(card){
 								return ['sha','jiu'].includes(card.name);
 							});
+							strPrompt += '或【酒】';
 						}
 
 						if(event.shaRequired>1){
-							next.set('prompt2','共需打出'+event.shaRequired+'张冲')
+							next.set('prompt2','共需打出'+event.shaRequired+'张【冲】'+strPrompt);
+						}
+						else if (event.turn.countCards('h','sha')==0){
+							next.set('prompt2','【酒】也能代替【冲】打出');
 						}
 						next.set('ai',function(card){
 							var event=_status.event;

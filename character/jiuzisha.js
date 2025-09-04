@@ -5148,13 +5148,13 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     });
                     "step 1"
                     if (result.card&&result.bool) {
-                        game.log('#g【九尾】','出冲判定成功');
+                        game.log('#g【九尾】','出','#y冲','判定成功');
                         trigger.untrigger();
                         trigger.set('responded',true);
                         trigger.result={bool:true,card:{name:'sha',isCard:true}}
                     }
                     else{
-                        game.log('#g【九尾】','出冲判定失败');
+                        game.log('#g【九尾】','出','#y冲','判定失败');
                     }
                 },
                 
@@ -5166,7 +5166,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 audio:2,
                 frequent:false,
                 shaRelated:true,
-                prompt:"你可以选择一个目标，发动技能【九尾】判定向其出冲，是否发动？",
+                prompt:"你可以选择一个目标，发动技能【九尾】判定向其出【冲】，是否发动？",
                 priority:10,
                 line:'thunder',
                 // direct:true,
@@ -5226,14 +5226,14 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     "step 1"
                     if (result.card&&result.bool) {
                         // 判定成功，视为对目标使用了一张【冲】
-                        game.log('#g【九尾】','出冲判定成功');
+                        game.log('#g【九尾】','出','#y冲','判定成功');
                         player.useCard({name:'sha',isCard:true,cardid:"jiuwei_useSha_tushan_id"},target,false);
                         player.storage.successSha = true;
                         // event.finish();
                         // result = {bool:true}; 
                     } 
                     else {
-                        game.log('#g【九尾】','出冲判定失败');
+                        game.log('#g【九尾】','出','#y冲','判定失败');
                         player.storage.successSha = false;
                         var theParent = event.getParent('chooseToUse');
                         if (theParent&&theParent.result){
@@ -5315,7 +5315,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 line:'thunder',
                 logTarget:'source',
                 prompt:"九尾",
-                prompt:"是否发动【九尾】判定，若判定结果点数≤9，你对伤害来源造成1点伤害。",
+                prompt2:"是否发动【九尾】判定，若判定结果点数≤9，你对伤害来源造成1点伤害。",
 				content:function(){
 					"step 0"
 					player.judge(function (card) {
@@ -5511,6 +5511,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 
 
             linghu2_ning:{
+                audio:false,
                 trigger:{player:'damageEnd'},
 				forced:true,
 				silent:true,
@@ -16557,7 +16558,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         if (has){
                             player.chooseCardButton('【傲樽】：选择一张【冲】打出',cards).set('filterButton',function(button){
-                                return get.type(button.link)=='basic'&&_status.event.getTrigger().filterCard(button.link);
+                                // return get.type(button.link)=='basic'&&_status.event.getTrigger().filterCard(button.link);
+                                //这里只能打出冲，酒能拿但不能打出哈！
+                                return get.type(button.link)=='basic'&&_status.event.getTrigger().filterCard(button.link)&&get.name(button.link)&&get.name(button.link)=='sha';
                             }).set('ai',function(button){
                                 if (event.triggerParent&&event.triggerParent.name&&event.triggerParent.name == 'juedou'){
                                     if (get.attitude(event.triggerParent.player,event.triggerParent.target) > 0 && get.attitude(event.triggerParent.target,event.triggerParent.player) > 0){
@@ -16585,7 +16588,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                             player.chooseCardButton('【傲樽】：选择一张卡牌获得，剩余三张置顶',cards).set('filterButton',function(button){
                                 return true;
                             }).set('ai',function(button){
-                                return get.value(button.link);
+                                var add = 0;
+                                if (get.name(button.link)&&get.name(button.link)=='jiu'){
+                                    add = 6.5;
+                                }
+                                return get.value(button.link)+add;
                             });
                             event.goto(3);
                         }
@@ -18069,12 +18076,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					else if(event.current.sex=='female'){
                         player.storage.yunv_shashan_guiing=true;
                         player.line(event.current);
-                        var next=event.current.chooseToRespond('【驭女】：是否替'+get.translation(player)+'打出一张'+event.Word+'？',{name:event.EnglishWord});
+                        var next=event.current.chooseToRespond('【驭女】：是否替'+get.translation(player)+'打出一张'+'【'+event.Word+'】？',{name:event.EnglishWord});
                         next.set('ai',function(){
                             var event=_status.event;
                             return (get.attitude(event.player,event.source)-2);
                         });
-                        next.set('skillwarn','替'+get.translation(player)+'打出一张'+event.Word);
+                        next.set('skillwarn','替'+get.translation(player)+'打出一张'+'【'+event.Word+'】');
                         if (event.Word == '守'){
                             next.autochoose=lib.filter.autoRespondShan;
                         }
