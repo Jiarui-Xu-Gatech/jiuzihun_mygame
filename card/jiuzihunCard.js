@@ -755,7 +755,20 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					if(typeof event.baseDamage!='number') event.baseDamage=1;
 					if(event.directHit) event._result={bool:false};
 					else{
-						var next=target.chooseToRespond({name:'sha'});
+						// var next=target.chooseToRespond({name:'sha'});
+						//红莲醉舞这里修改为如果没有冲，可以用酒代替冲
+						var next;
+						var strPrompt = '';
+						if (target.countCards('h','sha')!=0){
+							next=target.chooseToRespond({name:'sha'});
+						}
+						else{
+							next=target.chooseToRespond('请打出一张【'+get.translation('sha')+'】'+'响应'+'【'+get.translation('nanman')+'】',function(card){
+								return ['sha','jiu'].includes(card.name);
+							});
+							next.set('prompt2','【酒】也能代替【冲】打出');
+						}
+
 						next.set('ai',function(card){
 							var evt=_status.event.getParent();
 							if(get.damageEffect(evt.target,evt.player,evt.target,undefined,true)>=0) return 0;
@@ -3802,7 +3815,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			qilin_info:'当你使用【冲】对目标角色造成伤害时，你可以弃置其器具区里的一张坐骑牌。',
 			wugu_info:'出牌阶段，对所有角色使用。（选择目标后）你从牌堆顶亮出等同于目标数量的牌，每名目标角色获得这些牌中（剩余的）的任意一张。',
 			taoyuan_info:'出牌阶段，对所有角色使用。每名目标角色回复1点体力。',
-			nanman_info:'出牌阶段，对所有其他角色使用。每名目标角色需打出一张【冲】，否则受到1点伤害。',
+			nanman_info:'出牌阶段，对所有其他角色使用。每名目标角色需打出一张【冲】（当手牌中没有【冲】时，【酒】也能代替【冲】打出），否则受到1点伤害。',
 			wanjian_info:'出牌阶段，对所有其他角色使用。每名目标角色需打出一张【守】，否则受到1点伤害。',
 			wuzhong_info:'出牌阶段，对你使用。你摸两张牌。',
 			juedou_info:'出牌阶段，对一名其他角色使用。由其开始，其与你轮流打出一张【冲】，当手牌中没有【冲】时，【酒】也能代替【冲】打出，直到其中一方未打出【冲】或【酒】为止。未打出【冲】或【酒】的一方受到另一方对其造成的1点伤害。',
