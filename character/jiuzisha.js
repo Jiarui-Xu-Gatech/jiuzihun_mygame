@@ -26358,7 +26358,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     var card=get.cardPile2(function(card){
-                        return get.name(card)=='hualiu';
+                        return get.name(card)=='chitu';
                     });
                     if (card){
                         player.gain(card);
