@@ -15563,14 +15563,52 @@
 						delete player.equiping;
 						return;
 					}
-					if(lib.config.background_audio){
-						game.playAudio('effect',get.subtype(card));
+
+
+					//这里想试验一下能不能把装备个性化起来
+					// function checkAudioExists(path, callback){
+					// 	var audio = new Audio();
+					// 	audio.src = lib.assetURL + 'audio/effect/' + path + '.mp3';
+					// 	audio.addEventListener('canplaythrough', function(){
+					// 		callback(true); // 文件存在
+					// 	});
+					// 	audio.addEventListener('error', function(){
+					// 		callback(false); // 文件不存在
+					// 	});
+					// }
+					function checkAudioExists(filePath, callback){
+						var url = lib.assetURL + 'audio/effect/' + filePath + '.mp3';
+						fetch(url, { method: 'HEAD' }) // 只获取头部，不下载整个文件
+							.then(function(response){
+								callback(response.ok); // 200-299 为 true，其他为 false
+							})
+							.catch(function(){
+								callback(false); // 网络或其他问题
+							});
 					}
-					game.broadcast(function(type){
-						if(lib.config.background_audio){
-							game.playAudio('effect',type);
-						}
-					},get.subtype(card));
+					var audioTitle = get.name(card);
+					if(lib.config.background_audio){
+						checkAudioExists(audioTitle, function(exists){
+							if(exists){
+								game.playAudio('effect', audioTitle);
+								game.broadcast(function(type){
+									if(lib.config.background_audio){
+										game.playAudio('effect',type);
+									}
+								},audioTitle);
+							} else {
+								game.playAudio('effect', get.subtype(audioTitle));
+								game.broadcast(function(type){
+									if(lib.config.background_audio){
+										game.playAudio('effect',type);
+									}
+								},get.subtype(audioTitle));
+							}
+						});
+					}
+					
+
+
 					player.$equip(card);
 					game.addVideo('equip',player,get.cardInfo(card));
 					// game.broadcast(function(player,cardInfo){
