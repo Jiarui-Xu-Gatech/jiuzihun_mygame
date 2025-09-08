@@ -26358,7 +26358,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     var card=get.cardPile2(function(card){
-                        return get.name(card)=='chitu';
+                        return get.name(card)=='guding';
                     });
                     if (card){
                         player.gain(card);
@@ -26900,9 +26900,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             'jingling': '精灵',
             'jingling_info': "你可以弃置两张牌，使一次判定或一张策略牌无效。",
             'yongzhuang': '泳装',
-            'yongzhuang_info': "锁定技，当你的防具栏为空时，黑色的冲对你无效。",
+            'yongzhuang_info': "锁定技，当你的防具栏为空时，黑色的【冲】对你无效。",
             'mizui':'迷醉',
-            'mizui_info':"当你成为非黑色冲的目标或受到伤害时，你可以进行一次判定，若结果为♥，则此冲或此次伤害无效。",
+            'mizui_info':"当你成为非黑色【冲】的目标或受到伤害时，你可以进行一次判定，若结果为♥，则此【冲】或此次伤害无效。",
             
 
             hanxin: '韩鑫',
