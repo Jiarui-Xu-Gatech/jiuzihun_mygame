@@ -3473,9 +3473,9 @@
 				config:{
 					update:function(config,map){
 						//隐藏器具配音
-						if(map.equip_audio){
-							map.equip_audio.hide();
-						}
+						// if(map.equip_audio){
+						// 	map.equip_audio.hide();
+						// }
 
 						if(lib.config.background_music=='music_custom'&&(lib.device||lib.node)){
 							map.import_music.show();
