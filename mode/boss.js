@@ -731,7 +731,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					if(target.hasSha()){
 						target.chooseToUse(function(card,player,event){
 							return get.name(card)=='sha'&&lib.filter.filterCard.apply(this,arguments);
-						},'使用一张冲，或交给'+get.translation(player)+'两张牌');
+						},'使用一张【冲】，或交给'+get.translation(player)+'两张牌');
 					}
 					else{
 						event.directfalse=true;

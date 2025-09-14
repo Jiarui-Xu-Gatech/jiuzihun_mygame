@@ -16430,7 +16430,7 @@
 					if(!info||info=='server'){
 						this.roomempty=true;
 						if (info3||info3==0){
-							if (info2){
+							if (info2&&info3<18){
 								this.initOL('空房间'+get.cnNumber(info3+1,true)+get.translation(info2),info2||'room');
 							}
 							else{
@@ -26925,7 +26925,7 @@
 					_status.enteringroom=false;
 					ui.create.connecting(true);
 				},
-				roomlist:function(list,events,clients,wsid){
+				roomlist:function(list,events,clients,wsid,page){
 					game.send('server','key',game.onlineKey);
 					game.online=true;
 					game.onlinehall=true;
@@ -26937,6 +26937,12 @@
 					}
 					game.saveConfig('recentIP',lib.config.recentIP);
 					_status.connectMode=true;
+					if (!page){
+						_status.page = 0;
+					}
+					else{
+						_status.page = page;
+					}
 
 					game.clearArena();
 					game.clearConnect();
@@ -26946,14 +26952,88 @@
 					clearTimeout(_status.createNodeTimeout);
 					game.send('server','changeAvatar',lib.config.connect_nickname,lib.config.connect_avatar);
 
+					var leftButton = null;
+					var rightButton = null;
+
+					var showPageButton = function(){
+						if (leftButton && ui.window.contains(leftButton)) {
+							leftButton.remove(); // 或 ui.window.removeChild(leftButton)
+							leftButton = null; // 清空引用
+						}
+
+						if (rightButton && ui.window.contains(rightButton)) {
+							rightButton.remove();
+							rightButton = null;
+						}
+
+
+						if(_status.page > 0){
+							// 创建左侧按钮（< 上一页）
+							leftButton = ui.create.div('', '❮', function() {
+								// 点击事件 - 上一页逻辑
+								if (!_status.page){
+									_status.page = 0;
+								}
+								if (_status.page == 0){
+
+								}
+								else{
+									_status.page--;
+									lib.message.client.updaterooms(list,clients,_status.page);
+									showPageButton();
+								}
+							});
+							leftButton.style.width = '50px';
+							leftButton.style.height = '80px';
+							leftButton.style.borderRadius = '10px'; // 圆角
+							leftButton.style.left = 'calc(25% - 50px - 75px)'; // 按钮在 #window 左边的位置（可调整）
+							leftButton.style.top = 'calc(50% - 40px)';   // 垂直居中
+							leftButton.style.fontSize = '80px';
+							leftButton.style.lineHeight = '80px';
+							leftButton.style.textAlign = 'center';
+							ui.window.appendChild(leftButton);
+						}
+						
+
+						if ((_status.page+2)*9<=list.length){
+							// 创建右侧按钮（> 下一页）
+							rightButton = ui.create.div('', '❯', function() {
+								// 点击事件 - 下一页逻辑
+								if (!_status.page){
+									_status.page = 0;
+								}
+								if ((_status.page+2)*9>list.length){
+
+								}
+								else{
+									_status.page++;
+									lib.message.client.updaterooms(list,clients,_status.page);
+									showPageButton();
+								}
+							});
+							rightButton.style.width = '50px';
+							rightButton.style.height = '80px';
+							rightButton.style.borderRadius = '10px'; // 圆角
+							// rightButton.style.right = 'calc(50% - 350px)'; // 如果 ui.create.div 不能直接用 right，用 left 控制位置
+							rightButton.style.left = 'calc(75% + 75px)'; // 按钮在 #window 右边的位置（可调整）
+							rightButton.style.top = 'calc(50% - 40px)';
+							rightButton.style.fontSize = '80px';
+							rightButton.style.lineHeight = '80px';
+							rightButton.style.textAlign = 'center';
+							ui.window.appendChild(rightButton);
+						}
+
+					}
+
 					var proceed=function(){
 						ui.rooms=[];
 						game.ip=get.trimip(_status.ip);
-						for(var i=0;i<list.length;i++){
+						// for(var i=0;i<list.length;i++){
+						for(var i=0;i<9;i++){
 							var player=ui.create.player(ui.window).animate('start');
 							player.dataset.position='c'+i;
 							player.classList.add('connect');
-							player.roomindex=i;
+							player.roomindex= i + _status.page*9;
 							player.node.hp.classList.add('room');
 							ui.rooms.push(player);
 						}
@@ -26980,7 +27060,7 @@
 							}
 						}
 						game.wsid=wsid;
-						lib.message.client.updaterooms(list,clients);
+						lib.message.client.updaterooms(list,clients,_status.page);
 						lib.message.client.updateevents(events);
 						ui.exitroom=ui.create.system('退出房间',function(){
 							game.saveConfig('tmp_owner_roomId');
@@ -27066,6 +27146,7 @@
 							}
 						}
 						lib.init.onfree();
+						showPageButton();
 					}
 					if(_status.event.parent){
 						game.forceOver('noover',proceed);
@@ -27074,12 +27155,16 @@
 						proceed();
 					}
 				},
-				updaterooms:function(list,clients){
+				updaterooms:function(list,clients,page){
+					if (!page){
+						page = 0;
+					}
 					if(ui.rooms){
 						ui.window.classList.add('more_room');
 						var list2=['bixi_jiuzi','chiwen_jiuzi','pulao_jiuzi','bian_jiuzi','taotie_jiuzi','gongfu_jiuzi','yazi_jiuzi','suanni_jiuzi','jiaotu_jiuzi'];//['re_caocao','re_liubei','re_sunquan','re_zhangjiao','ol_yuanshao','ol_dongzhuo'];
-						for(var i=0;i<ui.rooms.length;i++){
-							ui.rooms[i].initRoom(list[i],list2[i%list2.length],i);
+						// for(var i=0;i<ui.rooms.length;i++){
+						for(var i=0;i<list2.length;i++){
+							ui.rooms[i].initRoom(list[i+(9*page)],list2[i%list2.length],i+(9*page));
 						}
 					}
 					lib.message.client.updateclients(clients,true);
