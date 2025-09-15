@@ -26876,7 +26876,7 @@
 						ui.window.removeChild(_status.leftButton)
 						_status.leftButton = null; // 清空引用
 					}
-					if (_status.rightButton){
+					if (_status.rightButton&&ui.window.contains(_status.rightButton)){
 						ui.window.removeChild(_status.rightButton)
 						_status.rightButton = null; // 清空引用
 					}
@@ -26917,7 +26917,7 @@
 						ui.window.removeChild(_status.leftButton)
 						_status.leftButton = null; // 清空引用
 					}
-					if (_status.rightButton){
+					if (_status.rightButton&&ui.window.contains(_status.rightButton)){
 						ui.window.removeChild(_status.rightButton)
 						_status.rightButton = null; // 清空引用
 					}
@@ -26939,7 +26939,7 @@
 						ui.window.removeChild(_status.leftButton)
 						_status.leftButton = null; // 清空引用
 					}
-					if (_status.rightButton){
+					if (_status.rightButton&&ui.window.contains(_status.rightButton)){
 						ui.window.removeChild(_status.rightButton)
 						_status.rightButton = null; // 清空引用
 					}
@@ -26963,7 +26963,7 @@
 						ui.window.removeChild(_status.leftButton)
 						_status.leftButton = null; // 清空引用
 					}
-					if (_status.rightButton){
+					if (_status.rightButton&&ui.window.contains(_status.rightButton)){
 						ui.window.removeChild(_status.rightButton)
 						_status.rightButton = null; // 清空引用
 					}
@@ -27277,7 +27277,7 @@
 						ui.window.removeChild(_status.leftButton)
 						_status.leftButton = null; // 清空引用
 					}
-					if (_status.rightButton){
+					if (_status.rightButton&&ui.window.contains(_status.rightButton)){
 						ui.window.removeChild(_status.rightButton)
 						_status.rightButton = null; // 清空引用
 					}
@@ -27389,12 +27389,12 @@
 						ui.window.removeChild(_status.leftButton)
 						_status.leftButton = null; // 清空引用
 					}
-					if (_status.rightButton){
+					if (_status.rightButton&&ui.window.contains(_status.rightButton)){
 						ui.window.removeChild(_status.rightButton)
 						_status.rightButton = null; // 清空引用
 					}
 					///////////////////////////////
-					
+
 
 					//这里保证能存录像了
 					if(!_status.video){
@@ -36461,6 +36461,17 @@
 			game.finishCards();
 		},
 		clearArena:function(){
+			//去掉leftButton和rightButton
+			if (_status.leftButton&&ui.window.contains(_status.leftButton)){
+				ui.window.removeChild(_status.leftButton)
+				_status.leftButton = null; // 清空引用
+			}
+			if (_status.rightButton&&ui.window.contains(_status.rightButton)){
+				ui.window.removeChild(_status.rightButton)
+				_status.rightButton = null; // 清空引用
+			}
+			///////////////////////////////
+
 			ui.control.innerHTML='';
 			ui.arenalog.innerHTML='';
 			var nodes=[];
