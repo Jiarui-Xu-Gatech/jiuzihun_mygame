@@ -16430,11 +16430,11 @@
 					if(!info||info=='server'){
 						this.roomempty=true;
 						if (info3||info3==0){
-							if (info2&&info3<18){
-								this.initOL('空房间'+get.cnNumber(info3+1,true)+get.translation(info2),info2||'room');
+							if (info2&&(info3<18||info3>=18)){
+								this.initOL('空房间'+get.cnNumber2(info3+1,true)+get.translation(info2),info2||'room');
 							}
 							else{
-								this.initOL('空房间'+get.cnNumber(info3+1,true),info2||'room');
+								this.initOL('空房间'+get.cnNumber2(info3+1,true),info2||'room');
 							}
 						}
 						else{
@@ -53037,6 +53037,32 @@
 			if(isNaN(num)) return '';
 			if(typeof num!='number') return num;
 			if(num<0||num>99) return num;
+			if(num<=10){
+				switch(num){
+					case 0:return '〇';
+					case 1:return '一';
+					case 2:return two?'二':'两';
+					case 3:return '三';
+					case 4:return '四';
+					case 5:return '五';
+					case 6:return '六';
+					case 7:return '七';
+					case 8:return '八';
+					case 9:return '九';
+					case 10:return '十';
+				}
+			}
+			if(num<20){
+				return '十'+get.cnNumber(num-10,true);
+			}
+			var x=Math.floor(num/10);
+			return get.cnNumber(x,true)+'十'+(num>10*x?get.cnNumber(num-10*x,true):'');
+		},
+		cnNumber2:function(num,two){
+			if(num==Infinity) return '∞';
+			if(isNaN(num)) return '';
+			if(typeof num!='number') return num;
+			if(num<0||num>18) return num;
 			if(num<=10){
 				switch(num){
 					case 0:return '〇';
