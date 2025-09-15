@@ -26871,6 +26871,18 @@
 					}
 				},
 				onconnection:function(id){
+					//去掉leftButton和rightButton
+					if (_status.leftButton&&ui.window.contains(_status.leftButton)){
+						ui.window.removeChild(_status.leftButton)
+						_status.leftButton = null; // 清空引用
+					}
+					if (_status.rightButton){
+						ui.window.removeChild(_status.rightButton)
+						_status.rightButton = null; // 清空引用
+					}
+					///////////////////////////////
+
+
 					var ws={wsid:id};
 					for(var i in lib.element.nodews){
 						ws[i]=lib.element.nodews[i];
@@ -26900,6 +26912,18 @@
 					game.ws.close();
 				},
 				reloadroom:function(forced){
+					//去掉leftButton和rightButton
+					if (_status.leftButton&&ui.window.contains(_status.leftButton)){
+						ui.window.removeChild(_status.leftButton)
+						_status.leftButton = null; // 清空引用
+					}
+					if (_status.rightButton){
+						ui.window.removeChild(_status.rightButton)
+						_status.rightButton = null; // 清空引用
+					}
+					///////////////////////////////
+
+
 					if(window.isNonameServer&&(forced||!_status.protectingroom)){
 						game.reload();
 					}
@@ -26934,6 +26958,17 @@
 					ui.create.connecting(true);
 				},
 				enterroomfailed:function(){
+					//去掉leftButton和rightButton
+					if (_status.leftButton&&ui.window.contains(_status.leftButton)){
+						ui.window.removeChild(_status.leftButton)
+						_status.leftButton = null; // 清空引用
+					}
+					if (_status.rightButton){
+						ui.window.removeChild(_status.rightButton)
+						_status.rightButton = null; // 清空引用
+					}
+					///////////////////////////////
+
 					alert('请稍后再试');
 					_status.enteringroom=false;
 					ui.create.connecting(true);
@@ -27236,6 +27271,19 @@
 					game.ip=ip;
 					game.servermode=servermode;
 					game.roomId=roomId;
+
+					//去掉leftButton和rightButton
+					if (_status.leftButton&&ui.window.contains(_status.leftButton)){
+						ui.window.removeChild(_status.leftButton)
+						_status.leftButton = null; // 清空引用
+					}
+					if (_status.rightButton){
+						ui.window.removeChild(_status.rightButton)
+						_status.rightButton = null; // 清空引用
+					}
+					///////////////////////////////
+
+
 					if(game.servermode){
 						game.saveConfig('reconnect_info',[_status.ip,id,game.roomId]);
 					}
@@ -27335,6 +27383,18 @@
 					}
 				},
 				reinit:function(config,state,state2,ip,observe,onreconnect,getVideoName,configmode,aozhan_bool,getIdentityList2,upperBackgoundPictureName,reinitCreateClearBackground){
+
+					//去掉leftButton和rightButton
+					if (_status.leftButton&&ui.window.contains(_status.leftButton)){
+						ui.window.removeChild(_status.leftButton)
+						_status.leftButton = null; // 清空引用
+					}
+					if (_status.rightButton){
+						ui.window.removeChild(_status.rightButton)
+						_status.rightButton = null; // 清空引用
+					}
+					///////////////////////////////
+					
 
 					//这里保证能存录像了
 					if(!_status.video){
