@@ -26967,83 +26967,8 @@
 					clearTimeout(_status.createNodeTimeout);
 					game.send('server','changeAvatar',lib.config.connect_nickname,lib.config.connect_avatar);
 
-					var leftButton = null;
-					var rightButton = null;
-
-					var showPageButton = function(){
-						if (leftButton && ui.window.contains(leftButton)) {
-							leftButton.remove(); // 或 ui.window.removeChild(leftButton)
-							leftButton = null; // 清空引用
-						}
-
-						if (rightButton && ui.window.contains(rightButton)) {
-							rightButton.remove();
-							rightButton = null;
-						}
-
-						if (game.onlineroom){
-							return;
-						}
-
-						if(_status.page > 0){
-							// 创建左侧按钮（< 上一页）
-							leftButton = ui.create.div('.button', '❮', function() {
-								// 点击事件 - 上一页逻辑
-								if (!_status.page){
-									_status.page = 0;
-								}
-								if (_status.page == 0){
-
-								}
-								else{
-									_status.page--;
-									lib.message.client.updaterooms(list,clients,_status.page);
-									showPageButton();
-								}
-							});
-							leftButton.style.width = '80px';
-							leftButton.style.height = '120px';
-							leftButton.style.borderRadius = '10px'; // 圆角
-							leftButton.style.left = 'calc(25% - 50px - 75px)'; // 按钮在 #window 左边的位置（可调整）
-							leftButton.style.top = 'calc(50% - 60px)';   // 垂直居中
-							leftButton.style.fontSize = '80px';
-							leftButton.style.lineHeight = '110px';
-							leftButton.style.textAlign = 'center';
-							ui.window.appendChild(leftButton);
-							_status.leftButton = leftButton;
-						}
-						
-
-						if ((_status.page+2)*9<=list.length){
-							// 创建右侧按钮（> 下一页）
-							rightButton = ui.create.div('.button', '❯', function() {
-								// 点击事件 - 下一页逻辑
-								if (!_status.page){
-									_status.page = 0;
-								}
-								if ((_status.page+2)*9>list.length){
-
-								}
-								else{
-									_status.page++;
-									lib.message.client.updaterooms(list,clients,_status.page);
-									showPageButton();
-								}
-							});
-							rightButton.style.width = '80px';
-							rightButton.style.height = '120px';
-							rightButton.style.borderRadius = '10px'; // 圆角
-							// rightButton.style.right = 'calc(50% - 350px)'; // 如果 ui.create.div 不能直接用 right，用 left 控制位置
-							rightButton.style.left = 'calc(75% + 75px)'; // 按钮在 #window 右边的位置（可调整）
-							rightButton.style.top = 'calc(50% - 60px)';
-							rightButton.style.fontSize = '80px';
-							rightButton.style.lineHeight = '110px';
-							rightButton.style.textAlign = 'center';
-							ui.window.appendChild(rightButton);
-							_status.rightButton = rightButton;
-						}
-
-					}
+					_status.leftButton = null;
+					_status.rightButton = null;
 
 					var proceed=function(){
 						ui.rooms=[];
@@ -27167,7 +27092,6 @@
 							}
 						}
 						lib.init.onfree();
-						showPageButton();
 					}
 					if(_status.event.parent){
 						game.forceOver('noover',proceed);
@@ -27190,6 +27114,82 @@
 						for(var i=0;i<list2.length;i++){
 							ui.rooms[i].initRoom(list[i+(9*page)],list2[i%list2.length],i+(9*page));
 						}
+
+
+						var leftButton = null;
+						var rightButton = null;
+
+						var showPageButton = function(){
+							if (_status.leftButton && ui.window.contains(_status.leftButton)) {
+								ui.window.removeChild(_status.leftButton);
+								_status.leftButton = null; // 清空引用
+							}
+
+							if (_status.rightButton && ui.window.contains(_status.rightButton)) {
+								ui.window.removeChild(_status.rightButton);
+								_status.rightButton = null;
+							}
+
+							if(_status.page > 0){
+								// 创建左侧按钮（< 上一页）
+								leftButton = ui.create.div('.button', '❮', function() {
+									// 点击事件 - 上一页逻辑
+									if (!_status.page){
+										_status.page = 0;
+									}
+									if (_status.page == 0){
+
+									}
+									else{
+										_status.page--;
+										lib.message.client.updaterooms(list,clients,_status.page);
+									}
+								});
+								leftButton.style.width = '80px';
+								leftButton.style.height = '120px';
+								leftButton.style.borderRadius = '10px'; // 圆角
+								leftButton.style.left = 'calc(25% - 50px - 75px)'; // 按钮在 #window 左边的位置（可调整）
+								leftButton.style.top = 'calc(50% - 60px)';   // 垂直居中
+								leftButton.style.fontSize = '80px';
+								leftButton.style.lineHeight = '110px';
+								leftButton.style.textAlign = 'center';
+								ui.window.appendChild(leftButton);
+								_status.leftButton = leftButton;
+							}
+							
+
+							if ((_status.page+2)*9<=list.length){
+								// 创建右侧按钮（> 下一页）
+								rightButton = ui.create.div('.button', '❯', function() {
+									// 点击事件 - 下一页逻辑
+									if (!_status.page){
+										_status.page = 0;
+									}
+									if ((_status.page+2)*9>list.length){
+
+									}
+									else{
+										_status.page++;
+										lib.message.client.updaterooms(list,clients,_status.page);
+									}
+								});
+								rightButton.style.width = '80px';
+								rightButton.style.height = '120px';
+								rightButton.style.borderRadius = '10px'; // 圆角
+								// rightButton.style.right = 'calc(50% - 350px)'; // 如果 ui.create.div 不能直接用 right，用 left 控制位置
+								rightButton.style.left = 'calc(75% + 75px)'; // 按钮在 #window 右边的位置（可调整）
+								rightButton.style.top = 'calc(50% - 60px)';
+								rightButton.style.fontSize = '80px';
+								rightButton.style.lineHeight = '110px';
+								rightButton.style.textAlign = 'center';
+								ui.window.appendChild(rightButton);
+								_status.rightButton = rightButton;
+							}
+
+						}
+
+						showPageButton();
+
 					}
 					lib.message.client.updateclients(clients,true);
 				},
