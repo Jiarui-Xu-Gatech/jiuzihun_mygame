@@ -723,7 +723,7 @@
 									me.style.height='22px';
 								}
 								me.style.borderRadius='2px';
-								var list=['tongxin','shiyun_za','ouruoling','hanxin'];
+								var list=['guidouzi_z','shiyun_za','ouruoling','tushanzuiyue'];
 								for(var i=0;i<4;i++){
 									var player=ui.create.div('.fakeplayer',node);
 									ui.create.div('.avatar',player).setBackground(list.randomRemove(),'character');

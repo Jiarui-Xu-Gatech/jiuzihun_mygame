@@ -1,10 +1,42 @@
+// const express = require('express');
+// const app = express();
+// const port = 3000;
+
+// app.get('/status', (req, res) => {
+//   res.json({ game: 'running', players: 1 });
+// });
+
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
+
+// const WebSocket = require('ws');
+// const wss = new WebSocket.Server({ port: 8080 });
+
+// wss.on('connection', function connection(ws) {
+//   console.log('Client connected');
+
+//   ws.on('message', function incoming(message) {
+//     console.log('received: %s', message);
+//     // 测试返回一些指令
+//     ws.send(JSON.stringify(['roomlist', [], [], '12345']));
+//   });
+
+//   ws.send(JSON.stringify(['roomlist', [], [], '12345']));
+// });
+
+
+
+
 (function(){
 	var WebSocketServer=require('ws').Server;
-	var wss=new WebSocketServer({port:8080});
+	var port = process.env.PORT || 8080;
+	var wss=new WebSocketServer({port:port});
 	var bannedKeys=[];
 	var bannedIps=[];
 
-	var rooms=[{},{},{},{},{},{}];
+	// var rooms=[{},{},{},{},{},{},{},{},{}];
+	var rooms = Array.from({ length: 999 }, () => ({}));
 	var events=[];
 	var clients={};
 	var messages={
@@ -125,8 +157,8 @@
 						this.sendl('eventsdenied','time');
 					}
 					else{
-						cfg.nickname=cfg.nickname||'无名玩家';
-						cfg.avatar=cfg.nickname||'caocao';
+						cfg.nickname=cfg.nickname||'九子魂玩家';
+						cfg.avatar=cfg.nickname||'chenyingchao';
 						cfg.creator=id;
 						cfg.id=util.getid();
 						cfg.members=[id];
@@ -188,9 +220,13 @@
 				args.push(arguments[i]);
 			}
 			try{
-				this.send(JSON.stringify(args));
+				// this.send(JSON.stringify(args));
+				const str = JSON.stringify(args);
+				// console.log('sending:', str);  // 打印字符串
+				this.send(str);
 			}
 			catch(e){
+        		// console.log('send failed:', args);  // 这就会打印出你错误的地方
 				this.close();
 			}
 		},
@@ -232,12 +268,16 @@
 			}
 			return clientlist;
 		},
+		getPage:function(){
+			return -1;
+		},
 		updaterooms:function(){
 			var roomlist=util.getroomlist();
 			var clientlist=util.getclientlist();
+			var page = util.getPage();
 			for(var i in clients){
 				if(!clients[i].room){
-					clients[i].sendl('updaterooms',roomlist,clientlist);
+					clients[i].sendl('updaterooms',roomlist,clientlist,page);
 				}
 			}
 		},
@@ -286,7 +326,7 @@
 		},2000);
 		ws.wsid=util.getid();
 		clients[ws.wsid]=ws;
-		ws.sendl('roomlist',util.getroomlist(),util.checkevents(),util.getclientlist(ws),ws.wsid);
+		ws.sendl('roomlist',util.getroomlist(),util.checkevents(),util.getclientlist(ws),ws.wsid,util.getPage());
 		ws.heartbeat=setInterval(function(){
 			if(ws.beat){
 				ws.close();
@@ -308,7 +348,16 @@
 				this.beat=false;
 			}
 			else if(this.owner){
-				this.owner.sendl('onmessage',this.wsid,message);
+        let raw = message;
+        try {
+            if (typeof raw !== 'string') {
+                raw = raw.toString();
+            }
+        } catch (e) {
+            console.log('Failed to convert message to string:', message);
+            return;
+        }
+				this.owner.sendl('onmessage',this.wsid,raw);
 			}
 			else{
 				var arr;
