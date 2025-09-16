@@ -723,7 +723,7 @@
 									me.style.height='22px';
 								}
 								me.style.borderRadius='2px';
-								var list=['re_caocao','re_liubei','sp_zhangjiao','sunquan'];
+								var list=['tongxin','shiyun_za','ouruoling','hanxin'];
 								for(var i=0;i<4;i++){
 									var player=ui.create.div('.fakeplayer',node);
 									ui.create.div('.avatar',player).setBackground(list.randomRemove(),'character');
@@ -47497,15 +47497,15 @@
 
 						for(var i=0;i<button.info.length;i++){
 							var node=ui.create.div('.menubutton.videonode.pointerdiv',uiintro.content);
-							ui.create.div('.menubutton.videoavatar',node).setBackground(button.info[i][1]||'caocao','character');
+							ui.create.div('.menubutton.videoavatar',node).setBackground(button.info[i][1]||'chenyingchao','character');
 							if(button.info[i][4]==game.wsid){
-								ui.create.div('.name','<span class="thundertext thunderauto">'+(button.info[i][0]||'无名玩家'),node);node.isme=true;
+								ui.create.div('.name','<span class="thundertext thunderauto">'+(button.info[i][0]||'九子魂玩家'),node);node.isme=true;
 							}
 							else if(button.info[i][2]){
-								ui.create.div('.name',(button.info[i][0]||'无名玩家'),node);
+								ui.create.div('.name',(button.info[i][0]||'九子魂玩家'),node);
 							}
 							else{
-								ui.create.div('.name','<span style="opacity:0.6">'+(button.info[i][0]||'无名玩家'),node);
+								ui.create.div('.name','<span style="opacity:0.6">'+(button.info[i][0]||'九子魂玩家'),node);
 							}
 							if(button.info[i][3]){
 								ui.create.div('.videostatus',node,button.info[i][3].slice(0,80));
