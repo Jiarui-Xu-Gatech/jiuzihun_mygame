@@ -26990,6 +26990,11 @@
 							_status.page = 0;
 						}
 					}
+					else if (page == -1){
+						if (!_status.page){
+							_status.page = 0;
+						}
+					}
 					else{
 						_status.page = page;
 					}
@@ -27138,6 +27143,12 @@
 				updaterooms:function(list,clients,page){
 					if (!page){
 						page = 0;
+					}
+					else if (page == -1){
+						if (!_status.page){
+							_status.page = 0;
+						}
+						page = _status.page;
 					}
 					if(ui.rooms){
 						ui.window.classList.add('more_room');
