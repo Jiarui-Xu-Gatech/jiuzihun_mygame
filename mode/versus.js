@@ -6382,6 +6382,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					if(_status.connectMode){
 						if(_status.mode=='1v1'||_status.mode=='3v3'){
 							game.broadcastAll(function(dead){
+								if (game.observe){
+									return;
+								}
 								if(dead.side==game.me.side){
 									_status.friendDied.push(dead.name);
 									_status.friendCount.innerHTML='阵亡: '+get.cnNumber(_status.friendDied.length,true);
