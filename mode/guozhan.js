@@ -8193,6 +8193,12 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				},
 				dieAfter:function(source){
 					this.showCharacter(2);
+					game.broadcastAll(function(){
+						if (game.observe){
+							ui.clear();
+						}
+					});
+
 					if(get.is.jun(this.name1)){
 						if(source&&source.identity==this.identity) source.shijun=true;
 						else if(source&&source.identity!='ye') source.shijun2=true;

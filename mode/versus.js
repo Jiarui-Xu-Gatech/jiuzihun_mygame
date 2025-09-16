@@ -6383,6 +6383,7 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 						if(_status.mode=='1v1'||_status.mode=='3v3'){
 							game.broadcastAll(function(dead){
 								if (game.observe){
+									ui.clear();
 									return;
 								}
 								if(dead.side==game.me.side){

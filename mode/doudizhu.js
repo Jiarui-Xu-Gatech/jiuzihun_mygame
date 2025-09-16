@@ -1155,6 +1155,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 					}
 				},
 				dieAfter:function(source){
+					game.broadcastAll(function(){
+						if (game.observe){
+							ui.clear();
+						}
+					});
 					game.checkResult();
 				},
 				logAi:function(targets,card){},

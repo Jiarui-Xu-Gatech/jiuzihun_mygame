@@ -807,6 +807,11 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 			player:{
 				hasZhuSkill:function(){return false;},
 				dieAfter:function(){
+					game.broadcastAll(function(){
+						if (game.observe){
+							ui.clear();
+						}
+					});
 					if(_status.mode!='normal'||_status.characterChoice[this.identity].length<=3) game.checkResult();
 				},
 				dieAfter2:function(){

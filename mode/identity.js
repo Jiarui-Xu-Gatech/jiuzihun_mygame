@@ -2359,6 +2359,9 @@ game.import('mode',function(lib,game,ui,get,ai,_status){
 				dieAfter:function(source){
 					if(!this.identityShown){
 						game.broadcastAll(function(player,identity,identity2){
+							if (game.observe){
+								ui.clear();
+							}
 							player.setIdentity(player.identity);
 							player.identityShown=true;
 							player.node.identity.classList.remove('guessing');
