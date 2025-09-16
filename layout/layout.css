@@ -432,8 +432,8 @@ table {
 	display: none !important;
 }
 #arena.observe .handcards>.card>div {
-	opacity: 0 !important;
-	/* display: none !important; */
+	/* opacity: 0 !important; */
+	display: none !important;
 }
 #arena.hide_name .player>.name:not(.name_seat),
 #arena.hide_name .player>.name2,

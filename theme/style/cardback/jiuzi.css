@@ -6,3 +6,8 @@
 	background: url('image/jiuzi2.png');
     background-size: 100% 100%;
 }
+
+#arena.observe .handcards>.card {
+    background: url('image/jiuzi.png') !important;
+    background-size: 100% 100% !important;
+}
