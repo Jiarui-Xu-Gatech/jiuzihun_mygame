@@ -4253,7 +4253,7 @@
 					},
 					connect_change_card:{
 						name:'启用手气卡',
-						init:false,
+						init:true,
 						frequent:true,
 						restart:true,
 					},
@@ -4788,7 +4788,7 @@
 					},
 					connect_change_card:{
 						name:'启用手气卡',
-						init:false,
+						init:true,
 						frequent:true,
 						restart:true,
 					},
@@ -5593,7 +5593,7 @@
 					},
 					connect_change_card:{
 						name:'启用手气卡',
-						init:false,
+						init:true,
 						frequent:true,
 						restart:true,
 					},
