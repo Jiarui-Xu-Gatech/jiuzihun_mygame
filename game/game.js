@@ -26857,12 +26857,7 @@
 							if (!_status.observePlayerView){
 								_status.observePlayerView = me;
 							}
-							console.log('online的-----')
-							console.log(game.me.playerid)
-							console.log(_status.observePlayerView)
-							console.log(game.me.playerid == _status.observePlayerView)
-							console.log('底online的-----')
-							if (game.me.playerid == _status.observePlayerView){
+							if (game.me.playerid == me){
 								_status.imchoosing = imchoosing;
 								game.countChoose(clear);
 							}
@@ -28670,17 +28665,11 @@
 				}
 				else{
 					game.broadcast(function(me,clear,imchoosing){
-						if (game.observe&&_status.roomHolder&&game.me&&_status.roomHolder == game.me.playerid){
+						if (game.observe){
 							if (!_status.observePlayerView){
 								_status.observePlayerView = me;
 							}
-							console.log('本机的----')
-							console.log(game.me.playerid)
-							console.log(_status.observePlayerView)
-							console.log(game.me.playerid == _status.observePlayerView)
-							console.log(_status.imchoosing)
-							console.log('底----')
-							if (game.me.playerid == _status.observePlayerView){
+							if (game.me.playerid == me){
 								_status.imchoosing = imchoosing;
 								game.countChoose(clear);
 							}
@@ -28795,7 +28784,7 @@
 				}
 				else{
 					game.broadcast(function(me){
-						if (game.observe&&_status.roomHolder&&game.me&&_status.roomHolder == game.me.playerid&&game.me.playerid == me){
+						if (game.observe&&game.me.playerid == me){
 							game.stopCountChoose();
 						}
 					},game.me.playerid);
