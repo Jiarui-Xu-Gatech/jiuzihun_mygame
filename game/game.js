@@ -27811,6 +27811,9 @@
 							if (!_status.observePlayerView){
 								_status.observePlayerView = observe;
 							}
+							if (!_status.roomHolder){
+								_status.roomHolder = observe;
+							}
 							next.custom.replace.target=function(player){
 								if(!lib.configOL.observe_handcard&&lib.configOL.mode=='guozhan'){
 									return;
@@ -28667,7 +28670,7 @@
 				}
 				else{
 					game.broadcast(function(me,clear,imchoosing){
-						if (game.observe){
+						if (game.observe&&_status.roomHolder&&_status.roomHolder == me){
 							if (!_status.observePlayerView){
 								_status.observePlayerView = me;
 							}
@@ -28792,7 +28795,7 @@
 				}
 				else{
 					game.broadcast(function(me){
-						if (game.observe&&game.me.playerid == me){
+						if (game.observe&&_status.roomHolder&&_status.roomHolder == me&&game.me.playerid == me){
 							game.stopCountChoose();
 						}
 					},game.me.playerid);
