@@ -26850,7 +26850,36 @@
 						return;
 					}
 					this.send('log',items);
-				}
+				},
+				countChooseServer:function(me,clear,imchoosing){
+					game.broadcastAll(function(me,clear,imchoosing){
+						if (game.observe){
+							if (!_status.observePlayerView){
+								_status.observePlayerView = me;
+							}
+							console.log('online的-----')
+							console.log(game.me.playerid)
+							console.log(_status.observePlayerView)
+							console.log(game.me.playerid == _status.observePlayerView)
+							console.log('底online的-----')
+							if (game.me.playerid == _status.observePlayerView){
+								_status.imchoosing = imchoosing;
+								game.countChoose(clear);
+							}
+							else{
+								ui.timer.hide();
+								game.addVideo('countDownHide');
+							}
+						}
+					},me,clear,imchoosing);
+				},
+				stopCountChooseServer:function(me){
+					game.broadcastAll(function(me){
+						if (game.observe&&game.me.playerid == me){
+							game.stopCountChoose();
+						}
+					},me);
+				},
 			},
 			client:{
 				log:function(arr){
@@ -27063,7 +27092,7 @@
 						},true);
 
 						if(typeof lib.config.tmp_owner_roomId=='number'){
-							if(typeof game.roomId!='number'&&ui.rooms[lib.config.tmp_owner_roomId].roomempty){
+							if(typeof game.roomId!='number'&&ui.rooms[lib.config.tmp_owner_roomId]&&ui.rooms[lib.config.tmp_owner_roomId].roomempty){
 								lib.configOL.mode=lib.config.connect_mode;
 								game.roomId=lib.config.tmp_owner_roomId;
 							}
@@ -27779,6 +27808,9 @@
 						var next=game.createEvent('game',false);
 						next.setContent(lib.init.startOnline);
 						if(observe){
+							if (!_status.observePlayerView){
+								_status.observePlayerView = observe;
+							}
 							next.custom.replace.target=function(player){
 								if(!lib.configOL.observe_handcard&&lib.configOL.mode=='guozhan'){
 									return;
@@ -28611,6 +28643,55 @@
 			},1000);
 		},
 		countChoose:function(clear){
+			//之前写的
+			// game.broadcast(function(me,clear,imchoosing){
+			// 	if (game.observe){
+			// 		if (!_status.observePlayerView){
+			// 			_status.observePlayerView = me;
+			// 		}
+			// 		if (game.me.playerid == _status.observePlayerView){
+			// 			_status.imchoosing = imchoosing;
+			// 			game.countChoose(clear);
+			// 		}
+			// 		else{
+			// 			ui.timer.hide();
+			// 			game.addVideo('countDownHide');
+			// 		}
+			// 	}
+			// },game.me.playerid,clear,_status.imchoosing);
+
+			//后续要改的
+			if (game.me){
+				if (game.online){
+					game.send('countChooseServer',game.me.playerid,clear,_status.imchoosing);
+				}
+				else{
+					game.broadcast(function(me,clear,imchoosing){
+						if (game.observe){
+							if (!_status.observePlayerView){
+								_status.observePlayerView = me;
+							}
+							console.log('本机的----')
+							console.log(game.me.playerid)
+							console.log(_status.observePlayerView)
+							console.log(game.me.playerid == _status.observePlayerView)
+							console.log(_status.imchoosing)
+							console.log('底----')
+							if (game.me.playerid == _status.observePlayerView){
+								_status.imchoosing = imchoosing;
+								game.countChoose(clear);
+							}
+							else{
+								ui.timer.hide();
+								game.addVideo('countDownHide');
+							}
+						}
+					},game.me.playerid,clear,_status.imchoosing);
+				}
+			}
+			
+			
+			
 			if(_status.imchoosing){
 				return;
 			}
@@ -28636,7 +28717,7 @@
 					ui.timer.hide();
 					game.addVideo('countDownHide');
 				});
-				if(!game.online&&game.me){
+				if((!game.online||game.observe)&&game.me){
 					if(_status.event.getParent().skillHidden){
 						for(var i=0;i<game.players.length;i++){
 							game.players[i].showTimer();
@@ -28648,7 +28729,7 @@
 					}
 				}
 			}
-			else if(_status.event.player.forceCountChoose&&_status.event.isMine()&&!_status.countDown){
+			else if(_status.event&&_status.event.player&&_status.event.player.forceCountChoose&&_status.event.isMine()&&!_status.countDown){
 				var info=_status.event.player.forceCountChoose;
 				var num;
 				if(_status.event.name=='chooseToUse'&&_status.event.type=='phase'&&typeof info.phaseUse=='number'){
@@ -28705,6 +28786,21 @@
 			}
 		},
 		stopCountChoose:function(){
+			if (game.me){
+				if (game.online){
+					game.send('stopCountChooseServer',game.me.playerid);
+				}
+				else{
+					game.broadcast(function(me){
+						if (game.observe&&game.me.playerid == me){
+							game.stopCountChoose();
+						}
+					},game.me.playerid);
+				}
+				
+			}
+			
+
 			if(_status.countDown){
 				clearInterval(_status.countDown);
 				delete _status.countDown;
@@ -28716,7 +28812,7 @@
 			// game.addVideo('countDownHide');
 			//以防bug:本地不知什么原因不消除timer，非常诡异
 			
-			if(_status.connectMode&&!game.online&&game.me){
+			if(_status.connectMode&&(!game.online||game.observe)&&game.me){
 				if(game.me._hide_all_timer){
 					delete game.me._hide_all_timer;
 					for(var i=0;i<game.players.length;i++){
@@ -35258,6 +35354,10 @@
 			}
 			else{
 				if(player==game.me) return;
+				if (ui.timer){
+					ui.timer.hide();
+					game.addVideo('countDownHide');
+				}
 				var players=game.players.concat(game.dead);
 				for(var i=0;i<players.length;i++){
 					players[i].style.transition='all 0s';
@@ -35278,6 +35378,9 @@
 				game.me.node.handcards2.remove();
 				var current=game.me;
 				game.me=player;
+				if (game.observe){
+					_status.observePlayerView = player.playerid;
+				}
 				if(current.isDead()){
 					current.$die();
 				}
