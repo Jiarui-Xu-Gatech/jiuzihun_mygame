@@ -28670,7 +28670,7 @@
 				}
 				else{
 					game.broadcast(function(me,clear,imchoosing){
-						if (game.observe&&_status.roomHolder&&_status.roomHolder == me){
+						if (game.observe&&_status.roomHolder&&game.me&&_status.roomHolder == game.me.playerid){
 							if (!_status.observePlayerView){
 								_status.observePlayerView = me;
 							}
@@ -28795,7 +28795,7 @@
 				}
 				else{
 					game.broadcast(function(me){
-						if (game.observe&&_status.roomHolder&&_status.roomHolder == me&&game.me.playerid == me){
+						if (game.observe&&_status.roomHolder&&game.me&&_status.roomHolder == game.me.playerid&&game.me.playerid == me){
 							game.stopCountChoose();
 						}
 					},game.me.playerid);
