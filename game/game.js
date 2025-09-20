@@ -10479,7 +10479,7 @@
 						custom:[],
 					});
 					game.countPlayer2(function(current){
-						current.actionHistory.push({useCard:[],respond:[],skipped:[],lose:[],gain:[],sourceDamage:[],damage:[],custom:[]});
+						current.actionHistory.push({useCard:[],respond:[],skipped:[],lose:[],gain:[],sourceDamage:[],damage:[],custom:[],judge:[]});
 						current.stat.push({card:{},skill:{}});
 						if(event.parent._roundStart){
 							current.getHistory().isRound=true;
@@ -15726,6 +15726,7 @@
 					var nextj=game.cardsGotoOrdering(cardj);
 					if(event.position!=ui.discardPile) nextj.noOrdering=true;
 					player.judging.unshift(cardj);
+					player.actionHistory[player.actionHistory.length-1].judge.push(event);
 					game.addVideo('judge1',player,[get.cardInfo(player.judging[0]),judgestr,event.videoId]);
 					game.broadcastAll(function(player,card,str,id,cardid){
 						var event;

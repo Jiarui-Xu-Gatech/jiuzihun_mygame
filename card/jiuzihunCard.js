@@ -361,36 +361,42 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				type:'equip',
 				subtype:'equip3',
 				distance:{globalTo:1},
+				skills:['jueying_skill']
 			},
 			dilu:{
 				fullskin:true,
 				type:'equip',
 				subtype:'equip3',
 				distance:{globalTo:1},
+				skills:['dilu_skill']
 			},
 			zhuahuang:{
 				fullskin:true,
 				type:'equip',
 				subtype:'equip3',
 				distance:{globalTo:1},
+				skills:['zhuahuang_skill']
 			},
 			chitu:{
 				fullskin:true,
 				type:'equip',
 				subtype:'equip4',
 				distance:{globalFrom:-1},
+				skills:['chitu_skill']
 			},
 			dawan:{
 				fullskin:true,
 				type:'equip',
 				subtype:'equip4',
 				distance:{globalFrom:-1},
+				skills:['dawan_skill']
 			},
 			zixin:{
 				fullskin:true,
 				type:'equip',
 				subtype:'equip4',
 				distance:{globalFrom:-1},
+				skills:['zixin_skill']
 			},
 			zhuge:{
 				fullskin:true,
@@ -557,6 +563,26 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					}
 					"step 2"
 					ui.clear();
+
+					//巨蟒 技能逻辑
+					var evt=event.getParent();
+					var superior = [];
+					for (var i = 0; i < evt.targets.length; i++){
+						if (evt.targets[i].countCards('e','dawan')){
+							evt.targets[i].logSkillColor('dawan_skill',undefined,false,'metal',false,false);
+							game.log('#y饕餮盛宴','结算时，',evt.targets[i],'优先选牌');
+							superior.push(evt.targets[i]);
+						}
+					}
+					for (var i = 0; i < evt.targets.length; i++){
+						if (!superior.contains(evt.targets[i])){
+							superior.push(evt.targets[i]);
+						}
+					}
+					evt.targets = superior;
+
+
+
 					var num;
 					if(event.targets){
 						num=event.targets.length;
@@ -903,19 +929,25 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				modTarget:true,
 				content:function(){
+					var orgin_num = 2;
+					if (target.countCards('e','jueying')>0){
+						target.logSkillColor('jueying_skill',undefined,false,'thunder',false,false);
+						game.log(target,'结算','#y'+get.translation('wuzhong'),'时的摸牌数+1');
+						orgin_num++;
+					}
 					if(get.is.versus()){
 						if(game.friend.contains(target)){
 							if(game.friend.length<game.enemy.length){
-								target.draw(3);return;
+								target.draw(orgin_num+1);return;
 							}
 						}
 						else{
 							if(game.friend.length>game.enemy.length){
-								target.draw(3);return;
+								target.draw(orgin_num+1);return;
 							}
 						}
 					}
-					target.draw(2);
+					target.draw(orgin_num);
 				},
 				ai:{
 					basic:{
@@ -2070,6 +2102,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				type:'equip',
 				subtype:'equip3',
 				distance:{globalTo:1},
+				skills:['hualiu_skill']
 			},
 			zhuque:{
 				fullskin:true,
@@ -2121,7 +2154,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						equipValue:3
 					},
 				},
-				skills:['tengjia1','tengjia2','tengjia3']
+				skills:['tengjia1','tengjia2','tengjia3','tengjia4']
 			},
 			baiyin:{
 				fullskin:true,
@@ -2401,7 +2434,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					return player.countCards('h')>=2;
 				},
 				audio:true,
-				prompt:'将两张手牌当冲使用或打出',
+				prompt:'将两张手牌当【冲】使用或打出',
 				check:function(card){
 					var player = _status.event.player;
 					if (player.hasSkillTag('noh')){
@@ -2636,6 +2669,139 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 						}
 					}
 				}
+			},
+			jueying_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+
+			},
+			dilu_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					var allDamage = player.getHistory('damage');
+                    for (var i = 0; i < allDamage.length; i++){
+						if (allDamage[i].nature == 'fire'){
+							return true;
+						}
+					}
+                    return false;
+                },
+                content:function(){
+					game.log(player,'本回合受到了','#y火属性','伤害');
+                    player.draw();
+                },
+
+			},
+			zhuahuang_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					var history=player.getHistory('useCard').concat(player.getHistory('respond'));
+                    for(var i=0;i<history.length;i++){
+                        if(history[i].card.name=='jiu') return true;
+                    }
+					return false;
+                },
+                content:function(){
+					game.log(player,'本回合使用或打出了','#y酒');
+                    player.draw();
+                },
+			},
+			chitu_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				direct:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					var allNum = game.countPlayer2(function(current){
+						var history=current.getHistory('useCard');
+						for(var i=0;i<history.length;i++){
+							if (history[i].card.name=='nanman'){
+								return true;
+							}
+						}
+                    })
+					if (allNum > 0) {return true;}
+                    return false;
+                },
+                content:function(){
+					player.logSkillColor('chitu_skill',undefined,false,'fire',false,false);
+					game.log('本回合有角色使用了','#y红莲醉舞');
+                    player.draw();
+                },
+
+			},
+			dawan_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					var allNum = game.countPlayer2(function(current){
+						var history=current.getHistory('useCard');
+						for(var i=0;i<history.length;i++){
+							if (history[i].card.name=='wugu'){
+								return true;
+							}
+						}
+                    })
+					if (allNum > 0) {return true;}
+                    return false;
+                },
+                content:function(){
+					game.log('本回合有角色使用了','#y饕餮盛宴');
+                    player.draw();
+                },
+
+			},
+			zixin_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				direct:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					return player.getHistory('sourceDamage').length>0;
+                },
+                content:function(){
+					player.logSkillColor('zixin_skill',undefined,false,'soil',false,false);
+					game.log(player,'本回合造成了','#y伤害');
+                    player.draw();
+                },
+			},
+			hualiu_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				direct:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					return player.getHistory('judge').length>0;
+                },
+                content:function(){
+					player.logSkillColor('hualiu_skill',undefined,false,'wood',false,false);
+					game.log(player,'本回合进行了','#y判定');
+                    player.draw();
+                },
 			},
 			_wuxie:{
 				trigger:{player:['useCardToBegin','phaseJudge']},
@@ -3619,6 +3785,23 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					trigger.cancel();
 				},
 			},
+			tengjia4:{
+				equipSkill:true,
+				audio:'tengjia1',
+				trigger:{player:'phaseDiscardBegin'},
+				forced:true,
+				filter:function(event,player){
+					return player.countCards('h')>player.hp;
+				},
+				content:function(){
+					game.log(player,'的手牌上限+1');
+				},
+				mod:{
+                    maxHandcard:function(player, num) {
+                        return num + 1; // 手牌上限+2
+                    },
+                },
+			},
 			baiyin_skill:{
 				equipSkill:true,
 				trigger:{player:'damageBegin4'},
@@ -3719,16 +3902,22 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			bagua_bg:'卦',
 			bagua_skill:'烟鬼雪茄',
 			jueying:'猫头鹰',//'绝影',
+			jueying_skill:'猫头鹰',//'绝影',
 			dilu:'寒武奇虾',//'的卢',
+			dilu_skill:'寒武奇虾',//'的卢',
 			zhuahuang:'白象',//'爪黄飞电',
+			zhuahuang_skill:'白象',//'爪黄飞电',
 			jueying_bg:'+马',
 			dilu_bg:'+马',
 			zhuahuang_bg:'+马',
 			chitu:'赤兔马',
+			chitu_skill:'赤兔马',
 			chitu_bg:'-马',
 			dawan:'巨蟒',//'大宛',
+			dawan_skill:'巨蟒',//'大宛',
 			dawan_bg:'-马',
 			zixin:'剑齿虎',//'紫骓',
+			zixin_skill:'剑齿虎',//'紫骓',
 			zixin_bg:'-马',
 			zhuge:'暗烟玫瑰',
 			cixiong:'鬼斗七星尺',
@@ -3788,12 +3977,18 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			tao_info:'出牌阶段，对自己使用，回复1点体力；有角色进入濒死阶段时，对濒死角色使用，令其回复1点体力。',
 			bagua_info:'当你需要使用或打出一张【守】时，你可以进行一次判定，若判定结果为红色，视为你使用或打出了一张【守】。',
 			bagua_skill_info:'当你需要使用或打出一张【守】时，你可以进行一次判定，若判定结果为红色，视为你使用或打出了一张【守】。',
-			jueying_info:'锁定技，其他角色计算与你的距离+1。',
-			dilu_info:'锁定技，其他角色计算与你的距离+1。',
-			zhuahuang_info:'锁定技，其他角色计算与你的距离+1。',
-			chitu_info:'锁定技，你计算与其他角色的距离-1。',
-			dawan_info:'锁定技，你计算与其他角色的距离-1。',
-			zixin_info:'锁定技，你计算与其他角色的距离-1。',
+			jueying_info:'锁定技，其他角色计算与你的距离+1。若此牌在你的器具区内，你结算【赌运亨通】时的摸牌数+1。',
+			jueying_skill_info:'锁定技，其他角色计算与你的距离+1。若此牌在你的器具区内，你结算【赌运亨通】时的摸牌数+1。',
+			dilu_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若你于此回合受到过火属性伤害，则你摸一张牌。',
+			dilu_skill_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若你于此回合受到过火属性伤害，则你摸一张牌。',
+			zhuahuang_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若你于此回合使用或打出了【酒】，则你摸一张牌。',
+			zhuahuang_skill_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若你于此回合使用或打出了【酒】，则你摸一张牌。',
+			chitu_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若有角色于此回合使用了【红莲醉舞】，则你摸一张牌。',
+			chitu_skill_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若有角色于此回合使用了【红莲醉舞】，则你摸一张牌。',
+			dawan_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若有角色于此回合使用了【饕餮盛宴】，则你摸一张牌。【饕餮盛宴】结算时，你优先选牌。',
+			dawan_skill_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若有角色于此回合使用了【饕餮盛宴】，则你摸一张牌。【饕餮盛宴】结算时，你优先选牌。',
+			zixin_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若你于此回合造成过伤害，则你摸一张牌。',
+			zixin_skill_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若你于此回合造成过伤害，则你摸一张牌。',
 			zhuge_skill_info:'锁定技，你于出牌阶段内使用【冲】无次数限制。',
 			zhuge_info:'锁定技，你于出牌阶段内使用【冲】无次数限制。',
 			cixiong_skill_info:'当你使用【冲】指定一名异性的目标角色后，你可以令其选择一项：1.弃置一张手牌；2.令你摸一张牌。',
@@ -3836,11 +4031,13 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			tiesuo_bg:'索',
 			bingliang:'海盗洗掠',
 			hualiu:'九幽鸟',//'骅骝',
+			hualiu_skill:'九幽鸟',//'骅骝',
 			zhuque:'熔炎战锤',
 			bingliang_bg:'粮',
 			bingliang_info:'目标角色判定阶段进行判定：若判定结果不为梅花，则跳过该角色的摸牌阶段。',
 			hualiu_bg:'+马',
-			hualiu_info:'你的防御距离+1',
+			hualiu_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若本回合你进行了判定，则你摸一张牌。',
+			hualiu_skill_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若本回合你进行了判定，则你摸一张牌。',
 			zhuque_bg:'扇',
 			zhuque_skill:'熔炎战锤',
 			zhuque_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。',
@@ -3848,10 +4045,11 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			guding_info:'锁定技，当你使用【冲】对目标角色造成伤害时，若其没有手牌，此伤害+1。',
 			guding_skill:'断魂琴',
 			tengjia:'紫砂宝衣',
-			tengjia_info:'锁定技，【红莲醉舞】、【乱剑穿心】和普通【冲】对你无效。你每次受到火焰伤害时，该伤害+1。',
+			tengjia_info:'锁定技，【红莲醉舞】、【乱剑穿心】和普通【冲】对你无效。你每次受到火焰伤害时，该伤害+1。你的手牌上限+1。',
 			tengjia1:'紫砂宝衣',
 			tengjia2:'紫砂宝衣',
 			tengjia3:'紫砂宝衣',
+			tengjia4:'紫砂宝衣',
 			baiyin:'涂山狐裘',
 			baiyin_info:'锁定技，你每次受到伤害时，最多承受1点伤害（防止多余的伤害）；当你失去器具区里的【涂山狐裘】时，你回复1点体力。',
 			baiyin_skill:'涂山狐裘',
