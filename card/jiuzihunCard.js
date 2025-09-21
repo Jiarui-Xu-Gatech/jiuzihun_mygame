@@ -3989,6 +3989,12 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 								var eff2=get.damageEffect(target,player,player,'fire');
 								eff+=eff2;
 								eff-=eff1;
+								if (get.attitude(player,target)+get.attitude(target,player)>0){
+									eff -= 10;
+								}
+								else{
+									eff += 10;
+								}
 							}
 						}
 						return eff >= 0;
