@@ -480,10 +480,10 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				ai:{
 					equipValue:function(card,player){
 						var num=2.5+player.countCards('h')/3;
-						return Math.min(num,4);
+						return Math.min(num,5.5);
 					},
 					basic:{
-						equipValue:3.5
+						equipValue:5.5
 					}
 				},
 				skills:['zhangba_skill']
@@ -2112,7 +2112,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				distance:{attackFrom:-3},
 				ai:{
 					basic:{
-						equipValue:2
+						equipValue:8.5
 					}
 				},
 				skills:['zhuque_skill']
