@@ -12611,7 +12611,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     next.logSkill = ["lashou_sha_jin", trigger.player];
                     'step 1'
                     if (result.bool){
-                        game.delay(2);
+                        game.delay(1);
                     }
                 },
                 ai:{
@@ -17601,7 +17601,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         game.playAudioVideoBroadCast('skill','yunv_gui8');
                     }
 					var eff=get.effect(trigger.target,trigger.card,trigger.player,trigger.player);
-					trigger.player.chooseToDiscard('【斟酒】：弃置一张行动牌并视为使用了一张【酒】，否则【冲】对'+get.translation(trigger.target)+'无效',function(card){
+					trigger.player.chooseToDiscard('【斟酒】：弃置一张行动牌并视为在出【冲】前使用了一张【酒】，否则【冲】对'+get.translation(trigger.target)+'无效',function(card){
 						return get.type(card)=='basic';
 					}).set('ai',function(card){
 						if(_status.event.eff>0||get.attitude(trigger.player,trigger.target)<-1-2*Math.random()||get.attitude(trigger.target,trigger.player)<-1-2*Math.random()){
@@ -17623,7 +17623,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 						}
                         game.playAudioVideoBroadCast('card',trigger.player.sex,'jiu');
                         trigger.player.popup('酒','metal');
-                        game.log(trigger.player,'视为在出冲前对','#b自己','使用了','#y酒');
+                        game.log(trigger.player,'视为在出【冲】前对','#b自己','使用了','#y酒');
                         game.delay(1.5);
                         event.goto(2);
                     }

@@ -2438,6 +2438,10 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				audio:true,
 				prompt:'将两张手牌当【冲】使用或打出',
+				onuse:function (result, player) {
+					player.addTempSkill('zhangba2');
+					player.storage.zhangba2.add(result.card);
+				},
 				check:function(card){
 					var player = _status.event.player;
 					if (player.hasSkillTag('noh')){
@@ -2453,6 +2457,98 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					},
 				}
 			},
+			zhangba2:{
+				firstDo:true,
+				equipSkill:true,
+				init:function(player,skill){
+					if(!player.storage[skill]) player.storage[skill]=[];
+				},
+				onremove:true,
+				charlotte:true,
+				priority:12,
+				direct:true,
+				skillPopupColor:'fire',
+				trigger:{
+					player:"useCard",
+				},
+				filter:function(trigger,player){
+					return player.storage.zhangba2.contains(trigger.card);
+				},
+				content:function(event){
+					'step 0'
+					player.chooseBool(get.prompt2('zhangba2')).set('ai',function(event,player){
+						if (player.hasSkillTag('maihp')){
+							return true;
+						}
+						if (player.hp <= 1){
+							return false;
+						}
+						if (player.hp == player.maxHp){
+							return false;
+						}
+						if (trigger.jiu){
+							if (trigger.jiu_add){
+								return Math.random() > 1/(2+trigger.jiu_add);
+							}
+							else{
+								return Math.random() > 0.3;
+							}
+						}
+						return Math.random() > 0.5;
+
+					});
+					'step 1'
+					if (result.bool){
+						player.logSkill('zhangba2');
+						game.log(player,'令此',trigger.card,'造成伤害时，自己回复等量体力');
+						player.loseHp(1);
+						player.addTempSkill('zhangba3');
+						player.addTempSkill('zhangba_remove');
+					}
+					else{
+						event.finish();
+						return;
+					}
+				},
+
+			},
+			zhangba3:{
+				equipSkill:true,
+				charlotte:true,
+				forced:true,
+				priority:12,
+				direct:true,
+				trigger:{
+					source:'damage',
+				},
+				filter:function(trigger,player){
+					return player.hp<player.maxHp&&player.storage.zhangba2&&player.storage.zhangba2.contains(trigger.card);
+				},
+				content:function(event){
+					player.logSkill('zhangba2');
+					player.recover(trigger.num);
+				}
+			},
+			zhangba_remove:{
+				equipSkill:true,
+				charlotte:true,
+				forced:true,
+				priority:12,
+				direct:true,
+				silent:true,
+				trigger:{
+					player:'useCardAfter',
+				},
+				filter:function(trigger,player){
+					return player.storage.zhangba2&&player.storage.zhangba2.contains(trigger.card);
+				},
+				content:function(event){
+					player.storage.zhangba2.remove(trigger.card);
+					player.removeSkill('zhangba2');
+					player.removeSkill('zhangba3');
+					player.removeSkill('zhangba_remove');
+				},
+			},
 			guanshi_skill:{
 				equipSkill:true,
 				trigger:{player:'shaMiss'},
@@ -2465,7 +2561,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				},
 				content:function(){
 					"step 0"
-					var next=player.chooseToDiscard(get.prompt('guanshi'),2,'he',function(card){
+					var next=player.chooseToDiscard(get.prompt2('guanshi'),2,'he',function(card){
 						return _status.event.player.getEquip('guanshi')!=card;
 					});
 					next.logSkill='guanshi_skill';
@@ -3877,7 +3973,45 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					return eff>=0;
 				},
 				content:function(){
+					'step 0'
+					game.log(player,'令',trigger.card,'变为','#y火属性');
 					trigger.card.nature='fire';
+					'step 1'
+					player.chooseBool(get.prompt('zhuque_skill'),'你可以令此【'+get.translation(trigger.card.name)+'】目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。').set('ai',function(event,player){
+						var eff = 0;
+						for (var i=0;i<game.players.length;i++){
+							if (game.players[i].isLinked()||trigger.targets.contains(game.players[i])){
+								if (game.players[i].hasSkillTag('nofire')){
+									continue;
+								}
+								var target = game.players[i];
+								var eff1=get.damageEffect(target,player,player);
+								var eff2=get.damageEffect(target,player,player,'fire');
+								eff+=eff2;
+								eff-=eff1;
+							}
+						}
+						return eff >= 0;
+					});
+					'step 2'
+					if (result.bool){
+						player.popup('zhuque_skill','soil');
+						game.log(player,'发动了','#g【'+get.translation('zhuque_skill')+'】','令此','#y【'+get.translation(trigger.card.name)+'】','目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。');
+						player.line(trigger.targets,'fire');
+						for(var i=0;i<trigger.targets.length;i++){
+							if (!trigger.targets[i].isLinked()){
+								trigger.targets[i].link();
+								// game.playAudioVideoBroadCast('skill','tiesuo');
+							}
+						}
+						player.addTempSkill('zhuque_turnover');
+						player.addTempSkill('zhuque_turnover_remove');
+						player.storage.zhuque_turnover.add(trigger.card);
+					}
+					else{
+						event.goto(3)
+					}
+					'step 3'
 					if(get.itemtype(trigger.card)=='card'){
 						var next=game.createEvent('zhuque_clear');
 						next.card=trigger.card;
@@ -3897,6 +4031,43 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					delete player.storage.zhuque_skill.nature;
 				}
 			},
+			zhuque_turnover:{
+				equipSkill:true,
+				init:function(player,skill){
+					if(!player.storage[skill]) player.storage[skill]=[];
+				},
+				direct:true,
+				forced:true,
+				charlotte:true,
+				skillPopupColor:'soil',
+				trigger:{
+					source:'damage',
+				},
+				filter:function(trigger,player){
+					return !trigger.player.isTurnedOver()&&player.storage.zhuque_turnover&&player.storage.zhuque_turnover.contains(trigger.card);
+				},
+				content:function(event){
+					player.logSkill('zhuque_turnover',trigger.player,'fire')
+					trigger.player.turnOver();
+				},
+			},
+			zhuque_turnover_remove:{
+				direct:true,
+				forced:true,
+				charlotte:true,
+				silent:true,
+				trigger:{
+					player:'useCardAfter',
+				},
+				filter:function(trigger,player){
+					return player.storage.zhuque_turnover&&player.storage.zhuque_turnover.contains(trigger.card);
+				},
+				content:function(event){
+					player.storage.zhuque_turnover.remove(trigger.card);
+					player.removeSkill('zhuque_turnover');
+					player.removeSkill('zhuque_turnover_remove');
+				},
+			},
 			huogon2:{},
 		},
 		translate:{
@@ -3906,7 +4077,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			shan:'守',
 			tao:'药',
 			bagua:'烟鬼雪茄',
-			bagua_bg:'卦',
+			bagua_bg:'烟',
 			bagua_skill:'烟鬼雪茄',
 			jueying:'猫头鹰',//'绝影',
 			jueying_skill:'猫头鹰',//'绝影',
@@ -3914,37 +4085,38 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			dilu_skill:'寒武奇虾',//'的卢',
 			zhuahuang:'白象',//'爪黄飞电',
 			zhuahuang_skill:'白象',//'爪黄飞电',
-			jueying_bg:'+马',
-			dilu_bg:'+马',
-			zhuahuang_bg:'+马',
+			jueying_bg:'+骑',
+			dilu_bg:'+骑',
+			zhuahuang_bg:'+骑',
 			chitu:'赤兔马',
 			chitu_skill:'赤兔马',
-			chitu_bg:'-马',
+			chitu_bg:'-骑',
 			dawan:'巨蟒',//'大宛',
 			dawan_skill:'巨蟒',//'大宛',
-			dawan_bg:'-马',
+			dawan_bg:'-骑',
 			zixin:'剑齿虎',//'紫骓',
 			zixin_skill:'剑齿虎',//'紫骓',
-			zixin_bg:'-马',
+			zixin_bg:'-骑',
 			zhuge:'暗烟玫瑰',
 			cixiong:'鬼斗七星尺',
-			zhuge_bg:'弩',
-			cixiong_bg:'双',
+			zhuge_bg:'玫',
+			cixiong_bg:'鬼',
 			qinggang:'魔瞳',
 			qinglong:'新月羽毛扇',
 			zhangba:'瑰璃血饮',
-			qinglong_bg:'偃',
-			zhangba_bg:'蛇',
+			qinglong_bg:'扇',
+			zhangba_bg:'璃',
 			guanshi:'睚眦剑',
 			fangtian:'天狼幽爪',
 			qilin:'滑翔羽',
-			qilin_bg:'弓',
+			qilin_bg:'羽',
 			zhuge_skill:'暗烟玫瑰',
 			cixiong_skill:'鬼斗七星尺',
 			qinggang_skill:'魔瞳',
 			qinglong_skill:'新月羽毛扇',
 			qinglong_guozhan:'新月羽毛扇',
 			zhangba_skill:'瑰璃血饮',
+			zhangba2:'瑰璃血饮',
 			guanshi_skill:'睚眦剑',
 			fangtian_skill:'天狼幽爪',
 			qilin_skill:'滑翔羽',
@@ -3954,25 +4126,26 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			wanjian:'乱剑穿心',
 			wuzhong:'赌运亨通',
 			juedou:'酣战',
-			wugu_bg:'谷',
-			taoyuan_bg:'园',
-			nanman_bg:'蛮',
-			wanjian_bg:'箭',
-			wuzhong_bg:'生',
-			juedou_bg:'斗',
+			wugu_bg:'宴',
+			taoyuan_bg:'霖',
+			nanman_bg:'舞',
+			wanjian_bg:'乱',
+			wuzhong_bg:'运',
+			juedou_bg:'酣',
 			shunshou:'盗亦有道',
 			guohe:'玉石同碎',
-			guohe_bg:'拆',
+			guohe_bg:'碎',
 			jiedao:'借刀杀人',
 			wuxie:'以策制策',
-			wuxie_bg:'懈',
+			wuxie_bg:'制',
 			lebu:'囹圄迷魂',
+			lebu_bg:'迷',
 			shandian:'闪电',
 			shandian_bg:'电',
 			hanbing:'百草仗',
 			renwang:'九幽坎肩',
-			hanbing_bg:'冰',
-			renwang_bg:'盾',
+			hanbing_bg:'仗',
+			renwang_bg:'肩',
 			hanbing_skill:'百草仗',
 			renwang_skill:'九幽坎肩',
 			hanbing_info:'当你使用【冲】造成伤害时，你可以防止此伤害，改为依次弃置目标角色的两张牌。',
@@ -4006,8 +4179,9 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			qinglong_guozhan_info:'锁定技，当你使用【冲】指定目标后，所有目标角色不能明置武将牌直到此【冲】结算完毕为止。',
 			qinglong_info:'当你使用的【冲】被目标角色使用的【守】抵消时，你可以对其使用一张【冲】（无距离限制）。',
 			qinglong_info_guozhan:'锁定技，当你使用【冲】指定目标后，所有目标角色不能明置武将牌直到此【冲】结算完毕为止。',
-			zhangba_skill_info:'你可以将两张手牌当【冲】使用或打出。',
-			zhangba_info:'你可以将两张手牌当【冲】使用或打出。',
+			zhangba_skill_info:'你可以将两张手牌当【冲】使用或打出；当你以此法使用【冲】时，你可以流失一点体力，然后令此牌造成伤害时，你回复等量体力。',
+			zhangba2_info:'你可以流失一点体力，然后令此牌造成伤害时，你回复等量体力。',
+			zhangba_info:'你可以将两张手牌当【冲】使用或打出。当你以此法使用【冲】时，你可以流失一点体力，然后令此牌造成伤害时，你回复等量体力。',
 			guanshi_skill_info:'当你使用的【冲】被目标角色使用的【守】抵消时，你可以弃置两张牌，令此【冲】依然对其造成伤害。',
 			guanshi_info:'当你使用的【冲】被目标角色使用的【守】抵消时，你可以弃置两张牌，令此【冲】依然对其造成伤害。',
 			fangtian_skill_info:'你使用的【冲】若是你最后的手牌，你可以额外选择至多两个目标。',
@@ -4033,24 +4207,27 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			huogong:'纵火',
 			tiesuo:'锁心连环',
 			tiesuo_info:'出牌阶段使用，选择1至2个角色，分别令这些角色横置进入连环状态或重置解除连环状况',
-			huogong_bg:'攻',
+			huogong_bg:'火',
 			huogong_info:'目标角色展示一张手牌，然后若你能弃掉一张与所展示牌相同花色的手牌，则纵火对该角色造成1点火焰伤害。',
 			tiesuo_bg:'索',
 			bingliang:'海盗洗掠',
 			hualiu:'九幽鸟',//'骅骝',
 			hualiu_skill:'九幽鸟',//'骅骝',
 			zhuque:'熔炎战锤',
-			bingliang_bg:'粮',
+			bingliang_bg:'掠',
 			bingliang_info:'目标角色判定阶段进行判定：若判定结果不为梅花，则跳过该角色的摸牌阶段。',
-			hualiu_bg:'+马',
+			hualiu_bg:'+骑',
 			hualiu_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若本回合你进行了判定，则你摸一张牌。',
 			hualiu_skill_info:'锁定技，其他角色计算与你的距离+1。一名角色的回合结束阶段，若本回合你进行了判定，则你摸一张牌。',
-			zhuque_bg:'扇',
+			zhuque_bg:'锤',
 			zhuque_skill:'熔炎战锤',
-			zhuque_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。',
+			zhuque_turnover:'熔炎战锤',
+			zhuque_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。若如此做，你可以令此牌目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。',
+			zhuque_skill_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。若如此做，你可以令此牌目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。',
 			guding:'断魂琴',
 			guding_info:'锁定技，当你使用【冲】对目标角色造成伤害时，若其没有手牌，此伤害+1。',
 			guding_skill:'断魂琴',
+			guding_skill_info:'锁定技，当你使用【冲】对目标角色造成伤害时，若其没有手牌，此伤害+1。',
 			tengjia:'紫砂宝衣',
 			tengjia_info:'锁定技，【红莲醉舞】、【乱剑穿心】和普通【冲】对你无效。你每次受到火焰伤害时，该伤害+1。你的手牌上限+1。',
 			tengjia1:'紫砂宝衣',
@@ -4060,6 +4237,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			baiyin:'涂山狐裘',
 			baiyin_info:'锁定技，你每次受到伤害时，最多承受1点伤害（防止多余的伤害）；当你失去器具区里的【涂山狐裘】时，你回复1点体力。',
 			baiyin_skill:'涂山狐裘',
+			baiyin_skill_info:'锁定技，你每次受到伤害时，最多承受1点伤害（防止多余的伤害）；当你失去器具区里的【涂山狐裘】时，你回复1点体力。',
 			
 			muniu:'无尽酒壶',
 			muniu_bg:'壶',//'牛',
