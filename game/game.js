@@ -19948,7 +19948,14 @@
 					}
 					var checkShow=this.checkShow(name);
 					if(lib.translate[name]){
-						this.trySkillAnimate(name,popname,checkShow);
+						var info = get.info(name);
+						if (!info.skillPopupColor){
+							this.trySkillAnimate(name,popname,checkShow);
+						}
+						else{
+							this.trySkillAnimateColor(name,popname,info.skillPopupColor,checkShow);
+						}	
+						// this.trySkillAnimate(name,popname,checkShow);
 						if(typeof targets=='object'&&targets.length){
 							var str=(targets[0]==this&&targets.length==1?'#b自己':targets);
 							game.log(this,'对',str,'发动了','【'+get.skillTranslation(name,this)+'】');

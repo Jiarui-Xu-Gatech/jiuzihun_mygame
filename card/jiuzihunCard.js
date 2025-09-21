@@ -2234,6 +2234,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				trigger:{source:'damageBegin2'},
 				//direct:true,
 				audio:true,
+				skillPopupColor:'wood',
 				filter:function(event){
 					return event.card&&event.card.name=='sha'&&event.notLink()&&event.player.getCards('he').length>0;
 				},
@@ -2315,6 +2316,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				audio:true,
 				firstDo:true,
 				trigger:{player:'useCard1'},
+				skillPopupColor:'thunder',
 				forced:true,
 				filter:function(event,player){
 					return !event.audioed&&event.card.name=='sha'&&player.countUsed('sha',true)>1&&event.getParent().type=='phase';
@@ -2369,6 +2371,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					return event.card.name=='sha';
 				},
 				forced:true,
+				skillPopupColor:'thunder',
 				logTarget:'target',
 				content:function(){
 					trigger.target.addTempSkill('qinggang2');
@@ -2493,6 +2496,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				trigger:{player:'useCard1'},
 				forced:true,
 				firstDo:true,
+				skillPopupColor:'fire',
 				filter:function(event,player){
 					if(event.card.name!='sha'||get.mode()=='guozhan') return false;
 					var card=event.card;
@@ -2588,6 +2592,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			},
 			qilin_skill:{
 				equipSkill:true,
+				skillPopupColor:'metal',
 				trigger:{source:'damageBegin2'},
 				filter:function(event,player){
 					return event.card&&event.card.name=='sha'&&event.notLink()&&event.player.getCards('e',{subtype:['equip3','equip4','equip6']}).length>0
@@ -3738,6 +3743,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			},
 			tengjia2:{
 				equipSkill:true,
+				skillPopupColor:'soil',
 				trigger:{player:'damageBegin3'},
 				filter:function(event,player){
 					if(event.nature!='fire') return false;
@@ -3845,6 +3851,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				equipSkill:true,
 				trigger:{player:'useCard1'},
 				//priority:7,
+				skillPopupColor:'soil',
 				filter:function(event,player){
 					if(event.card.name=='sha'&&!event.card.nature) return true;
 				},

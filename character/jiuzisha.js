@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'80/160',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard','yuner_getCardName','yini_heng'],[]],
+            // yuner:["female","qun",'80/160',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard','yuner_getCardName'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -26359,7 +26359,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     var card=get.cardPile2(function(card){
-                        return get.name(card)=='dawan'||get.name(card)=='wugu';
+                        return get.name(card)=='zhuque';
                     });
                     if (card){
                         player.gain(card);
