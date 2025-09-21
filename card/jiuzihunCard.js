@@ -3977,7 +3977,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					game.log(player,'令',trigger.card,'变为','#y火属性');
 					trigger.card.nature='fire';
 					'step 1'
-					player.chooseBool(get.prompt('zhuque_skill'),'你可以令此【'+get.translation(trigger.card.name)+'】目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。').set('ai',function(event,player){
+					player.chooseBool(get.prompt('zhuque_skill'),'你可以令此【'+get.translation(trigger.card.name)+'】目标中未被连环的角色全部进入连环状态，并令此牌对角色造成伤害后，该角色翻至背面。').set('ai',function(event,player){
 						var eff = 0;
 						for (var i=0;i<game.players.length;i++){
 							if (game.players[i].isLinked()||trigger.targets.contains(game.players[i])){
@@ -4002,7 +4002,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					'step 2'
 					if (result.bool){
 						player.popup('zhuque_skill','soil');
-						game.log(player,'发动了','#g【'+get.translation('zhuque_skill')+'】','令此','#y【'+get.translation(trigger.card.name)+'】','目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。');
+						game.log(player,'发动了','#g【'+get.translation('zhuque_skill')+'】','令此','#y【'+get.translation(trigger.card.name)+'】','目标中未被连环的角色全部进入连环状态，并令此牌对角色造成伤害后，该角色翻至背面。');
 						player.line(trigger.targets,'fire');
 						for(var i=0;i<trigger.targets.length;i++){
 							if (!trigger.targets[i].isLinked()){
@@ -4228,8 +4228,8 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			zhuque_bg:'锤',
 			zhuque_skill:'熔炎战锤',
 			zhuque_turnover:'熔炎战锤',
-			zhuque_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。若如此做，你可以令此牌目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。',
-			zhuque_skill_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。若如此做，你可以令此牌目标中未被连环的角色全部进入连环状态，并令此牌对一名角色造成伤害后，该角色翻至背面。',
+			zhuque_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。若如此做，你可以令此牌目标中未被连环的角色全部进入连环状态，并令此牌对角色造成伤害后，该角色翻至背面。',
+			zhuque_skill_info:'你可以将一张普通【冲】当具火焰伤害的【冲】使用。若如此做，你可以令此牌目标中未被连环的角色全部进入连环状态，并令此牌对角色造成伤害后，该角色翻至背面。',
 			guding:'断魂琴',
 			guding_info:'锁定技，当你使用【冲】对目标角色造成伤害时，若其没有手牌，此伤害+1。',
 			guding_skill:'断魂琴',
