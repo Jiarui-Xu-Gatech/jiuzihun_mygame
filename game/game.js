@@ -33136,7 +33136,20 @@
 					ui.historybar.style.borderRadius='0 0 0 4px';
 				}
 			}
-
+			if (result == '平局'||result == '游戏平局'){
+				if (game.showIdentity){
+					game.showIdentity();
+				}
+				else{
+					for (var i = 0; i < game.players.length; i++){
+						game.players[i].node.identity.classList.remove('guessing');
+						if (game.players[i].setIdentity&&game.players[i].identity){
+							game.players[i].setIdentity(game.players[i].identity);
+						}
+					}
+				}
+			}
+			
 			if (!game.online){
 				if(lib.config.background_audio){
 					if(result===true){
@@ -33574,7 +33587,12 @@
 				var clients=game.players.concat(game.dead);
 				for(var i=0;i<clients.length;i++){
 					if(clients[i].isOnline2()){
-						clients[i].send(game.over,dialog.content.innerHTML,game.checkOnlineResult(clients[i]));
+						if (result=='平局'||result=='游戏平局'){
+							clients[i].send(game.over,dialog.content.innerHTML,'平局');
+						}
+						else{
+							clients[i].send(game.over,dialog.content.innerHTML,game.checkOnlineResult(clients[i]));
+						}
 					}
 				}
 
