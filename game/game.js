@@ -33635,7 +33635,7 @@
 				for(var i=0;i<clients.length;i++){
 					if(clients[i].isOnline2()){
 						if (result=='平局'||result=='游戏平局'){
-							clients[i].send(game.over,dialog.content.innerHTML,'平局');
+							clients[i].send(game.over,dialog.content.innerHTML,result);
 						}
 						else{
 							clients[i].send(game.over,dialog.content.innerHTML,game.checkOnlineResult(clients[i]));
