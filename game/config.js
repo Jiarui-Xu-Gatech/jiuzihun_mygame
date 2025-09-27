@@ -21,7 +21,7 @@ window.config={
 		stockextension:['boss','cardpile','coin','wuxing'],
 		layout:['default','newlayout'],
 		theme:['woodden','music','simple'],
-		card_font:['xiaozhuan','huangcao','caoshu','xingshu'],
+		card_font:['xiaozhuan','huangcao','caoshu','xingshu','xingkai'],
 		double_hp:['hejiansan','pingjun','zuidazhi','zuixiaozhi','zonghe'],
 		image_background_filter:['default','blur','gray','sepia','invert','saturate','contrast','hue','brightness'],
 	},
@@ -123,6 +123,7 @@ window.config={
 
 	border_style:'gold',
 	identity_font:'huangcao',//'MySymbolFont',
+	cardtext_font:'xingkai',
 	global_font:'default',
 	name_font:'xingkai',
 	cardshape:'oblong',
