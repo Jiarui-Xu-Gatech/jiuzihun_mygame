@@ -51,6 +51,7 @@ window.noname_asset_list=[
 	'audio/background/music_steinsDoor.mp3',
 	'audio/background/music_shaolinSoccer.mp3',
 	'audio/background/music_FarOut.mp3',
+	'audio/background/music_NeverBackDown.mp3',
 	'audio/background/music_fantasyThreeKingdoms.mp3',
 
 	'audio/card/default.mp3',

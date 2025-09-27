@@ -4873,6 +4873,7 @@
 						item:{
 							disabled:'不启用',
 							farout:'超智远谋',
+							escape:'惊险逃亡',
 							online:'远程征战',
 							rewrite:'复兴战国',
 							chaoming:'潮鸣江海',
@@ -6265,8 +6266,8 @@
 			globalId:0,
 		},
 		help:{
-			'游戏开发':'<div style="margin:10px">游戏开发(developer)</div><ul style="margin-top:0"><li>许家瑞(Jiarui Xu)独立开发和部署。<li>'+
-			'This game, Son of Soul, was developed solely by Jiarui Xu.<li>'+
+			'游戏开发':'<div style="margin:10px">游戏开发(developer)</div><ul style="margin-top:0"><li>许家瑞(Jiarui Xu)独立设计开发和部署。<li>'+
+			'This game, Nine Sons of Soul, was developed solely by Jiarui Xu.<li>'+
 			'特别鸣谢：无名杀制作团队提供的帮助。',
 			'规则说明':
 			'<div style="margin:10px">游戏流程</div><ul style="margin-top:0">'+
@@ -39963,8 +39964,15 @@
 							init:lib.config.characters.contains(mode),
 							onclick:togglePack
 						});
+						if (mode == 'jiuzisha'){
+							cfgnode.style.display = 'none';
+						}
+						var aiStr = 'AI禁选';
+						if (mode == 'jiuzisha'){
+							aiStr = 'AI禁选（慎点，会全禁）';
+						}
 						var cfgnodeAI=createConfig({
-							name:'AI禁选',
+							name:aiStr,
 							_name:mode,
 							init:boolAI,
 							intro:'将该武将包内的武将全部设置为AI禁选',
@@ -39982,6 +39990,9 @@
 								game.saveConfig('forbidai_user',lib.config.forbidai_user);
 							},
 						});
+						if (mode == 'jiuzisha'){
+							cfgnodeAI.style.display = 'none';
+						}
 						if(mode.indexOf('mode_')!=0){
 						cfgnodeAI.style.marginTop='0px';
 							page.appendChild(cfgnode);
@@ -40418,6 +40429,9 @@
 							init:lib.config.cards.contains(mode),
 							onclick:togglePack
 						});
+						if (mode == 'jiuzihunCard'){
+							cfgnode.style.display = 'none';
+						}
 						if(mode.indexOf('mode_')!=0){
 							page.appendChild(cfgnode);
 						}
@@ -40466,7 +40480,7 @@
 						}
 						page.classList.add('menu-buttons');
 						page.classList.add('leftbutton');
-						if(!connectMenu&&mode.indexOf('mode_')!=0){
+						if(!connectMenu&&mode.indexOf('mode_')!=0&&mode != 'jiuzihunCard'){
 							ui.create.div('.config.pointerspan','<span>隐藏卡牌包</span>',page,function(){
 								if(this.firstChild.innerHTML=='隐藏卡牌包'){
 									this.firstChild.innerHTML='卡牌包将在重启后隐藏';
@@ -40492,21 +40506,23 @@
 							if(!lib.config.addedpile[mode]){
 								lib.config.addedpile[mode]=[];
 							}
-							ui.create.div('.config.more.pile','编辑牌堆 <div>&gt;</div>',page,function(){
-								if(cardpileexpanded){
-									this.classList.remove('on');
-									for(var k=0;k<cardpileNodes.length;k++){
-										cardpileNodes[k].style.display='none';
+							if (mode != 'jiuzihunCard'){
+								ui.create.div('.config.more.pile','编辑牌堆 <div>&gt;</div>',page,function(){
+									if(cardpileexpanded){
+										this.classList.remove('on');
+										for(var k=0;k<cardpileNodes.length;k++){
+											cardpileNodes[k].style.display='none';
+										}
 									}
-								}
-								else{
-									this.classList.add('on');
-									for(var k=0;k<cardpileNodes.length;k++){
-										cardpileNodes[k].style.display='';
+									else{
+										this.classList.add('on');
+										for(var k=0;k<cardpileNodes.length;k++){
+											cardpileNodes[k].style.display='';
+										}
 									}
-								}
-								cardpileexpanded=!cardpileexpanded;
-							});
+									cardpileexpanded=!cardpileexpanded;
+								});
+							}
 							var cfgnode=ui.create.div(page,'.config.pointerspan.cardpilecfg.toggle');
 							var cfgaddcard=ui.create.node('button','','添加卡牌',cfgnode,function(){
 								this.parentNode.nextSibling.classList.toggle('hidden');
