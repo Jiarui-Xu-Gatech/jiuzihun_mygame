@@ -1686,7 +1686,7 @@
 						item:{
 							wood:'木纹',
 							music:'音乐',
-							simple:'简约',
+							simple:'九魂',
 							custom:'自定',
 							default:'默认',
 						},
@@ -2001,7 +2001,7 @@
 						item:{
 							wood:'木纹',
 							music:'音乐',
-							simple:'简约',
+							simple:'九魂',
 							custom:'自定',
 							default:'默认',
 						},
@@ -2121,7 +2121,7 @@
 						item:{
 							wood:'木纹',
 							music:'音乐',
-							simple:'简约',
+							simple:'九魂',
 							custom:'自定',
 							default:'默认',
 						},
@@ -3023,7 +3023,7 @@
 						unfrequent:true,
 						item:{
 							none:'默认',
-							simple:'简约',
+							simple:'九魂',
 						},
 						onclick:function(item){
 							game.saveConfig('watchface',item);

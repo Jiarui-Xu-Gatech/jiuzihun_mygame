@@ -223,8 +223,8 @@ window.noname_package={
 		shousha:'手杀',
 	},
 	theme:{
-		woodden:'木纹',
-		music:'音乐',
-		simple:'简约'
+		simple:'九魂',
+		// woodden:'木纹',
+		// music:'音乐',
 	}
 };
