@@ -6267,8 +6267,9 @@
 		},
 		help:{
 			'游戏开发':'<div style="margin:10px">游戏开发(developer)</div><ul style="margin-top:0"><li>许家瑞(Jiarui Xu)独立设计开发和部署。<li>'+
-			'This game, Nine Sons of Soul, was developed solely by Jiarui Xu.<li>'+
-			'特别鸣谢：无名杀制作团队提供的帮助。',
+			'This game, Nine Sons of Soul, was developed solely by Jiarui Xu.'+
+			'<li>特别鸣谢：无名杀制作团队提供的框架支持。'+
+			'<li>交流QQ群：207364622',
 			'规则说明':
 			'<div style="margin:10px">游戏流程</div><ul style="margin-top:0">'+
 			'<li>1.本游戏为回合制，游戏开始后,由一号位开始,每名角色按逆时针顺序依次行动，执行一个回合。'+
