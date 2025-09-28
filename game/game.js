@@ -15398,8 +15398,15 @@
 					if(unseen){
 						player.classList.add('unseen');
 					}
-					if(source&&source!=player){
-						game.log(player,'被',source,'杀害');
+					//为啥自己不能杀死自己呢？
+					// if(source&&source!=player){
+					if(source){
+						if (source!=player){
+							game.log(player,'被',source,'杀害');
+						}
+						else{
+							game.log(player,'自杀');
+						}
 						if(source.stat[source.stat.length-1].kill==undefined){
 							source.stat[source.stat.length-1].kill=1;
 						}
@@ -38557,7 +38564,7 @@
 							if(connectMenu){
 								infoconfig.connect_choose_timeout={
 									name:'出牌时限',
-									init:'30',
+									init:'15',
 									item:{
 										'5':'5秒',
 										'10':'10秒',

@@ -26359,7 +26359,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(){
                     "step 0"
                     var card=get.cardPile2(function(card){
-                        return get.name(card)=='zhuque';
+                        return get.name(card)=='jingfanma';
                     });
                     if (card){
                         player.gain(card);

@@ -2955,10 +2955,20 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 							str+=get.translation(source)+'的';
 						}
 						if(isJudge){
-							str+=get.translation(card,'viewAs');
+							if (get.translation(card,'viewAs').includes('【')){
+								str+=get.translation(card,'viewAs');
+							}
+							else{
+								str+='【'+get.translation(card,'viewAs')+'】';
+							}
 						}
 						else{
-							str+=get.translation(card);
+							if (get.translation(card).includes('【')){
+								str+=get.translation(card);
+							}
+							else{
+								str+='【'+get.translation(card)+'】';
+							}
 						}
 						if((targets||target)&&!isJudge){
 							str+='对'+get.translation(targets||target);

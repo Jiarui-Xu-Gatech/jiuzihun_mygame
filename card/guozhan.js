@@ -763,6 +763,7 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 				type:'equip',
 				subtype:'equip4',
 				distance:{globalFrom:-1},
+				skills:['jingfanma_skill'],
 			},
 		},
 		skill:{
@@ -1348,6 +1349,25 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 					}
 				}
 			},
+			jingfanma_skill:{
+				audio:true,
+				equipSkill:true,
+				forced:true,
+				direct:true,
+				trigger:{
+                    global:"phaseJieshu",
+                },
+				filter:function(event,player){
+					console.log(player);
+					console.log(player.getStat('kill'));
+					return player.getStat('kill')>0;
+                },
+                content:function(){
+					player.logSkillColor('jingfanma_skill',undefined,false,'water',false,false);
+					game.log(player,'本回合','#y杀死','过角色');
+                    player.draw(2);
+                },
+			},
 		},
 		translate:{
 			
@@ -1412,9 +1432,11 @@ game.import('card',function(lib,game,ui,get,ai,_status){
 			sanjian_info:'当你使用杀造成伤害后，可以弃置1张手牌对一名距离受伤害角色1以内的其他角色造成1点伤害',
 			wuliu_skill:'吴六剑',
 			sanjian_skill:'三尖两刃刀',
-			jingfanma_bg:'-马',
-			jingfanma:'惊帆',
-			jingfanma_info:'你的进攻距离+1',
+			jingfanma_bg:'-骑',
+			jingfanma:'蓝幽狼',
+			jingfanma_skill:'蓝幽狼',
+			jingfanma_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若你于此回合杀死过角色，则你摸两张牌。',
+			jingfanma_skill_info:'锁定技，你计算与其他角色的距离-1。一名角色的回合结束阶段，若你于此回合杀死过角色，则你摸两张牌。',
 			huxinjing_bg:'镜',
 			huxinjing:'护心镜',
 			huxinjing_info:'当你受到伤害时，若伤害值大于或等于你的体力值，则你可以将【护心镜】置入弃牌堆，然后防止此伤害。',
