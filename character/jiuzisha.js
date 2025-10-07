@@ -188,7 +188,10 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         else if (trigger.name == 'judge'){
                             var trigger2=_status.event.getTrigger();
                             var judging=trigger.player.judging[0];
-                            if (trigger.judgestr == "囹圄迷魂" && get.attitude(player,trigger.player)>4 && trigger.player.countCards('h') >= trigger.player.hp  && player.countCards('he')>=5-trigger.player.countCards('h')/5&&trigger2.judge(judging)<0){
+                            if (trigger.judgestr == "囹圄迷魂" && trigger.player == player && player.countCards('h') >= player.hp){
+                                return true;
+                            }
+                            else if (trigger.judgestr == "囹圄迷魂" && get.attitude(player,trigger.player)>4 && trigger.player.countCards('h') >= trigger.player.hp  && player.countCards('he')>=5-trigger.player.countCards('h')/5&&trigger2.judge(judging)<0){
                                 return true;
                             }
                             else if (!(trigger.card) && trigger.getParent() && trigger.getParent().name == "jiuwei_useSha_tushan"){
