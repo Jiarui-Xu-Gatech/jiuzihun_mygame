@@ -7826,8 +7826,9 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 forced:true,
                 locked:true,
                 popup:"愚忠",
+                priority:-1000,
                 trigger:{
-                    player:'damageBegin3',
+                    player:'damageBegin4',
                 },
                 filter:function(event,player){
                     return ((event.card && get.type(event.card, 'trick') == 'trick')||!event.card||(event.nature=='fire'&& event.notLink() && player.isLinked()));
