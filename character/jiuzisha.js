@@ -19589,6 +19589,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 					}
 					'step 2'
 					var name=event.cardname;
+                    var logprompt = '懒慵：请弃置一张【'+get.translation(name)+'】，否则此'+get.translation(trigger.card)+'对'+get.translation(player)+'无效';
 					trigger.player.chooseToDiscard(function(card){
 						return card.name==_status.event.cardname;
 					}).set('ai',function(card){
@@ -19596,7 +19597,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
 							return 10-get.value(card);
 						}
 						return 0;
-					}).set('att',get.attitude(trigger.player,player)).set('cardname',name).set('dialog',['懒慵：请弃置一张【'+get.translation(name)+'】，否则此'+get.translation(trigger.card)+'对'+get.translation(player)+'无效',[event.vcard,'vcard']]);
+					}).set('att',get.attitude(trigger.player,player)).set('cardname',name).set('dialog','lanyong'+ '&' + logprompt +'&'+name);
 					'step 3'
 					if(result.bool==false){
 						trigger.excluded.push(player);

@@ -12025,6 +12025,13 @@
 							}
 						}
 						var range=get.select(event.selectCard);
+						if (typeof event.dialog == 'string') {
+							var two = event.dialog.split('&');
+							if (two[0] == 'lanyong') {
+								event.dialog = [two[1],[[[get.type(two[2]),'',two[2]]],'vcard']]
+								event.prompt = false;
+							}
+						}
 						game.check();
 						if(event.isMine()){
 							game.pause();
