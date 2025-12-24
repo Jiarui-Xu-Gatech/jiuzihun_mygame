@@ -35366,6 +35366,9 @@
 			_status.dragline.length=0;
 		},
 		swapSeat:function(player1,player2,prompt,behind,noanimate){
+			game.broadcast(function(player1,player2,prompt,behind,noanimate){
+				game.swapSeat(player1,player2,prompt,behind,noanimate);
+			},player1,player2,prompt,behind,noanimate);
 			if(noanimate){
 				player1.style.transition='all 0s';
 				player2.style.transition='all 0s';
