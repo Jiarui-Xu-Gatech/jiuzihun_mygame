@@ -59,7 +59,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             // baixuetuhuang_tblack:["female","wei","3/4",['aoman_tu','xuebai_tu','tianyu_tu','fuyun_tu'],['unseen']],
 
 
-            // yuner:["female","qun",'80/160',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard','yuner_getCardName'],[]],
+            // yuner:["female","qun",'80/160',['yuner_shiyan','yuner_selfDamage','yuner_die','yuner_WasSha','yuner_giveCard','yuner_getCardName','jiuwei_tushan','juannian_tushan'],[]],
             
             caiyang:['male','qun',1,['yinka'],['forbidai','unseen']],
         },
@@ -5176,7 +5176,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 // direct:true,
                 enable:"chooseToUse",
                 filter:function(event,player,target){
-                    if (player.hasSkill('jiuwei_block')){
+                    if (player.hasSkill('jiuwei_block') || player.hasSkill('jiuzhang_sha_ban')){
                         return false;
                     }
                     if (_status.event&&((_status.event.parent&&_status.event.parent.name == 'phaseUse')||(game.online&&_status.event._modparent&&_status.event._modparent.name=='phaseUse'))){
@@ -5235,10 +5235,38 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         player.storage.successSha = true;
                         // event.finish();
                         // result = {bool:true}; 
+                        if (player == _status.currentPhase) {
+                            player.storage.juannian_tushan++;
+                            player.syncStorage('juannian_tushan');
+                            player.markSkill("juannian_tushan");
+                            if (player.storage.juannian_tushan == 9) {
+                                // 第九张【冲】触发技能效果
+                                game.playAudioVideoBroadCast('skill','juannian_tushan'+Math.ceil(2*Math.random()));
+                                player.logSkill('juannian_tushan');
+                                player.addSkill("jiuzhang_sha_ban"); // 添加禁止出冲的技能
+                                player.syncStorage('juannian_tushan');
+                                player.markSkill("juannian_tushan"); // 标记技能
+                            }
+                        }
                     } 
                     else {
                         game.log('#g【九尾】','出','#y冲','判定失败');
                         player.storage.successSha = false;
+                        
+                        if (player == _status.currentPhase) {
+                            player.storage.juannian_tushan++;
+                            player.syncStorage('juannian_tushan');
+                            player.markSkill("juannian_tushan");
+                            if (player.storage.juannian_tushan == 9) {
+                                // 第九张【冲】触发技能效果
+                                game.playAudioVideoBroadCast('skill','juannian_tushan'+Math.ceil(2*Math.random()));
+                                player.logSkill('juannian_tushan');
+                                player.addSkill("jiuzhang_sha_ban"); // 添加禁止出冲的技能
+                                player.syncStorage('juannian_tushan');
+                                player.markSkill("juannian_tushan"); // 标记技能
+                            }
+                        }
+
                         var theParent = event.getParent('chooseToUse');
                         if (theParent&&theParent.result){
                             if (theParent.parent&&(theParent.parent.name=='phaseUse')||(theParent._modparent&&(game.online&&theParent._modparent.name=='phaseUse'))){
@@ -5255,6 +5283,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                         }
                         event.finish();
                     }
+                    
                 },
 
                 ai:{
@@ -5408,10 +5437,11 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 popup:false,
                 intro: {
                     name:"眷念",
-                    content: "当前回合已使用了9张冲",
+                    content: "当前回合已判定了#次",
                 },
                 filter: function (event, player) {
-                    return event.card && event.card.name == "sha"; // 只关注【冲】
+                    return false;
+                    // return event.card && event.card.name == "sha"; // 只关注【冲】
                 },
                 init: function (player) {
                     player.storage.juannian_tushan = 0; // 初始化出冲计数
@@ -5449,11 +5479,12 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             },
             
             jiuzhang_sha_ban: {
-                mod: {
-                    cardEnabled: function (card, player) {
-                        if (card.name == "sha") return false; // 禁止【冲】的使用
-                    },
-                },
+                forced:true,
+                // mod: {
+                //     cardEnabled: function (card, player) {
+                //         if (card.name == "sha") return false; // 禁止【冲】的使用
+                //     },
+                // },
             },
 
             linghu_ning:{
@@ -27070,7 +27101,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "jiuwei_shou_tushan":"九尾",
             "jiuwei_jiashang_tushan":"九尾",
             "juannian_tushan":"眷念",
-            "juannian_tushan_info":"锁定技，你每回合使用【冲】的次数不能超过9。",
+            "juannian_tushan_info":"锁定技，你的回合内，发动【九尾】使用【冲】判定的次数不能超过9次。",
 
 
             zhangning_jiuzi:"涂山宁",
