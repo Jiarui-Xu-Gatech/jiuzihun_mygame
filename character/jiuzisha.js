@@ -1466,7 +1466,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             haoqin:{
                 audio:2,
                 trigger:{
-                    player:"phaseJieshu",
+                    player:"phaseUseEnd",
                 },
                 priority:15,
                 direct:true,
@@ -1554,7 +1554,8 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                     return player.countCards('h')>player.hp;
                 },
                 content:function(event){
-                    player.logSkill('zuimei');
+                    // player.logSkill('zuimei');
+                    player.logSkillColor('zuimei',undefined,false,'water',false,true);
                     game.log(player,'的手牌上限+2');
                 },
                 mod:{
@@ -26978,7 +26979,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
             "jiuyu_info":"出牌阶段限一次，你令【醉美】的摸牌数-1，并令所有角色的手牌中除【冲】以外的牌都视为【酒】，然后你依次与除你外的所有角色对饮【酒】（对饮过程：你先使用一张【酒】, 否则失去1点体力，然后此角色使用一张【酒】，否则失去1点体力。）；此过程结束后，你令除你外的所有角色依次对距离最近的其他角色使用一张【冲】，否则回复1点体力；最后，所有角色手牌视为【酒】的限制解除，你恢复技能【醉美】。",
             'jiuyu_jiu':'酒域',
             "haoqin":"豪情",
-            "haoqin_info":"回合结束阶段，你可选择一名其他角色，若如此做，直到你的下回合开始，所有角色对该角色造成的伤害均转移到你身上。",
+            "haoqin_info":"出牌阶段结束时，你可选择一名其他角色，若如此做，直到你的下回合开始，所有角色对该角色造成的伤害均转移到你身上。",
             "zuimei":"醉美",
             "zuimei_info":"你使用【酒】后可以摸两张牌。你的手牌上限+2。",
             "zuimei2":"醉美",
