@@ -1556,6 +1556,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     // player.logSkill('zuimei');
                     player.logSkillColor('zuimei',undefined,false,'water',false,true);
+                    var hasHaoqin = false;
+                    for(var i=0;i<game.players.length;i++){
+                        if(game.players[i].hasSkill('haoqin_target')){
+                            hasHaoqin = true;
+                        }
+                    }
+                    if (!hasHaoqin) {
+                        game.playAudioVideoBroadCast('skill','zuimei22');
+                    }
                     // game.playAudioVideoBroadCast('skill','zuimei22');  
                     game.log(player,'的手牌上限+2');
                 },
@@ -1605,6 +1614,15 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 content:function(event){
                     // player.logSkill('zuimei');
                     player.logSkillColor('zuimei',undefined,false,'water',false,true);
+                    var hasHaoqin = false;
+                    for(var i=0;i<game.players.length;i++){
+                        if(game.players[i].hasSkill('haoqin_target')){
+                            hasHaoqin = true;
+                        }
+                    }
+                    if (!hasHaoqin) {
+                        game.playAudioVideoBroadCast('skill','zuimei22');
+                    }
                     // game.playAudioVideoBroadCast('skill','zuimei22'); 
                     game.log(player,'的手牌上限+2');
                 },
@@ -1627,7 +1645,7 @@ game.import('character',function(lib,game,ui,get,ai,_status){
                 });
                 },
                 content:function(){
-                 for(var i=0;i<game.players.length;i++){
+                    for(var i=0;i<game.players.length;i++){
                         if(game.players[i].hasSkill('haoqin_target')){
                             game.players[i].removeSkill('haoqin_target');
                         }
